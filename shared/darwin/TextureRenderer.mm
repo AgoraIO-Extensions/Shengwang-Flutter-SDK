@@ -1,10 +1,14 @@
 #import "TextureRenderer.h"
+#if defined(TARGET_OS_OSX) && TARGET_OS_OSX
+#import "AgoraCVPixelBufferUtils.h"
+#endif
 
 #import <AgoraRtcKit/AgoraMediaBase.h>
 #import <AgoraRtcKit/IAgoraMediaEngine.h>
 #import <AgoraRtcWrapper/iris_rtc_rendering_cxx.h>
 #import <Foundation/Foundation.h>
 
+#import <memory.h>
 #import <stdio.h>
 
 using namespace agora::iris;
@@ -26,69 +30,107 @@ using namespace agora::iris;
 @end
 
 namespace {
-class RendererDelegate : public agora::iris::VideoFrameObserverDelegate {
+class RendererDelegate : public std::enable_shared_from_this<RendererDelegate>,
+                         public agora::iris::VideoFrameObserverDelegate {
 public:
   RendererDelegate(void *renderer)
-      : renderer_(renderer), pre_width_(0), pre_height_(0) {}
+      : renderer_(((__bridge TextureRender *)renderer)), pre_width_(0),
+        pre_height_(0) {}
 
   void OnVideoFrameReceived(const void *videoFrame,
                             const IrisRtcVideoFrameConfig &config,
                             bool resize) override {
-    @autoreleasepool {
-      TextureRender *renderer = (__bridge TextureRender *)renderer_;
+    TextureRender *strongRenderer = renderer_;
+    if (!strongRenderer) {
+      return;
+    }
 
-      agora::media::base::VideoFrame *vf =
-          (agora::media::base::VideoFrame *)videoFrame;
+    std::weak_ptr<RendererDelegate> self_weak = shared_from_this();
 
-      if (vf->width == 0 || vf->height == 0) {
-        return;
-      }
+    agora::media::base::VideoFrame *vf =
+        (agora::media::base::VideoFrame *)videoFrame;
 
-      CVPixelBufferRef _Nullable pixelBuffer =
-          reinterpret_cast<CVPixelBufferRef>(vf->pixelBuffer);
-      if (!pixelBuffer) {
-        return;
-      }
+    if (vf->width == 0 || vf->height == 0) {
+      return;
+    }
 
-      if (pre_width_ != vf->width || pre_height_ != vf->height) {
-        pre_width_ = vf->width;
-        pre_height_ = vf->height;
+    CVPixelBufferRef _Nullable pixelBuffer =
+        reinterpret_cast<CVPixelBufferRef>(vf->pixelBuffer);
+    if (!pixelBuffer) {
+      return;
+    }
 
-        // notify size changed on main thread, to avoid data race, we need to
-        // copy the width and height to local variables.
-        int temp_width = vf->width;
-        int temp_height = vf->height;
-        dispatch_async(dispatch_get_main_queue(), ^{
-          [renderer.channel invokeMethod:@"onSizeChanged"
-                               arguments:@{
-                                 @"width" : @(temp_width),
-                                 @"height" : @(temp_height)
-                               }];
-        });
-      }
+    if (pre_width_ != vf->width || pre_height_ != vf->height) {
+      pre_width_ = vf->width;
+      pre_height_ = vf->height;
 
-      __block CVPixelBufferRef previousPixelBuffer = nil;
-      // Use `dispatch_sync` to avoid unnecessary context switch under common
-      // non-contest scenarios;
-      // Under rare contest scenarios, it will not block for too long since
-      // the critical section is quite lightweight.
-      dispatch_sync(renderer.pixelBufferSynchronizationQueue, ^{
-        previousPixelBuffer = renderer.latestPixelBuffer;
-        renderer.latestPixelBuffer = CVPixelBufferRetain(pixelBuffer);
-      });
-      if (previousPixelBuffer) {
-        CFRelease(previousPixelBuffer);
-      }
+      // notify size changed on main thread, to avoid data race, we need to
+      // copy the width and height to local variables.
+      int temp_width = vf->width;
+      int temp_height = vf->height;
 
-      // notify new frame available on main thread
       dispatch_async(dispatch_get_main_queue(), ^{
-        [renderer.textureRegistry textureFrameAvailable:renderer.textureId];
+        std::shared_ptr<RendererDelegate> self_strong = self_weak.lock();
+        if (!self_strong) {
+          return;
+        }
+
+        TextureRender *strongRenderer = self_strong->renderer_;
+        if (!strongRenderer) {
+          return;
+        }
+        [strongRenderer.channel invokeMethod:@"onSizeChanged"
+                                   arguments:@{
+                                     @"width" : @(temp_width),
+                                     @"height" : @(temp_height)
+                                   }];
       });
     }
+
+    __block CVPixelBufferRef previousPixelBuffer = nil;
+    // Use `dispatch_sync` to avoid unnecessary context switch under common
+    // non-contest scenarios;
+    // Under rare contest scenarios, it will not block for too long since
+    // the critical section is quite lightweight.
+    //
+    // Note: `dispatch_sync` will block the current thread, so we don't need
+    // to check if the renderer is still valid before accessing its
+    // properties.
+    dispatch_sync(strongRenderer.pixelBufferSynchronizationQueue, ^{
+      previousPixelBuffer = strongRenderer.latestPixelBuffer;
+      // There has been a bug since RTC 4.4.0 that the pixel buffer ref count is not updated correctly,
+      // which will cause the flutter engine copy the wrong pixel buffer to the skia texture.
+      // So we need to copy the pixel buffer directly to work around this issue for now, after the issue is fixed,
+      // we can revert to the original code.
+#if defined(TARGET_OS_OSX) && TARGET_OS_OSX
+      strongRenderer.latestPixelBuffer =
+          [AgoraCVPixelBufferUtils copyCVPixelBuffer:pixelBuffer];
+#else
+      strongRenderer.latestPixelBuffer = CVPixelBufferRetain(pixelBuffer);
+#endif
+    });
+    if (previousPixelBuffer) {
+      CVPixelBufferRelease(previousPixelBuffer);
+    }
+
+    // notify new frame available on main thread
+    dispatch_async(dispatch_get_main_queue(), ^{
+      std::shared_ptr<RendererDelegate> self_strong = self_weak.lock();
+      if (!self_strong) {
+        return;
+      }
+
+      TextureRender *strongRenderer = self_strong->renderer_;
+      if (!strongRenderer) {
+        return;
+      }
+      [strongRenderer.textureRegistry
+          textureFrameAvailable:strongRenderer.textureId];
+    });
   }
 
 public:
-  void *renderer_;
+  __weak TextureRender *renderer_;
   int pre_width_;
   int pre_height_;
 };
@@ -96,7 +138,7 @@ public:
 
 @interface TextureRender ()
 
-@property(nonatomic) RendererDelegate *delegate;
+@property(nonatomic) std::shared_ptr<RendererDelegate> delegate;
 
 @end
 
@@ -118,7 +160,7 @@ public:
                                        self.textureId]
               binaryMessenger:messenger];
 
-    self.delegate = new ::RendererDelegate((__bridge void *)self);
+    self.delegate = std::make_shared< ::RendererDelegate>((__bridge void *)self);
     self.latestPixelBuffer = nil;
     self.pixelBufferSynchronizationQueue = dispatch_queue_create(
         [[NSString stringWithFormat:@"io.agora.flutter.render_%lld", _textureId]
@@ -148,7 +190,7 @@ public:
       agora::media::base::VIDEO_MODULE_POSITION::POSITION_PRE_RENDERER;
 
   self.delegateId = self.irisRtcRendering->AddVideoFrameObserverDelegate(
-      config, self.delegate);
+      config, self.delegate.get());
 }
 
 - (CVPixelBufferRef _Nullable)copyPixelBuffer {
@@ -164,25 +206,34 @@ public:
 }
 
 - (void)dispose {
-    if (self.irisRtcRendering) {
-      self.irisRtcRendering->RemoveVideoFrameObserverDelegate(self.delegateId);
-      self.irisRtcRendering = nil;
-    }
-    if (self.delegate) {
-      delete self.delegate;
-      self.delegate = nil;
-    }
-    if (self.textureRegistry) {
-      [self.textureRegistry unregisterTexture:self.textureId];
-      self.textureRegistry = nil;
-    }
+  if (self.irisRtcRendering) {
+    self.irisRtcRendering->RemoveVideoFrameObserverDelegate(self.delegateId);
+    self.irisRtcRendering = nil;
+  }
+  if (self.delegate) {
+    self.delegate.reset();
+  }
+  if (self.textureRegistry) {
+    [self.textureRegistry unregisterTexture:self.textureId];
+    self.textureRegistry = nil;
+  }
 }
 
 - (void)dealloc {
-  if (self.latestPixelBuffer) {
-    CVPixelBufferRelease(self.latestPixelBuffer);
-    self.latestPixelBuffer = nil;
+  if (self.irisRtcRendering) {
+    // the delegateId is garenteed to be auto incremented, so we can just remove
+    // the delegate by the id, no need to check if the delegate is still valid
+    // or is belong to this TextureRender
+    self.irisRtcRendering->RemoveVideoFrameObserverDelegate(self.delegateId);
+    self.irisRtcRendering = nil;
   }
+
+  dispatch_sync(self.pixelBufferSynchronizationQueue, ^{
+    if (self.latestPixelBuffer) {
+      CVPixelBufferRelease(self.latestPixelBuffer);
+      self.latestPixelBuffer = nil;
+    }
+  });
 }
 
 @end

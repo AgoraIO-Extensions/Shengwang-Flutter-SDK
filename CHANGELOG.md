@@ -1,5 +1,59 @@
 # Changelog
 
+## [6.5.3](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/compare/6.5.2...6.5.3) (2025-09-16)
+
+### Bug Fixes
+
+* compile issue of example with lower version of flutter ([#2351](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2351)) ([36821c5](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/36821c596a979501d3d0944c7c873148e9e01166))
+* eliminate video playback flicker during resolution changes ([#2306](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2306)) ([7a917da](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/7a917da15054768e403d245d311e979eded0a50f))
+* the compatibility of the construction configuration of CMakeLists.txt with lower versions of Flutter SDK ([#2401](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2401)) ([50657fd](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/50657fdebd783b927296a47fb27a367615396f33))
+* ui.platformViewRegistry.registerViewFactory fixed ([#2399](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2399)) ([bb258fc](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/bb258fcfc031cd56e0285e27827297e01c12e15d)), closes [#2360](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2360) [#2360](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2360)
+* update run_update_deps.yml to use macos-14 ([#2415](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2415)) ([56e92db](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/56e92db6c67b0a6e059be857ecacdf2adf848216))
+* windows-2019 is deprecated ([#2352](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2352)) ([9950395](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/9950395d49942d86d3102f3167894de9ce738e74))
+
+## [6.5.2](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/compare/6.5.1-rc.2...6.5.2) (2025-04-29)
+
+### Features
+
+* update dependencies ([#2272](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2272)) ([a97726d](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/a97726d1c4d57e79811ac71eaeb8320ed3c7481b))
+* update dependencies ([#2280](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2280)) ([14540c3](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/14540c30c8973f4921e54525d8b6b58162c5b839))
+
+### Bug Fixes
+
+* copy CVPixelBuffer for macOS ([#2298](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2298)) ([e17b4f6](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/e17b4f696291ce5f62e59276a7417ef52829cfef))
+* hold weak ref of RendererDelegate in async task ([#2265](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2265)) ([#2271](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2271)) ([3a5a91e](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/3a5a91e937c61122ed53dae5299c9df9f0ad180a))
+* refine demo with send multi video stream ([#2295](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2295)) ([e7053aa](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/e7053aa33e3e2a2f6e3ed0001745409f9336e85a))
+* unregister video frame delegate in dealloc of TextureRender to a… ([#2296](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2296)) ([92c4dbd](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/92c4dbd88f067a4f7ac5596e761b03ddb383e9a5))
+
+## [6.5.1-rc.1](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/compare/6.5.1...6.5.1-rc.1) (2025-04-11)
+
+### Features
+
+* make data classes serializable ([#2223](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2223)) ([0ff7d49](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/0ff7d4935b7c4b0fd50c1b01961b6f728df526bd))
+* modify gen functions to make data classes serializable ([#2223](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2223)) ([#2244](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2244)) ([242472c](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/242472c4c9740483f98bac24bfb88e06f2d79d7d))
+* support to pub multi camera streams for iOS ([#2256](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2256)) ([e1e990d](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/e1e990deab7d25369347e3939041b7cc25221016))
+
+### Bug Fixes
+
+* do not clear all platform view renders when dispose render ([#2214](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2214)) ([#2235](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2235)) ([3fac8fa](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/3fac8fa8eb87fad5beef562ee8c5fd7482a7fbea))
+
+## [6.5.1](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/compare/6.5.0...6.5.1) (2025-03-12)
+
+### Features
+
+* optimize internal dependencies ([#2146](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2146)) ([4afc2ba](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/4afc2ba8c503b7897f80e0704d9299794e7f78bf))
+* replace urls of test media files with agora cdn links ([#2144](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2144)) ([2fc4715](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/2fc471538d8102e54a3849beca9f0e1f1b3af714))
+* update dependencies ([#2209](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2209)) ([f149b40](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/f149b40bdcc7883c702fdf469218a2c22be9c9ea))
+
+### Bug Fixes
+
+* add missed extra link flags to support to enable 16K page size f… ([#2143](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2143)) ([2146142](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/214614282efb1e9f0c2bdb519449581481a54e6e))
+* catch exception of eventHandler when some unknown error code or … ([#2215](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2215)) ([fdfc43b](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/fdfc43ba2f25e0345dcb82f40ad534be826eb70f)), closes [#2210](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2210)
+* crash in texture renderer for ios (pick 06896207 4d484b4d from release/6.3) ([#2190](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2190)) ([89cdb5d](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/89cdb5d0ba47f56b461ed3d358dac0a552718340))
+* demo typo in media recorder case ([9c36c25](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/9c36c2571055642c77a6ab27502e9b6a05cb3566))
+* disable warning 4819 when build windows ([5b9d15e](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/5b9d15e76cb7d9a72d8ea7555a102eeef937f95a))
+* use internal custom_headers ([#2145](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues/2145)) ([fb3ea26](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/commit/fb3ea26e644fe6c627f1dc38be66bfe5c45f5a8c))
+
 ## [6.5.0](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/compare/6.3.2...6.5.0) (2024-12-10)
 
 ### Features

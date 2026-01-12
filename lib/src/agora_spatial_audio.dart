@@ -1,9 +1,10 @@
+import '/src/_serializable.dart';
 import '/src/binding_forward_export.dart';
 part 'agora_spatial_audio.g.dart';
 
 /// The spatial position of the remote user or the media player.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class RemoteVoicePositionInfo {
+class RemoteVoicePositionInfo implements AgoraSerializable {
   /// @nodoc
   const RemoteVoicePositionInfo({this.position, this.forward});
 
@@ -19,13 +20,13 @@ class RemoteVoicePositionInfo {
   factory RemoteVoicePositionInfo.fromJson(Map<String, dynamic> json) =>
       _$RemoteVoicePositionInfoFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$RemoteVoicePositionInfoToJson(this);
 }
 
 /// Sound insulation area settings.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class SpatialAudioZone {
+class SpatialAudioZone implements AgoraSerializable {
   /// @nodoc
   const SpatialAudioZone(
       {this.zoneSetId,
@@ -82,7 +83,7 @@ class SpatialAudioZone {
   factory SpatialAudioZone.fromJson(Map<String, dynamic> json) =>
       _$SpatialAudioZoneFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$SpatialAudioZoneToJson(this);
 }
 

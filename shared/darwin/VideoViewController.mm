@@ -150,7 +150,7 @@
                                   @"agora_rtc_ng/video_view_controller"
                   binaryMessenger:messenger];
         
-      __weak typeof(self) weakSelf = self;
+      __weak VideoViewController *weakSelf = self;
       [self.methodChannel setMethodCallHandler:^(FlutterMethodCall *_Nonnull call,
                                                    FlutterResult _Nonnull result) {
         if (weakSelf != nil) {
@@ -180,6 +180,11 @@
       NSNumber *textureIdValue = call.arguments;
       BOOL success = [self destroyTextureRender: [textureIdValue longLongValue]];
       result(@(success));
+  } else if ([@"addPlatformRenderRef" isEqualToString:call.method]) {
+      NSNumber *platformViewIdValue = call.arguments;
+      int64_t platformViewId = [platformViewIdValue longLongValue];
+      [self addPlatformRenderRef:platformViewId];
+      result(@(YES));
   } else if ([@"dePlatfromViewRef" isEqualToString:call.method]) {
       NSNumber *platformViewIdValue = call.arguments;
       int64_t platformViewId = [platformViewIdValue longLongValue];
@@ -240,5 +245,12 @@
     }
     [self.textureRenders removeAllObjects];
 }
+
+// - (void)dealloc {
+//   // do not do this, coz TextureRender::TextureRender will call
+//   // [textureRegistry unregisterTexture] which may already been dealloced by
+//   // flutter and will bring crash
+//   // [self dispose];
+// }
 
 @end

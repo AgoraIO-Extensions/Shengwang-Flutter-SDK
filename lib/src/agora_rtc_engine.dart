@@ -1,3 +1,4 @@
+import '/src/_serializable.dart';
 import '/src/binding_forward_export.dart';
 part 'agora_rtc_engine.g.dart';
 
@@ -367,7 +368,7 @@ extension PriorityTypeExt on PriorityType {
 
 /// The statistics of the local video stream.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class LocalVideoStats {
+class LocalVideoStats implements AgoraSerializable {
   /// @nodoc
   const LocalVideoStats(
       {this.uid,
@@ -497,13 +498,13 @@ class LocalVideoStats {
   factory LocalVideoStats.fromJson(Map<String, dynamic> json) =>
       _$LocalVideoStatsFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$LocalVideoStatsToJson(this);
 }
 
 /// Audio statistics of the remote user.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class RemoteAudioStats {
+class RemoteAudioStats implements AgoraSerializable {
   /// @nodoc
   const RemoteAudioStats(
       {this.uid,
@@ -606,13 +607,13 @@ class RemoteAudioStats {
   factory RemoteAudioStats.fromJson(Map<String, dynamic> json) =>
       _$RemoteAudioStatsFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$RemoteAudioStatsToJson(this);
 }
 
 /// Statistics of the remote video stream.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class RemoteVideoStats {
+class RemoteVideoStats implements AgoraSerializable {
   /// @nodoc
   const RemoteVideoStats(
       {this.uid,
@@ -715,13 +716,13 @@ class RemoteVideoStats {
   factory RemoteVideoStats.fromJson(Map<String, dynamic> json) =>
       _$RemoteVideoStatsFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$RemoteVideoStatsToJson(this);
 }
 
 /// @nodoc
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class VideoCompositingLayout {
+class VideoCompositingLayout implements AgoraSerializable {
   /// @nodoc
   const VideoCompositingLayout(
       {this.canvasWidth,
@@ -764,13 +765,13 @@ class VideoCompositingLayout {
   factory VideoCompositingLayout.fromJson(Map<String, dynamic> json) =>
       _$VideoCompositingLayoutFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$VideoCompositingLayoutToJson(this);
 }
 
 /// @nodoc
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class Region {
+class Region implements AgoraSerializable {
   /// @nodoc
   const Region(
       {this.uid,
@@ -817,13 +818,13 @@ class Region {
   /// @nodoc
   factory Region.fromJson(Map<String, dynamic> json) => _$RegionFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$RegionToJson(this);
 }
 
 /// @nodoc
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class InjectStreamConfig {
+class InjectStreamConfig implements AgoraSerializable {
   /// @nodoc
   const InjectStreamConfig(
       {this.width,
@@ -871,7 +872,7 @@ class InjectStreamConfig {
   factory InjectStreamConfig.fromJson(Map<String, dynamic> json) =>
       _$InjectStreamConfigFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$InjectStreamConfigToJson(this);
 }
 
@@ -904,7 +905,7 @@ extension RtmpStreamLifeCycleTypeExt on RtmpStreamLifeCycleType {
 
 /// @nodoc
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class PublisherConfiguration {
+class PublisherConfiguration implements AgoraSerializable {
   /// @nodoc
   const PublisherConfiguration(
       {this.width,
@@ -977,7 +978,7 @@ class PublisherConfiguration {
   factory PublisherConfiguration.fromJson(Map<String, dynamic> json) =>
       _$PublisherConfigurationFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$PublisherConfigurationToJson(this);
 }
 
@@ -1037,7 +1038,7 @@ extension CloudProxyTypeExt on CloudProxyType {
 
 /// The camera capturer preference.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class CameraCapturerConfiguration {
+class CameraCapturerConfiguration implements AgoraSerializable {
   /// @nodoc
   const CameraCapturerConfiguration(
       {this.cameraDirection,
@@ -1084,13 +1085,13 @@ class CameraCapturerConfiguration {
   factory CameraCapturerConfiguration.fromJson(Map<String, dynamic> json) =>
       _$CameraCapturerConfigurationFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$CameraCapturerConfigurationToJson(this);
 }
 
 /// The configuration of the captured screen.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class ScreenCaptureConfiguration {
+class ScreenCaptureConfiguration implements AgoraSerializable {
   /// @nodoc
   const ScreenCaptureConfiguration(
       {this.isCaptureWindow,
@@ -1128,13 +1129,13 @@ class ScreenCaptureConfiguration {
   factory ScreenCaptureConfiguration.fromJson(Map<String, dynamic> json) =>
       _$ScreenCaptureConfigurationFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$ScreenCaptureConfigurationToJson(this);
 }
 
 /// @nodoc
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class SIZE {
+class SIZE implements AgoraSerializable {
   /// @nodoc
   const SIZE({this.width, this.height});
 
@@ -1149,7 +1150,7 @@ class SIZE {
   /// @nodoc
   factory SIZE.fromJson(Map<String, dynamic> json) => _$SIZEFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$SIZEToJson(this);
 }
 
@@ -1157,7 +1158,7 @@ class SIZE {
 ///
 /// The default image is in the ARGB format. If you need to use another format, you need to convert the image on your own.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class ThumbImageBuffer {
+class ThumbImageBuffer implements AgoraSerializable {
   /// @nodoc
   const ThumbImageBuffer({this.buffer, this.length, this.width, this.height});
 
@@ -1181,7 +1182,7 @@ class ThumbImageBuffer {
   factory ThumbImageBuffer.fromJson(Map<String, dynamic> json) =>
       _$ThumbImageBufferFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$ThumbImageBufferToJson(this);
 }
 
@@ -1220,7 +1221,7 @@ extension ScreenCaptureSourceTypeExt on ScreenCaptureSourceType {
 
 /// The information about the specified shareable window or screen.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class ScreenCaptureSourceInfo {
+class ScreenCaptureSourceInfo implements AgoraSerializable {
   /// @nodoc
   const ScreenCaptureSourceInfo(
       {this.type,
@@ -1288,13 +1289,13 @@ class ScreenCaptureSourceInfo {
   factory ScreenCaptureSourceInfo.fromJson(Map<String, dynamic> json) =>
       _$ScreenCaptureSourceInfoFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$ScreenCaptureSourceInfoToJson(this);
 }
 
 /// The advanced options for audio.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class AdvancedAudioOptions {
+class AdvancedAudioOptions implements AgoraSerializable {
   /// @nodoc
   const AdvancedAudioOptions({this.audioProcessingChannels});
 
@@ -1306,13 +1307,13 @@ class AdvancedAudioOptions {
   factory AdvancedAudioOptions.fromJson(Map<String, dynamic> json) =>
       _$AdvancedAudioOptionsFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$AdvancedAudioOptionsToJson(this);
 }
 
 /// Image configurations.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class ImageTrackOptions {
+class ImageTrackOptions implements AgoraSerializable {
   /// @nodoc
   const ImageTrackOptions({this.imageUrl, this.fps, this.mirrorMode});
 
@@ -1332,7 +1333,7 @@ class ImageTrackOptions {
   factory ImageTrackOptions.fromJson(Map<String, dynamic> json) =>
       _$ImageTrackOptionsFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$ImageTrackOptionsToJson(this);
 }
 
@@ -1340,7 +1341,7 @@ class ImageTrackOptions {
 ///
 /// Agora supports publishing multiple audio streams and one video stream at the same time and in the same RtcConnection. For example, publishMicrophoneTrack, publishCustomAudioTrack, and publishMediaPlayerAudioTrack can be set as true at the same time, but only one of publishCameraTrack, publishScreenCaptureVideo, publishScreenTrack, publishCustomVideoTrack, or publishEncodedVideoTrack can be set as true. Agora recommends that you set member parameter values yourself according to your business scenario, otherwise the SDK will automatically assign values to member parameters.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class ChannelMediaOptions {
+class ChannelMediaOptions implements AgoraSerializable {
   /// @nodoc
   const ChannelMediaOptions(
       {this.publishCameraTrack,
@@ -1537,7 +1538,7 @@ class ChannelMediaOptions {
   factory ChannelMediaOptions.fromJson(Map<String, dynamic> json) =>
       _$ChannelMediaOptionsFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$ChannelMediaOptionsToJson(this);
 }
 
@@ -1613,7 +1614,7 @@ extension FeatureTypeExt on FeatureType {
 
 /// The options for leaving a channel.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class LeaveChannelOptions {
+class LeaveChannelOptions implements AgoraSerializable {
   /// @nodoc
   const LeaveChannelOptions(
       {this.stopAudioMixing, this.stopAllEffect, this.stopMicrophoneRecording});
@@ -1634,7 +1635,7 @@ class LeaveChannelOptions {
   factory LeaveChannelOptions.fromJson(Map<String, dynamic> json) =>
       _$LeaveChannelOptionsFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$LeaveChannelOptionsToJson(this);
 }
 
@@ -2183,7 +2184,7 @@ class RtcEngineEventHandler {
 
   /// Occurs when the local user receives the data stream from the remote user.
   ///
-  /// The SDK triggers this callback when the local user receives the stream message that the remote user sends by calling the sendStreamMessage method.
+  /// If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and status synchronization, it is recommended to use. The SDK triggers this callback when the local user receives the stream message that the remote user sends by calling the sendStreamMessage method.
   ///
   /// * [connection] The connection information. See RtcConnection.
   /// * [remoteUid] The ID of the remote user sending the message.
@@ -2196,7 +2197,7 @@ class RtcEngineEventHandler {
 
   /// Occurs when the local user does not receive the data stream from the remote user.
   ///
-  /// The SDK triggers this callback when the local user fails to receive the stream message that the remote user sends by calling the sendStreamMessage method.
+  /// If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and status synchronization, it is recommended to use. The SDK triggers this callback when the local user fails to receive the stream message that the remote user sends by calling the sendStreamMessage method.
   ///
   /// * [connection] The connection information. See RtcConnection.
   /// * [remoteUid] The ID of the remote user sending the message.
@@ -2716,7 +2717,7 @@ abstract class VideoDeviceManager {
 
 /// Configurations for the RtcEngineContext instance.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class RtcEngineContext {
+class RtcEngineContext implements AgoraSerializable {
   /// @nodoc
   const RtcEngineContext(
       {this.appId,
@@ -2784,7 +2785,7 @@ class RtcEngineContext {
   factory RtcEngineContext.fromJson(Map<String, dynamic> json) =>
       _$RtcEngineContextFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$RtcEngineContextToJson(this);
 }
 
@@ -2857,7 +2858,7 @@ extension MaxMetadataSizeTypeExt on MaxMetadataSizeType {
 
 /// Media metadata.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class Metadata {
+class Metadata implements AgoraSerializable {
   /// @nodoc
   const Metadata(
       {this.channelId, this.uid, this.size, this.buffer, this.timeStampMs});
@@ -2888,7 +2889,7 @@ class Metadata {
   factory Metadata.fromJson(Map<String, dynamic> json) =>
       _$MetadataFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$MetadataToJson(this);
 }
 
@@ -2972,7 +2973,7 @@ extension DirectCdnStreamingStateExt on DirectCdnStreamingState {
 
 /// The statistics of the current CDN streaming.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class DirectCdnStreamingStats {
+class DirectCdnStreamingStats implements AgoraSerializable {
   /// @nodoc
   const DirectCdnStreamingStats(
       {this.videoWidth,
@@ -3005,7 +3006,7 @@ class DirectCdnStreamingStats {
   factory DirectCdnStreamingStats.fromJson(Map<String, dynamic> json) =>
       _$DirectCdnStreamingStatsFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$DirectCdnStreamingStatsToJson(this);
 }
 
@@ -3039,7 +3040,7 @@ class DirectCdnStreamingEventHandler {
 
 /// The media setting options for the host.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class DirectCdnStreamingMediaOptions {
+class DirectCdnStreamingMediaOptions implements AgoraSerializable {
   /// @nodoc
   const DirectCdnStreamingMediaOptions(
       {this.publishCameraTrack,
@@ -3082,13 +3083,13 @@ class DirectCdnStreamingMediaOptions {
   factory DirectCdnStreamingMediaOptions.fromJson(Map<String, dynamic> json) =>
       _$DirectCdnStreamingMediaOptionsFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$DirectCdnStreamingMediaOptionsToJson(this);
 }
 
 /// @nodoc
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class ExtensionInfo {
+class ExtensionInfo implements AgoraSerializable {
   /// @nodoc
   const ExtensionInfo(
       {this.mediaSourceType, this.remoteUid, this.channelId, this.localUid});
@@ -3113,7 +3114,7 @@ class ExtensionInfo {
   factory ExtensionInfo.fromJson(Map<String, dynamic> json) =>
       _$ExtensionInfoFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$ExtensionInfoToJson(this);
 }
 
@@ -3533,6 +3534,7 @@ abstract class RtcEngine {
   /// Enables/Disables the virtual background.
   ///
   /// The virtual background feature enables the local user to replace their original background with a static image, dynamic video, blurred background, or portrait-background segmentation to achieve picture-in-picture effect. Once the virtual background feature is enabled, all users in the channel can see the custom background. Call this method after calling enableVideo or startPreview.
+  ///  Using a video as a your virtual background will lead to continuous increase in memory usage, which may cause issues such as app crashes. Therefore,it is recommended to reduce the resolution and frame rate of the video when using it.
   ///  This feature has high requirements on device performance. When calling this method, the SDK automatically checks the capabilities of the current device. Agora recommends you use virtual background on devices with the following processors:
   ///  Snapdragon 700 series 750G and later
   ///  Snapdragon 800 series 835 and later
@@ -3609,7 +3611,7 @@ abstract class RtcEngine {
   ///  If someone subscribes to the low-quality stream, the SDK enables the low-quality stream and resets it to the SimulcastStreamConfig configuration used in the most recent calling of setDualStreamMode. If no configuration has been set by the user previously, the following values are used:
   ///  Resolution: 480 × 272
   ///  Frame rate: 15 fps
-  ///  Bitrate: 500 Kbps applicationScenario1v1 (2) This is applicable to the scenario. To meet the requirements for low latency and high-quality video in this scenario, the SDK optimizes its strategies, improving performance in terms of video quality, first frame rendering, latency on mid-to-low-end devices, and smoothness under weak network conditions. applicationScenarioLiveshow (3) This is applicable to the scenario. In this scenario, fast video rendering and high image quality are crucial. The SDK implements several performance optimizations, including automatically enabling accelerated audio and video frame rendering to minimize first-frame latency (no need to call enableInstantMediaRendering), and B-frame encoding to achieve better image quality and bandwidth efficiency. The SDK also provides enhanced video quality and smooth playback, even in poor network conditions or on lower-end devices.
+  ///  Bitrate: 500 Kbps applicationScenario1v1 (2) This is applicable to the scenario. To meet the requirements for low latency and high-quality video in this scenario, the SDK optimizes its strategies, improving performance in terms of video quality, first frame rendering, latency on mid-to-low-end devices, and smoothness under weak network conditions. This enumeration value is only applicable to the broadcaster vs. broadcaster scenario. applicationScenarioLiveshow (3) This is applicable to the scenario. In this scenario, fast video rendering and high image quality are crucial. The SDK implements several performance optimizations, including automatically enabling accelerated audio and video frame rendering to minimize first-frame latency (no need to call enableInstantMediaRendering), and B-frame encoding to achieve better image quality and bandwidth efficiency. The SDK also provides enhanced video quality and smooth playback, even in poor network conditions or on lower-end devices.
   ///
   /// Returns
   /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly.
@@ -5738,6 +5740,8 @@ abstract class RtcEngine {
 
   /// Creates a data stream.
   ///
+  /// If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and status synchronization, it is recommended to use.
+  ///
   /// * [config] The configurations for the data stream. See DataStreamConfig.
   ///
   /// Returns
@@ -5747,11 +5751,11 @@ abstract class RtcEngine {
 
   /// Sends data stream messages.
   ///
-  /// After calling createDataStream, you can call this method to send data stream messages to all users in the channel. The SDK has the following restrictions on this method:
+  /// If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and status synchronization, it is recommended to use. After calling createDataStream, you can call this method to send data stream messages to all users in the channel. The SDK has the following restrictions on this method:
   ///  Each client within the channel can have up to 5 data channels simultaneously, with a total shared packet bitrate limit of 30 KB/s for all data channels.
   ///  Each data channel can send up to 60 packets per second, with each packet being a maximum of 1 KB. A successful method call triggers the onStreamMessage callback on the remote client, from which the remote user gets the stream message. A failed method call triggers the onStreamMessageError callback on the remote client.
   ///  This method needs to be called after createDataStream and joining the channel.
-  ///  In live streaming scenarios, this method only applies to hosts.
+  ///  This method applies to broadcasters only.
   ///
   /// * [streamId] The data stream ID. You can get the data stream ID by calling createDataStream.
   /// * [data] The message to be sent.
@@ -6256,7 +6260,7 @@ abstract class RtcEngine {
   /// Enables tracing the video frame rendering process.
   ///
   /// The SDK starts tracing the rendering status of the video frames in the channel from the moment this method is successfully called and reports information about the event through the onVideoRenderingTracingResult callback.
-  ///  By default, the SDK starts tracing the video rendering event automatically when the local user successfully joins the channel. You can call this method at an appropriate time according to the actual application scenario to customize the tracing process.
+  ///  The SDK automatically starts tracking the rendering events of the video from the moment that you call joinChannel to join the channel. You can call this method at an appropriate time according to the actual application scenario to customize the tracing process.
   ///  After the local user leaves the current channel, the SDK automatically resets the time point to the next time when the user successfully joins the channel.
   ///
   /// Returns
@@ -6795,7 +6799,7 @@ extension VideoProfileTypeExt on VideoProfileType {
 
 /// SDK version information.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class SDKBuildInfo {
+class SDKBuildInfo implements AgoraSerializable {
   /// @nodoc
   const SDKBuildInfo({this.build, this.version});
 
@@ -6811,13 +6815,13 @@ class SDKBuildInfo {
   factory SDKBuildInfo.fromJson(Map<String, dynamic> json) =>
       _$SDKBuildInfoFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$SDKBuildInfoToJson(this);
 }
 
 /// The VideoDeviceInfo class that contains the ID and device name of the video devices.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class VideoDeviceInfo {
+class VideoDeviceInfo implements AgoraSerializable {
   /// @nodoc
   const VideoDeviceInfo({this.deviceId, this.deviceName});
 
@@ -6833,13 +6837,13 @@ class VideoDeviceInfo {
   factory VideoDeviceInfo.fromJson(Map<String, dynamic> json) =>
       _$VideoDeviceInfoFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$VideoDeviceInfoToJson(this);
 }
 
 /// The AudioDeviceInfo class that contains the ID, name and type of the audio devices.
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
-class AudioDeviceInfo {
+class AudioDeviceInfo implements AgoraSerializable {
   /// @nodoc
   const AudioDeviceInfo({this.deviceId, this.deviceTypeName, this.deviceName});
 
@@ -6859,6 +6863,6 @@ class AudioDeviceInfo {
   factory AudioDeviceInfo.fromJson(Map<String, dynamic> json) =>
       _$AudioDeviceInfoFromJson(json);
 
-  /// @nodoc
+  @override
   Map<String, dynamic> toJson() => _$AudioDeviceInfoToJson(this);
 }
