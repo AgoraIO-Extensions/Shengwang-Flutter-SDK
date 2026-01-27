@@ -8,7 +8,7 @@ List<TemplatedTestCase> createIntegarationTestCases(String outputDir) {
       testCaseFileTemplate: '''
 $defaultHeader
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/foundation.dart';
 import 'package:integration_test_app/main.dart' as app;
@@ -66,7 +66,7 @@ List<TemplatedTestCase> createFakeTestCases(String outputDir) {
       testCaseFileTemplate: '''
 $defaultHeader
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
@@ -132,7 +132,7 @@ testWidgets('{{TEST_CASE_NAME}}', (WidgetTester tester) async {
       testCaseFileTemplate: '''
 $defaultHeader
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
@@ -195,7 +195,7 @@ testWidgets('{{TEST_CASE_NAME}}', (WidgetTester tester) async {
       testCaseFileTemplate: '''
 $defaultHeader
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fake_test_app/main.dart' as app;
@@ -249,7 +249,7 @@ testWidgets('{{TEST_CASE_NAME}}', (WidgetTester tester) async {
       testCaseFileTemplate: '''
 $defaultHeader
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fake_test_app/main.dart' as app;
@@ -304,7 +304,7 @@ testWidgets('{{TEST_CASE_NAME}}', (WidgetTester tester) async {
       testCaseFileTemplate: '''
 $defaultHeader
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
@@ -362,7 +362,7 @@ testWidgets('{{TEST_CASE_NAME}}', (WidgetTester tester) async {
       testCaseFileTemplate: '''
 $defaultHeader
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
@@ -418,7 +418,7 @@ testWidgets('{{TEST_CASE_NAME}}', (WidgetTester tester) async {
       testCaseFileTemplate: '''
 $defaultHeader
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fake_test_app/main.dart' as app;
@@ -474,7 +474,7 @@ testWidgets('{{TEST_CASE_NAME}}', (WidgetTester tester) async {
       testCaseFileTemplate: '''
 $defaultHeader
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fake_test_app/main.dart' as app;
@@ -533,7 +533,7 @@ testWidgets('{{TEST_CASE_NAME}}', (WidgetTester tester) async {
       testCaseFileTemplate: '''
 $defaultHeader
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/foundation.dart';
 import 'package:iris_tester/iris_tester.dart';
@@ -586,7 +586,7 @@ testWidgets('{{TEST_CASE_NAME}}', (WidgetTester tester) async {
       testCaseFileTemplate: '''
 $defaultHeader
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fake_test_app/main.dart' as app;
