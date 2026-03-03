@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:agora_rtc_engine_example/components/stats_monitoring_widget.dart';
 import 'package:agora_rtc_engine_example/config/agora.config.dart' as config;
 import 'package:agora_rtc_engine_example/components/example_actions_widget.dart';
