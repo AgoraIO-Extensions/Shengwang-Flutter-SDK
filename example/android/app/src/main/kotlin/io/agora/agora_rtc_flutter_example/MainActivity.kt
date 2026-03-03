@@ -1,9 +1,9 @@
-package io.agora.agora_rtc_ng_example
+package cn.shengwang.shengwang_rtc_ng_example
 
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import io.agora.agora_rtc_flutter_example.VideoRawDataController
+import cn.shengwang.shengwang_rtc_flutter_example.VideoRawDataController
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 

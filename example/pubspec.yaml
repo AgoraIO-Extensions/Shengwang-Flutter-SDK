@@ -1,5 +1,5 @@
-name: agora_rtc_engine_example
-description: Demonstrates how to use the agora_rtc_engine plugin.
+name: shengwang_rtc_engine_example
+description: Demonstrates how to use the shengwang_rtc_engine plugin.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.

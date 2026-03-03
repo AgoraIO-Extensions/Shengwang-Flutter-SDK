@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
-import 'package:agora_rtc_engine_example/config/agora.config.dart' as config;
-import 'package:agora_rtc_engine_example/components/example_actions_widget.dart';
-import 'package:agora_rtc_engine_example/components/log_sink.dart';
+import 'package:shengwang_rtc_engine_example/config/agora.config.dart' as config;
+import 'package:shengwang_rtc_engine_example/components/example_actions_widget.dart';
+import 'package:shengwang_rtc_engine_example/components/log_sink.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as path;

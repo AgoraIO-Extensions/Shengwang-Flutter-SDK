@@ -230,10 +230,10 @@ jobs:
           cp $PP_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
           # update project settings for Runner target
-          bundle _2.7.2_ exec fastlane run update_code_signing_settings use_automatic_signing:false path:Runner.xcodeproj bundle_identifier:io.agora.agoraRtcEngineExample team_id:$DEFAULT_BUILD_PROVISION_PROFILE_TEAMID profile_name:$DEFAULT_BUILD_PROVISION_PROFILE_NAME code_sign_identity:$DEFAULT_BUILD_PROVISION_PROFILE_IDENTITY targets:Runner
+          bundle _2.7.2_ exec fastlane run update_code_signing_settings use_automatic_signing:false path:Runner.xcodeproj bundle_identifier:cn.shengwang.shengwangRtcEngineExample team_id:$DEFAULT_BUILD_PROVISION_PROFILE_TEAMID profile_name:$DEFAULT_BUILD_PROVISION_PROFILE_NAME code_sign_identity:$DEFAULT_BUILD_PROVISION_PROFILE_IDENTITY targets:Runner
 
           # update project settings for ScreenSharing target
-          bundle _2.7.2_ exec fastlane run update_code_signing_settings use_automatic_signing:false path:Runner.xcodeproj bundle_identifier:io.agora.agoraRtcEngineExample.ScreenSharing team_id:$DEFAULT_BUILD_PROVISION_PROFILE_TEAMID profile_name:$DEFAULT_BUILD_PROVISION_PROFILE_NAME code_sign_identity:$DEFAULT_BUILD_PROVISION_PROFILE_IDENTITY targets:ScreenSharing
+          bundle _2.7.2_ exec fastlane run update_code_signing_settings use_automatic_signing:false path:Runner.xcodeproj bundle_identifier:cn.shengwang.shengwangRtcEngineExample.ScreenSharing team_id:$DEFAULT_BUILD_PROVISION_PROFILE_TEAMID profile_name:$DEFAULT_BUILD_PROVISION_PROFILE_NAME code_sign_identity:$DEFAULT_BUILD_PROVISION_PROFILE_IDENTITY targets:ScreenSharing
 
           # replace all DEFAULT_BUILD_PROVISION_PROFILE_NAME in export.plist with $DEFAULT_BUILD_PROVISION_PROFILE_NAME
           sed -i '' "s/DEFAULT_BUILD_PROVISION_PROFILE_NAME/$DEFAULT_BUILD_PROVISION_PROFILE_NAME/g" export.plist
@@ -339,15 +339,15 @@ jobs:
               cp -r build/app/outputs/native-debug-symbols ../output
             fi
           elif [ "$platform" == "ios" ]; then
-            # copy build/ios/ipa/agora_rtc_engine_example.ipa to ../output directory
-            cp build/ios/ipa/agora_rtc_engine_example.ipa ../output
+            # copy build/ios/ipa/shengwang_rtc_engine_example.ipa to ../output directory
+            cp build/ios/ipa/shengwang_rtc_engine_example.ipa ../output
 
             if [ -d "build/ios/archive/Runner.xcarchive/dSYMs" ]; then
               cp -RP build/ios/archive/Runner.xcarchive/dSYMs ../output
             fi
           elif [ "$platform" == "macos" ]; then
-            # cp example/build/macos/Build/Products/*/agora_rtc_engine_example.app to ../output directory
-            cp -RP build/macos/Build/Products/*/agora_rtc_engine_example.app ../output
+            # cp example/build/macos/Build/Products/*/shengwang_rtc_engine_example.app to ../output directory
+            cp -RP build/macos/Build/Products/*/shengwang_rtc_engine_example.app ../output
 
             # mkdir dSYMs directory in ../output directory if it doesn't exist
             if [ ! -d "../output/dSYMs" ]; then
@@ -397,7 +397,7 @@ jobs:
           build_timestamp=$(date +%Y%m%d%H%M%S)
 
           # generate artifact_name
-          artifact_name="agora_rtc_engine_example_${{ matrix.platform }}_${pub_version}_${build_timestamp}_${{ github.run_id }}"
+          artifact_name="shengwang_rtc_engine_example_${{ matrix.platform }}_${pub_version}_${build_timestamp}_${{ github.run_id }}"
           echo "artifact_name=$artifact_name" >> $GITHUB_OUTPUT
 
       - name: Upload build artifacts
