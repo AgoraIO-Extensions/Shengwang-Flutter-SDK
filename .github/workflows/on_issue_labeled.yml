@@ -8,10 +8,10 @@ jobs:
 
   # Triage to Agora Support
   # 
-  # This job will be triggered when the issue is labeled with `triage agora support` label.
+  # This job will be triggered when the issue is labeled with `triage shengwang support` label.
   # It will add a comment to the issue to ask the user to provide more details about the issue.
   triage-to-agora-support:
-    if: ${{ github.event.type == 'labeled' && github.event.label.name == 'triage agora support' }}
+    if: ${{ github.event.type == 'labeled' && github.event.label.name == 'triage shengwang support' }}
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -21,7 +21,7 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Please submit a ticket to [Agora Support](https://www.agora.io/en/customer-support/) for further investigation of this issue. If you have any conclusions, you can share them here which may help other developers. Thanks!
+            Please submit a ticket to [Shengwang Support](https://www.shengwang.cn/customer-support/) for further investigation of this issue. If you have any conclusions, you can share them here which may help other developers. Thanks!
 
   # Ask the user for more detail of the issue
   # 
@@ -38,4 +38,4 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Please follow the [issue template](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml) to fill in more details about this issue so that we can investigate this issue more easily, thanks!
+            Please follow the [issue template](https://github.com/shengwang-extensions/Shengwang-Flutter-SDK/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml) to fill in more details about this issue so that we can investigate this issue more easily, thanks!
