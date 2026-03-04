@@ -1,4 +1,4 @@
-package cn.shengwang.shengwang_rtc_ng_example
+package io.agora.shengwang_rtc_ng_example
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

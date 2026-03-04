@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "cn.shengwang.shengwang_rtc_ng_example"
+    namespace "io.agora.shengwang_rtc_ng_example"
 
     compileSdkVersion 34
 
@@ -42,7 +42,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "cn.shengwang.shengwang_rtc_ng_example"
+        applicationId "io.agora.shengwang_rtc_ng_example"
         minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
