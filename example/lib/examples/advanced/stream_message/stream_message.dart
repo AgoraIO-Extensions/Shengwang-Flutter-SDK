@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-import 'package:agora_rtc_engine_example/config/agora.config.dart' as config;
-import 'package:agora_rtc_engine_example/components/example_actions_widget.dart';
-import 'package:agora_rtc_engine_example/components/log_sink.dart';
-import 'package:agora_rtc_engine_example/components/remote_video_views_widget.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine_example/config/agora.config.dart' as config;
+import 'package:shengwang_rtc_engine_example/components/example_actions_widget.dart';
+import 'package:shengwang_rtc_engine_example/components/log_sink.dart';
+import 'package:shengwang_rtc_engine_example/components/remote_video_views_widget.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';

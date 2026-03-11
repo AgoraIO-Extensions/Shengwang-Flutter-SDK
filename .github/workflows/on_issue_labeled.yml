@@ -38,4 +38,4 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            Please follow the [issue template](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml) to fill in more details about this issue so that we can investigate this issue more easily, thanks!
+            Please follow the [issue template](https://github.com/AgoraIO-Extensions/Shengwang-Flutter-SDK/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml) to fill in more details about this issue so that we can investigate this issue more easily, thanks!
