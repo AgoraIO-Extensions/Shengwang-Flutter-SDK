@@ -2,17 +2,17 @@ import '/src/_serializable.dart';
 import '/src/binding_forward_export.dart';
 part 'agora_rtc_engine_ex.g.dart';
 
-/// Class containing connection information.
+/// 包含连接信息的类。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class RtcConnection implements AgoraSerializable {
   /// @nodoc
   const RtcConnection({this.channelId, this.localUid});
 
-  /// Channel name.
+  /// 频道名。
   @JsonKey(name: 'channelId')
   final String? channelId;
 
-  /// Local user ID.
+  /// 本地用户 ID。
   @JsonKey(name: 'localUid')
   final int? localUid;
 
@@ -24,49 +24,49 @@ class RtcConnection implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$RtcConnectionToJson(this);
 }
 
-/// Interface class that provides multi-channel methods.
+/// 提供多频道方法的接口类。
 ///
-/// Inherits from RtcEngine.
+/// 继承自 RtcEngine 。
 abstract class RtcEngineEx implements RtcEngine {
-  /// Joins a channel.
+  /// 加入频道。
   ///
-  /// Call this method to join multiple channels simultaneously. If you want to join the same channel on different devices, make sure the user IDs used on each device are different. If you are already in a channel, you cannot join the same channel again with the same user ID.
-  /// Before joining a channel, ensure that the App ID used to generate the Token is the same as the one used in the initialize method. Otherwise, joining the channel using the Token will fail.
+  /// 调用该方法，你可以同时加入多个频道。如果你想在不同的设备上加入相同的频道，请确保你在不同设备上使用的用户 ID 都不同。 如果你已经在一个频道内，你不能用相同的用户 ID 再次加入该频道。
+  /// 加入频道前，请确保用于生成 Token 的 App ID 和调用 initialize 方法初始化引擎时使用的是同一个 App ID，否则使用 Token 加入频道会失败。
   ///
-  /// * [token] The dynamic key generated on your server for authentication. See [Token Authentication](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication).
-  ///  (Recommended) If your project enables security mode (i.e., uses APP ID + Token for authentication), this parameter is required.
-  ///  If your project only enables debug mode (i.e., uses APP ID for authentication), you can join a channel without providing a Token. You will automatically leave the channel after 24 hours.
-  ///  If you need to join multiple channels at once or frequently switch between channels, Agora recommends using a wildcard Token to avoid requesting a new Token from your server for each new channel. See [Wildcard Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token).
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [options] Channel media options. See ChannelMediaOptions.
+  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  ///  （推荐）如果你的项目开启了安全模式，即选择 APP ID + Token 为鉴权机制，则该参数为必填。
+  ///  如果你的项目仅开启调试模式，即选择 APP ID 为鉴权机制，则无需填入 Token 即可加入频道。成功加入频道 24 小时后会自动退出该频道。
+  ///  如果你需要同时加入多个频道或在频道间频繁切换，声网推荐你使用通配 Token 以避免每加入一个新的频道都需向服务端申请一个新的 Token，详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [options] 频道媒体设置选项。详见 ChannelMediaOptions 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -2: Invalid parameters. For example, an invalid Token, uid is not an integer, or ChannelMediaOptions contains invalid values. Provide valid parameters and rejoin the channel.
-  ///  -3: RtcEngine initialization failed. Reinitialize the RtcEngine object.
-  ///  -7: RtcEngine not initialized. Initialize the RtcEngine object before calling this method.
-  ///  -8: Internal state error in RtcEngine. Possible cause: startEchoTest was called but stopEchoTest was not called before joining the channel. Call stopEchoTest before this method.
-  ///  -17: Join channel rejected. Possible cause: user is already in the channel. Use onConnectionStateChanged to check if the user is in the channel. Do not call this method again unless you receive connectionStateDisconnected (1).
-  ///  -102: Invalid channel name. Provide a valid channelId and rejoin the channel.
-  ///  -121: Invalid user ID. Provide a valid uid and rejoin the channel.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -2：传入的参数无效。例如，使用了不合法的 Token， uid 参数未设置为整型，或 ChannelMediaOptions 成员值不合法。你需要填入有效的参数，重新加入频道。
+  ///  -3： RtcEngine 对象初始化失败。你需要重新初始化 RtcEngine 对象。
+  ///  -7： RtcEngine 对象尚未初始化。你需要在调用该方法前成功初始化 RtcEngine 对象。
+  ///  -8： RtcEngine 对象内部状态错误。可能的原因是：调用 startEchoTest 开始通话回路测试后，未调用 stopEchoTest 停止测试就调用该方法加入频道。你需要在该方法前调用 stopEchoTest 。
+  ///  -17：加入频道被拒绝。可能的原因是用户已经在频道中。建议通过 onConnectionStateChanged 回调判断用户是否在频道中。除收到 connectionStateDisconnected (1) 状态外，不要再次调用该方法加入频道。
+  ///  -102：频道名无效。你需要在 channelId 中填入有效的频道名，重新加入频道。
+  ///  -121：用户 ID 无效。你需要在 uid 中填入有效的用户 ID，重新加入频道。
   Future<void> joinChannelEx(
       {required String token,
       required RtcConnection connection,
       required ChannelMediaOptions options});
 
-  /// Sets channel options and leaves the channel.
+  /// 设置频道选项并离开频道。
   ///
-  /// After this method is called, the SDK stops audio and video communication, leaves the current channel, and releases all session-related resources.
-  /// After successfully joining a channel by calling joinChannelEx, you must call this method to end the call; otherwise, you cannot start the next call.
-  ///  This method is asynchronous. When the call returns, it does not mean the channel has been actually left.
-  ///  If you call leaveChannel, you will leave both the channels joined by joinChannel and joinChannelEx. If you call release immediately after calling this method, the SDK will not trigger the onLeaveChannel callback.
+  /// 调用该方法后，SDK 会终止音视频互动、离开当前频道，并会释放会话相关的所有资源。
+  /// 调用 joinChannelEx 成功加入频道后，必须调用本方法结束通话，否则无法开始下一次通话。
+  ///  该方法是异步操作，调用返回时并没有真正退出频道。
+  ///  如果你调用了 leaveChannel 后，会同时离开 joinChannel 及 joinChannelEx 加入的频道。 如果你调用了该方法后立即调用 release 方法，SDK 将不会触发 onLeaveChannel 回调。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [options] Options for leaving the channel. See LeaveChannelOptions. This parameter only supports setting the stopMicrophoneRecording member in LeaveChannelOptions. Setting other members has no effect.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [options] 离开频道的选项，详见 LeaveChannelOptions 。 该参数仅支持设置 LeaveChannelOptions 中的 stopMicrophoneRecording 成员，设置其他成员均不生效。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> leaveChannelEx(
       {required RtcConnection connection, LeaveChannelOptions? options});
 
@@ -76,262 +76,262 @@ abstract class RtcEngineEx implements RtcEngine {
       required String userAccount,
       LeaveChannelOptions? options});
 
-  /// Updates channel media options after joining the channel.
+  /// 加入频道后更新频道媒体选项 。
   ///
-  /// * [options] Channel media options. See ChannelMediaOptions.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [options] 频道媒体选项，详见 ChannelMediaOptions 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> updateChannelMediaOptionsEx(
       {required ChannelMediaOptions options,
       required RtcConnection connection});
 
-  /// Sets the video encoding attributes.
+  /// 设置视频编码属性。
   ///
-  /// Sets the encoding attributes for the local video. Each video encoding profile corresponds to a set of video parameters, including resolution, frame rate, and bitrate. The config parameter of this method defines the maximum values achievable under ideal network conditions. If the network condition is poor, the video engine will not use this config to render the local video and will automatically downgrade to a more appropriate video configuration.
+  /// 设置本地视频的编码属性。每一种视频编码属性对应一系列视频相关参数设置，包含分辨率、帧率和码率。 该方法的 config 参数设置是在理想网络状态下能达到的最大值。如果网络状态不好，视频引擎便不能使用该 config 渲染本地视频，它会自动降低到一个合适的视频参数设置。
   ///
-  /// * [config] Video encoding configuration. See VideoEncoderConfiguration.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [config] 视频编码参数配置。详见 VideoEncoderConfiguration 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setVideoEncoderConfigurationEx(
       {required VideoEncoderConfiguration config,
       required RtcConnection connection});
 
-  /// Initializes the remote user view.
+  /// 初始化远端用户视图。
   ///
-  /// This method binds a remote user to a display view and sets the rendering and mirror mode of the remote user view displayed locally. It only affects the video seen by the local user.
-  /// You need to specify the remote user's ID in VideoCanvas when calling this method. Typically, you can set this before joining the channel.
-  /// If the remote user ID is not available before joining, call this method upon receiving the onUserJoined callback. If video recording is enabled, the recording service will join the channel as a dummy client, and other clients will also receive its onUserJoined event. The app should not bind a view for it (as it does not send video streams).
-  /// To unbind a view from a remote user, call this method and set view to null.
-  /// After leaving the channel, the SDK clears the binding of the remote user view.
-  ///  This method must be called after joinChannelEx.
-  ///  In Flutter, you do not need to call this method manually. Use AgoraVideoView to render local and remote views.
-  ///  If you want to update the rendering or mirror mode of the remote user view during a call, use the setRemoteRenderModeEx method.
+  /// 该方法绑定远端用户和显示视图，并设置远端用户视图在本地显示时的渲染模式和镜像模式，只影响本地用户看到的视频画面。
+  /// 调用该方法时需要在 VideoCanvas 中指定远端视频的用户 ID，一般可以在进频道前提前设置好。
+  /// 如果无法在加入频道前得到远端用户的 uid，可以在收到 onUserJoined 回调时调用该方法。如果启用了视频录制功能，视频录制服务会做为一个哑客户端加入频道，因此其他客户端也会收到它的 onUserJoined 事件， App 不应给它绑定视图（因为它不会发送视频流）。
+  /// 如需解除某个远端用户的绑定视图，可以调用该方法并将 view 设置为空。
+  /// 离开频道后，SDK 会清除远端用户视图的绑定关系。
+  ///  该方法需要在 joinChannelEx 之后调用。
+  ///  在 Flutter 中你不需要主动调用该方法，请使用 AgoraVideoView 渲染本地和远端视图。
+  ///  如果你希望在通话中更新远端用户视图的渲染或镜像模式，请使用 setRemoteRenderModeEx 方法。
   ///
-  /// * [canvas] Video canvas information. See VideoCanvas.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [canvas] 视频画布信息。详见 VideoCanvas 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setupRemoteVideoEx(
       {required VideoCanvas canvas, required RtcConnection connection});
 
-  /// Stops or resumes receiving a specified audio stream.
+  /// 停止/恢复接收指定的音频流。
   ///
-  /// This method stops or resumes receiving the audio stream of a specified remote user. You can call this method before or after joining a channel. The setting is reset after leaving the channel.
+  /// 该方法停止/恢复接收某一个指定远端用户的音频流。在加入频道前或后都可以调用。该方法的设置在离开频道后失效。
   ///
-  /// * [uid] The ID of the specified user.
-  /// * [mute] Whether to stop receiving the specified audio stream: true : Stop receiving the specified audio stream. false : (Default) Continue receiving the specified audio stream.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [uid] 指定用户的 ID。
+  /// * [mute] 是否停止接收指定音频流： true : 停止接收指定音频流。 false :（默认）继续接收指定音频流。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteRemoteAudioStreamEx(
       {required int uid,
       required bool mute,
       required RtcConnection connection});
 
-  /// Stops or resumes receiving a specified video stream.
+  /// 停止/恢复接收指定的视频流。
   ///
-  /// This method stops or resumes receiving the video stream of a specified remote user. You can call this method before or after joining a channel. The setting is reset after leaving the channel.
+  /// 该方法停止/恢复接收某一个指定远端用户的视频流。在加入频道前或后都可以调用。该方法的设置在离开频道后失效。
   ///
-  /// * [uid] The ID of the remote user.
-  /// * [mute] Whether to stop receiving the video of a remote user: true : Stop receiving. false : (Default) Resume receiving.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [uid] 远端用户的 ID。
+  /// * [mute] 是否停止接收某个远端用户的视频： true : 停止接收。 false : （默认）恢复接收。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteRemoteVideoStreamEx(
       {required int uid,
       required bool mute,
       required RtcConnection connection});
 
-  /// Sets the video stream type to subscribe to.
+  /// 设置订阅的视频流类型。
   ///
-  /// Depending on the sender's default behavior and the specific settings of setDualStreamMode, the receiver's call to this method falls into the following cases:
-  ///  By default, the SDK enables the small stream adaptive mode (autoSimulcastStream) on the sender side, meaning the sender only sends the high-quality stream. Only receivers with host role can call this method to request the low-quality stream. Once the sender receives the request, it starts sending the low-quality stream. All users in the channel can then call this method to switch to low-quality stream subscription mode.
-  ///  If the sender calls setDualStreamMode and sets mode to disableSimulcastStream (never send low-quality stream), this method has no effect.
-  ///  If the sender calls setDualStreamMode and sets mode to enableSimulcastStream (always send low-quality stream), both hosts and audience can call this method to switch to low-quality stream subscription mode. When receiving the low-quality stream, the SDK dynamically adjusts the video stream size according to the video window size to save bandwidth and computing resources. The default aspect ratio of the low-quality stream is consistent with the high-quality stream. Based on the current high-quality stream's aspect ratio, the system automatically assigns resolution, frame rate, and bitrate to the low-quality stream. If the sender has already called setDualStreamModeEx and set mode to disableSimulcastStream (never send low-quality stream), this method has no effect. You need to call setDualStreamModeEx again on the sender side to change the setting.
+  /// 取决于发送端的默认行为和调用 setDualStreamMode 的具体设置，接收端调用该方法分为以下几种情况：
+  ///  SDK 默认在发送端开启小流自适应模式 (autoSimulcastStream)，即：发送端仅发送大流，仅主播身份的接收端可以调用该方法发起小流申请，发送端收到申请后开始自动发送小流，此时频道内所有用户均可调用该方法切换到小流订阅模式。
+  ///  当发送端调用 setDualStreamMode 并将 mode 设置为 disableSimulcastStream （始终不发送小流），则调用该方法不生效。
+  ///  当发送端调用 setDualStreamMode 并将 mode 设置为 enableSimulcastStream （始终发送小流），则主播或观众身份的接收端均可调用该方法切换到小流订阅模式。 在接收视频小流时，SDK 会根据视频窗口的大小动态调整对应视频流的大小，以节约带宽和计算资源。视频小流默认的宽高比和视频大流的宽高比一致。根据当前大流的宽高比，系统会自动分配小流的分辨率、帧率及码率。 如果发送端已调用 setDualStreamModeEx 并将 mode 设置为 disableSimulcastStream （始终不发送小流），则调用该方法不生效，你需要在发送端重新调用 setDualStreamModeEx 修改设置。
   ///
-  /// * [uid] User ID.
-  /// * [streamType] Video stream type: VideoStreamType.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [uid] 用户 ID。
+  /// * [streamType] 视频流类型: VideoStreamType 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteVideoStreamTypeEx(
       {required int uid,
       required VideoStreamType streamType,
       required RtcConnection connection});
 
-  /// Stops or resumes publishing the local audio stream.
+  /// 取消或恢复发布本地音频流。
   ///
-  /// After this method is called successfully, remote users receive the onUserMuteAudio and onRemoteAudioStateChanged callbacks. This method does not affect the audio capture status because it does not disable the audio capture device.
+  /// 成功调用该方法后，远端会触发 onUserMuteAudio 回调和 onRemoteAudioStateChanged 回调。 该方法不影响音频采集状态，因为没有禁用音频采集设备。
   ///
-  /// * [mute] Whether to stop publishing the local audio stream. true : Stop publishing. false : (Default) Publish.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [mute] 是否取消发布本地音频流。 true : 取消发布。 false :（默认）发布。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteLocalAudioStreamEx(
       {required bool mute, required RtcConnection connection});
 
-  /// Stops or resumes publishing the local video stream.
+  /// 取消或恢复发布本地视频流。
   ///
-  /// After this method is successfully called, the remote user receives the onUserMuteVideo callback.
-  ///  This method does not affect the video capture state and does not disable the camera.
+  /// 成功调用该方法后，远端会触发 onUserMuteVideo 回调。
+  ///  该方法不影响视频采集状态，没有禁用摄像头。
   ///
-  /// * [mute] Whether to stop sending the local video stream. true : Stop sending the local video stream. false : (Default) Send the local video stream.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [mute] 是否取消发送本地视频流。 true : 取消发送本地视频流。 false : （默认）发送本地视频流。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteLocalVideoStreamEx(
       {required bool mute, required RtcConnection connection});
 
-  /// Stops or resumes subscribing to all remote users' audio streams.
+  /// 取消或恢复订阅所有远端用户的音频流。
   ///
-  /// After this method is called successfully, the local user stops or resumes subscribing to remote users' audio streams, including streams from users who join the channel after this method is called.
-  ///  You must call this method after joining a channel.
-  ///  To set the default behavior to not subscribe to remote audio streams before joining, set autoSubscribeAudio to false when calling joinChannel.
+  /// 成功调用该方法后，本地用户会取消或恢复订阅远端用户的音频流，包括在调用该方法后加入频道的用户的音频流。
+  ///  该方法需要在加入频道后调用。
+  ///  如果需要在加入频道前设置默认不订阅远端用户音频流，可以在调用 joinChannel 加入频道时设置 autoSubscribeAudio 为 false 。
   ///
-  /// * [mute] Whether to stop subscribing to all remote users' audio streams: true : Stop subscribing to all remote users' audio streams. false : (Default) Subscribe to all remote users' audio streams.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [mute] 是否取消订阅所有远端用户的音频流： true : 取消订阅所有远端用户的音频流。 false :（默认）订阅所有远端用户的音频流。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteAllRemoteAudioStreamsEx(
       {required bool mute, required RtcConnection connection});
 
-  /// Stops or resumes subscribing to all remote users' video streams.
+  /// 取消或恢复订阅所有远端用户的视频流。
   ///
-  /// After this method is called successfully, the local user stops or resumes subscribing to all remote users' video streams, including streams from users who join the channel after this method is called.
+  /// 成功调用该方法后，本地用户会取消或恢复订阅所有远端用户的视频流，包括在调用该方法后加入频道的用户的视频流。
   ///
-  /// * [mute] Whether to stop subscribing to all remote users' video streams. true : Stop subscribing to all users' video streams. false : (Default) Subscribe to all users' video streams.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [mute] 是否取消订阅所有远端用户的视频流。 true : 取消订阅所有用户的视频流。 false :（默认）订阅所有用户的视频流。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteAllRemoteVideoStreamsEx(
       {required bool mute, required RtcConnection connection});
 
-  /// Sets the audio subscription blocklist.
+  /// 设置音频订阅黑名单。
   ///
-  /// You can call this method to specify the audio streams you do not want to subscribe to.
-  ///  This method can be called before or after joining a channel.
-  ///  The audio subscription blocklist is not affected by muteRemoteAudioStream, muteAllRemoteAudioStreams, or autoSubscribeAudio in ChannelMediaOptions.
-  ///  After setting the blocklist, if you leave and rejoin the channel, the blocklist remains effective.
-  ///  If a user appears in both the audio subscription allowlist and blocklist, only the blocklist takes effect.
+  /// 你可以调用该方法指定不订阅的音频流。
+  ///  该方法在加入频道前后均可调用。
+  ///  音频订阅黑名单不受 muteRemoteAudioStream 、 muteAllRemoteAudioStreams 以及 ChannelMediaOptions 中的 autoSubscribeAudio 影响。
+  ///  设置订阅黑名单后，如果离开当前频道后再重新加入频道，黑名单依然生效。
+  ///  如果某个用户同时在音频订阅黑名单和白名单中，仅订阅黑名单生效。
   ///
-  /// * [uidList] The list of user IDs in the audio subscription blocklist.
-  /// If you want to exclude a specific user's audio stream from being subscribed to, add that user's ID to this list. If you want to remove a user from the blocklist, call the setSubscribeAudioBlocklist method again and update the list of user IDs so that it no longer contains the uid of the user you want to remove.
-  /// * [uidNumber] The number of users in the blocklist.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [uidList] 订阅黑名单的用户 ID 列表。
+  /// 如果你想指定不订阅某一发流用户的音频流，将该用户的 ID 加入此列表中。如果你想要将某一用户从订阅黑名单中移除，需要重新调用 setSubscribeAudioBlocklist 方法更新订阅黑名单的用户 ID 列表，使其不包含你想移除的用户的 uid 。
+  /// * [uidNumber] 黑名单用户 ID 列表中的用户数量。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setSubscribeAudioBlocklistEx(
       {required List<int> uidList,
       required int uidNumber,
       required RtcConnection connection});
 
-  /// Sets the audio subscription allowlist.
+  /// 设置音频订阅白名单。
   ///
-  /// You can call this method to specify the audio streams you want to subscribe to.
-  ///  This method can be called before or after joining a channel.
-  ///  The audio subscription allowlist is not affected by muteRemoteAudioStream, muteAllRemoteAudioStreams, or autoSubscribeAudio in ChannelMediaOptions.
-  ///  After setting the allowlist, if you leave and rejoin the channel, the allowlist remains effective.
-  ///  If a user appears in both the audio subscription allowlist and blocklist, only the blocklist takes effect.
+  /// 你可以调用该方法指定想要订阅的音频流。
+  ///  该方法在加入频道前后均可调用。
+  ///  音频订阅白名单不受 muteRemoteAudioStream 、 muteAllRemoteAudioStreams 以及 ChannelMediaOptions 中的 autoSubscribeAudio 的影响。
+  ///  设置订阅白名单后，如果离开当前频道后再重新加入频道，白名单依然生效。
+  ///  如果某个用户同时在音频订阅黑名单和白名单中，仅订阅黑名单生效。
   ///
-  /// * [uidList] The list of user IDs in the audio subscription allowlist.
-  /// If you want to subscribe to a specific user's audio stream, add that user's ID to this list. If you want to remove a user from the allowlist, call the setSubscribeAudioAllowlist method again and update the list of user IDs so that it no longer contains the uid of the user you want to remove.
-  /// * [uidNumber] The number of users in the allowlist.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [uidList] 音频订阅白名单的用户 ID 列表。
+  /// 如果你想指定订阅某一发流用户的音频流，将该用户的 ID 加入此列表中。如果你想要将某一用户从订阅白名单中移除，需要重新调用 setSubscribeAudioAllowlist 方法更新音频订阅白名单的用户 ID 列表，使其不包含你想移除的用户的 uid 。
+  /// * [uidNumber] 白名单用户 ID 列表中的用户数量。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setSubscribeAudioAllowlistEx(
       {required List<int> uidList,
       required int uidNumber,
       required RtcConnection connection});
 
-  /// Sets the video subscription blocklist.
+  /// 设置视频订阅黑名单。
   ///
-  /// You can call this method to specify the video streams you do not want to subscribe to.
-  ///  You can call this method either before or after joining a channel.
-  ///  The video subscription blocklist is not affected by muteRemoteVideoStream, muteAllRemoteVideoStreams, or the autoSubscribeVideo setting in ChannelMediaOptions.
-  ///  After setting the blocklist, it remains effective even if you leave and rejoin the channel.
-  ///  If a user is in both the audio subscription blocklist and allowlist, only the blocklist takes effect.
+  /// 你可以调用该方法指定不订阅的视频流。
+  ///  该方法在加入频道前后均可调用。
+  ///  视频订阅黑名单不受 muteRemoteVideoStream 、 muteAllRemoteVideoStreams 以及 ChannelMediaOptions 中的 autoSubscribeVideo 的影响。
+  ///  设置订阅黑名单后，如果离开当前频道后再重新加入频道，黑名单依然生效。
+  ///  如果某个用户同时在音频订阅黑名单和白名单中，仅订阅黑名单生效。
   ///
-  /// * [uidList] The user ID list of the video subscription blocklist.
-  /// If you want to unsubscribe from the video stream of a specific publishing user, add that user's ID to this list. If you want to remove a user from the blocklist, you need to call the setSubscribeVideoBlocklist method again to update the user ID list of the subscription blocklist so that it no longer contains the uid of the user you want to remove.
-  /// * [uidNumber] The number of users in the blocklist.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [uidList] 视频订阅黑名单的用户 ID 列表。
+  /// 如果你想指定不订阅某一发流用户的视频流，将该用户的 ID 加入此列表中。如果你想要将某一用户从订阅黑名单中移除，需要重新调用 setSubscribeVideoBlocklist 方法更新订阅黑名单的用户 ID 列表，使其不包含你想移除的用户的 uid 。
+  /// * [uidNumber] 黑名单用户 ID 列表中的用户数量。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setSubscribeVideoBlocklistEx(
       {required List<int> uidList,
       required int uidNumber,
       required RtcConnection connection});
 
-  /// Sets the video subscription allowlist.
+  /// 设置视频订阅白名单。
   ///
-  /// You can call this method to specify the video streams you want to subscribe to.
-  ///  You can call this method either before or after joining a channel.
-  ///  The video subscription allowlist is not affected by muteRemoteVideoStream, muteAllRemoteVideoStreams, or the autoSubscribeVideo setting in ChannelMediaOptions.
-  ///  After setting the allowlist, it remains effective even if you leave and rejoin the channel.
-  ///  If a user is in both the audio subscription blocklist and allowlist, only the blocklist takes effect.
+  /// 你可以调用该方法指定想要订阅的视频流。
+  ///  该方法在加入频道前后均可调用。
+  ///  视频订阅白名单不受 muteRemoteVideoStream 、 muteAllRemoteVideoStreams 以及 ChannelMediaOptions 中的 autoSubscribeVideo 的影响。
+  ///  设置订阅白名单后，如果离开当前频道后再重新加入频道，白名单依然生效。
+  ///  如果某个用户同时在音频订阅黑名单和白名单中，仅订阅黑名单生效。
   ///
-  /// * [uidList] The user ID list of the video subscription allowlist.
-  /// If you want to subscribe only to the video stream of a specific publishing user, add that user's ID to this list. If you want to remove a user from the allowlist, you need to call the setSubscribeVideoAllowlist method again to update the user ID list of the audio subscription allowlist so that it no longer contains the uid of the user you want to remove.
-  /// * [uidNumber] The number of users in the allowlist.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [uidList] 视频订阅白名单的用户 ID 列表。
+  /// 如果你想指定仅订阅某一发流用户的视频流，将该用户的 ID 加入此列表中。如果你想要将某一用户从订阅白名单中移除，需要重新调用 setSubscribeVideoAllowlist 方法更新音频订阅白名单的用户 ID 列表，使其不包含你想移除的用户的 uid 。
+  /// * [uidNumber] 白名单用户 ID 列表中的用户数量。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setSubscribeVideoAllowlistEx(
       {required List<int> uidList,
       required int uidNumber,
       required RtcConnection connection});
 
-  /// Sets the subscription options for the remote video stream.
+  /// 设置远端视频流的订阅选项。
   ///
-  /// When the remote user sends dual streams, you can call this method to set the subscription options for the remote video stream.
+  /// 当远端发送双流时，可调用此方法来设置远端视频流的订阅选项。
   ///
-  /// * [uid] Remote user ID.
-  /// * [options] Subscription settings for the video stream. See VideoSubscriptionOptions.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [uid] 远端用户 ID。
+  /// * [options] 视频流的订阅设置，详见 VideoSubscriptionOptions 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteVideoSubscriptionOptionsEx(
       {required int uid,
       required VideoSubscriptionOptions options,
       required RtcConnection connection});
 
-  /// Sets the 2D position of a remote user's voice, i.e., horizontal position.
+  /// 设置远端用户声音的 2D 位置，即水平面位置。
   ///
-  /// Sets the spatial position and volume of a remote user's voice to help local users identify direction by sound.
-  /// By calling this method, you can set the position where the remote user's voice appears. The difference between the left and right audio channels creates a sense of direction, allowing users to determine the real-time position of the remote user. In online multiplayer games, such as battle royale games, this method enhances the sense of direction of game characters and simulates real-world scenarios.
-  ///  For the best listening experience, it is recommended that users wear wired headphones.
-  ///  This method must be called after joining a channel.
+  /// 设置远端用户声音的空间位置和音量，方便本地用户听声辨位。
+  /// 通过调用该接口设置远端用户声音出现的位置，左右声道的声音差异会产生声音的方位感，从而判断出远端用户的实时位置。在多人在线游戏场景，如吃鸡游戏中，该方法能有效增加游戏角色的方位感，模拟真实场景。
+  ///  为获得最佳听觉体验，建议用户佩戴有线耳机。
+  ///  该方法需要在加入频道后调用。
   ///
-  /// * [uid] The ID of the remote user.
-  /// * [pan] Sets the spatial position of the remote user's voice. The range is [-1.0, 1.0]:
-  ///  -1.0: Voice appears on the left.
-  ///  (Default) 0.0: Voice appears in the center.
-  ///  1.0: Voice appears on the right.
-  /// * [gain] Sets the volume of the remote user's voice. The range is [0.0, 100.0], and the default value is 100.0, representing the original volume of the user. The smaller the value, the lower the volume.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [uid] 远端用户的 ID。
+  /// * [pan] 设置远端用户声音的空间位置，取值范围为 [-1.0,1.0]:
+  ///  -1.0: 声音出现在左边。
+  ///  （默认）0.0: 声音出现在正前方。
+  ///  1.0: 声音出现在右边。
+  /// * [gain] 设置远端用户声音的音量，取值范围为 [0.0,100.0]，默认值为 100.0，表示该用户的原始音量。取值越小，则音量越低。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteVoicePositionEx(
       {required int uid,
       required double pan,
@@ -344,38 +344,38 @@ abstract class RtcEngineEx implements RtcEngine {
       required SpatialAudioParams params,
       required RtcConnection connection});
 
-  /// Sets the display mode of the remote view.
+  /// 设置远端视图显示模式。
   ///
-  /// After initializing the remote user view, you can call this method to update the rendering and mirror mode of the remote user view displayed locally. This method only affects the video seen by the local user.
+  /// 初始化远端用户视图后，你可以调用该方法更新远端用户视图在本地显示时的渲染和镜像模式。该方法只影响本地用户看到的视频画面。
   ///
-  /// * [uid] Remote user ID.
-  /// * [renderMode] Display mode of the remote view. See RenderModeType.
-  /// * [mirrorMode] Mirror mode of the remote user view. See VideoMirrorModeType.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [uid] 远端用户 ID。
+  /// * [renderMode] 远端视图显示模式，详见 RenderModeType 。
+  /// * [mirrorMode] 远端用户视图的镜像模式，详见 VideoMirrorModeType 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteRenderModeEx(
       {required int uid,
       required RenderModeType renderMode,
       required VideoMirrorModeType mirrorMode,
       required RtcConnection connection});
 
-  /// Enables loopback recording.
+  /// 开启声卡采集。
   ///
-  /// After enabling loopback recording, the sound played through the sound card is mixed into the local audio stream and can be sent to the remote end.
-  ///  This method is applicable to macOS and Windows only.
-  ///  The default sound card on macOS does not support recording. If you need to use this feature, enable a virtual sound card and set deviceName to the name of that virtual device. Agora recommends using its self-developed virtual sound card AgoraALD for recording.
-  ///  Currently, only one loopback recording is supported.
+  /// 启用声卡采集功能后，声卡播放的声音会被合到本地音频流中，从而可以发送到远端。
+  ///  该方法仅适用于 macOS 和 Windows 平台。
+  ///  macOS 系统默认声卡不支持采集功能，如果你需要使用该功能，请启用一个虚拟声卡，并将 deviceName 设为该虚拟声卡的设备名。声网推荐你使用声网自研的虚拟声卡 AgoraALD 进行采集。
+  ///  该方法目前仅支持一路声卡采集。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [enabled] Whether to enable loopback recording: true : Enable loopback recording. false : (default) Do not enable loopback recording.
-  /// * [deviceName] macOS: The name of the virtual sound card. Default is empty, which means using the AgoraALD virtual sound card for recording.
-  ///  Windows: The name of the sound card. Default is empty, which means using the built-in sound card of the device for recording.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [enabled] 是否开启声卡采集： true : 开启声卡采集。 false :（默认）不开启声卡采集。
+  /// * [deviceName] macOS: 虚拟声卡的设备名。默认为空，代表使用 AgoraALD 虚拟声卡进行采集。
+  ///  Windows: 声卡的设备名。默认为空，代表使用设备自带的声卡进行采集。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableLoopbackRecordingEx(
       {required RtcConnection connection,
       required bool enabled,
@@ -389,80 +389,80 @@ abstract class RtcEngineEx implements RtcEngine {
   Future<void> muteRecordingSignalEx(
       {required bool mute, required RtcConnection connection});
 
-  /// Adjusts the playback volume of a specified remote user locally.
+  /// 调节本地播放的指定远端用户信号音量。
   ///
-  /// You can call this method during a call to adjust the playback volume of a specified remote user locally. To adjust the playback volume of multiple users, call this method multiple times.
+  /// 你可以在通话中调用该方法调节指定远端用户在本地播放的音量。如需调节多个用户在本地播放的音量，则需多次调用该方法。
   ///
-  /// * [uid] The ID of the remote user.
-  /// * [volume] The volume, with a range of [0,400].
-  ///  0: Mute.
-  ///  100: (Default) Original volume.
-  ///  400: Four times the original volume, with built-in overflow protection.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [uid] 远端用户 ID。
+  /// * [volume] 音量，取值范围为 [0,400]。
+  ///  0: 静音。
+  ///  100: （默认）原始音量。
+  ///  400: 原始音量的 4 倍，自带溢出保护。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustUserPlaybackSignalVolumeEx(
       {required int uid,
       required int volume,
       required RtcConnection connection});
 
-  /// Gets the current network connection state.
+  /// 获取当前网络连接状态。
   ///
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// Current network connection state. See ConnectionStateType.
+  /// 当前网络连接状态。详见 ConnectionStateType 。
   Future<ConnectionStateType> getConnectionStateEx(RtcConnection connection);
 
-  /// Enable or disable built-in encryption.
+  /// 开启或关闭内置加密。
   ///
-  /// After the user leaves the channel, the SDK automatically disables encryption. To enable encryption again, you need to call this method before the user rejoins the channel.
-  ///  All users in the same channel must set the same encryption mode and key when calling this method.
-  ///  If built-in encryption is enabled, the CDN live streaming feature cannot be used.
+  /// 用户离开频道后，SDK 会自动关闭加密。如需重新开启加密，你需要在用户再次加入频道前调用该方法。
+  ///  同一频道内的所有用户在调用该方法时，必须设置相同的加密模式和密钥。
+  ///  如果开启了内置加密，则不能使用旁路推流功能。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [enabled] Whether to enable built-in encryption: true : Enable built-in encryption. false : (default) Disable built-in encryption.
-  /// * [config] Configure the built-in encryption mode and key. See EncryptionConfig.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [enabled] 是否开启内置加密： true : 开启内置加密。 false :（默认）关闭内置加密。
+  /// * [config] 配置内置加密模式和密钥。详见 EncryptionConfig 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。
   Future<void> enableEncryptionEx(
       {required RtcConnection connection,
       required bool enabled,
       required EncryptionConfig config});
 
-  /// Creates a data stream.
+  /// 创建数据流。
   ///
-  /// If you need a more comprehensive, low-latency, high-concurrency, and scalable real-time messaging and state synchronization solution, we recommend using [Real-time Messaging](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page).
-  /// During the lifecycle of RtcEngine, each user can create up to 5 data streams. The data streams are destroyed when leaving the channel. If needed again, you must recreate them.
+  /// 如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
+  /// 在 RtcEngine 生命周期内，每个用户最多只能创建 5 个数据流。离开频道时数据流会被销毁，如需使用需要重新创建数据流。
   ///
-  /// * [config] Data stream configuration. See DataStreamConfig.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [config] 数据流设置。详见 DataStreamConfig 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// ID of the created data stream: method call succeeded.
-  ///  < 0: method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 创建的数据流的 ID：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> createDataStreamEx(
       {required DataStreamConfig config, required RtcConnection connection});
 
-  /// Sends a data stream.
+  /// 发送数据流。
   ///
-  /// After calling createDataStreamEx, you can call this method to send data stream messages to all users in the channel.
-  /// The SDK imposes the following restrictions on this method:
-  ///  Each client in the channel can have up to 5 data channels simultaneously, with a total sending bitrate limit of 30 KB/s shared among all channels.
-  ///  Each data channel can send up to 60 packets per second, with each packet limited to 1 KB. After this method is successfully called, the remote side triggers the onStreamMessage callback, through which remote users can receive the stream message. If the call fails, the remote side triggers the onStreamMessageError callback.
-  ///  If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and state synchronization, we recommend using [Real-time Messaging](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page).
-  ///  This method must be called after joinChannelEx.
-  ///  Make sure you have called createDataStreamEx to create the data channel before calling this method.
+  /// 调用 createDataStreamEx 后，你可以调用本方法向频道内所有用户发送数据流消息。
+  /// SDK 对该方法的实现进行了如下限制：
+  ///  频道内每个客户端最多可以同时拥有 5 个数据通道，所有数据通道共用的总发包码率限制为 30 KB/s。
+  ///  每个数据通道每秒最多能发送 60 个包，每个包最大为 1 KB。 成功调用该方法后，远端会触发 onStreamMessage 回调，远端用户可以在该回调中获取接收到的流消息；若调用失败，远端会触发 onStreamMessageError 回调。
+  ///  如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
+  ///  该方法需要在 joinChannelEx 后调用。
+  ///  请确保在调用该方法前，已调用 createDataStreamEx 创建了数据通道。
   ///
-  /// * [streamId] The data stream ID. You can get it through createDataStreamEx.
-  /// * [data] The data to be sent.
-  /// * [length] The length of the data.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [streamId] 数据流 ID。可以通过 createDataStreamEx 获取。
+  /// * [data] 待发送的数据。
+  /// * [length] 数据长度。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> sendStreamMessageEx(
       {required int streamId,
       required Uint8List data,
@@ -484,54 +484,54 @@ abstract class RtcEngineEx implements RtcEngine {
       required int length,
       required RtcConnection connection});
 
-  /// Adds a local video watermark.
+  /// 添加本地视频水印。
   ///
-  /// Deprecated Deprecated: This method is deprecated. Use addVideoWatermarkWithConfigEx instead. This method adds a PNG image as a watermark to the local published live video stream. Users in the same live streaming channel, audience members of the CDN live stream, and capturing devices can see or capture the watermark image. Currently, only one watermark can be added to the live video stream. Any new watermark added will replace the previous one.
-  /// The watermark coordinates depend on the settings in the setVideoEncoderConfigurationEx method:
-  ///  If the video encoding orientation (OrientationMode) is fixed to landscape or adaptive landscape, the watermark uses landscape coordinates.
-  ///  If the video encoding orientation (OrientationMode) is fixed to portrait or adaptive portrait, the watermark uses portrait coordinates.
-  ///  When setting the watermark coordinates, the watermark image area must not exceed the video dimensions set in the setVideoEncoderConfigurationEx method; otherwise, the exceeding part will be cropped.
-  ///  You must call this method after calling enableVideo.
-  ///  The watermark image to be added must be in PNG format. This method supports all pixel formats of PNG images: RGBA, RGB, Palette, Gray, and Alpha_gray.
-  ///  If the size of the PNG image to be added does not match the size set in this method, the SDK will scale or crop the PNG image to match the settings.
-  ///  If you have already started local video preview using the startPreview method, the visibleInPreview parameter of this method can be used to set whether the watermark is visible during preview.
-  ///  If local video mirroring is enabled, the local watermark will also be mirrored. To avoid the watermark being mirrored when local users view their own video, it is recommended not to use both mirroring and watermark features simultaneously for local video. Implement the local watermark feature at the application level.
+  /// 废弃 弃用：该方法已废弃，请改用 addVideoWatermarkWithConfigEx 。 该方法将一张 PNG 图片作为水印添加到本地发布的直播视频流上，同一直播频道中的用户、旁路直播观众和采集设备都能看到或采集到该水印图片。当前只支持在直播视频流中添加一个水印，后添加的水印会替换掉之前添加的水印。
+  /// 水印坐标和 setVideoEncoderConfigurationEx 方法中的设置有依赖关系：
+  ///  如果视频编码方向（ OrientationMode ）固定为横屏或自适应模式下的横屏，那么水印使用横屏坐标。
+  ///  如果视频编码方向（ OrientationMode ）固定为竖屏或自适应模式下的竖屏，那么水印使用竖屏坐标。
+  ///  设置水印坐标时，水印的图像区域不能超出 setVideoEncoderConfigurationEx 方法中设置的视频尺寸，否则超出部分将被裁剪。
+  ///  你需要在调用 enableVideo 方法之后再调用本方法。
+  ///  待添加水印图片必须是 PNG 格式。本方法支持所有像素格式的 PNG 图片：RGBA、RGB、Palette、Gray 和 Alpha_gray。
+  ///  如果待添加的 PNG 图片的尺寸与你在本方法中设置的尺寸不一致，SDK 会对 PNG 图片进行缩放或裁剪，以与设置相符。
+  ///  如果你已经使用 startPreview 方法开启本地视频预览，那么本方法的 visibleInPreview 可设置水印在预览时是否可见。
+  ///  如果你已设置本地视频为镜像模式，那么此处的本地水印也为镜像。为避免本地用户看本地视频时的水印也被镜像，建议你不要对本地视频同时使用镜像和水印功能，请在应用层实现本地水印功能。
   ///
-  /// * [watermarkUrl] Local path of the watermark image to be added. This method supports adding watermark images from local absolute/relative paths.
-  /// * [options] Settings for the watermark image to be added. See WatermarkOptions.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [watermarkUrl] 待添加的水印图片的本地路径。该方法支持从本地绝对/相对路径添加水印图片。
+  /// * [options] 待添加的水印图片的设置选项，详见 WatermarkOptions 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> addVideoWatermarkEx(
       {required String watermarkUrl,
       required WatermarkOptions options,
       required RtcConnection connection});
 
-  /// Removes the specified watermark image from the local or remote video stream.
+  /// 从本地或远端视频流中移除指定的水印图像。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v4.6.2 版本新增。
   ///
-  /// * [id] Watermark ID.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [id] 水印 ID。
+  /// * [connection] 连接信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// 0: The method call succeeds.
-  ///  < 0: The method call fails.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> removeVideoWatermarkEx(
       {required String id, required RtcConnection connection});
 
-  /// Removes added video watermarks.
+  /// 删除已添加的视频水印。
   ///
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> clearVideoWatermarkEx(RtcConnection connection);
 
-  /// Custom data reporting and analytics service.
+  /// 自定义数据上报和分析服务。
   ///
-  /// Agora provides a custom data reporting and analytics service. This service is currently in a free beta period. During the beta, you can report up to 10 data entries within 6 seconds. Each custom data entry must not exceed 256 bytes, and each string must not exceed 100 bytes. To try this service, please [contact sales](https://www.shengwang.cn/contact-sales/) to enable it and agree on the custom data format.
+  /// 声网提供自定义数据上报和分析服务。该服务当前处于免费内测期。内测期提供的能力为 6 秒内最多上报 10 条数据，每条自定义数据不能超过 256 字节，每个字符串不能超过 100 字节。如需试用该服务，请[联系销售](https://www.shengwang.cn/contact-sales/)开通并商定自定义数据格式。
   Future<void> sendCustomReportMessageEx(
       {required String id,
       required String category,
@@ -540,148 +540,148 @@ abstract class RtcEngineEx implements RtcEngine {
       required int value,
       required RtcConnection connection});
 
-  /// Enables audio volume indication.
+  /// 启用用户音量提示。
   ///
-  /// This method allows the SDK to periodically report volume information of the local user who is sending a stream and up to 3 remote users with the highest instantaneous volume to the app.
+  /// 该方法允许 SDK 定期向 App 报告本地发流用户和瞬时音量最高的远端用户（最多 3 位）的音量相关信息。
   ///
-  /// * [interval] The time interval for volume indication:
-  ///  ≤ 0: Disables the volume indication.
-  ///  > 0: The interval in milliseconds for volume indication. It is recommended to set it greater than 100 ms. Must not be less than 10 ms, otherwise the onAudioVolumeIndication callback will not be received.
-  /// * [smooth] The smoothing factor that specifies the sensitivity of the volume indication. The range is [0,10], and the recommended value is 3. The larger the value, the more sensitive the fluctuation; the smaller the value, the smoother the fluctuation.
-  /// * [reportVad] true : Enables local voice activity detection. When enabled, the vad parameter in the onAudioVolumeIndication callback reports whether voice is detected locally. false : (Default) Disables local voice activity detection. Unless the engine automatically detects local voice, the vad parameter in the onAudioVolumeIndication callback does not report local voice detection.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [interval] 指定音量提示的时间间隔：
+  ///  ≤ 0: 禁用音量提示功能。
+  ///  > 0: 返回音量提示的间隔，单位为毫秒。建议设置到大于 100 毫秒，不得小于 10 毫秒，否则会收不到 onAudioVolumeIndication 回调。
+  /// * [smooth] 平滑系数，指定音量提示的灵敏度。取值范围为 [0,10]，建议值为 3。数字越大，波动越灵敏；数字越小，波动越平滑。
+  /// * [reportVad] true ：开启本地人声检测功能。开启后， onAudioVolumeIndication 回调的 vad 参数会报告是否在本地检测到人声。 false ：（默认）关闭本地人声检测功能。除引擎自动进行本地人声检测的场景外， onAudioVolumeIndication 回调的 vad 参数不会报告是否在本地检测到人声。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableAudioVolumeIndicationEx(
       {required int interval,
       required int smooth,
       required bool reportVad,
       required RtcConnection connection});
 
-  /// Starts pushing streams without transcoding.
+  /// 开始非转码推流。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side Streaming](https://doc.shengwang.cn/doc/media-push/restful/landing-page).
-  /// You can call this method to push live audio and video streams to a specified CDN streaming URL. This method can only push to one URL at a time. To push to multiple URLs, you must call this method multiple times.
-  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
-  ///  Call this method after joining a channel.
-  ///  Only hosts in live streaming scenarios can call this method.
-  ///  If the stream fails to start and you want to restart it, you must call stopRtmpStream before calling this method again. Otherwise, the SDK returns the same error code as the previous failure.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 调用该方法，你可以向指定的旁路推流地址推送直播音视频流。该方法每次只能向一个地址推送媒体流，如果你需要向多个地址转码推流，则需多次调用该方法。
+  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
+  ///  请在加入频道后调用该方法。
+  ///  只有直播场景下的主播才能调用该方法。
+  ///  调用该方法推流失败后，如果你想要重新推流，那么请你务必先调用 stopRtmpStream ，再调用该方法重推，否则 SDK 会返回与上次推流失败时一样的错误码。
   ///
-  /// * [url] The CDN streaming URL. The format must be RTMP or RTMPS. The character length must not exceed 1024 bytes. Special characters such as Chinese are not supported.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startRtmpStreamWithoutTranscodingEx(
       {required String url, required RtcConnection connection});
 
-  /// Starts pushing streams with transcoding settings.
+  /// 开始旁路推流并设置转码属性。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side Streaming](https://doc.shengwang.cn/doc/media-push/restful/landing-page).
-  /// You can call this method to push live audio and video streams to a specified CDN streaming URL with transcoding settings. This method can only push to one URL at a time. To push to multiple URLs, you must call this method multiple times.
-  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
-  ///  Make sure the CDN streaming service is enabled.
-  ///  Call this method after joining a channel.
-  ///  Only hosts in live streaming scenarios can call this method.
-  ///  If the stream fails to start and you want to restart it, you must call stopRtmpStreamEx before calling this method again. Otherwise, the SDK returns the same error code as the previous failure.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 调用该方法，你可以向指定的旁路推流地址推送直播音视频流并设置转码属性。该方法每次只能向一个地址推送媒体流，如果你需要向多个地址转码推流，则需多次调用该方法。
+  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
+  ///  请确保已开通旁路推流服务。
+  ///  请在加入频道后调用该方法。
+  ///  只有直播场景下的主播才能调用该方法。
+  ///  调用该方法推流失败后，如果你想要重新推流，那么请你务必先调用 stopRtmpStreamEx ，再调用该方法重推，否则 SDK 会返回与上次推流失败时一样的错误码。
   ///
-  /// * [url] The CDN streaming URL. The format must be RTMP or RTMPS. The character length must not exceed 1024 bytes. Special characters such as Chinese are not supported.
-  /// * [transcoding] The transcoding settings for the CDN stream. See LiveTranscoding.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
+  /// * [transcoding] 旁路推流的转码属性，详见 LiveTranscoding 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startRtmpStreamWithTranscodingEx(
       {required String url,
       required LiveTranscoding transcoding,
       required RtcConnection connection});
 
-  /// Updates the RTMP transcoding configuration.
+  /// 更新旁路推流转码属性。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side RTMP Streaming](https://doc.shengwang.cn/doc/media-push/restful/landing-page).
-  /// After enabling transcoding streaming, you can dynamically update the transcoding configuration based on your scenario needs. After the transcoding configuration is updated, the SDK triggers the onTranscodingUpdated callback.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 开启转码推流后，你可以根据场景需求，动态更新转码属性。转码属性更新后，SDK 会触发 onTranscodingUpdated 回调。
   ///
-  /// * [transcoding] The transcoding configuration for RTMP streaming. See LiveTranscoding.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [transcoding] 旁路推流的转码属性，详见 LiveTranscoding 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> updateRtmpTranscodingEx(
       {required LiveTranscoding transcoding,
       required RtcConnection connection});
 
-  /// Stops the RTMP stream.
+  /// 结束旁路推流。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side RTMP Streaming](https://doc.shengwang.cn/doc/media-push/restful/landing-page).
-  /// Call this method to stop the live stream on the specified RTMP streaming URL. This method can only stop one streaming URL at a time. If you need to stop multiple streaming URLs, call this method multiple times.
-  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 调用该方法，你可以结束指定的旁路推流地址上的直播。该方法每次只能结束一个推流地址上的直播，如果你需要结束多个推流地址的直播，则需多次调用该方法。
+  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
   ///
-  /// * [url] The RTMP streaming URL. The format must be RTMP or RTMPS. The character length must not exceed 1024 bytes. Special characters such as Chinese characters are not supported.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopRtmpStreamEx(
       {required String url, required RtcConnection connection});
 
-  /// Starts or updates cross-channel media stream relay.
+  /// 开始或更新跨频道媒体流转发。
   ///
-  /// The first successful call to this method starts the cross-channel media stream relay. To relay the stream to multiple destination channels or exit the current relay channels, you can call this method again to add or remove destination channels. This feature supports relaying media streams to up to 6 destination channels.
-  /// After the method is successfully called, the SDK triggers the onChannelMediaRelayStateChanged callback to report the current state of the cross-channel media stream relay. Common states include:
-  ///  If the onChannelMediaRelayStateChanged callback reports relayStateRunning (2) and relayOk (0), it indicates that the SDK has started relaying media streams between the source and destination channels.
-  ///  If the onChannelMediaRelayStateChanged callback reports relayStateFailure (3), it indicates an exception occurred in the cross-channel media stream relay.
-  ///  Call this method after successfully joining a channel.
-  ///  In a live broadcast scenario, only users with the broadcaster role can call this method.
-  ///  The cross-channel media stream relay feature requires [contacting technical support](https://ticket.shengwang.cn/) to enable.
-  ///  This feature does not support String-type UIDs.
+  /// 首次成功调用该方法将开始跨频道转发媒体流。如需将流转发到多个目标频道，或退出当前的转发频道，可以再次调用该方法添加或移除转发的目标频道。该功能最多支持将媒体流转发至 6 个目标频道。
+  /// 成功调用该方法后，SDK 会触发 onChannelMediaRelayStateChanged 回调，报告当前的跨频道媒体流转发状态。常见状态如下：
+  ///  如果 onChannelMediaRelayStateChanged 回调报告 relayStateRunning (2) 和 relayOk (0)， 则表示 SDK 开始在源频道和目标频道之间转发媒体流。
+  ///  如果 onChannelMediaRelayStateChanged 回调报告 relayStateFailure (3)， 则表示跨频道媒体流转发出现异常。
+  ///  请在成功加入频道后调用该方法。
+  ///  在直播场景中，只有角色为主播的用户才能调用该方法。
+  ///  跨频道媒体流转发功能需要[联系技术支持](https://ticket.shengwang.cn/)开通。
+  ///  该功能不支持 String 型 UID。
   ///
-  /// * [configuration] Configuration for cross-channel media stream relay. See ChannelMediaRelayConfiguration.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [configuration] 跨频道媒体流转发参数配置。详见 ChannelMediaRelayConfiguration 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -1: General error (not specifically classified).
-  ///  -2: Invalid parameter.
-  ///  -8: Internal state error. Possibly because the user role is not broadcaster.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -1: 一般性的错误（未明确归类）。
+  ///  -2: 参数无效。
+  ///  -8：内部状态错误。可能因为用户角色不是主播。
   Future<void> startOrUpdateChannelMediaRelayEx(
       {required ChannelMediaRelayConfiguration configuration,
       required RtcConnection connection});
 
-  /// Stops cross-channel media stream relay. Once stopped, the broadcaster leaves all destination channels.
+  /// 停止跨频道媒体流转发。一旦停止，主播会退出所有目标频道。
   ///
-  /// After the method is successfully called, the SDK triggers the onChannelMediaRelayStateChanged callback. If it reports relayStateIdle (0) and relayOk (0), it indicates that media stream relay has been stopped. If the method call fails, the SDK triggers the onChannelMediaRelayStateChanged callback and reports the status code relayErrorServerNoResponse (2) or relayErrorServerConnectionLost (8). You can call the leaveChannel method to leave the channel, and the cross-channel media stream relay will stop automatically.
+  /// 成功调用该方法后，SDK 会触发 onChannelMediaRelayStateChanged 回调。如果报告 relayStateIdle (0) 和 relayOk (0)，则表示已停止转发媒体流。 如果该方法调用不成功，SDK 会触发 onChannelMediaRelayStateChanged 回调，并报告状态码 relayErrorServerNoResponse (2) 或 relayErrorServerConnectionLost (8)。你可以调用 leaveChannel 方法离开频道，跨频道媒体流转发会自动停止。
   ///
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -5: This method call was rejected. There is no ongoing cross-channel media stream relay.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -5: 方法调用被拒绝。当前没有正在进行的跨频道媒体流转发。
   Future<void> stopChannelMediaRelayEx(RtcConnection connection);
 
-  /// Pauses media stream relay to all destination channels.
+  /// 暂停向所有目标频道转发媒体流。
   ///
-  /// After starting media stream relay across channels, if you want to pause relaying to all destination channels, you can call this method. To resume relaying, call resumeAllChannelMediaRelay. You must call this method after calling startOrUpdateChannelMediaRelayEx to start media stream relay across channels.
+  /// 开始跨频道转发媒体流后，如果你需要暂停向所有频道转发媒体流，可以调用该方法；暂停后，如果要恢复跨频道媒体流转发，可以调用 resumeAllChannelMediaRelay 方法。 该方法需要在调用 startOrUpdateChannelMediaRelayEx 开始跨频道媒体流转发后调用。
   ///
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> pauseAllChannelMediaRelayEx(RtcConnection connection);
 
-  /// Resumes media stream relay to all destination channels.
+  /// 恢复向所有目标频道转发媒体流。
   ///
-  /// After calling the pauseAllChannelMediaRelayEx method, if you need to resume media stream relay to all destination channels, you can call this method. This method must be called after pauseAllChannelMediaRelayEx.
+  /// 调用 pauseAllChannelMediaRelayEx 方法后，如果你需要恢复向所有目标频道转发媒体流，可以调用该方法。 该方法需要在 pauseAllChannelMediaRelayEx 后调用。
   ///
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -5: This method call was rejected. There is no paused cross-channel media stream relay.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -5: 方法调用被拒绝。当前没有暂停的跨频道媒体流转发。
   Future<void> resumeAllChannelMediaRelayEx(RtcConnection connection);
 
   /// @nodoc
@@ -692,38 +692,38 @@ abstract class RtcEngineEx implements RtcEngine {
   Future<UserInfo> getUserInfoByUidEx(
       {required int uid, required RtcConnection connection});
 
-  /// Enables or disables dual-stream mode on the sending end.
+  /// 在发送端开启或关闭双流模式。
   ///
-  /// Deprecated Deprecated: Deprecated since v4.2.0. Use setDualStreamModeEx instead. You can call this method on the sending end to enable or disable dual-stream mode. Dual-stream refers to high-quality and low-quality video streams:
-  ///  High-quality stream: High resolution and high frame rate video stream.
-  ///  Low-quality stream: Low resolution and low frame rate video stream. After enabling dual-stream mode, you can call setRemoteVideoStreamType on the receiving end to choose whether to receive the high-quality or low-quality stream. This method applies to all types of streams sent by the sender, including but not limited to camera-captured video, screen sharing, and custom-captured video.
+  /// 废弃 弃用： 从 v4.2.0 起废弃，请改用 setDualStreamModeEx 。 你可以在发流端调用该方法开启或关闭双流模式。双流指视频大流和视频小流：
+  ///  视频大流：高分辨率、高帧率的视频流。
+  ///  视频小流：低分辨率、低帧率的视频流。 开启双流模式后，你可以在收流端调用 setRemoteVideoStreamType 选择接收视频大流或视频小流。 该方法适用于发送端发送的所有类型的流，包括且不限于来自摄像头采集的视频流、屏幕共享流、自定义采集的视频流。
   ///
-  /// * [enabled] Whether to enable dual-stream mode: true : Enable dual-stream mode. false : (Default) Disable dual-stream mode.
-  /// * [streamConfig] Configuration for the low-quality stream. See SimulcastStreamConfig. When mode is set to disableSimulcastStream, setting streamConfig has no effect.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [enabled] 是否开启双流模式： true : 开启双流模式。 false : (默认) 关闭双流模式。
+  /// * [streamConfig] 视频小流的配置。详见 SimulcastStreamConfig 。 当设置 mode 为 disableSimulcastStream 时，再设置 streamConfig 不会生效。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableDualStreamModeEx(
       {required bool enabled,
       required SimulcastStreamConfig streamConfig,
       required RtcConnection connection});
 
-  /// Sets the dual-stream mode on the sender side.
+  /// 在发送端设置双流模式。
   ///
-  /// By default, the SDK enables the small stream adaptive mode (autoSimulcastStream) on the sender side, meaning the sender does not actively send the low-quality stream. The receiver with host role can call setRemoteVideoStreamTypeEx to request the low-quality stream, and the sender starts sending it upon receiving the request.
-  ///  If you want to change this behavior, you can call this method and set mode to disableSimulcastStream (never send low-quality stream) or enableSimulcastStream (always send low-quality stream).
-  ///  If you want to restore the default behavior after making changes, call this method again and set mode to autoSimulcastStream. The differences and relations between this method and enableDualStreamModeEx are as follows:
-  ///  Calling this method with mode set to disableSimulcastStream has the same effect as enableDualStreamModeEx(false).
-  ///  Calling this method with mode set to enableSimulcastStream has the same effect as enableDualStreamModeEx(true).
-  ///  Both methods can be called before or after joining a channel. If both are used, the settings in the method called later take effect.
+  /// SDK 默认在发送端开启小流自适应模式 (autoSimulcastStream)，即发送端不主动发送小流，主播身份的接收端可以调用 setRemoteVideoStreamTypeEx 发起小流申请，发送端收到申请后开始自动发送小流。
+  ///  如果你想修改此行为，可以调用该方法并修改 mode 为 disableSimulcastStream （始终不发送小流）或 enableSimulcastStream （始终发送小流）。
+  ///  如果你在进行修改后又想恢复该默认行为，可重新调用该方法，并将 mode 设置为 autoSimulcastStream 。 该方法和 enableDualStreamModeEx 的区别与联系如下：
+  ///  调用该方法并设置 mode 为 disableSimulcastStream 时，跟 enableDualStreamModeEx(false) 的效果相同。
+  ///  调用该方法并设置 mode 为 enableSimulcastStream 时，跟 enableDualStreamModeEx(true) 的效果相同。
+  ///  两种方法均可在加入频道前后调用，若同时使用，则以后调用的方法中的设置为准。
   ///
-  /// * [mode] The mode for sending video streams. See SimulcastStreamMode.
-  /// * [streamConfig] Configuration of the low-quality video stream. See SimulcastStreamConfig. When mode is set to disableSimulcastStream, setting streamConfig has no effect.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [mode] 发送视频流的模式。详见 SimulcastStreamMode 。
+  /// * [streamConfig] 视频小流的配置。详见 SimulcastStreamConfig 。 当设置 mode 为 disableSimulcastStream 时，再设置 streamConfig 不会生效。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setDualStreamModeEx(
       {required SimulcastStreamMode mode,
       required SimulcastStreamConfig streamConfig,
@@ -741,64 +741,64 @@ abstract class RtcEngineEx implements RtcEngine {
       required StreamFallbackOptions option,
       required RtcConnection connection});
 
-  /// Takes a video snapshot using the connection ID.
+  /// 使用连接 ID 获取视频截图。
   ///
-  /// This method takes a snapshot of the specified user's video stream, generates a JPG image, and saves it to the specified path.
-  ///  This method is asynchronous. When the call returns, the SDK has not actually captured the snapshot.
-  ///  When used for local video snapshot, it captures the video stream specified in ChannelMediaOptions.
-  ///  If the user's video has undergone preprocessing, such as watermarking or beautification, the snapshot will include these effects.
+  /// 该方法用于对指定用户的视频流进行截图，生成一张 JPG 格式的图片，并保存至指定的路径。
+  ///  该方法是异步操作，调用返回时 SDK 并没有真正获取截图。
+  ///  该方法用于本地视频截图时，是对 ChannelMediaOptions 中指定发布的视频流进行截图。
+  ///  如果用户的视频经过前处理，例如，添加了水印或美颜，生成的截图会包含前处理效果。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [uid] User ID. Set to 0 to capture the local user's video.
-  /// * [filePath] Make sure the directory exists and is writable. The local path to save the snapshot. The path must include the file name and format, for example:
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [uid] 用户 ID。如果要对本地用户的视频截图，则设为 0。
+  /// * [filePath] 请确保目录存在且可写。 截图的本地保存路径，需精确到文件名及格式，例如：
   ///  Windows: C:\Users\<user_name>\AppData\Local\Agora\<process_name>\example.jpg
   ///  iOS: /App Sandbox/Library/Caches/example.jpg
   ///  macOS: ～/Library/Logs/example.jpg
   ///  Android: /storage/emulated/0/Android/data/<package name>/files/example.jpg
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> takeSnapshotEx(
       {required RtcConnection connection,
       required int uid,
       required String filePath});
 
-  /// Enables/disables local snapshot upload.
+  /// 开启/关闭本地截图上传。
   ///
-  /// This method can take and upload snapshots for multiple video streams. After enabling local snapshot upload, the SDK takes and uploads snapshots of the video sent by the local user based on the module type and frequency set in ContentInspectConfig. After the snapshot is completed, the Agora server sends a callback notification to your server via HTTPS request and uploads all snapshots to your specified third-party cloud storage. Before calling this method, please [contact technical support](https://ticket.shengwang.cn/) to enable the local snapshot upload service.
+  /// 该方法可以对多条视频流截图并上传。开启本地截图上传后，SDK 会根据你在 ContentInspectConfig 中设置的模块类型和频率对本地用户发送的视频进行截图和上传。截图完成后，声网服务器会以 HTTPS 请求的形式，向你的服务器发送回调通知，并将所有截图发送至你指定的第三方云存储。 调用该方法前，请确保已[联系技术支持](https://ticket.shengwang.cn/)开通本地截图上传服务。
   ///
-  /// * [enabled] Sets whether to enable local snapshot upload: true : Enable local snapshot upload. false : Disable local snapshot upload.
-  /// * [config] Local snapshot upload configuration. See ContentInspectConfig.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [enabled] 设置是否开启本地截图上传： true ：开启本地截图上传。 false ：关闭本地截图上传。
+  /// * [config] 本地截图上传配置。详见 ContentInspectConfig 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableContentInspectEx(
       {required bool enabled,
       required ContentInspectConfig config,
       required RtcConnection connection});
 
-  /// Starts video frame rendering tracing.
+  /// 开启视频帧渲染数据打点。
   ///
-  /// After this method is successfully called, the SDK uses the time of the call as the starting point and reports information related to video frame rendering through the onVideoRenderingTracingResult callback.
-  ///  If you do not call this method, the SDK uses the time of calling joinChannel to join the channel as the starting point to begin tracing video rendering events automatically. You can call this method at an appropriate time based on your actual business scenario to customize the tracing.
-  ///  After leaving the current channel, the SDK automatically resets the starting point to the time of the next channel join.
+  /// 成功调用该方法后，SDK 会以调用该方法的时刻作为起点，并通过 onVideoRenderingTracingResult 回调报告视频帧渲染的相关信息。
+  ///  如果你未调用该方法，SDK 默认以调用 joinChannel 加入频道的时刻为起始点开始打点，自动开始跟踪视频的渲染事件。你可以根据实际业务场景，在合适的时机调用该方法，进行自定义打点。
+  ///  离开当前频道后，SDK 会自动重置该时间点为下一次加入频道的时刻。
   ///
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startMediaRenderingTracingEx(RtcConnection connection);
 
   /// @nodoc
   Future<void> setParametersEx(
       {required RtcConnection connection, required String parameters});
 
-  /// Gets the call ID using the connection ID.
+  /// 使用连接 ID 获取通话 ID。
   ///
-  /// Each time the client joins a channel, a corresponding callId is generated to identify the current call. You can call this method to get the callId parameter, and then pass it in when calling methods such as rate and complain.
+  /// 客户端在每次加入频道后会生成一个对应的 callId ，标识该客户端的此次通话。你可以调用该方法获取 callId 参数，然后在调用 rate 、 complain 等方法时填入。
   ///
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   Future<String> getCallIdEx(RtcConnection connection);
 
   /// @nodoc
@@ -807,49 +807,49 @@ abstract class RtcEngineEx implements RtcEngine {
       required Uint8List metadata,
       required int length});
 
-  /// Preloads the specified audio effect into the channel.
+  /// 将指定音效预加载到频道中。
   ///
-  /// Since Available since v4.6.2. Each time you call this method, only one audio effect file can be preloaded into memory. To preload multiple audio effect files, call this method multiple times. After preloading, you can call playEffect to play the preloaded audio effect, or call playAllEffects to play all preloaded audio effects.
-  ///  To ensure smooth usage, the size of the audio effect file should not exceed the limit.
-  ///  Agora recommends calling this method before joining the channel.
-  ///  If you call preloadEffectEx before playEffectEx, the file resource is not released after playEffectEx is executed. The next time you call playEffectEx, it will start playing from the beginning.
-  ///  If you do not call preloadEffectEx before playEffectEx, the resource is destroyed after playEffectEx is executed. The next time you call playEffectEx, it will attempt to reopen the file and play from the beginning.
+  /// 自从 自 v4.6.2 版本新增。 每次调用该方法时，只能将一个音效文件预加载到内存中。如果需要预加载多个音效文件，请多次调用该方法。预加载完成后，可以调用 playEffect 播放预加载的音效，或调用 playAllEffects 播放所有预加载的音效。
+  ///  为确保使用体验流畅，音效文件的大小不应超过限制。
+  ///  声网建议在加入频道前调用该方法。
+  ///  如果在调用 playEffectEx 前已调用 preloadEffectEx ，则 playEffectEx 执行后不会关闭文件资源。下次调用 playEffectEx 时会直接从头开始播放。
+  ///  如果在调用 playEffectEx 前未调用 preloadEffectEx ，则 playEffectEx 执行后会销毁资源。下次调用 playEffectEx 时会尝试重新打开文件并从头开始播放。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [soundId] Audio effect ID.
-  /// * [filePath] The absolute path of a local file or the URL of an online file. Supported audio formats include: mp3, mp4, m4a, aac, 3gp, mkv, and wav.
-  /// * [startPos] The start position for playing the audio effect file, in milliseconds.
+  /// * [connection] 连接信息。详见 RtcConnection 。
+  /// * [soundId] 音效 ID。
+  /// * [filePath] 本地文件的绝对路径或在线文件的 URL。支持的音频格式包括：mp3、mp4、m4a、aac、3gp、mkv 和 wav。
+  /// * [startPos] 音效文件的播放起始位置（单位为毫秒）。
   ///
   /// Returns
-  /// 0: Success.
-  ///  < 0: Failure.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> preloadEffectEx(
       {required RtcConnection connection,
       required int soundId,
       required String filePath,
       int startPos = 0});
 
-  /// Plays the specified audio effect in the channel.
+  /// 在频道中播放指定音效。
   ///
-  /// Since Available since v4.6.2. You can call this method to play a specified audio effect to all users in the channel. Each call plays only one audio effect. To play multiple audio effects simultaneously, call this method multiple times with different soundId and filePath. You can also set whether to publish the audio effect in the channel.
-  ///  Agora recommends not playing more than three audio effects simultaneously.
-  ///  The audio effect ID and file path in this method must match those in the preloadEffectEx method.
-  ///  If preloadEffectEx is called before playEffectEx, the file resource is not released after playEffectEx is executed. The next time you call playEffectEx, it will start playing from the beginning.
-  ///  If preloadEffectEx is not called before playEffectEx, the resource is destroyed after playEffectEx is executed. The next time you call playEffectEx, it will attempt to reopen the file and play from the beginning.
+  /// 自从 自 v4.6.2 版本新增。 你可以调用该方法在频道内向所有用户播放指定音效。每次调用该方法只能播放一个音效。若需同时播放多个音效，请使用不同的 soundId 和 filePath 多次调用该方法。你还可以设置是否在频道中发布该音效。
+  ///  声网建议不要同时播放超过三个音效。
+  ///  该方法中的音效 ID 和文件路径必须与 preloadEffectEx 方法中的保持一致。
+  ///  如果在调用 playEffectEx 之前调用了 preloadEffectEx ， playEffectEx 执行后不会关闭文件资源。下次调用 playEffectEx 时会直接从头开始播放。
+  ///  如果在调用 playEffectEx 之前未调用 preloadEffectEx ， playEffectEx 执行后会销毁资源。下次调用 playEffectEx 时会尝试重新打开文件并从头播放。
   ///
-  /// * [connection] RtcConnection object. See RtcConnection.
-  /// * [soundId] Audio effect ID.
-  /// * [filePath] The absolute path of a local file or the URL of an online file. Supported audio formats include mp3, mp4, m4a, aac, 3gp, mkv, and wav.
-  /// * [loopCount] The number of times the audio effect is played: -1 : Loops indefinitely until stopEffect or stopAllEffects is called. 0 : Plays once. 1 : Plays twice.
-  /// * [pitch] The pitch of the audio effect. The range is 0.5 to 2.0. The default value is 1.0 (original pitch). The smaller the value, the lower the pitch.
-  /// * [pan] The spatial position of the audio effect. The range is -1.0 to 1.0: -1.0 : Audio effect comes from the user's left. 0.0 : Audio effect comes from the front. 1.0 : Audio effect comes from the user's right.
-  /// * [gain] The volume of the audio effect. The range is 0 to 100. The default value is 100 (original volume). The smaller the value, the lower the volume.
-  /// * [publish] Whether to publish the audio effect in the channel: true : Publishes the audio effect in the channel. false : (Default) Does not publish the audio effect in the channel.
-  /// * [startPos] The start position for playing the audio effect file, in milliseconds.
+  /// * [connection] RtcConnection 对象，详见 RtcConnection 。
+  /// * [soundId] 音效 ID。
+  /// * [filePath] 本地文件的绝对路径或在线文件的 URL。支持的音频格式包括 mp3、mp4、m4a、aac、3gp、mkv 和 wav。
+  /// * [loopCount] 音效的循环播放次数： -1 ：无限循环，直到调用 stopEffect 或 stopAllEffects 。 0 ：播放一次。 1 ：播放两次。
+  /// * [pitch] 音效的音调。取值范围为 0.5 到 2.0，默认值为 1.0（原始音调）。数值越小，音调越低。
+  /// * [pan] 音效的空间位置。取值范围为 -1.0 到 1.0： -1.0 ：音效从用户左侧传来。 0.0 ：音效从用户正前方传来。 1.0 ：音效从用户右侧传来。
+  /// * [gain] 音效的音量。取值范围为 0 到 100，默认值为 100（原始音量）。数值越小，音量越低。
+  /// * [publish] 是否在频道中发布该音效： true ：在频道中发布该音效。 false ：（默认）不在频道中发布该音效。
+  /// * [startPos] 音效文件的播放起始位置，单位为毫秒。
   ///
   /// Returns
-  /// 0: Success.
-  ///  < 0: Failure.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> playEffectEx(
       {required RtcConnection connection,
       required int soundId,
@@ -861,34 +861,34 @@ abstract class RtcEngineEx implements RtcEngine {
       bool publish = false,
       int startPos = 0});
 
-  /// Takes a video snapshot at the specified observation point using the connection ID.
+  /// 使用连接 ID 获取指定观测位置的视频截图。
   ///
-  /// This method takes a snapshot of the specified user's video stream, generates a JPG image, and saves it to the specified path.
-  ///  This method is asynchronous. When the call returns, the SDK has not actually captured the snapshot.
-  ///  When used for local video snapshot, it captures the video stream specified in ChannelMediaOptions.
-  ///  If the user's video has undergone preprocessing, such as watermarking or beautification, the snapshot will include these effects.
+  /// 该方法用于对指定用户的视频流进行截图，生成一张 JPG 格式的图片，并保存至指定的路径。
+  ///  该方法是异步操作，调用返回时 SDK 并没有真正获取截图。
+  ///  该方法用于本地视频截图时，是对 ChannelMediaOptions 中指定发布的视频流进行截图。
+  ///  如果用户的视频经过前处理，例如，添加了水印或美颜，生成的截图会包含前处理效果。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [uid] User ID. Set to 0 to capture the local user's video.
-  /// * [config] Snapshot configuration. See SnapshotConfig.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [uid] 用户 ID。如果要对本地用户的视频截图，则设为 0。
+  /// * [config] 截图设置，详见 SnapshotConfig 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> takeSnapshotWithConfigEx(
       {required RtcConnection connection,
       required int uid,
       required SnapshotConfig config});
 
-  /// Adds a watermark image to the local video.
+  /// 向本地视频添加水印图像。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v4.6.2 版本新增。
   ///
-  /// * [config] Watermark configuration. See WatermarkConfig.
-  /// * [connection] RtcConnection object. See RtcConnection.
+  /// * [config] 水印配置，详见 WatermarkConfig 。
+  /// * [connection] RtcConnection 对象，详见 RtcConnection 。
   ///
   /// Returns
-  /// 0: The method call succeeds.
-  ///  < 0: The method call fails.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> addVideoWatermarkWithConfigEx(
       {required WatermarkConfig config, required RtcConnection connection});
 }
