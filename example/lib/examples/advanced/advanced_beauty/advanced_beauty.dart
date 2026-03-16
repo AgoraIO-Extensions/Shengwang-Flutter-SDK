@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
-import 'package:shengwang_rtc_engine_example/config/agora.config.dart' as config;
+import 'package:shengwang_rtc_engine_example/config/agora.config.dart'
+    as config;
 import 'package:shengwang_rtc_engine_example/components/example_actions_widget.dart';
 import 'package:shengwang_rtc_engine_example/components/log_sink.dart';
 import 'package:shengwang_rtc_engine_example/components/remote_video_views_widget.dart';
@@ -32,7 +33,6 @@ class AdvancedBeauty extends StatefulWidget {
 // ---------- Beauty template options ----------
 /// Beauty presets — template names come from the SDK resource bundle's config.json.
 enum _BeautyTemplate {
-
   basic('Basic (基础)', 'Beauty-Basic');
 
   const _BeautyTemplate(this.label, this.templateName);
@@ -44,11 +44,11 @@ enum _BeautyTemplate {
 /// Style makeup combines multiple makeup layers in one template.
 enum _StyleMakeupTemplate {
   none('None', null),
-  mature('Mature (学姐)', 'Makeup-Mature'),
-  graceful('Graceful (优雅)', 'Makeup-Graceful'),
-  aura('Aura (气质)', 'Makeup-Aura'),
-  maiden('Maiden (少女)', 'Makeup-Maiden'),
-  young('Young (学妹)', 'Makeup-Young');
+  mature('Xuejie (学姐)', 'Makeup-Xuejie');
+  // graceful('Graceful (优雅)', 'Makeup-Graceful'),
+  // aura('Aura (气质)', 'Makeup-Aura'),
+  // maiden('Maiden (少女)', 'Makeup-Maiden'),
+  // young('Young (学妹)', 'Makeup-Young');
 
   const _StyleMakeupTemplate(this.label, this.templateName);
   final String label;
@@ -59,11 +59,13 @@ enum _StyleMakeupTemplate {
 /// Filter template names (English) from the "暖色系" category of the bundle.
 enum _FilterTemplate {
   none('None', null),
-  serene('Serene (沉稳)', 'Filter-Serene'),
-  urban('Urban (都市)', 'Filter-Urban'),
-  glow('Glow (流光)', 'Filter-Glow'),
-  gilt('Gilt (鎏金)', 'Filter-Gilt'),
-  cream('Cream (奶油)', 'Filter-Cream');
+  nenbai('Nenbai(嫩白)', 'Filter-Nenbai'),
+  lengbai('Lengbai(冷白)', 'Filter-Lengbai');
+  // serene('Serene (沉稳)', 'Filter-Serene'),
+  // urban('Urban (都市)', 'Filter-Urban'),
+  // glow('Glow (流光)', 'Filter-Glow'),
+  // gilt('Gilt (鎏金)', 'Filter-Gilt'),
+  // cream('Cream (奶油)', 'Filter-Cream');
 
   const _FilterTemplate(this.label, this.templateName);
   final String label;
@@ -372,10 +374,6 @@ class _State extends State<AdvancedBeauty> with KeepRemoteVideoViewsMixin {
       }
       setState(() {
         _styleMakeup = template;
-        // Makeup and filter are mutually exclusive (makeup takes priority)
-        if (template != _StyleMakeupTemplate.none) {
-          _filter = _FilterTemplate.none;
-        }
       });
     } on AgoraRtcException catch (e) {
       logSink
@@ -395,12 +393,6 @@ class _State extends State<AdvancedBeauty> with KeepRemoteVideoViewsMixin {
             .removeVideoEffect(VideoEffectNodeId.filter.value());
         logSink.log('[removeVideoEffect] filter removed');
       } else {
-        // Style makeup takes priority: remove makeup first
-        if (_styleMakeup != _StyleMakeupTemplate.none) {
-          await _videoEffectObject!
-              .removeVideoEffect(VideoEffectNodeId.styleMakeup.value());
-          logSink.log('[removeVideoEffect] styleMakeup removed for filter');
-        }
         await _videoEffectObject!.addOrUpdateVideoEffect(
           nodeId: VideoEffectNodeId.filter.value(),
           templateName: template.templateName!,
@@ -414,9 +406,6 @@ class _State extends State<AdvancedBeauty> with KeepRemoteVideoViewsMixin {
       }
       setState(() {
         _filter = template;
-        if (template != _FilterTemplate.none) {
-          _styleMakeup = _StyleMakeupTemplate.none;
-        }
       });
     } on AgoraRtcException catch (e) {
       logSink.log('[applyFilter] AgoraRtcException: ${e.code}, ${e.message}');
