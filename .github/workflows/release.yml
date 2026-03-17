@@ -325,20 +325,20 @@ jobs:
           # Generate DartDoc
           dart doc
           # Create a zip file of the DartDoc output
-          zip -r agora_rtc_docs.zip doc
+          zip -r shengwang_rtc_docs.zip doc
 
       - name: Upload DartDoc Artifact ⬆️
         uses: actions/upload-artifact@v4
         with:
-          name: agora_rtc_docs.zip
-          path: agora_rtc_docs.zip
+          name: shengwang_rtc_docs.zip
+          path: shengwang_rtc_docs.zip
 
       - name: Upload DartDoc Archive to GitHub release ⬆️
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: agora_rtc_docs.zip
-          asset_name: agora_rtc_docs.zip
+          file: shengwang_rtc_docs.zip
+          asset_name: shengwang_rtc_docs.zip
           tag: ${{ steps.doc_version.outputs.version }}
           overwrite: true
 
@@ -404,11 +404,11 @@ jobs:
           
           if [ "$RELEASE_TYPE" = "standard" ]; then
             echo "[publish info]  dependencies:"
-            echo "[publish info]    agora_rtc_engine: ^$RELEASE_VERSION"
+            echo "[publish info]    shengwang_rtc_engine: ^$RELEASE_VERSION"
           else
             echo "[publish info]  dependencies:"
-            echo "[publish info]    agora_rtc_engine:"
+            echo "[publish info]    shengwang_rtc_engine:"
             echo "[publish info]     git:"
-            echo "[publish info]      url: https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK.git"
+            echo "[publish info]      url: https://github.com/shengwang-extensions/Shengwang-Flutter-SDK.git"
             echo "[publish info]      ref: $RELEASE_VERSION"
           fi
