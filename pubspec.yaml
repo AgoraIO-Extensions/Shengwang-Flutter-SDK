@@ -1,7 +1,8 @@
 name: shengwang_rtc_engine
 description: >-
-  Flutter plugin of Shengwang RTC SDK, allow you to simply integrate Shengwang Video
-  Calling or Live Video Streaming to your app with just a few lines of code.
+  Flutter plugin of Shengwang RTC SDK, allow you to simply integrate Shengwang
+  Video Calling or Live Video Streaming to your app with just a few lines of
+  code.
 version: 6.6.2
 homepage: https://www.shengwang.cn
 repository: https://github.com/shengwang-extensions/Shengwang-Flutter-SDK/tree/main
