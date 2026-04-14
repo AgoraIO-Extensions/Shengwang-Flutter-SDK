@@ -11,26 +11,26 @@ const defaultConnectionId = 0;
 /// @nodoc
 const dummyConnectionId = 4294967295;
 
-/// Plugin context information.
+/// 插件上下文信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ExtensionContext implements AgoraSerializable {
   /// @nodoc
   const ExtensionContext(
       {this.isValid, this.uid, this.providerName, this.extensionName});
 
-  /// Whether the uid reported in ExtensionContext is valid: true : uid is valid. false : uid is invalid.
+  /// ExtensionContext 中报告的 uid 是否有效： true ： uid 有效。 false ： uid 无效。
   @JsonKey(name: 'isValid')
   final bool? isValid;
 
-  /// User ID. 0 represents the local user, values greater than 0 represent remote users.
+  /// 用户 ID。0 代表本地用户，大于 0 代表远端用户。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// Name of the plugin provider.
+  /// 提供插件的服务商名称。
   @JsonKey(name: 'providerName')
   final String? providerName;
 
-  /// Name of the plugin.
+  /// 插件的名称。
   @JsonKey(name: 'extensionName')
   final String? extensionName;
 
@@ -42,82 +42,82 @@ class ExtensionContext implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ExtensionContextToJson(this);
 }
 
-/// Type of video source.
+/// 视频源的类型。
 @JsonEnum(alwaysCreate: true)
 enum VideoSourceType {
-  /// 0: (Default) Video source is the first camera.
+  /// 0：（默认）视频源为第一个摄像头。
   @JsonValue(0)
   videoSourceCameraPrimary,
 
-  /// 0: (Default) Video source is the first camera.
+  /// 0：（默认）视频源为第一个摄像头。
   @JsonValue(0)
   videoSourceCamera,
 
-  /// 1: Video source is the second camera.
+  /// 1：视频源为第二个摄像头。
   @JsonValue(1)
   videoSourceCameraSecondary,
 
-  /// 2: Video source is the first screen.
+  /// 2：视频源为第一个屏幕。
   @JsonValue(2)
   videoSourceScreenPrimary,
 
-  /// 2: Video source is the first screen.
+  /// 2：视频源为第一个屏幕。
   @JsonValue(2)
   videoSourceScreen,
 
-  /// 3: Video source is the second screen.
+  /// 3：视频源为第二个屏幕。
   @JsonValue(3)
   videoSourceScreenSecondary,
 
-  /// 4: Custom video source.
+  /// 4：自定义的视频源。
   @JsonValue(4)
   videoSourceCustom,
 
-  /// 5: Video source is media player.
+  /// 5：视频源为媒体播放器。
   @JsonValue(5)
   videoSourceMediaPlayer,
 
-  /// 6: Video source is a PNG image.
+  /// 6：视频源为 PNG 图片。
   @JsonValue(6)
   videoSourceRtcImagePng,
 
-  /// 7: Video source is a JPEG image.
+  /// 7：视频源为 JPEG 图片。
   @JsonValue(7)
   videoSourceRtcImageJpeg,
 
-  /// 8: Video source is a GIF image.
+  /// 8：视频源为 GIF 图片。
   @JsonValue(8)
   videoSourceRtcImageGif,
 
-  /// 9: Video source is remote video obtained from the network.
+  /// 9：视频源为网络获取的远端视频。
   @JsonValue(9)
   videoSourceRemote,
 
-  /// 10: Transcoded video source.
+  /// 10：转码后的视频源。
   @JsonValue(10)
   videoSourceTranscoded,
 
-  /// 11: (Android, Windows, and macOS only) Video source is the third camera.
+  /// 11：（仅适用于 Android、Windows 和 macOS）视频源为第三个摄像头。
   @JsonValue(11)
   videoSourceCameraThird,
 
-  /// 12: (Android, Windows, and macOS only) Video source is the fourth camera.
+  /// 12：（仅适用于 Android、Windows 和 macOS）视频源为第四个摄像头。
   @JsonValue(12)
   videoSourceCameraFourth,
 
-  /// 13: (Windows and macOS only) Video source is the third screen.
+  /// 13：（仅适用于 Windows 和 macOS）视频源为第三个屏幕。
   @JsonValue(13)
   videoSourceScreenThird,
 
-  /// 14: (Windows and macOS only) Video source is the fourth screen.
+  /// 14：（仅适用于 Windows 和 macOS）视频源为第四个屏幕。
   @JsonValue(14)
   videoSourceScreenFourth,
 
-  /// 15: Video source is post-processed by a speech-driven plugin.
+  /// 15：视频源为语音驱动插件处理后的视频。
   @JsonValue(15)
   videoSourceSpeechDriven,
 
-  /// 100: Unknown video source.
+  /// 100：未知的视频源。
   @JsonValue(100)
   videoSourceUnknown,
 }
@@ -135,22 +135,22 @@ extension VideoSourceTypeExt on VideoSourceType {
   }
 }
 
-/// Audio source types.
+/// 音频源类型。
 @JsonEnum(alwaysCreate: true)
 enum AudioSourceType {
-  /// 0: (default) Microphone.
+  /// 0：（默认）麦克风。
   @JsonValue(0)
   audioSourceMicrophone,
 
-  /// 1: Custom captured audio stream.
+  /// 1：自定义采集到的音频流。
   @JsonValue(1)
   audioSourceCustom,
 
-  /// 2: Media player.
+  /// 2：媒体播放器。
   @JsonValue(2)
   audioSourceMediaPlayer,
 
-  /// 3: System audio stream captured during screen sharing.
+  /// 3：在屏幕共享时采集的系统音频流。
   @JsonValue(3)
   audioSourceLoopbackRecording,
 
@@ -158,15 +158,15 @@ enum AudioSourceType {
   @JsonValue(4)
   audioSourceMixedStream,
 
-  /// 5: Audio stream of a specified remote user.
+  /// 5：指定远端用户的音频流。
   @JsonValue(5)
   audioSourceRemoteUser,
 
-  /// 6: Mixed stream of all audio streams in the current channel.
+  /// 6：当前频道内所有音频流的合流。
   @JsonValue(6)
   audioSourceRemoteChannel,
 
-  /// 100: Unknown audio source.
+  /// 100：未知的音频源。
   @JsonValue(100)
   audioSourceUnknown,
 }
@@ -184,30 +184,30 @@ extension AudioSourceTypeExt on AudioSourceType {
   }
 }
 
-/// Audio routing types.
+/// 音频路由的类型。
 @JsonEnum(alwaysCreate: true)
 enum AudioRoute {
-  /// -1: Use the default audio route.
+  /// -1: 使用默认的音频路由。
   @JsonValue(-1)
   routeDefault,
 
-  /// 0: Audio routed to a headset with microphone.
+  /// 0: 音频路由为带麦克风的耳机。
   @JsonValue(0)
   routeHeadset,
 
-  /// 1: Audio routed to the earpiece.
+  /// 1: 音频路由为听筒。
   @JsonValue(1)
   routeEarpiece,
 
-  /// 2: Audio routed to a headset without microphone.
+  /// 2: 音频路由为不带麦克风的耳机。
   @JsonValue(2)
   routeHeadsetnomic,
 
-  /// 3: Audio routed to the device's built-in speaker.
+  /// 3: 音频路由为设备自带的扬声器。
   @JsonValue(3)
   routeSpeakerphone,
 
-  /// 4: Audio routed to an external speaker. (iOS and macOS only)
+  /// 4: 音频路由为外接的扬声器。（仅适用于 iOS 和 macOS）
   @JsonValue(4)
   routeLoudspeaker,
 
@@ -215,19 +215,19 @@ enum AudioRoute {
   @JsonValue(5)
   routeBluetoothDeviceHfp,
 
-  /// 6: Audio routed to a USB peripheral device. (macOS only)
+  /// 6: 音频路由为 USB 外围设备。（仅适用于 macOS）
   @JsonValue(6)
   routeUsb,
 
-  /// 7: Audio routed to an HDMI peripheral device. (macOS only)
+  /// 7: 音频路由为 HDMI 外围设备。（仅适用于 macOS）
   @JsonValue(7)
   routeHdmi,
 
-  /// 8: Audio routed to a DisplayPort peripheral device. (macOS only)
+  /// 8: 音频路由为 DisplayPort 外围设备。（仅适用于 macOS）
   @JsonValue(8)
   routeDisplayport,
 
-  /// 9: Audio routed to Apple AirPlay. (macOS only)
+  /// 9: 音频路由为 Apple AirPlay。（仅适用于 macOS）
   @JsonValue(9)
   routeAirplay,
 
@@ -296,14 +296,14 @@ class AudioParameters implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$AudioParametersToJson(this);
 }
 
-/// Usage mode of audio data.
+/// 音频数据的使用模式。
 @JsonEnum(alwaysCreate: true)
 enum RawAudioFrameOpModeType {
-  /// 0: (Default) Read-only mode. For example, if you collect data via the SDK and perform bypass streaming yourself, you can choose this mode.
+  /// 0: (默认) 只读模式，例如: 若用户通过 SDK 采集数据，自己进行旁路推流，则可以选择该模式。
   @JsonValue(0)
   rawAudioFrameOpModeReadOnly,
 
-  /// 2: Read-write mode. For example, if you have your own audio effects processing module and want to pre-process the data (e.g., voice changing), you can choose this mode.
+  /// 2: 读写模式, 例如: 若用户自己有音效处理模块，且想要根据实际需要对数据进行前处理(例如变声)，则可以选择该模式。
   @JsonValue(2)
   rawAudioFrameOpModeReadWrite,
 }
@@ -321,22 +321,22 @@ extension RawAudioFrameOpModeTypeExt on RawAudioFrameOpModeType {
   }
 }
 
-/// Media source types.
+/// 媒体源类型。
 @JsonEnum(alwaysCreate: true)
 enum MediaSourceType {
-  /// 0: Audio playback device.
+  /// 0: 音频播放设备。
   @JsonValue(0)
   audioPlayoutSource,
 
-  /// 1: Audio capture device.
+  /// 1: 音频采集设备。
   @JsonValue(1)
   audioRecordingSource,
 
-  /// 2: Primary camera.
+  /// 2: 第一个摄像头
   @JsonValue(2)
   primaryCameraSource,
 
-  /// 3: Secondary camera.
+  /// 3: 第二个摄像头。
   @JsonValue(3)
   secondaryCameraSource,
 
@@ -348,7 +348,7 @@ enum MediaSourceType {
   @JsonValue(5)
   secondaryScreenSource,
 
-  /// 6: Custom video capture source.
+  /// 6: 自定义采集的视频源。
   @JsonValue(6)
   customVideoSource,
 
@@ -376,11 +376,11 @@ enum MediaSourceType {
   @JsonValue(12)
   transcodedVideoSource,
 
-  /// 13: Video source processed by speech-driven plugin.
+  /// 13: 视频源为语音驱动插件处理后的视频。
   @JsonValue(13)
   speechDrivenVideoSource,
 
-  /// 100: Unknown media source.
+  /// 100: 未知媒体源。
   @JsonValue(100)
   unknownMediaSource,
 }
@@ -445,7 +445,7 @@ class AudioEncodedFrameInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$AudioEncodedFrameInfoToJson(this);
 }
 
-/// Information of external PCM format audio frame.
+/// 外部 PCM 格式音频帧的信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AudioPcmFrame implements AgoraSerializable {
   /// @nodoc
@@ -459,19 +459,19 @@ class AudioPcmFrame implements AgoraSerializable {
       this.data,
       this.isStereo});
 
-  /// Timestamp (ms) of the audio frame.
+  /// 音频帧的时间戳 (ms)。
   @JsonKey(name: 'capture_timestamp')
   final int? captureTimestamp;
 
-  /// Number of samples per channel.
+  /// 每个声道的采样点数。
   @JsonKey(name: 'samples_per_channel_')
   final int? samplesPerChannel;
 
-  /// Audio sample rate (Hz).
+  /// 音频采样率 (Hz)。
   @JsonKey(name: 'sample_rate_hz_')
   final int? sampleRateHz;
 
-  /// Number of audio channels.
+  /// 音频声道数。
   @JsonKey(name: 'num_channels_')
   final int? numChannels;
 
@@ -479,11 +479,11 @@ class AudioPcmFrame implements AgoraSerializable {
   @JsonKey(name: 'audio_track_number_')
   final int? audioTrackNumber;
 
-  /// Number of bytes per audio sample.
+  /// 音频数据的字节数。
   @JsonKey(name: 'bytes_per_sample')
   final BytesPerSample? bytesPerSample;
 
-  /// Audio frame data.
+  /// 音频帧数据。
   @JsonKey(name: 'data_')
   final List<int>? data;
 
@@ -499,22 +499,22 @@ class AudioPcmFrame implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$AudioPcmFrameToJson(this);
 }
 
-/// Channel mode.
+/// 声道模式。
 @JsonEnum(alwaysCreate: true)
 enum AudioDualMonoMode {
-  /// 0: Original mode.
+  /// 0: 原始模式。
   @JsonValue(0)
   audioDualMonoStereo,
 
-  /// 1: Left channel mode. This mode replaces the right channel audio with the left channel audio, so the user hears only the left channel.
+  /// 1: 左声道模式。该模式用左声道的音频替换右声道的音频，即用户只能听到左声道的音频。
   @JsonValue(1)
   audioDualMonoL,
 
-  /// 2: Right channel mode. This mode replaces the left channel audio with the right channel audio, so the user hears only the right channel.
+  /// 2: 右声道模式。该模式用右声道的音频替换左声道的音频，即用户只能听到右声道的音频。
   @JsonValue(2)
   audioDualMonoR,
 
-  /// 3: Mix mode. This mode mixes the left and right channel data, so the user hears both channels simultaneously.
+  /// 3: 混合模式。该模式将左右声道的数据叠加，即用户能同时听到左声道和右声道的音频。
   @JsonValue(3)
   audioDualMonoMix,
 }
@@ -532,14 +532,14 @@ extension AudioDualMonoModeExt on AudioDualMonoMode {
   }
 }
 
-/// Video pixel format.
+/// 视频像素格式。
 @JsonEnum(alwaysCreate: true)
 enum VideoPixelFormat {
-  /// 0: Original video pixel format.
+  /// 0: 原始视频像素格式。
   @JsonValue(0)
   videoPixelDefault,
 
-  /// 1: I420 format.
+  /// 1: I420 格式。
   @JsonValue(1)
   videoPixelI420,
 
@@ -551,7 +551,7 @@ enum VideoPixelFormat {
   @JsonValue(3)
   videoPixelNv21,
 
-  /// 4: RGBA format.
+  /// 4: RGBA 格式。
   @JsonValue(4)
   videoPixelRgba,
 
@@ -583,11 +583,11 @@ enum VideoPixelFormat {
   @JsonValue(15)
   videoCvpixelP010,
 
-  /// 16: I422 format.
+  /// 16: I422 格式。
   @JsonValue(16)
   videoPixelI422,
 
-  /// 17: ID3D11TEXTURE2D format. Currently supported types include DXGI_FORMAT_B8G8R8A8_UNORM, DXGI_FORMAT_B8G8R8A8_TYPELESS, and DXGI_FORMAT_NV12.
+  /// 17: ID3D11TEXTURE2D 格式。目前支持的类型有 DXGI_FORMAT_B8G8R8A8_UNORM 、 DXGI_FORMAT_B8G8R8A8_TYPELESS 和 DXGI_FORMAT_NV12 。
   @JsonValue(17)
   videoTextureId3d11texture2d,
 
@@ -609,18 +609,18 @@ extension VideoPixelFormatExt on VideoPixelFormat {
   }
 }
 
-/// Video display mode.
+/// 视频显示模式。
 @JsonEnum(alwaysCreate: true)
 enum RenderModeType {
-  /// 1: Video is scaled proportionally. Priority is to fill the view. Excess video that does not fit due to aspect ratio differences is cropped.
+  /// 1: 视频尺寸等比缩放。优先保证视窗被填满。因视频尺寸与显示视窗尺寸不一致而多出的视频将被截掉。
   @JsonValue(1)
   renderModeHidden,
 
-  /// 2: Video is scaled proportionally. Priority is to display the entire video content. Black bars are added to fill areas not covered due to aspect ratio differences.
+  /// 2: 视频尺寸等比缩放。优先保证视频内容全部显示。因视频尺寸与显示视窗尺寸不一致造成的视窗未被填满的区域填充黑色。
   @JsonValue(2)
   renderModeFit,
 
-  /// 3: Adaptive mode. Deprecated: This enum is deprecated and not recommended for use.
+  /// 3：匹配模式。 弃用：该枚举已废弃，不推荐使用。
   @JsonValue(3)
   renderModeAdaptive,
 }
@@ -1054,26 +1054,26 @@ class Hdr10MetadataInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$Hdr10MetadataInfoToJson(this);
 }
 
-/// The relative position of alphaBuffer and the video frame.
+/// alphaBuffer 和视频帧的相对位置。
 @JsonEnum(alwaysCreate: true)
 enum AlphaStitchMode {
-  /// 0: (Default) Only the video frame, i.e., alphaBuffer is not stitched with the video frame.
+  /// 0：（默认）仅视频帧，即 alphaBuffer 不和视频帧拼接。
   @JsonValue(0)
   noAlphaStitch,
 
-  /// 1: alphaBuffer is above the video frame.
+  /// 1： alphaBuffer 位于视频帧的上方。
   @JsonValue(1)
   alphaStitchUp,
 
-  /// 2: alphaBuffer is below the video frame.
+  /// 2： alphaBuffer 位于视频帧的下方。
   @JsonValue(2)
   alphaStitchBelow,
 
-  /// 3: alphaBuffer is on the left side of the video frame.
+  /// 3： alphaBuffer 位于视频帧的左侧。
   @JsonValue(3)
   alphaStitchLeft,
 
-  /// 4: alphaBuffer is on the right side of the video frame.
+  /// 4： alphaBuffer 位于视频帧的右侧。
   @JsonValue(4)
   alphaStitchRight,
 }
@@ -1091,7 +1091,7 @@ extension AlphaStitchModeExt on AlphaStitchMode {
   }
 }
 
-/// External video frame.
+/// 外部视频帧。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ExternalVideoFrame implements AgoraSerializable {
   /// @nodoc
@@ -1121,55 +1121,55 @@ class ExternalVideoFrame implements AgoraSerializable {
       this.hdr10MetadataInfo,
       this.colorSpace});
 
-  /// Video type. See VideoBufferType.
+  /// 视频类型。详见 VideoBufferType 。
   @JsonKey(name: 'type')
   final VideoBufferType? type;
 
-  /// Pixel format. See VideoPixelFormat.
+  /// 像素格式。详见 VideoPixelFormat 。
   @JsonKey(name: 'format')
   final VideoPixelFormat? format;
 
-  /// Video buffer.
+  /// 视频缓冲区。
   @JsonKey(name: 'buffer', ignore: true)
   final Uint8List? buffer;
 
-  /// Stride of the input video frame, in pixels (not bytes). For Texture, this refers to the width of the Texture.
+  /// 传入视频帧的行间距，单位为像素而不是字节。对于 Texture，该值指的是 Texture 的宽度。
   @JsonKey(name: 'stride')
   final int? stride;
 
-  /// Height of the input video frame.
+  /// 传入视频帧的高度。
   @JsonKey(name: 'height')
   final int? height;
 
-  /// This parameter only applies to raw video data.
+  /// 该参数仅适用于原始视频数据。
   @JsonKey(name: 'cropLeft')
   final int? cropLeft;
 
-  /// This parameter only applies to raw video data.
+  /// 该参数仅适用于原始视频数据。
   @JsonKey(name: 'cropTop')
   final int? cropTop;
 
-  /// This parameter only applies to raw video data.
+  /// 该参数仅适用于原始视频数据。
   @JsonKey(name: 'cropRight')
   final int? cropRight;
 
-  /// This parameter only applies to raw video data.
+  /// 该参数仅适用于原始视频数据。
   @JsonKey(name: 'cropBottom')
   final int? cropBottom;
 
-  /// Field related to raw data. Specifies whether to rotate the input video frame clockwise. Options are 0, 90, 180, 270. Default is 0.
+  /// 原始数据相关字段。指定是否对传入的视频组做顺时针旋转操作，可选值为 0， 90， 180， 270。默认为 0。
   @JsonKey(name: 'rotation')
   final int? rotation;
 
-  /// Timestamp of the input video frame, in milliseconds. Incorrect timestamps may cause frame drops or audio-video desynchronization.
+  /// 传入的视频帧的时间戳，以毫秒为单位。不正确的时间戳会导致丢帧或者音视频不同步。
   @JsonKey(name: 'timestamp')
   final int? timestamp;
 
-  /// This parameter only applies to video data in Texture format. Refers to the Texture ID of the video frame.
+  /// 该参数仅适用于 Texture 格式的视频数据。指该视频帧的 Texture ID。
   @JsonKey(name: 'eglType')
   final EglContextType? eglType;
 
-  /// This parameter only applies to video data in Texture format. It is a 4x4 input transformation matrix, typically an identity matrix.
+  /// 该参数仅适用于 Texture 格式的视频数据。为一个输入的 4x4 变换矩阵，典型值为一个单位矩阵。
   @JsonKey(name: 'textureId')
   final int? textureId;
 
@@ -1177,38 +1177,38 @@ class ExternalVideoFrame implements AgoraSerializable {
   @JsonKey(name: 'fenceObject')
   final int? fenceObject;
 
-  /// This parameter only applies to video data in Texture format. It is a 4x4 input transformation matrix, typically an identity matrix.
+  /// 该参数仅适用于 Texture 格式的视频数据。为一个输入的 4x4 变换矩阵，典型值为一个单位矩阵。
   @JsonKey(name: 'matrix')
   final List<double>? matrix;
 
-  /// This parameter only applies to video data in Texture format. Refers to the data buffer of MetaData, default value is NULL.
+  /// 该参数仅适用于 Texture 格式的视频数据。指 MetaData 的数据缓冲区，默认值为 NULL 。
   @JsonKey(name: 'metadataBuffer', ignore: true)
   final Uint8List? metadataBuffer;
 
-  /// This parameter only applies to video data in Texture format. Refers to the size of MetaData, default value is 0.
+  /// 该参数仅适用于 Texture 格式的视频数据。指 MetaData 的大小，默认值为 0 。
   @JsonKey(name: 'metadataSize')
   final int? metadataSize;
 
-  /// Alpha channel data output by portrait segmentation algorithm. This data matches the size of the video frame. Each pixel value ranges from [0,255], where 0 represents background and 255 represents foreground (portrait).
-  /// You can use this parameter to render the video background with various effects, such as transparency, solid color, image, video, etc. In custom video rendering scenarios, make sure both the input video frame and alphaBuffer are of Full Range type; other types may cause incorrect rendering of alpha data.
+  /// 采用人像分割算法输出的 Alpha 通道数据。该数据跟视频帧的尺寸一致，每个像素点的取值范围为 [0,255]，其中 0 代表背景；255 代表前景（人像）。
+  /// 你可以通过设置该参数，实现将视频背景自渲染为各种效果，例如：透明、纯色、图片、视频等。 在自定义视频渲染场景下，需确保传入的视频帧和 alphaBuffer 均为 Full Range 类型；其他类型可能导致 Alpha 数据渲染不正常。
   @JsonKey(name: 'alphaBuffer', ignore: true)
   final Uint8List? alphaBuffer;
 
-  /// For video data in BGRA or RGBA format, you can choose either method to set the alpha channel data:
-  ///  Automatically fill by setting this parameter to true.
-  ///  Set via the alphaBuffer parameter. This parameter only applies to video data in BGRA or RGBA format. Sets whether to extract the alpha channel data from the video frame and automatically fill it into alphaBuffer : true : Extract and fill alpha channel data. false : (default) Do not extract or fill alpha channel data.
+  /// 对于 BGRA 或 RGBA 格式的视频数据，你可以任选一种方式设置 Alpha 通道数据：
+  ///  通过将该参数设置为 true 自动填写。
+  ///  通过 alphaBuffer 参数设置。 该参数仅适用于 BGRA 或 RGBA 格式的视频数据。设置是否提取视频帧中的 Alpha 通道数据并自动填入到 alphaBuffer 中： true ：提取并填充 Alpha 通道数据。 false ：（默认）不提取填充 Alpha 通道数据。
   @JsonKey(name: 'fillAlphaBuffer')
   final bool? fillAlphaBuffer;
 
-  /// When the video frame contains alpha channel data, sets the relative position of alphaBuffer to the video frame. See AlphaStitchMode.
+  /// 当视频帧中包含 Alpha 通道数据时，设置 alphaBuffer 和视频帧的相对位置。详见 AlphaStitchMode 。
   @JsonKey(name: 'alphaStitchMode')
   final AlphaStitchMode? alphaStitchMode;
 
-  /// This parameter only applies to video data in Windows Texture format. Represents a pointer to an object of type ID3D11Texture2D, which is used by the video frame.
+  /// 该参数仅适用于 Windows Texture 格式的视频数据。表示一个指向 ID3D11Texture2D 类型对象的指针，该类型对象被视频帧所使用。
   @JsonKey(name: 'd3d11Texture2d', readValue: readIntPtr)
   final int? d3d11Texture2d;
 
-  /// This parameter only applies to video data in Windows Texture format. Indicates the index of the ID3D11Texture2D texture object used by the video frame in the ID3D11Texture2D array.
+  /// 该参数仅适用于 Windows Texture 格式的视频数据。表示在 ID3D11Texture2D 数组中，被视频帧使用的某一个 ID3D11Texture2D 纹理对象的索引。
   @JsonKey(name: 'textureSliceIndex')
   final int? textureSliceIndex;
 
@@ -1216,7 +1216,7 @@ class ExternalVideoFrame implements AgoraSerializable {
   @JsonKey(name: 'hdr10MetadataInfo')
   final Hdr10MetadataInfo? hdr10MetadataInfo;
 
-  /// Color space property of the video frame. By default, Full Range and BT.709 standard configuration is applied. You can customize the setting based on your custom capture or rendering requirements. See [VideoColorSpace](https://developer.mozilla.org/en-US/docs/Web/API/VideoColorSpace).
+  /// 视频帧的色彩空间属性，默认情况下会应用 Full Range 和 BT.709 标准配置。你可以根据自定义采集、自定义渲染的业务需求进行自定义设置，详见 [VideoColorSpace](https://developer.mozilla.org/en-US/docs/Web/API/VideoColorSpace)。
   @JsonKey(name: 'colorSpace')
   final ColorSpace? colorSpace;
 
@@ -1253,18 +1253,18 @@ extension EglContextTypeExt on EglContextType {
   }
 }
 
-/// Video buffer type.
+/// 视频 buffer 类型。
 @JsonEnum(alwaysCreate: true)
 enum VideoBufferType {
-  /// 1: Type is raw data.
+  /// 1: 类型为原始数据。
   @JsonValue(1)
   videoBufferRawData,
 
-  /// 2: Type is raw data.
+  /// 2: 类型为原始数据。
   @JsonValue(2)
   videoBufferArray,
 
-  /// 3: Type is Texture.
+  /// 3: 类型为 Texture 。
   @JsonValue(3)
   videoBufferTexture,
 }
@@ -1282,9 +1282,9 @@ extension VideoBufferTypeExt on VideoBufferType {
   }
 }
 
-/// Video frame property settings.
+/// 视频帧的属性设置。
 ///
-/// The buffer is a pointer to a pointer. This interface cannot modify the buffer pointer, only the content of the buffer.
+/// 缓冲区给出的是指向指针的指针，该接口不能修改缓冲区的指针，只能修改缓冲区的内容。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class VideoFrame implements AgoraSerializable {
   /// @nodoc
@@ -1312,78 +1312,78 @@ class VideoFrame implements AgoraSerializable {
       this.hdr10MetadataInfo,
       this.colorSpace});
 
-  /// Pixel format. See VideoPixelFormat.
+  /// 像素格式。详见 VideoPixelFormat 。
   @JsonKey(name: 'type')
   final VideoPixelFormat? type;
 
-  /// Pixel width of the video.
+  /// 视频像素宽度。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// Pixel height of the video.
+  /// 视频像素高度。
   @JsonKey(name: 'height')
   final int? height;
 
-  /// For YUV data, the line stride of the Y buffer; for RGBA data, the total data length. When processing video data, you must handle the offset between each row of pixel data based on this parameter; otherwise, image distortion may occur.
+  /// 对 YUV 数据，表示 Y 缓冲区的行跨度；对 RGBA 数据，表示总的数据长度。 在处理视频数据时，需根据该参数处理每行像素数据之间的偏移量，否则可能导致图像失真。
   @JsonKey(name: 'yStride')
   final int? yStride;
 
-  /// For YUV data, the line stride of the U buffer; for RGBA data, the value is 0. When processing video data, you must handle the offset between each row of pixel data based on this parameter; otherwise, image distortion may occur.
+  /// 对 YUV 数据，表示 U 缓冲区的行跨度；对 RGBA 数据，值为 0。 在处理视频数据时，需根据该参数处理每行像素数据之间的偏移量，否则可能导致图像失真。
   @JsonKey(name: 'uStride')
   final int? uStride;
 
-  /// For YUV data, the line stride of the V buffer; for RGBA data, the value is 0. When processing video data, you must handle the offset between each row of pixel data based on this parameter; otherwise, image distortion may occur.
+  /// 对 YUV 数据，表示 V 缓冲区的行跨度；对 RGBA 数据，值为 0。 在处理视频数据时，需根据该参数处理每行像素数据之间的偏移量，否则可能导致图像失真。
   @JsonKey(name: 'vStride')
   final int? vStride;
 
-  /// For YUV data, the pointer to the Y buffer; for RGBA data, the data buffer.
+  /// 对 YUV 数据，表示 Y 缓冲区的指针；对 RGBA 数据，表示数据缓冲区。
   @JsonKey(name: 'yBuffer', ignore: true)
   final Uint8List? yBuffer;
 
-  /// For YUV data, the pointer to the U buffer; for RGBA data, the value is null.
+  /// 对 YUV 数据，表示 U 缓冲区的指针；对 RGBA 数据，值为空。
   @JsonKey(name: 'uBuffer', ignore: true)
   final Uint8List? uBuffer;
 
-  /// For YUV data, the pointer to the V buffer; for RGBA data, the value is null.
+  /// 对 YUV 数据，表示 V 缓冲区的指针；对 RGBA 数据，值为空。
   @JsonKey(name: 'vBuffer', ignore: true)
   final Uint8List? vBuffer;
 
-  /// Clockwise rotation angle of this frame before rendering. Supported values are 0, 90, 180, and 270 degrees.
+  /// 在渲染视频前设置该帧的顺时针旋转角度，目前支持 0 度、90 度、180 度，和 270 度。
   @JsonKey(name: 'rotation')
   final int? rotation;
 
-  /// Unix timestamp (in milliseconds) when the video frame is rendered. This timestamp can be used to guide video frame rendering. This parameter is required.
+  /// 视频帧被渲染时的 Unix 时间戳（毫秒）。该时间戳可用于指导渲染视频帧。该参数为必填。
   @JsonKey(name: 'renderTimeMs')
   final int? renderTimeMs;
 
-  /// Reserved parameter.
+  /// 保留参数。
   @JsonKey(name: 'avsync_type')
   final int? avsyncType;
 
-  /// This parameter applies only to video data in Texture format. It refers to the data buffer of MetaData. Default is NULL.
+  /// 该参数仅适用于 Texture 格式的视频数据。指 MetaData 的数据缓冲区，默认值为 NULL 。
   @JsonKey(name: 'metadata_buffer', ignore: true)
   final Uint8List? metadataBuffer;
 
-  /// This parameter applies only to video data in Texture format. It refers to the size of MetaData. Default is 0.
+  /// 该参数仅适用于 Texture 格式的视频数据。指 MetaData 的大小，默认值为 0 。
   @JsonKey(name: 'metadata_size')
   final int? metadataSize;
 
-  /// This parameter applies only to video data in Texture format. Texture ID.
+  /// 该参数仅适用于 Texture 格式的视频数据。Texture ID。
   @JsonKey(name: 'textureId')
   final int? textureId;
 
-  /// This parameter applies only to video data in Texture format. A 4x4 transformation matrix input, typically an identity matrix.
+  /// 该参数仅适用于 Texture 格式的视频数据。为一个输入的 4x4 变换矩阵，典型值为一个单位矩阵。
   @JsonKey(name: 'matrix')
   final List<double>? matrix;
 
-  /// Alpha channel data output by portrait segmentation algorithm. This data has the same dimensions as the video frame. Each pixel value ranges from [0,255], where 0 represents background and 255 represents foreground (portrait).
-  /// By setting this parameter, you can render the video background with various effects such as transparency, solid color, image, or video.
-  ///  In custom video rendering scenarios, ensure that both the video frame and alphaBuffer are Full Range type; other types may result in incorrect rendering of Alpha data.
-  ///  Make sure that the dimensions of alphaBuffer exactly match the video frame (width × height), otherwise the app may crash.
+  /// 采用人像分割算法输出的 Alpha 通道数据。该数据跟视频帧的尺寸一致，每个像素点的取值范围为 [0,255]，其中 0 代表背景；255 代表前景（人像）。
+  /// 你可以通过设置该参数，实现将视频背景自渲染为各种效果，例如：透明、纯色、图片、视频等。
+  ///  在自定义视频渲染场景下，需确保传入的视频帧和 alphaBuffer 均为 Full Range 类型；其他类型可能导致 Alpha 数据渲染不正常。
+  ///  请务必确保 alphaBuffer 跟视频帧的尺寸 (width × height) 完全一致，否则可能会导致 App 崩溃。
   @JsonKey(name: 'alphaBuffer', ignore: true)
   final Uint8List? alphaBuffer;
 
-  /// When the video frame contains Alpha channel data, sets the relative position of alphaBuffer and the video frame. See AlphaStitchMode.
+  /// 当视频帧中包含 Alpha 通道数据时，设置 alphaBuffer 和视频帧的相对位置。详见 AlphaStitchMode 。
   @JsonKey(name: 'alphaStitchMode')
   final AlphaStitchMode? alphaStitchMode;
 
@@ -1391,7 +1391,7 @@ class VideoFrame implements AgoraSerializable {
   @JsonKey(name: 'pixelBuffer', ignore: true)
   final Uint8List? pixelBuffer;
 
-  /// Metadata in the video frame. This parameter requires [contacting technical support](https://ticket.shengwang.cn/) to use.
+  /// 视频帧中的元信息。该参数需要[联系技术支持](https://ticket.shengwang.cn/)使用。
   @VideoFrameMetaInfoConverter()
   @JsonKey(name: 'metaInfo')
   final VideoFrameMetaInfo? metaInfo;
@@ -1400,7 +1400,7 @@ class VideoFrame implements AgoraSerializable {
   @JsonKey(name: 'hdr10MetadataInfo')
   final Hdr10MetadataInfo? hdr10MetadataInfo;
 
-  /// Color space properties of the video frame. By default, Full Range and BT.709 configuration is applied. You can customize it according to the needs of custom capture and rendering. See [VideoColorSpace](https://developer.mozilla.org/en-US/docs/Web/API/VideoColorSpace).
+  /// 视频帧的色彩空间属性，默认情况下会应用 Full Range 和 BT.709 标准配置。你可以根据自定义采集、自定义渲染的业务需求进行自定义设置，详见 [VideoColorSpace](https://developer.mozilla.org/en-US/docs/Web/API/VideoColorSpace)。
   @JsonKey(name: 'colorSpace')
   final ColorSpace? colorSpace;
 
@@ -1441,24 +1441,24 @@ extension MediaPlayerSourceTypeExt on MediaPlayerSourceType {
   }
 }
 
-/// Video observation position.
+/// 视频观测位置。
 @JsonEnum(alwaysCreate: true)
 enum VideoModulePosition {
-  /// 1: Position after local video capture and preprocessing, corresponding to the onCaptureVideoFrame callback. The observed video at this position includes preprocessing effects and can be verified by enabling beautification, virtual background, or watermark.
+  /// 1: 本地采集视频数据并且经过前处理之后的位置，对应 onCaptureVideoFrame 回调。此处观测到的视频具备视频前处理的效果，可通过开启美颜、虚拟背景或水印等方式验证。
   @JsonValue(1 << 0)
   positionPostCapturer,
 
-  /// 2: Position before rendering received remote video, corresponding to the onRenderVideoFrame callback.
+  /// 2: 接收远端发送的视频在渲染前的位置，对应 onRenderVideoFrame 回调。
   @JsonValue(1 << 1)
   positionPreRenderer,
 
-  /// 4: Position before local video encoding, corresponding to the onPreEncodeVideoFrame callback. The observed video at this position includes preprocessing and pre-encoding effects:
-  ///  For preprocessing effects, verify by enabling beautification, virtual background, or watermark.
-  ///  For pre-encoding effects, verify by setting a low frame rate (e.g., 5 fps).
+  /// 4: 本地视频编码前的位置，对应 onPreEncodeVideoFrame 回调。此处观测到的视频具备视频前处理和编码前处理的效果：
+  ///  对于视频前处理效果，可通过开启美颜、虚拟背景或水印等方式验证。
+  ///  对于编码前处理效果，可通过设置一个较低的帧率（例如 5 fps）验证。
   @JsonValue(1 << 2)
   positionPreEncoder,
 
-  /// 8: Position after local video capture and before preprocessing. The observed video at this position does not include preprocessing effects and can be verified by enabling beautification, virtual background, or watermark.
+  /// 8: 本地采集视频之后、前处理之前的位置。此处观测到的视频不具备前处理的效果，可通过开启美颜、虚拟背景或设置水印等方式验证。
   @JsonValue(1 << 3)
   positionPostCapturerOrigin,
 }
@@ -1505,10 +1505,10 @@ extension ContentInspectResultExt on ContentInspectResult {
   }
 }
 
-/// Type of video content inspection module.
+/// 视频内容审核模块的类型。
 @JsonEnum(alwaysCreate: true)
 enum ContentInspectType {
-  /// 0: (Default) This module has no actual functionality. Do not set type to this value.
+  /// 0：（默认）该功能模块无实际功能。请不要将 type 设为该值。
   @JsonValue(0)
   contentInspectInvalid,
 
@@ -1516,11 +1516,11 @@ enum ContentInspectType {
   @JsonValue(1)
   contentInspectModeration,
 
-  /// 2: Uses Agora's proprietary plugin for screenshot upload. The SDK captures and uploads screenshots of the video stream.
+  /// 2：使用声网自研插件截图上传。SDK 会对视频流进行截图并上传。
   @JsonValue(2)
   contentInspectSupervision,
 
-  /// 3: Uses Cloud Marketplace plugin for screenshot upload. The SDK uses the Cloud Marketplace video moderation plugin to capture and upload screenshots of the video stream.
+  /// 3：使用云市场插件截图上传。SDK 会使用云市场视频审核插件对视频流进行截图并上传。
   @JsonValue(3)
   contentInspectImageModeration,
 }
@@ -1538,21 +1538,21 @@ extension ContentInspectTypeExt on ContentInspectType {
   }
 }
 
-/// ContentInspectModule struct for configuring the upload frequency of local screenshots.
+/// ContentInspectModule 结构体，用于配置本地截图上传的频率。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ContentInspectModule implements AgoraSerializable {
   /// @nodoc
   const ContentInspectModule({this.type, this.interval, this.position});
 
-  /// The type of function module. See ContentInspectType.
+  /// 功能模块的类型。详见 ContentInspectType 。
   @JsonKey(name: 'type')
   final ContentInspectType? type;
 
-  /// Interval for uploading local screenshots, in seconds. The value must be greater than 0. Default is 0, meaning no screenshot upload. Recommended value is 10 seconds, but you can adjust it based on your business requirements.
+  /// 本地截图上传的间隔，单位为秒，取值必须大于 0。默认值为 0，表示不进行截图上传。推荐值为 10 秒，你也可以根据业务需求自行调整。
   @JsonKey(name: 'interval')
   final int? interval;
 
-  /// Position of the video observer. See VideoModulePosition.
+  /// 视频观察器的位置。详见 VideoModulePosition 。
   @JsonKey(name: 'position')
   final VideoModulePosition? position;
 
@@ -1564,28 +1564,28 @@ class ContentInspectModule implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ContentInspectModuleToJson(this);
 }
 
-/// Local screenshot upload configuration.
+/// 本地截图上传配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ContentInspectConfig implements AgoraSerializable {
   /// @nodoc
   const ContentInspectConfig(
       {this.extraInfo, this.serverConfig, this.modules, this.moduleCount});
 
-  /// Additional information, with a maximum length of 1024 bytes.
-  /// The SDK uploads the additional information along with the screenshot to the Agora server; after the screenshot is completed, the Agora server sends the additional information to your server along with the callback notification.
+  /// 附加信息，最大长度为 1024 字节。
+  /// SDK 会将附加信息和截图一起上传至声网服务器；截图完成后，声网服务器会将附加信息随回调通知一起发送给你的服务器。
   @JsonKey(name: 'extraInfo')
   final String? extraInfo;
 
-  /// (Optional) Server configuration related to video moderation in the Cloud Marketplace. This parameter takes effect only when the type in ContentInspectModule is set to contentInspectImageModeration. To use this feature, please [contact technical support](https://ticket.shengwang.cn/).
+  /// （可选）云市场视频审核相关服务端配置，该参数仅在 ContentInspectModule 中的 type 设置为 contentInspectImageModeration 时生效。如需使用，请[联系技术支持](https://ticket.shengwang.cn/)。
   @JsonKey(name: 'serverConfig')
   final String? serverConfig;
 
-  /// Function modules. See ContentInspectModule.
-  /// Supports up to 32 ContentInspectModule instances. The value range for MAX_CONTENT_INSPECT_MODULE_COUNT is an integer between [1, 32]. Only one instance can be configured for each function module. Currently, only screenshot upload is supported.
+  /// 功能模块。详见 ContentInspectModule 。
+  /// 最多支持配置 32 个 ContentInspectModule 实例， MAX_CONTENT_INSPECT_MODULE_COUNT 的取值范围为 [1,32] 中的整数。 一个功能模块最多只能配置一个实例。目前仅支持截图上传功能。
   @JsonKey(name: 'modules')
   final List<ContentInspectModule>? modules;
 
-  /// The number of function modules, i.e., the number of configured ContentInspectModule instances. Must match the number of instances configured in modules. Maximum value is 32.
+  /// 功能模块数，即配置的 ContentInspectModule 实例的数量，必须与 modules 中配置的实例个数一致。最大值为 32。
   @JsonKey(name: 'moduleCount')
   final int? moduleCount;
 
@@ -1597,13 +1597,13 @@ class ContentInspectConfig implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ContentInspectConfigToJson(this);
 }
 
-/// Video snapshot settings.
+/// 视频截图设置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class SnapshotConfig implements AgoraSerializable {
   /// @nodoc
   const SnapshotConfig({this.filePath, this.position});
 
-  /// Make sure the directory exists and is writable. Local path to save the snapshot, including file name and format. For example:
+  /// 请确保目录存在且可写。 截图的本地保存路径，需精确到文件名及格式，例如：
   ///  Windows: C:\Users\<user_name>\AppData\Local\Agora\<process_name>\example.jpg
   ///  iOS: /App Sandbox/Library/Caches/example.jpg
   ///  macOS: ～/Library/Logs/example.jpg
@@ -1611,7 +1611,7 @@ class SnapshotConfig implements AgoraSerializable {
   @JsonKey(name: 'filePath')
   final String? filePath;
 
-  /// The position of the video frame to snapshot within the video pipeline. See VideoModulePosition.
+  /// 截图的视频帧在视频链路中的位置。详见 VideoModulePosition 。
   @JsonKey(name: 'position')
   final VideoModulePosition? position;
 
@@ -1623,26 +1623,26 @@ class SnapshotConfig implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$SnapshotConfigToJson(this);
 }
 
-/// This class is used to obtain raw PCM audio data.
+/// 该类用于获取原始的 PCM 音频数据。
 ///
-/// You can inherit this class and implement the onFrame callback to get PCM audio data.
+/// 你可以继承这个类，实现 onFrame 回调来获得 PCM 音频数据。
 class AudioPcmFrameSink {
   /// @nodoc
   const AudioPcmFrameSink({
     this.onFrame,
   });
 
-  /// Callback for received audio frame.
+  /// 已获取音频帧回调。
   ///
-  /// After registering the audio data observer, this callback is triggered each time an audio frame is received to report audio frame information.
+  /// 注册音频数据观测器后，每次接收到一帧音频帧时，都会触发该回调，报告音频帧信息。
   ///
-  /// * [frame] Audio frame information. See AudioPcmFrame.
+  /// * [frame] 音频帧信息。详见 AudioPcmFrame 。
   final void Function(AudioPcmFrame frame)? onFrame;
 }
 
-/// Audio observer.
+/// 音频观测器。
 ///
-/// You can call registerAudioFrameObserver to register or unregister the AudioFrameObserverBase.
+/// 你可以调用 registerAudioFrameObserver 注册或取消注册 AudioFrameObserverBase 音频观测器。
 class AudioFrameObserverBase {
   /// @nodoc
   const AudioFrameObserverBase({
@@ -1652,46 +1652,46 @@ class AudioFrameObserverBase {
     this.onEarMonitoringAudioFrame,
   });
 
-  /// Retrieves the raw audio data collected.
+  /// 获得采集的原始音频数据。
   ///
-  /// To ensure the format of the recorded audio data meets expectations, you can set the audio data format using the following methods: Call setRecordingAudioFrameParameters to set the audio data format, then call registerAudioFrameObserver to register the audio frame observer object. The SDK calculates the sampling interval based on the parameters of this method and triggers the onRecordAudioFrame callback accordingly.
-  ///  Due to framework limitations, this callback does not support sending the processed audio data back to the SDK.
+  /// 为保证采集的音频数据格式符合预期，你可以在如下方法设置音频的数据格式：调用 setRecordingAudioFrameParameters 设置音频数据格式后，调用 registerAudioFrameObserver 注册音频观测器对象，SDK 会根据该方法中的参数计算采样间隔，并根据该采样间隔触发 onRecordAudioFrame 回调。
+  ///  由于框架的限制，该回调不支持将处理后的音频数据发送回 SDK。
   ///
-  /// * [audioFrame] Raw audio data. See AudioFrame.
-  /// * [channelId] Channel ID.
+  /// * [audioFrame] 音频原始数据。详见 AudioFrame 。
+  /// * [channelId] 频道 ID。
   final void Function(String channelId, AudioFrame audioFrame)?
       onRecordAudioFrame;
 
-  /// Retrieves the raw audio data being played.
+  /// 获得播放的原始音频数据。
   ///
-  /// To ensure the format of the playback audio data meets expectations, you can set the audio data format using the following methods: Call setPlaybackAudioFrameParameters to set the audio data format, then call registerAudioFrameObserver to register the audio frame observer object. The SDK calculates the sampling interval based on the parameters of this method and triggers the onPlaybackAudioFrame callback accordingly.
-  ///  Due to framework limitations, this callback does not support sending the processed audio data back to the SDK.
+  /// 为保证播放的音频数据格式符合预期，你可以在如下方法设置音频的数据格式：调用 setPlaybackAudioFrameParameters 设置音频数据格式后，调用 registerAudioFrameObserver 注册音频观测器对象，SDK 会根据该方法中的参数计算采样间隔，并根据该采样间隔触发 onPlaybackAudioFrame 回调。
+  ///  由于框架的限制，该回调不支持将处理后的音频数据发送回 SDK。
   ///
-  /// * [audioFrame] Raw audio data. See AudioFrame.
-  /// * [channelId] Channel ID.
+  /// * [audioFrame] 音频原始数据。详见 AudioFrame 。
+  /// * [channelId] 频道 ID。
   final void Function(String channelId, AudioFrame audioFrame)?
       onPlaybackAudioFrame;
 
-  /// Retrieves the data after mixing recorded and playback audio.
+  /// 获取采集和播放音频混音后的数据。
   ///
-  /// To ensure the format of the mixed audio data from recording and playback meets expectations, you can set the audio data format using the following methods: Call setMixedAudioFrameParameters to set the audio data format, then call registerAudioFrameObserver to register the audio frame observer object. The SDK calculates the sampling interval based on the parameters of this method and triggers the onMixedAudioFrame callback accordingly.
-  ///  Due to framework limitations, this callback does not support sending the processed audio data back to the SDK.
+  /// 为保证采集和播放混音后的音频数据格式符合预期，你可以在如下方法设置音频的数据格式：调用 setMixedAudioFrameParameters 设置音频数据格式后，调用 registerAudioFrameObserver 注册音频观测器对象，SDK 会根据该方法中的参数计算采样间隔，并根据该采样间隔触发 onMixedAudioFrame 回调。
+  ///  由于框架的限制，该回调不支持将处理后的音频数据发送回 SDK。
   ///
-  /// * [audioFrame] Raw audio data. See AudioFrame.
-  /// * [channelId] Channel ID.
+  /// * [audioFrame] 音频原始数据。详见 AudioFrame 。
+  /// * [channelId] 频道 ID。
   final void Function(String channelId, AudioFrame audioFrame)?
       onMixedAudioFrame;
 
-  /// Receives the raw audio data for ear monitoring.
+  /// 获得耳返的原始音频数据。
   ///
-  /// To ensure the audio data format for ear monitoring meets expectations, you can set the format using the following methods: Call setEarMonitoringAudioFrameParameters to set the audio data format, then call registerAudioFrameObserver to register the audio observer object. The SDK calculates the sampling interval based on the parameters in this method and triggers the onEarMonitoringAudioFrame callback accordingly.
-  ///  Due to framework limitations, this callback does not support sending the processed audio data back to the SDK.
+  /// 为保证耳返的音频数据格式符合预期，你可以使用如下方法设置耳返音频数据格式：调用 setEarMonitoringAudioFrameParameters 设置音频数据格式后，调用 registerAudioFrameObserver 注册音频观测器对象，SDK 会根据该方法中的参数计算采样间隔，并根据该采样间隔触发 onEarMonitoringAudioFrame 回调。
+  ///  由于框架的限制，该回调不支持将处理后的音频数据发送回 SDK。
   ///
-  /// * [audioFrame] The raw audio data. See AudioFrame.
+  /// * [audioFrame] 音频原始数据。详见 AudioFrame 。
   final void Function(AudioFrame audioFrame)? onEarMonitoringAudioFrame;
 }
 
-/// Audio frame type.
+/// 音频帧类型。
 @JsonEnum(alwaysCreate: true)
 enum AudioFrameType {
   /// 0: PCM 16
@@ -1712,7 +1712,7 @@ extension AudioFrameTypeExt on AudioFrameType {
   }
 }
 
-/// Raw audio data.
+/// 原始音频数据。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AudioFrame implements AgoraSerializable {
   /// @nodoc
@@ -1729,39 +1729,39 @@ class AudioFrame implements AgoraSerializable {
       this.audioTrackNumber,
       this.rtpTimestamp});
 
-  /// Audio frame type. See AudioFrameType.
+  /// 音频帧类型，详见 AudioFrameType 。
   @JsonKey(name: 'type')
   final AudioFrameType? type;
 
-  /// Number of samples per channel.
+  /// 每个声道的采样点数。
   @JsonKey(name: 'samplesPerChannel')
   final int? samplesPerChannel;
 
-  /// Number of bytes per sample. For PCM, typically 16 bits, i.e., two bytes.
+  /// 每个采样点的字节数。对于 PCM 来说，一般使用 16 bit，即两个字节。
   @JsonKey(name: 'bytesPerSample')
   final BytesPerSample? bytesPerSample;
 
-  /// Number of channels (data is interleaved if stereo).
-  ///  1: Mono
-  ///  2: Stereo
+  /// 声道数量(如果是立体声，数据是交叉的)。
+  ///  1: 单声道
+  ///  2: 双声道
   @JsonKey(name: 'channels')
   final int? channels;
 
-  /// Number of samples per second per channel.
+  /// 每声道每秒的采样点数。
   @JsonKey(name: 'samplesPerSec')
   final int? samplesPerSec;
 
-  /// Audio data buffer (data is interleaved if stereo).
-  /// Buffer size buffer = samples × channels × bytesPerSample.
+  /// 声音数据缓存区（如果是立体声，数据是交叉存储的）。
+  /// 缓存区数据大小 buffer = samples × channels × bytesPerSample 。
   @JsonKey(name: 'buffer', ignore: true)
   final Uint8List? buffer;
 
-  /// Render timestamp of the external audio frame.
-  /// You can use this timestamp to restore the audio frame order; in scenarios with video (including external video source), this parameter can be used to achieve audio-video synchronization.
+  /// 外部音频帧的渲染时间戳。
+  /// 你可以使用该时间戳还原音频帧顺序；在有视频的场景中（包含使用外部视频源的场景），该参数可以用于实现音视频同步。
   @JsonKey(name: 'renderTimeMs')
   final int? renderTimeMs;
 
-  /// Reserved parameter.
+  /// 保留参数。
   @JsonKey(name: 'avsync_type')
   final int? avsyncType;
 
@@ -1826,37 +1826,37 @@ extension AudioFramePositionExt on AudioFramePosition {
   }
 }
 
-/// Audio data format.
+/// 音频数据格式。
 ///
-/// The SDK calculates the sampling interval based on the samplesPerCall, sampleRate, and channel parameters in AudioParams, and triggers the onRecordAudioFrame, onPlaybackAudioFrame, onMixedAudioFrame, and onEarMonitoringAudioFrame callbacks accordingly.
-///  Sampling interval = samplesPerCall / (sampleRate × channel).
-///  Make sure the sampling interval is not less than 0.01 (s).
+/// SDK 会通过 AudioParams 中的 samplesPerCall 、 sampleRate 和 channel 参数计算采样间隔，并根据该采样间隔触发 onRecordAudioFrame 、 onPlaybackAudioFrame 、 onMixedAudioFrame 和 onEarMonitoringAudioFrame 回调。
+///  采样间隔 = samplesPerCall /(sampleRate × channel)。
+///  请确保采样间隔不得小于 0.01 (s)。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AudioParams implements AgoraSerializable {
   /// @nodoc
   const AudioParams(
       {this.sampleRate, this.channels, this.mode, this.samplesPerCall});
 
-  /// Sampling rate of the data in Hz. The possible values are:
+  /// 数据的采样率，单位为 Hz，取值如下：
   ///  8000
-  ///  16000 (default)
+  ///  16000（默认值）
   ///  32000
   ///  44100
   ///  48000
   @JsonKey(name: 'sample_rate')
   final int? sampleRate;
 
-  /// Number of audio channels. The possible values are:
-  ///  1: Mono (default)
-  ///  2: Stereo
+  /// 数据的声道数，取值如下：
+  ///  1：单声道（默认值）
+  ///  2：双声道
   @JsonKey(name: 'channels')
   final int? channels;
 
-  /// Usage mode of the data. See RawAudioFrameOpModeType.
+  /// 数据的使用模式。详见 RawAudioFrameOpModeType 。
   @JsonKey(name: 'mode')
   final RawAudioFrameOpModeType? mode;
 
-  /// Number of audio samples per call, typically 1024 in scenarios like media stream relay.
+  /// 数据的采样点数，如旁路推流应用中通常为 1024。
   @JsonKey(name: 'samples_per_call')
   final int? samplesPerCall;
 
@@ -1868,9 +1868,9 @@ class AudioParams implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$AudioParamsToJson(this);
 }
 
-/// Audio observer.
+/// 音频观测器。
 ///
-/// You can call registerAudioFrameObserver to register or unregister the AudioFrameObserver.
+/// 你可以调用 registerAudioFrameObserver 注册或取消注册 AudioFrameObserver 音频观测器。
 class AudioFrameObserver extends AudioFrameObserverBase {
   /// @nodoc
   const AudioFrameObserver({
@@ -1894,28 +1894,28 @@ class AudioFrameObserver extends AudioFrameObserverBase {
           onEarMonitoringAudioFrame: onEarMonitoringAudioFrame,
         );
 
-  /// Retrieves the audio of a subscribed remote user before mixing.
+  /// 获取所订阅的远端用户混音前的声音。
   ///
-  /// Due to framework limitations, this callback does not support sending the processed audio data back to the SDK.
+  /// 由于框架的限制，该回调不支持将处理后的音频数据发送回 SDK。
   ///
-  /// * [channelId] Channel ID.
-  /// * [uid] ID of the subscribed remote user.
-  /// * [audioFrame] Raw audio data. See AudioFrame.
+  /// * [channelId] 频道 ID。
+  /// * [uid] 订阅的远端用户的 ID。
+  /// * [audioFrame] 音频原始数据。详见 AudioFrame 。
   final void Function(String channelId, int uid, AudioFrame audioFrame)?
       onPlaybackAudioFrameBeforeMixing;
 }
 
-/// Audio spectrum data.
+/// 音频频谱数据。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AudioSpectrumData implements AgoraSerializable {
   /// @nodoc
   const AudioSpectrumData({this.audioSpectrumData, this.dataLength});
 
-  /// Audio spectrum data. The SDK divides the audio frequency into 256 bands and reports the energy value of each band through this parameter. The value range of each energy is [-300, 1], in dBFS.
+  /// 音频频谱数据。声网将声音频率分为 256 个频域，通过该参数报告各频域的能量值，每个能量值的取值范围为 [-300,1]，单位为 dBFS。
   @JsonKey(name: 'audioSpectrumData')
   final List<double>? audioSpectrumData;
 
-  /// The length of the audio spectrum data is 256.
+  /// 音频频谱数据长度为 256。
   @JsonKey(name: 'dataLength')
   final int? dataLength;
 
@@ -1927,17 +1927,17 @@ class AudioSpectrumData implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$AudioSpectrumDataToJson(this);
 }
 
-/// Audio spectrum information of a remote user.
+/// 远端用户的音频频谱信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class UserAudioSpectrumInfo implements AgoraSerializable {
   /// @nodoc
   const UserAudioSpectrumInfo({this.uid, this.spectrumData});
 
-  /// Remote user ID.
+  /// 远端用户 ID。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// Audio spectrum data of the remote user. See AudioSpectrumData.
+  /// 远端用户的音频频谱数据。详见 AudioSpectrumData 。
   @JsonKey(name: 'spectrumData')
   final AudioSpectrumData? spectrumData;
 
@@ -1949,7 +1949,7 @@ class UserAudioSpectrumInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$UserAudioSpectrumInfoToJson(this);
 }
 
-/// Audio spectrum observer.
+/// 音频频谱观测器。
 class AudioSpectrumObserver {
   /// @nodoc
   const AudioSpectrumObserver({
@@ -1957,40 +1957,40 @@ class AudioSpectrumObserver {
     this.onRemoteAudioSpectrum,
   });
 
-  /// Gets the local audio spectrum.
+  /// 获取本地音频频谱。
   ///
-  /// After successfully calling registerAudioSpectrumObserver to implement the onLocalAudioSpectrum callback in AudioSpectrumObserver and calling enableAudioSpectrumMonitor to enable audio spectrum monitoring, the SDK triggers this callback at the set time interval to report the spectrum of the local audio data before encoding.
+  /// 成功调用 registerAudioSpectrumObserver 实现 AudioSpectrumObserver 中的 onLocalAudioSpectrum 回调并调用 enableAudioSpectrumMonitor 开启音频频谱监测后，SDK 会按照你设置的时间间隔触发该回调，报告编码前的本地音频数据的频谱。
   ///
-  /// * [data] The local user's audio spectrum data. See AudioSpectrumData.
+  /// * [data] 本地用户的音频频谱数据。详见 AudioSpectrumData 。
   final void Function(AudioSpectrumData data)? onLocalAudioSpectrum;
 
-  /// Gets the remote audio spectrum.
+  /// 获取远端音频频谱。
   ///
-  /// After successfully calling registerAudioSpectrumObserver to implement the onRemoteAudioSpectrum callback in AudioSpectrumObserver and calling enableAudioSpectrumMonitor to enable audio spectrum monitoring, the SDK triggers this callback at the set time interval to report the spectrum of the received remote audio data.
+  /// 成功调用 registerAudioSpectrumObserver 实现 AudioSpectrumObserver 中的 onRemoteAudioSpectrum 回调并调用 enableAudioSpectrumMonitor 开启音频频谱监测后，SDK 会按照你设置的时间间隔触发该回调，报告接收到的远端音频数据的频谱。
   ///
-  /// * [spectrums] The audio spectrum information of remote users. See UserAudioSpectrumInfo. The number of elements in the array equals the number of remote users detected by the SDK. An empty array means no remote audio spectrum is detected.
-  /// * [spectrumNumber] The number of remote users.
+  /// * [spectrums] 远端用户的音频频谱信息，详见 UserAudioSpectrumInfo 。 数组数量等于 SDK 监测到的远端用户数量，数组为空表示没有监测到远端用户的音频频谱。
+  /// * [spectrumNumber] 远端用户的数量。
   final void Function(
           List<UserAudioSpectrumInfo> spectrums, int spectrumNumber)?
       onRemoteAudioSpectrum;
 }
 
-/// Class used to receive encoded video frames.
+/// 用于接收编码后的视频图像的类。
 class VideoEncodedFrameObserver {
   /// @nodoc
   const VideoEncodedFrameObserver({
     this.onEncodedVideoFrameReceived,
   });
 
-  /// Reports that the receiver has received a remote encoded video frame.
+  /// 报告接收端已收到远端发送的待解码视频帧。
   ///
-  /// When you call the setRemoteVideoSubscriptionOptions method and set encodedFrameOnly to true, the SDK triggers this callback locally to report the received encoded video frame information.
+  /// 调用 setRemoteVideoSubscriptionOptions 方法并将 encodedFrameOnly 设置为 true 时，SDK 会在本地触发该回调，上报接收到的编码后视频帧信息。
   ///
-  /// * [channelId] Channel name.
-  /// * [uid] Remote user ID.
-  /// * [imageBuffer] Video frame buffer.
-  /// * [length] Data length of the video frame.
-  /// * [videoEncodedFrameInfo] Information about the encoded video frame. See EncodedVideoFrameInfo.
+  /// * [channelId] 频道名。
+  /// * [uid] 远端用户 ID。
+  /// * [imageBuffer] 视频图像 buffer。
+  /// * [length] 视频图像的数据长度。
+  /// * [videoEncodedFrameInfo] 编码后的视频帧信息，详见 EncodedVideoFrameInfo 。
   final void Function(
       String channelId,
       int uid,
@@ -1999,9 +1999,9 @@ class VideoEncodedFrameObserver {
       EncodedVideoFrameInfo videoEncodedFrameInfo)? onEncodedVideoFrameReceived;
 }
 
-/// Video observer.
+/// 视频观测器。
 ///
-/// You can call registerVideoFrameObserver to register or unregister the VideoFrameObserver.
+/// 你可以调用 registerVideoFrameObserver 注册或取消注册 VideoFrameObserver 视频观测器。
 class VideoFrameObserver {
   /// @nodoc
   const VideoFrameObserver({
@@ -2012,35 +2012,35 @@ class VideoFrameObserver {
     this.onTranscodedVideoFrame,
   });
 
-  /// Gets the video data captured by the local device.
+  /// 获取本地设备采集到的视频数据。
   ///
-  /// You can get the raw video data captured by the local device in the callback.
-  ///  If the video data you get is of RGBA type, the SDK does not support processing the Alpha channel.
-  ///  It is recommended that you ensure the modified parameters in videoFrame match the actual video frame in the buffer; otherwise, unexpected rotation, distortion, etc., may occur in the local preview or remote video.
-  ///  Due to framework limitations, this callback does not support sending the processed video data back to the SDK.
+  /// 你可以在回调中获取本地设备采集到的原始视频数据。
+  ///  如果你获取到的视频数据类型为 RGBA，SDK 不支持对 Alpha 通道的值进行处理。
+  ///  建议你在修改 videoFrame 中的参数时，需确保修改后的参数跟视频帧缓冲区中的视频帧实际情况保持一致，否则可能导致本地预览画面和对端的视频画面出现非预期的旋转、失真等问题。
+  ///  由于框架的限制，该回调不支持将处理后的视频数据发送回 SDK。
   ///
-  /// * [sourceType] Type of video source, which may include camera, screen, or media player. See VideoSourceType.
-  /// * [videoFrame] Video frame data. See VideoFrame. The default format of the video frame data obtained through this callback is as follows:
-  ///  Android: I420
-  ///  iOS: I420
-  ///  macOS: I420
-  ///  Windows: YUV420
+  /// * [sourceType] 视频源类型，可能的视频源包括：摄像头、屏幕或媒体播放器。详见 VideoSourceType 。
+  /// * [videoFrame] 视频帧数据。详见 VideoFrame 。 通过该回调获取的视频帧数据格式默认值如下：
+  ///  Android：I420
+  ///  iOS：I420
+  ///  macOS：I420
+  ///  Windows：YUV420
   final void Function(VideoSourceType sourceType, VideoFrame videoFrame)?
       onCaptureVideoFrame;
 
-  /// Gets the video data before local encoding.
+  /// 获取本地视频编码前的视频数据。
   ///
-  /// After successfully registering the video data observer, the SDK triggers this callback each time a video frame is captured. You can get the video data before encoding in the callback and process it as needed for your scenario.
-  ///  Due to framework limitations, this callback does not support sending the processed video data back to the SDK.
-  ///  The video data obtained here has already undergone preprocessing such as cropping, rotation, and beauty effects.
-  ///  It is recommended that you ensure the modified parameters in videoFrame match the actual video frame in the buffer; otherwise, unexpected rotation, distortion, etc., may occur in the local preview or remote video.
+  /// 成功注册视频数据观测器后，SDK 会在捕捉到每个视频帧时触发该回调。你可以在回调中获取编码前的视频数据，然后根据场景需要，对视频数据进行处理。
+  ///  由于框架的限制，该回调不支持将处理后的视频数据发送回 SDK。
+  ///  此处获取的视频数据已经过前处理，如裁剪、旋转和美颜等。
+  ///  建议你在修改 videoFrame 中的参数时，需确保修改后的参数跟视频帧缓冲区中的视频帧实际情况保持一致，否则可能导致本地预览画面和对端的视频画面出现非预期的旋转、失真等问题。
   ///
-  /// * [sourceType] Type of video source. See VideoSourceType.
-  /// * [videoFrame] Video frame data. See VideoFrame. The default format of the video frame data obtained through this callback is as follows:
-  ///  Android: I420
-  ///  iOS: I420
-  ///  macOS: I420
-  ///  Windows: YUV420
+  /// * [sourceType] 视频源的类型。详见 VideoSourceType 。
+  /// * [videoFrame] 视频帧数据。详见 VideoFrame 。 通过该回调获取的视频帧数据格式默认值如下：
+  ///  Android：I420
+  ///  iOS：I420
+  ///  macOS：I420
+  ///  Windows：YUV420
   final void Function(VideoSourceType sourceType, VideoFrame videoFrame)?
       onPreEncodeVideoFrame;
 
@@ -2048,20 +2048,20 @@ class VideoFrameObserver {
   final void Function(VideoFrame videoFrame, int mediaPlayerId)?
       onMediaPlayerVideoFrame;
 
-  /// Gets the video data sent from the remote user.
+  /// 获取远端发送的视频数据。
   ///
-  /// After successfully registering the video data observer, the SDK triggers this callback each time a video frame is captured. You can get the video data sent from the remote user before rendering and process it as needed for your scenario.
-  ///  If the video data you get is of RGBA type, the SDK does not support processing the Alpha channel.
-  ///  Due to framework limitations, this callback does not support sending the processed video data back to the SDK.
-  ///  It is recommended that you ensure the modified parameters in videoFrame match the actual video frame in the buffer; otherwise, unexpected rotation, distortion, etc., may occur in the local preview or remote video.
+  /// 成功注册视频数据观测器后，SDK 会在捕捉到每个视频帧时触发该回调。你可以在回调中获取远端发送的渲染前的视频数据，然后根据场景需要，对视频数据进行处理。
+  ///  如果你获取到的视频数据类型为 RGBA，SDK 不支持对 Alpha 通道的值进行处理。
+  ///  由于框架的限制，该回调不支持将处理后的视频数据发送回 SDK。
+  ///  建议你在修改 videoFrame 中的参数时，需确保修改后的参数跟视频帧缓冲区中的视频帧实际情况保持一致，否则可能导致本地预览画面和对端的视频画面出现非预期的旋转、失真等问题。
   ///
-  /// * [remoteUid] Remote user ID who sent the video frame.
-  /// * [videoFrame] Video frame data. See VideoFrame. The default format of the video frame data obtained through this callback is as follows:
-  ///  Android: I420
-  ///  iOS: I420
-  ///  macOS: I420
-  ///  Windows: YUV420
-  /// * [channelId] Channel ID.
+  /// * [remoteUid] 发送该帧视频的远端用户 ID。
+  /// * [videoFrame] 视频帧数据。详见 VideoFrame 。 通过该回调获取的视频帧数据格式默认值如下：
+  ///  Android：I420
+  ///  iOS：I420
+  ///  macOS：I420
+  ///  Windows：YUV420
+  /// * [channelId] 频道 ID。
   final void Function(String channelId, int remoteUid, VideoFrame videoFrame)?
       onRenderVideoFrame;
 
@@ -2069,16 +2069,16 @@ class VideoFrameObserver {
   final void Function(VideoFrame videoFrame)? onTranscodedVideoFrame;
 }
 
-/// Video frame processing mode.
+/// 视频帧处理模式。
 @JsonEnum(alwaysCreate: true)
 enum VideoFrameProcessMode {
-  /// Read-only mode.
-  /// In read-only mode, you do not modify video frames. The video observer acts as a renderer.
+  /// 只读模式。
+  /// 只读模式下，你不修改视频帧，视频观测器相当于渲染器。
   @JsonValue(0)
   processModeReadOnly,
 
-  /// Read-write mode.
-  /// In read-write mode, you modify video frames. The video observer acts as a video filter.
+  /// 读写模式。
+  /// 读写模式下，你会修改视频帧，视频观测器相当于视频 filter。
   @JsonValue(1)
   processModeReadWrite,
 }
@@ -2096,14 +2096,14 @@ extension VideoFrameProcessModeExt on VideoFrameProcessMode {
   }
 }
 
-/// Encoding type of external video frames.
+/// 外部视频帧编码类型。
 @JsonEnum(alwaysCreate: true)
 enum ExternalVideoSourceType {
-  /// 0: Unencoded video frame.
+  /// 0：未编码视频帧。
   @JsonValue(0)
   videoFrame,
 
-  /// 1: Encoded video frame.
+  /// 1：已编码视频帧。
   @JsonValue(1)
   encodedVideoFrame,
 }
@@ -2121,10 +2121,10 @@ extension ExternalVideoSourceTypeExt on ExternalVideoSourceType {
   }
 }
 
-/// @nodoc
+/// 录制文件的格式。
 @JsonEnum(alwaysCreate: true)
 enum MediaRecorderContainerFormat {
-  /// @nodoc
+  /// 1:（默认）MP4。
   @JsonValue(1)
   formatMp4,
 }
@@ -2142,18 +2142,18 @@ extension MediaRecorderContainerFormatExt on MediaRecorderContainerFormat {
   }
 }
 
-/// @nodoc
+/// 录制内容。
 @JsonEnum(alwaysCreate: true)
 enum MediaRecorderStreamType {
-  /// @nodoc
+  /// 1: 仅音频。
   @JsonValue(0x01)
   streamTypeAudio,
 
-  /// @nodoc
+  /// 2: 仅视频。
   @JsonValue(0x02)
   streamTypeVideo,
 
-  /// @nodoc
+  /// 3: （默认）音视频。
   @JsonValue(0x01 | 0x02)
   streamTypeBoth,
 }
@@ -2171,18 +2171,18 @@ extension MediaRecorderStreamTypeExt on MediaRecorderStreamType {
   }
 }
 
-/// Current recording state.
+/// 当前的录制状态。
 @JsonEnum(alwaysCreate: true)
 enum RecorderState {
-  /// -1: Audio/video stream recording error. See RecorderReasonCode.
+  /// -1: 音视频流录制出错，错误原因详见 RecorderReasonCode 。
   @JsonValue(-1)
   recorderStateError,
 
-  /// 2: Audio/video stream recording started.
+  /// 2: 音视频流录制开始。
   @JsonValue(2)
   recorderStateStart,
 
-  /// 3: Audio/video stream recording stopped.
+  /// 3: 音视频流录制停止。
   @JsonValue(3)
   recorderStateStop,
 }
@@ -2200,26 +2200,26 @@ extension RecorderStateExt on RecorderState {
   }
 }
 
-/// Reason for recording state error.
+/// 录制状态出错的原因。
 @JsonEnum(alwaysCreate: true)
 enum RecorderReasonCode {
-  /// 0: Everything is normal.
+  /// 0: 一切正常。
   @JsonValue(0)
   recorderReasonNone,
 
-  /// 1: Failed to write the recording file.
+  /// 1: 录制文件写入失败。
   @JsonValue(1)
   recorderReasonWriteFailed,
 
-  /// 2: No audio/video stream to record or the stream was interrupted for more than 5 seconds.
+  /// 2: 没有可录制的音视频流或者录制的音视频流中断超过 5 秒。
   @JsonValue(2)
   recorderReasonNoStream,
 
-  /// 3: Recording duration exceeds the limit.
+  /// 3: 录制时长超出上限。
   @JsonValue(3)
   recorderReasonOverMaxDuration,
 
-  /// 4: Recording configuration changed.
+  /// 4: 录制配置改变。
   @JsonValue(4)
   recorderReasonConfigChanged,
 }
@@ -2237,7 +2237,7 @@ extension RecorderReasonCodeExt on RecorderReasonCode {
   }
 }
 
-/// @nodoc
+/// 音视频流录制配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class MediaRecorderConfiguration implements AgoraSerializable {
   /// @nodoc
@@ -2254,47 +2254,58 @@ class MediaRecorderConfiguration implements AgoraSerializable {
       this.channelNum,
       this.videoSourceType});
 
-  /// @nodoc
+  /// 请确保你指定的路径存在并且可写。 录制文件在本地保存的绝对路径，需精确到文件名及格式。例如：
+  ///  Windows: C:\Users\<user_name>\AppData\Local\Agora\<process_name>\example.mp4
+  ///  iOS: /App Sandbox/Library/Caches/example.mp4
+  ///  macOS: /Library/Logs/example.mp4
+  ///  Android: /storage/emulated/0/Android/data/<package name>/files/example.mp4
   @JsonKey(name: 'storagePath')
   final String? storagePath;
 
-  /// @nodoc
+  /// 录制文件的格式。详见 MediaRecorderContainerFormat 。
   @JsonKey(name: 'containerFormat')
   final MediaRecorderContainerFormat? containerFormat;
 
-  /// @nodoc
+  /// 录制内容。详见 MediaRecorderStreamType 。
   @JsonKey(name: 'streamType')
   final MediaRecorderStreamType? streamType;
 
-  /// @nodoc
+  /// 最大录制时长，单位为毫秒，默认值为 120000。
   @JsonKey(name: 'maxDurationMs')
   final int? maxDurationMs;
 
-  /// @nodoc
+  /// 录制信息更新间隔，单位为毫秒，取值范围为 [1000,10000]。SDK 会根据该值的设置触发 onRecorderInfoUpdated 回调，报告更新后的录制信息。
   @JsonKey(name: 'recorderInfoUpdateInterval')
   final int? recorderInfoUpdateInterval;
 
-  /// @nodoc
+  /// 录制视频的宽度 (px)，宽 × 高的最大值不应超过 3840 × 2160。
+  /// 该参数仅在 调用 createMediaRecorder 且将 RecorderStreamInfo 中的 type 设置为 preview 时需要传入。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// @nodoc
+  /// 录制视频的高度 (px)，宽 × 高的最大值不超过 3840 × 2160。
+  /// 该参数仅在 调用 createMediaRecorder 且将 RecorderStreamInfo 中的 type 设置为 preview 时需要传入。
   @JsonKey(name: 'height')
   final int? height;
 
-  /// @nodoc
+  /// 录制视频的帧率，最高值不超过 30，如： 5、10、15、24、30 等。
+  /// 该参数仅在 调用 createMediaRecorder 且将 RecorderStreamInfo 中的 type 设置为 preview 时需要传入。
   @JsonKey(name: 'fps')
   final int? fps;
 
-  /// @nodoc
+  /// 录制音频的采样率 (Hz)，可设置为 16000，32000，44100 或 48000。
+  /// 该参数仅在 调用 createMediaRecorder 且将 RecorderStreamInfo 中的 type 设置为 preview 时需要传入。
   @JsonKey(name: 'sample_rate')
   final int? sampleRate;
 
-  /// @nodoc
+  /// 录制音频的声道数:
+  ///  1: 单声道
+  ///  2: 双声道 该参数仅在 调用 createMediaRecorder 且将 RecorderStreamInfo 中的 type 设置为 preview 时需要传入。
   @JsonKey(name: 'channel_num')
   final int? channelNum;
 
-  /// @nodoc
+  /// 录制视频源的类型。详见 VideoSourceType 。
+  /// 该参数仅在 调用 createMediaRecorder 且将 RecorderStreamInfo 中的 type 设置为 preview 时需要传入。
   @JsonKey(name: 'videoSourceType')
   final VideoSourceType? videoSourceType;
 
@@ -2306,46 +2317,46 @@ class MediaRecorderConfiguration implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$MediaRecorderConfigurationToJson(this);
 }
 
-/// Face information observer.
+/// 人脸信息观测器。
 ///
-/// You can call registerFaceInfoObserver to register the FaceInfoObserver.
+/// 你可以调用 registerFaceInfoObserver 注册 FaceInfoObserver 观测器。
 class FaceInfoObserver {
   /// @nodoc
   const FaceInfoObserver({
     this.onFaceInfo,
   });
 
-  /// Reports the face information processed by the voice driver plugin.
+  /// 报告已获取语音驱动插件处理后的人脸信息。
   ///
-  /// * [outFaceInfo] Output parameter. A JSON string of face information processed by the voice driver plugin, containing the following fields:
-  ///  faces: Array of objects. Contains information of detected faces, each face corresponds to one object.
-  ///  blendshapes: Object. Blend shape coefficient set, named according to ARkit standards. Each key-value pair represents a blend shape coefficient. The coefficient is a float ranging from [0.0, 1.0].
-  ///  rotation: Array of objects. Head rotation values, including the following three key-value pairs, with float values ranging from [-180.0, 180.0]:
-  ///  pitch: Head pitch angle. Positive when looking down, negative when looking up.
-  ///  yaw: Head yaw angle. Positive when turning left, negative when turning right.
-  ///  roll: Head roll angle. Positive when tilting right, negative when tilting left.
-  ///  timestamp: String. Timestamp of the output result in milliseconds. Example JSON: { "faces":[{ "blendshapes":{ "eyeBlinkLeft":0.9, "eyeLookDownLeft":0.0, "eyeLookInLeft":0.0, "eyeLookOutLeft":0.0, "eyeLookUpLeft":0.0, "eyeSquintLeft":0.0, "eyeWideLeft":0.0, "eyeBlinkRight":0.0, "eyeLookDownRight":0.0, "eyeLookInRight":0.0, "eyeLookOutRight":0.0, "eyeLookUpRight":0.0, "eyeSquintRight":0.0, "eyeWideRight":0.0, "jawForward":0.0, "jawLeft":0.0, "jawRight":0.0, "jawOpen":0.0, "mouthClose":0.0, "mouthFunnel":0.0, "mouthPucker":0.0, "mouthLeft":0.0, "mouthRight":0.0, "mouthSmileLeft":0.0, "mouthSmileRight":0.0, "mouthFrownLeft":0.0, "mouthFrownRight":0.0, "mouthDimpleLeft":0.0, "mouthDimpleRight":0.0, "mouthStretchLeft":0.0, "mouthStretchRight":0.0, "mouthRollLower":0.0, "mouthRollUpper":0.0, "mouthShrugLower":0.0, "mouthShrugUpper":0.0, "mouthPressLeft":0.0, "mouthPressRight":0.0, "mouthLowerDownLeft":0.0, "mouthLowerDownRight":0.0, "mouthUpperUpLeft":0.0, "mouthUpperUpRight":0.0, "browDownLeft":0.0, "browDownRight":0.0, "browInnerUp":0.0, "browOuterUpLeft":0.0, "browOuterUpRight":0.0, "cheekPuff":0.0, "cheekSquintLeft":0.0, "cheekSquintRight":0.0, "noseSneerLeft":0.0, "noseSneerRight":0.0, "tongueOut":0.0 }, "rotation":{"pitch":30.0, "yaw":25.5, "roll":-15.5}, }], "timestamp":"654879876546" }
+  /// * [outFaceInfo] 输出参数，语音驱动插件处理后的人脸信息 JSON 字符串，包含以下字段：
+  ///  faces：Object 序列。包含识别到的人脸信息，每一张人脸对应一个 Object。
+  ///  blendshapes：Object。面捕系数集，命名符合 ARkit 标准，内部的键值对为每一个 blendshape 系数。blendshape 系数为浮点，取值范围为 [0.0,1.0]。
+  ///  rotation：Object 序列。头部旋转量，包含以下三个键值对，取值为浮点数，范围为 [-180.0,180.0]：
+  ///  pitch：头部俯仰角度。低头为正值，抬头为负值。
+  ///  yaw：头部水平旋转角度。左转为正值，右转为负值。
+  ///  roll：头部垂直旋转角度。右倾为正值，左倾为负值。
+  ///  timestamp：String。输出结果的时间戳，单位为毫秒。 以下为 JSON 示例： { "faces":[{ "blendshapes":{ "eyeBlinkLeft":0.9, "eyeLookDownLeft":0.0, "eyeLookInLeft":0.0, "eyeLookOutLeft":0.0, "eyeLookUpLeft":0.0, "eyeSquintLeft":0.0, "eyeWideLeft":0.0, "eyeBlinkRight":0.0, "eyeLookDownRight":0.0, "eyeLookInRight":0.0, "eyeLookOutRight":0.0, "eyeLookUpRight":0.0, "eyeSquintRight":0.0, "eyeWideRight":0.0, "jawForward":0.0, "jawLeft":0.0, "jawRight":0.0, "jawOpen":0.0, "mouthClose":0.0, "mouthFunnel":0.0, "mouthPucker":0.0, "mouthLeft":0.0, "mouthRight":0.0, "mouthSmileLeft":0.0, "mouthSmileRight":0.0, "mouthFrownLeft":0.0, "mouthFrownRight":0.0, "mouthDimpleLeft":0.0, "mouthDimpleRight":0.0, "mouthStretchLeft":0.0, "mouthStretchRight":0.0, "mouthRollLower":0.0, "mouthRollUpper":0.0, "mouthShrugLower":0.0, "mouthShrugUpper":0.0, "mouthPressLeft":0.0, "mouthPressRight":0.0, "mouthLowerDownLeft":0.0, "mouthLowerDownRight":0.0, "mouthUpperUpLeft":0.0, "mouthUpperUpRight":0.0, "browDownLeft":0.0, "browDownRight":0.0, "browInnerUp":0.0, "browOuterUpLeft":0.0, "browOuterUpRight":0.0, "cheekPuff":0.0, "cheekSquintLeft":0.0, "cheekSquintRight":0.0, "noseSneerLeft":0.0, "noseSneerRight":0.0, "tongueOut":0.0 }, "rotation":{"pitch":30.0, "yaw":25.5, "roll":-15.5}, }], "timestamp":"654879876546" }
   ///
   /// Returns
-  /// true : Face information JSON parsed successfully. false : Face information JSON parsing failed.
+  /// true : 人脸信息 JSON 解析成功。 false : 人脸信息 JSON 解析失败。
   final void Function(String outFaceInfo)? onFaceInfo;
 }
 
-/// @nodoc
+/// 录制文件信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class RecorderInfo implements AgoraSerializable {
   /// @nodoc
   const RecorderInfo({this.fileName, this.durationMs, this.fileSize});
 
-  /// @nodoc
+  /// 录制文件的绝对存储路径。
   @JsonKey(name: 'fileName')
   final String? fileName;
 
-  /// @nodoc
+  /// 录制文件的时长，单位为毫秒。
   @JsonKey(name: 'durationMs')
   final int? durationMs;
 
-  /// @nodoc
+  /// 录制文件的大小，单位为字节。
   @JsonKey(name: 'fileSize')
   final int? fileSize;
 
@@ -2357,7 +2368,7 @@ class RecorderInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$RecorderInfoToJson(this);
 }
 
-/// @nodoc
+/// 包含音视频录制的事件。
 class MediaRecorderObserver {
   /// @nodoc
   const MediaRecorderObserver({
@@ -2365,11 +2376,24 @@ class MediaRecorderObserver {
     this.onRecorderInfoUpdated,
   });
 
-  /// @nodoc
+  /// 录制状态发生改变回调。
+  ///
+  /// 音视频流录制状态发生改变时，SDK 会触发该回调，报告当前的录制状态和引起录制状态改变的原因。
+  ///
+  /// * [channelId] 频道名称。
+  /// * [uid] 用户 ID。
+  /// * [state] 当前的录制状态。详见 RecorderState 。
+  /// * [reason] 录制状态出错的原因。详见 RecorderReasonCode 。
   final void Function(String channelId, int uid, RecorderState state,
       RecorderReasonCode reason)? onRecorderStateChanged;
 
-  /// @nodoc
+  /// 录制信息更新回调。
+  ///
+  /// 成功注册该回调并开启音视频流录制后，SDK 会根据你在 MediaRecorderConfiguration 中设置的 recorderInfoUpdateInterval 的值周期性触发该回调，报告当前录制文件的文件名、时长和大小。
+  ///
+  /// * [channelId] 频道名称。
+  /// * [uid] 用户 ID。
+  /// * [info] 录制文件信息。详见 RecorderInfo 。
   final void Function(String channelId, int uid, RecorderInfo info)?
       onRecorderInfoUpdated;
 }

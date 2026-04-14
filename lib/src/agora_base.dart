@@ -2,22 +2,22 @@ import '/src/_serializable.dart';
 import '/src/binding_forward_export.dart';
 part 'agora_base.g.dart';
 
-/// Channel profile.
+/// 频道场景。
 @JsonEnum(alwaysCreate: true)
 enum ChannelProfileType {
-  /// 0: Communication profile. Agora recommends using the live broadcasting profile for a better audio and video experience.
+  /// 0: 通信场景。声网推荐使用直播场景以获取更好的音视频体验。
   @JsonValue(0)
   channelProfileCommunication,
 
-  /// 1: (Default) Live broadcasting profile.
+  /// 1:（默认）直播场景。
   @JsonValue(1)
   channelProfileLiveBroadcasting,
 
-  /// 2: Gaming profile. Deprecated: Use channelProfileLiveBroadcasting instead.
+  /// 2: 游戏场景。 废弃：请改用 channelProfileLiveBroadcasting。
   @JsonValue(2)
   channelProfileGame,
 
-  /// 3: Interactive profile. This profile is optimized for low latency. If your scenario involves frequent interactions among users, this profile is recommended. Deprecated: Use channelProfileLiveBroadcasting instead.
+  /// 3: 互动场景。该场景对延时进行了优化。如果你的场景中有用户需要频繁互动，建议使用该场景。 废弃：请改用 channelProfileLiveBroadcasting。
   @JsonValue(3)
   channelProfileCloudGaming,
 
@@ -184,59 +184,59 @@ extension WarnCodeTypeExt on WarnCodeType {
   }
 }
 
-/// Error codes.
+/// 错误代码。
 ///
-/// Error codes indicate that the SDK has encountered an unrecoverable error requiring application intervention. For example, an error is returned when the camera fails to open, and the app needs to notify the user that the camera cannot be used.
+/// 错误代码意味着 SDK 遇到不可恢复的错误，需要应用程序干预。例如：打开摄像头失败时会返回错误，App 需要提示用户不能使用摄像头。
 @JsonEnum(alwaysCreate: true)
 enum ErrorCodeType {
-  /// 0: No error.
+  /// 0：没有错误。
   @JsonValue(0)
   errOk,
 
-  /// 1: General error (uncategorized error cause). Please try calling the method again.
+  /// 1：一般性的错误（没有明确归类的错误原因）。请重新调用方法。
   @JsonValue(1)
   errFailed,
 
-  /// 2: Invalid parameter set in the method. For example, the specified channel name contains illegal characters. Please reset the parameters.
+  /// 2：方法中设置了无效的参数。例如指定的频道名中含有非法字符。请重新设置参数。
   @JsonValue(2)
   errInvalidArgument,
 
-  /// 3: SDK is not ready. Possible reasons include: RtcEngine initialization failed. Please reinitialize RtcEngine.
-  ///  User has not joined the channel when calling the method. Please check the method call logic.
-  ///  User has not left the channel when calling rate or complain. Please check the method call logic.
-  ///  Audio module is not enabled.
-  ///  Incomplete assembly.
+  /// 3：SDK 尚未准备好。可能的原因有： RtcEngine 初始化失败。请重新初始化 RtcEngine 。
+  ///  调用方法时用户尚未加入频道。请检查方法的调用逻辑。
+  ///  调用 rate 或 complain 方法时用户尚未离开频道。请检查方法的调用逻辑。
+  ///  音频模块未开启。
+  ///  程序集不完整。
   @JsonValue(3)
   errNotReady,
 
-  /// 4: The current state of RtcEngine does not support this operation. Possible reasons include:
-  ///  When using built-in encryption, the encryption mode is incorrect or loading the external encryption library failed. Please check whether the encryption enum value is correct or reload the external encryption library.
+  /// 4： RtcEngine 当前状态不支持该操作。可能的原因有：
+  ///  使用内置加密时，设置的加密模式不正确，或加载外部加密库失败。请检查加密的枚举值是否正确，或重新加载外部加密库。
   @JsonValue(4)
   errNotSupported,
 
-  /// 5: This method call was rejected. Possible reasons include: RtcEngine initialization failed. Please reinitialize RtcEngine.
-  ///  An empty string "" was set as the channel name when joining the channel. Please reset the channel name.
-  ///  In multi-channel scenarios, the specified channel name already exists when calling joinChannelEx to join a channel. Please reset the channel name.
+  /// 5：方法调用被拒绝。可能的原因有： RtcEngine 初始化失败。请重新初始化 RtcEngine 。
+  ///  在加入频道时，将频道名设为空字符 "" 。请重新设置频道名。
+  ///  多频道场景下，在调用 joinChannelEx 方法加入频道时，设置的频道名已存在。请重新设置频道名。
   @JsonValue(5)
   errRefused,
 
-  /// 6: Buffer size is insufficient to hold the returned data.
+  /// 6：缓冲区大小不足以存放返回的数据。
   @JsonValue(6)
   errBufferTooSmall,
 
-  /// 7: Method is called before RtcEngine is initialized. Please ensure that the RtcEngine object is created and initialized before calling this method.
+  /// 7： RtcEngine 尚未初始化就调用方法。请确认在调用该方法前已创建 RtcEngine 对象并完成初始化。
   @JsonValue(7)
   errNotInitialized,
 
-  /// 8: Invalid current state.
+  /// 8：当前状态无效。
   @JsonValue(8)
   errInvalidState,
 
-  /// 9: No permission to operate. Please check whether the user has granted the app permission to use audio and video devices.
+  /// 9：没有操作权限。请检查用户是否授予了 App 音视频设备的使用权限。
   @JsonValue(9)
   errNoPermission,
 
-  /// 10: Method call timed out. Some method calls require a result from the SDK. If the SDK takes too long to process the event and does not return within 10 seconds, this error occurs.
+  /// 10： 方法调用超时。有些方法调用需要 SDK 返回结果，如果 SDK 处理事件过长，超过 10 秒没有返回，会出现此错误。
   @JsonValue(10)
   errTimedout,
 
@@ -256,31 +256,31 @@ enum ErrorCodeType {
   @JsonValue(14)
   errNetDown,
 
-  /// 17: Joining the channel was rejected. Possible reasons include:
-  ///  The user is already in the channel. It is recommended to determine whether the user is in the channel via the onConnectionStateChanged callback. Do not call this method again to join the channel unless receiving the connectionStateDisconnected (1) state.
-  ///  After calling startEchoTest for a call test, the user attempts to join the channel without calling stopEchoTest to end the current test. After starting the call test, you must call stopEchoTest to end the test before joining the channel.
+  /// 17：加入频道被拒绝。可能的原因有：
+  ///  用户已经在频道中。建议通过 onConnectionStateChanged 回调判断用户是否在频道中。除收到 connectionStateDisconnected (1) 状态外，不要再次调用该方法加入频道。
+  ///  用户在调用 startEchoTest 进行通话测试后，未调用 stopEchoTest 结束当前测试就尝试加入频道。开始通话测试后，需要先调用 stopEchoTest 结束当前测试，再加入频道。
   @JsonValue(17)
   errJoinChannelRejected,
 
-  /// 18: Failed to leave the channel. Possible reasons include:
-  ///  The user has already left the channel before calling leaveChannel. Stop calling this method.
-  ///  The user calls leaveChannel to exit the channel without having joined it. No further action is needed in this case.
+  /// 18：离开频道失败。可能的原因有：
+  ///  调用 leaveChannel 前，用户已离开频道。停止调用该方法即可。
+  ///  用户尚未加入频道，就调用 leaveChannel 退出频道。这种情况下无需额外操作。
   @JsonValue(18)
   errLeaveChannelRejected,
 
-  /// 19: The resource is already in use and cannot be reused.
+  /// 19：资源已被占用，不能重复使用。
   @JsonValue(19)
   errAlreadyInUse,
 
-  /// 20: SDK aborted the request, possibly due to too many requests.
+  /// 20：SDK 放弃请求，可能由于请求的次数太多。
   @JsonValue(20)
   errAborted,
 
-  /// 21: Specific firewall settings on Windows caused RtcEngine initialization to fail and crash.
+  /// 21：Windows 下特定的防火墙设置导致 RtcEngine 初始化失败然后崩溃。
   @JsonValue(21)
   errInitNetEngine,
 
-  /// 22: SDK failed to allocate resources, possibly because the app is using too many resources or system resources are exhausted.
+  /// 22：SDK 分配资源失败，可能由于 App 占用资源过多或系统资源耗尽。
   @JsonValue(22)
   errResourceLimited,
 
@@ -288,77 +288,77 @@ enum ErrorCodeType {
   @JsonValue(23)
   errFuncIsProhibited,
 
-  /// 101: Invalid App ID. Please use a valid App ID to rejoin the channel.
+  /// 101：不是有效的 App ID。请更换有效的 App ID 重新加入频道。
   @JsonValue(101)
   errInvalidAppId,
 
-  /// 102: Invalid channel name. Possible reason is incorrect data type set for the parameter. Please use a valid channel name to rejoin the channel.
+  /// 102：不是有效的频道名。可能的原因是设置的参数数据类型不正确。请更换有效的频道名重新加入频道。
   @JsonValue(102)
   errInvalidChannelName,
 
-  /// 103: Unable to obtain server resources in the current region. Try specifying a different region when initializing RtcEngine.
+  /// 103：无法获取当前区域的服务器资源。请在初始化 RtcEngine 时尝试指定其他区域。
   @JsonValue(103)
   errNoServerResources,
 
-  /// 109: The current Token has expired and is no longer valid. Please request a new Token from the server and call renewToken to update it. Deprecated: This enum is deprecated. Use connectionChangedTokenExpired (9) in the onConnectionStateChanged callback instead.
+  /// 109：当前使用的 Token 过期，不再有效。请在服务端申请生成新的 Token，并调用 renewToken 更新 Token。 弃用：该枚举已废弃。请改用 onConnectionStateChanged 回调中的 connectionChangedTokenExpired (9)。
   @JsonValue(109)
   errTokenExpired,
 
-  /// Deprecated: This enum is deprecated. Use connectionChangedInvalidToken (8) in the onConnectionStateChanged callback instead. 110: Invalid Token. Common reasons include:
-  ///  App certificate is enabled in the console, but App ID + Token authentication is not used. When the project enables the App certificate, Token authentication must be used.
-  ///  The uid field used when generating the Token does not match the uid used when the user joins the channel.
+  /// 弃用：该枚举已废弃。请改用 onConnectionStateChanged 回调中的 connectionChangedInvalidToken (8)。 110：Token 无效。一般有以下原因：
+  ///  在控制台中启用了 App 证书，但未使用 App ID + Token 鉴权。当项目启用了 App 证书，就必须使用 Token 鉴权。
+  ///  生成 Token 时填入的 uid 字段，和用户加入频道时填入的 uid 不匹配。
   @JsonValue(110)
   errInvalidToken,
 
-  /// 111: Network connection interrupted. SDK lost network connection for more than 4 seconds after establishing a connection with the server.
+  /// 111：网络连接中断。SDK 在和服务器建立连接后，失去网络连接超过 4 秒。
   @JsonValue(111)
   errConnectionInterrupted,
 
-  /// 112: Network connection lost. The network was interrupted and the SDK could not reconnect to the server within 10 seconds.
+  /// 112：网络连接丢失。网络连接中断，且 SDK 无法在 10 秒内连接服务器。
   @JsonValue(112)
   errConnectionLost,
 
-  /// 113: User is not in the channel when calling the sendStreamMessage method.
+  /// 113：调用 sendStreamMessage 方法时用户不在频道内。
   @JsonValue(113)
   errNotInChannel,
 
-  /// 114: The data length exceeds 1 KB when calling sendStreamMessage.
+  /// 114：在调用 sendStreamMessage 时，发送的数据长度大于 1 KB。
   @JsonValue(114)
   errSizeTooLarge,
 
-  /// 115: The data sending frequency exceeds the limit (6 KB/s) when calling sendStreamMessage.
+  /// 115：在调用 sendStreamMessage 时，发送数据的频率超过限制（6 KB/s）。
   @JsonValue(115)
   errBitrateLimit,
 
-  /// 116: The number of data streams created exceeds the limit (5) when calling createDataStream.
+  /// 116：在调用 createDataStream 时，创建的数据流超过限制（5 个）。
   @JsonValue(116)
   errTooManyDataStreams,
 
-  /// 117: Data stream sending timed out.
+  /// 117：数据流发送超时。
   @JsonValue(117)
   errStreamMessageTimeout,
 
-  /// 119: Failed to switch user role. Please try rejoining the channel.
+  /// 119：用户切换角色失败，请尝试重新加入频道。
   @JsonValue(119)
   errSetClientRoleNotAuthorized,
 
-  /// 120: Media stream decryption failed. Possibly due to an incorrect key used when the user joined the channel. Please check the key entered when joining the channel or guide the user to try rejoining.
+  /// 120：媒体流解密失败。可能是用户加入频道时使用了错误的密钥。请检查用户加入频道时填入的密钥，或引导用户尝试重新加入频道。
   @JsonValue(120)
   errDecryptionFailed,
 
-  /// 121: Invalid user ID.
+  /// 121：该用户 ID 无效。
   @JsonValue(121)
   errInvalidUserId,
 
-  /// 122: Data stream decryption failed. Possibly due to an incorrect key used when the user joined the channel. Please check the key entered when joining the channel or guide the user to try rejoining.
+  /// 122：数据流解密失败。可能是用户加入频道时使用了错误的密钥。请检查用户加入频道时填入的密钥，或引导用户尝试重新加入频道。
   @JsonValue(122)
   errDatastreamDecryptionFailed,
 
-  /// 123: The user is banned by the server.
+  /// 123：该用户被服务器禁止。
   @JsonValue(123)
   errClientIsBannedByServer,
 
-  /// 130: The SDK does not support pushing encrypted streams to CDN.
+  /// 130：SDK 不支持将加密过的流推到 CDN 上。
   @JsonValue(130)
   errEncryptedStreamNotAllowedPublish,
 
@@ -366,7 +366,7 @@ enum ErrorCodeType {
   @JsonValue(131)
   errLicenseCredentialInvalid,
 
-  /// 134: Invalid user account, possibly due to invalid parameters.
+  /// 134：无效的 user account，可能是因为设置了无效的参数。
   @JsonValue(134)
   errInvalidUserAccount,
 
@@ -422,11 +422,11 @@ enum ErrorCodeType {
   @JsonValue(168)
   errCertRequest,
 
-  /// 200: Unsupported PCM format.
+  /// 200：不支持的 PCM 格式。
   @JsonValue(200)
   errPcmsendFormat,
 
-  /// 201: Buffer overflow, PCM sending rate is too fast.
+  /// 201：缓冲区溢出，PCM 发送速率过快。
   @JsonValue(201)
   errPcmsendBufferoverflow,
 
@@ -458,39 +458,39 @@ enum ErrorCodeType {
   @JsonValue(428)
   errLoginAlreadyLogin,
 
-  /// 1001: Failed to load media engine.
+  /// 1001：加载媒体引擎失败。
   @JsonValue(1001)
   errLoadMediaEngine,
 
-  /// 1005: Audio device error (unspecified). Please check whether the audio device is occupied by another application, or try rejoining the channel.
+  /// 1005：音频设备出现错误（未指明何种错误）。请检查音频设备是否被其他应用占用，或者尝试重新进入频道。
   @JsonValue(1005)
   errAdmGeneralError,
 
-  /// 1008: Error initializing playback device. Please check whether the playback device is occupied by another application, or try rejoining the channel.
+  /// 1008：初始化播放设备出错。请检查播放设备是否被其他应用占用，或者尝试重新进入频道。
   @JsonValue(1008)
   errAdmInitPlayout,
 
-  /// 1009: Error starting playback device. Please check whether the playback device is functioning properly.
+  /// 1009：启动播放设备出错。请检查播放设备是否正常。
   @JsonValue(1009)
   errAdmStartPlayout,
 
-  /// 1010: Error stopping playback device.
+  /// 1010：停止播放设备出错。
   @JsonValue(1010)
   errAdmStopPlayout,
 
-  /// 1011: Error initializing recording device. Please check whether the recording device is functioning properly, or try rejoining the channel.
+  /// 1011：初始化录音设备出错。请检查录音设备是否正常，或者尝试重新进入频道。
   @JsonValue(1011)
   errAdmInitRecording,
 
-  /// 1012: Error starting recording device. Please check whether the recording device is functioning properly.
+  /// 1012：启动录音设备出错。请检查录音设备是否正常。
   @JsonValue(1012)
   errAdmStartRecording,
 
-  /// 1013: Error stopping recording device.
+  /// 1013：停止录音设备出错。
   @JsonValue(1013)
   errAdmStopRecording,
 
-  /// 1501: No permission to use the camera. Please check whether camera permission is enabled.
+  /// 1501：没有摄像头使用权限。请检查是否已经打开摄像头权限。
   @JsonValue(1501)
   errVdmCameraNotAuthorized,
 }
@@ -549,26 +549,26 @@ extension LicenseErrorTypeExt on LicenseErrorType {
   }
 }
 
-/// SDK's operation permissions for Audio Session.
+/// SDK 对 Audio Session 的操作权限。
 @JsonEnum(alwaysCreate: true)
 enum AudioSessionOperationRestriction {
-  /// 0: No restriction. SDK can modify the Audio Session.
+  /// 0: 没有限制，SDK 可以对 Audio Session 进行更改。
   @JsonValue(0)
   audioSessionOperationRestrictionNone,
 
-  /// 1: SDK cannot change the Audio Session category.
+  /// 1: SDK 不能更改 Audio Session 的 category。
   @JsonValue(1)
   audioSessionOperationRestrictionSetCategory,
 
-  /// 2: SDK cannot change the Audio Session category, mode, or categoryOptions.
+  /// 2: SDK 不能更改 Audio Session 的 category、mode 或 categoryOptions。
   @JsonValue(1 << 1)
   audioSessionOperationRestrictionConfigureSession,
 
-  /// 4: When leaving the channel, the SDK keeps the Audio Session active, for example, to continue audio playback in the background.
+  /// 4: 离开频道时，SDK 会保持 Audio Session 处于活动状态，例如在后台播放音频。
   @JsonValue(1 << 2)
   audioSessionOperationRestrictionDeactivateSession,
 
-  /// 128: Fully restricts the SDK's operation permissions for Audio Session. SDK cannot make any changes to the Audio Session.
+  /// 128: 完全限制 SDK 对 Audio Session 的操作权限，SDK 不能再对 Audio Session 进行任何更改。
   @JsonValue(1 << 7)
   audioSessionOperationRestrictionAll,
 }
@@ -586,18 +586,18 @@ extension AudioSessionOperationRestrictionExt
   }
 }
 
-/// Reason for user going offline.
+/// 用户离线原因。
 @JsonEnum(alwaysCreate: true)
 enum UserOfflineReasonType {
-  /// 0: User left voluntarily.
+  /// 0: 用户主动离开。
   @JsonValue(0)
   userOfflineQuit,
 
-  /// 1: Timed out due to not receiving packets from the peer for a long time. Since the SDK uses an unreliable channel, it is also possible that the peer left the channel voluntarily, but the local side did not receive the leave message and mistakenly judged it as a timeout.
+  /// 1: 因过长时间收不到对方数据包，超时掉线。 由于 SDK 使用的是不可靠通道，也有可能对方主动离开频道，但是本地没收到对方离开消息而误判为超时掉线。
   @JsonValue(1)
   userOfflineDropped,
 
-  /// 2: User switched role from host to audience.
+  /// 2: 用户身份从主播切换为观众。
   @JsonValue(2)
   userOfflineBecomeAudience,
 }
@@ -615,22 +615,22 @@ extension UserOfflineReasonTypeExt on UserOfflineReasonType {
   }
 }
 
-/// Interface class.
+/// 接口类。
 @JsonEnum(alwaysCreate: true)
 enum InterfaceIdType {
-  /// 1: AudioDeviceManager interface class.
+  /// 1： AudioDeviceManager 接口类。
   @JsonValue(1)
   agoraIidAudioDeviceManager,
 
-  /// 2: VideoDeviceManager interface class.
+  /// 2： VideoDeviceManager 接口类。
   @JsonValue(2)
   agoraIidVideoDeviceManager,
 
-  /// 3: This interface class is deprecated.
+  /// 3：该接口类已废弃。
   @JsonValue(3)
   agoraIidParameterEngine,
 
-  /// 4: MediaEngine interface class.
+  /// 4： MediaEngine 接口类。
   @JsonValue(4)
   agoraIidMediaEngine,
 
@@ -646,7 +646,7 @@ enum InterfaceIdType {
   @JsonValue(7)
   agoraIidRtcConnection,
 
-  /// 8: This interface class is deprecated.
+  /// 8：该接口类已废弃。
   @JsonValue(8)
   agoraIidSignalingEngine,
 
@@ -654,7 +654,7 @@ enum InterfaceIdType {
   @JsonValue(9)
   agoraIidMediaEngineRegulator,
 
-  /// 11: LocalSpatialAudioEngine interface class.
+  /// 11： LocalSpatialAudioEngine 接口类。
   @JsonValue(11)
   agoraIidLocalSpatialAudio,
 
@@ -666,7 +666,7 @@ enum InterfaceIdType {
   @JsonValue(14)
   agoraIidMetaService,
 
-  /// 15: MusicContentCenter interface class.
+  /// 15： MusicContentCenter 接口类。
   @JsonValue(15)
   agoraIidMusicContentCenter,
 
@@ -688,34 +688,34 @@ extension InterfaceIdTypeExt on InterfaceIdType {
   }
 }
 
-/// Network quality.
+/// 网络质量。
 @JsonEnum(alwaysCreate: true)
 enum QualityType {
-  /// 0: Network quality is unknown.
+  /// 0: 网络质量未知。
   @JsonValue(0)
   qualityUnknown,
 
-  /// 1: Excellent network quality.
+  /// 1: 网络质量极好。
   @JsonValue(1)
   qualityExcellent,
 
-  /// 2: Subjectively similar to excellent, but bitrate may be slightly lower.
+  /// 2: 用户主观感觉和 excellent 差不多，但码率可能略低于 excellent。
   @JsonValue(2)
   qualityGood,
 
-  /// 3: Slightly impaired user experience but still allows communication.
+  /// 3: 用户主观感受有瑕疵但不影响沟通。
   @JsonValue(3)
   qualityPoor,
 
-  /// 4: Barely communicable but not smooth.
+  /// 4: 勉强能沟通但不顺畅。
   @JsonValue(4)
   qualityBad,
 
-  /// 5: Very poor network quality, communication is almost impossible.
+  /// 5: 网络质量非常差，基本不能沟通。
   @JsonValue(5)
   qualityVbad,
 
-  /// 6: Communication is completely impossible.
+  /// 6: 完全无法沟通。
   @JsonValue(6)
   qualityDown,
 
@@ -723,7 +723,7 @@ enum QualityType {
   @JsonValue(7)
   qualityUnsupported,
 
-  /// 8: Network quality detection in progress.
+  /// 8: 网络质量检测进行中。
   @JsonValue(8)
   qualityDetecting,
 }
@@ -766,22 +766,22 @@ extension FitModeTypeExt on FitModeType {
   }
 }
 
-/// Video clockwise rotation information.
+/// 视频顺时针旋转信息。
 @JsonEnum(alwaysCreate: true)
 enum VideoOrientation {
-  /// 0: (Default) Rotates 0 degrees clockwise.
+  /// 0:（默认）顺时针旋转 0 度。
   @JsonValue(0)
   videoOrientation0,
 
-  /// 90: Rotates 90 degrees clockwise.
+  /// 90: 顺时针旋转 90 度。
   @JsonValue(90)
   videoOrientation90,
 
-  /// 180: Rotates 180 degrees clockwise.
+  /// 180: 顺时针旋转 180 度。
   @JsonValue(180)
   videoOrientation180,
 
-  /// 270: Rotates 270 degrees clockwise.
+  /// 270: 顺时针旋转 270 度。
   @JsonValue(270)
   videoOrientation270,
 }
@@ -799,34 +799,34 @@ extension VideoOrientationExt on VideoOrientation {
   }
 }
 
-/// Video frame rate.
+/// 视频帧率。
 @JsonEnum(alwaysCreate: true)
 enum FrameRate {
-  /// 1: 1 fps.
+  /// 1: 1 fps。
   @JsonValue(1)
   frameRateFps1,
 
-  /// 7: 7 fps.
+  /// 7: 7 fps。
   @JsonValue(7)
   frameRateFps7,
 
-  /// 10: 10 fps.
+  /// 10: 10 fps。
   @JsonValue(10)
   frameRateFps10,
 
-  /// 15: 15 fps.
+  /// 15: 15 fps。
   @JsonValue(15)
   frameRateFps15,
 
-  /// 24: 24 fps.
+  /// 24: 24 fps。
   @JsonValue(24)
   frameRateFps24,
 
-  /// 30: 30 fps.
+  /// 30: 30 fps。
   @JsonValue(30)
   frameRateFps30,
 
-  /// 60: 60 fps. (Windows and macOS only)
+  /// 60: 60 fps。 仅适用于 Windows 和 macOS 平台。
   @JsonValue(60)
   frameRateFps60,
 }
@@ -886,30 +886,30 @@ extension FrameHeightExt on FrameHeight {
   }
 }
 
-/// Video frame type.
+/// 视频帧类型。
 @JsonEnum(alwaysCreate: true)
 enum VideoFrameType {
-  /// 0: Black frame.
+  /// 0: 黑帧。
   @JsonValue(0)
   videoFrameTypeBlankFrame,
 
-  /// 3: Key frame.
+  /// 3: 关键帧。
   @JsonValue(3)
   videoFrameTypeKeyFrame,
 
-  /// 4: Delta frame.
+  /// 4: Delta 帧。
   @JsonValue(4)
   videoFrameTypeDeltaFrame,
 
-  /// 5: B frame.
+  /// 5: B 帧。
   @JsonValue(5)
   videoFrameTypeBFrame,
 
-  /// 6: Droppable frame.
+  /// 6: 丢弃帧。
   @JsonValue(6)
   videoFrameTypeDroppableFrame,
 
-  /// Unknown frame.
+  /// 未知帧。
   @JsonValue(7)
   videoFrameTypeUnknow,
 }
@@ -927,20 +927,20 @@ extension VideoFrameTypeExt on VideoFrameType {
   }
 }
 
-/// Orientation mode for video encoding.
+/// 视频编码的方向模式。
 @JsonEnum(alwaysCreate: true)
 enum OrientationMode {
-  /// 0: (Default) In this mode, the SDK outputs video with the same orientation as the captured video. The receiving end rotates the video based on the received rotation info. This mode is suitable when the receiver can adjust video orientation.
-  ///  If the captured video is landscape, the output video is also landscape.
-  ///  If the captured video is portrait, the output video is also portrait.
+  /// 0: （默认）该模式下 SDK 输出的视频方向与采集到的视频方向一致。接收端会根据收到的视频旋转信息对视频进行旋转。该模式适用于接收端可以调整视频方向的场景。
+  ///  如果采集的视频是横屏模式，则输出的视频也是横屏模式。
+  ///  如果采集的视频是竖屏模式，则输出的视频也是竖屏模式。
   @JsonValue(0)
   orientationModeAdaptive,
 
-  /// 1: In this mode, the SDK outputs video in fixed landscape mode. If the captured video is portrait, the encoder crops it. This mode is suitable when the receiver cannot adjust video orientation, such as in CDN streaming scenarios.
+  /// 1: 该模式下 SDK 固定输出风景（横屏）模式的视频。如果采集到的视频是竖屏模式，则视频编码器会对其进行裁剪。该模式适用于当接收端无法调整视频方向时，如使用旁路推流场景下。
   @JsonValue(1)
   orientationModeFixedLandscape,
 
-  /// 2: In this mode, the SDK outputs video in fixed portrait mode. If the captured video is landscape, the encoder crops it. This mode is suitable when the receiver cannot adjust video orientation, such as in CDN streaming scenarios.
+  /// 2: 该模式下 SDK 固定输出人像（竖屏）模式的视频，如果采集到的视频是横屏模式，则视频编码器会对其进行裁剪。该模式适用于当接收端无法调整视频方向时，如使用旁路推流场景下。
   @JsonValue(2)
   orientationModeFixedPortrait,
 }
@@ -958,26 +958,26 @@ extension OrientationModeExt on OrientationMode {
   }
 }
 
-/// Video encoding degradation preference when bandwidth is limited.
+/// 带宽受限时的视频编码降级偏好。
 @JsonEnum(alwaysCreate: true)
 enum DegradationPreference {
-  /// -1: (Default) Auto mode. The SDK automatically selects maintainFramerate, maintainBalanced, or maintainResolution based on your video scenario settings to achieve optimal overall quality experience (QoE).
+  /// -1：（默认）自动模式。SDK 会根据你设置的视频场景，自动选择 maintainFramerate、maintainBalanced 或 maintainResolution，以获得最优的综合质量体验 (QoE)。
   @JsonValue(-1)
   maintainAuto,
 
-  /// 0: When bandwidth is limited, prioritize reducing video frame rate while maintaining resolution. This preference is suitable for scenarios prioritizing image quality. Deprecated: This enumeration is deprecated. Use other enumerations instead.
+  /// 0：带宽受限时，视频编码时优先降低视频帧率，维持分辨率不变。该降级偏好适用于画质优先的场景。 弃用：该枚举已废弃。请改用其他枚举。
   @JsonValue(0)
   maintainQuality,
 
-  /// 1: When bandwidth is limited, prioritize reducing video resolution while maintaining frame rate. This preference is suitable for scenarios prioritizing smoothness and allowing reduced image quality.
+  /// 1：带宽受限时，视频编码时优先降低视频分辨率，维持视频帧率不变。该降级偏好适用于流畅性优先且允许画质降低的场景。
   @JsonValue(1)
   maintainFramerate,
 
-  /// 2: When bandwidth is limited, reduce both video frame rate and resolution. The degradation level of maintainBalanced is lower than maintainQuality and maintainFramerate, suitable for scenarios with limited smoothness and image quality. The resolution of the locally sent video may change. Remote users must be able to handle this situation. See onVideoSizeChanged.
+  /// 2：带宽受限时，视频编码时同时降低视频帧率和视频分辨率。maintainBalanced 的降幅比 maintainQuality 和 maintainFramerate 降幅更低，适用于流畅性和画质均有限的场景。 本地发送的视频分辨率可能改变，远端用户需能处理这种情况，详见 onVideoSizeChanged 。
   @JsonValue(2)
   maintainBalanced,
 
-  /// 3: When bandwidth is limited, prioritize reducing video frame rate while keeping resolution unchanged. This preference is suitable for scenarios prioritizing image quality.
+  /// 3: 带宽受限时，视频编码时优先降低视频帧率，维持分辨率保持不变。该降级偏好适用于画质优先的场景。
   @JsonValue(3)
   maintainResolution,
 
@@ -999,17 +999,17 @@ extension DegradationPreferenceExt on DegradationPreference {
   }
 }
 
-/// Video dimensions.
+/// 视频尺寸。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class VideoDimensions implements AgoraSerializable {
   /// @nodoc
   const VideoDimensions({this.width, this.height});
 
-  /// Video width in pixels.
+  /// 视频宽度，单位为像素。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// Video height in pixels.
+  /// 视频高度，单位为像素。
   @JsonKey(name: 'height')
   final int? height;
 
@@ -1033,18 +1033,18 @@ const defaultMinBitrate = -1;
 /// @nodoc
 const defaultMinBitrateEqualToTargetBitrate = -2;
 
-/// Maximum frame rate supported by the screen sharing device.
+/// 屏幕共享设备支持的最高帧率。
 @JsonEnum(alwaysCreate: true)
 enum ScreenCaptureFramerateCapability {
-  /// 0: Supports up to 15 fps.
+  /// 0：最高支持 15 fps。
   @JsonValue(0)
   screenCaptureFramerateCapability15Fps,
 
-  /// 1: Supports up to 30 fps.
+  /// 1：最高支持 30 fps。
   @JsonValue(1)
   screenCaptureFramerateCapability30Fps,
 
-  /// 2: Supports up to 60 fps.
+  /// 2：最高支持 60 fps。
   @JsonValue(2)
   screenCaptureFramerateCapability60Fps,
 }
@@ -1062,26 +1062,26 @@ extension ScreenCaptureFramerateCapabilityExt
   }
 }
 
-/// Video codec capability level.
+/// 视频编解码能力等级。
 @JsonEnum(alwaysCreate: true)
 enum VideoCodecCapabilityLevel {
-  /// -1: Unsupported video type. Currently only H.264 and H.265 formats are supported. If the video is in another format, this value is returned.
+  /// -1：不支持的视频类型。目前仅支持对 H.264 和 H.265 格式的视频进行查询，如果视频为其他格式，则返回该值。
   @JsonValue(-1)
   codecCapabilityLevelUnspecified,
 
-  /// 5: Basic codec support, i.e., encoding and decoding for video up to 1080p and 30 fps.
+  /// 5：基本的编解码支持，即：对 1080p、30 fps 以下的视频进行编解码。
   @JsonValue(5)
   codecCapabilityLevelBasicSupport,
 
-  /// 10: Supports encoding and decoding for video up to 1080p and 30 fps.
+  /// 10：最高支持对 1080p、30 fps 的视频进行编解码。
   @JsonValue(10)
   codecCapabilityLevel1080p30fps,
 
-  /// 20: Supports encoding and decoding for video up to 1080p and 60 fps.
+  /// 20：最高支持对 1080p、60 fps 的视频进行编解码。
   @JsonValue(20)
   codecCapabilityLevel1080p60fps,
 
-  /// 30: Supports encoding and decoding for video up to 4K and 30 fps.
+  /// 30：最高支持对 4K、30 fps 的视频进行编解码。
   @JsonValue(30)
   codecCapabilityLevel4k60fps,
 }
@@ -1099,26 +1099,26 @@ extension VideoCodecCapabilityLevelExt on VideoCodecCapabilityLevel {
   }
 }
 
-/// Video codec format.
+/// 视频编码格式。
 @JsonEnum(alwaysCreate: true)
 enum VideoCodecType {
-  /// 0: (Default) No specific codec format. The SDK automatically selects a suitable codec format based on the resolution of the current video stream and device performance.
+  /// 0：（默认）不指定编解码格式。SDK 会根据当前视频流的分辨率、设备性能自动匹配适合的编解码格式。
   @JsonValue(0)
   videoCodecNone,
 
-  /// 1: Standard VP8.
+  /// 1：标准 VP8。
   @JsonValue(1)
   videoCodecVp8,
 
-  /// 2: Standard H.264.
+  /// 2：标准 H.264。
   @JsonValue(2)
   videoCodecH264,
 
-  /// 3: Standard H.265.
+  /// 3：标准 H.265。
   @JsonValue(3)
   videoCodecH265,
 
-  /// 6: Generic. This type is mainly used for transmitting raw video data (e.g., user-encrypted video frames). The video frames of this type are returned to the user via callback, and the user needs to decode and render them manually.
+  /// 6：Generic。本类型主要用于传输视频裸数据(比如用户已加密的视频帧)，该类型视频帧以回调的形式返回给用户，需要用户自行解码与渲染。
   @JsonValue(6)
   videoCodecGeneric,
 
@@ -1134,7 +1134,7 @@ enum VideoCodecType {
   @JsonValue(13)
   videoCodecVp9,
 
-  /// 20: Generic JPEG. Requires less computing power and can be used on IoT devices with limited processing capabilities.
+  /// 20：Generic JPEG。本类型所需的算力较小，可用于算力有限的 IoT 设备。
   @JsonValue(20)
   videoCodecGenericJpeg,
 }
@@ -1152,24 +1152,24 @@ extension VideoCodecTypeExt on VideoCodecType {
   }
 }
 
-/// Camera focal length type.
+/// 摄像头的焦距类型。
 ///
-/// (Android and iOS only)
+/// 仅适用于 Android 和 iOS。
 @JsonEnum(alwaysCreate: true)
 enum CameraFocalLengthType {
-  /// 0: (Default) Standard lens.
+  /// 0：（默认）标准镜头。
   @JsonValue(0)
   cameraFocalLengthDefault,
 
-  /// 1: Wide-angle lens.
+  /// 1：广角镜头。
   @JsonValue(1)
   cameraFocalLengthWideAngle,
 
-  /// 2: Ultra-wide-angle lens.
+  /// 2：超广角镜头。
   @JsonValue(2)
   cameraFocalLengthUltraWide,
 
-  /// 3: (iOS only) Telephoto lens.
+  /// 3：（仅适用于 iOS）长焦镜头。
   @JsonValue(3)
   cameraFocalLengthTelephoto,
 }
@@ -1238,38 +1238,38 @@ class SenderOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$SenderOptionsToJson(this);
 }
 
-/// Audio codec format.
+/// 音频编解码格式。
 @JsonEnum(alwaysCreate: true)
 enum AudioCodecType {
-  /// 1: OPUS.
+  /// 1: OPUS。
   @JsonValue(1)
   audioCodecOpus,
 
-  /// 3: PCMA.
+  /// 3: PCMA。
   @JsonValue(3)
   audioCodecPcma,
 
-  /// 4: PCMU.
+  /// 4: PCMU。
   @JsonValue(4)
   audioCodecPcmu,
 
-  /// 5: G722.
+  /// 5: G722。
   @JsonValue(5)
   audioCodecG722,
 
-  /// 8: LC-AAC.
+  /// 8: LC-AAC。
   @JsonValue(8)
   audioCodecAaclc,
 
-  /// 9: HE-AAC.
+  /// 9: HE-AAC。
   @JsonValue(9)
   audioCodecHeaac,
 
-  /// 10: JC1.
+  /// 10: JC1。
   @JsonValue(10)
   audioCodecJc1,
 
-  /// 11: HE-AAC v2.
+  /// 11: HE-AAC v2。
   @JsonValue(11)
   audioCodecHeaac2,
 
@@ -1295,50 +1295,50 @@ extension AudioCodecTypeExt on AudioCodecType {
   }
 }
 
-/// Audio encoding type.
+/// 音频编码类型。
 @JsonEnum(alwaysCreate: true)
 enum AudioEncodingType {
-  /// 0x010101: AAC encoding format, 16000 Hz sample rate, low quality. The file size of 10 minutes of audio is approximately 1.2 MB after encoding.
+  /// 0x010101: AAC 编码格式，16000 Hz 采样率，低音质。音频时长为 10 分钟的文件编码后大小约为 1.2 MB。
   @JsonValue(0x010101)
   audioEncodingTypeAac16000Low,
 
-  /// 0x010102: AAC encoding format, 16000 Hz sample rate, medium quality. The file size of 10 minutes of audio is approximately 2 MB after encoding.
+  /// 0x010102: AAC 编码格式，16000 Hz 采样率，中音质。音频时长为 10 分钟的文件编码后大小约为 2 MB。
   @JsonValue(0x010102)
   audioEncodingTypeAac16000Medium,
 
-  /// 0x010201: AAC encoding format, 32000 Hz sample rate, low quality. The file size of 10 minutes of audio is approximately 1.2 MB after encoding.
+  /// 0x010201: AAC 编码格式，32000 Hz 采样率，低音质。音频时长为 10 分钟的文件编码后大小约为 1.2 MB。
   @JsonValue(0x010201)
   audioEncodingTypeAac32000Low,
 
-  /// 0x010202: AAC encoding format, 32000 Hz sample rate, medium quality. The file size of 10 minutes of audio is approximately 2 MB after encoding.
+  /// 0x010202: AAC 编码格式，32000 Hz 采样率，中音质。音频时长为 10 分钟的文件编码后大小约为 2 MB。
   @JsonValue(0x010202)
   audioEncodingTypeAac32000Medium,
 
-  /// 0x010203: AAC encoding format, 32000 Hz sample rate, high quality. The file size of 10 minutes of audio is approximately 3.5 MB after encoding.
+  /// 0x010203: AAC 编码格式，32000 Hz 采样率，高音质。音频时长为 10 分钟的文件编码后大小约为 3.5 MB。
   @JsonValue(0x010203)
   audioEncodingTypeAac32000High,
 
-  /// 0x010302: AAC encoding format, 48000 Hz sample rate, medium quality. The file size of 10 minutes of audio is approximately 2 MB after encoding.
+  /// 0x010302: AAC 编码格式，48000 Hz 采样率，中音质。音频时长为 10 分钟的文件编码后大小约为 2 MB。
   @JsonValue(0x010302)
   audioEncodingTypeAac48000Medium,
 
-  /// 0x010303: AAC encoding format, 48000 Hz sample rate, high quality. The file size of 10 minutes of audio is approximately 3.5 MB after encoding.
+  /// 0x010303: AAC 编码格式，48000 Hz 采样率，高音质。音频时长为 10 分钟的文件编码后大小约为 3.5 MB。
   @JsonValue(0x010303)
   audioEncodingTypeAac48000High,
 
-  /// 0x020101: OPUS encoding format, 16000 Hz sample rate, low quality. The file size of 10 minutes of audio is approximately 2 MB after encoding.
+  /// 0x020101: OPUS 编码格式，16000 Hz 采样率，低音质。音频时长为 10 分钟的文件编码后大小约为 2 MB。
   @JsonValue(0x020101)
   audioEncodingTypeOpus16000Low,
 
-  /// 0x020102: OPUS encoding format, 16000 Hz sample rate, medium quality. The file size of 10 minutes of audio is approximately 2 MB after encoding.
+  /// 0x020102: OPUS 编码格式，16000 Hz 采样率，中音质。音频时长为 10 分钟的文件编码后大小约为 2 MB。
   @JsonValue(0x020102)
   audioEncodingTypeOpus16000Medium,
 
-  /// 0x020302: OPUS encoding format, 48000 Hz sample rate, medium quality. The file size of 10 minutes of audio is approximately 2 MB after encoding.
+  /// 0x020302: OPUS 编码格式，48000 Hz 采样率，中音质。音频时长为 10 分钟的文件编码后大小约为 2 MB。
   @JsonValue(0x020302)
   audioEncodingTypeOpus48000Medium,
 
-  /// 0x020303: OPUS encoding format, 48000 Hz sample rate, high quality. The file size of 10 minutes of audio is approximately 3.5 MB after encoding.
+  /// 0x020303: OPUS 编码格式，48000 Hz 采样率，高音质。音频时长为 10 分钟的文件编码后大小约为 3.5 MB。
   @JsonValue(0x020303)
   audioEncodingTypeOpus48000High,
 }
@@ -1356,14 +1356,14 @@ extension AudioEncodingTypeExt on AudioEncodingType {
   }
 }
 
-/// Watermark fit mode.
+/// 水印的适配模式。
 @JsonEnum(alwaysCreate: true)
 enum WatermarkFitMode {
-  /// 0: Uses the positionInLandscapeMode and positionInPortraitMode values set in WatermarkOptions. The settings in WatermarkRatio are ignored.
+  /// 0: 使用你在 WatermarkOptions 中设置的 positionInLandscapeMode 和 positionInPortraitMode 值。此时 WatermarkRatio 中的设置无效。
   @JsonValue(0)
   fitModeCoverPosition,
 
-  /// 1: Uses the value set in WatermarkRatio. The positionInLandscapeMode and positionInPortraitMode settings in WatermarkOptions are ignored.
+  /// 1: 使用你在 WatermarkRatio 中设置的值。此时 WatermarkOptions 中 positionInLandscapeMode 和 positionInPortraitMode 的设置无效。
   @JsonValue(1)
   fitModeUseImageRatio,
 }
@@ -1405,7 +1405,7 @@ class EncodedAudioFrameAdvancedSettings implements AgoraSerializable {
       _$EncodedAudioFrameAdvancedSettingsToJson(this);
 }
 
-/// Information about the encoded audio.
+/// 编码后音频的信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class EncodedAudioFrameInfo implements AgoraSerializable {
   /// @nodoc
@@ -1417,27 +1417,27 @@ class EncodedAudioFrameInfo implements AgoraSerializable {
       this.advancedSettings,
       this.captureTimeMs});
 
-  /// Audio codec type: AudioCodecType.
+  /// 音频编码规格: AudioCodecType 。
   @JsonKey(name: 'codec')
   final AudioCodecType? codec;
 
-  /// Audio sample rate (Hz).
+  /// 音频采样率 (Hz)。
   @JsonKey(name: 'sampleRateHz')
   final int? sampleRateHz;
 
-  /// Number of audio samples per channel.
+  /// 每个声道的音频采样数。
   @JsonKey(name: 'samplesPerChannel')
   final int? samplesPerChannel;
 
-  /// Number of channels.
+  /// 声道数。
   @JsonKey(name: 'numberOfChannels')
   final int? numberOfChannels;
 
-  /// This feature is not supported yet.
+  /// 该功能暂不支持。
   @JsonKey(name: 'advancedSettings')
   final EncodedAudioFrameAdvancedSettings? advancedSettings;
 
-  /// Unix timestamp (ms) when the external encoded video frame was captured.
+  /// 采集外部编码视频帧的 Unix 时间戳 (ms)。
   @JsonKey(name: 'captureTimeMs')
   final int? captureTimeMs;
 
@@ -1513,14 +1513,14 @@ extension H264PacketizeModeExt on H264PacketizeMode {
   }
 }
 
-/// Video stream type.
+/// 视频流类型。
 @JsonEnum(alwaysCreate: true)
 enum VideoStreamType {
-  /// 0: High video stream, i.e., high-resolution and high-bitrate video stream.
+  /// 0: 视频大流，即高分辨率、高码率视频流。
   @JsonValue(0)
   videoStreamHigh,
 
-  /// 1: Low video stream, i.e., low-resolution and low-bitrate video stream.
+  /// 1: 视频小流，即低分辨率、低码率视频流。
   @JsonValue(1)
   videoStreamLow,
 
@@ -1562,17 +1562,17 @@ extension VideoStreamTypeExt on VideoStreamType {
   }
 }
 
-/// Video subscription settings.
+/// 视频订阅设置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class VideoSubscriptionOptions implements AgoraSerializable {
   /// @nodoc
   const VideoSubscriptionOptions({this.type, this.encodedFrameOnly});
 
-  /// Type of video stream to subscribe to. Default is videoStreamHigh, which subscribes to the high-quality video stream. See VideoStreamType for details.
+  /// 订阅的视频流类型，默认值为 videoStreamHigh，即订阅视频大流。详见 VideoStreamType 。
   @JsonKey(name: 'type')
   final VideoStreamType? type;
 
-  /// Whether to subscribe only to encoded video streams: true : Subscribe only to encoded video data (structured data). The SDK does not decode or render the video data. false : (Default) Subscribe to both raw and encoded video data.
+  /// 是否仅订阅编码后的视频流： true ：仅订阅编码后的视频数据（结构化数据），SDK 未对该视频数据做解码及渲染。 false ：（默认）订阅原始视频数据和编码后的数据。
   @JsonKey(name: 'encodedFrameOnly')
   final bool? encodedFrameOnly;
 
@@ -1584,10 +1584,10 @@ class VideoSubscriptionOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$VideoSubscriptionOptionsToJson(this);
 }
 
-/// Maximum length of user account.
+/// 用户 User Account 的最大长度。
 @JsonEnum(alwaysCreate: true)
 enum MaxUserAccountLengthType {
-  /// The maximum length of the user account is 255 characters.
+  /// 用户 User Account 的最大长度为 255 个字符。
   @JsonValue(256)
   maxUserAccountLength,
 }
@@ -1605,7 +1605,7 @@ extension MaxUserAccountLengthTypeExt on MaxUserAccountLengthType {
   }
 }
 
-/// Information about externally encoded video frames.
+/// 外部编码视频帧的信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class EncodedVideoFrameInfo implements AgoraSerializable {
   /// @nodoc
@@ -1622,36 +1622,36 @@ class EncodedVideoFrameInfo implements AgoraSerializable {
       this.streamType,
       this.presentationMs});
 
-  /// Video codec type. See VideoCodecType. Default is videoCodecH264 (2).
+  /// 视频编码类型，详见 VideoCodecType 。默认值为 videoCodecH264 (2) 。
   @JsonKey(name: 'codecType')
   final VideoCodecType? codecType;
 
-  /// Width of the video frame (px).
+  /// 视频帧的宽度 (px)。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// Height of the video frame (px).
+  /// 视频帧的高度 (px)。
   @JsonKey(name: 'height')
   final int? height;
 
-  /// Frames per second.
-  /// When this parameter is not 0, you can use it to calculate the Unix timestamp of the externally encoded video frame.
+  /// 每秒的视频帧数。
+  /// 当该参数不为 0 时，你可以用它计算外部编码视频帧的 Unix 时间戳。
   @JsonKey(name: 'framesPerSecond')
   final int? framesPerSecond;
 
-  /// Type of the video frame. See VideoFrameType.
+  /// 视频帧的类型，详见 VideoFrameType 。
   @JsonKey(name: 'frameType')
   final VideoFrameType? frameType;
 
-  /// Rotation information of the video frame. See VideoOrientation.
+  /// 视频帧的旋转信息，详见 VideoOrientation 。
   @JsonKey(name: 'rotation')
   final VideoOrientation? rotation;
 
-  /// Reserved parameter.
+  /// 预留参数。
   @JsonKey(name: 'trackId')
   final int? trackId;
 
-  /// Unix timestamp (ms) when the external encoded video frame was captured.
+  /// 采集外部编码视频帧的 Unix 时间戳 (ms)。
   @JsonKey(name: 'captureTimeMs')
   final int? captureTimeMs;
 
@@ -1659,7 +1659,7 @@ class EncodedVideoFrameInfo implements AgoraSerializable {
   @JsonKey(name: 'decodeTimeMs')
   final int? decodeTimeMs;
 
-  /// Video stream type. See VideoStreamType.
+  /// 视频流类型。详见 VideoStreamType 。
   @JsonKey(name: 'streamType')
   final VideoStreamType? streamType;
 
@@ -1675,18 +1675,18 @@ class EncodedVideoFrameInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$EncodedVideoFrameInfoToJson(this);
 }
 
-/// Compression preference type for video encoding.
+/// 视频编码的压缩偏好类型。
 @JsonEnum(alwaysCreate: true)
 enum CompressionPreference {
-  /// -1: (Default) Automatic mode. The SDK automatically selects preferLowLatency or preferQuality based on your video scenario to provide the best user experience.
+  /// -1:（默认）自动模式。SDK 会根据你设置的视频场景，自动选择 preferLowLatency 或 preferQuality，以获得最佳的用户体验。
   @JsonValue(-1)
   preferCompressionAuto,
 
-  /// 0: Low latency preference. The SDK compresses video frames to reduce latency. This preference is suitable for scenarios where smoothness is prioritized and some quality loss is acceptable.
+  /// 0: 低延时偏好。SDK 会对视频帧进行压缩处理，以降低延时。该偏好适用于流畅性优先且允许画质降低的场景。
   @JsonValue(0)
   preferLowLatency,
 
-  /// 1: High quality preference. The SDK compresses video frames while maintaining video quality. This preference is suitable for scenarios where video quality is prioritized.
+  /// 1：高质量偏好。SDK 会对视频帧进行压缩处理，同时保持视频质量。该偏好适用于画质优先的场景。
   @JsonValue(1)
   preferQuality,
 }
@@ -1704,18 +1704,18 @@ extension CompressionPreferenceExt on CompressionPreference {
   }
 }
 
-/// Video encoder preference.
+/// 视频编码器偏好。
 @JsonEnum(alwaysCreate: true)
 enum EncodingPreference {
-  /// -1: Adaptive preference. The SDK automatically selects the optimal encoding type based on platform, device type, and other factors.
+  /// -1：自适应偏好。SDK 根据平台、设备类型等因素自动选择最优的编码类型进行编码。
   @JsonValue(-1)
   preferAuto,
 
-  /// 0: Software encoding preference. The SDK prefers using the software encoder for video encoding.
+  /// 0：软件编码偏好。SDK 优先使用软件编码器进行视频编码。
   @JsonValue(0)
   preferSoftware,
 
-  /// 1: Hardware encoding preference. The SDK prefers using the hardware encoder for video encoding. If the device does not support hardware encoding, the SDK automatically switches to software encoding and reports the current encoder type via the hwEncoderAccelerating field in the onLocalVideoStats callback.
+  /// 1：硬件编码偏好。SDK 优先使用硬件编码器进行视频编码。当设备不支持硬件编码时，SDK 会自动使用软件编码，并通过 onLocalVideoStats 回调中的 hwEncoderAccelerating 报告当前使用的视频编码器类型。
   @JsonValue(1)
   preferHardware,
 }
@@ -1733,22 +1733,22 @@ extension EncodingPreferenceExt on EncodingPreference {
   }
 }
 
-/// Advanced options for video encoding.
+/// 视频编码的高级选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AdvanceOptions implements AgoraSerializable {
   /// @nodoc
   const AdvanceOptions(
       {this.encodingPreference, this.compressionPreference, this.encodeAlpha});
 
-  /// Video encoder preference. See EncodingPreference.
+  /// 视频编码器偏好。详见 EncodingPreference 。
   @JsonKey(name: 'encodingPreference')
   final EncodingPreference? encodingPreference;
 
-  /// Compression preference for video encoding. See CompressionPreference.
+  /// 视频编码的压缩偏好。详见 CompressionPreference 。
   @JsonKey(name: 'compressionPreference')
   final CompressionPreference? compressionPreference;
 
-  /// When the video frame contains Alpha channel data, sets whether to encode and send the Alpha data to the remote end: true : Encode and send the Alpha data. false : (Default) Do not encode and send the Alpha data.
+  /// 当视频帧包含 Alpha 通道数据时，设置是否将 Alpha 数据编码并发送至远端： true ：对 Alpha 数据进行编码发送。 false ：（默认）不对 Alpha 数据进行编码发送。
   @JsonKey(name: 'encodeAlpha')
   final bool? encodeAlpha;
 
@@ -1760,20 +1760,20 @@ class AdvanceOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$AdvanceOptionsToJson(this);
 }
 
-/// Mirror mode type.
+/// 镜像模式类型。
 @JsonEnum(alwaysCreate: true)
 enum VideoMirrorModeType {
-  /// 0: Mirror mode is determined by the SDK.
-  ///  Local view mirror mode: If you use the front camera, local mirror mode is enabled by default; if you use the rear camera, it is disabled by default.
-  ///  Remote user view mirror mode: Disabled by default.
+  /// 0：由 SDK 决定镜像模式。
+  ///  本地视图镜像模式：如果你使用前置摄像头，默认启动本地视图镜像模式；如果你使用后置摄像头，默认关闭本地视图镜像模式。
+  ///  远端用户视图镜像模式：默认关闭远端用户的镜像模式。
   @JsonValue(0)
   videoMirrorModeAuto,
 
-  /// 1: Enable mirror mode.
+  /// 1：启用镜像模式。
   @JsonValue(1)
   videoMirrorModeEnabled,
 
-  /// 2: Disable mirror mode.
+  /// 2：关闭镜像模式。
   @JsonValue(2)
   videoMirrorModeDisabled,
 }
@@ -1886,26 +1886,26 @@ extension HdrCapabilityExt on HdrCapability {
   }
 }
 
-/// Codec capability bit mask.
+/// 编解码类型 bit mask。
 @JsonEnum(alwaysCreate: true)
 enum CodecCapMask {
-  /// (0): Codec not supported.
+  /// (0)：不支持编解码。
   @JsonValue(0)
   codecCapMaskNone,
 
-  /// (1 << 0): Supports hardware decoding.
+  /// (1 << 0)：支持硬件解码。
   @JsonValue(1 << 0)
   codecCapMaskHwDec,
 
-  /// (1 << 1): Supports hardware encoding.
+  /// (1 << 1)：支持硬件编码。
   @JsonValue(1 << 1)
   codecCapMaskHwEnc,
 
-  /// (1 << 2): Supports software decoding.
+  /// (1 << 2)：支持软件解码。
   @JsonValue(1 << 2)
   codecCapMaskSwDec,
 
-  /// (1 << 3): Supports software encoding.
+  /// (1 << 3)：支持软件编码。
   @JsonValue(1 << 3)
   codecCapMaskSwEnc,
 }
@@ -1923,17 +1923,17 @@ extension CodecCapMaskExt on CodecCapMask {
   }
 }
 
-/// Codec capability levels.
+/// 编解码能力等级。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class CodecCapLevels implements AgoraSerializable {
   /// @nodoc
   const CodecCapLevels({this.hwDecodingLevel, this.swDecodingLevel});
 
-  /// Hardware decoding capability level, indicating the device's ability to decode videos of different qualities using hardware. See VideoCodecCapabilityLevel.
+  /// 硬件解码能力等级，表示设备能够对不同品质视频进行硬件解码的能力。详见 VideoCodecCapabilityLevel 。
   @JsonKey(name: 'hwDecodingLevel')
   final VideoCodecCapabilityLevel? hwDecodingLevel;
 
-  /// Software decoding capability level, indicating the device's ability to decode videos of different qualities using software. See VideoCodecCapabilityLevel.
+  /// 软件解码能力等级，表示设备能够对不同品质视频进行软件解码的能力。详见 VideoCodecCapabilityLevel 。
   @JsonKey(name: 'swDecodingLevel')
   final VideoCodecCapabilityLevel? swDecodingLevel;
 
@@ -1945,21 +1945,21 @@ class CodecCapLevels implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$CodecCapLevelsToJson(this);
 }
 
-/// Information about codec capabilities supported by the SDK.
+/// SDK 支持的编解码能力信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class CodecCapInfo implements AgoraSerializable {
   /// @nodoc
   const CodecCapInfo({this.codecType, this.codecCapMask, this.codecLevels});
 
-  /// Video codec type. See VideoCodecType.
+  /// 视频编解码类型。详见 VideoCodecType 。
   @JsonKey(name: 'codecType')
   final VideoCodecType? codecType;
 
-  /// Bit mask of codec types supported by the SDK. See CodecCapMask.
+  /// SDK 编解码类型的 bit mask。详见 CodecCapMask 。
   @JsonKey(name: 'codecCapMask')
   final int? codecCapMask;
 
-  /// Codec capability levels supported by the SDK. See CodecCapLevels.
+  /// SDK 支持的编解码能力等级。详见 CodecCapLevels 。
   @JsonKey(name: 'codecLevels')
   final CodecCapLevels? codecLevels;
 
@@ -1971,19 +1971,19 @@ class CodecCapInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$CodecCapInfoToJson(this);
 }
 
-/// Focal length information supported by the camera, including camera direction and focal length type.
+/// 摄像头支持的焦距信息，包含摄像头的方向以及焦距类型。
 ///
-/// (Android and iOS only)
+/// 仅适用于 Android 和 iOS。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class FocalLengthInfo implements AgoraSerializable {
   /// @nodoc
   const FocalLengthInfo({this.cameraDirection, this.focalLengthType});
 
-  /// Camera direction. See CameraDirection.
+  /// 摄像头方向。详见 CameraDirection 。
   @JsonKey(name: 'cameraDirection')
   final int? cameraDirection;
 
-  /// Focal length type. See CameraFocalLengthType.
+  /// 焦距类型。详见 CameraFocalLengthType 。
   @JsonKey(name: 'focalLengthType')
   final CameraFocalLengthType? focalLengthType;
 
@@ -1995,7 +1995,7 @@ class FocalLengthInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$FocalLengthInfoToJson(this);
 }
 
-/// Configuration for the video encoder.
+/// 视频编码器的配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class VideoEncoderConfiguration implements AgoraSerializable {
   /// @nodoc
@@ -2010,42 +2010,42 @@ class VideoEncoderConfiguration implements AgoraSerializable {
       this.mirrorMode,
       this.advanceOptions});
 
-  /// Video codec type. See VideoCodecType.
+  /// 视频编码类型，详见 VideoCodecType 。
   @JsonKey(name: 'codecType')
   final VideoCodecType? codecType;
 
-  /// Resolution (px) for video encoding. See VideoDimensions. This parameter is used to evaluate encoding quality and is expressed as width × height. The default value is 960 × 540. You can set the resolution as needed.
+  /// 视频编码的分辨率 (px)，详见 VideoDimensions 。该参数用于衡量编码质量，以长 × 宽表示，默认值为 960 × 540。用户可以自行设置分辨率。
   @JsonKey(name: 'dimensions')
   final VideoDimensions? dimensions;
 
-  /// Frame rate (fps) for video encoding. The default value is 15. See FrameRate.
+  /// 视频编码的帧率(fps)，默认值为 15。详见 FrameRate 。
   @JsonKey(name: 'frameRate')
   final int? frameRate;
 
-  /// Bitrate for video encoding, in Kbps. You do not need to set this parameter. Keep the default value standardBitrate. The SDK automatically selects the optimal bitrate based on the resolution and frame rate you set. For the relationship between resolution and frame rate, see [Video Profile](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/video-profile#%E8%A7%86%E9%A2%91%E5%B1%9E%E6%80%A7%E5%8F%82%E8%80%83).
-  ///  standardBitrate (0): (Default) Standard bitrate mode.
-  ///  compatibleBitrate (-1): Compatible bitrate mode. In general, Agora recommends not using this value.
+  /// 视频编码码率，单位为 Kbps。该参数无需设置，保留默认值 standardBitrate 即可，SDK 会根据你设定的视频分辨率和帧率自动匹配最合适的码率。有关视频分辨率和帧率的对应关系，详见[视频属性](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/video-profile#%E8%A7%86%E9%A2%91%E5%B1%9E%E6%80%A7%E5%8F%82%E8%80%83)。
+  ///  standardBitrate (0): (默认) 标准码率模式。
+  ///  compatibleBitrate (-1): 适配码率模式。一般情况下，声网建议你不要使用该值。
   @JsonKey(name: 'bitrate')
   final int? bitrate;
 
-  /// Minimum encoding bitrate, in Kbps.
-  /// The SDK automatically adjusts the video encoding bitrate based on network conditions. Setting this parameter higher than the default forces the encoder to output higher-quality images, but may cause packet loss and video stuttering under poor network conditions. Unless you have specific requirements for video quality, Agora recommends not modifying this parameter. This parameter applies to live streaming only.
+  /// 最低编码码率，单位为 Kbps。
+  /// SDK 会根据网络状况自动调整视频编码码率。将参数设为高于默认值可强制视频编码器输出高质量图片，但在网络状况不佳情况下可能导致网络丢包并影响视频播放的流畅度造成卡顿。因此如非对画质有特殊需求，声网建议不要修改该参数的值。 该参数仅适用于直播场景。
   @JsonKey(name: 'minBitrate')
   final int? minBitrate;
 
-  /// Orientation mode for video encoding. See OrientationMode.
+  /// 视频编码的方向模式，详见 OrientationMode 。
   @JsonKey(name: 'orientationMode')
   final OrientationMode? orientationMode;
 
-  /// Encoding degradation preference when bandwidth is limited. See DegradationPreference. If this parameter is set to maintainFramerate (1) or maintainBalanced (2), you must also set orientationMode to orientationModeAdaptive (0), otherwise the setting will not take effect.
+  /// 带宽受限时，视频编码降级偏好。详见 DegradationPreference 。 当该参数设置为 maintainFramerate (1) 或者 maintainBalanced (2) 时，需要同时将 orientationMode 设置为 orientationModeAdaptive (0)，否则设置不生效。
   @JsonKey(name: 'degradationPreference')
   final DegradationPreference? degradationPreference;
 
-  /// Whether to enable mirror mode when sending encoded video. This only affects the video seen by remote users. See VideoMirrorModeType. Mirror mode is disabled by default.
+  /// 发送编码视频时是否开启镜像模式，只影响远端用户看到的视频画面。详见 VideoMirrorModeType 。 默认关闭镜像模式。
   @JsonKey(name: 'mirrorMode')
   final VideoMirrorModeType? mirrorMode;
 
-  /// Advanced options for video encoding. See AdvanceOptions.
+  /// 视频编码的高级选项。详见 AdvanceOptions 。
   @JsonKey(name: 'advanceOptions')
   final AdvanceOptions? advanceOptions;
 
@@ -2057,24 +2057,24 @@ class VideoEncoderConfiguration implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$VideoEncoderConfigurationToJson(this);
 }
 
-/// Data stream settings.
+/// 数据流设置。
 ///
-/// The table below shows the SDK behavior under different parameter settings: syncWithAudio ordered
-/// SDK Behavior false false
-/// The SDK immediately triggers the onStreamMessage callback upon receiving a data packet. true false
-/// If the data packet delay is within the audio delay range, the SDK triggers the onStreamMessage callback synchronized with the audio packet during audio playback. If the delay exceeds the audio delay, the SDK triggers the callback immediately upon receiving the data packet, which may cause desynchronization between audio and data packets. false true
-/// If the data packet delay is within 5 seconds, the SDK corrects the packet disorder. If the delay exceeds 5 seconds, the SDK discards the packet. true true
-/// If the data packet delay is within the audio delay range, the SDK corrects the packet disorder. If the delay exceeds the audio delay, the SDK discards the packet.
+/// 下表展示不同的参数设置下，SDK 的行为： syncWithAudio ordered
+/// SDK 行为 false false
+/// 接收端接收到数据包后，SDK 立刻触发 onStreamMessage 回调。 true false
+/// 如果数据包的延迟在音频延迟的范围内，SDK 会在播放音频的同时触发与该音频包同步的 onStreamMessage 回调。如果数据包的延迟超出了音频延迟，SDK 会在接收到该数据包时立刻触发 onStreamMessage 回调；此情况会造成音频包和数据包的不同步。 false true
+/// 如果数据包的延迟在 5 秒以内，SDK 会修正数据包的乱序问题。如果数据包的延迟超出 5 秒，SDK 会丢弃该数据包。 true true
+/// 如果数据包的延迟在音频延迟的范围内，SDK 会修正数据包的乱序问题。如果数据包的延迟超出音频延迟，SDK 会丢弃该数据包。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class DataStreamConfig implements AgoraSerializable {
   /// @nodoc
   const DataStreamConfig({this.syncWithAudio, this.ordered});
 
-  /// Whether to synchronize with the locally sent audio stream. true : The data stream is synchronized with the audio stream. Suitable for scenarios like lyrics synchronization. false : The data stream is not synchronized with the audio stream. Suitable for scenarios where data packets need to reach the receiver immediately. When synchronization is enabled, if the data packet delay is within the audio delay range, the SDK triggers the onStreamMessage callback synchronized with the audio packet during audio playback.
+  /// 是否与本地发送的音频流同步。 true : 数据流与音频流同步。该设置适用于歌词同步等特殊场景。 false : 数据流与音频流不同步。该设置适用于需要数据包立刻到达接收端的场景。 设置数据流与音频流同步后，如果数据包的延迟在音频延迟的范围内，SDK 会在播放音频的同时触发与该音频包同步的 onStreamMessage 回调。
   @JsonKey(name: 'syncWithAudio')
   final bool? syncWithAudio;
 
-  /// Whether to ensure the received data is in the same order as sent. true : Ensures the SDK outputs data packets in the same order as sent. false : Does not ensure the SDK outputs data packets in the same order as sent. Do not set this parameter to true if you require data packets to reach the receiver immediately.
+  /// 是否保证接收到的数据按发送的顺序排列。 true : 保证 SDK 按照发送方发送的顺序输出数据包。 false : 不保证 SDK 按照发送方发送的顺序输出数据包。 当需要数据包立刻到达接收端时，不能将该参数设置为 true 。
   @JsonKey(name: 'ordered')
   final bool? ordered;
 
@@ -2086,18 +2086,18 @@ class DataStreamConfig implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$DataStreamConfigToJson(this);
 }
 
-/// Mode for sending video streams.
+/// 发送视频流的模式。
 @JsonEnum(alwaysCreate: true)
 enum SimulcastStreamMode {
-  /// -1: By default, the low stream is not sent until a subscription request for the low stream is received from the receiver.
+  /// -1：默认不发送小流，直至收到接收端发起的订阅小流申请时，开始自动发送小流。
   @JsonValue(-1)
   autoSimulcastStream,
 
-  /// 0: Never send the low stream.
+  /// 0：始终不发送小流。
   @JsonValue(0)
   disableSimulcastStream,
 
-  /// 1: Always send the low stream.
+  /// 1：始终发送小流。
   @JsonValue(1)
   enableSimulcastStream,
 }
@@ -2115,21 +2115,21 @@ extension SimulcastStreamModeExt on SimulcastStreamMode {
   }
 }
 
-/// Configuration for the video low stream.
+/// 视频小流的配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class SimulcastStreamConfig implements AgoraSerializable {
   /// @nodoc
   const SimulcastStreamConfig({this.dimensions, this.kBitrate, this.framerate});
 
-  /// Video dimensions. See VideoDimensions. The default value is 50% of the high stream.
+  /// 视频尺寸。详见 VideoDimensions 。默认值为视频大流的 50%。
   @JsonKey(name: 'dimensions')
   final VideoDimensions? dimensions;
 
-  /// Video bitrate (Kbps). The default value is -1. You don't need to set this parameter. The SDK automatically selects the optimal bitrate based on the resolution and frame rate you set.
+  /// 视频码率 (Kbps)，默认值为 -1。该参数无需设置，SDK 会根据你设定的视频分辨率和帧率自动匹配最合适的码率。
   @JsonKey(name: 'kBitrate')
   final int? kBitrate;
 
-  /// Video frame rate (fps). The default value is 5.
+  /// 视频帧率 (fps)。默认值为 5。
   @JsonKey(name: 'framerate')
   final int? framerate;
 
@@ -2238,25 +2238,25 @@ class StreamLayerConfig implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$StreamLayerConfigToJson(this);
 }
 
-/// The position of the target area relative to the entire screen or window. If not specified, it refers to the entire screen or window.
+/// 目标区域相对于整个屏幕或窗口的位置，如不填，则表示整个屏幕或窗口。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class Rectangle implements AgoraSerializable {
   /// @nodoc
   const Rectangle({this.x, this.y, this.width, this.height});
 
-  /// The horizontal offset of the top-left corner.
+  /// 左上角的横向偏移。
   @JsonKey(name: 'x')
   final int? x;
 
-  /// The vertical offset of the top-left corner.
+  /// 左上角的纵向偏移。
   @JsonKey(name: 'y')
   final int? y;
 
-  /// The width of the target area.
+  /// 目标区域的宽度。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// The height of the target area.
+  /// 目标区域的高度。
   @JsonKey(name: 'height')
   final int? height;
 
@@ -2268,24 +2268,24 @@ class Rectangle implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$RectangleToJson(this);
 }
 
-/// Position and size of the watermark on the screen.
+/// 水印在屏幕中的位置和大小。
 ///
-/// The position and size of the watermark on the screen are determined by xRatio, yRatio, and widthRatio :
-///  (xRatio, yRatio) specify the coordinates of the top-left corner of the watermark, determining the distance from the top-left corner of the screen. widthRatio determines the width of the watermark.
+/// 水印在屏幕中的位置和大小由 xRatio 、 yRatio 和 widthRatio 共同决定：
+///  (xRatio, yRatio) 指水印左上角的坐标，决定水印左上角到屏幕左上角的距离。 widthRatio 决定水印的宽度。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class WatermarkRatio implements AgoraSerializable {
   /// @nodoc
   const WatermarkRatio({this.xRatio, this.yRatio, this.widthRatio});
 
-  /// The x-coordinate of the top-left corner of the watermark. The origin is the top-left corner of the screen. The x-coordinate is the horizontal offset of the watermark's top-left corner relative to the origin. Value range: [0.0, 1.0], default is 0.
+  /// 水印左上角的 x 坐标。以屏幕左上角为原点，x 坐标为水印左上角相对于原点的横向位移。取值范围为 [0.0,1.0]，默认值为 0。
   @JsonKey(name: 'xRatio')
   final double? xRatio;
 
-  /// The y-coordinate of the top-left corner of the watermark. The origin is the top-left corner of the screen. The y-coordinate is the vertical offset of the watermark's top-left corner relative to the origin. Value range: [0.0, 1.0], default is 0.
+  /// 水印左上角的 y 坐标。以屏幕左上角为原点，y 坐标为水印左上角相对于原点的纵向位移。取值范围为 [0.0,1.0]，默认值为 0。
   @JsonKey(name: 'yRatio')
   final double? yRatio;
 
-  /// The width of the watermark. The SDK calculates the proportional height of the watermark based on this value to ensure the image is not distorted when scaled. Value range: [0.0, 1.0], default is 0, meaning the watermark is not displayed.
+  /// 水印的宽度。SDK 会根据该参数值计算出等比例的水印高度，确保放大或缩小后的水印图片不失真。取值范围为 [0.0,1.0]，默认值为 0，代表不显示水印。
   @JsonKey(name: 'widthRatio')
   final double? widthRatio;
 
@@ -2297,9 +2297,9 @@ class WatermarkRatio implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$WatermarkRatioToJson(this);
 }
 
-/// Configure watermark image.
+/// 配置水印图像。
 ///
-/// Used to configure the watermark image to be added.
+/// 用于设置要添加的水印图像的相关配置项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class WatermarkOptions implements AgoraSerializable {
   /// @nodoc
@@ -2311,27 +2311,27 @@ class WatermarkOptions implements AgoraSerializable {
       this.mode,
       this.zOrder});
 
-  /// Whether the watermark is visible in the local preview view: true : (Default) The watermark is visible in the local preview view. false : The watermark is not visible in the local preview view.
+  /// 水印是否在本地预览视图中可见： true : （默认）水印在本地预览视图中可见。 false : 水印在本地预览视图中不可见。
   @JsonKey(name: 'visibleInPreview')
   final bool? visibleInPreview;
 
-  /// When the watermark fit mode is fitModeCoverPosition, this parameter sets the area of the watermark image in landscape mode. See Rectangle.
+  /// 水印的适配模式为 fitModeCoverPosition 时，用于设置横屏模式下水印图片的区域。详见 Rectangle 。
   @JsonKey(name: 'positionInLandscapeMode')
   final Rectangle? positionInLandscapeMode;
 
-  /// When the watermark fit mode is fitModeCoverPosition, this parameter sets the area of the watermark image in portrait mode. See Rectangle.
+  /// 水印的适配模式为 fitModeCoverPosition 时，用于设置竖屏模式下水印图片的区域。详见 Rectangle 。
   @JsonKey(name: 'positionInPortraitMode')
   final Rectangle? positionInPortraitMode;
 
-  /// When the watermark fit mode is fitModeUseImageRatio, this parameter sets the watermark coordinates in scaling mode. See WatermarkRatio.
+  /// 水印的适配模式为 fitModeUseImageRatio 时，该参数可设置缩放模式下的水印坐标。详见 WatermarkRatio 。
   @JsonKey(name: 'watermarkRatio')
   final WatermarkRatio? watermarkRatio;
 
-  /// The fit mode of the watermark. See WatermarkFitMode.
+  /// 水印的适配模式。详见 WatermarkFitMode 。
   @JsonKey(name: 'mode')
   final WatermarkFitMode? mode;
 
-  /// Z-order of the watermark image. Default value is 0.
+  /// 水印图像的图层顺序，默认值为 0。
   @JsonKey(name: 'zOrder')
   final int? zOrder;
 
@@ -2343,24 +2343,24 @@ class WatermarkOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$WatermarkOptionsToJson(this);
 }
 
-/// Watermark source type.
+/// 水印源类型。
 ///
-/// Since Available since v4.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum WatermarkSourceType {
-  /// (0): The watermark source is an image.
+  /// （0）：水印源为图像。
   @JsonValue(0)
   image,
 
-  /// (1): The watermark source is a buffer.
+  /// （1）：水印源为缓冲区。
   @JsonValue(1)
   buffer,
 
-  /// (2): The watermark source is a text literal. Supported on Linux only.
+  /// （2）：水印源为文本字面量。 仅支持在 Linux 平台使用。
   @JsonValue(2)
   literal,
 
-  /// (3): The watermark source is a timestamp. Supported on Linux only.
+  /// （3）：水印源为时间戳。 仅支持在 Linux 平台使用。
   @JsonValue(3)
   timestamps,
 }
@@ -2378,28 +2378,28 @@ extension WatermarkSourceTypeExt on WatermarkSourceType {
   }
 }
 
-/// Used to configure timestamp watermark.
+/// 用于配置时间戳水印。
 ///
-/// Since Available since v4.6.2. (Linux only)
+/// 自从 自 v6.6.2 版本新增。 仅适用于 Linux 平台。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class WatermarkTimestamp implements AgoraSerializable {
   /// @nodoc
   const WatermarkTimestamp(
       {this.fontSize, this.fontFilePath, this.strokeWidth, this.format});
 
-  /// Font size of the timestamp. Default is 10.
+  /// 时间戳字体的大小。默认值为 10。
   @JsonKey(name: 'fontSize')
   final int? fontSize;
 
-  /// Path to the font file for the timestamp. Default is NULL. The font file must be in .ttf format. If not set, the SDK uses the system default font (if available). If used asynchronously, copy the path to memory that will not be released.
+  /// 时间戳字体文件的路径。默认值为 NULL 。字体文件需为 .ttf 格式。如果未设置，SDK 会使用系统默认字体（如果可用）。 如果异步使用，请将路径复制到不会被释放的内存中。
   @JsonKey(name: 'fontFilePath')
   final String? fontFilePath;
 
-  /// Stroke width of the timestamp. Default is 1.
+  /// 时间戳描边的宽度。默认值为 1。
   @JsonKey(name: 'strokeWidth')
   final int? strokeWidth;
 
-  /// Format of the timestamp. Default is %F %X. The format follows the C standard library function strftime. See strftime. If used asynchronously, copy the format string to memory that will not be released.
+  /// 时间戳的格式。默认值为 %F %X 。格式遵循 C 标准库函数 strftime 的规范，详见 strftime 。 如果异步使用，请将格式字符串复制到不会被释放的内存中。
   @JsonKey(name: 'format')
   final String? format;
 
@@ -2411,28 +2411,28 @@ class WatermarkTimestamp implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$WatermarkTimestampToJson(this);
 }
 
-/// Used to configure text watermark.
+/// 用于配置文字水印。
 ///
-/// Since Available since v4.6.2. (Linux only)
+/// 自从 自 v6.6.2 版本新增。 仅适用于 Linux 平台。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class WatermarkLiteral implements AgoraSerializable {
   /// @nodoc
   const WatermarkLiteral(
       {this.fontSize, this.strokeWidth, this.wmLiteral, this.fontFilePath});
 
-  /// Font size of the text. Default is 10.
+  /// 文字的字体大小。默认值为 10。
   @JsonKey(name: 'fontSize')
   final int? fontSize;
 
-  /// Stroke width of the text. Default is 1.
+  /// 文字的描边宽度。默认值为 1。
   @JsonKey(name: 'strokeWidth')
   final int? strokeWidth;
 
-  /// Text content of the watermark. Default is NULL. If used asynchronously, copy the string to memory that will not be released.
+  /// 水印的文字内容。默认值为 NULL 。 如果异步使用，请将字符串复制到不会被释放的内存中。
   @JsonKey(name: 'wmLiteral')
   final String? wmLiteral;
 
-  /// Path to the font file. Default is NULL. The font file should be in .ttf format. If not set, the SDK uses the system default font (if available). If used asynchronously, copy the string to memory that will not be released.
+  /// 字体文件的路径。默认值为 NULL 。字体文件应为 .ttf 格式。如果未设置，SDK 会使用系统默认字体（如果可用）。 如果异步使用，请将字符串复制到不会被释放的内存中。
   @JsonKey(name: 'fontFilePath')
   final String? fontFilePath;
 
@@ -2444,32 +2444,32 @@ class WatermarkLiteral implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$WatermarkLiteralToJson(this);
 }
 
-/// Used to configure the format, size, and pixel buffer of a watermark image.
+/// 用于配置水印图像的格式、尺寸和像素缓冲区。
 ///
-/// Since Available since v4.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class WatermarkBuffer implements AgoraSerializable {
   /// @nodoc
   const WatermarkBuffer(
       {this.width, this.height, this.length, this.format, this.buffer});
 
-  /// The width of the watermark image in pixels.
+  /// 水印图像的宽度，单位为像素。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// The height of the watermark image in pixels.
+  /// 水印图像的高度，单位为像素。
   @JsonKey(name: 'height')
   final int? height;
 
-  /// The length of the watermark image buffer in bytes.
+  /// 水印图像缓冲区的长度，单位为字节。
   @JsonKey(name: 'length')
   final int? length;
 
-  /// The pixel format of the watermark image. See VideoPixelFormat.
+  /// 水印图像的像素格式，详见 VideoPixelFormat 。
   @JsonKey(name: 'format')
   final VideoPixelFormat? format;
 
-  /// The pixel buffer data of the watermark image.
+  /// 水印图像的像素缓冲区数据。
   @JsonKey(name: 'buffer', ignore: true)
   final Uint8List? buffer;
 
@@ -2481,9 +2481,9 @@ class WatermarkBuffer implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$WatermarkBufferToJson(this);
 }
 
-/// Used to configure watermark information.
+/// 用于配置水印信息。
 ///
-/// Since Available since v4.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class WatermarkConfig implements AgoraSerializable {
   /// @nodoc
@@ -2496,31 +2496,31 @@ class WatermarkConfig implements AgoraSerializable {
       this.imageUrl,
       this.options});
 
-  /// The unique identifier of the watermark. It is recommended to use a UUID.
+  /// 水印的唯一标识符，建议使用 UUID。
   @JsonKey(name: 'id')
   final String? id;
 
-  /// The type of watermark. See WatermarkSourceType.
+  /// 水印类型，详见 WatermarkSourceType 。
   @JsonKey(name: 'type')
   final WatermarkSourceType? type;
 
-  /// The buffer of the watermark. See WatermarkBuffer.
+  /// 水印的缓冲区。详见 WatermarkBuffer 。
   @JsonKey(name: 'buffer')
   final WatermarkBuffer? buffer;
 
-  /// The timestamp of the watermark. (Linux only)
+  /// 水印的时间戳。 仅支持在 Linux 平台使用。
   @JsonKey(name: 'timestamp')
   final WatermarkTimestamp? timestamp;
 
-  /// The text content of the watermark. (Linux only)
+  /// 水印的文本内容。 仅支持在 Linux 平台使用。
   @JsonKey(name: 'literal')
   final WatermarkLiteral? literal;
 
-  /// The URL of the watermark image file. The default value is NULL.
+  /// 水印图像文件的 URL，默认值为 NULL 。
   @JsonKey(name: 'imageUrl')
   final String? imageUrl;
 
-  /// The configuration options for the watermark. See WatermarkOptions.
+  /// 水印的配置选项。详见 WatermarkOptions 。
   @JsonKey(name: 'options')
   final WatermarkOptions? options;
 
@@ -2532,16 +2532,16 @@ class WatermarkConfig implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$WatermarkConfigToJson(this);
 }
 
-/// Mode for multipath data transmission.
+/// 多路径数据传输的模式。
 ///
-/// Since Available since v4.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum MultipathMode {
-  /// (0): Redundant transmission mode. The same data is redundantly transmitted through all available paths.
+  /// （0）：冗余发送模式，相同的数据会通过所有可用路径进行冗余传输。
   @JsonValue(0)
   duplicate,
 
-  /// (1): Dynamic transmission mode. The SDK dynamically selects the optimal path based on current network conditions to improve transmission performance.
+  /// @nodoc
   @JsonValue(1)
   dynamic,
 }
@@ -2559,24 +2559,24 @@ extension MultipathModeExt on MultipathMode {
   }
 }
 
-/// Network path types used for multipath transmission.
+/// 多路径传输使用的网络路径类型。
 ///
-/// Since Available since v4.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum MultipathType {
-  /// (0): Local Area Network (LAN) path.
+  /// （0）：局域网（LAN）路径。
   @JsonValue(0)
   lan,
 
-  /// (1): Wi-Fi path.
+  /// （1）：Wi-Fi 路径。
   @JsonValue(1)
   wifi,
 
-  /// (2): Mobile network path.
+  /// （2）：移动网络路径。
   @JsonValue(2)
   mobile,
 
-  /// (99): Unknown or unspecified network path.
+  /// （99）：未知或未指定的网络路径。
   @JsonValue(99)
   unknown,
 }
@@ -2594,23 +2594,23 @@ extension MultipathTypeExt on MultipathType {
   }
 }
 
-/// Used to obtain statistics for a specific network path.
+/// 用于获取特定网络路径的统计数据。
 ///
-/// Since Available since v4.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class PathStats implements AgoraSerializable {
   /// @nodoc
   const PathStats({this.type, this.txKBitRate, this.rxKBitRate});
 
-  /// The type of network path. See MultipathType.
+  /// 网络路径的类型。详见 MultipathType 。
   @JsonKey(name: 'type')
   final MultipathType? type;
 
-  /// The transmission bitrate on this path, in Kbps.
+  /// 该路径的传输码率，单位为 Kbps。
   @JsonKey(name: 'txKBitRate')
   final int? txKBitRate;
 
-  /// The receiving bitrate on this path, in Kbps.
+  /// 该路径的接收码率，单位为 Kbps。
   @JsonKey(name: 'rxKBitRate')
   final int? rxKBitRate;
 
@@ -2622,9 +2622,9 @@ class PathStats implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$PathStatsToJson(this);
 }
 
-/// Used to summarize statistics of each network path in multipath transmission.
+/// 用于汇总多路径传输中各网络路径的统计数据。
 ///
-/// Since Available since v4.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class MultipathStats implements AgoraSerializable {
   /// @nodoc
@@ -2638,35 +2638,35 @@ class MultipathStats implements AgoraSerializable {
       this.activePathNum,
       this.pathStats});
 
-  /// Total bytes sent over the LAN path.
+  /// 通过 LAN 路径发送的字节总数。
   @JsonKey(name: 'lanTxBytes')
   final int? lanTxBytes;
 
-  /// Total bytes received over the LAN path.
+  /// 通过 LAN 路径接收的字节总数。
   @JsonKey(name: 'lanRxBytes')
   final int? lanRxBytes;
 
-  /// Total bytes sent over the Wi-Fi path.
+  /// 通过 Wi-Fi 路径发送的字节总数。
   @JsonKey(name: 'wifiTxBytes')
   final int? wifiTxBytes;
 
-  /// Total bytes received over the Wi-Fi path.
+  /// 通过 Wi-Fi 路径接收的字节总数。
   @JsonKey(name: 'wifiRxBytes')
   final int? wifiRxBytes;
 
-  /// Total bytes sent over the mobile network path.
+  /// 通过移动网络路径发送的字节总数。
   @JsonKey(name: 'mobileTxBytes')
   final int? mobileTxBytes;
 
-  /// Total bytes received over the mobile network path.
+  /// 通过移动网络路径接收的字节总数。
   @JsonKey(name: 'mobileRxBytes')
   final int? mobileRxBytes;
 
-  /// The number of currently active transmission paths.
+  /// 当前活跃的传输路径数量。
   @JsonKey(name: 'activePathNum')
   final int? activePathNum;
 
-  /// An array of statistics for each active transmission path. See PathStats.
+  /// 每个活跃传输路径的统计信息数组。详见 PathStats 。
   @JsonKey(name: 'pathStats')
   final List<PathStats>? pathStats;
 
@@ -2678,7 +2678,7 @@ class MultipathStats implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$MultipathStatsToJson(this);
 }
 
-/// Call-related statistics.
+/// 通话相关的统计信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class RtcStats implements AgoraSerializable {
   /// @nodoc
@@ -2718,98 +2718,96 @@ class RtcStats implements AgoraSerializable {
       this.rxPacketLossRate,
       this.lanAccelerateState});
 
-  /// Call duration of the local user (seconds), cumulative value.
+  /// 本地用户通话时长（秒），累计值。
   @JsonKey(name: 'duration')
   final int? duration;
 
-  /// Bytes sent.
+  /// 发送字节数 (bytes)。
   @JsonKey(name: 'txBytes')
   final int? txBytes;
 
-  /// Bytes received.
+  /// 接收字节数 (bytes)。
   @JsonKey(name: 'rxBytes')
   final int? rxBytes;
 
-  /// Audio bytes sent, cumulative value.
+  /// 发送音频字节数 (bytes)，累计值。
   @JsonKey(name: 'txAudioBytes')
   final int? txAudioBytes;
 
-  /// Video bytes sent, cumulative value.
+  /// 发送视频字节数 (bytes)，累计值。
   @JsonKey(name: 'txVideoBytes')
   final int? txVideoBytes;
 
-  /// Audio bytes received, cumulative value.
+  /// 接收音频字节数 (bytes)，累计值。
   @JsonKey(name: 'rxAudioBytes')
   final int? rxAudioBytes;
 
-  /// Video bytes received, cumulative value.
+  /// 接收视频字节数 (bytes)，累计值。
   @JsonKey(name: 'rxVideoBytes')
   final int? rxVideoBytes;
 
-  /// Sending bitrate (Kbps).
+  /// 发送码率 (Kbps)。
   @JsonKey(name: 'txKBitRate')
   final int? txKBitRate;
 
-  /// Receiving bitrate (Kbps).
+  /// 接收码率 (Kbps)。
   @JsonKey(name: 'rxKBitRate')
   final int? rxKBitRate;
 
-  /// Audio receiving bitrate (Kbps).
+  /// 音频接收码率 (Kbps)。
   @JsonKey(name: 'rxAudioKBitRate')
   final int? rxAudioKBitRate;
 
-  /// Audio packet sending bitrate (Kbps).
+  /// 音频包的发送码率 (Kbps)。
   @JsonKey(name: 'txAudioKBitRate')
   final int? txAudioKBitRate;
 
-  /// Video receiving bitrate (Kbps).
+  /// 视频接收码率 (Kbps)。
   @JsonKey(name: 'rxVideoKBitRate')
   final int? rxVideoKBitRate;
 
-  /// Video sending bitrate (Kbps).
+  /// 视频发送码率 (Kbps)。
   @JsonKey(name: 'txVideoKBitRate')
   final int? txVideoKBitRate;
 
-  /// Client-to-access-server latency (milliseconds).
+  /// 客户端-接入服务器延时 (毫秒)。
   @JsonKey(name: 'lastmileDelay')
   final int? lastmileDelay;
 
-  /// Number of users in the current channel.
+  /// 当前频道内的用户人数。
   @JsonKey(name: 'userCount')
   final int? userCount;
 
-  /// CPU usage (%) of the current app.
-  ///  The cpuAppUsage reported in the onLeaveChannel callback is always 0.
-  ///  Starting from Android 8.1, due to system limitations, you may not be able to obtain CPU usage via this property.
+  /// 当前 App 的 CPU 使用率 (%)。 onLeaveChannel 回调中报告的 cpuAppUsage 恒为 0。
+  ///  自 Android 8.1 起，因系统限制，你可能无法通过该属性获取 CPU 使用率。
   @JsonKey(name: 'cpuAppUsage')
   final double? cpuAppUsage;
 
-  /// CPU usage (%) of the current system.
-  /// For Windows platform, in multi-core environments, this member indicates the average usage of multi-core CPUs. The calculation is (100 - CPU usage of system idle process shown in Task Manager)/100.
-  ///  The cpuTotalUsage reported in the onLeaveChannel callback is always 0.
+  /// 当前系统的 CPU 使用率 (%)。
+  /// 对于 Windows 平台，在多核环境中，该成员指多核 CPU 的平均使用率。 计算方式为 (100 - 任务管理中显示的系统空闲进程 CPU)/100。 onLeaveChannel 回调中报告的 cpuTotalUsage 恒为 0。
   @JsonKey(name: 'cpuTotalUsage')
   final double? cpuTotalUsage;
 
-  /// Round-trip time from client to local router (ms). This property is enabled by default on devices running iOS versions earlier than 14, and disabled on iOS 14 and later.
+  /// 客户端到本地路由器的往返时延 (ms)。 该属性默认在 iOS 14 之前的设备上开启，在 iOS 14 及之后的设备上关闭。
   ///
-  ///  To enable this property on iOS 14 and later, please [contact technical support](https://ticket.shengwang.cn/).
-  /// On Android, to obtain gatewayRtt, make sure you have added the android.permission.ACCESS_WIFI_STATE permission after </application> in your project's AndroidManifest.xml file.
+  ///  如需在 iOS 14 及之后的设备上启用该属性，请[联系技术支持](https://ticket.shengwang.cn/)。
+  /// 在 Android 平台上，如需获取 gatewayRtt ，请确保已在项目 AndroidManifest.xml 文件的 </application> 后面添加 android.permission.ACCESS_WIFI_STATE 权限。
   @JsonKey(name: 'gatewayRtt')
   final int? gatewayRtt;
 
-  /// Memory usage ratio (%) of the current app. This value is for reference only. It may not be retrievable due to system limitations.
+  /// 当前 App 的内存占比 (%)。 该值仅作参考。受系统限制可能无法获取。
   @JsonKey(name: 'memoryAppUsageRatio')
   final double? memoryAppUsageRatio;
 
-  /// Memory usage ratio (%) of the current system. This value is for reference only. It may not be retrievable due to system limitations.
+  /// 当前系统的内存占比 (%)。 该值仅作参考。受系统限制可能无法获取。
   @JsonKey(name: 'memoryTotalUsageRatio')
   final double? memoryTotalUsageRatio;
 
-  /// Memory usage of the current app (KB). This value is for reference only. It may not be retrievable due to system limitations.
+  /// 当前 App 的内存大小 (KB)。 该值仅作参考。受系统限制可能无法获取。
   @JsonKey(name: 'memoryAppUsageInKbytes')
   final int? memoryAppUsageInKbytes;
 
-  /// Time from starting to establish connection to successful connection (milliseconds). A value of 0 indicates invalid.
+  /// 从开始建立连接到成功连接的时间（毫秒）。如报告 0，则表示无效。
   @JsonKey(name: 'connectTimeMs')
   final int? connectTimeMs;
 
@@ -2849,11 +2847,11 @@ class RtcStats implements AgoraSerializable {
   @JsonKey(name: 'firstVideoKeyFrameRenderedDurationAfterUnmute')
   final int? firstVideoKeyFrameRenderedDurationAfterUnmute;
 
-  /// Uplink packet loss rate (%) from client to server before applying anti-packet-loss technology.
+  /// 使用抗丢包技术前，客户端上行发送到服务器丢包率 (%)。
   @JsonKey(name: 'txPacketLossRate')
   final int? txPacketLossRate;
 
-  /// Downlink packet loss rate (%) from server to client before applying anti-packet-loss technology.
+  /// 使用抗丢包技术前，服务器下行发送到客户端丢包率 (%)。
   @JsonKey(name: 'rxPacketLossRate')
   final int? rxPacketLossRate;
 
@@ -2869,14 +2867,14 @@ class RtcStats implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$RtcStatsToJson(this);
 }
 
-/// User role in live broadcasting profile.
+/// 直播场景里的用户角色。
 @JsonEnum(alwaysCreate: true)
 enum ClientRoleType {
-  /// 1: Broadcaster. A broadcaster can both send and receive streams.
+  /// 1: 主播。主播可以发流也可以收流。
   @JsonValue(1)
   clientRoleBroadcaster,
 
-  /// 2: (Default) Audience. An audience member can only receive streams but cannot send them.
+  /// 2:（默认）观众。观众只能收流不能发流。
   @JsonValue(2)
   clientRoleAudience,
 }
@@ -2894,18 +2892,18 @@ extension ClientRoleTypeExt on ClientRoleType {
   }
 }
 
-/// Local video quality adaptation since the last statistics (based on target frame rate and target bitrate).
+/// 自上次统计后本地视频质量的自适应情况（基于目标帧率和目标码率）。
 @JsonEnum(alwaysCreate: true)
 enum QualityAdaptIndication {
-  /// 0: No change in local video quality.
+  /// 0：本地视频质量不变。
   @JsonValue(0)
   adaptNone,
 
-  /// 1: Local video quality improves due to increased network bandwidth.
+  /// 1：因网络带宽增加，本地视频质量改善。
   @JsonValue(1)
   adaptUpBandwidth,
 
-  /// 2: Local video quality degrades due to decreased network bandwidth.
+  /// 2：因网络带宽减少，本地视频质量变差。
   @JsonValue(2)
   adaptDownBandwidth,
 }
@@ -2923,14 +2921,14 @@ extension QualityAdaptIndicationExt on QualityAdaptIndication {
   }
 }
 
-/// Latency level for audience in a live broadcast channel. This enum is effective only when the user role is set to clientRoleAudience.
+/// 直播频道中观众的延时级别。该枚举仅在用户角色设为 clientRoleAudience 时才生效。
 @JsonEnum(alwaysCreate: true)
 enum AudienceLatencyLevelType {
-  /// 1: Low latency.
+  /// 1: 低延时。
   @JsonValue(1)
   audienceLatencyLevelLowLatency,
 
-  /// 2: (Default) Ultra-low latency.
+  /// 2:（默认）超低延时。
   @JsonValue(2)
   audienceLatencyLevelUltraLowLatency,
 }
@@ -2948,13 +2946,13 @@ extension AudienceLatencyLevelTypeExt on AudienceLatencyLevelType {
   }
 }
 
-/// User role property settings.
+/// 用户角色属性设置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ClientRoleOptions implements AgoraSerializable {
   /// @nodoc
   const ClientRoleOptions({this.audienceLatencyLevel});
 
-  /// Audience latency level. See AudienceLatencyLevelType.
+  /// 观众端延时级别。详见 AudienceLatencyLevelType 。
   @JsonKey(name: 'audienceLatencyLevel')
   final AudienceLatencyLevelType? audienceLatencyLevel;
 
@@ -2966,14 +2964,14 @@ class ClientRoleOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ClientRoleOptionsToJson(this);
 }
 
-/// The subjective experience quality of the local user when receiving remote audio.
+/// 接收远端音频时，本地用户的主观体验质量。
 @JsonEnum(alwaysCreate: true)
 enum ExperienceQualityType {
-  /// 0: Good subjective experience quality.
+  /// 0: 主观体验质量较好。
   @JsonValue(0)
   experienceQualityGood,
 
-  /// 1: Poor subjective experience quality.
+  /// 1: 主观体验质量较差。
   @JsonValue(1)
   experienceQualityBad,
 }
@@ -2991,26 +2989,26 @@ extension ExperienceQualityTypeExt on ExperienceQualityType {
   }
 }
 
-/// The reason for poor subjective experience quality of the local user when receiving remote audio.
+/// 接收远端音频时，本地用户主观体验质量较差的原因。
 @JsonEnum(alwaysCreate: true)
 enum ExperiencePoorReason {
-  /// 0: No reason, indicating good subjective experience quality.
+  /// 0: 无原因，说明主观体验质量较好。
   @JsonValue(0)
   experienceReasonNone,
 
-  /// 1: Poor network condition of the remote user.
+  /// 1: 远端用户的网络较差。
   @JsonValue(1)
   remoteNetworkQualityPoor,
 
-  /// 2: Poor network condition of the local user.
+  /// 2: 本地用户的网络较差。
   @JsonValue(2)
   localNetworkQualityPoor,
 
-  /// 4: Weak Wi-Fi or mobile data signal of the local user.
+  /// 4: 本地用户的 Wi-FI 或者移动数据网络信号弱。
   @JsonValue(4)
   wirelessSignalPoor,
 
-  /// 8: Wi-Fi and Bluetooth are enabled simultaneously on the local device, causing signal interference and degraded audio transmission quality.
+  /// 8: 本地用户同时开启 Wi-Fi 和蓝牙，二者信号互相干扰，导致音频传输质量下降。
   @JsonValue(8)
   wifiBluetoothCoexist,
 }
@@ -3028,18 +3026,18 @@ extension ExperiencePoorReasonExt on ExperiencePoorReason {
   }
 }
 
-/// AI noise reduction mode.
+/// AI 降噪的模式。
 @JsonEnum(alwaysCreate: true)
 enum AudioAinsMode {
-  /// 0: (Default) Balanced noise reduction mode. Choose this mode if you want a balanced effect between noise suppression and latency.
+  /// 0：（默认）均衡降噪模式；如果你希望实现对噪声抑制和延时都较为均衡的降噪效果，可选择该模式。
   @JsonValue(0)
   ainsModeBalanced,
 
-  /// 1: Aggressive noise reduction mode. Suitable for scenarios with high noise suppression requirements, such as outdoor live streaming. This mode can significantly reduce noise but may slightly affect voice quality.
+  /// 1：强降噪模式；适用于对噪声抑制性能要求较高的场景，如户外直播。该模式可以更大程度地减少噪声，但同时可能会对语音造成一定损伤。
   @JsonValue(1)
   ainsModeAggressive,
 
-  /// 2: Low-latency aggressive noise reduction mode. This mode has approximately half the latency of the weak and aggressive noise reduction modes. It is suitable for scenarios requiring both noise reduction and low latency, such as real-time chorus.
+  /// 2：低延时强降噪模式。该模式的降噪延时比弱降噪和强降噪模式大约低一半，适用于对降噪及低延时要求较高的场景，如实时合唱。
   @JsonValue(2)
   ainsModeUltralowlatency,
 }
@@ -3057,44 +3055,44 @@ extension AudioAinsModeExt on AudioAinsMode {
   }
 }
 
-/// Audio encoding attributes.
+/// 音频编码属性。
 @JsonEnum(alwaysCreate: true)
 enum AudioProfileType {
-  /// 0: Default value.
-  ///  In live broadcast: 48 kHz sample rate, music encoding, mono, max bitrate 64 Kbps.
-  ///  In communication:
-  ///  Windows: 16 kHz sample rate, voice encoding, mono, max bitrate 16 Kbps.
-  ///  Android, macOS, iOS: 32 kHz sample rate, voice encoding, mono, max bitrate 18 Kbps.
+  /// 0: 默认值。
+  ///  直播场景下：48 kHz 采样率，音乐编码，单声道，编码码率最大值为 64 Kbps。
+  ///  通信场景下：
+  ///  Windows 平台：16 kHz 采样率，语音编码，单声道，编码码率最大值为 16 Kbps。
+  ///  Android、macOS、iOS 平台：32 kHz 采样率，语音编码，单声道，编码码率最大值为 18 Kbps。
   @JsonValue(0)
   audioProfileDefault,
 
-  /// 1: 32 kHz sample rate, voice encoding, mono, max bitrate 18 Kbps.
+  /// 1: 指定 32 kHz 采样率，语音编码，单声道，编码码率最大值为 18 Kbps。
   @JsonValue(1)
   audioProfileSpeechStandard,
 
-  /// 2: 48 kHz sample rate, music encoding, mono, max bitrate 64 Kbps.
+  /// 2: 指定 48 kHz 采样率，音乐编码，单声道，编码码率最大值为 64 Kbps。
   @JsonValue(2)
   audioProfileMusicStandard,
 
-  /// 3: 48 kHz sample rate, music encoding, stereo, max bitrate 80 Kbps.
-  /// To enable stereo, you also need to call setAdvancedAudioOptions and set audioProcessingChannels to audioProcessingStereo in AdvancedAudioOptions.
+  /// 3: 指定 48 kHz 采样率，音乐编码，双声道，编码码率最大值为 80 Kbps。
+  /// 如需实现立体声，你还需要调用 setAdvancedAudioOptions 并在 AdvancedAudioOptions 中设置 audioProcessingChannels 为 audioProcessingStereo 。
   @JsonValue(3)
   audioProfileMusicStandardStereo,
 
-  /// 4: 48 kHz sample rate, music encoding, mono, max bitrate 96 Kbps.
+  /// 4: 指定 48 kHz 采样率，音乐编码，单声道，编码码率最大值为 96 Kbps。
   @JsonValue(4)
   audioProfileMusicHighQuality,
 
-  /// 5: 48 kHz sample rate, music encoding, stereo, max bitrate 128 Kbps.
-  /// To enable stereo, you also need to call setAdvancedAudioOptions and set audioProcessingChannels to audioProcessingStereo in AdvancedAudioOptions.
+  /// 5: 指定 48 kHz 采样率，音乐编码，双声道，编码码率最大值为 128 Kbps。
+  /// 如需实现立体声，你还需要调用 setAdvancedAudioOptions 并在 AdvancedAudioOptions 中设置 audioProcessingChannels 为 audioProcessingStereo 。
   @JsonValue(5)
   audioProfileMusicHighQualityStereo,
 
-  /// 6: 16 kHz sample rate, voice encoding, mono, applies echo cancellation algorithm AEC.
+  /// 6: 指定 16 kHz 采样率，语音编码，单声道，应用回声消除算法 AEC。
   @JsonValue(6)
   audioProfileIot,
 
-  /// Enum boundary value.
+  /// 枚举值边界。
   @JsonValue(7)
   audioProfileNum,
 }
@@ -3112,26 +3110,26 @@ extension AudioProfileTypeExt on AudioProfileType {
   }
 }
 
-/// Audio scenarios.
+/// 音频场景。
 @JsonEnum(alwaysCreate: true)
 enum AudioScenarioType {
-  /// 0: (default) Automatic scenario selection. Matches appropriate audio quality based on user role and audio route.
+  /// 0: （默认）自动场景，根据用户角色和音频路由自动匹配合适的音质。
   @JsonValue(0)
   audioScenarioDefault,
 
-  /// 3: High-quality audio scenario, suitable for music-centric use cases. For example: instrument practice.
+  /// 3: 高音质场景，适用于音乐为主的场景。例如：乐器陪练。
   @JsonValue(3)
   audioScenarioGameStreaming,
 
-  /// 5: Chatroom scenario, suitable for use cases where users frequently join and leave the mic. For example: education scenarios.
+  /// 5: 聊天室场景，适用于用户需要频繁上下麦的场景。例如：教育场景。
   @JsonValue(5)
   audioScenarioChatroom,
 
-  /// 7: Chorus scenario. Suitable for real-time chorus with low latency under good network conditions.
+  /// 7: 合唱场景。适用于网络条件良好，要求极低延时的实时合唱场景。
   @JsonValue(7)
   audioScenarioChorus,
 
-  /// 8: Meeting scenario, suitable for multi-person meetings focusing on voice.
+  /// 8: 会议场景，适用于人声为主的多人会议。
   @JsonValue(8)
   audioScenarioMeeting,
 
@@ -3139,11 +3137,11 @@ enum AudioScenarioType {
   @JsonValue(9)
   audioScenarioAiServer,
 
-  /// 10: AI conversation scenario, only applicable for interactions with agents created using [Agora Conversational AI Engine](https://doc.shengwang.cn/doc/convoai/restful/landing-page).
+  /// 10: AI 对话场景，仅适用于与[声网对话式 AI 引擎](https://doc.shengwang.cn/doc/convoai/restful/landing-page)创建的智能体互动的场景。
   @JsonValue(10)
   audioScenarioAiClient,
 
-  /// Number of enumerations.
+  /// 枚举的数量。
   @JsonValue(11)
   audioScenarioNum,
 }
@@ -3161,21 +3159,21 @@ extension AudioScenarioTypeExt on AudioScenarioType {
   }
 }
 
-/// Video frame format.
+/// 视频帧格式。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class VideoFormat implements AgoraSerializable {
   /// @nodoc
   const VideoFormat({this.width, this.height, this.fps});
 
-  /// Width of the video frame (px). Default is 960.
+  /// 视频帧的宽度（px）。默认值为 960。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// Height of the video frame (px). Default is 540.
+  /// 视频帧的高度（px）。默认值为 540.
   @JsonKey(name: 'height')
   final int? height;
 
-  /// Frame rate of the video frame. Default is 15.
+  /// 视频帧的帧率。默认值为 15。
   @JsonKey(name: 'fps')
   final int? fps;
 
@@ -3187,18 +3185,18 @@ class VideoFormat implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$VideoFormatToJson(this);
 }
 
-/// Content type for screen sharing.
+/// 屏幕共享的内容类型。
 @JsonEnum(alwaysCreate: true)
 enum VideoContentHint {
-  /// (Default) No specified content type.
+  /// （默认）无指定的内容类型。
   @JsonValue(0)
   contentHintNone,
 
-  /// Content type is motion. Recommended when the shared content is video, movie, or video game.
+  /// 内容类型为动画。当共享的内容是视频、电影或视频游戏时，推荐选择该内容类型。
   @JsonValue(1)
   contentHintMotion,
 
-  /// Content type is details. Recommended when the shared content is image or text.
+  /// 内容类型为细节。当共享的内容是图片或文字时，推荐选择该内容类型。
   @JsonValue(2)
   contentHintDetails,
 }
@@ -3216,22 +3214,22 @@ extension VideoContentHintExt on VideoContentHint {
   }
 }
 
-/// Screen sharing scenario.
+/// 屏幕共享的场景。
 @JsonEnum(alwaysCreate: true)
 enum ScreenScenarioType {
-  /// 1: (Default) Document. In this scenario, image quality is prioritized and latency on the receiving end is reduced. Use this scenario when sharing documents, slides, or spreadsheets.
+  /// 1:（默认）文档。该场景下，优先保障共享的画质，并降低了接收端看到共享视频的延时。如果你共享文档、幻灯片、表格，可以设置该场景。
   @JsonValue(1)
   screenScenarioDocument,
 
-  /// 2: Gaming. In this scenario, smoothness is prioritized. Use this scenario when sharing games.
+  /// 2: 游戏。该场景下，优先保障共享的流畅性。如果你共享游戏，可以设置该场景。
   @JsonValue(2)
   screenScenarioGaming,
 
-  /// 3: Video. In this scenario, smoothness is prioritized. Use this scenario when sharing movies or live video.
+  /// 3: 视频。该场景下，优先保障共享的流畅性。如果你共享电影、视频直播，可以设置该场景。
   @JsonValue(3)
   screenScenarioVideo,
 
-  /// 4: Remote control. In this scenario, image quality is prioritized and latency on the receiving end is reduced. Use this scenario when sharing the desktop of a remotely controlled device.
+  /// 4: 远程控制。该场景下，优先保障共享的画质，并降低了接收端看到共享视频的延时。如果你共享被远程控制的设备桌面，可以设置该场景。
   @JsonValue(4)
   screenScenarioRdc,
 }
@@ -3249,22 +3247,22 @@ extension ScreenScenarioTypeExt on ScreenScenarioType {
   }
 }
 
-/// Video application scenario type.
+/// 视频业务场景类型。
 @JsonEnum(alwaysCreate: true)
 enum VideoApplicationScenarioType {
-  /// 0: (Default) General scenario.
+  /// 0: (默认) 通用场景。
   @JsonValue(0)
   applicationScenarioGeneral,
 
-  /// 1: Meeting scenario.
+  /// 1: 会议场景。
   @JsonValue(1)
   applicationScenarioMeeting,
 
-  /// 2: 1v1 video call
+  /// 2: 1v1 视频通话
   @JsonValue(2)
   applicationScenario1v1,
 
-  /// 3: Live show
+  /// 3: 秀场直播
   @JsonValue(3)
   applicationScenarioLiveshow,
 }
@@ -3315,22 +3313,22 @@ extension VideoQoePreferenceTypeExt on VideoQoePreferenceType {
   }
 }
 
-/// Brightness level of locally captured video quality.
+/// 本地采集的画质亮度级别。
 @JsonEnum(alwaysCreate: true)
 enum CaptureBrightnessLevelType {
-  /// -1: SDK did not detect the brightness level of the locally captured video. Please wait a few seconds and get the brightness level from the next captureBrightnessLevel callback.
+  /// -1: SDK 未检测出本地采集的画质亮度级别。请等待几秒，通过下一次回调的 captureBrightnessLevel 获取亮度级别。
   @JsonValue(-1)
   captureBrightnessLevelInvalid,
 
-  /// 0: Brightness of the locally captured video is normal.
+  /// 0: 本地采集的画质亮度正常。
   @JsonValue(0)
   captureBrightnessLevelNormal,
 
-  /// 1: Brightness of the locally captured video is too bright.
+  /// 1: 本地采集的画质亮度偏亮。
   @JsonValue(1)
   captureBrightnessLevelBright,
 
-  /// 2: Brightness of the locally captured video is too dark.
+  /// 2: 本地采集的画质亮度偏暗。
   @JsonValue(2)
   captureBrightnessLevelDark,
 }
@@ -3348,28 +3346,28 @@ extension CaptureBrightnessLevelTypeExt on CaptureBrightnessLevelType {
   }
 }
 
-/// Camera stabilization mode.
+/// 摄像头防抖模式。
 ///
-/// Camera stabilization effect increases in the order of 1 < 2 < 3, and the latency increases accordingly.
+/// 摄像头的防抖效果按照 1 < 2 <3 的顺序依次增强，时延也会相应增大。
 @JsonEnum(alwaysCreate: true)
 enum CameraStabilizationMode {
-  /// -1: (Default) Camera stabilization is off.
+  /// -1：（默认）摄像头防抖模式关闭。
   @JsonValue(-1)
   cameraStabilizationModeOff,
 
-  /// 0: Camera auto stabilization. The system automatically selects a stabilization mode based on the camera status. However, this mode has higher latency, so it is not recommended to use this enum.
+  /// 0：摄像头自动防抖，系统会根据摄像头的状态自动选择一种防抖模式。但是在该模式下的时延较大，建议你不要使用该枚举。
   @JsonValue(0)
   cameraStabilizationModeAuto,
 
-  /// 1: (Recommended) Level 1 camera stabilization.
+  /// 1：（推荐）摄像头 1 级防抖。
   @JsonValue(1)
   cameraStabilizationModeLevel1,
 
-  /// 2: Level 2 camera stabilization.
+  /// 2：摄像头 2 级防抖。
   @JsonValue(2)
   cameraStabilizationModeLevel2,
 
-  /// 3: Level 3 camera stabilization.
+  /// 3：摄像头 3 级防抖。
   @JsonValue(3)
   cameraStabilizationModeLevel3,
 
@@ -3391,22 +3389,22 @@ extension CameraStabilizationModeExt on CameraStabilizationMode {
   }
 }
 
-/// Local audio state.
+/// 本地音频状态。
 @JsonEnum(alwaysCreate: true)
 enum LocalAudioStreamState {
-  /// 0: Default initial state of local audio.
+  /// 0: 本地音频默认初始状态。
   @JsonValue(0)
   localAudioStreamStateStopped,
 
-  /// 1: Local audio capture device started successfully.
+  /// 1: 本地音频采集设备启动成功。
   @JsonValue(1)
   localAudioStreamStateRecording,
 
-  /// 2: First frame of local audio encoded successfully.
+  /// 2: 本地音频首帧编码成功。
   @JsonValue(2)
   localAudioStreamStateEncoding,
 
-  /// 3: Failed to start local audio.
+  /// 3: 本地音频启动失败。
   @JsonValue(3)
   localAudioStreamStateFailed,
 }
@@ -3424,50 +3422,50 @@ extension LocalAudioStreamStateExt on LocalAudioStreamState {
   }
 }
 
-/// Reasons for local audio state change.
+/// 本地音频状态改变原因。
 @JsonEnum(alwaysCreate: true)
 enum LocalAudioStreamReason {
-  /// 0: Local audio is working properly.
+  /// 0：本地音频状态正常。
   @JsonValue(0)
   localAudioStreamReasonOk,
 
-  /// 1: Unknown reason for local audio failure. Suggest prompting the user to try rejoining the channel.
+  /// 1：本地音频出错原因不明确。建议提示用户尝试重新加入频道。
   @JsonValue(1)
   localAudioStreamReasonFailure,
 
-  /// 2: No permission to start local audio capture device. Prompt the user to grant permission. Deprecated: This enum is deprecated. Use recordAudio in the onPermissionError callback instead.
+  /// 2：没有权限启动本地音频采集设备。请提示用户开启权限。 弃用：该枚举已废弃。请改用 onPermissionError 回调中的 recordAudio 。
   @JsonValue(2)
   localAudioStreamReasonDeviceNoPermission,
 
-  /// 3: (Android and iOS only) Local audio capture device is in use. Prompt the user to check if the microphone is occupied by another app. Local audio capture will automatically resume about 5 seconds after the microphone becomes idle, or you can try rejoining the channel after it becomes idle.
+  /// 3：（仅适用于 Android 和 iOS）本地音频采集设备已经在使用中。请提示用户检查麦克风是否被其他应用占用。麦克风空闲约 5 秒后本地音频采集会自动恢复，你也可以在麦克风空闲后尝试重新加入频道。
   @JsonValue(3)
   localAudioStreamReasonDeviceBusy,
 
-  /// 4: Local audio capture failed.
+  /// 4：本地音频采集失败。
   @JsonValue(4)
   localAudioStreamReasonRecordFailure,
 
-  /// 5: Local audio encoding failed.
+  /// 5：本地音频编码失败。
   @JsonValue(5)
   localAudioStreamReasonEncodeFailure,
 
-  /// 6: (Windows and macOS only) No local audio capture device. Prompt the user to check in the control panel whether the microphone is properly connected and working.
+  /// 6：（仅适用于 Windows 和 macOS）无本地音频采集设备。请提示用户在设备的控制面板中检查麦克风是否与设备连接正常，检查麦克风是否正常工作。
   @JsonValue(6)
   localAudioStreamReasonNoRecordingDevice,
 
-  /// 7: (Windows and macOS only) No local audio playback device. Prompt the user to check in the control panel whether the speaker is properly connected and working.
+  /// 7：（仅适用于 Windows 和 macOS）无本地音频播放设备。请提示用户在设备的控制面板中检查扬声器是否与设备连接正常，检查扬声器是否正常工作。
   @JsonValue(7)
   localAudioStreamReasonNoPlayoutDevice,
 
-  /// 8: (Android and iOS only) Local audio capture was interrupted by system call, smart assistant, or alarm. To resume local audio capture, ask the user to end the call, assistant, or alarm.
+  /// 8:（仅适用于 Android 和 iOS）本地音频采集被系统来电、智能助手、闹钟中断。如需恢复本地音频采集，请用户中止电话、智能助手、闹钟。
   @JsonValue(8)
   localAudioStreamReasonInterrupted,
 
-  /// 9: (Windows only) Invalid ID for local audio capture device. Prompt the user to check the audio capture device ID.
+  /// 9：（仅适用于 Windows）本地音频采集设备的 ID 无效。请提示用户检查音频采集设备 ID。
   @JsonValue(9)
   localAudioStreamReasonRecordInvalidId,
 
-  /// 10: (Windows only) Invalid ID for local audio playback device. Prompt the user to check the audio playback device ID.
+  /// 10：（仅适用于 Windows）本地音频播放设备的 ID 无效。请提示用户检查音频播放设备 ID。
   @JsonValue(10)
   localAudioStreamReasonPlayoutInvalidId,
 }
@@ -3485,22 +3483,22 @@ extension LocalAudioStreamReasonExt on LocalAudioStreamReason {
   }
 }
 
-/// Local video state.
+/// 本地视频状态。
 @JsonEnum(alwaysCreate: true)
 enum LocalVideoStreamState {
-  /// 0: Default initial state of local video.
+  /// 0: 本地视频默认初始状态。
   @JsonValue(0)
   localVideoStreamStateStopped,
 
-  /// 1: Local video capture device started successfully.
+  /// 1: 本地视频采集设备启动成功。
   @JsonValue(1)
   localVideoStreamStateCapturing,
 
-  /// 2: First frame of local video encoded successfully.
+  /// 2: 本地视频首帧编码成功。
   @JsonValue(2)
   localVideoStreamStateEncoding,
 
-  /// 3: Failed to start local video.
+  /// 3: 本地视频启动失败。
   @JsonValue(3)
   localVideoStreamStateFailed,
 }
@@ -3518,24 +3516,24 @@ extension LocalVideoStreamStateExt on LocalVideoStreamState {
   }
 }
 
-/// Local video event types.
+/// 本地视频事件类型。
 ///
-/// Since Available since v4.6.1.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum LocalVideoEventType {
-  /// (1): The screen capture window is hidden (Android only).
+  /// （1）：屏幕采集窗口被隐藏，仅适用于 Android 平台。
   @JsonValue(1)
   localVideoEventTypeScreenCaptureWindowHidden,
 
-  /// (2): The screen capture window is restored from hidden state (Android only).
+  /// （2）：屏幕采集窗口从隐藏状态恢复，仅适用于 Android 平台。
   @JsonValue(2)
   localVideoEventTypeScreenCaptureWindowRecoverFromHidden,
 
-  /// (3): Screen capture is stopped by the user (Android only).
+  /// （3）：屏幕采集被用户停止，仅适用于 Android 平台。
   @JsonValue(3)
   localVideoEventTypeScreenCaptureStoppedByUser,
 
-  /// (4): A system internal error occurs during screen capture (Android only).
+  /// （4）：屏幕采集过程中发生系统内部错误，仅适用于 Android 平台。
   @JsonValue(4)
   localVideoEventTypeScreenCaptureSystemInternalError,
 }
@@ -3553,80 +3551,80 @@ extension LocalVideoEventTypeExt on LocalVideoEventType {
   }
 }
 
-/// Reason for local video state change.
+/// 本地视频状态改变原因。
 @JsonEnum(alwaysCreate: true)
 enum LocalVideoStreamReason {
-  /// 0: Local video is in normal state.
+  /// 0：本地视频状态正常。
   @JsonValue(0)
   localVideoStreamReasonOk,
 
-  /// 1: Unknown error.
+  /// 1：出错原因不明确。
   @JsonValue(1)
   localVideoStreamReasonFailure,
 
-  /// 2: No permission to start the local video capture device. Prompt the user to enable device permissions and rejoin the channel. Deprecated: This enum is deprecated. Use onPermissionError callback with camera instead.
+  /// 2：没有权限启动本地视频采集设备。请提示用户开启设备权限后再重新加入频道。 弃用：该枚举已废弃。请改用 onPermissionError 回调中的 camera 。
   @JsonValue(2)
   localVideoStreamReasonDeviceNoPermission,
 
-  /// 3: The local video capture device is currently in use. Prompt the user to check if the camera is occupied by another app or try rejoining the channel.
+  /// 3：本地视频采集设备正在使用中。请提示用户检查摄像头是否被其他 App 占用，或者尝试重新加入频道。
   @JsonValue(3)
   localVideoStreamReasonDeviceBusy,
 
-  /// 4: Failed to capture local video. Prompt the user to check if the video capture device is working properly, whether the camera is occupied by another app, or try rejoining the channel.
+  /// 4：本地视频采集失败。请提示用户检查视频采集设备是否正常工作，检查摄像头是否被其他 App 占用，或者尝试重新加入频道。
   @JsonValue(4)
   localVideoStreamReasonCaptureFailure,
 
-  /// 5: Failed to encode local video.
+  /// 5：本地视频编码失败。
   @JsonValue(5)
   localVideoStreamReasonCodecNotSupport,
 
-  /// 6: (iOS only) The app is in the background. Prompt the user that video capture cannot function properly while the app is in the background.
+  /// 6：（仅适用于 iOS）App 处于后台。请提示用户 App 处于后台时，无法正常进行视频采集。
   @JsonValue(6)
   localVideoStreamReasonCaptureInbackground,
 
-  /// 7: (iOS only) The current app window is in Slide Over, Split View, or Picture-in-Picture mode, and another app is using the camera. Prompt the user that video capture cannot function properly under these conditions.
+  /// 7：（仅适用于 iOS）当前 App 窗口处于侧拉、分屏、画中画模式，且其他 App 正占用摄像头。请提示用户当 App 窗口处于侧拉、分屏、画中画模式，且其他 App 正占用摄像头时，无法正常进行视频采集。
   @JsonValue(7)
   localVideoStreamReasonCaptureMultipleForegroundApps,
 
-  /// 8: Local video capture device not found. Check if the camera is properly connected and functioning, or try rejoining the channel.
+  /// 8：找不到本地视频采集设备。需检查摄像头是否与设备正常连接、摄像头是否正常工作，或者尝试重新加入频道。
   @JsonValue(8)
   localVideoStreamReasonDeviceNotFound,
 
-  /// 9: (macOS and Windows only) The video capture device in use has been disconnected (e.g., unplugged).
+  /// 9：（仅适用于 macOS 和 Windows）当前正在使用的视频采集设备已经断开连接（例如，被拔出）。
   @JsonValue(9)
   localVideoStreamReasonDeviceDisconnected,
 
-  /// 10: (macOS and Windows only) The SDK cannot find the video device in the device list. Check if the video device ID is valid.
+  /// 10：（仅适用于 macOS 和 Windows）SDK 无法在视频设备列表中找到该视频设备。请检查视频设备 ID 是否有效。
   @JsonValue(10)
   localVideoStreamReasonDeviceInvalidId,
 
-  /// 14: (Android only) Video capture interrupted. Possible reasons:
-  ///  The camera is occupied by another app. Prompt the user to check if the camera is in use.
-  ///  The app has been sent to the background. Use a foreground service notification to ensure video capture continues in the background. See [Why does audio/video capture fail when the app is locked or in the background on some Android versions?](https://doc.shengwang.cn/faq/quality-issues/android-background).
+  /// 14:（仅适用于 Android）视频采集中断。可能的原因是：
+  ///  摄像头被其他 App 占用。请提示用户检查摄像头是否被其他 App 占用。
+  ///  当前 App 已被切换到后台。可以使用前台服务通知操作系统，确保 App 在切换到后台时仍可采集视频。详见[为什么部分 Android 版本应用锁屏或切后台后采集音视频无效？](https://doc.shengwang.cn/faq/quality-issues/android-background)。
   @JsonValue(14)
   localVideoStreamReasonDeviceInterrupt,
 
-  /// 15: (Android only) Video capture device error. Prompt the user to turn the camera off and on again. If the issue persists, check for hardware failure.
+  /// 15:（仅适用于 Android）视频采集设备出错。请提示用户关闭并重新启动摄像头以恢复功能，如果该操作不能解决问题，请检查摄像头是否出现硬件故障。
   @JsonValue(15)
   localVideoStreamReasonDeviceFatalError,
 
-  /// 101: The video capture device is unavailable due to excessive system pressure.
+  /// 101：由于系统压力过大，导致当前视频采集设备不可用。
   @JsonValue(101)
   localVideoStreamReasonDeviceSystemPressure,
 
-  /// 11: (macOS and Windows only) The window shared via startScreenCaptureByWindowId is minimized. The SDK cannot share minimized windows. Prompt the user to restore the window.
+  /// 11：（仅适用于 macOS 和 Windows）调用 startScreenCaptureByWindowId 方法共享窗口时，共享窗口处于最小化的状态。SDK 无法共享被最小化的窗口。请提示用户将共享窗口取消最小化。
   @JsonValue(11)
   localVideoStreamReasonScreenCaptureWindowMinimized,
 
-  /// 12: (macOS and Windows only) The window shared by window ID has been closed, or a fullscreen window shared by ID has exited fullscreen. After exiting fullscreen, remote users will not see the shared window. To avoid black screens, it is recommended to end the sharing session immediately.
-  /// Common scenarios for this error code:
-  ///  The local user closes the shared window.
-  ///  The local user plays a slideshow and shares it. When the slideshow ends, the SDK reports this error code.
-  ///  The local user views a web video or document in fullscreen, then shares it. When exiting fullscreen, the SDK reports this error code.
+  /// 12：（仅适用于 macOS 和 Windows）通过窗口 ID 共享的窗口已关闭，或通过窗口 ID 共享的全屏窗口已退出全屏。退出全屏模式后，远端用户将无法看到共享的窗口。为避免远端用户看到黑屏，建议你立即结束本次共享。
+  /// 报告该错误码的常见场景：
+  ///  本地用户关闭共享的窗口。
+  ///  本地用户先播放映幻灯片，然后共享放映中的幻灯片。结束放映时，SDK 会报告该错误码。
+  ///  本地用户先全屏观看网页视频或网页文档，然后共享网页视频或网页文档。结束全屏时，SDK 会报告该错误码。
   @JsonValue(12)
   localVideoStreamReasonScreenCaptureWindowClosed,
 
-  /// 13: (Windows only) The window to be shared is occluded by another window. The occluded part will appear black in the shared content.
+  /// 13:（仅适用于 Windows）待共享的窗口被其他窗口遮挡住，被遮挡住的部分在共享时会被 SDK 涂黑。
   @JsonValue(13)
   localVideoStreamReasonScreenCaptureWindowOccluded,
 
@@ -3634,39 +3632,39 @@ enum LocalVideoStreamReason {
   @JsonValue(20)
   localVideoStreamReasonScreenCaptureWindowNotSupported,
 
-  /// 21: (Windows and Android only) No data from the currently captured window.
+  /// 21：（仅适用于 Windows 和 Android）当前采集的窗口无数据。
   @JsonValue(21)
   localVideoStreamReasonScreenCaptureFailure,
 
-  /// 22: (Windows and macOS only) No permission to capture the screen.
+  /// 22：（仅适用于 Windows 和 macOS）不具备采集屏幕的权限。
   @JsonValue(22)
   localVideoStreamReasonScreenCaptureNoPermission,
 
-  /// 24: (Windows only) An unexpected error occurred during screen sharing (possibly due to failure to block a window), causing the screen sharing strategy to fall back. The sharing process itself is not affected. During screen sharing, if the SDK fails to block a specific window due to driver or hardware issues, it will report this event and automatically fall back to sharing the entire screen. If your use case requires blocking specific windows for privacy, listen for this event and implement additional privacy protections when triggered.
+  /// 24：（仅适用于 Windows）屏幕共享过程中发生意外错误（可能由于窗口屏蔽失败），导致屏幕共享策略降级，但屏幕共享过程本身没有受到影响。 屏幕共享过程中，由于设备本身驱动等问题导致屏蔽指定窗口失败时，SDK 也会报告该事件并自动回退到共享整个屏幕。如果你的应用场景需要屏蔽特定窗口以保护隐私，建议监听此事件并在事件触发时添加额外的隐私保护机制。
   @JsonValue(24)
   localVideoStreamReasonScreenCaptureAutoFallback,
 
-  /// 25: (Windows only) The window being captured is hidden and not visible on the current screen.
+  /// 25：（仅适用于 Windows）当前屏幕采集的窗口处于隐藏状态，并且在当前屏幕上不可见。
   @JsonValue(25)
   localVideoStreamReasonScreenCaptureWindowHidden,
 
-  /// 26: (Windows only) The window being captured has recovered from a hidden state.
+  /// 26：（仅适用于 Windows）进行屏幕采集的窗口已经从隐藏状态中恢复。
   @JsonValue(26)
   localVideoStreamReasonScreenCaptureWindowRecoverFromHidden,
 
-  /// 27: (macOS and Windows only) The window being captured has recovered from a minimized state.
+  /// 27：（仅适用于 macOS 和 Windows）进行屏幕采集的窗口已经从最小化状态恢复正常。
   @JsonValue(27)
   localVideoStreamReasonScreenCaptureWindowRecoverFromMinimized,
 
-  /// 28: (Windows only) Screen capture is paused. Common scenario: the screen may have switched to a secure desktop, such as a UAC dialog or Winlogon desktop.
+  /// 28：（仅适用于 Windows）屏幕采集已暂停。报告该错误码的常见场景：当前屏幕可能已切换到安全桌面，例如 UAC 对话框或者 Winlogon 桌面。
   @JsonValue(28)
   localVideoStreamReasonScreenCapturePaused,
 
-  /// 29: (Windows only) Screen capture has resumed from a paused state.
+  /// 29：（仅适用于 Windows）屏幕采集已从暂停状态中恢复。
   @JsonValue(29)
   localVideoStreamReasonScreenCaptureResumed,
 
-  /// 30: (Windows and macOS only) The display being captured has been disconnected. Prompt the user that screen sharing is paused and restart screen sharing.
+  /// 30：（仅适用于 Windows 和 macOS）进行屏幕采集的显示器已断开连接。当收到该状态时，请提示用户当前屏幕共享已暂停并重启屏幕共享。
   @JsonValue(30)
   localVideoStreamReasonScreenCaptureDisplayDisconnected,
 
@@ -3700,26 +3698,26 @@ extension LocalVideoStreamReasonExt on LocalVideoStreamReason {
   }
 }
 
-/// Remote audio stream state.
+/// 远端音频流状态。
 @JsonEnum(alwaysCreate: true)
 enum RemoteAudioState {
-  /// 0: The default initial state of the remote audio. This state is reported in cases of remoteAudioReasonLocalMuted, remoteAudioReasonRemoteMuted, or remoteAudioReasonRemoteOffline.
+  /// 0: 远端音频默认初始状态。在 remoteAudioReasonLocalMuted 、 remoteAudioReasonRemoteMuted 或 remoteAudioReasonRemoteOffline 的情况下，会报告该状态。
   @JsonValue(0)
   remoteAudioStateStopped,
 
-  /// 1: The local user has received the first packet of the remote audio.
+  /// 1: 本地用户已接收远端音频首包。
   @JsonValue(1)
   remoteAudioStateStarting,
 
-  /// 2: The remote audio stream is decoding and playing normally. This state is reported in cases of remoteAudioReasonNetworkRecovery, remoteAudioReasonLocalUnmuted, or remoteAudioReasonRemoteUnmuted.
+  /// 2: 远端音频流正在解码，正常播放。在 remoteAudioReasonNetworkRecovery 、 remoteAudioReasonLocalUnmuted 或 remoteAudioReasonRemoteUnmuted 的情况下，会报告该状态。
   @JsonValue(2)
   remoteAudioStateDecoding,
 
-  /// 3: The remote audio stream is frozen. This state is reported in the case of remoteAudioReasonNetworkCongestion.
+  /// 3: 远端音频流卡顿。在 remoteAudioReasonNetworkCongestion 的情况下，会报告该状态。
   @JsonValue(3)
   remoteAudioStateFrozen,
 
-  /// 4: The remote audio stream failed to play. This state is reported in the case of remoteAudioReasonInternal.
+  /// 4: 远端音频流播放失败。在 remoteAudioReasonInternal 的情况下，会报告该状态。
   @JsonValue(4)
   remoteAudioStateFailed,
 }
@@ -3737,38 +3735,38 @@ extension RemoteAudioStateExt on RemoteAudioState {
   }
 }
 
-/// Reason for remote audio stream state change.
+/// 远端音频流状态切换原因。
 @JsonEnum(alwaysCreate: true)
 enum RemoteAudioStateReason {
-  /// 0: This reason is reported when the audio state changes.
+  /// 0: 音频状态发生改变时，会报告该原因。
   @JsonValue(0)
   remoteAudioReasonInternal,
 
-  /// 1: Network congestion.
+  /// 1: 网络阻塞。
   @JsonValue(1)
   remoteAudioReasonNetworkCongestion,
 
-  /// 2: Network recovered.
+  /// 2: 网络恢复正常。
   @JsonValue(2)
   remoteAudioReasonNetworkRecovery,
 
-  /// 3: Local user stopped receiving remote audio stream or disabled the audio module.
+  /// 3: 本地用户停止接收远端音频流或本地用户禁用音频模块。
   @JsonValue(3)
   remoteAudioReasonLocalMuted,
 
-  /// 4: Local user resumed receiving remote audio stream or enabled the audio module.
+  /// 4: 本地用户恢复接收远端音频流或本地用户启动音频模块。
   @JsonValue(4)
   remoteAudioReasonLocalUnmuted,
 
-  /// 5: Remote user stopped sending audio stream or disabled the audio module.
+  /// 5: 远端用户停止发送音频流或远端用户禁用音频模块。
   @JsonValue(5)
   remoteAudioReasonRemoteMuted,
 
-  /// 6: Remote user resumed sending audio stream or enabled the audio module.
+  /// 6: 远端用户恢复发送音频流或远端用户启用音频模块。
   @JsonValue(6)
   remoteAudioReasonRemoteUnmuted,
 
-  /// 7: Remote user left the channel.
+  /// 7: 远端用户离开频道。
   @JsonValue(7)
   remoteAudioReasonRemoteOffline,
 
@@ -3794,26 +3792,26 @@ extension RemoteAudioStateReasonExt on RemoteAudioStateReason {
   }
 }
 
-/// Remote video stream state.
+/// 远端视频流状态。
 @JsonEnum(alwaysCreate: true)
 enum RemoteVideoState {
-  /// 0: The default initial state of the remote video. This state is reported in cases of remoteVideoStateReasonLocalMuted, remoteVideoStateReasonRemoteMuted, or remoteVideoStateReasonRemoteOffline.
+  /// 0: 远端视频默认初始状态。在 remoteVideoStateReasonLocalMuted 、 remoteVideoStateReasonRemoteMuted 或 remoteVideoStateReasonRemoteOffline 的情况下，会报告该状态。
   @JsonValue(0)
   remoteVideoStateStopped,
 
-  /// 1: The local user has received the first packet of the remote video.
+  /// 1: 本地用户已接收远端视频首包。
   @JsonValue(1)
   remoteVideoStateStarting,
 
-  /// 2: The remote video stream is decoding and playing normally. This state is reported in cases of remoteVideoStateReasonNetworkRecovery, remoteVideoStateReasonLocalUnmuted, remoteVideoStateReasonRemoteUnmuted, or remoteVideoStateReasonAudioFallbackRecovery.
+  /// 2: 远端视频流正在解码，正常播放。在 remoteVideoStateReasonNetworkRecovery 、 remoteVideoStateReasonLocalUnmuted 、 remoteVideoStateReasonRemoteUnmuted 或 remoteVideoStateReasonAudioFallbackRecovery 的情况下，会报告该状态。
   @JsonValue(2)
   remoteVideoStateDecoding,
 
-  /// 3: The remote video stream is frozen. This state is reported in cases of remoteVideoStateReasonNetworkCongestion or remoteVideoStateReasonAudioFallback.
+  /// 3: 远端视频流卡顿。在 remoteVideoStateReasonNetworkCongestion 或 remoteVideoStateReasonAudioFallback 的情况下，会报告该状态。
   @JsonValue(3)
   remoteVideoStateFrozen,
 
-  /// 4: The remote video stream failed to play. This state is reported in the case of remoteVideoStateReasonInternal.
+  /// 4: 远端视频流播放失败。在 remoteVideoStateReasonInternal 的情况下，会报告该状态。
   @JsonValue(4)
   remoteVideoStateFailed,
 }
@@ -3831,46 +3829,46 @@ extension RemoteVideoStateExt on RemoteVideoState {
   }
 }
 
-/// Reason for remote video stream state change.
+/// 远端视频流状态切换原因。
 @JsonEnum(alwaysCreate: true)
 enum RemoteVideoStateReason {
-  /// 0: This reason is reported when the video state changes.
+  /// 0: 视频状态发生改变时，会报告该原因。
   @JsonValue(0)
   remoteVideoStateReasonInternal,
 
-  /// 1: Network congestion.
+  /// 1: 网络阻塞。
   @JsonValue(1)
   remoteVideoStateReasonNetworkCongestion,
 
-  /// 2: Network recovery.
+  /// 2: 网络恢复正常。
   @JsonValue(2)
   remoteVideoStateReasonNetworkRecovery,
 
-  /// 3: The local user stops receiving the remote video stream or disables the video module.
+  /// 3: 本地用户停止接收远端视频流或本地用户禁用视频模块。
   @JsonValue(3)
   remoteVideoStateReasonLocalMuted,
 
-  /// 4: The local user resumes receiving the remote video stream or enables the video module.
+  /// 4: 本地用户恢复接收远端视频流或本地用户启动视频模块。
   @JsonValue(4)
   remoteVideoStateReasonLocalUnmuted,
 
-  /// 5: The remote user stops sending the video stream or disables the video module.
+  /// 5: 远端用户停止发送视频流或远端用户禁用视频模块。
   @JsonValue(5)
   remoteVideoStateReasonRemoteMuted,
 
-  /// 6: The remote user resumes sending the video stream or enables the video module.
+  /// 6: 远端用户恢复发送视频流或远端用户启用视频模块。
   @JsonValue(6)
   remoteVideoStateReasonRemoteUnmuted,
 
-  /// 7: The remote user leaves the channel.
+  /// 7: 远端用户离开频道。
   @JsonValue(7)
   remoteVideoStateReasonRemoteOffline,
 
-  /// 8: Under poor network conditions, the remote audio and video stream falls back to audio only.
+  /// 8: 弱网情况下，远端音视频流回退为音频流。
   @JsonValue(8)
   remoteVideoStateReasonAudioFallback,
 
-  /// 9: When the network improves, the remote audio stream recovers to audio and video stream.
+  /// 9: 网络情况改善时，远端音频流恢复为音视频流。
   @JsonValue(9)
   remoteVideoStateReasonAudioFallbackRecovery,
 
@@ -3882,11 +3880,11 @@ enum RemoteVideoStateReason {
   @JsonValue(11)
   remoteVideoStateReasonVideoStreamTypeChangeToHigh,
 
-  /// 12: (iOS only) The remote user's app has switched to the background.
+  /// 12：(仅适用于 iOS) 远端用户的 App 已切换到后台。
   @JsonValue(12)
   remoteVideoStateReasonSdkInBackground,
 
-  /// 13: The local video decoder does not support decoding the received remote video stream.
+  /// 13：本地的视频解码器不支持对收到的远端视频流进行解码。
   @JsonValue(13)
   remoteVideoStateReasonCodecNotSupport,
 }
@@ -4028,30 +4026,30 @@ extension RemoteVideoDownscaleLevelExt on RemoteVideoDownscaleLevel {
   }
 }
 
-/// User volume information.
+/// 用户音量信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AudioVolumeInfo implements AgoraSerializable {
   /// @nodoc
   const AudioVolumeInfo({this.uid, this.volume, this.vad, this.voicePitch});
 
-  /// User ID.
-  ///  In the local user's callback, uid is 0.
-  ///  In the remote user's callback, uid is the ID of the remote user with the highest instantaneous volume (up to 3 users).
+  /// 用户 ID。
+  ///  在本地用户的回调中， uid 为 0。
+  ///  在远端用户的回调中， uid 为瞬时音量最高的远端用户（最多 3 位）的 ID。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// User volume, range [0,255]. If the user mutes themselves (sets muteLocalAudioStream to true) but audio capture is enabled, the volume value represents the volume of the locally captured signal.
+  /// 用户的音量，取值范围为 [0,255]。如果用户将自己静音（将 muteLocalAudioStream 设为 true ），但开启了音频采集， volume 的值表示本地采集信号的音量。
   @JsonKey(name: 'volume')
   final int? volume;
 
-  /// vad does not report the voice status of remote users. For remote users, the value of vad is always 1.
-  ///  To use this parameter, set reportVad to true when calling enableAudioVolumeIndication. Voice activity status of the local user.
-  ///  0: No voice detected locally.
-  ///  1: Voice detected locally.
+  /// vad 无法报告远端用户的人声状态。对于远端用户， vad 的值始终为 1。
+  ///  如需使用此参数，请在调用 enableAudioVolumeIndication 时设置 reportVad 为 true 。 本地用户的人声状态。
+  ///  0：本地无人声。
+  ///  1：本地有人声。
   @JsonKey(name: 'vad')
   final int? vad;
 
-  /// Voice pitch of the local user (Hz). Value range: [0.0, 4000.0]. voicePitch does not report the voice pitch of remote users. For remote users, the value of voicePitch is always 0.0.
+  /// 本地用户的人声音调（Hz）。取值范围为 [0.0,4000.0]。 voicePitch 无法报告远端用户的人声音调。对于远端用户， voicePitch 的值始终为 0.0。
   @JsonKey(name: 'voicePitch')
   final double? voicePitch;
 
@@ -4063,15 +4061,15 @@ class AudioVolumeInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$AudioVolumeInfoToJson(this);
 }
 
-/// Audio device information.
+/// 音频设备信息。
 ///
-/// This class is only applicable to the Android platform.
+/// 该类仅适用于 Android 平台。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class DeviceInfo implements AgoraSerializable {
   /// @nodoc
   const DeviceInfo({this.isLowLatencyAudioSupported});
 
-  /// Whether ultra-low latency audio capture and playback is supported: true : Supported false : Not supported
+  /// 是否支持极低延时音频采集和播放： true : 支持 false : 不支持
   @JsonKey(name: 'isLowLatencyAudioSupported')
   final bool? isLowLatencyAudioSupported;
 
@@ -4104,7 +4102,7 @@ class Packet implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$PacketToJson(this);
 }
 
-/// Sampling rate of the audio output during streaming.
+/// 推流输出音频的采样率。
 @JsonEnum(alwaysCreate: true)
 enum AudioSampleRateType {
   /// 32000: 32 kHz
@@ -4115,7 +4113,7 @@ enum AudioSampleRateType {
   @JsonValue(44100)
   audioSampleRate44100,
 
-  /// 48000: (default) 48 kHz
+  /// 48000: （默认）48 kHz
   @JsonValue(48000)
   audioSampleRate48000,
 }
@@ -4133,14 +4131,14 @@ extension AudioSampleRateTypeExt on AudioSampleRateType {
   }
 }
 
-/// Codec type for transcoded output video stream.
+/// 转码输出视频流的编解码类型。
 @JsonEnum(alwaysCreate: true)
 enum VideoCodecTypeForStream {
-  /// 1: (Default) H.264.
+  /// 1：（默认）H.264。
   @JsonValue(1)
   videoCodecH264ForStream,
 
-  /// 2: H.265.
+  /// 2：H.265。
   @JsonValue(2)
   videoCodecH265ForStream,
 }
@@ -4158,18 +4156,18 @@ extension VideoCodecTypeForStreamExt on VideoCodecTypeForStream {
   }
 }
 
-/// Codec profile for video in CDN streaming.
+/// 旁路推流输出视频的编解码规格。
 @JsonEnum(alwaysCreate: true)
 enum VideoCodecProfileType {
-  /// 66: Baseline profile, generally used for low-end or error-tolerant applications such as video calls and mobile videos.
+  /// 66: Baseline 级别的视频编码规格，一般用于低阶或需要额外容错的应用，比如视频通话、手机视频等。
   @JsonValue(66)
   videoCodecProfileBaseline,
 
-  /// 77: Main profile, generally used in mainstream consumer electronics such as MP4 players, portable video players, PSP, iPad, etc.
+  /// 77: Main 级别的视频编码规格，一般用于主流消费类电子产品，如 MP4、便携的视频播放器、PSP、iPad 等。
   @JsonValue(77)
   videoCodecProfileMain,
 
-  /// 100: (Default) High profile, generally used for broadcasting, video disc storage, and HDTV.
+  /// 100: （默认）High 级别的视频编码规格，一般用于广播、视频碟片存储、高清电视。
   @JsonValue(100)
   videoCodecProfileHigh,
 }
@@ -4187,18 +4185,18 @@ extension VideoCodecProfileTypeExt on VideoCodecProfileType {
   }
 }
 
-/// Audio codec profile for stream output. Defaults to LC-AAC.
+/// 推流输出音频的编解码规格，默认为 LC-AAC。
 @JsonEnum(alwaysCreate: true)
 enum AudioCodecProfileType {
-  /// 0: (Default) LC-AAC profile.
+  /// 0: （默认）LC-AAC 规格。
   @JsonValue(0)
   audioCodecProfileLcAac,
 
-  /// 1: HE-AAC profile.
+  /// 1: HE-AAC 规格。
   @JsonValue(1)
   audioCodecProfileHeAac,
 
-  /// 2: HE-AAC v2 profile.
+  /// 2: HE-AAC v2 规格。
   @JsonValue(2)
   audioCodecProfileHeAacV2,
 }
@@ -4216,7 +4214,7 @@ extension AudioCodecProfileTypeExt on AudioCodecProfileType {
   }
 }
 
-/// Local audio statistics.
+/// 本地音频统计数据。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LocalAudioStats implements AgoraSerializable {
   /// @nodoc
@@ -4231,27 +4229,27 @@ class LocalAudioStats implements AgoraSerializable {
       this.earMonitorDelay,
       this.aecEstimatedDelay});
 
-  /// Number of audio channels.
+  /// 声道数。
   @JsonKey(name: 'numChannels')
   final int? numChannels;
 
-  /// Sampling rate of the sent local audio, in Hz.
+  /// 发送本地音频的采样率，单位为 Hz。
   @JsonKey(name: 'sentSampleRate')
   final int? sentSampleRate;
 
-  /// Average bitrate of the sent local audio, in Kbps.
+  /// 发送本地音频的码率平均值，单位为 Kbps。
   @JsonKey(name: 'sentBitrate')
   final int? sentBitrate;
 
-  /// Internal payload type.
+  /// 内部的 payload 类型。
   @JsonKey(name: 'internalCodec')
   final int? internalCodec;
 
-  /// Packet loss rate (%) from the local end to the Agora edge server before network resilience is applied.
+  /// 弱网对抗前本端到声网边缘服务器的丢包率 (%)。
   @JsonKey(name: 'txPacketLossRate')
   final int? txPacketLossRate;
 
-  /// Delay (ms) of the audio device module during audio playback or recording.
+  /// 播放或录制音频时，音频设备模块的延迟 (ms)。
   @JsonKey(name: 'audioDeviceDelay')
   final int? audioDeviceDelay;
 
@@ -4259,11 +4257,11 @@ class LocalAudioStats implements AgoraSerializable {
   @JsonKey(name: 'audioPlayoutDelay')
   final int? audioPlayoutDelay;
 
-  /// Ear monitor delay (ms), i.e., the delay from microphone input to headphone output.
+  /// 耳返延迟 (ms)，即声音从麦克风输入到耳机输出的延迟。
   @JsonKey(name: 'earMonitorDelay')
   final int? earMonitorDelay;
 
-  /// Acoustic Echo Cancellation (AEC) delay (ms), i.e., the delay estimated by the AEC module between audio playback and the signal captured locally.
+  /// 回声消除延迟 (ms)，即回声消除 (Acoustic Echo Cancellation, AEC) 模块测算出音频在本地播放前与被本地采集后的信号延迟。
   @JsonKey(name: 'aecEstimatedDelay')
   final int? aecEstimatedDelay;
 
@@ -4275,32 +4273,32 @@ class LocalAudioStats implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LocalAudioStatsToJson(this);
 }
 
-/// The state of RTMP streaming.
+/// 推流状态。
 @JsonEnum(alwaysCreate: true)
 enum RtmpStreamPublishState {
-  /// 0: Streaming has not started or has ended.
+  /// 0：推流未开始或已结束。
   @JsonValue(0)
   rtmpStreamPublishStateIdle,
 
-  /// 1: Connecting to the streaming server and CDN server.
+  /// 1：正在连接推流服务器和 CDN 服务器。
   @JsonValue(1)
   rtmpStreamPublishStateConnecting,
 
-  /// 2: Streaming is in progress. This state is returned after successful streaming.
+  /// 2：推流正在进行。成功推流后，会返回该状态。
   @JsonValue(2)
   rtmpStreamPublishStateRunning,
 
-  /// 3: Recovering the stream. When the CDN encounters an issue or the stream is briefly interrupted, the SDK automatically attempts to recover the stream and returns this state.
-  ///  If recovery is successful, it transitions to rtmpStreamPublishStateRunning(2).
-  ///  If the server fails or recovery is not successful within 60 seconds, it transitions to rtmpStreamPublishStateFailure(4). If 60 seconds is too long, you can also manually attempt reconnection.
+  /// 3：正在恢复推流。当 CDN 出现异常，或推流短暂中断时，SDK 会自动尝试恢复推流，并返回该状态。
+  ///  如成功恢复推流，则进入状态 rtmpStreamPublishStateRunning(2)。
+  ///  如服务器出错或 60 秒内未成功恢复，则进入状态 rtmpStreamPublishStateFailure(4)。如果觉得 60 秒太长，也可以主动尝试重连。
   @JsonValue(3)
   rtmpStreamPublishStateRecovering,
 
-  /// 4: Streaming failed. After failure, you can troubleshoot the error based on the returned error code.
+  /// 4：推流失败。失败后，你可以通过返回的错误码排查错误原因。
   @JsonValue(4)
   rtmpStreamPublishStateFailure,
 
-  /// 5: The SDK is disconnecting from the streaming server and CDN server. When you call the stopRtmpStream method to end streaming normally, the SDK reports the streaming state as rtmpStreamPublishStateDisconnecting, then rtmpStreamPublishStateIdle.
+  /// 5：SDK 正在与推流服务器和 CDN 服务器断开连接。当你调用 stopRtmpStream 方法正常结束推流时，SDK 会依次报告推流状态为 rtmpStreamPublishStateDisconnecting 、 rtmpStreamPublishStateIdle 。
   @JsonValue(5)
   rtmpStreamPublishStateDisconnecting,
 }
@@ -4318,62 +4316,62 @@ extension RtmpStreamPublishStateExt on RtmpStreamPublishState {
   }
 }
 
-/// The reason for RTMP stream publishing state change.
+/// 推流状态改变的原因。
 @JsonEnum(alwaysCreate: true)
 enum RtmpStreamPublishReason {
-  /// 0: Stream published successfully.
+  /// 0：推流成功。
   @JsonValue(0)
   rtmpStreamPublishReasonOk,
 
-  /// 1: Invalid parameter. Please check whether the input parameters are correct.
+  /// 1：参数无效。请检查输入参数是否正确。
   @JsonValue(1)
   rtmpStreamPublishReasonInvalidArgument,
 
-  /// 2: The stream is encrypted and cannot be published.
+  /// 2：推流已加密，不能推流。
   @JsonValue(2)
   rtmpStreamPublishReasonEncryptedStreamNotAllowed,
 
-  /// 3: Publishing timed out and failed.
+  /// 3：推流超时未成功。
   @JsonValue(3)
   rtmpStreamPublishReasonConnectionTimeout,
 
-  /// 4: An error occurred on the streaming server.
+  /// 4：推流服务器出现错误。
   @JsonValue(4)
   rtmpStreamPublishReasonInternalServerError,
 
-  /// 5: An error occurred on the CDN server.
+  /// 5：CDN 服务器出现错误。
   @JsonValue(5)
   rtmpStreamPublishReasonRtmpServerError,
 
-  /// 6: Streaming requests are too frequent.
+  /// 6：推流请求过于频繁。
   @JsonValue(6)
   rtmpStreamPublishReasonTooOften,
 
-  /// 7: The number of streaming URLs for a single broadcaster has reached the limit of 10. Please remove some unused URLs before adding new ones.
+  /// 7：单个主播的推流地址数目达到上限 10。请删掉一些不用的推流地址再增加推流地址。
   @JsonValue(7)
   rtmpStreamPublishReasonReachLimit,
 
-  /// 8: The broadcaster is operating on a stream that does not belong to them. For example, updating or stopping another broadcaster's stream. Please check your app logic.
+  /// 8：主播操作不属于自己的流。例如更新其他主播的流参数、停止其他主播的流。请检查 App 逻辑。
   @JsonValue(8)
   rtmpStreamPublishReasonNotAuthorized,
 
-  /// 9: The server could not find the stream.
+  /// 9：服务器未找到这个流。
   @JsonValue(9)
   rtmpStreamPublishReasonStreamNotFound,
 
-  /// 10: The streaming URL format is incorrect. Please check whether the format is valid.
+  /// 10：推流地址格式有错误。请检查推流地址格式是否正确。
   @JsonValue(10)
   rtmpStreamPublishReasonFormatNotSupported,
 
-  /// 11: The user role is not broadcaster, and the user cannot use the streaming feature. Please check your application logic.
+  /// 11：用户角色不是主播，该用户无法使用推流功能。请检查你的应用代码逻辑。
   @JsonValue(11)
   rtmpStreamPublishReasonNotBroadcaster,
 
-  /// 13: The updateRtmpTranscoding method was called to update transcoding properties when not using transcoding streaming. Please check your application logic.
+  /// 13：非转码推流情况下，调用了 updateRtmpTranscoding 方法更新转码属性。请检查你的应用代码逻辑。
   @JsonValue(13)
   rtmpStreamPublishReasonTranscodingNoMixStream,
 
-  /// 14: The broadcaster's network encountered an error.
+  /// 14：主播的网络出错。
   @JsonValue(14)
   rtmpStreamPublishReasonNetDown,
 
@@ -4381,11 +4379,11 @@ enum RtmpStreamPublishReason {
   @JsonValue(15)
   rtmpStreamPublishReasonInvalidAppid,
 
-  /// 16: Your project does not have permission to use the streaming service.
+  /// 16：你的项目没有使用推流服务的权限。
   @JsonValue(16)
   rtmpStreamPublishReasonInvalidPrivilege,
 
-  /// 100: Streaming has ended normally. After you stop streaming, the SDK returns this value.
+  /// 100：推流已正常结束。当你结束推流后，SDK 会返回该值。
   @JsonValue(100)
   rtmpStreamUnpublishReasonOk,
 }
@@ -4403,22 +4401,22 @@ extension RtmpStreamPublishReasonExt on RtmpStreamPublishReason {
   }
 }
 
-/// Events that occur during RTMP streaming.
+/// 旁路推流时发生的事件。
 @JsonEnum(alwaysCreate: true)
 enum RtmpStreamingEvent {
-  /// 1: Failed to add background image or watermark during RTMP streaming.
+  /// 1: 旁路推流时，添加背景图或水印出错。
   @JsonValue(1)
   rtmpStreamingEventFailedLoadImage,
 
-  /// 2: The streaming URL is already in use. If you want to start a new stream, please use a new streaming URL.
+  /// 2: 该推流 URL 已用于推流。如果你想开始新的推流，请使用新的推流 URL。
   @JsonValue(2)
   rtmpStreamingEventUrlAlreadyInUse,
 
-  /// 3: Feature not supported.
+  /// 3: 功能不支持。
   @JsonValue(3)
   rtmpStreamingEventAdvancedFeatureNotSupport,
 
-  /// 4: Reserved parameter.
+  /// 4: 预留参数。
   @JsonValue(4)
   rtmpStreamingEventRequestTooOften,
 }
@@ -4436,9 +4434,9 @@ extension RtmpStreamingEventExt on RtmpStreamingEvent {
   }
 }
 
-/// Image properties.
+/// 图像属性。
 ///
-/// Used to set the properties of watermark and background images in live video.
+/// 用于设置直播视频的水印和背景图片的属性。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class RtcImage implements AgoraSerializable {
   /// @nodoc
@@ -4451,33 +4449,33 @@ class RtcImage implements AgoraSerializable {
       this.zOrder,
       this.alpha});
 
-  /// The HTTP/HTTPS URL of the image on the live video. The character length must not exceed 1024 bytes.
+  /// 直播视频上图片的 HTTP/HTTPS 地址。字符长度不得超过 1024 字节。
   @JsonKey(name: 'url')
   final String? url;
 
-  /// The x-coordinate (px) of the image on the video frame, using the top-left corner of the output video frame as the origin.
+  /// 图片在视频画面上的 x 坐标 (px)，以输出视频画面的左上角为原点。
   @JsonKey(name: 'x')
   final int? x;
 
-  /// The y-coordinate (px) of the image on the video frame, using the top-left corner of the output video frame as the origin.
+  /// 图片在视频画面上的 y 坐标 (px)，以输出视频画面的左上角为原点。
   @JsonKey(name: 'y')
   final int? y;
 
-  /// The width (px) of the image on the video frame.
+  /// 图片在视频画面上的宽度 (px)。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// The height (px) of the image on the video frame.
+  /// 图片在视频画面上的高度 (px)。
   @JsonKey(name: 'height')
   final int? height;
 
-  /// The layer index of the watermark or background image. When adding one or more watermarks using a watermark array, you must assign a value to zOrder. The valid range is [1,255]; otherwise, the SDK will report an error. In other cases, zOrder is optional. The valid range is [0,255], with 0 as the default. 0 represents the bottom layer, and 255 represents the top layer.
+  /// 水印或背景图的图层编号。使用水印数组添加单张或多张水印时，必须向 zOrder 传值，取值范围为 [1,255]，否则 SDK 会报错。其余情况， zOrder 可选传值，取值范围为 [0,255]，0 为默认值。0 代表图层的最下层，255 代表图层的最上层。
   @JsonKey(name: 'zOrder')
   final int? zOrder;
 
-  /// The transparency of the watermark or background image. The valid range is [0.0,1.0]:
-  ///  0.0: Fully transparent.
-  ///  1.0: (Default) Fully opaque.
+  /// 水印或背景图片的透明度。取值范围为 [0.0,1.0]：
+  ///  0.0: 完全透明。
+  ///  1.0:（默认）完全不透明。
   @JsonKey(name: 'alpha')
   final double? alpha;
 
@@ -4489,19 +4487,19 @@ class RtcImage implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$RtcImageToJson(this);
 }
 
-/// Advanced feature configuration for transcoding live streaming.
+/// 转码推流的高级功能配置。
 ///
-/// To use advanced transcoding live streaming features, please [contact sales](https://www.shengwang.cn/contact-sales/).
+/// 如需使用转码推流高级功能，请[联系销售](https://www.shengwang.cn/contact-sales/)。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LiveStreamAdvancedFeature implements AgoraSerializable {
   /// @nodoc
   const LiveStreamAdvancedFeature({this.featureName, this.opened});
 
-  /// The name of the advanced transcoding live streaming feature, including LBHQ (low-bitrate high-definition video) and VEO (optimized video encoder).
+  /// 转码推流高级功能的名称，包含 LBHQ（低码率的高清视频功能） 和 VEO（优化的视频编码器功能）。
   @JsonKey(name: 'featureName')
   final String? featureName;
 
-  /// Whether to enable the advanced transcoding live streaming feature: true : Enable the advanced transcoding live streaming feature. false : (default) Disable the advanced transcoding live streaming feature.
+  /// 是否启用转码推流的高级功能： true ：开启转码推流的高级功能。 false ：（默认）关闭转码推流的高级功能。
   @JsonKey(name: 'opened')
   final bool? opened;
 
@@ -4513,34 +4511,34 @@ class LiveStreamAdvancedFeature implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LiveStreamAdvancedFeatureToJson(this);
 }
 
-/// Network connection state.
+/// 网络连接状态。
 @JsonEnum(alwaysCreate: true)
 enum ConnectionStateType {
-  /// 1: Disconnected from the network. This state indicates the SDK is:
-  ///  In the initialization phase before calling joinChannel.
-  ///  Or in the phase after calling leaveChannel.
+  /// 1: 网络连接断开。该状态表示 SDK 处于:
+  ///  调用 joinChannel 加入频道前的初始化阶段。
+  ///  或调用 leaveChannel 后的离开频道阶段。
   @JsonValue(1)
   connectionStateDisconnected,
 
-  /// 2: Connecting to the network. This state indicates the SDK is establishing a connection to the specified channel after calling joinChannel.
-  ///  If the channel is joined successfully, the app receives the onConnectionStateChanged callback indicating the network state has changed to connectionStateConnected.
-  ///  After establishing the connection, the SDK initializes media and calls back onJoinChannelSuccess when everything is ready.
+  /// 2: 建立网络连接中。该状态表示 SDK 在调用 joinChannel 后正在与指定的频道建立连接。
+  ///  如果成功加入频道，App 会收到 onConnectionStateChanged 回调，通知当前网络状态变成 connectionStateConnected。
+  ///  建立连接后，SDK 还会初始化媒体，一切就绪后会回调 onJoinChannelSuccess 。
   @JsonValue(2)
   connectionStateConnecting,
 
-  /// 3: Network connected. This state indicates the user has joined the channel and can publish or subscribe to media streams. If the connection to the channel is lost due to network issues or switching, the SDK attempts to reconnect. The app receives the onConnectionStateChanged callback indicating the network state has changed to connectionStateReconnecting.
+  /// 3: 网络已连接。该状态表示用户已经加入频道，可以在频道内发布或订阅媒体流。如果因网络断开或切换而导致 SDK 与频道的连接中断，SDK 会自动重连，此时 App 会收到 onConnectionStateChanged 回调，通知当前网络状态变成 connectionStateReconnecting。
   @JsonValue(3)
   connectionStateConnected,
 
-  /// 4: Reconnecting to the network. This state indicates the SDK had previously joined the channel but the connection was interrupted due to network issues. The SDK automatically attempts to rejoin the channel.
-  ///  If the SDK fails to rejoin within 10 seconds, onConnectionLost is triggered. The SDK remains in the connectionStateReconnecting state and continues trying to rejoin.
-  ///  If the SDK fails to rejoin the channel within 20 minutes after disconnection, the app receives the onConnectionStateChanged callback indicating the network state has changed to connectionStateFailed, and the SDK stops trying to reconnect.
+  /// 4: 重新建立网络连接中。该状态表示 SDK 之前曾加入过频道，但因网络等原因连接中断了，此时 SDK 会自动尝试重新接入频道。
+  ///  如果 SDK 无法在 10 秒内重新加入频道，则 onConnectionLost 会被触发，SDK 会一直保持在 connectionStateReconnecting 的状态，并不断尝试重新加入频道。
+  ///  如果 SDK 在断开连接后，20 分钟内还是没能重新加入频道，则应用程序会收到 onConnectionStateChanged 回调，通知 App 的网络状态进入 connectionStateFailed，SDK 停止尝试重连。
   @JsonValue(4)
   connectionStateReconnecting,
 
-  /// 5: Network connection failed. This state indicates the SDK has stopped trying to rejoin the channel and you need to call leaveChannel to leave.
-  ///  If the user wants to rejoin the channel, call joinChannel again.
-  ///  If the SDK is forbidden to join the channel due to the server using RESTful API, the app receives onConnectionStateChanged.
+  /// 5: 网络连接失败。该状态表示 SDK 已不再尝试重新加入频道，需要调用 leaveChannel 离开频道。
+  ///  如果用户还想重新加入频道，则需要再次调用 joinChannel 。
+  ///  如果 SDK 因服务器端使用 RESTful API 禁止加入频道，则 App 会收到 onConnectionStateChanged 。
   @JsonValue(5)
   connectionStateFailed,
 }
@@ -4558,7 +4556,7 @@ extension ConnectionStateTypeExt on ConnectionStateType {
   }
 }
 
-/// Settings for each host involved in transcoding and mixing.
+/// 参与转码合流的每个主播的设置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class TranscodingUser implements AgoraSerializable {
   /// @nodoc
@@ -4572,40 +4570,40 @@ class TranscodingUser implements AgoraSerializable {
       this.alpha,
       this.audioChannel});
 
-  /// User ID of the host.
+  /// 主播的用户 ID。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// X-coordinate (px) of the host video in the output video, with the top-left corner of the output video as the origin. Value range: [0, width], where width is set in LiveTranscoding.
+  /// 主播视频画面在输出视频画面的 x 坐标 (px)，以输出视频画面的左上角为原点。取值范围为[0,width]，width 为 LiveTranscoding 中设置的 width 。
   @JsonKey(name: 'x')
   final int? x;
 
-  /// Y-coordinate (px) of the host video in the output video, with the top-left corner of the output video as the origin. Value range: [0, height], where height is set in LiveTranscoding.
+  /// 主播视频画面在输出视频画面的 y 坐标 (px)，以输出视频画面的左上角为原点。取值范围为[0,height]，height 为 LiveTranscoding 中设置的 height 。
   @JsonKey(name: 'y')
   final int? y;
 
-  /// Width of the host video (px).
+  /// 主播视频画面的宽 (px)。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// Height of the host video (px).
+  /// 主播视频画面的高 (px)。
   @JsonKey(name: 'height')
   final int? height;
 
-  /// If the value is less than 0 or greater than 100, an errInvalidArgument error is returned.
-  ///  Setting zOrder to 0 is supported. Layer number of the host video. Value range: [0,100].
-  ///  0: (Default) Video is at the bottom layer.
-  ///  100: Video is at the top layer.
+  /// 如果取值小于 0 或大于 100，会返回错误 errInvalidArgument 。
+  ///  支持将 zOrder 设置为 0。 主播视频画面的图层编号。取值范围为 [0,100]。
+  ///  0:（默认）视频画面位于图层的最下层。
+  ///  100: 视频画面位于图层的最上层。
   @JsonKey(name: 'zOrder')
   final int? zOrder;
 
-  /// Transparency of the host video. Value range: [0.0, 1.0].
-  ///  0.0: Fully transparent.
-  ///  1.0: (Default) Fully opaque.
+  /// 主播视频画面的透明度。取值范围为 [0.0,1.0]。
+  ///  0.0: 完全透明。
+  ///  1.0:（默认）完全不透明。
   @JsonKey(name: 'alpha')
   final double? alpha;
 
-  /// When the value is not 0, a special player is required. Audio channel occupied by the host audio in the output audio. Default is 0. Value range: [0,5]: 0 : (Recommended) Default audio mixing setting, supports up to stereo, related to the host's upstream audio. 1 : Host audio in the FL channel of the output audio. If the host's upstream audio is multi-channel, the Agora server mixes it into mono. 2 : Host audio in the FC channel of the output audio. If the host's upstream audio is multi-channel, the Agora server mixes it into mono. 3 : Host audio in the FR channel of the output audio. If the host's upstream audio is multi-channel, the Agora server mixes it into mono. 4 : Host audio in the BL channel of the output audio. If the host's upstream audio is multi-channel, the Agora server mixes it into mono. 5 : Host audio in the BR channel of the output audio. If the host's upstream audio is multi-channel, the Agora server mixes it into mono. 0xFF or values greater than 5 : The host audio is muted, and the Agora server removes the host's audio.
+  /// 取值不为 0 时，需要使用特殊的播放器。 主播音频在输出音频中占用的声道。默认值为 0，取值范围为 [0,5]： 0 : （推荐）默认混音设置，最多支持双声道，与主播上行音频相关。 1 : 主播音频在输出音频的 FL 声道。如果主播上行音频是多声道，声网服务器会先把多声道混音成单声道。 2 : 主播音频在输出音频的 FC 声道。如果主播上行音频是多声道，声网服务器会先把多声道混音成单声道。 3 : 主播音频在输出音频的 FR 声道。如果主播上行音频是多声道，声网服务器会先把多声道混音成单声道。 4 : 主播音频在输出音频的 BL 声道。如果主播上行音频是多声道，声网服务器会先把多声道混音成单声道。 5 : 主播音频在输出音频的 BR 声道。如果主播上行音频是多声道，声网服务器会先把多声道混音成单声道。 0xFF 或取值大于 5 : 该主播音频静音，声网服务器移除该主播的音频。
   @JsonKey(name: 'audioChannel')
   final int? audioChannel;
 
@@ -4617,7 +4615,7 @@ class TranscodingUser implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$TranscodingUserToJson(this);
 }
 
-/// Transcoding properties for CDN live streaming.
+/// 旁路推流的转码属性。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LiveTranscoding implements AgoraSerializable {
   /// @nodoc
@@ -4646,106 +4644,106 @@ class LiveTranscoding implements AgoraSerializable {
       this.advancedFeatures,
       this.advancedFeatureCount});
 
-  /// Total width of the video stream in pixels. Default is 360.
-  ///  For video streams, the value range is [64,1920]. If the value is less than 64, it is automatically adjusted to 64 by the Agora server; if it is greater than 1920, it is adjusted to 1920.
-  ///  For audio-only streams, set both width and height to 0.
+  /// 推流视频的总宽度，默认值 360，单位为像素。
+  ///  如果推视频流， width 取值范围为 [64,1920]。如果取值低于 64，声网服务器会自动调整为 64； 如果取值高于 1920，声网服务器会自动调整为 1920。
+  ///  如果推音频流，请将 width 和 height 设为 0。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// Total height of the video stream in pixels. Default is 640.
-  ///  For video streams, the value range is [64,1080]. If the value is less than 64, it is automatically adjusted to 64 by the Agora server; if it is greater than 1080, it is adjusted to 1080.
-  ///  For audio-only streams, set both width and height to 0.
+  /// 推流视频的总高度，默认值 640，单位为像素。
+  ///  如果推视频流， height 取值范围为 [64,1080]。如果取值低于 64，声网服务器会自动调整为 64； 如果取值高于 1080，声网服务器会自动调整为 1080。
+  ///  如果推音频流，请将 width 和 height 设为 0。
   @JsonKey(name: 'height')
   final int? height;
 
-  /// Video encoding bitrate in Kbps. You do not need to set this parameter. Keep the default value standardBitrate. The SDK automatically matches the most appropriate bitrate based on the video resolution and frame rate you set. For the mapping between resolution and frame rate, see [Video Profile](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/video-profile#%E8%A7%86%E9%A2%91%E5%B1%9E%E6%80%A7%E5%8F%82%E8%80%83).
+  /// 视频编码码率，单位为 Kbps。该参数无需设置，保留默认值 standardBitrate 即可，SDK 会根据你设定的视频分辨率和帧率自动匹配最合适的码率。有关视频分辨率和帧率的对应关系，详见[视频属性](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/video-profile#%E8%A7%86%E9%A2%91%E5%B1%9E%E6%80%A7%E5%8F%82%E8%80%83)。
   @JsonKey(name: 'videoBitrate')
   final int? videoBitrate;
 
-  /// Frame rate of the output video for CDN live streaming. Value range is (0,30], in fps. Default is 15 fps. The Agora server adjusts any value above 30 fps to 30 fps.
+  /// 用于旁路直播的输出视频的帧率。取值范围是 (0,30]，单位为 fps。15 fps 为默认值。 声网服务器会将高于 30 fps 的帧率统一调整为 30 fps。
   @JsonKey(name: 'videoFramerate')
   final int? videoFramerate;
 
-  /// Deprecated. Not recommended. Low latency mode true : Low latency, video quality not guaranteed. false : (Default) High latency, video quality guaranteed.
+  /// 弃用不建议使用。 低延时模式 true : 低延时，不保证画质。 false :（默认值）高延时，保证画质。
   @JsonKey(name: 'lowLatency')
   final bool? lowLatency;
 
-  /// GOP (Group of Pictures) of the output video for CDN live streaming, in frames. Default is 30.
+  /// 用于旁路直播的输出视频的 GOP (Group of Pictures)。单位为帧。默认值为 30。
   @JsonKey(name: 'videoGop')
   final int? videoGop;
 
-  /// Encoding profile of the output video for CDN live streaming. Can be set to 66, 77, or 100. See VideoCodecProfileType. If you set this parameter to other values, the Agora server adjusts it to the default value.
+  /// 用于旁路直播的输出视频的编码规格。可以设置为 66、77 或 100，详见 VideoCodecProfileType 。 如果你把这个参数设为其他值，声网服务器会将其调整为默认值。
   @JsonKey(name: 'videoCodecProfile')
   final VideoCodecProfileType? videoCodecProfile;
 
-  /// Background color of the output video for CDN live streaming, in hexadecimal RGB integer format without the # sign. For example, 0xFFB6C1 represents light pink. Default is 0x000000 (black).
+  /// 用于旁路直播的输出视频的背景色，格式为 RGB 定义下的十六进制整数，不要带 # 号，如 0xFFB6C1 表示浅粉色。默认0x000000，黑色。
   @JsonKey(name: 'backgroundColor')
   final int? backgroundColor;
 
-  /// Codec type of the output video for CDN live streaming. See VideoCodecTypeForStream.
+  /// 用于旁路直播的输出视频的编解码类型。详见 VideoCodecTypeForStream 。
   @JsonKey(name: 'videoCodecType')
   final VideoCodecTypeForStream? videoCodecType;
 
-  /// Number of users in the video mix. Default is 0. Value range is [0,17].
+  /// 参与合图的用户数量，默认 0。取值范围为 [0,17]。
   @JsonKey(name: 'userCount')
   final int? userCount;
 
-  /// Users participating in video mixing for CDN live streaming. Supports up to 17 users simultaneously. See TranscodingUser.
+  /// 用于管理参与旁路直播的视频转码合图的用户。最多支持 17 人同时参与转码合图。详见 TranscodingUser 。
   @JsonKey(name: 'transcodingUsers')
   final List<TranscodingUser>? transcodingUsers;
 
-  /// Reserved parameter: Custom information sent to the CDN streaming client, used to populate SEI frames in H264/H265 video. Length limit: 4096 bytes. For details on SEI, see [SEI Frame Related Issues](https://doc.shengwang.cn/faq/quality-issues/sei).
+  /// 预留参数：用户自定义的发送到旁路推流客户端的信息，用于填充 H264/H265 视频中 SEI 帧内容。长度限制：4096 字节。关于 SEI 的详细信息，详见 [SEI 帧相关问题](https://doc.shengwang.cn/faq/quality-issues/sei)。
   @JsonKey(name: 'transcodingExtraInfo')
   final String? transcodingExtraInfo;
 
-  /// Metadata sent to the CDN client. Deprecated. Not recommended.
+  /// 发送给 CDN 客户端的 metadata。 弃用已废弃，不建议使用。
   @JsonKey(name: 'metadata')
   final String? metadata;
 
-  /// Watermark on the live video. The image format must be PNG. See RtcImage.
-  /// You can add one watermark or use an array to add multiple watermarks.
+  /// 直播视频上的水印。图片格式需为 PNG。详见 RtcImage 。
+  /// 你可以添加一个水印，或使用数组的方式添加多个水印。
   @JsonKey(name: 'watermark')
   final List<RtcImage>? watermark;
 
-  /// Number of watermarks on the live video. The total number of watermarks and background images must be between 0 and 10. This parameter is used together with watermark.
+  /// 直播视频上的水印的数量。水印和背景图的总数量需大于等于 0 且小于等于 10。该参数与 watermark 搭配使用。
   @JsonKey(name: 'watermarkCount')
   final int? watermarkCount;
 
-  /// Background image on the live video. The image format must be PNG. See RtcImage.
-  /// You can add one background image or use an array to add multiple background images. This parameter is used together with backgroundImageCount.
+  /// 直播视频上的背景图。图片格式需为 PNG。详见 RtcImage 。
+  /// 你可以添加一张背景图，或使用数组的方式添加多张背景图。该参数与 backgroundImageCount 搭配使用。
   @JsonKey(name: 'backgroundImage')
   final List<RtcImage>? backgroundImage;
 
-  /// Number of background images on the live video. The total number of watermarks and background images must be between 0 and 10. This parameter is used together with backgroundImage.
+  /// 直播视频上的背景图的数量。水印和背景图的总数量需大于等于 0 且小于等于 10。该参数与 backgroundImage 搭配使用。
   @JsonKey(name: 'backgroundImageCount')
   final int? backgroundImageCount;
 
-  /// Audio sample rate (Hz) of the output media stream for CDN streaming. See AudioSampleRateType.
+  /// 用于旁路推流的输出媒体流的音频采样率 (Hz)，详见 AudioSampleRateType 。
   @JsonKey(name: 'audioSampleRate')
   final AudioSampleRateType? audioSampleRate;
 
-  /// Bitrate of the output audio for CDN live streaming, in Kbps. Default is 48, maximum is 128.
+  /// 用于旁路直播的输出音频的码率。单位为 Kbps，默认值为 48，最大值为 128。
   @JsonKey(name: 'audioBitrate')
   final int? audioBitrate;
 
-  /// Number of audio channels in the output audio for CDN live streaming. Default is 1. Acceptable integer values are [1,5]. Recommended values are 1 or 2. Values 3, 4, and 5 require special player support:
-  ///  1: (Default) Mono
-  ///  2: Stereo
-  ///  3: Three channels
-  ///  4: Four channels
-  ///  5: Five channels
+  /// 用于旁路直播的输出音频的声道数，默认值为 1。取值范围为 [1,5] 中的整型，建议取 1 或 2。3、4、5 需要特殊播放器支持：
+  ///  1: （默认）单声道
+  ///  2: 双声道
+  ///  3: 三声道
+  ///  4: 四声道
+  ///  5: 五声道
   @JsonKey(name: 'audioChannels')
   final int? audioChannels;
 
-  /// Audio codec profile of the output audio for CDN live streaming. See AudioCodecProfileType.
+  /// 用于旁路直播输出音频的编码规格。详见 AudioCodecProfileType 。
   @JsonKey(name: 'audioCodecProfile')
   final AudioCodecProfileType? audioCodecProfile;
 
-  /// Advanced features for transcoding and streaming. See LiveStreamAdvancedFeature.
+  /// 转码推流的高级功能。详见 LiveStreamAdvancedFeature 。
   @JsonKey(name: 'advancedFeatures')
   final List<LiveStreamAdvancedFeature>? advancedFeatures;
 
-  /// Number of enabled advanced features. Default is 0.
+  /// 开启的高级功能数量。默认值为 0。
   @JsonKey(name: 'advancedFeatureCount')
   final int? advancedFeatureCount;
 
@@ -4757,7 +4755,7 @@ class LiveTranscoding implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LiveTranscodingToJson(this);
 }
 
-/// Video streams involved in local compositing.
+/// 参与本地合图的视频流。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class TranscodingVideoStream implements AgoraSerializable {
   /// @nodoc
@@ -4774,15 +4772,15 @@ class TranscodingVideoStream implements AgoraSerializable {
       this.alpha,
       this.mirror});
 
-  /// Type of video source involved in local compositing. See VideoSourceType.
+  /// 参与本地合图的视频源类型。详见 VideoSourceType 。
   @JsonKey(name: 'sourceType')
   final VideoSourceType? sourceType;
 
-  /// Remote user ID. Use this parameter only when the video source type for local compositing is videoSourceRemote.
+  /// 远端用户 ID。 请仅在参与本地合图的视频源类型为 videoSourceRemote 时，使用该参数。
   @JsonKey(name: 'remoteUserUid')
   final int? remoteUserUid;
 
-  /// Use this parameter only when the video source type for local compositing is an image. Path to the local image. Example paths:
+  /// 请仅在参与本地合图的视频源类型为图片时，使用该参数。 本地图片的路径。 示例路径：
   ///  Android: /storage/emulated/0/Pictures/image.png
   ///  iOS: /var/mobile/Containers/Data/Application/<APP-UUID>/Documents/image.png
   ///  macOS: ~/Pictures/image.png
@@ -4790,37 +4788,37 @@ class TranscodingVideoStream implements AgoraSerializable {
   @JsonKey(name: 'imageUrl')
   final String? imageUrl;
 
-  /// (Optional) Media player ID. Set this parameter when sourceType is set to videoSourceMediaPlayer.
+  /// （可选）媒体播放器 ID。当你将 sourceType 设置为 videoSourceMediaPlayer 时，需要设置该参数。
   @JsonKey(name: 'mediaPlayerId')
   final int? mediaPlayerId;
 
-  /// Horizontal offset of the top-left corner of the video relative to the top-left corner (origin) of the canvas.
+  /// 参与本地合图的视频的左上角相对于合图画布左上角（原点）的横向位移。
   @JsonKey(name: 'x')
   final int? x;
 
-  /// Vertical offset of the top-left corner of the video relative to the top-left corner (origin) of the canvas.
+  /// 参与本地合图的视频的左上角相对于合图画布左上角（原点）的纵向位移。
   @JsonKey(name: 'y')
   final int? y;
 
-  /// Width of the video involved in local compositing (px).
+  /// 参与本地合图的视频的宽度 (px)。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// Height of the video involved in local compositing (px).
+  /// 参与本地合图的视频的高度 (px)。
   @JsonKey(name: 'height')
   final int? height;
 
-  /// Layer number of the video involved in local compositing. Value range: [0,100].
-  ///  0: (Default) Bottom layer.
-  ///  100: Top layer.
+  /// 参与本地合图的视频所属的图层的编号。取值范围为 [0,100]。
+  ///  0:（默认值）图层在最下层。
+  ///  100: 图层在最上层。
   @JsonKey(name: 'zOrder')
   final int? zOrder;
 
-  /// Transparency of the video involved in local compositing. Value range: [0.0,1.0]. 0.0 means fully transparent, 1.0 means fully opaque.
+  /// 参与本地合图的视频的透明度。取值范围为 [0.0,1.0]。 0.0 表示透明度为完全透明，1.0 表示透明度为完全不透明。
   @JsonKey(name: 'alpha')
   final double? alpha;
 
-  /// This parameter takes effect only for video sources from the camera. Whether to mirror the video involved in local compositing: true : Mirror the video. false : (Default) Do not mirror the video.
+  /// 该参数仅对视频源类型为摄像头的视频生效。 是否对参与本地合图的的视频进行镜像： true : 将参与本地合图的视频进行镜像。 false : （默认值）不将参与本地合图的视频进行镜像。
   @JsonKey(name: 'mirror')
   final bool? mirror;
 
@@ -4832,7 +4830,7 @@ class TranscodingVideoStream implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$TranscodingVideoStreamToJson(this);
 }
 
-/// Local video compositing configuration.
+/// 本地合图的配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LocalTranscoderConfiguration implements AgoraSerializable {
   /// @nodoc
@@ -4842,15 +4840,15 @@ class LocalTranscoderConfiguration implements AgoraSerializable {
       this.videoOutputConfiguration,
       this.syncWithPrimaryCamera});
 
-  /// Number of video streams participating in local video compositing.
+  /// 参与本地合图的视频流的数量。
   @JsonKey(name: 'streamCount')
   final int? streamCount;
 
-  /// Video streams participating in local video compositing. See TranscodingVideoStream.
+  /// 参与本地合图的视频流。详见 TranscodingVideoStream 。
   @JsonKey(name: 'videoInputStreams')
   final List<TranscodingVideoStream>? videoInputStreams;
 
-  /// Encoding configuration of the composited video after local video compositing. See VideoEncoderConfiguration.
+  /// 本地合图后，合图视频的编码配置。详见 VideoEncoderConfiguration 。
   @JsonKey(name: 'videoOutputConfiguration')
   final VideoEncoderConfiguration? videoOutputConfiguration;
 
@@ -4866,30 +4864,30 @@ class LocalTranscoderConfiguration implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LocalTranscoderConfigurationToJson(this);
 }
 
-/// Local video mixing error codes.
+/// 本地合图错误代码。
 @JsonEnum(alwaysCreate: true)
 enum VideoTranscoderError {
-  /// 1: The specified video source has not started video capture. You need to create a video track for it and start video capture.
+  /// 1：指定的视频源未开始进行视频采集，你需要为其创建视频轨道并开始视频采集。
   @JsonValue(1)
   vtErrVideoSourceNotReady,
 
-  /// 2: Invalid video source type. You need to reassign a supported video source type.
+  /// 2：视频源类型无效，你需要重新指定支持的视频源类型。
   @JsonValue(2)
   vtErrInvalidVideoSourceType,
 
-  /// 3: Invalid image path. You need to reassign the correct image path.
+  /// 3：图片路径无效，你需要重新指定正确的图片路径。
   @JsonValue(3)
   vtErrInvalidImagePath,
 
-  /// 4: Invalid image format. Ensure the image format is one of PNG, JPEG, or GIF.
+  /// 4：图片格式无效，需确保图片格式为 PNG、JPEG 或 GIF 中的一种。
   @JsonValue(4)
   vtErrUnsupportImageFormat,
 
-  /// 5: Invalid resolution for the encoded video after mixing.
+  /// 5：合图后的视频编码分辨率无效。
   @JsonValue(5)
   vtErrInvalidLayout,
 
-  /// 20: Internal unknown error.
+  /// 20：内部未知错误。
   @JsonValue(20)
   vtErrInternal,
 }
@@ -4938,22 +4936,22 @@ class MixedAudioStream implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$MixedAudioStreamToJson(this);
 }
 
-/// Local audio mixing configuration.
+/// 本地音频合流配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LocalAudioMixerConfiguration implements AgoraSerializable {
   /// @nodoc
   const LocalAudioMixerConfiguration(
       {this.streamCount, this.audioInputStreams, this.syncWithLocalMic});
 
-  /// Number of audio streams to be mixed locally.
+  /// 在本地进行合流的音频流数量。
   @JsonKey(name: 'streamCount')
   final int? streamCount;
 
-  /// Audio sources to be mixed locally. See MixedAudioStream.
+  /// 在本地进行合流的音频源。详见 MixedAudioStream 。
   @JsonKey(name: 'audioInputStreams')
   final List<MixedAudioStream>? audioInputStreams;
 
-  /// Whether the mixed audio stream uses timestamps from the local microphone audio frames: true : (default) Uses timestamps from the local microphone audio frames. Set this value if you want all locally captured audio streams to stay synchronized. false : Does not use timestamps from the local microphone audio frames. The SDK uses the timestamp when the mixed audio frame is constructed.
+  /// 合流后的音频流是否使用本地麦克风采集的音频帧时间戳： true ：（默认）使用本地麦克风采集的音频帧时间戳。如果要所有本地采集的音频流保持同步，你可以将参数设置为该值。 false ：不使用本地麦克风采集的音频帧时间戳，SDK 会采用合流的音频帧被构建时的时间戳。
   @JsonKey(name: 'syncWithLocalMic')
   final bool? syncWithLocalMic;
 
@@ -4965,7 +4963,7 @@ class LocalAudioMixerConfiguration implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LocalAudioMixerConfigurationToJson(this);
 }
 
-/// Last mile network probe configuration.
+/// Last mile 网络探测配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LastmileProbeConfig implements AgoraSerializable {
   /// @nodoc
@@ -4975,19 +4973,19 @@ class LastmileProbeConfig implements AgoraSerializable {
       this.expectedUplinkBitrate,
       this.expectedDownlinkBitrate});
 
-  /// Whether to probe the uplink network. Some users, such as audience members in a live broadcast channel, do not need network probing: true : Probe the uplink network. false : Do not probe the uplink network.
+  /// 是否探测上行网络。有些用户，如直播频道中的普通观众，不需要进行网络探测: true : 探测上行网络。 false : 不探测上行网络。
   @JsonKey(name: 'probeUplink')
   final bool? probeUplink;
 
-  /// Whether to probe the downlink network: true : Probe the downlink network. false : Do not probe the downlink network.
+  /// 是否探测下行网络： true : 探测下行网络。 false : 不探测下行网络。
   @JsonKey(name: 'probeDownlink')
   final bool? probeDownlink;
 
-  /// Expected maximum uplink bitrate in bps. Range: [100000,5000000]. It is recommended to refer to the bitrate value in setVideoEncoderConfiguration when setting this parameter.
+  /// 用户期望的最高发送码率，单位为 bps，范围为 [100000,5000000]。建议参考 setVideoEncoderConfiguration 中的码率值设置该参数的值。
   @JsonKey(name: 'expectedUplinkBitrate')
   final int? expectedUplinkBitrate;
 
-  /// Expected maximum downlink bitrate in bps. Range: [100000,5000000].
+  /// 用户期望的最高接收码率，单位为 bps，范围为 [100000,5000000]。
   @JsonKey(name: 'expectedDownlinkBitrate')
   final int? expectedDownlinkBitrate;
 
@@ -4999,18 +4997,18 @@ class LastmileProbeConfig implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LastmileProbeConfigToJson(this);
 }
 
-/// Status of last mile quality probe result.
+/// Last mile 质量探测结果的状态。
 @JsonEnum(alwaysCreate: true)
 enum LastmileProbeResultState {
-  /// 1: Indicates that the last mile probe result is complete.
+  /// 1: 表示本次 last mile 质量探测的结果是完整的。
   @JsonValue(1)
   lastmileProbeResultComplete,
 
-  /// 2: Indicates that the last mile probe did not perform bandwidth estimation, so the result is incomplete. A possible reason is temporarily limited testing resources.
+  /// 2: 表示本次 last mile 质量探测未进行带宽预测，因此结果不完整。一个可能的原因是测试资源暂时受限。
   @JsonValue(2)
   lastmileProbeResultIncompleteNoBwe,
 
-  /// 3: Last mile probe was not performed. A possible reason is network disconnection.
+  /// 3: 未进行 last mile 质量探测。一个可能的原因是网络连接中断。
   @JsonValue(3)
   lastmileProbeResultUnavailable,
 }
@@ -5028,22 +5026,22 @@ extension LastmileProbeResultStateExt on LastmileProbeResultState {
   }
 }
 
-/// Uplink or downlink last mile network probe result.
+/// 上行或下行 Last mile 网络质量探测结果。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LastmileProbeOneWayResult implements AgoraSerializable {
   /// @nodoc
   const LastmileProbeOneWayResult(
       {this.packetLossRate, this.jitter, this.availableBandwidth});
 
-  /// Packet loss rate.
+  /// 丢包率。
   @JsonKey(name: 'packetLossRate')
   final int? packetLossRate;
 
-  /// Network jitter (ms).
+  /// 网络抖动 (ms)。
   @JsonKey(name: 'jitter')
   final int? jitter;
 
-  /// Estimated available network bandwidth (bps).
+  /// 可用网络带宽预估 (bps)。
   @JsonKey(name: 'availableBandwidth')
   final int? availableBandwidth;
 
@@ -5055,26 +5053,26 @@ class LastmileProbeOneWayResult implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LastmileProbeOneWayResultToJson(this);
 }
 
-/// Last mile uplink and downlink network quality probe result.
+/// 上下行 Last mile 网络质量探测结果。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LastmileProbeResult implements AgoraSerializable {
   /// @nodoc
   const LastmileProbeResult(
       {this.state, this.uplinkReport, this.downlinkReport, this.rtt});
 
-  /// The status of the last mile quality probe result. See: LastmileProbeResultState.
+  /// Last mile 质量探测结果的状态。详见: LastmileProbeResultState 。
   @JsonKey(name: 'state')
   final LastmileProbeResultState? state;
 
-  /// Uplink network quality report. See LastmileProbeOneWayResult.
+  /// 上行网络质量报告。详见 LastmileProbeOneWayResult 。
   @JsonKey(name: 'uplinkReport')
   final LastmileProbeOneWayResult? uplinkReport;
 
-  /// Downlink network quality report. See LastmileProbeOneWayResult.
+  /// 下行网络质量报告。详见 LastmileProbeOneWayResult 。
   @JsonKey(name: 'downlinkReport')
   final LastmileProbeOneWayResult? downlinkReport;
 
-  /// Round-trip time (ms).
+  /// 往返时延 (ms)。
   @JsonKey(name: 'rtt')
   final int? rtt;
 
@@ -5086,98 +5084,98 @@ class LastmileProbeResult implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LastmileProbeResultToJson(this);
 }
 
-/// Reason for changes in network connection state.
+/// 网络连接状态发生变化的原因。
 @JsonEnum(alwaysCreate: true)
 enum ConnectionChangedReasonType {
-  /// 0: Connecting to the network.
+  /// 0: 建立网络连接中。
   @JsonValue(0)
   connectionChangedConnecting,
 
-  /// 1: Successfully joined the channel.
+  /// 1: 成功加入频道。
   @JsonValue(1)
   connectionChangedJoinSuccess,
 
-  /// 2: Network connection interrupted.
+  /// 2: 网络连接中断。
   @JsonValue(2)
   connectionChangedInterrupted,
 
-  /// 3: Network connection is banned by the server. For example, this status is returned when a user is kicked out of the channel.
+  /// 3: 网络连接被服务器禁止。例如，当用户被踢出频道时，会返回该状态。
   @JsonValue(3)
   connectionChangedBannedByServer,
 
-  /// 4: Failed to join the channel. If the SDK fails to join the channel after trying for 20 minutes, this status is returned and it stops trying to reconnect. Prompt the user to switch networks and try joining the channel again.
+  /// 4: 加入频道失败。SDK 在尝试加入频道 20 分钟后仍未能加入频道，会返回该状态并不再尝试重连。请提示用户尝试切换网络后重新加入频道。
   @JsonValue(4)
   connectionChangedJoinFailed,
 
-  /// 5: Left the channel.
+  /// 5: 离开频道。
   @JsonValue(5)
   connectionChangedLeaveChannel,
 
-  /// 6: Invalid App ID. Use a valid App ID to rejoin the channel and ensure the App ID matches the one generated in the Agora Console.
+  /// 6: App ID 无效。请使用有效的 APP ID 重新加入频道，并确保你使用的 App ID 与在声网控制台生成的一致。
   @JsonValue(6)
   connectionChangedInvalidAppId,
 
-  /// 7: Invalid channel name. Use a valid channel name to rejoin the channel. A valid channel name is a string within 64 bytes. The supported character set includes 89 characters:
+  /// 7: 频道名无效。请更换有效的频道名重新加入频道。有效的频道名为长度在 64 字节以内的字符串。以下为支持的字符集范围（共 89 个字符）:
   @JsonValue(7)
   connectionChangedInvalidChannelName,
 
-  /// 8: Invalid Token. Possible reasons include:
-  ///  Your project has enabled App Certificate, but you joined the channel without using a Token.
-  ///  The user ID specified when calling joinChannel does not match the one used when generating the Token.
-  ///  The Token used to join the channel is different from the one generated. Ensure that:
-  ///  When your project has enabled App Certificate, use a Token to join the channel.
-  ///  The user ID specified when generating the Token matches the one used to join the channel.
-  ///  The Token used to join the channel matches the one generated.
+  /// 8: Token 无效。一般有以下原因：
+  ///  你的项目启用了 App Certificate，但加入频道未使用 Token。
+  ///  在调用 joinChannel 加入频道时指定的用户 ID 与生成 Token 时传入的用户 ID 不一致。
+  ///  生成的 Token 和加入频道使用的 Token 不一致。 请确保：
+  ///  当你的项目启用了 App Certificate 时，使用 Token 加入频道。
+  ///  生成 Token 时指定的用户 ID 与加入频道时使用的用户 ID 一致，
+  ///  生成的 Token 和加入频道使用的 Token 一致。
   @JsonValue(8)
   connectionChangedInvalidToken,
 
-  /// 9: The current Token has expired. Generate a new Token on your server and use it to rejoin the channel.
+  /// 9: 当前使用的 Token 已过期。请重新在你的服务端生成 Token，然后用新的 Token 重新加入频道。
   @JsonValue(9)
   connectionChangedTokenExpired,
 
-  /// 10: This user is banned by the server. Possible reasons include:
-  ///  The user has already joined the channel and calls the join API again, such as joinChannel, which returns this status. Stop calling the method.
-  ///  The user tries to join a channel during a call test. Wait until the test ends before joining the channel.
+  /// 10: 此用户被服务器禁止。一般有以下原因：
+  ///  用户已进入频道，再次调用加入频道的 API，例如 joinChannel ，会返回此状态。停止调用该方法即可。
+  ///  用户在进行通话测试时尝试加入频道。等待通话测试结束后再加入频道即可。
   @JsonValue(10)
   connectionChangedRejectedByServer,
 
-  /// 11: SDK attempts to reconnect due to proxy server settings.
+  /// 11: 由于设置了代理服务器，SDK 尝试重连。
   @JsonValue(11)
   connectionChangedSettingProxyServer,
 
-  /// 12: Network connection state changed due to Token renewal.
+  /// 12: 更新 Token 引起网络连接状态改变。
   @JsonValue(12)
   connectionChangedRenewToken,
 
-  /// 13: Client IP address changed. If this status occurs multiple times, prompt the user to switch networks and try rejoining the channel.
+  /// 13: 客户端 IP 地址变更。如多次收到该状态码，请提示用户更换网络后尝试重新加入频道。
   @JsonValue(13)
   connectionChangedClientIpAddressChanged,
 
-  /// 14: Keep-alive timeout between SDK and server, entering auto-reconnect state.
+  /// 14: SDK 和服务器连接保活超时，进入自动重连状态。
   @JsonValue(14)
   connectionChangedKeepAliveTimeout,
 
-  /// 15: Successfully rejoined the channel.
+  /// 15: 重新加入频道成功。
   @JsonValue(15)
   connectionChangedRejoinSuccess,
 
-  /// 16: SDK lost connection with the server.
+  /// 16: SDK 和服务器失去连接。
   @JsonValue(16)
   connectionChangedLost,
 
-  /// 17: Connection state changed due to echo test.
+  /// 17: 连接状态变化由回声测试引起。
   @JsonValue(17)
   connectionChangedEchoTest,
 
-  /// 18: Local IP address changed by user.
+  /// 18: 本地 IP 地址被用户更改。
   @JsonValue(18)
   connectionChangedClientIpAddressChangedByUser,
 
-  /// 19: Joined the same channel from different devices using the same UID.
+  /// 19: 使用相同的 UID 从不同的设备加入同一频道。
   @JsonValue(19)
   connectionChangedSameUidLogin,
 
-  /// 20: The number of broadcasters in the channel has reached the limit.
+  /// 20: 频道内主播人数已达上限。
   @JsonValue(20)
   connectionChangedTooManyBroadcasters,
 
@@ -5211,22 +5209,22 @@ extension ConnectionChangedReasonTypeExt on ConnectionChangedReasonType {
   }
 }
 
-/// Reason for failing to switch user roles.
+/// 切换用户角色失败的原因。
 @JsonEnum(alwaysCreate: true)
 enum ClientRoleChangeFailedReason {
-  /// 1: The number of broadcasters in the channel has reached the limit. This enum is only reported when the 128-user feature is enabled. The broadcaster limit depends on the actual number configured when enabling the 128-user feature.
+  /// 1: 频道内主播人数达到上限。 该枚举仅在开启 128 人功能后报告。主播人数的上限根据开启 128 人功能时实际配置的人数而定。
   @JsonValue(1)
   clientRoleChangeFailedTooManyBroadcasters,
 
-  /// 2: The request is rejected by the server. It is recommended to prompt the user to try switching roles again.
+  /// 2: 请求被服务端拒绝。建议提示用户重新尝试切换用户角色。
   @JsonValue(2)
   clientRoleChangeFailedNotAuthorized,
 
-  /// 3: The request timed out. It is recommended to prompt the user to check the network connection and try switching roles again. Deprecated: This enum value is deprecated as of v4.4.0 and is not recommended for use.
+  /// 3: 请求超时。建议提示用户检查网络连接状况后重新尝试切换用户角色。 废弃：该枚举值自 v4.4.0 起废弃，不建议使用。
   @JsonValue(3)
   clientRoleChangeFailedRequestTimeOut,
 
-  /// 4: Network connection lost. You can troubleshoot the specific cause of the network failure based on the reason reported by onConnectionStateChanged. Deprecated: This enum value is deprecated as of v4.4.0 and is not recommended for use.
+  /// 4: 网络连接断开。可根据 onConnectionStateChanged 报告的 reason ，排查网络连接失败的具体原因。 废弃：该枚举值自 v4.4.0 起废弃，不建议使用。
   @JsonValue(4)
   clientRoleChangeFailedConnectionFailed,
 }
@@ -5244,38 +5242,38 @@ extension ClientRoleChangeFailedReasonExt on ClientRoleChangeFailedReason {
   }
 }
 
-/// Network connection type.
+/// 网络连接类型。
 @JsonEnum(alwaysCreate: true)
 enum NetworkType {
-  /// -1: Network connection type is unknown.
+  /// -1: 网络连接类型未知。
   @JsonValue(-1)
   networkTypeUnknown,
 
-  /// 0: Network connection is disconnected.
+  /// 0: 网络连接已断开。
   @JsonValue(0)
   networkTypeDisconnected,
 
-  /// 1: Network type is LAN.
+  /// 1: 网络类型为 LAN。
   @JsonValue(1)
   networkTypeLan,
 
-  /// 2: Network type is Wi-Fi (including hotspots).
+  /// 2: 网络类型为 Wi-Fi（包含热点）。
   @JsonValue(2)
   networkTypeWifi,
 
-  /// 3: Network type is 2G mobile network.
+  /// 3: 网络类型为 2G 移动网络。
   @JsonValue(3)
   networkTypeMobile2g,
 
-  /// 4: Network type is 3G mobile network.
+  /// 4: 网络类型为 3G 移动网络。
   @JsonValue(4)
   networkTypeMobile3g,
 
-  /// 5: Network type is 4G mobile network.
+  /// 5: 网络类型为 4G 移动网络。
   @JsonValue(5)
   networkTypeMobile4g,
 
-  /// 6: Network type is 5G mobile network.
+  /// 6: 网络类型为 5G 移动网络。
   @JsonValue(6)
   networkTypeMobile5g,
 }
@@ -5293,18 +5291,18 @@ extension NetworkTypeExt on NetworkType {
   }
 }
 
-/// View setup mode.
+/// 视图设置模式。
 @JsonEnum(alwaysCreate: true)
 enum VideoViewSetupMode {
-  /// 0: (Default) Clears all added views and replaces with a new view.
+  /// 0：(默认) 清除已添加的所有视图、替换为新的视图。
   @JsonValue(0)
   videoViewSetupReplace,
 
-  /// 1: Adds a view.
+  /// 1：增加一个视图。
   @JsonValue(1)
   videoViewSetupAdd,
 
-  /// 2: Removes a view. When you no longer need a view, it is recommended to set setupMode to videoViewSetupRemove in time to remove the view, otherwise it may lead to rendering resource leaks.
+  /// 2：删除一个视图。 当你不再需要使用某个视图时，建议及时设置 setupMode 为 videoViewSetupRemove 删除视图，否则可能会导致渲染资源泄漏。
   @JsonValue(2)
   videoViewSetupRemove,
 }
@@ -5322,7 +5320,7 @@ extension VideoViewSetupModeExt on VideoViewSetupMode {
   }
 }
 
-/// Properties of the video canvas object.
+/// 视频画布对象的属性。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class VideoCanvas implements AgoraSerializable {
   /// @nodoc
@@ -5340,54 +5338,54 @@ class VideoCanvas implements AgoraSerializable {
       this.enableAlphaMask,
       this.position});
 
-  /// For Android and iOS platforms, when the video source is a composite video stream (videoSourceTranscoded), this parameter indicates the user ID that publishes the composite video stream.
+  /// 对于 Android 和 iOS 平台，当视频源为合图视频流 (videoSourceTranscoded) 时，该参数表示发布合图视频流的用户 ID。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// User ID that publishes a specific composite sub-video stream.
+  /// 发布某一路合图子视频流的用户 ID。
   @JsonKey(name: 'subviewUid')
   final int? subviewUid;
 
-  /// Video display window. In a VideoCanvas, you can only set either view or surfaceTexture. If both are set, only the configuration in view takes effect.
+  /// 视频显示窗口。 在一个 VideoCanvas 中，你只能选择 view 或 surfaceTexture 其中一个进行设置，如果同时设置，只有 view 中的设置会生效。
   @JsonKey(name: 'view', readValue: readIntPtr)
   final int? view;
 
-  /// Background color of the video canvas in RGBA format. The default is 0x00000000, which represents black.
+  /// 视频画布的背景颜色，格式为 RGBA。默认值为 0x00000000，代表黑色。
   @JsonKey(name: 'backgroundColor')
   final int? backgroundColor;
 
-  /// Video rendering mode. See RenderModeType.
+  /// 视频渲染模式，详见 RenderModeType 。
   @JsonKey(name: 'renderMode')
   final RenderModeType? renderMode;
 
-  /// View mirroring mode. See VideoMirrorModeType.
-  ///  Local view mirroring mode: If you use the front camera, local view mirroring is enabled by default; if you use the rear camera, it is disabled by default.
-  ///  Remote user view mirroring mode: Disabled by default.
+  /// 视图镜像模式，详见 VideoMirrorModeType 。
+  ///  本地视图镜像模式：如果你使用前置摄像头，默认启动本地视图镜像模式；如果你使用后置摄像头，默认关闭本地视图镜像模式。
+  ///  远端用户视图镜像模式：默认关闭远端用户的镜像模式。
   @JsonKey(name: 'mirrorMode')
   final VideoMirrorModeType? mirrorMode;
 
-  /// View setup mode. See VideoViewSetupMode.
+  /// 视图设置模式。详见 VideoViewSetupMode 。
   @JsonKey(name: 'setupMode')
   final VideoViewSetupMode? setupMode;
 
-  /// Type of video source. See VideoSourceType.
+  /// 视频源的类型，详见 VideoSourceType 。
   @JsonKey(name: 'sourceType')
   final VideoSourceType? sourceType;
 
-  /// Media player ID. You can get it through getMediaPlayerId.
+  /// 媒体播放器 ID。可通过 getMediaPlayerId 获取。
   @JsonKey(name: 'mediaPlayerId')
   final int? mediaPlayerId;
 
-  /// (Optional) Display area of the video frame. See Rectangle. width and height represent the pixel width and height of the video in this area. The default is null (width or height is 0), which means the actual resolution of the video frame is displayed.
+  /// （可选）视频帧的展示区域，详见 Rectangle 。其中， width 和 height 表示该区域的视频像素宽度和高度。默认值为空值 (宽或高为 0)，表示展示实际分辨率的视频帧。
   @JsonKey(name: 'cropArea')
   final Rectangle? cropArea;
 
-  /// The receiver can only render alpha channel information when the sender enables the alpha transmission feature.
-  ///  To enable alpha transmission, please [contact technical support](https://ticket.shengwang.cn/). (Optional) Whether to enable alpha mask rendering: true : Enable alpha mask rendering. false : (Default) Disable alpha mask rendering. Alpha mask rendering can create images with transparency effects and extract portraits from videos. When used with other methods, it can achieve effects such as portrait picture-in-picture or watermark overlays.
+  /// 仅当发送端开启 Alpha 传输功能时，接收端才能渲染 Alpha 通道的信息。
+  ///  如需开启 Alpha 传输功能，请[联系技术支持](https://ticket.shengwang.cn/)。 （可选）是否开启 Alpha 遮罩渲染： true ：开启 Alpha 遮罩渲染。 false ：（默认）关闭 Alpha 遮罩渲染。 Alpha 遮罩渲染可以创建具有透明效果的图像，还可以提取视频中的人像。与其他方法结合使用时，可以实现人像画中画、添加水印等效果。
   @JsonKey(name: 'enableAlphaMask')
   final bool? enableAlphaMask;
 
-  /// Position of the video frame in the video pipeline. See VideoModulePosition.
+  /// 视频帧在视频链路中的位置。详见 VideoModulePosition 。
   @JsonKey(name: 'position')
   final VideoModulePosition? position;
 
@@ -5399,7 +5397,7 @@ class VideoCanvas implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$VideoCanvasToJson(this);
 }
 
-/// Beauty effect options.
+/// 美颜选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class BeautyOptions implements AgoraSerializable {
   /// @nodoc
@@ -5410,23 +5408,23 @@ class BeautyOptions implements AgoraSerializable {
       this.rednessLevel,
       this.sharpnessLevel});
 
-  /// Contrast level, usually used together with lighteningLevel. The higher the value, the greater the contrast. See LighteningContrastLevel.
+  /// 对比度，常与 lighteningLevel 搭配使用。取值越大，明暗对比程度越大。详见 LighteningContrastLevel 。
   @JsonKey(name: 'lighteningContrastLevel')
   final LighteningContrastLevel? lighteningContrastLevel;
 
-  /// Whitening level, range is [0.0, 1.0], where 0.0 means original brightness. Default is 0.0. The higher the value, the higher the whitening level.
+  /// 美白程度，取值范围为 [0.0,1.0]，其中 0.0 表示原始亮度，默认值为 0.0。取值越大，美白程度越大。
   @JsonKey(name: 'lighteningLevel')
   final double? lighteningLevel;
 
-  /// Smoothing level, range is [0.0, 1.0], where 0.0 means original smoothness. Default is 0.0. The higher the value, the more smoothing is applied.
+  /// 磨皮程度，取值范围为 [0.0,1.0]，其中 0.0 表示原始磨皮程度，默认值为 0.0。取值越大，磨皮程度越大。
   @JsonKey(name: 'smoothnessLevel')
   final double? smoothnessLevel;
 
-  /// Redness level, range is [0.0, 1.0], where 0.0 means original redness. Default is 0.0. The higher the value, the more redness is applied.
+  /// 红润度，取值范围为 [0.0,1.0]，其中 0.0 表示原始红润度，默认值为 0.0。取值越大，红润程度越大。
   @JsonKey(name: 'rednessLevel')
   final double? rednessLevel;
 
-  /// Sharpness level, range is [0.0, 1.0], where 0.0 means original sharpness. Default is 0.0. The higher the value, the more sharpening is applied.
+  /// 锐化程度，取值范围为 [0.0,1.0]，其中 0.0 表示原始锐度，默认值为 0.0。取值越大，锐化程度越大。
   @JsonKey(name: 'sharpnessLevel')
   final double? sharpnessLevel;
 
@@ -5438,18 +5436,18 @@ class BeautyOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$BeautyOptionsToJson(this);
 }
 
-/// Brightness contrast level.
+/// 亮度明暗对比度。
 @JsonEnum(alwaysCreate: true)
 enum LighteningContrastLevel {
-  /// 0: Low contrast.
+  /// 0：低对比度。
   @JsonValue(0)
   lighteningContrastLow,
 
-  /// 1: Normal contrast.
+  /// 1：正常对比度。
   @JsonValue(1)
   lighteningContrastNormal,
 
-  /// 2: High contrast.
+  /// 2：高对比度。
   @JsonValue(2)
   lighteningContrastHigh,
 }
@@ -5467,17 +5465,17 @@ extension LighteningContrastLevelExt on LighteningContrastLevel {
   }
 }
 
-/// Filter effect options.
+/// 滤镜效果选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class FaceShapeAreaOptions implements AgoraSerializable {
   /// @nodoc
   const FaceShapeAreaOptions({this.shapeArea, this.shapeIntensity});
 
-  /// Facial area. See FaceShapeArea.
+  /// 美型部位，详见 FaceShapeArea 。
   @JsonKey(name: 'shapeArea')
   final FaceShapeArea? shapeArea;
 
-  /// Modification intensity. The definition of modification intensity (including direction, range, default value, etc.) varies by area. See FaceShapeArea.
+  /// 修饰力度。各部位的修饰力度定义（包括修饰的方向、范围、预设值等）有所不同，详见 FaceShapeArea 。
   @JsonKey(name: 'shapeIntensity')
   final int? shapeIntensity;
 
@@ -5489,128 +5487,128 @@ class FaceShapeAreaOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$FaceShapeAreaOptionsToJson(this);
 }
 
-/// Selects the specific facial area to adjust.
+/// 选择需要调整的具体美型区域。
 ///
-/// Since Available since v4.4.0.
+/// 自从 自 v4.4.0 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum FaceShapeArea {
-  /// (-1): Default value, indicates an invalid area. The face shaping effect is not applied.
+  /// （-1）：默认值，表示无效区域，美型效果不生效。
   @JsonValue(-1)
   faceShapeAreaNone,
 
-  /// (100): Head area, used to achieve a smaller head effect. Value range is [0, 100], default is 50. The larger the value, the more noticeable the adjustment.
+  /// （100）：头部区域，用于实现小头效果。取值范围为 [0, 100]，默认值为 50。数值越大，调整越明显。
   @JsonValue(100)
   faceShapeAreaHeadscale,
 
-  /// (101): Forehead area, used to adjust the hairline height. Value range is [0, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （101）：额头区域，用于调整发际线高度。取值范围为 [0, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(101)
   faceShapeAreaForehead,
 
-  /// (102): Face contour area, used to achieve a slimmer face effect. Value range is [0, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （102）：脸部轮廓区域，用于实现瘦脸效果。取值范围为 [0, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(102)
   faceShapeAreaFacecontour,
 
-  /// (103): Face length area, used to elongate the face. Value range is [-100, 100], default is 0. The greater the absolute value, the more noticeable the adjustment; negative values indicate the opposite direction.
+  /// （103）：脸部长度区域，用于拉长脸部。取值范围为 [-100, 100]，默认值为 0。绝对值越大，调整越明显，负值表示相反方向。
   @JsonValue(103)
   faceShapeAreaFacelength,
 
-  /// (104): Face width area, used to achieve a narrower face effect. Value range is [0, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （104）：脸部宽度区域，用于实现窄脸效果。取值范围为 [0, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(104)
   faceShapeAreaFacewidth,
 
-  /// (105): Cheekbone area, used to adjust cheekbone width. Value range is [0, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （105）：颧骨区域，用于调整颧骨宽度。取值范围为 [0, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(105)
   faceShapeAreaCheekbone,
 
-  /// (106): Cheek area, used to adjust cheek width. Value range is [0, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （106）：面颊区域，用于调整面颊宽度。取值范围为 [0, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(106)
   faceShapeAreaCheek,
 
-  /// (107): Jawbone area, used to adjust jawbone width. Value range is [0, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （107）：下颌骨区域，用于调整下颌骨宽度。取值范围为 [0, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(107)
   faceShapeAreaMandible,
 
-  /// (108): Chin area, used to adjust chin length. Value range is [-100, 100], default is 0. The greater the absolute value, the more noticeable the adjustment; negative values indicate the opposite direction.
+  /// （108）：下巴区域，用于调整下巴长度。取值范围为 [-100, 100]，默认值为 0。绝对值越大，调整越明显，负值表示相反方向。
   @JsonValue(108)
   faceShapeAreaChin,
 
-  /// (200): Eye area, used to achieve a bigger eye effect. Value range is [0, 100], default is 50. The larger the value, the more noticeable the adjustment.
+  /// （200）：眼睛区域，用于实现大眼效果。取值范围为 [0, 100]，默认值为 50。数值越大，调整越明显。
   @JsonValue(200)
   faceShapeAreaEyescale,
 
-  /// (201): Eye distance area, used to adjust the distance between the eyes. Value range is [-100, 100], default is 0. The greater the absolute value, the more noticeable the adjustment; negative values indicate the opposite direction.
+  /// （201）：眼距区域，用于调整两眼间距。取值范围为 [-100, 100]，默认值为 0。绝对值越大，调整越明显，负值表示相反方向。
   @JsonValue(201)
   faceShapeAreaEyedistance,
 
-  /// (202): Eye position area, used to adjust the overall position of the eyes. Value range is [-100, 100], default is 0. The greater the absolute value, the more noticeable the adjustment; negative values indicate the opposite direction.
+  /// （202）：眼睛位置区域，用于调整眼睛整体位置。取值范围为 [-100, 100]，默认值为 0。绝对值越大，调整越明显，负值表示相反方向。
   @JsonValue(202)
   faceShapeAreaEyeposition,
 
-  /// (203): Lower eyelid area, used to adjust the shape of the lower eyelid. Value range is [0, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （203）：下眼睑区域，用于调整下眼睑形态。取值范围为 [0, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(203)
   faceShapeAreaLowereyelid,
 
-  /// (204): Pupil area, used to adjust pupil size. Value range is [0, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （204）：瞳孔区域，用于调整瞳孔大小。取值范围为 [0, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(204)
   faceShapeAreaEyepupils,
 
-  /// (205): Inner eye corner area, used to adjust the shape of the inner eye corner. Value range is [-100, 100], default is 0. The greater the absolute value, the more noticeable the adjustment; negative values indicate the opposite direction.
+  /// （205）：内眼角区域，用于调整内眼角形态。取值范围为 [-100, 100]，默认值为 0。绝对值越大，调整越明显，负值表示相反方向。
   @JsonValue(205)
   faceShapeAreaEyeinnercorner,
 
-  /// (206): Outer eye corner area, used to adjust the shape of the outer eye corner. Value range is [-100, 100], default is 0. The greater the absolute value, the more noticeable the adjustment; negative values indicate the opposite direction.
+  /// （206）：外眼角区域，用于调整外眼角形态。取值范围为 [-100, 100]，默认值为 0。绝对值越大，调整越明显，负值表示相反方向。
   @JsonValue(206)
   faceShapeAreaEyeoutercorner,
 
-  /// (300): Nose length area, used to elongate the nose. Value range is [-100, 100], default is 0. The greater the absolute value, the more noticeable the adjustment; negative values indicate the opposite direction.
+  /// （300）：鼻子长度区域，用于拉长鼻子。取值范围为 [-100, 100]，默认值为 0。绝对值越大，调整越明显，负值表示相反方向。
   @JsonValue(300)
   faceShapeAreaNoselength,
 
-  /// (301): Nose width area, used to achieve a slimmer nose effect. Value range is [0, 100], default is 0. The larger the value, the more noticeable the slimming effect.
+  /// （301）：鼻子宽度区域，用于实现瘦鼻效果。取值范围为 [0, 100]，默认值为 0。数值越大，瘦鼻效果越明显。
   @JsonValue(301)
   faceShapeAreaNosewidth,
 
-  /// (302): Alar area, used to adjust the width of the alar. Value range is [0, 100], default is 10. The larger the value, the more noticeable the adjustment.
+  /// （302）：鼻翼区域，用于调整鼻翼宽度。取值范围为 [0, 100]，默认值为 10。数值越大，调整越明显。
   @JsonValue(302)
   faceShapeAreaNosewing,
 
-  /// (303): Nasal root area, used to adjust the height of the nasal root. Value range is [0, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （303）：鼻根区域，用于调整鼻根高度。取值范围为 [0, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(303)
   faceShapeAreaNoseroot,
 
-  /// (304): Nose bridge area, used to adjust the height of the nose bridge. Value range is [0, 100], default is 50. The larger the value, the more noticeable the adjustment.
+  /// （304）：鼻梁区域，用于调整鼻梁高度。取值范围为 [0, 100]，默认值为 50。数值越大，调整越明显。
   @JsonValue(304)
   faceShapeAreaNosebridge,
 
-  /// (305): Nose tip area, used to adjust the shape of the nose tip. Value range is [0, 100], default is 50. The larger the value, the more noticeable the adjustment.
+  /// （305）：鼻尖区域，用于调整鼻尖形态。取值范围为 [0, 100]，默认值为 50。数值越大，调整越明显。
   @JsonValue(305)
   faceShapeAreaNosetip,
 
-  /// (306): Overall nose area, used to adjust the overall nose shape. Value range is [-100, 100], default is 50. The greater the absolute value, the more noticeable the adjustment; negative values indicate the opposite direction.
+  /// （306）：整体鼻子区域，用于统一调整鼻部形态。取值范围为 [-100, 100]，默认值为 50。绝对值越大，调整越明显，负值表示相反方向。
   @JsonValue(306)
   faceShapeAreaNosegeneral,
 
-  /// (400): Mouth area, used to achieve a larger mouth effect. Value range is [-100, 100], default is 20. The greater the absolute value, the more noticeable the adjustment; negative values indicate the opposite direction.
+  /// （400）：嘴巴区域，用于实现大嘴效果。取值范围为 [-100, 100]，默认值为 20。绝对值越大，调整越明显，负值表示相反方向。
   @JsonValue(400)
   faceShapeAreaMouthscale,
 
-  /// (401): Mouth position area, used to adjust the overall position of the mouth. Value range is [0, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （401）：嘴巴位置区域，用于调整嘴巴整体位置。取值范围为 [0, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(401)
   faceShapeAreaMouthposition,
 
-  /// (402): Smile corner area, used to adjust the degree of mouth corner lift. Value range is [0, 1], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （402）：嘴角微笑区域，用于调整嘴角上扬程度。取值范围为 [0, 1]，默认值为 0。数值越大，调整越明显。
   @JsonValue(402)
   faceShapeAreaMouthsmile,
 
-  /// (403): Lip shape area, used to adjust the shape of the lips. Value range is [0, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （403）：唇形区域，用于调整唇部形态。取值范围为 [0, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(403)
   faceShapeAreaMouthlip,
 
-  /// (500): Eyebrow position area, used to adjust the overall position of the eyebrows. Value range is [-100, 100], default is 0. The greater the absolute value, the more noticeable the adjustment; negative values indicate the opposite direction.
+  /// （500）：眉毛位置区域，用于调整眉毛整体位置。取值范围为 [-100, 100]，默认值为 0。绝对值越大，调整越明显，负值表示相反方向。
   @JsonValue(500)
   faceShapeAreaEyebrowposition,
 
-  /// (501): Eyebrow thickness area, used to adjust eyebrow thickness. Value range is [-100, 100], default is 0. The larger the value, the more noticeable the adjustment.
+  /// （501）：眉毛粗细区域，用于调整眉毛粗细。取值范围为 [-100, 100]，默认值为 0。数值越大，调整越明显。
   @JsonValue(501)
   faceShapeAreaEyebrowthickness,
 }
@@ -5628,17 +5626,17 @@ extension FaceShapeAreaExt on FaceShapeArea {
   }
 }
 
-/// Face shaping style options.
+/// 美型风格选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class FaceShapeBeautyOptions implements AgoraSerializable {
   /// @nodoc
   const FaceShapeBeautyOptions({this.shapeStyle, this.styleIntensity});
 
-  /// Face shaping style. See FaceShapeBeautyStyle.
+  /// 美型风格，详见 FaceShapeBeautyStyle 。
   @JsonKey(name: 'shapeStyle')
   final FaceShapeBeautyStyle? shapeStyle;
 
-  /// Face shaping style intensity. Value range is [0,100], with a default value of 0.0, indicating no face shaping effect. The higher the value, the more noticeable the modification.
+  /// 美型风格强度，取值范围为 [0,100]，其中默认值为 0.0，表示无美型效果。取值越大，修饰部位的改变越明显。
   @JsonKey(name: 'styleIntensity')
   final int? styleIntensity;
 
@@ -5650,20 +5648,20 @@ class FaceShapeBeautyOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$FaceShapeBeautyOptionsToJson(this);
 }
 
-/// Face shaping style makeup effect options.
+/// 美型风格妆特效选项。
 ///
-/// Since Available since v4.4.0.
+/// 自从 自 v4.4.0 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum FaceShapeBeautyStyle {
-  /// (0): (Default) Female style makeup effect.
+  /// （0）：（默认）女性风格妆特效。
   @JsonValue(0)
   faceShapeBeautyStyleFemale,
 
-  /// (1): Male style makeup effect.
+  /// （1）：男性风格妆特效。
   @JsonValue(1)
   faceShapeBeautyStyleMale,
 
-  /// (2): Natural style makeup effect, only minimal adjustments to facial features.
+  /// （2）：自然风格妆特效，仅对面部特征进行最小调整。
   @JsonValue(2)
   faceShapeBeautyStyleNatural,
 }
@@ -5681,23 +5679,23 @@ extension FaceShapeBeautyStyleExt on FaceShapeBeautyStyle {
   }
 }
 
-/// Filter effect options.
+/// 滤镜效果选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class FilterEffectOptions implements AgoraSerializable {
   /// @nodoc
   const FilterEffectOptions({this.path, this.strength});
 
-  /// Local absolute path to the 3D cube map file used to implement custom filter effects. The referenced .cube file must strictly follow the Cube LUT (Lookup Table) specification, otherwise the filter effect will not take effect. Below is an example of a .cube file: LUT_3D_SIZE 32
+  /// 3D 立方体贴图文件的本地绝对路径，该文件用于实现自定义滤镜效果。引用的 .cube 文件必须严格遵循立方体查找表（Cube LUT）规范，否则滤镜效果无法生效。以下为 .cube 文件的示例： LUT_3D_SIZE 32
   /// 0.0039215689 0 0.0039215682
   /// 0.0086021447 0.0037950677 0
   /// ...
   /// 0.0728652592 0.0039215689 0
-  ///  The first line of the cube map file contains the LUT_3D_SIZE identifier, indicating the size of the 3D lookup table. Currently, only a LUT size of 32 is supported.
-  ///  The SDK provides a built-in built_in_whiten_filter.cube file. Passing the absolute path of this file applies a whitening filter effect.
+  ///  立方体贴图文件首行的 LUT_3D_SIZE 标识符表示三维查找表的尺寸，滤镜效果的 LUT 尺寸目前仅支持设为 32。
+  ///  SDK 提供了一个内置的 built_in_whiten_filter.cube 文件，传入该文件的绝对路径可实现美白滤镜效果。
   @JsonKey(name: 'path')
   final String? path;
 
-  /// Filter effect intensity. Value range is [0.0,1.0], where 0.0 indicates no filter effect. Default value is 0.5. The higher the value, the stronger the filter effect.
+  /// 滤镜效果强度，取值范围为 [0.0,1.0]，其中 0.0 表示无滤镜效果，默认值为 0.5。取值越大，滤镜效果越强。
   @JsonKey(name: 'strength')
   final double? strength;
 
@@ -5709,17 +5707,17 @@ class FilterEffectOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$FilterEffectOptionsToJson(this);
 }
 
-/// Low light enhancement options.
+/// 暗光增强选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LowlightEnhanceOptions implements AgoraSerializable {
   /// @nodoc
   const LowlightEnhanceOptions({this.mode, this.level});
 
-  /// Low light enhancement mode. See LowLightEnhanceMode.
+  /// 暗光增强模式。详见 LowLightEnhanceMode 。
   @JsonKey(name: 'mode')
   final LowLightEnhanceMode? mode;
 
-  /// Low light enhancement level. See LowLightEnhanceLevel.
+  /// 暗光增强等级。详见 LowLightEnhanceLevel 。
   @JsonKey(name: 'level')
   final LowLightEnhanceLevel? level;
 
@@ -5731,14 +5729,14 @@ class LowlightEnhanceOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LowlightEnhanceOptionsToJson(this);
 }
 
-/// Low-light enhancement mode.
+/// 暗光增强模式。
 @JsonEnum(alwaysCreate: true)
 enum LowLightEnhanceMode {
-  /// 0: (Default) Auto mode. The SDK automatically enables or disables the low-light enhancement feature based on ambient brightness to provide appropriate fill light and prevent overexposure.
+  /// 0:（默认）自动模式。SDK 会根据环境光亮度自动开启或关闭暗光增强功能，以适时补光和防止过曝。
   @JsonValue(0)
   lowLightEnhanceAuto,
 
-  /// 1: Manual mode. You need to manually enable or disable the low-light enhancement feature.
+  /// 1：手动模式。用户需手动开启或关闭暗光增强功能。
   @JsonValue(1)
   lowLightEnhanceManual,
 }
@@ -5756,14 +5754,14 @@ extension LowLightEnhanceModeExt on LowLightEnhanceMode {
   }
 }
 
-/// Low-light enhancement level.
+/// 暗光增强等级。
 @JsonEnum(alwaysCreate: true)
 enum LowLightEnhanceLevel {
-  /// 0: (Default) High-quality low-light enhancement. Processes video brightness, detail, and noise. Offers moderate performance consumption and processing speed, with optimal overall image quality.
+  /// 0:（默认）优先画质的暗光增强，会处理视频图像的亮度、细节、噪声，消耗的性能适中，处理速度适中，综合画质最优。
   @JsonValue(0)
   lowLightEnhanceLevelHighQuality,
 
-  /// 1: Performance-prioritized low-light enhancement. Processes video brightness and detail. Consumes less performance and processes faster.
+  /// 1：优先性能的暗光增强，会处理视频图像的亮度、细节，消耗的性能较少，处理速度较快。
   @JsonValue(1)
   lowLightEnhanceLevelFast,
 }
@@ -5781,17 +5779,17 @@ extension LowLightEnhanceLevelExt on LowLightEnhanceLevel {
   }
 }
 
-/// Video denoising options.
+/// 视频降噪选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class VideoDenoiserOptions implements AgoraSerializable {
   /// @nodoc
   const VideoDenoiserOptions({this.mode, this.level});
 
-  /// Video denoising mode.
+  /// 视频降噪模式。
   @JsonKey(name: 'mode')
   final VideoDenoiserMode? mode;
 
-  /// Video denoising level.
+  /// 视频降噪等级。
   @JsonKey(name: 'level')
   final VideoDenoiserLevel? level;
 
@@ -5803,14 +5801,14 @@ class VideoDenoiserOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$VideoDenoiserOptionsToJson(this);
 }
 
-/// Video denoising mode.
+/// 视频降噪模式。
 @JsonEnum(alwaysCreate: true)
 enum VideoDenoiserMode {
-  /// 0: (Default) Auto mode. The SDK automatically enables or disables video denoising based on ambient light brightness.
+  /// 0:（默认）自动模式。SDK 会根据环境光亮度自动开启或关闭视频降噪功能。
   @JsonValue(0)
   videoDenoiserAuto,
 
-  /// 1: Manual mode. You need to manually enable or disable video denoising.
+  /// 1：手动模式。用户需手动开启或关闭视频降噪功能。
   @JsonValue(1)
   videoDenoiserManual,
 }
@@ -5828,14 +5826,14 @@ extension VideoDenoiserModeExt on VideoDenoiserMode {
   }
 }
 
-/// Video denoising level.
+/// 视频降噪等级。
 @JsonEnum(alwaysCreate: true)
 enum VideoDenoiserLevel {
-  /// 0: (Default) Video denoising prioritizing image quality. Balances performance consumption and denoising effect. Moderate performance consumption and denoising speed, optimal overall image quality.
+  /// 0:（默认）优先画质的视频降噪。是在性能消耗和视频降噪效果中取平衡的等级。性能消耗适中，视频降噪速度适中，综合画质最优。
   @JsonValue(0)
   videoDenoiserLevelHighQuality,
 
-  /// 1: Video denoising prioritizing performance. Focuses on saving performance at the cost of denoising effect. Lower performance consumption and faster denoising speed. To avoid noticeable trailing effects in processed video, it is recommended to use this setting when the camera is stationary.
+  /// 1：优先性能的视频降噪。是在性能消耗和视频降噪效果中侧重于节省性能的等级。性能消耗较少，视频降噪速度较快。为避免处理后的视频有明显的拖影效果，建议你在摄像头固定的情况下使用该设置。
   @JsonValue(1)
   videoDenoiserLevelFast,
 }
@@ -5853,19 +5851,19 @@ extension VideoDenoiserLevelExt on VideoDenoiserLevel {
   }
 }
 
-/// Color enhancement options.
+/// 色彩增强选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ColorEnhanceOptions implements AgoraSerializable {
   /// @nodoc
   const ColorEnhanceOptions({this.strengthLevel, this.skinProtectLevel});
 
-  /// Color enhancement level. Value range is [0.0, 1.0]. 0.0 means no color enhancement is applied to the video. The higher the value, the stronger the color enhancement. Default is 0.5.
+  /// 色彩增强程度。取值范围为 [0.0,1.0]。 0.0 表示不对视频进行色彩增强。取值越大，色彩增强的程度越大。默认值为 0.5 。
   @JsonKey(name: 'strengthLevel')
   final double? strengthLevel;
 
-  /// Skin tone protection level. Value range is [0.0, 1.0]. 0.0 means no skin tone protection is applied. The higher the value, the stronger the protection. Default is 1.0.
-  ///  When the color enhancement level is high, facial skin tones may appear distorted. You need to set the skin tone protection level.
-  ///  A higher skin tone protection level slightly reduces the color enhancement effect. Therefore, to achieve the best color enhancement effect, it is recommended that you dynamically adjust strengthLevel and skinProtectLevel to achieve the optimal result.
+  /// 肤色保护程度。取值范围为 [0.0,1.0]。 0.0 表示不对肤色进行保护。取值越大，肤色保护的程度越大。默认值为 1.0 。
+  ///  当色彩增强程度较大时，人像肤色会明显失真，你需要设置肤色保护程度；
+  ///  肤色保护程度较大时，色彩增强效果会略微降低。 因此，为获取最佳的色彩增强效果，建议你动态调节 strengthLevel 和 skinProtectLevel 以实现最合适的效果。
   @JsonKey(name: 'skinProtectLevel')
   final double? skinProtectLevel;
 
@@ -5877,28 +5875,28 @@ class ColorEnhanceOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ColorEnhanceOptionsToJson(this);
 }
 
-/// Custom background.
+/// 自定义的背景。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class VirtualBackgroundSource implements AgoraSerializable {
   /// @nodoc
   const VirtualBackgroundSource(
       {this.backgroundSourceType, this.color, this.source, this.blurDegree});
 
-  /// Custom background. See backgroundSourceType.
+  /// 自定义的背景。详见 backgroundSourceType 。
   @JsonKey(name: 'background_source_type')
   final BackgroundSourceType? backgroundSourceType;
 
-  /// Color of the custom background image. The format is a hexadecimal integer defined in RGB, without the # symbol. For example, 0xFFB6C1 represents light pink. The default value is 0xFFFFFF, which represents white. The valid range is [0x000000, 0xffffff]. If the value is invalid, the SDK will replace the original background image with a white background. This parameter takes effect only when the custom background is one of the following types:
-  ///  backgroundColor: The background image is a solid color image of the color passed in this parameter.
-  ///  backgroundImg: If the image in source has a transparent background, the color passed in this parameter will be used to fill the transparent background.
+  /// 自定义的背景图颜色。格式为 RGB 定义下的十六进制整数，不带 # 号，如 0xFFB6C1 表示浅粉色。 默认值为 0xFFFFFF，表示白色。 取值范围为 [0x000000，0xffffff]。如果取值非法，SDK 会用白色背景图替换原背景图。 该参数仅在自定义背景为以下类型时生效，具体效果如下：
+  ///  backgroundColor：背景图为该参数传入颜色的纯色图片。
+  ///  backgroundImg：如果 source 中的图片使用了透明背景，则会使用该参数传入的颜色填充透明背景。
   @JsonKey(name: 'color')
   final int? color;
 
-  /// The absolute local path of the custom background. Supports PNG, JPG, MP4, AVI, MKV, and FLV formats. If the path is invalid, the SDK will use the original background image or a solid color background specified by color. This parameter takes effect only when the custom background type is backgroundImg or backgroundVideo.
+  /// 自定义背景的本地绝对路径。支持 PNG、JPG、MP4、 AVI、 MKV 和 FLV 格式。如果路径无效，SDK 会使用原背景图或 color 指定的纯色背景。 该参数仅在自定义背景图类型为 backgroundImg 或 backgroundVideo 时生效。
   @JsonKey(name: 'source')
   final String? source;
 
-  /// The blur level of the custom background image. This parameter takes effect only when the custom background type is backgroundBlur.
+  /// 自定义背景图的模糊程度。 该参数仅在自定义背景图类型为 backgroundBlur 时生效。
   @JsonKey(name: 'blur_degree')
   final BackgroundBlurDegree? blurDegree;
 
@@ -5910,26 +5908,26 @@ class VirtualBackgroundSource implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$VirtualBackgroundSourceToJson(this);
 }
 
-/// Custom background.
+/// 自定义的背景。
 @JsonEnum(alwaysCreate: true)
 enum BackgroundSourceType {
-  /// 0: Process the background as alpha data without replacement, only segmenting the portrait from the background. After setting this, you can call startLocalVideoTranscoder to achieve a picture-in-picture effect of the portrait.
+  /// 0: 将背景处理为 Alpha 数据，不作替换，仅分割人像和背景。设置后，你可以调用 startLocalVideoTranscoder ，实现人像画中画的效果。
   @JsonValue(0)
   backgroundNone,
 
-  /// 1: (Default) Background is a solid color.
+  /// 1:（默认）背景为纯色。
   @JsonValue(1)
   backgroundColor,
 
-  /// 2: Background is an image in PNG or JPG format.
+  /// 2: 背景为 PNG、JPG 格式的图片。
   @JsonValue(2)
   backgroundImg,
 
-  /// 3: Background is a blurred version of the original.
+  /// 3: 背景为虚化处理后的背景。
   @JsonValue(3)
   backgroundBlur,
 
-  /// 4: Background is a local video in formats such as MP4, AVI, MKV, FLV, etc.
+  /// 4: 背景为 MP4、AVI、MKV、FLV 等格式的本地视频。
   @JsonValue(4)
   backgroundVideo,
 }
@@ -5947,18 +5945,18 @@ extension BackgroundSourceTypeExt on BackgroundSourceType {
   }
 }
 
-/// Degree of background blur for custom background images.
+/// 自定义背景图的虚化程度。
 @JsonEnum(alwaysCreate: true)
 enum BackgroundBlurDegree {
-  /// 1: Low degree of background blur. Users can almost clearly see the background.
+  /// 1: 自定义背景图的虚化程度为低。用户差不多能看清背景。
   @JsonValue(1)
   blurDegreeLow,
 
-  /// 2: Medium degree of background blur. Users have some difficulty seeing the background clearly.
+  /// 2: 自定义背景图的虚化程度为中。用户较难看清背景。
   @JsonValue(2)
   blurDegreeMedium,
 
-  /// 3: (Default) High degree of background blur. Users can barely see the background.
+  /// 3:（默认）自定义背景图的虚化程度为高。用户很难看清背景。
   @JsonValue(3)
   blurDegreeHigh,
 }
@@ -5976,22 +5974,22 @@ extension BackgroundBlurDegreeExt on BackgroundBlurDegree {
   }
 }
 
-/// Processing properties for background images.
+/// 背景图像的处理属性。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class SegmentationProperty implements AgoraSerializable {
   /// @nodoc
   const SegmentationProperty(
       {this.modelType, this.greenCapacity, this.screenColorType});
 
-  /// Algorithm used for background processing. See SegModelType.
+  /// 进行背景处理的算法。详见 SegModelType 。
   @JsonKey(name: 'modelType')
   final SegModelType? modelType;
 
-  /// Precision range for recognizing background color in the image. Value range is [0,1], default is 0.5. A larger value means a wider range of solid colors can be recognized. If the value is too large, solid colors within the portrait area or along its edges may also be recognized. You are advised to adjust this parameter dynamically based on the actual effect. This parameter takes effect only when modelType is set to segModelGreen.
+  /// 对画面中背景颜色识别的精度范围。取值范围为 [0,1]，默认值为 0.5。取值越大，代表可识别的纯色范围越大。当该参数取值过大时，人像边缘和人像范围内的纯色也会被识别。建议你根据实际效果动态调整该参数的值。 该参数仅在 modelType 设置为 segModelGreen 时生效。
   @JsonKey(name: 'greenCapacity')
   final double? greenCapacity;
 
-  /// Type of screen color. See ScreenColorType.
+  /// 屏幕颜色类型。详见 ScreenColorType 。
   @JsonKey(name: 'screenColorType')
   final ScreenColorType? screenColorType;
 
@@ -6003,14 +6001,14 @@ class SegmentationProperty implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$SegmentationPropertyToJson(this);
 }
 
-/// Algorithm for background processing.
+/// 进行背景处理的算法。
 @JsonEnum(alwaysCreate: true)
 enum SegModelType {
-  /// 1: (Default) Background processing algorithm suitable for all scenarios.
+  /// 1: (默认) 适用于所有场景下的背景处理算法。
   @JsonValue(1)
   segModelAi,
 
-  /// 2: (Green screen only) Background processing algorithm suitable only for green screen backgrounds.
+  /// 2: 仅适用于绿幕背景下的背景处理算法。
   @JsonValue(2)
   segModelGreen,
 }
@@ -6028,18 +6026,18 @@ extension SegModelTypeExt on SegModelType {
   }
 }
 
-/// Screen color types.
+/// 屏幕颜色类型。
 @JsonEnum(alwaysCreate: true)
 enum ScreenColorType {
-  /// (0): Automatically select screen color.
+  /// （0）：自动选择屏幕颜色。
   @JsonValue(0)
   screenColorAuto,
 
-  /// (1): Green screen color.
+  /// （1）：绿色屏幕颜色。
   @JsonValue(1)
   screenColorGreen,
 
-  /// (2): Blue screen color.
+  /// （2）：蓝色屏幕颜色。
   @JsonValue(2)
   screenColorBlue,
 }
@@ -6057,18 +6055,18 @@ extension ScreenColorTypeExt on ScreenColorType {
   }
 }
 
-/// Types of custom audio capture tracks.
+/// 自定义音频采集轨道的类型。
 @JsonEnum(alwaysCreate: true)
 enum AudioTrackType {
   /// @nodoc
   @JsonValue(-1)
   audioTrackInvalid,
 
-  /// 0: Mixable audio track. Supports mixing with other audio streams (e.g., microphone-captured audio) before local playback or publishing to the channel. Has higher latency compared to non-mixable tracks.
+  /// 0：可混流的音频轨道。支持与其他音频流 (例如：麦克风采集的音频流) 混音后，再在本地播放或发布到频道中。与非混流的音频轨道相比，延迟更高。
   @JsonValue(0)
   audioTrackMixable,
 
-  /// 1: Non-mixable audio track. Replaces microphone capture and does not support mixing with other audio streams. Has lower latency compared to mixable tracks. If audioTrackDirect is specified, you must set publishMicrophoneTrack in ChannelMediaOptions to false when calling joinChannel, otherwise joining the channel fails and returns error code -2.
+  /// 1：非混流的音频轨道。会替代麦克风采集，且不支持与其他音频流混音。与可混流的音频轨道相比，延迟更低。 如指定 audioTrackDirect ，则必须在调用 joinChannel 加入频道时，将 ChannelMediaOptions 中的 publishMicrophoneTrack 设为 false ，否则加入频道失败并返回错误码 -2.
   @JsonValue(1)
   audioTrackDirect,
 }
@@ -6086,18 +6084,18 @@ extension AudioTrackTypeExt on AudioTrackType {
   }
 }
 
-/// Configuration options for custom audio tracks.
+/// 自定义音频轨道的配置选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AudioTrackConfig implements AgoraSerializable {
   /// @nodoc
   const AudioTrackConfig(
       {this.enableLocalPlayback, this.enableAudioProcessing});
 
-  /// Whether to enable local audio playback: true : (Default) Enable local audio playback. false : Disable local audio playback.
+  /// 是否启用本地音频播放： true ：(默认) 启用本地音频播放。 false ：不启用本地音频播放。
   @JsonKey(name: 'enableLocalPlayback')
   final bool? enableLocalPlayback;
 
-  /// This setting only takes effect for custom audio capture tracks of type audioTrackDirect. Whether to enable the audio processing module: true : Enable the audio processing module, including echo cancellation (AEC), noise suppression (ANS), and automatic gain control (AGC). false : (Default) Do not enable the audio processing module.
+  /// 该参数设置仅对 audioTrackDirect 类型的自定义音频采集轨道生效。 是否启用音频处理模块： true ：启用音频处理模块，应用回声消除 (AEC)、降噪 (ANS) 和自动增益控制 (AGC) 效果。 false ：（默认）不启用音频处理模块。
   @JsonKey(name: 'enableAudioProcessing')
   final bool? enableAudioProcessing;
 
@@ -6109,66 +6107,66 @@ class AudioTrackConfig implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$AudioTrackConfigToJson(this);
 }
 
-/// Preset voice beautifier options.
+/// 预设的美声效果选项。
 @JsonEnum(alwaysCreate: true)
 enum VoiceBeautifierPreset {
-  /// Original voice, i.e., disables voice beautifier effect.
+  /// 原声，即关闭美声效果。
   @JsonValue(0x00000000)
   voiceBeautifierOff,
 
-  /// Magnetic (male). This setting is only effective for male voices. Do not use it for female voices, or the audio will be distorted.
+  /// 磁性（男）。 该设置仅对男声有效，请勿用于设置女声，否则音频会失真。
   @JsonValue(0x01010100)
   chatBeautifierMagnetic,
 
-  /// Fresh (female). This setting is only effective for female voices. Do not use it for male voices, or the audio will be distorted.
+  /// 清新（女）。 该设置仅对女声有效，请勿用于设置男声，否则音频会失真。
   @JsonValue(0x01010200)
   chatBeautifierFresh,
 
-  /// Vibrant (female). This setting is only effective for female voices. Do not use it for male voices, or the audio will be distorted.
+  /// 活力（女）。 该设置仅对女声有效，请勿用于设置男声，否则音频会失真。
   @JsonValue(0x01010300)
   chatBeautifierVitality,
 
-  /// Singing beautifier.
-  ///  If you call setVoiceBeautifierPreset (singingBeautifier), you can beautify male voices and add a small-room reverb effect. Do not use it for female voices, or the audio will be distorted.
-  ///  If you call setVoiceBeautifierParameters (singingBeautifier, param1, param2), you can beautify male or female voices and add reverb effects.
+  /// 歌唱美声。
+  ///  如果调用 setVoiceBeautifierPreset (singingBeautifier)，你可以美化男声并添加歌声在小房间的混响效果。请勿用于设置女声，否则音频会失真。
+  ///  如果调用 setVoiceBeautifierParameters (singingBeautifier, param1, param2)，你可以美化男声或女声并添加混响效果。
   @JsonValue(0x01020100)
   singingBeautifier,
 
-  /// Vigorous.
+  /// 浑厚。
   @JsonValue(0x01030100)
   timbreTransformationVigorous,
 
-  /// Deep.
+  /// 低沉。
   @JsonValue(0x01030200)
   timbreTransformationDeep,
 
-  /// Mellow.
+  /// 圆润。
   @JsonValue(0x01030300)
   timbreTransformationMellow,
 
-  /// Falsetto.
+  /// 假音。
   @JsonValue(0x01030400)
   timbreTransformationFalsetto,
 
-  /// Full.
+  /// 饱满。
   @JsonValue(0x01030500)
   timbreTransformationFull,
 
-  /// Clear.
+  /// 清澈。
   @JsonValue(0x01030600)
   timbreTransformationClear,
 
-  /// Resounding.
+  /// 高亢。
   @JsonValue(0x01030700)
   timbreTransformationResounding,
 
-  /// Ringing.
+  /// 嘹亮。
   @JsonValue(0x01030800)
   timbreTransformationRinging,
 
-  /// Ultra-high audio quality, which makes audio clearer and more detailed.
-  ///  For better results, it is recommended to set the profile parameter of setAudioProfile2 to audioProfileMusicHighQuality (4) or audioProfileMusicHighQualityStereo (5), and the scenario parameter to audioScenarioGameStreaming (3), before calling setVoiceBeautifierPreset.
-  ///  If the user's audio capture device can highly reproduce audio details, it is recommended not to enable ultra-high audio quality, as the SDK may over-enhance the details and fail to achieve the desired effect.
+  /// 超高音质，即让音频更清晰、细节更丰富。
+  ///  为达到更好的效果，建议在调用 setVoiceBeautifierPreset 前将 setAudioProfile2 的 profile 参数设置为 audioProfileMusicHighQuality (4) 或 audioProfileMusicHighQualityStereo (5)，且 scenario 参数设置为 audioScenarioGameStreaming (3)。
+  ///  如果用户的音频采集设备可以高度还原音频细节，建议你不要开启超高音质，否则 SDK 会过度还原音频细节，达不到预期效果。
   @JsonValue(0x01040100)
   ultraHighQualityVoice,
 }
@@ -6186,96 +6184,96 @@ extension VoiceBeautifierPresetExt on VoiceBeautifierPreset {
   }
 }
 
-/// Preset audio effect options.
+/// 预设的音效选项。
 ///
 /// setAudioProfile profile
-/// Preset audio effects profile
+/// 预设音效 profile
 ///  roomAcousticsVirtualStereo
 ///  roomAcoustics3dVoice
-///  roomAcousticsVirtualSurroundSound audioProfileMusicHighQualityStereo or audioProfileMusicStandardStereo Other preset audio effects (excluding audioEffectOff) audioProfileMusicHighQuality or audioProfileMusicHighQualityStereo
+///  roomAcousticsVirtualSurroundSound audioProfileMusicHighQualityStereo 或 audioProfileMusicStandardStereo 其他预设音效（除 audioEffectOff 以外） audioProfileMusicHighQuality 或 audioProfileMusicHighQualityStereo
 @JsonEnum(alwaysCreate: true)
 enum AudioEffectPreset {
-  /// Original sound, i.e., disables voice effects.
+  /// 原声，即关闭人声音效。
   @JsonValue(0x00000000)
   audioEffectOff,
 
-  /// KTV.
+  /// KTV。
   @JsonValue(0x02010100)
   roomAcousticsKtv,
 
-  /// Concert.
+  /// 演唱会。
   @JsonValue(0x02010200)
   roomAcousticsVocalConcert,
 
-  /// Studio.
+  /// 录音棚。
   @JsonValue(0x02010300)
   roomAcousticsStudio,
 
-  /// Phonograph.
+  /// 留声机。
   @JsonValue(0x02010400)
   roomAcousticsPhonograph,
 
-  /// Virtual stereo, where the SDK renders mono audio into stereo sound.
+  /// 虚拟立体声，即 SDK 将单声道的音频渲染出双声道的音效。
   @JsonValue(0x02010500)
   roomAcousticsVirtualStereo,
 
-  /// Spacious.
+  /// 空旷。
   @JsonValue(0x02010600)
   roomAcousticsSpacial,
 
-  /// Ethereal.
+  /// 空灵。
   @JsonValue(0x02010700)
   roomAcousticsEthereal,
 
-  /// 3D voice, where the SDK renders audio to surround the user. The surround cycle defaults to 10 seconds. After setting this effect, you can also call setAudioEffectParameters to modify the surround cycle. To experience the expected effect of 3D voice, users need to use audio playback devices that support stereo.
+  /// 3D 人声，即 SDK 将音频渲染出在用户周围环绕的效果。环绕周期默认为 10 秒。设置该音效后，你还可以调用 setAudioEffectParameters 修改环绕周期。 启用 3D 人声后，用户需要使用支持双声道的音频播放设备才能听到预期效果。
   @JsonValue(0x02010800)
   roomAcoustics3dVoice,
 
-  /// Virtual surround sound, where the SDK simulates surround sound based on stereo channels to create an immersive effect. To experience the expected effect of virtual surround sound, users need to use audio playback devices that support stereo.
+  /// 虚拟环绕声，即 SDK 在双声道的基础上产生仿真的环绕声场，从而营造出具有环绕感的音效。 启用虚拟环绕声后，用户需要使用支持双声道的音频播放设备才能听到预期效果。
   @JsonValue(0x02010900)
   roomAcousticsVirtualSurroundSound,
 
-  /// Chorus. Agora recommends using this in chorus scenarios to make vocals sound more spatial and three-dimensional.
+  /// 合唱。声网推荐你在合唱场景下使用，使人声更具空间立体感。
   @JsonValue(0x02010D00)
   roomAcousticsChorus,
 
-  /// Deep male voice. Recommended for processing male voices; otherwise, the effect may not be as expected.
+  /// 大叔。 建议用于处理男声，否则无法达到预期效果。
   @JsonValue(0x02020100)
   voiceChangerEffectUncle,
 
-  /// Elderly male. Recommended for processing male voices; otherwise, the effect may not be as expected.
+  /// 老年男性。 建议用于处理男声，否则无法达到预期效果。
   @JsonValue(0x02020200)
   voiceChangerEffectOldman,
 
-  /// Boy. Recommended for processing male voices; otherwise, the effect may not be as expected.
+  /// 男孩。 建议用于处理男声，否则无法达到预期效果。
   @JsonValue(0x02020300)
   voiceChangerEffectBoy,
 
-  /// Young woman. Recommended for processing female voices; otherwise, the effect may not be as expected.
+  /// 少女。 建议用于处理女声，否则无法达到预期效果。
   @JsonValue(0x02020400)
   voiceChangerEffectSister,
 
-  /// Girl. Recommended for processing female voices; otherwise, the effect may not be as expected.
+  /// 女孩。 建议用于处理女声，否则无法达到预期效果。
   @JsonValue(0x02020500)
   voiceChangerEffectGirl,
 
-  /// Pigsy.
+  /// 猪八戒。
   @JsonValue(0x02020600)
   voiceChangerEffectPigking,
 
-  /// Hulk.
+  /// 绿巨人。
   @JsonValue(0x02020700)
   voiceChangerEffectHulk,
 
-  /// R&B.
+  /// R&B。
   @JsonValue(0x02030100)
   styleTransformationRnb,
 
-  /// Pop.
+  /// 流行。
   @JsonValue(0x02030200)
   styleTransformationPopular,
 
-  /// Electronic voice, where the SDK corrects the pitch based on the natural major scale with C as the tonic. After setting this effect, you can also call setAudioEffectParameters to adjust the base scale and tonic pitch.
+  /// 电音，即 SDK 以主音音高为 C 的自然大调为基础修正音频的实际音高。设置该音效后，你还可以调用 setAudioEffectParameters 调整修音的基础调式和主音音高。
   @JsonValue(0x02040100)
   pitchCorrection,
 }
@@ -6293,26 +6291,26 @@ extension AudioEffectPresetExt on AudioEffectPreset {
   }
 }
 
-/// Preset voice conversion options.
+/// 预设的变声效果选项。
 @JsonEnum(alwaysCreate: true)
 enum VoiceConversionPreset {
-  /// Original voice, i.e., disables voice conversion effect.
+  /// 原声，即关闭变声效果。
   @JsonValue(0x00000000)
   voiceConversionOff,
 
-  /// Neutral. To avoid audio distortion, make sure to apply this effect only to female voices.
+  /// 中性。为避免音频失真，请确保仅对女声设置该效果。
   @JsonValue(0x03010100)
   voiceChangerNeutral,
 
-  /// Sweet. To avoid audio distortion, make sure to apply this effect only to female voices.
+  /// 甜美。为避免音频失真，请确保仅对女声设置该效果。
   @JsonValue(0x03010200)
   voiceChangerSweet,
 
-  /// Steady. To avoid audio distortion, make sure to apply this effect only to male voices.
+  /// 稳重。为避免音频失真，请确保仅对男声设置该效果。
   @JsonValue(0x03010300)
   voiceChangerSolid,
 
-  /// Deep. To avoid audio distortion, make sure to apply this effect only to male voices.
+  /// 低沉。为避免音频失真，请确保仅对男声设置该效果。
   @JsonValue(0x03010400)
   voiceChangerBass,
 
@@ -6374,18 +6372,18 @@ extension VoiceConversionPresetExt on VoiceConversionPreset {
   }
 }
 
-/// Preset headphone equalizer types.
+/// 预设的耳机均衡器类型。
 @JsonEnum(alwaysCreate: true)
 enum HeadphoneEqualizerPreset {
-  /// Turn off headphone equalizer and listen to original audio.
+  /// 关闭耳机均衡器，收听原始音频。
   @JsonValue(0x00000000)
   headphoneEqualizerOff,
 
-  /// Use over-ear headphone equalizer.
+  /// 使用头戴式耳机的均衡器。
   @JsonValue(0x04000001)
   headphoneEqualizerOverear,
 
-  /// Use in-ear headphone equalizer.
+  /// 使用入耳式耳机的均衡器。
   @JsonValue(0x04000002)
   headphoneEqualizerInear,
 }
@@ -6403,46 +6401,46 @@ extension HeadphoneEqualizerPresetExt on HeadphoneEqualizerPreset {
   }
 }
 
-/// AI tuner voice effect types.
+/// AI 调音器音效类型。
 @JsonEnum(alwaysCreate: true)
 enum VoiceAiTunerType {
-  /// 0: Mature male voice. A deep and magnetic male voice.
+  /// 0：大叔音。低沉而有磁性的男声。
   @JsonValue(0)
   voiceAiTunerMatureMale,
 
-  /// 1: Fresh male voice. A fresh and slightly sweet male voice.
+  /// 1：清新男音。清新而略带甜美的男声。
   @JsonValue(1)
   voiceAiTunerFreshMale,
 
-  /// 2: Elegant female voice. A deep and charming female voice.
+  /// 2：御姐音。深沉而富有魅力的女声。
   @JsonValue(2)
   voiceAiTunerElegantFemale,
 
-  /// 3: Sweet girl voice. A high-pitched and cute female voice.
+  /// 3：萝莉音。高亢而可爱的女声。
   @JsonValue(3)
   voiceAiTunerSweetFemale,
 
-  /// 4: Warm male singing voice. A warm and melodious male voice.
+  /// 4：暖男歌声。温暖而悠扬的男声。
   @JsonValue(4)
   voiceAiTunerWarmMaleSinging,
 
-  /// 5: Gentle female singing voice. A soft and delicate female voice.
+  /// 5：温柔女歌声。柔和而细腻的女声。
   @JsonValue(5)
   voiceAiTunerGentleFemaleSinging,
 
-  /// 6: Husky male singing voice. A unique hoarse male voice.
+  /// 6：烟嗓叔音歌声。独特的沙哑男声。
   @JsonValue(6)
   voiceAiTunerHuskyMaleSinging,
 
-  /// 7: Warm elegant female singing voice. A warm and mature female voice.
+  /// 7：温暖御姐歌声。温暖而成熟的女声。
   @JsonValue(7)
   voiceAiTunerWarmElegantFemaleSinging,
 
-  /// 8: Powerful male singing voice. A strong and forceful male voice.
+  /// 8：力量男歌声。强劲而有力的男声。
   @JsonValue(8)
   voiceAiTunerPowerfulMaleSinging,
 
-  /// 9: Dreamy female singing voice. A dreamy and soft female voice.
+  /// 9：梦幻女歌声。梦幻而柔美的女声。
   @JsonValue(9)
   voiceAiTunerDreamyFemaleSinging,
 }
@@ -6460,9 +6458,9 @@ extension VoiceAiTunerTypeExt on VoiceAiTunerType {
   }
 }
 
-/// Audio configuration for screen sharing stream.
+/// 共享屏幕流的音频配置。
 ///
-/// (flutter only) Only applicable when captureAudio is set to true.
+/// 仅适用于 captureAudio 为 true 的场景。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ScreenAudioParameters implements AgoraSerializable {
   /// @nodoc
@@ -6472,15 +6470,15 @@ class ScreenAudioParameters implements AgoraSerializable {
       this.captureSignalVolume,
       this.excludeCurrentProcessAudio});
 
-  /// Audio sampling rate (Hz). Default is 16000.
+  /// 音频采样率 (Hz)。默认值为 16000。
   @JsonKey(name: 'sampleRate')
   final int? sampleRate;
 
-  /// Number of audio channels. Default is 2, which means stereo.
+  /// 声道数。默认值为 2，表示双声道。
   @JsonKey(name: 'channels')
   final int? channels;
 
-  /// Captured system volume. Value range is [0,100]. Default is 100.
+  /// 采集的系统音量。取值范围为 [0,100]。默认值为 100。
   @JsonKey(name: 'captureSignalVolume')
   final int? captureSignalVolume;
 
@@ -6496,7 +6494,7 @@ class ScreenAudioParameters implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ScreenAudioParametersToJson(this);
 }
 
-/// Parameter configuration for screen sharing.
+/// 屏幕共享的参数配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ScreenCaptureParameters implements AgoraSerializable {
   /// @nodoc
@@ -6522,51 +6520,51 @@ class ScreenCaptureParameters implements AgoraSerializable {
   @JsonKey(name: 'audioParams')
   final ScreenAudioParameters? audioParams;
 
-  /// When setting encoding resolution in a document sharing scenario (screenScenarioDocument), choose one of the following:
-  ///  For optimal image quality, set the encoding resolution the same as the capture resolution.
-  ///  For a balance between quality, bandwidth, and performance:
-  ///  If capture resolution is greater than 1920 × 1080, set encoding resolution no lower than 1920 × 1080.
-  ///  If capture resolution is less than 1920 × 1080, set encoding resolution no lower than 1280 × 720. Video encoding resolution of the screen sharing stream. See VideoDimensions. Default is 1920 × 1080, i.e., 2073600 pixels. This pixel count is used for billing. If the aspect ratio of the shared screen resolution differs from this setting, the SDK encodes according to the following strategy. Assuming dimensions is set to 1920 × 1080:
-  ///  If the screen resolution is smaller than dimensions, e.g., 1000 × 1000, the SDK encodes at 1000 × 1000.
-  ///  If the screen resolution is larger than dimensions, e.g., 2000 × 1500, the SDK encodes at the maximum resolution within dimensions that matches the screen's aspect ratio (4:3), i.e., 1440 × 1080.
+  /// 在共享文档的场景（screenScenarioDocument）下设置编码分辨率时，选择以下两种方式其中之一。
+  ///  如果你需要最优的画质，建议将编码分辨率设置为与采集分辨率相同。
+  ///  如果你希望在画质、带宽和系统性能之间达到相对平衡，则：
+  ///  当采集分辨率大于 1920 × 1080 时，建议编码分辨率不低于 1920 × 1080。
+  ///  当采集分辨率低于 1920 × 1080 时，建议编码分辨率不低于 1280 × 720。 屏幕共享流的视频编码分辨率。详见 VideoDimensions 。默认值为 1920 × 1080，即 2073600 像素。该像素值为计费标准。 当共享的屏幕分辨率宽高比与该值设置不一致时，SDK 按如下策略进行编码。假设 dimensions 设为 1920 × 1080：
+  ///  如果屏幕分辨率小于 dimensions ，如 1000 × 1000，SDK 直接按 1000 × 1000 进行编码。
+  ///  如果屏幕分辨率大于 dimensions ，如 2000 × 1500，SDK 按屏幕分辨率的宽高比，即 4:3，取 dimensions 以内的最大分辨率进行编码，即 1440 × 1080。
   @JsonKey(name: 'dimensions')
   final VideoDimensions? dimensions;
 
-  /// Frame rate of the shared video, in fps. Default is 5. It is recommended not to exceed 15.
+  /// 共享视频的帧率。单位为 fps；默认值为 5，建议不要超过 15。
   @JsonKey(name: 'frameRate')
   final int? frameRate;
 
-  /// Bitrate of the shared video, in Kbps. Default is 0, meaning the SDK calculates a reasonable value based on the current screen resolution.
+  /// 共享视频的码率。单位为 Kbps；默认值为 0，表示 SDK 根据当前共享屏幕的分辨率计算出一个合理的值。
   @JsonKey(name: 'bitrate')
   final int? bitrate;
 
-  /// Due to macOS system limitations, setting this parameter to false has no effect when sharing the screen (no impact when sharing a window). Whether to capture the mouse cursor during screen sharing: true : (Default) Capture mouse. false : Do not capture mouse.
+  /// 受 macOS 系统限制，在共享屏幕时将该参数设置为 false 无效（共享窗口时无影响）。 是否采集鼠标用于屏幕共享： true :（默认）采集鼠标。 false : 不采集鼠标。
   @JsonKey(name: 'captureMouseCursor')
   final bool? captureMouseCursor;
 
-  /// Due to macOS system limitations, when setting this member to bring a window to the front, only the main window is brought to the front if the app has multiple windows. When calling startScreenCaptureByWindowId to share a window, whether to bring the window to the front: true : Bring to front. false : (Default) Do not bring to front.
+  /// 由于 macOS 系统限制，设置该成员将窗口前置时，如果当前的应用存在多个窗口，只会将主窗口前置。 调用 startScreenCaptureByWindowId 方法共享窗口时，是否将该窗口前置： true : 前置窗口。 false :（默认）不前置窗口。
   @JsonKey(name: 'windowFocus')
   final bool? windowFocus;
 
-  /// List of window IDs to exclude. When calling startScreenCaptureByDisplayId to start screen sharing, you can use this parameter to exclude specific windows. You can also dynamically exclude windows by passing this parameter when calling updateScreenCaptureParameters to update screen sharing configuration.
+  /// 待屏蔽窗口的 ID 列表。调用 startScreenCaptureByDisplayId 开启屏幕共享时，你可以通过该参数屏蔽指定的窗口。你可以在调用 updateScreenCaptureParameters 更新屏幕共享的配置参数时，通过该参数动态屏蔽指定的窗口。
   @JsonKey(name: 'excludeWindowList', readValue: readIntPtrList)
   final List<int>? excludeWindowList;
 
-  /// Number of windows to exclude. On Windows, the maximum value is 24. If exceeded, window exclusion does not take effect.
+  /// 待屏蔽窗口的数量。 在 Windows 平台上，该参数最大值不超过 24，如果超过该值，则屏蔽窗口功能失效。
   @JsonKey(name: 'excludeWindowCount')
   final int? excludeWindowCount;
 
-  /// (macOS and Windows only) Width of the highlight border (px). Default is 5. Valid range is (0,50]. This parameter takes effect only when highLighted is set to true.
+  /// (仅适用于 macOS 和 Windows)描边的宽度 (px)。默认值为 5，取值范围为 (0,50]。 该参数仅在 highLighted 设置为 true 时生效。
   @JsonKey(name: 'highLightWidth')
   final int? highLightWidth;
 
-  /// (macOS and Windows only)
-  ///  On Windows, specifies the ARGB color of the highlight. Default is 0xFF8CBF26.
-  ///  On macOS, COLOR_CLASS refers to NSColor.
+  /// (仅适用于 macOS 和 Windows)
+  ///  在 Windows 平台上，指描边的 ARGB 颜色。默认值为 0xFF8CBF26。
+  ///  在 macOS 平台上， COLOR_CLASS 指 NSColor 。
   @JsonKey(name: 'highLightColor')
   final int? highLightColor;
 
-  /// When sharing a partial region of a window or screen, if this parameter is set to true, the SDK highlights the entire window or screen. (macOS and Windows only) Whether to highlight the shared window or screen: true : Highlight. false : (Default) Do not highlight.
+  /// 当你在共享窗口或屏幕的部分区域时，如果将该参数设置为 true ，SDK 会对整个窗口或屏幕进行描边。 (仅适用于 macOS 和 Windows)是否对共享的窗口或屏幕进行描边： true : 描边。 false : （默认）不描边。
   @JsonKey(name: 'enableHighLight')
   final bool? enableHighLight;
 
@@ -6578,22 +6576,22 @@ class ScreenCaptureParameters implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ScreenCaptureParametersToJson(this);
 }
 
-/// Audio recording quality.
+/// 录音音质。
 @JsonEnum(alwaysCreate: true)
 enum AudioRecordingQualityType {
-  /// 0: Low quality. 32 kHz sample rate, file size for 10 minutes is about 1.2 MB.
+  /// 0: 低音质。采样率为 32 kHz，录制 10 分钟的文件大小为 1.2 M 左右。
   @JsonValue(0)
   audioRecordingQualityLow,
 
-  /// 1: Medium quality. 32 kHz sample rate, file size for 10 minutes is about 2 MB.
+  /// 1: 中音质。采样率为 32 kHz，录制 10 分钟的文件大小为 2 M 左右。
   @JsonValue(1)
   audioRecordingQualityMedium,
 
-  /// 2: High quality. 32 kHz sample rate, file size for 10 minutes is about 3.75 MB.
+  /// 2: 高音质。采样率为 32 kHz，录制 10 分钟的文件大小为 3.75 M 左右。
   @JsonValue(2)
   audioRecordingQualityHigh,
 
-  /// 3: Ultra-high quality. 32 kHz sample rate, file size for 10 minutes is about 7.5 MB.
+  /// 3: 超高音质。采样率为 32 KHz，录制 10 分钟的文件大小约为 7.5 M 左右。
   @JsonValue(3)
   audioRecordingQualityUltraHigh,
 }
@@ -6611,18 +6609,18 @@ extension AudioRecordingQualityTypeExt on AudioRecordingQualityType {
   }
 }
 
-/// Recording content. Set in startAudioRecording.
+/// 录音内容。在 startAudioRecording 中设置。
 @JsonEnum(alwaysCreate: true)
 enum AudioFileRecordingType {
-  /// 1: Record only the local user's audio.
+  /// 1: 仅录制本地用户的音频。
   @JsonValue(1)
   audioFileRecordingMic,
 
-  /// 2: Record only the audio of all remote users.
+  /// 2: 仅录制所有远端用户的音频。
   @JsonValue(2)
   audioFileRecordingPlayback,
 
-  /// 3: Record the mixed audio of the local and all remote users.
+  /// 3: 录制本地和所有远端用户混音后的音频。
   @JsonValue(3)
   audioFileRecordingMixed,
 }
@@ -6640,18 +6638,18 @@ extension AudioFileRecordingTypeExt on AudioFileRecordingType {
   }
 }
 
-/// Audio encoding content.
+/// 音频编码内容。
 @JsonEnum(alwaysCreate: true)
 enum AudioEncodedFrameObserverPosition {
-  /// 1: Encode only the local user's audio.
+  /// 1: 仅编码本地用户的音频。
   @JsonValue(1)
   audioEncodedFrameObserverPositionRecord,
 
-  /// 2: Encode only all remote users' audio.
+  /// 2: 仅编码所有远端用户的音频。
   @JsonValue(2)
   audioEncodedFrameObserverPositionPlayback,
 
-  /// 3: Encode the mixed audio of local and all remote users.
+  /// 3: 编码本地和所有远端用户混音后的音频。
   @JsonValue(3)
   audioEncodedFrameObserverPositionMixed,
 }
@@ -6669,7 +6667,7 @@ extension AudioEncodedFrameObserverPositionExt
   }
 }
 
-/// Recording configuration.
+/// 录音配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AudioRecordingConfiguration implements AgoraSerializable {
   /// @nodoc
@@ -6681,35 +6679,35 @@ class AudioRecordingConfiguration implements AgoraSerializable {
       this.quality,
       this.recordingChannel});
 
-  /// The absolute path where the recording file is saved locally. Must include the file name and extension. For example: C:\music\audio.aac. Make sure the specified path exists and is writable.
+  /// 录音文件在本地保存的绝对路径，需精确到文件名及格式。例如： C:\music\audio.aac 。 请确保你指定的路径存在并且可写。
   @JsonKey(name: 'filePath')
   final String? filePath;
 
-  /// Specifies whether to encode the audio data: true : Encode the audio data using AAC. false : (Default) Do not encode the audio data; save the raw recorded audio data directly.
+  /// 设置是否编码音频数据： true : 将音频数据用 AAC 编码。 false :（默认）不编码音频数据，直接保存录制的音频数据。
   @JsonKey(name: 'encode')
   final bool? encode;
 
-  /// If you set this parameter to 44100 or 48000, to ensure recording quality, it is recommended to record in WAV format or use AAC files with quality set to audioRecordingQualityMedium or audioRecordingQualityHigh. Recording sample rate (Hz).
+  /// 如果把该参数设为 44100 或 48000，为保证录音效果，建议录制 WAV 文件或 quality 为 audioRecordingQualityMedium 或 audioRecordingQualityHigh 的 AAC 文件。 录音采样率（Hz）。
   ///  16000
-  ///  32000 (default)
+  ///  32000 （默认）
   ///  44100
   ///  48000
   @JsonKey(name: 'sampleRate')
   final int? sampleRate;
 
-  /// Recording content. See AudioFileRecordingType.
+  /// 录音内容。详见 AudioFileRecordingType 。
   @JsonKey(name: 'fileRecordingType')
   final AudioFileRecordingType? fileRecordingType;
 
-  /// Recording quality. See audiorecordingqualitytype. This parameter applies only to AAC files.
+  /// 录音音质。详见 audiorecordingqualitytype 。 该参数仅适用于 AAC 文件。
   @JsonKey(name: 'quality')
   final AudioRecordingQualityType? quality;
 
-  /// The actual recorded audio channel depends on the captured audio channel:
-  ///  If the captured audio is mono and recordingChannel is set to 2, the recorded audio will be stereo with duplicated mono data, not true stereo.
-  ///  If the captured audio is stereo and recordingChannel is set to 1, the recorded audio will be mono with mixed stereo data. In addition, the integration scheme may affect the final recorded audio channel. If you want to record true stereo, please [contact technical support](https://ticket.shengwang.cn/) for assistance. Number of audio channels to record. Supported values:
-  ///  1: (Default) Mono.
-  ///  2: Stereo.
+  /// 实际录制的音频声道与你采集的音频声道有关：
+  ///  如果采集的音频为单声道， recordingChannel 设为 2 ， 则录制的音频为经过单声道数据拷贝后的双声道数据，而不是立体声。
+  ///  如果采集的音频为双声道， recordingChannel 设为 1 ，则录制的音频为经过双声道数据混合后的单声道数据。 此外，集成方案也会影响最终录制的音频声道。因此，如果你希望录制立体声，请[联系技术支持](https://ticket.shengwang.cn/)协助。 录制的音频声道。目前支持如下取值：
+  ///  1:（默认）单声道。
+  ///  2: 双声道。
   @JsonKey(name: 'recordingChannel')
   final int? recordingChannel;
 
@@ -6721,17 +6719,17 @@ class AudioRecordingConfiguration implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$AudioRecordingConfigurationToJson(this);
 }
 
-/// Observer settings for encoded audio.
+/// 编码后音频的观测器设置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AudioEncodedFrameObserverConfig implements AgoraSerializable {
   /// @nodoc
   const AudioEncodedFrameObserverConfig({this.postionType, this.encodingType});
 
-  /// Audio encoding content. See AudioEncodedFrameObserverPosition.
+  /// 音频编码内容。详见 AudioEncodedFrameObserverPosition 。
   @JsonKey(name: 'postionType')
   final AudioEncodedFrameObserverPosition? postionType;
 
-  /// Audio encoding type. See AudioEncodingType.
+  /// 音频编码类型。详见 AudioEncodingType 。
   @JsonKey(name: 'encodingType')
   final AudioEncodingType? encodingType;
 
@@ -6744,7 +6742,7 @@ class AudioEncodedFrameObserverConfig implements AgoraSerializable {
       _$AudioEncodedFrameObserverConfigToJson(this);
 }
 
-/// Observer for encoded audio.
+/// 编码后音频的观测器。
 class AudioEncodedFrameObserver {
   /// @nodoc
   const AudioEncodedFrameObserver({
@@ -6753,65 +6751,65 @@ class AudioEncodedFrameObserver {
     this.onMixedAudioEncodedFrame,
   });
 
-  /// Retrieves the audio encoded data of the local user.
+  /// 获取本地用户的音频编码数据。
   ///
-  /// After calling registerAudioEncodedFrameObserver and setting the audio encoded content to audioEncodedFrameObserverPositionRecord, you can use this callback to get the audio encoded data of the local user.
+  /// 调用 registerAudioEncodedFrameObserver 并将音频编码内容设为 audioEncodedFrameObserverPositionRecord 后，你可以通过该回调获取本地用户的音频编码数据。
   ///
-  /// * [frameBuffer] Audio buffer.
-  /// * [length] Length of the audio data in bytes.
-  /// * [audioEncodedFrameInfo] Information about the encoded audio. See EncodedAudioFrameInfo.
+  /// * [frameBuffer] 音频 buffer。
+  /// * [length] 音频数据长度，单位为字节。
+  /// * [audioEncodedFrameInfo] 编码后音频的信息。详见 EncodedAudioFrameInfo 。
   final void Function(Uint8List frameBuffer, int length,
       EncodedAudioFrameInfo audioEncodedFrameInfo)? onRecordAudioEncodedFrame;
 
-  /// Retrieves the audio encoded data of all remote users.
+  /// 获取所有远端用户的音频编码数据。
   ///
-  /// After calling registerAudioEncodedFrameObserver and setting the audio encoded content to audioEncodedFrameObserverPositionPlayback, you can use this callback to get the audio encoded data of all remote users.
+  /// 调用 registerAudioEncodedFrameObserver 并将音频编码内容设为 audioEncodedFrameObserverPositionPlayback 后，你可以通过该回调获取所有远端用户的音频编码数据。
   ///
-  /// * [frameBuffer] Audio buffer.
-  /// * [length] Length of the audio data in bytes.
-  /// * [audioEncodedFrameInfo] Information about the encoded audio. See EncodedAudioFrameInfo.
+  /// * [frameBuffer] 音频 buffer。
+  /// * [length] 音频数据长度，单位为字节。
+  /// * [audioEncodedFrameInfo] 编码后音频的信息。详见 EncodedAudioFrameInfo 。
   final void Function(Uint8List frameBuffer, int length,
       EncodedAudioFrameInfo audioEncodedFrameInfo)? onPlaybackAudioEncodedFrame;
 
-  /// Retrieves the encoded audio data after mixing local and all remote users' audio.
+  /// 获取本地和所有远端用户混音后的音频编码数据。
   ///
-  /// After calling registerAudioEncodedFrameObserver and setting the audio encoding content to audioEncodedFrameObserverPositionMixed, you can use this callback to get the mixed and encoded audio data from the local and all remote users.
+  /// 调用 registerAudioEncodedFrameObserver 并将音频编码内容设为 audioEncodedFrameObserverPositionMixed 后，你可以通过该回调获取本地和所有远端用户混音、编码后的音频数据。
   ///
-  /// * [frameBuffer] Audio buffer.
-  /// * [length] Length of the audio data in bytes.
-  /// * [audioEncodedFrameInfo] Information about the encoded audio. See EncodedAudioFrameInfo.
+  /// * [frameBuffer] 音频 buffer。
+  /// * [length] 音频数据长度，单位为字节。
+  /// * [audioEncodedFrameInfo] 编码后音频的信息。详见 EncodedAudioFrameInfo 。
   final void Function(Uint8List frameBuffer, int length,
       EncodedAudioFrameInfo audioEncodedFrameInfo)? onMixedAudioEncodedFrame;
 }
 
-/// Access region, i.e., the region of the server that the SDK connects to.
+/// 访问区域，即 SDK 连接的服务器所在的区域。
 @JsonEnum(alwaysCreate: true)
 enum AreaCode {
-  /// Mainland China.
+  /// 中国大陆。
   @JsonValue(0x00000001)
   areaCodeCn,
 
-  /// North America region.
+  /// 北美区域。
   @JsonValue(0x00000002)
   areaCodeNa,
 
-  /// Europe region.
+  /// 欧洲区域。
   @JsonValue(0x00000004)
   areaCodeEu,
 
-  /// Asia region excluding China.
+  /// 除中国以外的亚洲区域。
   @JsonValue(0x00000008)
   areaCodeAs,
 
-  /// Japan.
+  /// 日本。
   @JsonValue(0x00000010)
   areaCodeJp,
 
-  /// India.
+  /// 印度。
   @JsonValue(0x00000020)
   areaCodeIn,
 
-  /// Global.
+  /// 全球。
   @JsonValue((0xFFFFFFFF))
   areaCodeGlob,
 }
@@ -6878,56 +6876,56 @@ extension AreaCodeExExt on AreaCodeEx {
   }
 }
 
-/// Error codes for media stream relay across channels.
+/// 跨频道媒体流转发出错的错误码。
 @JsonEnum(alwaysCreate: true)
 enum ChannelMediaRelayError {
-  /// 0: Everything works fine.
+  /// 0: 一切正常。
   @JsonValue(0)
   relayOk,
 
-  /// 1: Server error response.
+  /// 1: 服务器回应出错。
   @JsonValue(1)
   relayErrorServerErrorResponse,
 
-  /// 2: No response from the server.
-  /// This error may be caused by poor network conditions. If this error is reported when initiating cross-channel media relay, you can try again later; if reported during the relay process, you can call the leaveChannel method to leave the channel.
-  /// This error may also occur if the current App ID has not enabled cross-channel media relay. You can [contact technical support](https://ticket.shengwang.cn/) to apply for enabling it.
+  /// 2: 服务器无回应。
+  /// 该错误可能是网络状况不佳导致的。如果在发起跨频道连麦时报告该错误，你可以稍后重试；如果在跨频道连麦过程中报告该错误，你可以调用 leaveChannel 方法离开频道。
+  /// 该错误也可能是由于当前的 App ID 未开启跨频道连麦导致的。你可以[联系技术支持](https://ticket.shengwang.cn/)申请开通跨频道连麦。
   @JsonValue(2)
   relayErrorServerNoResponse,
 
-  /// 3: SDK failed to get the service, possibly due to limited server resources.
+  /// 3: SDK 无法获取服务，可能是因为服务器资源有限导致。
   @JsonValue(3)
   relayErrorNoResourceAvailable,
 
-  /// 4: Failed to initiate media stream relay across channels.
+  /// 4: 发起跨频道转发媒体流请求失败。
   @JsonValue(4)
   relayErrorFailedJoinSrc,
 
-  /// 5: Failed to accept media stream relay across channels.
+  /// 5: 接受跨频道转发媒体流请求失败。
   @JsonValue(5)
   relayErrorFailedJoinDest,
 
-  /// 6: Server failed to receive media stream relay across channels.
+  /// 6: 服务器接收跨频道转发媒体流失败。
   @JsonValue(6)
   relayErrorFailedPacketReceivedFromSrc,
 
-  /// 7: Server failed to send media stream relay across channels.
+  /// 7: 服务器发送跨频道转发媒体流失败。
   @JsonValue(7)
   relayErrorFailedPacketSentToDest,
 
-  /// 8: SDK disconnected from the server due to poor network quality. You can call the leaveChannel method to leave the current channel.
+  /// 8: SDK 因网络质量不佳与服务器断开。你可以调用 leaveChannel 方法离开当前频道。
   @JsonValue(8)
   relayErrorServerConnectionLost,
 
-  /// 9: Internal server error.
+  /// 9: 服务器内部出错。
   @JsonValue(9)
   relayErrorInternalError,
 
-  /// 10: Token of the source channel has expired.
+  /// 10: 源频道的 Token 已过期。
   @JsonValue(10)
   relayErrorSrcTokenExpired,
 
-  /// 11: Token of the destination channel has expired.
+  /// 11: 目标频道的 Token 已过期。
   @JsonValue(11)
   relayErrorDestTokenExpired,
 }
@@ -6945,22 +6943,22 @@ extension ChannelMediaRelayErrorExt on ChannelMediaRelayError {
   }
 }
 
-/// State codes for media stream relay across channels.
+/// 跨频道媒体流转发状态码。
 @JsonEnum(alwaysCreate: true)
 enum ChannelMediaRelayState {
-  /// 0: Initial state. After successfully calling stopChannelMediaRelay to stop media stream relay across channels, onChannelMediaRelayStateChanged will return this state.
+  /// 0: 初始状态。在成功调用 stopChannelMediaRelay 停止跨频道媒体流转发后， onChannelMediaRelayStateChanged 会回调该状态。
   @JsonValue(0)
   relayStateIdle,
 
-  /// 1: SDK is attempting cross-channel connection.
+  /// 1: SDK 尝试跨频道。
   @JsonValue(1)
   relayStateConnecting,
 
-  /// 2: Broadcaster in the source channel has successfully joined the destination channel.
+  /// 2: 源频道主播成功加入目标频道。
   @JsonValue(2)
   relayStateRunning,
 
-  /// 3: An error occurred. See the code parameter in onChannelMediaRelayStateChanged for error details.
+  /// 3: 发生异常，详见 onChannelMediaRelayStateChanged 的 code 参数提示的错误信息。
   @JsonValue(3)
   relayStateFailure,
 }
@@ -6978,21 +6976,21 @@ extension ChannelMediaRelayStateExt on ChannelMediaRelayState {
   }
 }
 
-/// Channel media information.
+/// 频道媒体信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ChannelMediaInfo implements AgoraSerializable {
   /// @nodoc
   const ChannelMediaInfo({this.uid, this.channelName, this.token});
 
-  /// User ID.
+  /// 用户 ID。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// Channel name.
+  /// 频道名。
   @JsonKey(name: 'channelName')
   final String? channelName;
 
-  /// Token used to join the channel.
+  /// 能加入频道的 Token。
   @JsonKey(name: 'token')
   final String? token;
 
@@ -7004,26 +7002,26 @@ class ChannelMediaInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ChannelMediaInfoToJson(this);
 }
 
-/// Configuration information for media stream relay across channels.
+/// 跨频道媒体流转发配置信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ChannelMediaRelayConfiguration implements AgoraSerializable {
   /// @nodoc
   const ChannelMediaRelayConfiguration(
       {this.srcInfo, this.destInfos, this.destCount});
 
-  /// Source channel information ChannelMediaInfo, which includes the following members: channelName : Name of the source channel. Default is NULL, which means the SDK fills in the current channel name. token : The token used to join the source channel. It is generated based on the channelName and uid you set in srcInfo.
-  ///  If App Certificate is not enabled, you can set this parameter to the default value NULL, which means the SDK fills in the App ID.
-  ///  If App Certificate is enabled, you must provide a token generated using the channelName and uid, and the uid must be 0. uid : The UID that identifies the media stream being relayed in the source channel. Default is 0. Do not modify.
+  /// 源频道信息 ChannelMediaInfo ，包含如下成员： channelName ：源频道名。默认值为 NULL ，表示 SDK 填充当前的频道名。 token ：能加入源频道的 token 。由你在 srcInfo 中设置的 channelName 和 uid 生成。
+  ///  如未启用 App Certificate，可直接将该参数设为默认值 NULL ，表示 SDK 填充 App ID。
+  ///  如已启用 App Certificate，则务必填入使用 channelName 和 uid 生成的 token ，且其中的 uid 必须为 0。 uid ：标识源频道中的转发媒体流的 UID。默认值为 0，请勿修改。
   @JsonKey(name: 'srcInfo')
   final ChannelMediaInfo? srcInfo;
 
-  /// If the token for any destination channel expires, all cross-channel relays will stop. Therefore, it is recommended that you set the same expiration duration for the tokens of all destination channels. Destination channel information ChannelMediaInfo, which includes the following members: channelName : Name of the destination channel. token : The token used to join the destination channel. It is generated based on the channelName and uid you set in destInfos.
-  ///  If App Certificate is not enabled, you can set this parameter to the default value NULL, which means the SDK fills in the App ID.
-  ///  If App Certificate is enabled, you must provide a token generated using the channelName and uid. uid : The UID that identifies the media stream being relayed in the destination channel. The value range is 0 to (2^32 - 1). Ensure it is different from all UIDs in the destination channel. Default is 0, which means the SDK assigns a UID randomly.
+  /// 由于目标频道中任意频道的 token 过期会导致所有跨频道推流停止，因此建议你将目标频道的 token 设置为相同的过期时长。 目标频道信息 ChannelMediaInfo ，包含如下成员： channelName ：目标频道的频道名。 token ：能加入目标频道的 token 。由你在 destInfos 中设置的 channelName 和 uid 生成。
+  ///  如未启用 App Certificate，可直接将该参数设为默认值 NULL ，表示 SDK 填充 App ID。
+  ///  如已启用 App Certificate，则务必填入使用 channelName 和 uid 生成的 token 。 uid ：标识目标频道中的转发媒体流的 UID。取值范围为 0 到 (2 32-1），请确保与目标频道中的所有 UID 不同。默认值为 0，表示 SDK 随机分配一个 UID。
   @JsonKey(name: 'destInfos')
   final List<ChannelMediaInfo>? destInfos;
 
-  /// Number of destination channels. Default is 0. Value range is [0,6]. This parameter should match the number of ChannelMediaInfo objects defined in destInfos.
+  /// 目标频道数量，默认值为 0，取值范围为 [0,6]。该参数应与你在 destInfos 中定义的 ChannelMediaInfo 数组的数目一致。
   @JsonKey(name: 'destCount')
   final int? destCount;
 
@@ -7035,13 +7033,13 @@ class ChannelMediaRelayConfiguration implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ChannelMediaRelayConfigurationToJson(this);
 }
 
-/// Uplink network information.
+/// 上行网络信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class UplinkNetworkInfo implements AgoraSerializable {
   /// @nodoc
   const UplinkNetworkInfo({this.videoEncoderTargetBitrateBps});
 
-  /// Target bitrate (bps) of the video encoder.
+  /// 目标视频编码器的码率 (bps)。
   @JsonKey(name: 'video_encoder_target_bitrate_bps')
   final int? videoEncoderTargetBitrateBps;
 
@@ -7126,44 +7124,44 @@ class PeerDownlinkInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$PeerDownlinkInfoToJson(this);
 }
 
-/// Built-in encryption mode.
+/// 内置加密模式。
 ///
-/// It is recommended to use aes128Gcm2 or aes256Gcm2 encryption modes. These modes support salt and offer higher security.
+/// 建议使用 aes128Gcm2 或 aes256Gcm2 加密模式。这两种模式支持使用盐，安全性更高。
 @JsonEnum(alwaysCreate: true)
 enum EncryptionMode {
-  /// 1: 128-bit AES encryption, XTS mode.
+  /// 1: 128 位 AES 加密，XTS 模式。
   @JsonValue(1)
   aes128Xts,
 
-  /// 2: 128-bit AES encryption, ECB mode.
+  /// 2: 128 位 AES 加密，ECB 模式。
   @JsonValue(2)
   aes128Ecb,
 
-  /// 3: 256-bit AES encryption, XTS mode.
+  /// 3: 256 位 AES 加密，XTS 模式。
   @JsonValue(3)
   aes256Xts,
 
-  /// 4: 128-bit SM4 encryption, ECB mode.
+  /// 4: 128 位 SM4 加密，ECB 模式。
   @JsonValue(4)
   sm4128Ecb,
 
-  /// 5: 128-bit AES encryption, GCM mode.
+  /// 5: 128 位 AES 加密，GCM 模式。
   @JsonValue(5)
   aes128Gcm,
 
-  /// 6: 256-bit AES encryption, GCM mode.
+  /// 6: 256 位 AES 加密，GCM 模式。
   @JsonValue(6)
   aes256Gcm,
 
-  /// 7: (Default) 128-bit AES encryption, GCM mode. This encryption mode requires setting a salt (encryptionKdfSalt).
+  /// 7:（默认）128 位 AES 加密，GCM 模式。该加密模式需要设置盐（ encryptionKdfSalt ）。
   @JsonValue(7)
   aes128Gcm2,
 
-  /// 8: 256-bit AES encryption, GCM mode. This encryption mode requires setting a salt (encryptionKdfSalt).
+  /// 8: 256 位 AES 加密，GCM 模式。该加密模式需要设置盐（ encryptionKdfSalt ）。
   @JsonValue(8)
   aes256Gcm2,
 
-  /// Enumeration value boundary.
+  /// 枚举值边界。
   @JsonValue(9)
   modeEnd,
 }
@@ -7181,7 +7179,7 @@ extension EncryptionModeExt on EncryptionMode {
   }
 }
 
-/// Configures built-in encryption mode and key.
+/// 配置内置加密模式和密钥。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class EncryptionConfig implements AgoraSerializable {
   /// @nodoc
@@ -7191,19 +7189,19 @@ class EncryptionConfig implements AgoraSerializable {
       this.encryptionKdfSalt,
       this.datastreamEncryptionEnabled});
 
-  /// Built-in encryption mode. See EncryptionMode. It is recommended to use aes128Gcm2 or aes256Gcm2 encryption modes. These two modes support salt and offer higher security.
+  /// 内置加密模式。详见 EncryptionMode 。建议使用 aes128Gcm2 或 aes256Gcm2 加密模式。这两种模式支持使用盐，安全性更高。
   @JsonKey(name: 'encryptionMode')
   final EncryptionMode? encryptionMode;
 
-  /// Built-in encryption key, of type String, with no length limit. It is recommended to use a 32-byte key. If this parameter is not specified or set to NULL, built-in encryption cannot be enabled, and the SDK returns error code -2.
+  /// 内置加密密钥，字符串类型，长度无限制。建议使用 32 字节的密钥。 如果未指定该参数或将该参数设置为 NULL ，则无法启用内置加密，且 SDK 会返回错误码 -2 。
   @JsonKey(name: 'encryptionKey')
   final String? encryptionKey;
 
-  /// Salt, 32 bytes in length. It is recommended to generate the salt on the server side using OpenSSL. This parameter takes effect only when using aes128Gcm2 or aes256Gcm2 encryption modes. In this case, ensure that the value provided for this parameter is not all 0.
+  /// 盐，长度为 32 字节。建议你在服务端使用 OpenSSL 生成盐。 只有在 aes128Gcm2 或 aes256Gcm2 加密模式下，该参数才生效。此时，需确保填入该参数的值不全为 0 。
   @JsonKey(name: 'encryptionKdfSalt', ignore: true)
   final Uint8List? encryptionKdfSalt;
 
-  /// Whether to enable data stream encryption: true : Enable data stream encryption. false : (Default) Disable data stream encryption.
+  /// 是否开启数据流加密： true ：开启数据流加密。 false ：（默认）关闭数据流加密。
   @JsonKey(name: 'datastreamEncryptionEnabled')
   final bool? datastreamEncryptionEnabled;
 
@@ -7215,26 +7213,26 @@ class EncryptionConfig implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$EncryptionConfigToJson(this);
 }
 
-/// Built-in encryption error type.
+/// 内置加密的错误类型。
 @JsonEnum(alwaysCreate: true)
 enum EncryptionErrorType {
-  /// 0: Internal reason.
+  /// 0: 内部原因。
   @JsonValue(0)
   encryptionErrorInternalFailure,
 
-  /// 1: Media stream decryption error. Make sure the encryption mode or key used by the sender and receiver is the same.
+  /// 1: 媒体流解密错误。请确保接收端和发送端使用的加密模式或密钥一致。
   @JsonValue(1)
   encryptionErrorDecryptionFailure,
 
-  /// 2: Media stream encryption error.
+  /// 2: 媒体流加密错误。
   @JsonValue(2)
   encryptionErrorEncryptionFailure,
 
-  /// 3: Data stream decryption error. Make sure the encryption mode or key used by the sender and receiver is the same.
+  /// 3: 数据流解密错误。请确保接收端和发送端使用的加密模式或密钥一致。
   @JsonValue(3)
   encryptionErrorDatastreamDecryptionFailure,
 
-  /// 4: Data stream encryption error.
+  /// 4: 数据流加密错误。
   @JsonValue(4)
   encryptionErrorDatastreamEncryptionFailure,
 }
@@ -7281,36 +7279,36 @@ extension UploadErrorReasonExt on UploadErrorReason {
   }
 }
 
-/// Error codes after calling renewToken.
+/// 调用 renewToken 后的错误码。
 ///
-/// Since Available since 4.6.0.
+/// 自从 自 v6.6.0 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum RenewTokenErrorCode {
-  /// (0): Token updated successfully.
+  /// （0）：Token 更新成功。
   @JsonValue(0)
   renewTokenSuccess,
 
-  /// (1): Token update failed due to an unknown server error. Check the parameters used to generate the Token, regenerate the Token, and retry renewToken.
+  /// （1）：由于未知的服务器错误，Token 更新失败。建议检查用于生成 Token 的参数，重新生成 Token，并重试 renewToken 。
   @JsonValue(1)
   renewTokenFailure,
 
-  /// (2): Token update failed because the provided Token has expired. Generate a new Token with a longer expiration time and retry renewToken.
+  /// （2）：由于提供的 Token 已过期，Token 更新失败。建议生成一个过期时间更长的新 Token，并重试 renewToken 。
   @JsonValue(2)
   renewTokenTokenExpired,
 
-  /// (3): Token update failed because the provided Token is invalid. Common reasons include: the project has enabled App Certificate in the Agora Console but the Token was not used when joining the channel; the uid specified in joinChannel is different from the one used to generate the Token; the channel name specified in joinChannel is different from the one used to generate the Token. Check the Token generation process, regenerate the Token, and retry renewToken.
+  /// （3）：由于提供的 Token 无效，Token 更新失败。常见原因包括：项目在声网控制台启用了 App 证书但加入频道时未使用 Token； joinChannel 中指定的 uid 与生成 Token 时使用的 uid 不一致； joinChannel 中指定的频道名与生成 Token 时使用的频道名不一致。建议检查 Token 的生成流程，重新生成 Token，并重试 renewToken 。
   @JsonValue(3)
   renewTokenInvalidToken,
 
-  /// (4): Token update failed because the channel name in the Token does not match the current channel. Check the channel name, regenerate the Token, and retry renewToken.
+  /// （4）：由于 Token 中的频道名与当前频道不一致，Token 更新失败。建议检查频道名，重新生成 Token，并重试 renewToken 。
   @JsonValue(4)
   renewTokenInvalidChannelName,
 
-  /// (5): Token update failed because the App ID in the Token does not match the current App ID. Check the App ID, regenerate the Token, and retry renewToken.
+  /// （5）：由于 Token 中的 App ID 与当前 App ID 不一致，Token 更新失败。建议检查 App ID，重新生成 Token，并重试 renewToken 。
   @JsonValue(5)
   renewTokenInconsistentAppid,
 
-  /// (6): The previous Token update request was canceled due to a new request being initiated.
+  /// （6）：由于发起了新的请求，之前的 Token 更新请求被取消。
   @JsonValue(6)
   renewTokenCanceledByNewRequest,
 }
@@ -7328,18 +7326,18 @@ extension RenewTokenErrorCodeExt on RenewTokenErrorCode {
   }
 }
 
-/// Device permission types.
+/// 设备权限类型。
 @JsonEnum(alwaysCreate: true)
 enum PermissionType {
-  /// 0: Permission for audio recording devices.
+  /// 0: 音频采集设备的权限。
   @JsonValue(0)
   recordAudio,
 
-  /// 1: Camera permission.
+  /// 1: 摄像头权限。
   @JsonValue(1)
   camera,
 
-  /// (Android only) 2: Screen sharing permission.
+  /// (仅适用于 Android) 2: 屏幕共享权限。
   @JsonValue(2)
   screenCapture,
 }
@@ -7357,30 +7355,30 @@ extension PermissionTypeExt on PermissionType {
   }
 }
 
-/// Subscribe state.
+/// 订阅状态。
 @JsonEnum(alwaysCreate: true)
 enum StreamSubscribeState {
-  /// 0: Initial subscribe state after joining the channel.
+  /// 0: 加入频道后的初始订阅状态。
   @JsonValue(0)
   subStateIdle,
 
-  /// 1: Subscription failed. Possible reasons:
-  ///  Remote user:
-  ///  Called muteLocalAudioStream (true) or muteLocalVideoStream (true) to stop sending local media streams.
-  ///  Called disableAudio or disableVideo to disable local audio or video modules.
-  ///  Called enableLocalAudio (false) or enableLocalVideo (false) to disable local audio or video capture.
-  ///  User is an audience member.
-  ///  Local user called the following methods to stop receiving remote media streams:
-  ///  Called muteRemoteAudioStream (true), muteAllRemoteAudioStreams (true) to stop receiving remote audio streams.
-  ///  Called muteRemoteVideoStream (true), muteAllRemoteVideoStreams (true) to stop receiving remote video streams.
+  /// 1: 订阅失败。可能是因为：
+  ///  远端用户：
+  ///  调用 muteLocalAudioStream (true) 或 muteLocalVideoStream (true) 停止发送本地媒体流。
+  ///  调用 disableAudio 或 disableVideo 关闭本地音频或视频模块。
+  ///  调用 enableLocalAudio (false) 或 enableLocalVideo (false) 关闭本地音频或视频采集。
+  ///  用户角色为观众。
+  ///  本地用户调用以下方法停止接收远端媒体流：
+  ///  调用 muteRemoteAudioStream (true)、 muteAllRemoteAudioStreams (true) 停止接收远端音频流。
+  ///  调用 muteRemoteVideoStream (true)、 muteAllRemoteVideoStreams (true) 停止接收远端视频流。
   @JsonValue(1)
   subStateNoSubscribed,
 
-  /// 2: Subscribing.
+  /// 2: 正在订阅。
   @JsonValue(2)
   subStateSubscribing,
 
-  /// 3: Remote stream received, subscription successful.
+  /// 3: 收到了远端流，订阅成功。
   @JsonValue(3)
   subStateSubscribed,
 }
@@ -7398,26 +7396,26 @@ extension StreamSubscribeStateExt on StreamSubscribeState {
   }
 }
 
-/// Publish state.
+/// 发布状态。
 @JsonEnum(alwaysCreate: true)
 enum StreamPublishState {
-  /// 0: Initial publish state after joining the channel.
+  /// 0: 加入频道后的初始发布状态。
   @JsonValue(0)
   pubStateIdle,
 
-  /// 1: Publish failed. Possible reasons:
-  ///  The local user called muteLocalAudioStream (true) or muteLocalVideoStream (true) to stop sending local media streams.
-  ///  The local user called disableAudio or disableVideo to disable local audio or video modules.
-  ///  The local user called enableLocalAudio (false) or enableLocalVideo (false) to disable local audio or video capture.
-  ///  The local user is an audience member.
+  /// 1: 发布失败。可能是因为：
+  ///  本地用户调用 muteLocalAudioStream (true) 或 muteLocalVideoStream (true) 停止发送本地媒体流。
+  ///  本地用户调用 disableAudio 或 disableVideo 关闭本地音频或视频模块。
+  ///  本地用户调用 enableLocalAudio (false) 或 enableLocalVideo (false) 关闭本地音频或视频采集。
+  ///  本地用户角色为观众。
   @JsonValue(1)
   pubStateNoPublished,
 
-  /// 2: Publishing.
+  /// 2: 正在发布。
   @JsonValue(2)
   pubStatePublishing,
 
-  /// 3: Published successfully.
+  /// 3: 发布成功。
   @JsonValue(3)
   pubStatePublished,
 }
@@ -7435,7 +7433,7 @@ extension StreamPublishStateExt on StreamPublishState {
   }
 }
 
-/// Configuration for audio and video echo test.
+/// 音视频通话回路测试的配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class EchoTestConfiguration implements AgoraSerializable {
   /// @nodoc
@@ -7447,29 +7445,29 @@ class EchoTestConfiguration implements AgoraSerializable {
       this.channelId,
       this.intervalInSeconds});
 
-  /// The view used to render the local user's video. This parameter only applies to scenarios testing video devices. Make sure enableVideo is set to true.
+  /// 用于渲染本地用户视频的视图。该参数仅适用于测试视频设备的场景，请确保 enableVideo 为 true。
   @JsonKey(name: 'view', readValue: readIntPtr)
   final int? view;
 
-  /// Whether to enable the audio device: true : (Default) Enables the audio device. Set to true to test the audio device. false : Disables the audio device.
+  /// 是否开启音频设备： true : (默认) 开启音频设备。如需测试音频设备，请设为 true。 false : 关闭音频设备。
   @JsonKey(name: 'enableAudio')
   final bool? enableAudio;
 
-  /// Whether to enable the video device. Video device detection is not supported yet. Set this parameter to false.
+  /// 是否开启视频设备。暂不支持视频设备检测，请将该参数设为 false 。
   @JsonKey(name: 'enableVideo')
   final bool? enableVideo;
 
-  /// Token used to ensure the security of the audio and video echo test. If you have not enabled the App Certificate in the console, you do not need to set this parameter. If you have enabled the App Certificate, you must provide a Token, and the uid used to generate the Token must be 0xFFFFFFFF, and the channel name used must uniquely identify each echo test. For how to generate a Token on the server, refer to [Use Token for Authentication](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication).
+  /// 用于保证音视频通话回路测试安全性的 Token。如果你在控制台未启用 App 证书，则不需要向该参数传值；如果你在控制台已启用 App 证书，则必须向该参数传入 Token，且在你生成 Token 时使用的 uid 必须为 0xFFFFFFFF，使用的频道名必须为标识每个音视频通话回路测试的频道名。服务端生成 Token 的方式请参考[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
   @JsonKey(name: 'token')
   final String? token;
 
-  /// Channel name identifying each audio and video echo test. To ensure proper functioning of the echo test, the channel name used by each terminal user under the same project (App ID) on different devices must be unique.
+  /// 标识每个音视频通话回路测试的频道名。为保证回路测试功能正常，同一个项目（App ID） 的各终端用户在不同设备上做音视频通话回路测试时，传入的标识每个回路测试的频道名不能相同。
   @JsonKey(name: 'channelId')
   final String? channelId;
 
-  /// Sets the interval or delay for returning the audio and video echo test results. Value range is [2,10] in seconds. Default is 2 seconds.
-  ///  For audio echo test, the result is returned at the interval you set.
-  ///  For video echo test, the video is displayed briefly, then the delay gradually increases until it reaches the set value.
+  /// 设置返回音视频回路测试结果的时间间隔或延迟，取值范围为 [2,10]，单位为秒，默认为 2 秒。
+  ///  对于音频回路测试，测试结果会根据你设置的时间间隔返回。
+  ///  对于视频回路测试，视频画面会在短时间内显示，之后延迟会逐渐增加，直至达到你设置的延迟。
   @JsonKey(name: 'intervalInSeconds')
   final int? intervalInSeconds;
 
@@ -7481,17 +7479,17 @@ class EchoTestConfiguration implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$EchoTestConfigurationToJson(this);
 }
 
-/// User information.
+/// 用户的信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class UserInfo implements AgoraSerializable {
   /// @nodoc
   const UserInfo({this.uid, this.userAccount});
 
-  /// User ID.
+  /// 用户 ID。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// User account. Length limit is MaxUserAccountLengthType.
+  /// 用户 Account。长度限制为 MaxUserAccountLengthType 。
   @JsonKey(name: 'userAccount')
   final String? userAccount;
 
@@ -7503,22 +7501,22 @@ class UserInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$UserInfoToJson(this);
 }
 
-/// Ear monitoring audio filter type.
+/// 耳返 Audio filter 类型。
 @JsonEnum(alwaysCreate: true)
 enum EarMonitoringFilterType {
-  /// 1<<0: Do not add audio filter to ear monitoring.
+  /// 1<<0: 不在耳返中添加 Audio filter。
   @JsonValue((1 << 0))
   earMonitoringFilterNone,
 
-  /// 1<<1: Add vocal effect audio filter to ear monitoring. If you implement features like voice beautification or sound effects, users can hear the processed sound through ear monitoring.
+  /// 1<<1: 在耳返中添加人声效果 Audio filter。如果你实现了美声、音效等功能，用户可以在耳返中听到添加效果后的声音。
   @JsonValue((1 << 1))
   earMonitoringFilterBuiltInAudioFilters,
 
-  /// 1<<2: Add noise suppression audio filter to ear monitoring.
+  /// 1<<2: 在耳返中添加降噪 Audio filter。
   @JsonValue((1 << 2))
   earMonitoringFilterNoiseSuppression,
 
-  /// 1<<15: Reuse the audio filter already applied on the sending end. Reusing the audio filter reduces CPU usage for ear monitoring but increases ear monitoring latency. Suitable for scenarios where lower CPU usage is required and latency is not critical.
+  /// 1<<15: 复用发送端已进行过音效处理的 Audio filter。通过复用 Audio filter 降低耳返对 CPU 的占用率，但会增加耳返延迟，适用于需要降低 CPU 消耗且对耳返延迟不敏感的场景。
   @JsonValue((1 << 15))
   earMonitoringFilterReusePostProcessingFilter,
 }
@@ -7577,26 +7575,26 @@ extension ThreadPriorityTypeExt on ThreadPriorityType {
   }
 }
 
-/// Video encoding configuration for screen sharing stream.
+/// 共享屏幕流的视频编码配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ScreenVideoParameters implements AgoraSerializable {
   /// @nodoc
   const ScreenVideoParameters(
       {this.dimensions, this.frameRate, this.bitrate, this.contentHint});
 
-  /// Resolution for video encoding. Default is 1280 × 720.
+  /// 视频编码的分辨率。默认值为 1280 × 720。
   @JsonKey(name: 'dimensions')
   final VideoDimensions? dimensions;
 
-  /// Video encoding frame rate (fps). Default is 15.
+  /// 视频编码帧率 (fps)。默认值为 15。
   @JsonKey(name: 'frameRate')
   final int? frameRate;
 
-  /// Video encoding bitrate (Kbps).
+  /// 视频编码码率 (Kbps)。
   @JsonKey(name: 'bitrate')
   final int? bitrate;
 
-  /// Content type of the screen sharing video.
+  /// 屏幕共享视频的内容类型。
   @JsonKey(name: 'contentHint')
   final VideoContentHint? contentHint;
 
@@ -7608,7 +7606,7 @@ class ScreenVideoParameters implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ScreenVideoParametersToJson(this);
 }
 
-/// Parameter configuration for screen sharing.
+/// 屏幕共享的参数配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ScreenCaptureParameters2 implements AgoraSerializable {
   /// @nodoc
@@ -7618,20 +7616,20 @@ class ScreenCaptureParameters2 implements AgoraSerializable {
       this.captureVideo,
       this.videoParams});
 
-  /// Due to system limitations, capturing system audio is only supported on Android API level 29 and above, i.e., Android 10 and above.
-  ///  To improve the success rate of capturing system audio during screen sharing, ensure that you have called the setAudioScenario method and set the audio scenario to audioScenarioGameStreaming. Whether to capture system audio during screen sharing: true : Capture system audio. false : (Default) Do not capture system audio.
+  /// 受系统限制，采集系统音频仅适用于 Android API 级别为 29 及以上，即 Android 10 及以上。
+  ///  为提高屏幕共享时采集系统音频的成功率，请确保你已调用 setAudioScenario 方法并设置音频场景为 audioScenarioGameStreaming 。 屏幕共享时是否采集系统音频： true : 采集系统音频。 false : （默认）不采集系统音频。
   @JsonKey(name: 'captureAudio')
   final bool? captureAudio;
 
-  /// Audio configuration for the screen sharing stream. See ScreenAudioParameters. This parameter takes effect only when captureAudio is true.
+  /// 共享屏幕流的音频配置。详见 ScreenAudioParameters 。 该参数仅在 captureAudio 为 true 时生效。
   @JsonKey(name: 'audioParams')
   final ScreenAudioParameters? audioParams;
 
-  /// Due to system limitations, screen capture is only supported on Android API level 21 and above, i.e., Android 5 and above. Whether to capture the screen during screen sharing: true : (Default) Capture screen. false : Do not capture screen.
+  /// 受系统限制，采集屏幕仅适用于 Android API 级别为 21 及以上，即 Android 5 及以上。 屏幕共享时是否采集屏幕： true :（默认）采集屏幕。 false : 不采集屏幕。
   @JsonKey(name: 'captureVideo')
   final bool? captureVideo;
 
-  /// Video encoding configuration for the screen sharing stream. See ScreenVideoParameters. This parameter takes effect only when captureVideo is true.
+  /// 共享屏幕流的视频编码配置。详见 ScreenVideoParameters 。 该参数仅在 captureVideo 为 true 时生效。
   @JsonKey(name: 'videoParams')
   final ScreenVideoParameters? videoParams;
 
@@ -7643,14 +7641,14 @@ class ScreenCaptureParameters2 implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ScreenCaptureParameters2ToJson(this);
 }
 
-/// Rendering status of media frames.
+/// 媒体帧的渲染状态。
 @JsonEnum(alwaysCreate: true)
 enum MediaTraceEvent {
-  /// 0: Video frame rendered.
+  /// 0：视频帧已被渲染。
   @JsonValue(0)
   mediaTraceEventVideoRendered,
 
-  /// 1: Video frame decoded.
+  /// 1：视频帧已被解码。
   @JsonValue(1)
   mediaTraceEventVideoDecoded,
 }
@@ -7668,7 +7666,7 @@ extension MediaTraceEventExt on MediaTraceEvent {
   }
 }
 
-/// Metric information during video frame rendering.
+/// 视频帧渲染过程中的指标信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class VideoRenderingTracingInfo implements AgoraSerializable {
   /// @nodoc
@@ -7681,43 +7679,43 @@ class VideoRenderingTracingInfo implements AgoraSerializable {
       this.remoteJoined2UnmuteVideo,
       this.remoteJoined2PacketReceived});
 
-  /// The time interval (ms) from calling startMediaRenderingTracing to triggering the onVideoRenderingTracingResult callback. It is recommended to call startMediaRenderingTracing before joining the channel.
+  /// 从调用 startMediaRenderingTracing 到触发 onVideoRenderingTracingResult 回调的时间间隔 (ms)。建议在加入频道前调用 startMediaRenderingTracing 。
   @JsonKey(name: 'elapsedTime')
   final int? elapsedTime;
 
-  /// The time interval (ms) from calling startMediaRenderingTracing to calling joinChannel. A negative value indicates that startMediaRenderingTracing was called after joinChannel.
+  /// 从调用 startMediaRenderingTracing 到调用 joinChannel 的时间间隔 (ms)。负数表示在调用 joinChannel 后调用 startMediaRenderingTracing 。
   @JsonKey(name: 'start2JoinChannel')
   final int? start2JoinChannel;
 
-  /// The time interval (ms) from calling joinChannel1 or joinChannel to successfully joining the channel.
+  /// 从调用 joinChannel1 或 joinChannel 到成功加入频道的时间间隔 (ms)。
   @JsonKey(name: 'join2JoinSuccess')
   final int? join2JoinSuccess;
 
-  /// If the local user calls startMediaRenderingTracing after the remote user has joined the channel, this value is 0 and has no reference value.
-  ///  To improve the speed of remote user video display, it is recommended that the local user joins the channel after the remote user has joined to reduce this value.
-  ///  If the local user calls startMediaRenderingTracing before successfully joining the channel, this is the time interval (ms) from the local user successfully joining the channel to the remote user joining the channel.
-  ///  If the local user calls startMediaRenderingTracing after successfully joining the channel, this is the time interval (ms) from calling startMediaRenderingTracing to the remote user joining the channel.
+  /// 如果本地用户在远端用户加入频道后调用 startMediaRenderingTracing ，则该值为 0，无参考意义。
+  ///  为提升远端用户出图速度，建议远端用户加入频道中后，本地用户再加入频道，以降低该值。
+  ///  如果本地用户成功加入频道前调用 startMediaRenderingTracing ，则该值为从本地用户成功加入频道到远端用户加入频道的时间间隔 (ms)。
+  ///  如果本地用户成功加入频道后调用 startMediaRenderingTracing ，则该值为从调用 startMediaRenderingTracing 到远端用户加入频道的时间间隔 (ms)。
   @JsonKey(name: 'joinSuccess2RemoteJoined')
   final int? joinSuccess2RemoteJoined;
 
-  /// If the local user calls startMediaRenderingTracing after setting the remote view, this value is 0 and has no reference value.
-  ///  To improve the speed of remote user video display, it is recommended to set the remote view before the remote user joins the channel, or immediately after the remote user joins, to reduce this value.
-  ///  If the local user calls startMediaRenderingTracing before the remote user joins the channel, this is the time interval (ms) from the remote user joining the channel to the local user setting the remote view.
-  ///  If the local user calls startMediaRenderingTracing after the remote user joins the channel, this is the time interval (ms) from calling startMediaRenderingTracing to setting the remote view.
+  /// 如果本地用户在设置远端视图后再调用 startMediaRenderingTracing ，则该值为 0，无参考意义。
+  ///  为提升远端用户出图速度，建议在远端用户加入频道之前设置远端视图，或者远端用户加入频道后立即设置远端视图，以降低该值。
+  ///  如果本地用户在远端用户加入频道前调用 startMediaRenderingTracing ，则该值为从远端用户加入频道到本地用户设置远端视图的时间间隔 (ms)。
+  ///  如果本地用户在远端用户加入频道后调用 startMediaRenderingTracing ，则该值为从调用 startMediaRenderingTracing 到设置远端视图的时间间隔 (ms)。
   @JsonKey(name: 'remoteJoined2SetView')
   final int? remoteJoined2SetView;
 
-  /// If startMediaRenderingTracing is called after subscribing to the remote video stream, this value is 0 and has no reference value.
-  ///  To improve the speed of remote user video display, it is recommended that the local user subscribes to the remote video stream immediately after the remote user joins the channel to reduce this value.
-  ///  If the local user calls startMediaRenderingTracing before the remote user joins the channel, this is the time interval (ms) from the remote user joining the channel to subscribing to the remote video stream.
-  ///  If the local user calls startMediaRenderingTracing after the remote user joins the channel, this is the time interval (ms) from calling startMediaRenderingTracing to subscribing to the remote video stream.
+  /// 如果在订阅远端视频流后再调用 startMediaRenderingTracing ，则该值为 0，无参考意义。
+  ///  为提升远端用户出图速度，建议在远端用户加入频道后，本地用户立即订阅远端视频流，以降低该值。
+  ///  如果本地用户在远端用户加入频道前调用 startMediaRenderingTracing ，则该值为从远端用户加入频道到订阅远端视频流的时间间隔 (ms)。
+  ///  如果本地用户在远端用户加入频道后调用 startMediaRenderingTracing ，则该值为从调用 startMediaRenderingTracing 到订阅远端视频流的时间间隔 (ms)。
   @JsonKey(name: 'remoteJoined2UnmuteVideo')
   final int? remoteJoined2UnmuteVideo;
 
-  /// If startMediaRenderingTracing is called after receiving the remote video stream, this value is 0 and has no reference value.
-  ///  To improve the speed of remote user video display, it is recommended that the remote user publishes the video stream immediately after joining the channel and the local user subscribes to the remote video stream immediately to reduce this value.
-  ///  If the local user calls startMediaRenderingTracing before the remote user joins the channel, this is the time interval (ms) from the remote user joining the channel to the local user receiving the first remote data packet.
-  ///  If the local user calls startMediaRenderingTracing after the remote user joins the channel, this is the time interval (ms) from calling startMediaRenderingTracing to receiving the first remote data packet.
+  /// 如果在接收到远端视频流后再调用 startMediaRenderingTracing ，则该值为 0，无参考意义。
+  ///  为提升远端用户出图速度，建议在远端用户加入频道后立即发布视频流，本地用户立即订阅远端视频流，以降低该值。
+  ///  如果本地用户在远端用户加入频道前调用 startMediaRenderingTracing ，则该值为从远端用户加入频道到本地用户接收到首个远端数据包的时间间隔 (ms)。
+  ///  如果本地用户在远端用户加入频道后调用 startMediaRenderingTracing ，则该值为从调用 startMediaRenderingTracing 到接收到首个远端数据包的时间间隔 (ms)。
   @JsonKey(name: 'remoteJoined2PacketReceived')
   final int? remoteJoined2PacketReceived;
 
@@ -7754,14 +7752,14 @@ extension ConfigFetchTypeExt on ConfigFetchType {
   }
 }
 
-/// @nodoc
+/// 与声网私有媒体服务器的连接模式。
 @JsonEnum(alwaysCreate: true)
 enum LocalProxyMode {
-  /// @nodoc
+  /// 0：SDK 优先尝试连接指定的声网私有媒体服务器；如果无法连接到指定的声网私有媒体服务器，则连接声网 SD-RTN™。
   @JsonValue(0)
   connectivityFirst,
 
-  /// @nodoc
+  /// 1：SDK 只尝试连接指定的声网私有媒体服务器。
   @JsonValue(1)
   localOnly,
 }
@@ -7779,26 +7777,26 @@ extension LocalProxyModeExt on LocalProxyMode {
   }
 }
 
-/// Configuration information of the log server.
+/// 日志服务器的配置信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LogUploadServerInfo implements AgoraSerializable {
   /// @nodoc
   const LogUploadServerInfo(
       {this.serverDomain, this.serverPath, this.serverPort, this.serverHttps});
 
-  /// Domain name of the log server.
+  /// 日志服务器的域名。
   @JsonKey(name: 'serverDomain')
   final String? serverDomain;
 
-  /// Storage path of the log on the server.
+  /// 日志在服务器上的存储路径。
   @JsonKey(name: 'serverPath')
   final String? serverPath;
 
-  /// Port of the log server.
+  /// 日志服务器的端口。
   @JsonKey(name: 'serverPort')
   final int? serverPort;
 
-  /// Whether the log server uses HTTPS protocol: true : Uses HTTPS protocol. false : Uses HTTP protocol.
+  /// 日志服务器是否使用 HTTPS 协议： true : 使用 HTTPS 协议。 false : 使用 HTTP 协议。
   @JsonKey(name: 'serverHttps')
   final bool? serverHttps;
 
@@ -7810,13 +7808,13 @@ class LogUploadServerInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LogUploadServerInfoToJson(this);
 }
 
-/// Advanced options for Local Access Point.
+/// Local Access Point 的高级选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AdvancedConfigInfo implements AgoraSerializable {
   /// @nodoc
   const AdvancedConfigInfo({this.logUploadServer});
 
-  /// Custom log upload server. By default, the SDK uploads logs to the Agora log server. You can use this parameter to change the log upload server. See LogUploadServerInfo.
+  /// 自定义的日志上传服务器。默认情况下，SDK 会将日志上传至声网日志服务器。你可以通过该参数修改日志上传的服务器。详见 LogUploadServerInfo 。
   @JsonKey(name: 'logUploadServer')
   final LogUploadServerInfo? logUploadServer;
 
@@ -7828,7 +7826,7 @@ class AdvancedConfigInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$AdvancedConfigInfoToJson(this);
 }
 
-/// Local Access Point configuration.
+/// Local Access Point 配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LocalAccessPointConfiguration implements AgoraSerializable {
   /// @nodoc
@@ -7842,31 +7840,31 @@ class LocalAccessPointConfiguration implements AgoraSerializable {
       this.advancedConfig,
       this.disableAut});
 
-  /// Internal IP address list of the Local Access Point. Either ipList or domainList must be provided.
+  /// Local Access Point 的对内 IP 地址列表。ipList 和 domainList 必须至少填一个。
   @JsonKey(name: 'ipList')
   final List<String>? ipList;
 
-  /// Number of internal IP addresses for the Local Access Point. This value must match the number of IP addresses you provide.
+  /// Local Access Point 对内 IP 地址的数量。该参数的值必须和你填入的 IP 地址的数量一致。
   @JsonKey(name: 'ipListSize')
   final int? ipListSize;
 
-  /// Domain name list of the Local Access Point. The SDK resolves the IP addresses of the Local Access Point based on the provided domain names. The domain resolution timeout is 10 seconds. Either ipList or domainList must be provided. If you specify both IP addresses and domain names, the SDK merges and deduplicates the resolved IPs and the specified IPs, then randomly connects to one IP for load balancing.
+  /// Local Access Point 的域名列表。SDK 会根据你填入的域名解析出 Local Access Point 的 IP 地址。域名解析的超时时间为 10 秒。ipList 和 domainList 必须至少填一个。如果你同时指定 IP 地址和域名，SDK 会将根据域名解析出来的 IP 地址和你指定的 IP 地址合并、去重，然后随机连接一个 IP 来实现负载均衡。
   @JsonKey(name: 'domainList')
   final List<String>? domainList;
 
-  /// Number of domain names for the Local Access Point. This value must match the number of domain names you provide.
+  /// Local Access Point 域名的数量。该参数的值必须和你填入的域名的数量一致。
   @JsonKey(name: 'domainListSize')
   final int? domainListSize;
 
-  /// Domain name used for internal certificate verification. If left empty, the SDK uses the default certificate verification domain secure-edge.local.
+  /// 内网证书验证域名。如果传值为空，则用 SDK 默认的证书验证域名 secure-edge.local 。
   @JsonKey(name: 'verifyDomainName')
   final String? verifyDomainName;
 
-  /// Connection mode. See LocalProxyMode.
+  /// 连接模式。详见 LocalProxyMode 。
   @JsonKey(name: 'mode')
   final LocalProxyMode? mode;
 
-  /// Advanced options for the Local Access Point. See AdvancedConfigInfo.
+  /// Local Access Point 的高级选项。详见 AdvancedConfigInfo 。
   @JsonKey(name: 'advancedConfig')
   final AdvancedConfigInfo? advancedConfig;
 
@@ -7882,14 +7880,14 @@ class LocalAccessPointConfiguration implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LocalAccessPointConfigurationToJson(this);
 }
 
-/// @nodoc
+/// 需录制的视频流类型。
 @JsonEnum(alwaysCreate: true)
 enum RecorderStreamType {
-  /// @nodoc
+  /// 0: （默认）频道内的视频流。
   @JsonValue(0)
   rtc,
 
-  /// @nodoc
+  /// 1: 加入频道前，在本地预览的视频流。
   @JsonValue(1)
   preview,
 }
@@ -7907,21 +7905,21 @@ extension RecorderStreamTypeExt on RecorderStreamType {
   }
 }
 
-/// @nodoc
+/// 需录制的音视频流的相关信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class RecorderStreamInfo implements AgoraSerializable {
   /// @nodoc
   const RecorderStreamInfo({this.channelId, this.uid, this.type});
 
-  /// @nodoc
+  /// 需录制的频道名称。
   @JsonKey(name: 'channelId')
   final String? channelId;
 
-  /// @nodoc
+  /// 需录制的用户 ID。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// @nodoc
+  /// 需录制的视频流类型，详见 RecorderStreamType 。
   @JsonKey(name: 'type')
   final RecorderStreamType? type;
 
@@ -7999,7 +7997,7 @@ extension RdtStateExt on RdtState {
   }
 }
 
-/// Spatial audio parameters.
+/// 空间音频参数。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class SpatialAudioParams implements AgoraSerializable {
   /// @nodoc
@@ -8053,7 +8051,7 @@ class SpatialAudioParams implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$SpatialAudioParamsToJson(this);
 }
 
-/// Layout information of a sub video stream in a composite stream.
+/// 某一路合图子视频流的布局信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class VideoLayout implements AgoraSerializable {
   /// @nodoc
@@ -8067,38 +8065,38 @@ class VideoLayout implements AgoraSerializable {
       this.height,
       this.videoState});
 
-  /// Channel name to which the sub video stream belongs.
+  /// 合图子视频流所属的频道名。
   @JsonKey(name: 'channelId')
   final String? channelId;
 
-  /// User ID that publishes the sub video stream.
+  /// 发布该合图子视频流的用户 ID。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// Reserved parameter.
+  /// 预留参数。
   @JsonKey(name: 'strUid')
   final String? strUid;
 
-  /// The x-coordinate (px) of the sub video stream on the composite canvas. That is, the horizontal offset of the top-left corner of the sub video stream relative to the top-left corner (origin) of the composite canvas.
+  /// 合图子视频在合图画布上的 x 坐标 (px)。即合图子视频的左上角相对于合图画布左上角（原点）的横向位移。
   @JsonKey(name: 'x')
   final int? x;
 
-  /// The y-coordinate (px) of the sub video stream on the composite canvas. That is, the vertical offset of the top-left corner of the sub video stream relative to the top-left corner (origin) of the composite canvas.
+  /// 合图子视频在合图画布上的 y 坐标 (px)。即合图子视频的左上角相对于合图画布左上角（原点）的纵向位移。
   @JsonKey(name: 'y')
   final int? y;
 
-  /// Width of the sub video stream (px).
+  /// 合图子视频流的宽度 (px)。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// Height of the sub video stream (px)
+  /// 合图子视频流的高度 (px)
   @JsonKey(name: 'height')
   final int? height;
 
-  /// State of the sub video stream on the composite canvas.
-  ///  0: Normal. The video stream is rendered on the composite canvas.
-  ///  1: Placeholder. The video stream has no video frame and is displayed as a placeholder on the composite canvas.
-  ///  2: Black image. The video stream is replaced with a black image.
+  /// 合图子视频流在合图画布上的状态。
+  ///  0：正常。该视频流已被渲染到合图画布。
+  ///  1：占位图。该视频流无视频画面，在合图画布中显示为占位符。
+  ///  2：黑色图片。该视频流被黑色图片替代。
   @JsonKey(name: 'videoState')
   final int? videoState;
 

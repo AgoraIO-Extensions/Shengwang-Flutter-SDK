@@ -2,10 +2,10 @@ import '/src/_serializable.dart';
 import '/src/binding_forward_export.dart';
 part 'audio_device_manager.g.dart';
 
-/// Maximum length of device ID.
+/// 设备 ID 的最大长度。
 @JsonEnum(alwaysCreate: true)
 enum MaxDeviceIdLengthType {
-  /// The maximum length of the device ID is 512 characters.
+  /// 设备 ID 的最大长度为 512 个字符。
   @JsonValue(512)
   maxDeviceIdLength,
 }
@@ -23,280 +23,280 @@ extension MaxDeviceIdLengthTypeExt on MaxDeviceIdLengthType {
   }
 }
 
-/// Methods for managing audio devices.
+/// 音频设备管理方法。
 abstract class AudioDeviceManager {
-  /// Gets a list of all playback devices in the system.
+  /// 获取系统中所有的播放设备列表。
   ///
-  /// This method is applicable only to Windows and macOS.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
   /// Returns
-  /// If the method call succeeds, returns an array of AudioDeviceInfo containing the device ID and name of all playback devices.
-  ///  If the method call fails: returns an empty list.
+  /// 方法调用成功，返回 AudioDeviceInfo 数组，包含所有音频播放设备的设备 ID 和设备名称。
+  ///  方法调用失败: 返回空列表。
   Future<List<AudioDeviceInfo>> enumeratePlaybackDevices();
 
-  /// Gets the list of all audio recording devices in the system.
+  /// 获取系统中所有的音频采集设备列表。
   ///
-  /// This method is applicable to Windows and macOS only.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
   /// Returns
-  /// If the method call succeeds, returns an array of AudioDeviceInfo containing the device ID and device name of all audio recording devices.
-  ///  If the method call fails: returns an empty list.
+  /// 方法调用成功，返回一个 AudioDeviceInfo 数组，包含所有音频采集设备的设备 ID 和设备名称。
+  ///  方法调用失败: 返回空列表。
   Future<List<AudioDeviceInfo>> enumerateRecordingDevices();
 
-  /// Specifies the playback device.
+  /// 指定播放设备。
   ///
-  /// This method changes the current audio route but does not change the system default audio route. For example, if the system default audio route is Speaker 1, and you call this method to set the current audio route to Speaker 2 before joining a channel, the SDK will test Speaker 2 during device testing. After testing, when you join the channel, the SDK will still use the system default audio route, i.e., Speaker 1. This method is applicable to Windows and macOS only.
+  /// 该方法可以更改当前的音频路由，但不会改变系统默认的音频路由。假设系统默认的音频路由是扬声器 1，你在加入频道前调用该方法设置当前的音频路由为扬声器 2，如果在此时进行设备检测，SDK 会对扬声器 2 进行检测。检测结束后，当你加入频道时 SDK 依然会选择使用系统默认的音频路由，即扬声器 1。 该方法仅适用于 Windows 和 macOS。
   ///
-  /// * [deviceId] Specifies the playback device. Obtained via enumeratePlaybackDevices. Plugging or unplugging devices does not affect deviceId.
+  /// * [deviceId] 指定播放设备。由 enumeratePlaybackDevices 获取。插拔设备不会影响 deviceId 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setPlaybackDevice(String deviceId);
 
-  /// Gets the current audio playback device.
+  /// 获取当前音频播放设备。
   ///
-  /// This method is applicable to Windows and macOS only.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
   /// Returns
-  /// The current audio playback device.
+  /// 当前音频播放设备。
   Future<String> getPlaybackDevice();
 
-  /// Gets audio playback device information.
+  /// 获取音频播放设备信息。
   ///
-  /// This method is applicable to Windows and macOS only.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
   /// Returns
-  /// An AudioDeviceInfo object containing the device ID and device name of the audio playback device.
+  /// AudioDeviceInfo 对象，包含音频播放设备的设备 ID 和设备名称。
   Future<AudioDeviceInfo> getPlaybackDeviceInfo();
 
-  /// Sets the playback device volume.
+  /// 设置播放设备音量。
   ///
-  /// (Windows only)
+  /// 该方法仅适用于 Windows 平台。
   ///
-  /// * [volume] Playback device volume. Value range: [0,255].
+  /// * [volume] 播放设备音量。取值范围为 [0,255]。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setPlaybackDeviceVolume(int volume);
 
-  /// Gets the playback device volume.
+  /// 获取播放设备音量。
   ///
   /// Returns
-  /// Playback device volume. Value range: [0,255].
+  /// 播放设备音量。取值范围 [0,255]。
   Future<int> getPlaybackDeviceVolume();
 
-  /// Specifies the audio recording device.
+  /// 指定音频采集设备。
   ///
-  /// This method allows you to change the current audio recording device without changing the system default audio recording device. Suppose the system default recording device is Microphone 1. If you call this method before joining a channel to set the current audio route to Bluetooth Headset 1, the SDK will test Bluetooth Headset 1 during device testing. After the test, when you join a channel, the SDK will still use the system default recording device, i.e., Microphone 1. (Windows and macOS only)
+  /// 该方法可以更改当前的音频采集设备，但不改变系统默认的音频采集设备。假设系统默认的音频采集设备是麦克风 1，你在加入频道前调用该方法设置当前的音频路由为蓝牙耳机 1，如果在此时进行设备检测，SDK 会对蓝牙耳机 1 进行检测。检测结束后，当你加入频道时 SDK 依然会选择使用系统默认的音频采集设备，即麦克风 1。 该方法仅适用于 Windows 和 macOS。
   ///
-  /// * [deviceId] The Device ID of the audio recording device. You can get it through enumerateRecordingDevices. Plugging or unplugging the device does not affect the deviceId.
+  /// * [deviceId] 音频采集设备的 Device ID。可通过 enumerateRecordingDevices 获取。插拔设备不会影响 deviceId 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRecordingDevice(String deviceId);
 
-  /// Gets the current audio recording device.
+  /// 获取当前音频采集设备。
   ///
-  /// This method is applicable to Windows and macOS only.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
   /// Returns
-  /// The current audio recording device.
+  /// 当前音频采集设备。
   Future<String> getRecordingDevice();
 
-  /// Gets information about the audio recording device.
+  /// 获取音频采集设备信息。
   ///
-  /// This method is applicable to Windows and macOS only.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
   /// Returns
-  /// AudioDeviceInfo object containing the device ID and name of the audio recording device.
+  /// AudioDeviceInfo 对象，包含音频采集设备的设备 ID 和设备名称。
   Future<AudioDeviceInfo> getRecordingDeviceInfo();
 
-  /// Sets the volume of the audio recording device.
+  /// 设置音频采集设备音量。
   ///
-  /// (Windows and macOS only)
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
-  /// * [volume] Volume of the audio recording device. Value range: [0,255]. 0 means muted, 255 means maximum volume.
+  /// * [volume] 音频采集设备音量。取值范围 [0,255]。0 代表无声，255 代表最大音量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRecordingDeviceVolume(int volume);
 
-  /// Gets the volume of the audio recording device.
+  /// 获取音频采集设备音量。
   ///
-  /// This method is applicable to Windows only.
+  /// 该方法仅适用于 Windows 平台。
   ///
   /// Returns
-  /// Audio recording device volume. Value range: [0,255].
+  /// 音频采集设备音量。取值范围 [0,255]。
   Future<int> getRecordingDeviceVolume();
 
-  /// Specifies the sound card capture device.
+  /// 指定声卡采集设备。
   ///
-  /// By default, the SDK uses the current playback device as the sound card capture device. To specify another audio device as the sound card capture device, call this method and set deviceId to the desired device.
-  /// This method changes the current recording device but does not change the system default recording device. For example, if the system default recording device is Microphone 1, and you call this method to set the current audio route to Sound Card 1 before joining a channel, the SDK will test Sound Card 1 during device testing. After testing, when you join the channel, the SDK will still use the system default recording device, i.e., Microphone 1. This method is applicable to Windows and macOS only.
-  /// Applicable scenarios:
-  /// App A plays music through Bluetooth headset; App B conducts a video conference through speaker.
-  ///  If the sound card capture device is set to the Bluetooth headset, the SDK will publish the music from App A to the remote end.
-  ///  If the sound card capture device is set to the speaker, the SDK will not publish the music from App A.
-  ///  If you switch from Bluetooth headset to wired headset for App A after setting the sound card capture device to Bluetooth headset, you need to call this method again to set the sound card capture device to wired headset, so that the SDK continues publishing App A's music to the remote end.
+  /// SDK 默认采用当前的播放设备作为声卡采集设备，如果想要指定其他音频设备作为声卡采集设备，则调用该方法并设置 deviceId 为你想要指定的声卡采集设备。
+  /// 该方法可以更改当前的音频采集设备，但不改变系统默认的音频采集设备。假设系统默认的音频采集设备是麦克风 1，你在加入频道前调用该方法设置当前的音频路由为声卡 1，如果在此时进行设备检测，SDK 会对声卡 1 做设备检测。检测结束后，当你加入频道时 SDK 依然会选择使用系统默认的音频采集设备，即麦克风 1。 该方法仅适用于 Windows 和 macOS。
+  /// 该方法适用的场景如下：
+  /// 使用 App A 播放音乐，通过蓝牙耳机播放；同时使用 App B 进行视频会议，通过扬声器播放。
+  ///  如果设置声卡采集设备为蓝牙耳机，则 SDK 会将 App A 中的音乐发布到远端。
+  ///  如果设置声卡采集设备设置为扬声器，则 SDK 不会将 App A 中的音乐发布到远端。
+  ///  如果设置声卡采集设备为蓝牙耳机后，又改用有线耳机播放 App A 中的音乐，则需要重新调用该方法，设置声卡采集设备为有线耳机，则 SDK 会继续将 App A 中的音乐发布到远端。
   ///
-  /// * [deviceId] Specifies the SDK's sound card capture device. Obtained via enumeratePlaybackDevices. Plugging or unplugging devices does not affect deviceId.
-  /// Maximum length is MaxDeviceIdLengthType.
+  /// * [deviceId] 指定 SDK 的声卡采集设备。由 enumeratePlaybackDevices 获取。插拔设备不会影响 deviceId 。
+  /// 最大长度为 MaxDeviceIdLengthType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLoopbackDevice(String deviceId);
 
-  /// Gets the current sound card capture device.
+  /// 获取当前的声卡采集设备。
   ///
-  /// This method is applicable to Windows and macOS only.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
   /// Returns
-  /// The ID of the current sound card capture device.
+  /// 当前声卡采集设备的 ID。
   Future<String> getLoopbackDevice();
 
-  /// Sets the playback device to mute.
+  /// 设置播放设备静音。
   ///
-  /// * [mute] Whether to mute the playback device: true : Mute the playback device. false : Do not mute the playback device.
+  /// * [mute] 是否设置播放设备为静音： true : 播放设备设为静音。 false : 播放设备不设为静音。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setPlaybackDeviceMute(bool mute);
 
-  /// Gets the mute status of the current playback device.
+  /// 获取当前播放设备静音状态。
   ///
   /// Returns
-  /// true : The playback device is muted. false : The playback device is not muted.
+  /// true : 播放设备为静音状态。 false : 播放设备为非静音状态。
   Future<bool> getPlaybackDeviceMute();
 
-  /// Mutes the current audio recording device.
+  /// 设置当前音频采集设备静音。
   ///
-  /// * [mute] Whether to mute the audio recording device: true : Mute the recording device. false : Unmute the recording device.
+  /// * [mute] 是否设置音频采集设备静音： true : 采集设备静音。 false : 采集设备为非静音。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRecordingDeviceMute(bool mute);
 
-  /// Gets the mute status of the current recording device.
+  /// 获取当前音频采集设备静音状态。
   ///
   /// Returns
-  /// true : The recording device is muted. false : The recording device is not muted.
+  /// true : 采集设备为静音状态。 false : 采集设备为非静音状态。
   Future<bool> getRecordingDeviceMute();
 
-  /// Starts the audio playback device test.
+  /// 启动音频播放设备测试。
   ///
-  /// This method tests whether the local audio playback device is working properly. After starting the test, the SDK plays the specified audio file. If you can hear the sound, it indicates that the playback device is functioning correctly.
-  /// After calling this method, the SDK triggers the onAudioVolumeIndication callback every 100 ms to report the volume information of uid = 1 and the playback device.
-  /// The difference between this method and startEchoTest is that this method checks whether the local audio playback device works properly, while the latter checks whether the audio/video devices and network are functioning correctly. You must call this method before joining a channel. After the test is complete, if you want to join a channel, make sure to call stopPlaybackDeviceTest to stop the device test first.
+  /// 该方法用于测试本地音频播放设备是否能正常工作。启动测试后，SDK 播放指定的音频文件，测试者如果能听到声音，说明播放设备能正常工作。
+  /// 调用该方法后，SDK 会每隔 100 毫秒触发一次 onAudioVolumeIndication 回调，报告 uid = 1 及播放设备的音量信息。
+  /// 该方法和 startEchoTest 的区别在于该方法检测本地的音频播放设备能否正常工作，后者可以检测音视频设备及网络是否正常。 该方法需要在加入频道前调用。测试完成后，如需加入频道，请确保先调用 stopPlaybackDeviceTest 停止设备测试。
   ///
-  /// * [testAudioFilePath] The absolute path of the audio file. The path string must be encoded in UTF-8.
-  ///  Supported file formats: wav, mp3, m4a, aac.
-  ///  Supported sample rates: 8000, 16000, 32000, 44100, 48000.
+  /// * [testAudioFilePath] 音频文件的绝对路径，路径字符串使用 UTF-8 编码格式。
+  ///  支持文件格式: wav、mp3、m4a、aac。
+  ///  支持文件采样率: 8000、16000、32000、44100、48000。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startPlaybackDeviceTest(String testAudioFilePath);
 
-  /// Stops the audio playback device test.
+  /// 停止音频播放设备测试。
   ///
-  /// This method stops the audio playback device test. After calling startPlaybackDeviceTest, you must call this method to stop the test. You must call this method before joining a channel.
+  /// 该方法用于停止音频播放设备测试。调用 startPlaybackDeviceTest 后，必须调用该方法停止测试。 该方法需要在加入频道前调用。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopPlaybackDeviceTest();
 
-  /// Starts the audio recording device test.
+  /// 启动音频采集设备测试。
   ///
-  /// This method tests whether the local audio recording device works properly. After you call this method, the SDK triggers the onAudioVolumeIndication callback at the specified time interval to report the volume information of the recording device with uid = 0.
-  /// The difference between this method and startEchoTest is that this method checks whether the local audio recording device works properly, while the latter checks whether the audio and video devices and network are functioning properly. You must call this method before joining a channel. After the test is complete, if you want to join a channel, make sure to call stopRecordingDeviceTest to stop the device test.
+  /// 该方法用于测试本地音频采集设备是否能正常工作。调用该方法后，SDK 会按设置的时间间隔触发 onAudioVolumeIndication 回调，报告 uid = 0 及采集设备的音量信息。
+  /// 该方法和 startEchoTest 的区别在于该方法检测本地的音频采集设备能否正常工作，后者可以检测音视频设备及网络是否正常。 该方法需要在加入频道前调用。测试完成后，如需加入频道，请确保先调用 stopRecordingDeviceTest 停止设备测试。
   ///
-  /// * [indicationInterval] The time interval at which the SDK triggers the onAudioVolumeIndication callback, in milliseconds. The minimum value is 10. Otherwise, the onAudioVolumeIndication callback will not be received, and the SDK returns error code -2. Agora recommends setting this value to 100.
+  /// * [indicationInterval] SDK 触发 onAudioVolumeIndication 回调的时间间隔，单位为毫秒，最小取值为 10，否则会收不到 onAudioVolumeIndication 回调，SDK 会返回错误码 -2 。声网推荐你将该值设为 100。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -2: Invalid parameter setting. Please reset the parameter.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -2: 参数设置错误，请重新设置参数。
   Future<void> startRecordingDeviceTest(int indicationInterval);
 
-  /// Stops the audio recording device test.
+  /// 停止音频采集设备测试。
   ///
-  /// This method stops the audio recording device test. After calling startRecordingDeviceTest, you must call this method to stop the test. You must call this method before joining a channel.
+  /// 该方法用于停止音频采集设备测试。调用 startRecordingDeviceTest 后，必须调用该方法停止测试。 该方法需要在加入频道前调用。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopRecordingDeviceTest();
 
-  /// Starts the audio device loopback test.
+  /// 开始音频设备回路测试。
   ///
-  /// This method tests whether the audio recording and playback devices are working properly. Once the test starts, the recording device captures local audio and the playback device plays it back. The SDK triggers two onAudioVolumeIndication callbacks at the specified interval, reporting the volume information of the recording device (uid = 0) and the playback device (uid = 1).
-  ///  (Windows and macOS only)
-  ///  Can be called before or after joining a channel.
-  ///  Only supported for the broadcaster role.
-  ///  This method only tests local audio devices and does not involve network connection.
-  ///  After the test is complete, you must call stopAudioDeviceLoopbackTest to stop the loopback test.
+  /// 该方法测试音频采集和播放设备是否能正常工作。一旦测试开始，音频采集设备会采集本地音频，然后使用音频播放设备播放出来。SDK 会按设置的时间间隔触发两个 onAudioVolumeIndication 回调，分别报告音频采集设备（ uid = 0）和音频播放设置（ uid = 1）的音量信息。
+  ///  该方法仅适用于 Windows 和 macOS。
+  ///  该方法在加入频道前后都可调用。
+  ///  该方法仅支持主播角色调用。
+  ///  该方法仅在本地进行音频设备测试，不涉及网络连接。
+  ///  完成测试后，必须调用 stopAudioDeviceLoopbackTest 停止音频设备回路测试。
   ///
-  /// * [indicationInterval] The time interval (in milliseconds) at which the SDK triggers the onAudioVolumeIndication callback. It is recommended to set it greater than 200 ms. It must not be less than 10 ms, otherwise the onAudioVolumeIndication callback will not be received.
+  /// * [indicationInterval] SDK 触发 onAudioVolumeIndication 回调的时间间隔，单位为毫秒。建议设置到大于 200 毫秒。不得少于 10 毫秒，否则会收不到 onAudioVolumeIndication 回调。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startAudioDeviceLoopbackTest(int indicationInterval);
 
-  /// Stops the audio device loopback test.
+  /// 停止音频设备回路测试。
   ///
-  /// This method is only applicable to Windows and macOS.
-  ///  You can call this method either before or after joining a channel.
-  ///  Only the host role is allowed to call this method.
-  ///  After calling startAudioDeviceLoopbackTest, you must call this method to stop the audio device loopback test.
+  /// 该方法仅适用于 Windows 和 macOS。
+  ///  该方法在加入频道前后都可调用。
+  ///  该方法仅支持主播角色调用。
+  ///  在调用 startAudioDeviceLoopbackTest 后，必须调用该方法停止音频设备回路测试。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopAudioDeviceLoopbackTest();
 
-  /// Sets whether the audio playback device used by the SDK follows the system default playback device.
+  /// 设置 SDK 使用的音频播放设备跟随系统默认的音频播放设备。
   ///
-  /// This method is applicable to Windows and macOS only.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
-  /// * [enable] Whether to follow the system default audio playback device: true : Follow. When the system default playback device changes, the SDK immediately switches the audio playback device. false : Do not follow. The SDK switches to the system default playback device only when the current audio playback device is removed.
+  /// * [enable] 是否跟随系统默认的音频播放设备： true ：跟随。当系统默认音频播放设备发生改变时，SDK 立即切换音频播放设备。 false ：不跟随。只有当 SDK 使用的音频播放设备被移除后，SDK 才切换至系统默认的音频播放设备。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> followSystemPlaybackDevice(bool enable);
 
-  /// Sets whether the audio recording device used by the SDK follows the system default recording device.
+  /// 设置 SDK 使用的音频采集设备跟随系统默认的音频采集设备。
   ///
-  /// This method is applicable to Windows and macOS only.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
-  /// * [enable] Whether to follow the system default audio recording device: true : Follow. When the system default recording device changes, the SDK immediately switches the recording device. false : Do not follow. The SDK switches to the system default recording device only when the current recording device is removed.
+  /// * [enable] 是否跟随系统默认的音频采集设备： true ：跟随。当系统默认的音频采集设备改变时，SDK 立即切换音频采集设备。 false ：不跟随。只有当 SDK 使用的音频采集设备被移除后，SDK 才切换至系统默认的音频采集设备。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> followSystemRecordingDevice(bool enable);
 
-  /// Sets whether the loopback recording device follows the system default playback device.
+  /// 设置声卡采集设备是否跟随系统默认的播放设备。
   ///
-  /// This method is applicable to Windows and macOS only.
+  /// 方法仅适用于 Windows 和 macOS。
   ///
-  /// * [enable] Whether to follow the system default playback device: true : Follow. When the system default playback device changes, the SDK immediately switches the loopback recording device. false : Do not follow. The SDK switches to the system default playback device only when the current loopback recording device is removed.
+  /// * [enable] 是否跟随系统默认的播放设备： true ：跟随。当系统默认播放设备发生改变时，SDK 立即跟随切换声卡采集设备。 false ：不跟随。只有当 SDK 使用的声卡采集设备被移除后，SDK 才切换至系统默认的音频播放设备。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> followSystemLoopbackDevice(bool enable);
 
-  /// Releases all resources used by the AudioDeviceManager object.
+  /// 释放 AudioDeviceManager 对象占用的所有资源。
   Future<void> release();
 
-  /// Gets the system default audio playback device.
+  /// 获取系统默认的音频播放设备。
   ///
-  /// This method is applicable to Windows and macOS only.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
   /// Returns
-  /// Information about the default audio playback device. See AudioDeviceInfo.
+  /// 默认音频播放设备的信息。详见 AudioDeviceInfo 。
   Future<AudioDeviceInfo> getPlaybackDefaultDevice();
 
-  /// Gets the system default audio recording device.
+  /// 获取系统默认的音频采集设备。
   ///
-  /// This method is applicable to Windows and macOS only.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
   /// Returns
-  /// Information about the default audio recording device. See AudioDeviceInfo.
+  /// 默认音频采集设备的信息。详见 AudioDeviceInfo 。
   Future<AudioDeviceInfo> getRecordingDefaultDevice();
 }

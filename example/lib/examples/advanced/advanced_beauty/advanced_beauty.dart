@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
-import 'package:shengwang_rtc_engine_example/config/agora.config.dart' as config;
+import 'package:shengwang_rtc_engine_example/config/agora.config.dart'
+    as config;
 import 'package:shengwang_rtc_engine_example/components/example_actions_widget.dart';
 import 'package:shengwang_rtc_engine_example/components/log_sink.dart';
 import 'package:shengwang_rtc_engine_example/components/remote_video_views_widget.dart';
@@ -32,7 +33,6 @@ class AdvancedBeauty extends StatefulWidget {
 // ---------- Beauty template options ----------
 /// Beauty presets — template names come from the SDK resource bundle's config.json.
 enum _BeautyTemplate {
-
   basic('Basic (基础)', 'Beauty-Basic');
 
   const _BeautyTemplate(this.label, this.templateName);
