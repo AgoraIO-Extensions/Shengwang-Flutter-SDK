@@ -1,4 +1,4 @@
-import 'package:agora_rtc_engine_example/components/config_override.dart';
+import 'package:shengwang_rtc_engine_example/components/config_override.dart';
 
 /// Get your own App ID at https://dashboard.agora.io/
 String get appId {
