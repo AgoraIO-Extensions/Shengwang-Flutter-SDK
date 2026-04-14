@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:agora_rtc_engine_example/components/android_foreground_service_widget.dart';
-import 'package:agora_rtc_engine_example/components/config_override.dart';
+import 'package:shengwang_rtc_engine_example/components/android_foreground_service_widget.dart';
+import 'package:shengwang_rtc_engine_example/components/config_override.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';

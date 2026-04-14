@@ -1,5 +1,5 @@
-import 'package:agora_rtc_engine/src/agora_media_base.dart';
-import 'package:agora_rtc_engine/src/_serializable.dart';
+import 'package:shengwang_rtc_engine/src/agora_media_base.dart';
+import 'package:shengwang_rtc_engine/src/_serializable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'json_converters.g.dart';
