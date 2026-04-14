@@ -2,38 +2,38 @@ import '/src/_serializable.dart';
 import '/src/binding_forward_export.dart';
 part 'agora_rtc_engine.g.dart';
 
-/// Device type.
+/// 设备类型。
 @JsonEnum(alwaysCreate: true)
 enum MediaDeviceType {
-  /// -1: Unknown device type.
+  /// -1: 设备类型未知。
   @JsonValue(-1)
   unknownAudioDevice,
 
-  /// 0: Audio playback device.
+  /// 0: 音频播放设备。
   @JsonValue(0)
   audioPlayoutDevice,
 
-  /// 1: Audio recording device.
+  /// 1: 音频采集设备。
   @JsonValue(1)
   audioRecordingDevice,
 
-  /// 2: Video rendering device (GPU).
+  /// 2: 视频渲染设备 (显卡)。
   @JsonValue(2)
   videoRenderDevice,
 
-  /// 3: Video capture device.
+  /// 3: 视频采集设备。
   @JsonValue(3)
   videoCaptureDevice,
 
-  /// 4: Audio application playback device.
+  /// 4: 音频应用播放设备。
   @JsonValue(4)
   audioApplicationPlayoutDevice,
 
-  /// (macOS only) 5: Virtual audio playback device (virtual sound card).
+  /// （仅适用于 macOS。）5: 虚拟音频播放设备（虚拟声卡）。
   @JsonValue(5)
   audioVirtualPlayoutDevice,
 
-  /// (macOS only) 6: Virtual audio recording device (virtual sound card).
+  /// （仅适用于 macOS。）6: 虚拟音频采集设备（虚拟声卡）。
   @JsonValue(6)
   audioVirtualRecordingDevice,
 }
@@ -51,26 +51,26 @@ extension MediaDeviceTypeExt on MediaDeviceType {
   }
 }
 
-/// Music file playback state.
+/// 音乐文件播放状态。
 @JsonEnum(alwaysCreate: true)
 enum AudioMixingStateType {
-  /// 710: Music file is playing normally.
+  /// 710: 音乐文件正常播放。
   @JsonValue(710)
   audioMixingStatePlaying,
 
-  /// 711: Music file playback is paused.
+  /// 711: 音乐文件暂停播放。
   @JsonValue(711)
   audioMixingStatePaused,
 
-  /// 713: Music file playback stopped.
-  /// This state may be caused by:
+  /// 713: 音乐文件停止播放。
+  /// 该状态可能由以下原因导致：
   ///  audioMixingReasonAllLoopsCompleted(723)
   ///  audioMixingReasonStoppedByUser(724)
   @JsonValue(713)
   audioMixingStateStopped,
 
-  /// 714: Music file playback error.
-  /// This state may be caused by:
+  /// 714: 音乐文件播放出错。
+  /// 该状态可能由以下原因导致：
   ///  audioMixingReasonCanNotOpen(701)
   ///  audioMixingReasonTooFrequentCall(702)
   ///  audioMixingReasonInterruptedEof(703)
@@ -91,30 +91,30 @@ extension AudioMixingStateTypeExt on AudioMixingStateType {
   }
 }
 
-/// Reason for music file playback state change. Reported in the onAudioMixingStateChanged callback.
+/// 音乐文件播放状态改变的原因。在 onAudioMixingStateChanged 回调中报告。
 @JsonEnum(alwaysCreate: true)
 enum AudioMixingReasonType {
-  /// 701: Failed to open the music file. For example, the local file does not exist, the format is not supported, or the online music file URL is inaccessible.
+  /// 701: 音乐文件打开出错。例如，本地音乐文件不存在、文件格式不支持或无法访问在线音乐文件 URL。
   @JsonValue(701)
   audioMixingReasonCanNotOpen,
 
-  /// 702: Music file is opened too frequently. If you need to call startAudioMixing multiple times, ensure the interval between calls is greater than 500 ms.
+  /// 702: 音乐文件打开太频繁。如需多次调用 startAudioMixing ，请确保调用间隔大于 500 ms。
   @JsonValue(702)
   audioMixingReasonTooFrequentCall,
 
-  /// 703: Music file playback interrupted.
+  /// 703: 音乐文件播放中断。
   @JsonValue(703)
   audioMixingReasonInterruptedEof,
 
-  /// 721: One loop of music file playback completed.
+  /// 721: 音乐文件完成一次循环播放。
   @JsonValue(721)
   audioMixingReasonOneLoopCompleted,
 
-  /// 723: All loops of music file playback completed.
+  /// 723: 音乐文件完成所有循环播放。
   @JsonValue(723)
   audioMixingReasonAllLoopsCompleted,
 
-  /// 724: Successfully stopped music file playback by calling stopAudioMixing.
+  /// 724: 成功调用 stopAudioMixing 停止播放音乐文件。
   @JsonValue(724)
   audioMixingReasonStoppedByUser,
 
@@ -122,7 +122,7 @@ enum AudioMixingReasonType {
   @JsonValue(726)
   audioMixingReasonResumedByUser,
 
-  /// 0: Successfully opened the music file.
+  /// 0: 成功打开音乐文件。
   @JsonValue(0)
   audioMixingReasonOk,
 }
@@ -201,7 +201,7 @@ extension InjectStreamStatusExt on InjectStreamStatus {
   }
 }
 
-/// Center frequency of voice equalization bands.
+/// 语音音效均衡波段的中心频率。
 @JsonEnum(alwaysCreate: true)
 enum AudioEqualizationBandFrequency {
   /// 0: 31 Hz
@@ -258,26 +258,26 @@ extension AudioEqualizationBandFrequencyExt on AudioEqualizationBandFrequency {
   }
 }
 
-/// Audio reverb types.
+/// 音频混响类型。
 @JsonEnum(alwaysCreate: true)
 enum AudioReverbType {
-  /// 0: Original sound intensity, also known as the dry signal. Value range: [-20,10], unit: dB.
+  /// 0: 原始声音强度，即所谓的 dry signal，取值范围 [-20,10]，单位为 dB。
   @JsonValue(0)
   audioReverbDryLevel,
 
-  /// 1: Early reflection signal intensity, also known as the wet signal. Value range: [-20,10], unit: dB.
+  /// 1: 早期反射信号强度，即所谓的 wet signal，取值范围 [-20,10]，单位为 dB。
   @JsonValue(1)
   audioReverbWetLevel,
 
-  /// 2: Room size for the desired reverb effect. Generally, the larger the room, the stronger the reverb. Value range: [0,100], unit: dB.
+  /// 2: 所需混响效果的房间尺寸，一般房间越大，混响越强，取值范围 [0,100]，单位为 dB。
   @JsonValue(2)
   audioReverbRoomSize,
 
-  /// 3: Initial delay length of the wet signal. Value range: [0,200], unit: milliseconds.
+  /// 3: Wet signal 的初始延迟长度，取值范围 [0,200]，单位为毫秒。
   @JsonValue(3)
   audioReverbWetDelay,
 
-  /// 4: Reverb strength duration. Value range: [0,100].
+  /// 4: 混响持续的强度，取值范围为 [0,100]。
   @JsonValue(4)
   audioReverbStrength,
 }
@@ -295,18 +295,18 @@ extension AudioReverbTypeExt on AudioReverbType {
   }
 }
 
-/// Options for audio and video stream fallback under poor network conditions.
+/// 网络条件较差时，音视频流回退处理的选项。
 @JsonEnum(alwaysCreate: true)
 enum StreamFallbackOptions {
-  /// 0: Do not fallback for audio and video streams, but the quality of the audio and video streams is not guaranteed.
+  /// 0: 不对音视频流作回退处理，但不能保证音视频流的质量。
   @JsonValue(0)
   streamFallbackOptionDisabled,
 
-  /// 1: Receive only the low-quality video stream (low resolution and low bitrate).
+  /// 1: 只接收视频小流（低分辨率、低码率视频流）。
   @JsonValue(1)
   streamFallbackOptionVideoStreamLow,
 
-  /// 2: When network conditions are poor, try receiving only the low-quality video stream first; if the video cannot be displayed due to poor network, fallback to receiving only the subscribed audio stream.
+  /// 2: 网络条件较差时，先尝试只接收视频小流；如果因网络环境太差无法显示视频，则再回退到只接收订阅的音频流。
   @JsonValue(2)
   streamFallbackOptionAudioOnly,
 
@@ -373,7 +373,7 @@ extension PriorityTypeExt on PriorityType {
   }
 }
 
-/// Statistics of the local video stream.
+/// 本地视频流统计信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LocalVideoStats implements AgoraSerializable {
   /// @nodoc
@@ -404,87 +404,87 @@ class LocalVideoStats implements AgoraSerializable {
       this.simulcastDimensions,
       this.encodedFrameDepth});
 
-  /// ID of the local user.
+  /// 本地用户的 ID。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// Actual sending bitrate (Kbps) Excludes bitrate of retransmitted video after packet loss.
+  /// 实际发送码率 (Kbps) 不包含丢包后重传视频等的发送码率。
   @JsonKey(name: 'sentBitrate')
   final int? sentBitrate;
 
-  /// Actual sending frame rate (fps). Excludes frame rate of retransmitted video after packet loss.
+  /// 实际发送帧率 (fps)。 不包含丢包后重传视频等的发送帧率。
   @JsonKey(name: 'sentFrameRate')
   final int? sentFrameRate;
 
-  /// Frame rate of local video capture (fps).
+  /// 本地视频采集帧率 (fps)。
   @JsonKey(name: 'captureFrameRate')
   final int? captureFrameRate;
 
-  /// Width of local video capture (px).
+  /// 本地视频采集宽度 (px)。
   @JsonKey(name: 'captureFrameWidth')
   final int? captureFrameWidth;
 
-  /// Height of local video capture (px).
+  /// 本地视频采集高度 (px)。
   @JsonKey(name: 'captureFrameHeight')
   final int? captureFrameHeight;
 
-  /// Frame rate (fps) of video captured by the camera after adjustment by the SDK's built-in video capture adapter (regulator). The regulator adjusts the camera capture frame rate based on the video encoding configuration.
+  /// SDK 内置的视频采集适配器（regulator）调整后的摄像头采集视频帧率 (fps)。Regulator 根据视频编码配置对摄像头采集视频的帧率进行调整。
   @JsonKey(name: 'regulatedCaptureFrameRate')
   final int? regulatedCaptureFrameRate;
 
-  /// Width (px) of video captured by the camera after adjustment by the SDK's built-in video capture adapter (regulator). The regulator adjusts the width and height of the camera capture video based on the video encoding configuration.
+  /// SDK 内置的视频采集适配器（regulator）调整后的摄像头采集视频宽度 (px)。Regulator 根据视频编码配置对摄像头采集视频的宽高进行调整。
   @JsonKey(name: 'regulatedCaptureFrameWidth')
   final int? regulatedCaptureFrameWidth;
 
-  /// Height (px) of video captured by the camera after adjustment by the SDK's built-in video capture adapter (regulator). The regulator adjusts the width and height of the camera capture video based on the video encoding configuration.
+  /// SDK 内置的视频采集适配器（regulator）调整后的摄像头采集视频高度 (px)。Regulator 根据视频编码配置对摄像头采集视频的宽高进行调整。
   @JsonKey(name: 'regulatedCaptureFrameHeight')
   final int? regulatedCaptureFrameHeight;
 
-  /// Output frame rate of the local video encoder, in fps.
+  /// 本地视频编码器的输出帧率，单位为 fps。
   @JsonKey(name: 'encoderOutputFrameRate')
   final int? encoderOutputFrameRate;
 
-  /// Video encoding width (px).
+  /// 视频编码宽度（px）。
   @JsonKey(name: 'encodedFrameWidth')
   final int? encodedFrameWidth;
 
-  /// Video encoding height (px).
+  /// 视频编码高度（px）。
   @JsonKey(name: 'encodedFrameHeight')
   final int? encodedFrameHeight;
 
-  /// Output frame rate of the local video renderer, in fps.
+  /// 本地视频渲染器的输出帧率，单位为 fps。
   @JsonKey(name: 'rendererOutputFrameRate')
   final int? rendererOutputFrameRate;
 
-  /// Target encoding bitrate (Kbps) of the current encoder. This bitrate is estimated by the SDK based on the current network conditions.
+  /// 当前编码器的目标编码码率 (Kbps)，该码率为 SDK 根据当前网络状况预估的一个值。
   @JsonKey(name: 'targetBitrate')
   final int? targetBitrate;
 
-  /// Target encoding frame rate (fps) of the current encoder.
+  /// 当前编码器的目标编码帧率 (fps)。
   @JsonKey(name: 'targetFrameRate')
   final int? targetFrameRate;
 
-  /// Adaptation status of local video quality (based on target frame rate and target bitrate) during the statistical cycle. See QualityAdaptIndication.
+  /// 统计周期内本地视频质量（基于目标帧率和目标码率）的自适应情况。详见 QualityAdaptIndication 。
   @JsonKey(name: 'qualityAdaptIndication')
   final QualityAdaptIndication? qualityAdaptIndication;
 
-  /// Video encoding bitrate (Kbps). Excludes bitrate of retransmitted video after packet loss.
+  /// 视频编码码率（Kbps）。 不包含丢包后重传视频等的编码码率。
   @JsonKey(name: 'encodedBitrate')
   final int? encodedBitrate;
 
-  /// Number of video frames sent, cumulative value.
+  /// 视频发送的帧数，累计值。
   @JsonKey(name: 'encodedFrameCount')
   final int? encodedFrameCount;
 
-  /// Video codec type. See VideoCodecType.
+  /// 视频的编码类型。详见 VideoCodecType 。
   @JsonKey(name: 'codecType')
   final VideoCodecType? codecType;
 
-  /// Video packet loss rate (%) from the local end to the Agora edge server before weak network recovery.
+  /// 弱网对抗前本端到声网边缘服务器的视频丢包率 (%)。
   @JsonKey(name: 'txPacketLossRate')
   final int? txPacketLossRate;
 
-  /// Brightness level of locally captured video quality. See CaptureBrightnessLevelType.
+  /// 本地采集的画质亮度级别。详见 CaptureBrightnessLevelType 。
   @JsonKey(name: 'captureBrightnessLevel')
   final CaptureBrightnessLevelType? captureBrightnessLevel;
 
@@ -492,9 +492,9 @@ class LocalVideoStats implements AgoraSerializable {
   @JsonKey(name: 'dualStreamEnabled')
   final bool? dualStreamEnabled;
 
-  /// Local video encoding acceleration type.
-  ///  0: Uses software encoding, no acceleration.
-  ///  1: Uses hardware encoding for acceleration.
+  /// 本地视频编码加速类型。
+  ///  0：采用软件编码，未加速。
+  ///  1：采用硬件编码进行加速。
   @JsonKey(name: 'hwEncoderAccelerating')
   final int? hwEncoderAccelerating;
 
@@ -514,7 +514,7 @@ class LocalVideoStats implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LocalVideoStatsToJson(this);
 }
 
-/// Audio statistics of the remote user.
+/// 远端用户的音频统计数据。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class RemoteAudioStats implements AgoraSerializable {
   /// @nodoc
@@ -541,48 +541,47 @@ class RemoteAudioStats implements AgoraSerializable {
       this.rxAudioBytes,
       this.e2eDelay});
 
-  /// The user ID of the remote user.
+  /// 远端用户的用户 ID。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// The quality of the audio stream sent by the remote user. See QualityType.
+  /// 远端用户发送的音频流质量。详见 QualityType 。
   @JsonKey(name: 'quality')
   final int? quality;
 
-  /// Network delay from the audio sender to the receiver (ms).
+  /// 音频发送端到接收端的网络延迟（毫秒）。
   @JsonKey(name: 'networkTransportDelay')
   final int? networkTransportDelay;
 
-  /// Network delay from the audio receiver to the jitter buffer (ms). This parameter is not effective when the receiver is an audience member and audienceLatencyLevel in ClientRoleOptions is set to 1.
+  /// 音频接收端到网络抖动缓冲的网络延迟（毫秒）。 当接收端为观众且 ClientRoleOptions 的 audienceLatencyLevel 为 1 时，该参数不生效。
   @JsonKey(name: 'jitterBufferDelay')
   final int? jitterBufferDelay;
 
-  /// Audio frame loss rate (%) of the remote audio stream during the reporting interval.
+  /// 统计周期内的远端音频流的丢帧率 (%)。
   @JsonKey(name: 'audioLossRate')
   final int? audioLossRate;
 
-  /// Number of audio channels.
+  /// 声道数。
   @JsonKey(name: 'numChannels')
   final int? numChannels;
 
-  /// Sampling rate of the received remote audio stream during the reporting interval.
+  /// 统计周期内接收到的远端音频流的采样率。
   @JsonKey(name: 'receivedSampleRate')
   final int? receivedSampleRate;
 
-  /// Average bitrate (Kbps) of the received remote audio stream during the reporting interval.
+  /// 接收到的远端音频流在统计周期内的平均码率（Kbps）。
   @JsonKey(name: 'receivedBitrate')
   final int? receivedBitrate;
 
-  /// Total duration (ms) of audio freezes experienced by the remote user after joining the channel. An audio freeze is counted when the audio frame loss rate exceeds 4%.
+  /// 远端用户在加入频道后发生音频卡顿的累计时长（毫秒）。通话过程中，音频丢帧率达到 4% 即记为一次音频卡顿。
   @JsonKey(name: 'totalFrozenTime')
   final int? totalFrozenTime;
 
-  /// Percentage (%) of the total freeze duration relative to the total valid audio duration. Valid audio duration refers to the time after the remote user joins the channel during which audio is not stopped or disabled.
+  /// 音频卡顿的累计时长占音频总有效时长的百分比 (%)。音频有效时长是指远端用户加入频道后音频未被停止发送或禁用的时长。
   @JsonKey(name: 'frozenRate')
   final int? frozenRate;
 
-  /// During the reporting interval, the quality score of the received remote audio stream evaluated by Agora's real-time audio MOS (Mean Opinion Score) method. The return value ranges from [0,500]. Divide the return value by 100 to get the MOS score in the range [0,5], where a higher score indicates better audio quality.
-  /// The subjective audio quality corresponding to the Agora real-time audio MOS score is as follows: MOS Score Audio Quality Greater than 4 Excellent audio quality, clear and smooth. 3.5 - 4 Good audio quality, occasional impairments, but still clear. 3 - 3.5 Fair audio quality, occasional stuttering, not very smooth, requires some effort to understand. 2.5 - 3 Poor audio quality, frequent stuttering, requires focus to understand. 2 - 2.5 Very poor audio quality, occasional noise, partial semantic loss, difficult to communicate. Less than 2 Extremely poor audio quality, frequent noise, significant semantic loss, communication impossible.
+  /// 统计周期内，声网实时音频 MOS（平均主观意见分）评估方法对接收到的远端音频流的质量评分。返回值范围为 [0,500]。返回值除以 100 即可得到 MOS 分数，范围为 [0,5] 分，分数越高，音频质量越好。 MOS 分数 音质感受 大于 4 分 音频质量佳，清晰流畅。 3.5 - 4 分 音频质量较好，偶有音质损伤，但依然清晰。 3 - 3.5 分 音频质量一般，偶有卡顿，不是非常流畅，需要一点注意力才能听清。 2.5 - 3 分 音频质量较差，卡顿频繁，需要集中精力才能听清。 2 - 2.5 分 音频质量很差，偶有杂音，部分语义丢失，难以交流。 小于 2 分 音频质量非常差，杂音频现，大量语义丢失，完全无法交流。
   @JsonKey(name: 'mosValue')
   final int? mosValue;
 
@@ -602,20 +601,20 @@ class RemoteAudioStats implements AgoraSerializable {
   @JsonKey(name: 'frozenTimeByCustom')
   final int? frozenTimeByCustom;
 
-  /// Total valid time (ms) from the start of the audio call to this callback for the remote user.
-  /// Valid time excludes the total time the remote user was in a muted state.
+  /// 远端用户在音频通话开始到本次回调之间的有效时长（毫秒）。
+  /// 有效时长是指去除了远端用户进入静音状态的总时长。
   @JsonKey(name: 'totalActiveTime')
   final int? totalActiveTime;
 
-  /// Total publishing duration (ms) of the remote audio stream.
+  /// 远端音频流的累计发布时长（毫秒）。
   @JsonKey(name: 'publishDuration')
   final int? publishDuration;
 
-  /// Subjective experience quality of the local user when receiving remote audio.
+  /// 接收远端音频时，本地用户的主观体验质量。
   @JsonKey(name: 'qoeQuality')
   final int? qoeQuality;
 
-  /// Reason for poor subjective experience quality of the local user when receiving remote audio. See ExperiencePoorReason.
+  /// 接收远端音频时，本地用户主观体验质量较差的原因。详见 ExperiencePoorReason 。
   @JsonKey(name: 'qualityChangedReason')
   final int? qualityChangedReason;
 
@@ -623,7 +622,7 @@ class RemoteAudioStats implements AgoraSerializable {
   @JsonKey(name: 'rxAudioBytes')
   final int? rxAudioBytes;
 
-  /// End-to-end audio delay (ms), i.e., the total time from when the remote user captures the audio to when the local user starts playing it.
+  /// 端到端音频延时（毫秒），即自远端用户音频采集起，至本地用户开始播放音频的总时长。
   @JsonKey(name: 'e2eDelay')
   final int? e2eDelay;
 
@@ -635,7 +634,7 @@ class RemoteAudioStats implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$RemoteAudioStatsToJson(this);
 }
 
-/// Statistics of the remote video stream.
+/// 远端视频流的统计信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class RemoteVideoStats implements AgoraSerializable {
   /// @nodoc
@@ -660,27 +659,27 @@ class RemoteVideoStats implements AgoraSerializable {
       this.mosValue,
       this.rxVideoBytes});
 
-  /// User ID that identifies which user's video stream it is.
+  /// 用户 ID，指定是哪个用户的视频流。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// Delay (ms). Deprecated: In audio and video scenarios with audio-video sync mechanism, you can refer to the values of networkTransportDelay and jitterBufferDelay in RemoteAudioStats to understand video delay data.
+  /// 延时（毫秒）。 弃用：在有音画同步机制的音视频场景中，你可以参考 RemoteAudioStats 里的 networkTransportDelay 和 jitterBufferDelay 成员的值，了解视频的延迟数据。
   @JsonKey(name: 'delay')
   final int? delay;
 
-  /// End-to-end video delay (ms), i.e., the total time from video capture by the remote user to video rendering by the local user.
+  /// 端到端视频延时（毫秒）。即，自远端用户视频采集起，至本地用户接收并渲染视频的总时长。
   @JsonKey(name: 'e2eDelay')
   final int? e2eDelay;
 
-  /// Video stream width (pixels).
+  /// 视频流宽（像素）。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// Video stream height (pixels).
+  /// 视频流高（像素）。
   @JsonKey(name: 'height')
   final int? height;
 
-  /// Bitrate received (Kbps) since last statistics.
+  /// （上次统计后）接收到的码率(Kbps)。
   @JsonKey(name: 'receivedBitrate')
   final int? receivedBitrate;
 
@@ -688,54 +687,54 @@ class RemoteVideoStats implements AgoraSerializable {
   @JsonKey(name: 'decoderInputFrameRate')
   final int? decoderInputFrameRate;
 
-  /// Output frame rate of the remote video decoder, in fps.
+  /// 远端视频解码器的输出帧率，单位为 fps。
   @JsonKey(name: 'decoderOutputFrameRate')
   final int? decoderOutputFrameRate;
 
-  /// Output frame rate of the remote video renderer, in fps.
+  /// 远端视频渲染器的输出帧率，单位为 fps。
   @JsonKey(name: 'rendererOutputFrameRate')
   final int? rendererOutputFrameRate;
 
-  /// Remote video frame loss rate (%).
+  /// 远端视频丢包率(%)。
   @JsonKey(name: 'frameLossRate')
   final int? frameLossRate;
 
-  /// Packet loss rate (%) of the remote video after applying anti-packet-loss techniques.
+  /// 远端视频在使用抗丢包技术之后的丢包率(%)。
   @JsonKey(name: 'packetLossRate')
   final int? packetLossRate;
 
-  /// Video stream type, either high or low. See VideoStreamType.
+  /// 视频流类型，大流或小流。详见 VideoStreamType 。
   @JsonKey(name: 'rxStreamType')
   final VideoStreamType? rxStreamType;
 
-  /// Total duration (ms) of video freezes experienced by the remote user after joining the channel. During a call, if the video frame rate is set to no less than 5 fps and the interval between two consecutive rendered frames exceeds 500 ms, it is counted as a video freeze.
+  /// 远端用户在加入频道后发生视频卡顿的累计时长（ms）。通话过程中，视频帧率设置不低于 5 fps 时，连续渲染的两帧视频之间间隔超过 500 ms，则记为一次视频卡顿。
   @JsonKey(name: 'totalFrozenTime')
   final int? totalFrozenTime;
 
-  /// Percentage (%) of the total duration of video freezes experienced by the remote user after joining the channel relative to the total effective video duration. Effective video duration refers to the time after the remote user joins the channel during which the video is neither stopped nor disabled.
+  /// 远端用户在加入频道后发生视频卡顿的累计时长占视频总有效时长的百分比 (%)。视频有效时长是指远端用户加入频道后视频未被停止发送或禁用的时长。
   @JsonKey(name: 'frozenRate')
   final int? frozenRate;
 
-  /// Time (ms) that audio leads video. If the value is negative, it means audio lags behind video.
+  /// 音频超前视频的时间 (ms)。 如果为负值，则代表音频落后于视频。
   @JsonKey(name: 'avSyncTimeMs')
   final int? avSyncTimeMs;
 
-  /// Effective video duration (ms).
-  /// The total effective video duration is the time during which the remote user or host has joined the channel and neither stopped sending the video stream nor disabled the video module.
+  /// 视频有效时长（毫秒）。
+  /// 视频总有效时长是远端用户或主播加入频道后，既没有停止发送视频流，也没有禁用视频模块的通话时长。
   @JsonKey(name: 'totalActiveTime')
   final int? totalActiveTime;
 
-  /// Total published duration (ms) of the remote video stream.
+  /// 远端视频流的累计发布时长（毫秒）。
   @JsonKey(name: 'publishDuration')
   final int? publishDuration;
 
-  /// Quality of the remote audio stream during the statistics period. The quality is measured using Agora's real-time audio MOS (Mean Opinion Score) method. The return value ranges from [0, 500]; divide by 100 to get the MOS score, ranging from 0 to 5. The higher the score, the better the audio quality. The subjective audio quality corresponding to the Agora MOS score is:
-  ///  Greater than 4: Excellent audio quality, clear and smooth.
-  ///  3.5 - 4: Good audio quality, occasional distortion but still clear.
-  ///  3 - 3.5: Fair audio quality, occasional stuttering, not very smooth, requires some attention to hear clearly.
-  ///  2.5 - 3: Poor audio quality, frequent stuttering, requires concentration to hear clearly.
-  ///  2 - 2.5: Very poor audio quality, occasional noise, partial semantic loss, difficult to communicate.
-  ///  Less than 2: Extremely poor audio quality, frequent noise, significant semantic loss, communication impossible.
+  /// 在统计周期内远端音频流的质量。该质量由声网实时音频 MOS（主观意见评分）测量方法确定。返回值范围为 [0, 500]，除以 100 后为 MOS 分数，范围为 0 到 5，分数越高表示音频质量越好。声网实时音频 MOS 评分对应的主观音质感受如下：
+  ///  大于 4 分，音频质量佳，清晰流畅。
+  ///  3.5 - 4 分，音频质量较好，偶有音质损伤，但依然清晰。
+  ///  3 - 3.5 分，音频质量一般，偶有卡顿，不是非常流畅，需要一点注意力才能听清。
+  ///  2.5 - 3 分，音频质量较差，卡顿频繁，需要集中精力才能听清。
+  ///  2 - 2.5 分，音频质量很差，偶有杂音，部分语义丢失，难以交流。
+  ///  小于 2 分，音频质量非常差，杂音频现，大量语义丢失，完全无法交流。
   @JsonKey(name: 'mosValue')
   final int? mosValue;
 
@@ -907,16 +906,16 @@ class InjectStreamConfig implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$InjectStreamConfigToJson(this);
 }
 
-/// Lifecycle of server-side transcoding stream.
+/// 服务端转码推流的生命周期。
 ///
-/// Deprecated Deprecated
+/// 废弃 弃用
 @JsonEnum(alwaysCreate: true)
 enum RtmpStreamLifeCycleType {
-  /// Bound to the channel lifecycle. When all hosts leave the channel, the server-side transcoding stream stops after 30 seconds.
+  /// 跟频道生命周期绑定，即频道内所有主播离开，服务端转码推流会在 30 秒之后停止。
   @JsonValue(1)
   rtmpStreamLifeCycleBind2channel,
 
-  /// Bound to the lifecycle of the host who starts the server-side transcoding stream. When the host leaves, the stream stops immediately.
+  /// 跟启动服务端转码推流的主播生命周期绑定，即该主播离开，服务端转码推流会立即停止。
   @JsonValue(2)
   rtmpStreamLifeCycleBind2owner,
 }
@@ -1013,14 +1012,14 @@ class PublisherConfiguration implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$PublisherConfigurationToJson(this);
 }
 
-/// Camera direction.
+/// 摄像头方向。
 @JsonEnum(alwaysCreate: true)
 enum CameraDirection {
-  /// 0: Rear camera.
+  /// 0: 后置摄像头。
   @JsonValue(0)
   cameraRear,
 
-  /// 1: (Default) Front camera.
+  /// 1: （默认）前置摄像头。
   @JsonValue(1)
   cameraFront,
 }
@@ -1038,18 +1037,18 @@ extension CameraDirectionExt on CameraDirection {
   }
 }
 
-/// Cloud proxy type.
+/// 云代理类型。
 @JsonEnum(alwaysCreate: true)
 enum CloudProxyType {
-  /// 0: Automatic mode. This is the default mode enabled by the SDK. In this mode, the SDK first attempts to connect to SD-RTN™. If the connection fails, it automatically switches to TLS 443.
+  /// 0：自动模式。SDK 默认开启该模式。在该模式下，SDK 优先连接 SD-RTN™，如果连接失败，自动切换到 TLS 443。
   @JsonValue(0)
   noneProxy,
 
-  /// 1: Cloud proxy using UDP protocol, also known as Force UDP mode. In this mode, the SDK always transmits data via UDP.
+  /// 1：UDP 协议的云代理，即 Force UDP 云代理模式。在该模式下，SDK 始终通过 UDP 协议传输数据。
   @JsonValue(1)
   udpProxy,
 
-  /// 2: Cloud proxy using TCP (encrypted) protocol, also known as Force TCP mode. In this mode, the SDK always transmits data via TLS 443.
+  /// 2：TCP（加密）协议的云代理，即 Force TCP 云代理模式。在该模式下，SDK 始终通过 TLS 443 传输数据。
   @JsonValue(2)
   tcpProxy,
 }
@@ -1067,7 +1066,7 @@ extension CloudProxyTypeExt on CloudProxyType {
   }
 }
 
-/// Camera capture configuration.
+/// 摄像头采集配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class CameraCapturerConfiguration implements AgoraSerializable {
   /// @nodoc
@@ -1079,36 +1078,36 @@ class CameraCapturerConfiguration implements AgoraSerializable {
       this.followEncodeDimensionRatio,
       this.format});
 
-  /// (Optional) Camera direction. See CameraDirection. This parameter is only applicable to Android and iOS platforms.
+  /// （可选）摄像头方向。详见 CameraDirection 。 该参数仅适用于 Android 和 iOS 平台。
   @JsonKey(name: 'cameraDirection')
   final CameraDirection? cameraDirection;
 
-  /// (Optional) Camera focal length type. See CameraFocalLengthType.
-  ///  This parameter is only applicable to Android and iOS.
-  ///  To set the camera focal length type, you can only use cameraDirection to specify the camera. cameraId is not supported.
-  ///  Some iOS devices have composite rear cameras, such as dual (wide and ultra-wide) or triple (wide, ultra-wide, and telephoto). For such composite lenses with ultra-wide capabilities, you can achieve ultra-wide capture using either of the following methods:
-  ///  Method 1: Set this parameter to cameraFocalLengthUltraWide (2) (ultra-wide lens).
-  ///  Method 2: Set this parameter to cameraFocalLengthDefault (0) (standard lens), then call setCameraZoomFactor to set the zoom factor to a value less than 1.0, with a minimum of 0.5. The difference is that Method 1 has a fixed ultra-wide view, while Method 2 allows flexible zoom adjustment.
+  /// （可选）摄像头的焦距类型。详见 CameraFocalLengthType 。
+  ///  该参数仅适用于 Android 和 iOS。
+  ///  如需设置摄像头的焦距类型，仅支持通过 cameraDirection 指定摄像头，不支持通过 cameraId 进行指定。
+  ///  部分 iOS 设备的后置摄像头为多个摄像头组成的融合镜头，如双摄（广角和超广角）或三摄（广角、超广角和长焦），对于这种具备超广角能力的融合镜头，你可以通过以下任意一种方式实现超广角的采集效果：
+  ///  方式一：将该参数设置为 cameraFocalLengthUltraWide (2)（超广角镜头）。
+  ///  方式二：将该参数设置为 cameraFocalLengthDefault (0)（标准镜头），然后调用 setCameraZoomFactor 将相机缩放比例设置为小于 1.0 的数值，最小可以设置为 0.5。 区别为方式一的超广角大小不可调节，方式二支持自由调节相机的缩放比例。
   @JsonKey(name: 'cameraFocalLengthType')
   final CameraFocalLengthType? cameraFocalLengthType;
 
-  /// (Optional) Camera ID. Maximum length is MaxDeviceIdLengthType. This parameter is only applicable to Windows and macOS.
+  /// （可选）摄像头的 ID。最大长度为 MaxDeviceIdLengthType 。 该参数仅适用于 Windows 和 macOS。
   @JsonKey(name: 'deviceId')
   final String? deviceId;
 
-  /// (Optional) Camera ID. Defaults to the front camera's ID. You can get the camera ID using Android native system APIs. See [Camera.open()](https://developer.android.google.cn/reference/android/hardware/Camera#open(int)) and [CameraManager.getCameraIdList()](https://developer.android.google.cn/reference/android/hardware/camera2/CameraManager?hl=en#getCameraIdList).
-  ///  This parameter is only applicable to Android.
-  ///  This parameter and cameraDirection are both used to specify the camera and are mutually exclusive. You can choose either one as needed. The differences are:
-  ///  Using cameraDirection is simpler. You only need to specify the direction (front or rear), and the SDK will determine the actual camera ID via system APIs.
-  ///  Using cameraId allows you to specify a particular camera more precisely. On multi-camera devices, cameraDirection may not detect or access all available cameras. In such cases, it's recommended to use cameraId to directly specify the desired camera ID.
+  /// （可选）摄像头 ID。默认为前置摄像头对应的摄像头 ID。你可以通过 Android 原生系统 API 获取摄像头 ID，详见 [Camera.open()](https://developer.android.google.cn/reference/android/hardware/Camera#open(int)) 和 [CameraManager.getCameraIdList()](https://developer.android.google.cn/reference/android/hardware/camera2/CameraManager?hl=en#getCameraIdList)。
+  ///  该参数仅适用于 Android。
+  ///  该参数和 cameraDirection 均用于指定摄像头，二者为互斥关系，你可以按需选用其中之一，具体区别如下：
+  ///  通过 cameraDirection 指定摄像头的方式更为简便。你只需指定摄像头的方向（前置或后置），无需指定具体的摄像头 ID，SDK 会通过系统 API 去检索和确定实际的摄像头 ID。
+  ///  通过 cameraId 则可以更精确地指定某个特定的摄像头。对于多摄像头的设备， cameraDirection 无法识别或访问全部可用摄像头，这种情况建议使用 cameraId 直接指定你想要的摄像头 ID。
   @JsonKey(name: 'cameraId')
   final String? cameraId;
 
-  /// (Optional) Whether to follow the video aspect ratio set in setVideoEncoderConfiguration : true : (Default) Follow. The SDK crops the captured video to match the configured aspect ratio. This also affects local preview, onCaptureVideoFrame, and onPreEncodeVideoFrame. false : Do not follow. The SDK does not change the aspect ratio of the captured video frames.
+  /// （可选）是否跟随 setVideoEncoderConfiguration 中设置的视频宽高比： true ：(默认) 跟随。SDK 会将采集到的视频按照已设置的视频宽高比进行裁剪，会同步改变本地预览画面、 onCaptureVideoFrame 和 onPreEncodeVideoFrame 中的视频画面。 false ：不跟随。SDK不改变采集到的视频帧宽高比。
   @JsonKey(name: 'followEncodeDimensionRatio')
   final bool? followEncodeDimensionRatio;
 
-  /// (Optional) Video frame format. See VideoFormat.
+  /// （可选）视频帧格式。详见 VideoFormat 。
   @JsonKey(name: 'format')
   final VideoFormat? format;
 
@@ -1120,7 +1119,7 @@ class CameraCapturerConfiguration implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$CameraCapturerConfigurationToJson(this);
 }
 
-/// Screen capture configuration.
+/// 屏幕采集配置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ScreenCaptureConfiguration implements AgoraSerializable {
   /// @nodoc
@@ -1132,27 +1131,27 @@ class ScreenCaptureConfiguration implements AgoraSerializable {
       this.params,
       this.regionRect});
 
-  /// Whether to capture a window on the screen: true : Capture window. false : (Default) Capture screen, not window.
+  /// 是否采集屏幕上的窗口： true ：采集窗口。 false ：（默认）采集屏幕，不采集窗口。
   @JsonKey(name: 'isCaptureWindow')
   final bool? isCaptureWindow;
 
-  /// (macOS only) Display ID of the screen. Use this parameter only when capturing the screen on Mac devices.
+  /// （仅适用于 macOS 平台）屏幕的 display ID。 请仅在 Mac 设备上采集屏幕时使用该参数。
   @JsonKey(name: 'displayId')
   final int? displayId;
 
-  /// (Windows only) Position of the screen to be shared relative to the virtual screen. Use this parameter only when capturing the screen on Windows devices.
+  /// （仅适用于 Windows 平台）待共享的屏幕相对于虚拟屏的位置。 请仅在 Windows 设备上采集屏幕时使用该参数。
   @JsonKey(name: 'screenRect')
   final Rectangle? screenRect;
 
-  /// (Windows and macOS only) Window ID. Use this parameter only when capturing a window.
+  /// （仅适用于 Windows 和 macOS 平台）窗口 ID。 请仅在采集窗口时使用该参数。
   @JsonKey(name: 'windowId')
   final int? windowId;
 
-  /// (Windows and macOS only) Encoding parameter configuration for screen sharing stream. See ScreenCaptureParameters.
+  /// （仅适用于 Windows 和 macOS 平台）屏幕共享流的编码参数配置。详见 ScreenCaptureParameters 。
   @JsonKey(name: 'params')
   final ScreenCaptureParameters? params;
 
-  /// (Windows and macOS only) Position of the region to be shared relative to the entire screen. See Rectangle. If not set, the entire screen is shared. If the specified region exceeds screen boundaries, only the content within the screen is shared. If width or height in Rectangle is set to 0, the entire screen is shared.
+  /// （仅适用于 Windows 和 macOS 平台）待共享区域相对于整个屏幕的位置。详见 Rectangle 。如不填，则表示共享整个屏幕。如果设置的共享区域超出了屏幕的边界，则只共享屏幕内的内容。 如果将 Rectangle 中的 width 或 height 设为 0 ，则共享整个屏幕。
   @JsonKey(name: 'regionRect')
   final Rectangle? regionRect;
 
@@ -1185,27 +1184,27 @@ class SIZE implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$SIZEToJson(this);
 }
 
-/// Image content of a thumbnail or icon. Set in ScreenCaptureSourceInfo.
+/// 缩略图或图标的图像内容。在 ScreenCaptureSourceInfo 中设置。
 ///
-/// The image is in ARGB format by default. If you need to use a different format, please convert it yourself.
+/// 图像默认为 ARGB 格式。如果你需要使用其他格式，请自行转换格式。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ThumbImageBuffer implements AgoraSerializable {
   /// @nodoc
   const ThumbImageBuffer({this.buffer, this.length, this.width, this.height});
 
-  /// Buffer of the thumbnail or icon.
+  /// 缩略图或图标的 buffer。
   @JsonKey(name: 'buffer', ignore: true)
   final Uint8List? buffer;
 
-  /// Length of the thumbnail or icon buffer in bytes.
+  /// 缩略图或图标的 buffer 长度，单位为字节。
   @JsonKey(name: 'length')
   final int? length;
 
-  /// Actual width of the thumbnail or icon (px).
+  /// 缩略图或图标的实际宽度（px）。
   @JsonKey(name: 'width')
   final int? width;
 
-  /// Actual height of the thumbnail or icon (px).
+  /// 缩略图或图标的实际高度（px）。
   @JsonKey(name: 'height')
   final int? height;
 
@@ -1217,22 +1216,22 @@ class ThumbImageBuffer implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ThumbImageBufferToJson(this);
 }
 
-/// Type of the shared target. Set in ScreenCaptureSourceInfo.
+/// 共享目标的类型。在 ScreenCaptureSourceInfo 中设置。
 @JsonEnum(alwaysCreate: true)
 enum ScreenCaptureSourceType {
-  /// -1: Unknown.
+  /// -1：未知。
   @JsonValue(-1)
   screencapturesourcetypeUnknown,
 
-  /// 0: The shared target is a window.
+  /// 0：共享目标为某一个窗口。
   @JsonValue(0)
   screencapturesourcetypeWindow,
 
-  /// 1: The shared target is a display screen.
+  /// 1：共享目标为某一个显示器的屏幕。
   @JsonValue(1)
   screencapturesourcetypeScreen,
 
-  /// 2: Reserved parameter.
+  /// 2：预留参数。
   @JsonValue(2)
   screencapturesourcetypeCustom,
 }
@@ -1250,7 +1249,7 @@ extension ScreenCaptureSourceTypeExt on ScreenCaptureSourceType {
   }
 }
 
-/// Information about shareable windows or screens.
+/// 可共享窗口或屏幕的信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ScreenCaptureSourceInfo implements AgoraSerializable {
   /// @nodoc
@@ -1268,35 +1267,35 @@ class ScreenCaptureSourceInfo implements AgoraSerializable {
       this.minimizeWindow,
       this.sourceDisplayId});
 
-  /// Type of the sharing target. See ScreenCaptureSourceType.
+  /// 共享目标的类型。详见 ScreenCaptureSourceType 。
   @JsonKey(name: 'type')
   final ScreenCaptureSourceType? type;
 
-  /// For windows, represents the Window ID; for screens, represents the Display ID.
+  /// 对于窗口，表示窗口 ID（Window ID）；对于屏幕，表示屏幕 ID（Display ID）。
   @JsonKey(name: 'sourceId')
   final int? sourceId;
 
-  /// Name of the window or screen. UTF-8 encoded.
+  /// 窗口或屏幕的名称。UTF-8 编码。
   @JsonKey(name: 'sourceName')
   final String? sourceName;
 
-  /// Image content of the thumbnail. See ThumbImageBuffer.
+  /// 缩略图的图像内容。详见 ThumbImageBuffer 。
   @JsonKey(name: 'thumbImage')
   final ThumbImageBuffer? thumbImage;
 
-  /// Image content of the icon. See ThumbImageBuffer.
+  /// 图标的图像内容。详见 ThumbImageBuffer 。
   @JsonKey(name: 'iconImage')
   final ThumbImageBuffer? iconImage;
 
-  /// Process to which the window belongs. UTF-8 encoded.
+  /// 窗口所属的进程。UTF-8 编码。
   @JsonKey(name: 'processPath')
   final String? processPath;
 
-  /// Window title. UTF-8 encoded.
+  /// 窗口标题。UTF-8 编码。
   @JsonKey(name: 'sourceTitle')
   final String? sourceTitle;
 
-  /// Whether the screen is the primary display: true : The screen is the primary display. false : The screen is not the primary display.
+  /// 屏幕是否为主显示屏： true : 屏幕为主显示屏。 false : 屏幕不是主显示屏。
   @JsonKey(name: 'primaryMonitor')
   final bool? primaryMonitor;
 
@@ -1304,15 +1303,15 @@ class ScreenCaptureSourceInfo implements AgoraSerializable {
   @JsonKey(name: 'isOccluded')
   final bool? isOccluded;
 
-  /// Position of the window relative to the entire screen space (including all shareable screens). See Rectangle.
+  /// 窗口相对于整个屏幕空间（包含所有可共享屏幕）的位置。详见 Rectangle 。
   @JsonKey(name: 'position')
   final Rectangle? position;
 
-  /// (Windows only) Whether the window is minimized: true : The window is minimized. false : The window is not minimized.
+  /// (仅适用于 Windows) 窗口是否已最小化： true : 窗口已最小化。 false : 窗口未最小化。
   @JsonKey(name: 'minimizeWindow')
   final bool? minimizeWindow;
 
-  /// (Windows only) ID of the screen where the window is located. If the window spans multiple screens, this indicates the screen with the largest intersection area. If the window is outside the visible screen area, the value is -2.
+  /// (仅适用于 Windows) 窗口所在的屏幕 ID。如果窗口为跨屏幕显示，则表示与该窗口相交面积最大的屏幕 ID。如果窗口位于可见屏幕之外，则该成员的值为 -2。
   @JsonKey(name: 'sourceDisplayId')
   final int? sourceDisplayId;
 
@@ -1324,13 +1323,13 @@ class ScreenCaptureSourceInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ScreenCaptureSourceInfoToJson(this);
 }
 
-/// Advanced options for audio.
+/// 音频的高级选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AdvancedAudioOptions implements AgoraSerializable {
   /// @nodoc
   const AdvancedAudioOptions({this.audioProcessingChannels});
 
-  /// Number of channels for audio pre-processing. See audioprocessingchannels.
+  /// 音频前处理的声道数。详见 audioprocessingchannels 。
   @JsonKey(name: 'audioProcessingChannels')
   final int? audioProcessingChannels;
 
@@ -1342,17 +1341,17 @@ class AdvancedAudioOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$AdvancedAudioOptionsToJson(this);
 }
 
-/// Settings for placeholder image.
+/// 垫片图片的设置选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ImageTrackOptions implements AgoraSerializable {
   /// @nodoc
   const ImageTrackOptions({this.imageUrl, this.fps, this.mirrorMode});
 
-  /// URL of the placeholder image. Currently supports JPEG, JPG, PNG, and GIF formats. You can add placeholder images from local absolute or relative paths. On Android, adding placeholder images from /assets/ is not supported.
+  /// 垫片图片的 URL，目前支持 JPEG、JPG、PNG、GIF 格式的图片。支持从本地绝对路径或相对路径添加垫片图片。 在 Android 平台上，不支持从 /assets/ 中添加垫片图片。
   @JsonKey(name: 'imageUrl')
   final String? imageUrl;
 
-  /// Video frame rate. Value range is [1,30]. Default value is 1.
+  /// 视频帧率，取值范围为 [1,30]。默认值为 1。
   @JsonKey(name: 'fps')
   final int? fps;
 
@@ -1368,9 +1367,9 @@ class ImageTrackOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ImageTrackOptionsToJson(this);
 }
 
-/// Channel media configuration options.
+/// 频道媒体设置选项。
 ///
-/// RtcConnection publishMicrophoneTrack publishCustomAudioTrack publishMediaPlayerAudioTrack true publishCameraTrack publishScreenCaptureVideo, publishScreenTrack, publishCustomVideoTrack publishEncodedVideoTrack true It is recommended that you configure the member parameters based on your business scenario. Otherwise, the SDK automatically assigns values to them.
+/// RtcConnection publishMicrophoneTrack publishCustomAudioTrack publishMediaPlayerAudioTrack true publishCameraTrack publishScreenCaptureVideo 、 publishScreenTrack 、 publishCustomVideoTrack publishEncodedVideoTrack true 建议你根据业务场景自行设置成员参数值，否则 SDK 会自动对成员参数进行赋值。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ChannelMediaOptions implements AgoraSerializable {
   /// @nodoc
@@ -1417,120 +1416,120 @@ class ChannelMediaOptions implements AgoraSerializable {
       this.downlinkMultipathMode,
       this.preferMultipathType});
 
-  /// Sets whether to publish the video captured by the camera: true : Publish the video captured by the camera. false : Do not publish the video captured by the camera.
+  /// 设置是否发布摄像头采集的视频： true ：发布摄像头采集的视频。 false ：不发布摄像头采集的视频。
   @JsonKey(name: 'publishCameraTrack')
   final bool? publishCameraTrack;
 
-  /// Sets whether to publish the video captured by the second camera: true : Publish the video captured by the second camera. false : Do not publish the video captured by the second camera.
+  /// 设置是否发布第二个摄像头采集的视频： true ：发布第二个摄像头采集的视频。 false ：不发布第二个摄像头采集的视频。
   @JsonKey(name: 'publishSecondaryCameraTrack')
   final bool? publishSecondaryCameraTrack;
 
-  /// This parameter is only applicable to Android, Windows, and macOS platforms. Sets whether to publish the video captured by the third camera: true : Publish the video captured by the third camera. false : Do not publish the video captured by the third camera.
+  /// 该参数仅适用于 Android、Windows 和 macOS 平台。 设置是否发布第三个摄像头采集的视频： true ：发布第三个摄像头采集的视频。 false ：不发布第三个摄像头采集的视频。
   @JsonKey(name: 'publishThirdCameraTrack')
   final bool? publishThirdCameraTrack;
 
-  /// This parameter is only applicable to Android, Windows, and macOS platforms. Sets whether to publish the video captured by the fourth camera: true : Publish the video captured by the fourth camera. false : Do not publish the video captured by the fourth camera.
+  /// 该参数仅适用于 Android、Windows 和 macOS 平台。 设置是否发布第四个摄像头采集的视频： true ：发布第四个摄像头采集的视频。 false ：不发布第四个摄像头采集的视频。
   @JsonKey(name: 'publishFourthCameraTrack')
   final bool? publishFourthCameraTrack;
 
-  /// Sets whether to publish the audio captured by the microphone: true : Publish the audio captured by the microphone. false : Do not publish the audio captured by the microphone.
+  /// 设置是否发布麦克风采集到的音频： true ：发布麦克风采集到的音频。 false ：不发布麦克风采集到的音频。
   @JsonKey(name: 'publishMicrophoneTrack')
   final bool? publishMicrophoneTrack;
 
-  /// This parameter is only applicable to Android and iOS platforms. Sets whether to publish the audio captured from the screen: true : Publish the screen-captured audio. false : Do not publish the screen-captured audio.
+  /// 该参数仅适用于 Android 和 iOS 平台。 设置是否发布屏幕采集的音频： true ：发布屏幕采集到的音频。 false ：不发布屏幕采集到的音频。
   @JsonKey(name: 'publishScreenCaptureAudio')
   final bool? publishScreenCaptureAudio;
 
-  /// This parameter is only applicable to Android and iOS platforms. Sets whether to publish the video captured from the screen: true : Publish the screen-captured video. false : Do not publish the screen-captured video.
+  /// 该参数仅适用于 Android 和 iOS 平台。 设置是否发布屏幕采集的视频： true ：发布屏幕采集到的视频。 false ：不发布屏幕采集到的视频。
   @JsonKey(name: 'publishScreenCaptureVideo')
   final bool? publishScreenCaptureVideo;
 
-  /// This parameter is only applicable to Windows and macOS platforms. Sets whether to publish the video captured from the screen: true : Publish the screen-captured video. false : Do not publish the screen-captured video.
+  /// 该参数仅适用于 Windows 和 macOS 平台。 设置是否发布屏幕采集的视频： true ：发布屏幕采集到的视频。 false ：不发布屏幕采集到的视频。
   @JsonKey(name: 'publishScreenTrack')
   final bool? publishScreenTrack;
 
-  /// Sets whether to publish the video captured from the second screen: true : Publish the video captured from the second screen. false : Do not publish the video captured from the second screen.
+  /// 设置是否发布第二个屏幕采集的视频： true ：发布第二个屏幕采集到的视频。 false ：不发布第二个屏幕采集到的视频。
   @JsonKey(name: 'publishSecondaryScreenTrack')
   final bool? publishSecondaryScreenTrack;
 
-  /// This parameter is only applicable to Windows and macOS platforms. Sets whether to publish the video captured from the third screen: true : Publish the video captured from the third screen. false : Do not publish the video captured from the third screen.
+  /// 该参数仅适用于 Windows 和 macOS 平台。 设置是否发布第三个屏幕采集的视频： true ：发布第三个屏幕采集到的视频。 false ：不发布第三个屏幕采集到的视频。
   @JsonKey(name: 'publishThirdScreenTrack')
   final bool? publishThirdScreenTrack;
 
-  /// This parameter is only applicable to Windows and macOS platforms. Sets whether to publish the video captured from the fourth screen: true : Publish the video captured from the fourth screen. false : Do not publish the video captured from the fourth screen.
+  /// 该参数仅适用于 Windows 和 macOS 平台。 设置是否发布第四个屏幕采集的视频： true ：发布第四个屏幕采集到的视频。 false ：不发布第四个屏幕采集到的视频。
   @JsonKey(name: 'publishFourthScreenTrack')
   final bool? publishFourthScreenTrack;
 
-  /// Sets whether to publish custom captured audio: true : Publish the custom captured audio. false : Do not publish the custom captured audio.
+  /// 设置是否发布自定义采集的音频： true ：发布自定义采集到的音频。 false ：不发布自定义采集到的音频。
   @JsonKey(name: 'publishCustomAudioTrack')
   final bool? publishCustomAudioTrack;
 
-  /// ID of the custom audio track to be published. Default is 0. You can get the custom audio track ID via the createCustomAudioTrack method.
+  /// 待发布的自定义音频轨道的 ID，默认值为 0。你可以通过 createCustomAudioTrack 方法来获取自定义音频轨道 ID。
   @JsonKey(name: 'publishCustomAudioTrackId')
   final int? publishCustomAudioTrackId;
 
-  /// Sets whether to publish custom captured video: true : Publish the custom captured video. false : Do not publish the custom captured video.
+  /// 设置是否发布自定义采集的视频： true ：发布自定义采集的视频。 false ：不发布自定义采集到的视频。
   @JsonKey(name: 'publishCustomVideoTrack')
   final bool? publishCustomVideoTrack;
 
-  /// Sets whether to publish the encoded video: true : Publish the encoded video. false : Do not publish the encoded video.
+  /// 设置是否发布编码后的视频： true ：发布编码后的视频 。 false ：不发布编码后的视频。
   @JsonKey(name: 'publishEncodedVideoTrack')
   final bool? publishEncodedVideoTrack;
 
-  /// Sets whether to publish the audio from the media player: true : Publish the media player's audio. false : Do not publish the media player's audio.
+  /// 设置是否发布媒体播放器的音频： true ：发布媒体播放器的音频。 false ：不发布媒体播放器的音频。
   @JsonKey(name: 'publishMediaPlayerAudioTrack')
   final bool? publishMediaPlayerAudioTrack;
 
-  /// Sets whether to publish the video from the media player: true : Publish the media player's video. false : Do not publish the media player's video.
+  /// 设置是否发布媒体播放器的视频： true ：发布媒体播放器的视频。 false ：不发布媒体播放器的视频。
   @JsonKey(name: 'publishMediaPlayerVideoTrack')
   final bool? publishMediaPlayerVideoTrack;
 
-  /// Sets whether to publish the local transcoded video: true : Publish the local transcoded video. false : Do not publish the local transcoded video.
+  /// 设置是否发布本地的转码视频： true ：发布本地的转码视频。 false ：不发布本地的转码视频。
   @JsonKey(name: 'publishTranscodedVideoTrack')
   final bool? publishTranscodedVideoTrack;
 
-  /// Sets whether to publish the local audio mixing: true : Publish the local audio mixing. false : Do not publish the local audio mixing.
+  /// 设置是否发布本地混音音频： true ：发布本地混音音频。 false ：不发布本地混音音频。
   @JsonKey(name: 'publishMixedAudioTrack')
   final bool? publishMixedAudioTrack;
 
-  /// Sets whether to publish the video processed by the voice-driven plugin: true : Publish the video processed by the voice-driven plugin. false : (Default) Do not publish the video processed by the voice-driven plugin.
+  /// 设置是否发布语音驱动插件处理后的视频： true ：发布语音驱动插件处理后的视频。 false ：（默认）不发布语音驱动插件处理后的视频。
   @JsonKey(name: 'publishLipSyncTrack')
   final bool? publishLipSyncTrack;
 
-  /// Sets whether to automatically subscribe to all audio streams: true : Automatically subscribe to all audio streams. false : Do not automatically subscribe to any audio streams.
+  /// 设置是否自动订阅所有音频流： true ：自动订阅所有音频流。 false ：不自动订阅任何音频流。
   @JsonKey(name: 'autoSubscribeAudio')
   final bool? autoSubscribeAudio;
 
-  /// Sets whether to automatically subscribe to all video streams: true : Automatically subscribe to all video streams. false : Do not automatically subscribe to any video streams.
+  /// 设置是否自动订阅所有视频流： true ：自动订阅所有视频流。 false ：不自动订阅任何视频流。
   @JsonKey(name: 'autoSubscribeVideo')
   final bool? autoSubscribeVideo;
 
-  /// If you need to publish the audio stream captured by the microphone, make sure this parameter is set to true. Sets whether to enable audio recording or playback: true : Enable audio recording or playback. false : Do not enable audio recording or playback.
+  /// 如果那你需要发布麦克风采集的音频流，请确保该参数设为 true 。 设置是否开启音频录制或播放： true ：开启音频录制或播放。 false ：不开启音频录制或播放。
   @JsonKey(name: 'enableAudioRecordingOrPlayout')
   final bool? enableAudioRecordingOrPlayout;
 
-  /// ID of the media player to be published. Default is 0.
+  /// 待发布的媒体播放器的 ID。默认值为 0。
   @JsonKey(name: 'publishMediaPlayerId')
   final int? publishMediaPlayerId;
 
-  /// User role. See ClientRoleType.
+  /// 用户角色。详见 ClientRoleType 。
   @JsonKey(name: 'clientRoleType')
   final ClientRoleType? clientRoleType;
 
-  /// Audience latency level. See AudienceLatencyLevelType.
+  /// 观众端延时级别。详见 AudienceLatencyLevelType 。
   @JsonKey(name: 'audienceLatencyLevel')
   final AudienceLatencyLevelType? audienceLatencyLevel;
 
-  /// Default video stream type to subscribe to: VideoStreamType.
+  /// 默认订阅的视频流类型: VideoStreamType 。
   @JsonKey(name: 'defaultVideoStreamType')
   final VideoStreamType? defaultVideoStreamType;
 
-  /// Channel profile. See ChannelProfileType.
+  /// 频道使用场景。详见 ChannelProfileType 。
   @JsonKey(name: 'channelProfile')
   final ChannelProfileType? channelProfile;
 
-  /// Delay (in milliseconds) for sending audio frames. You can use this parameter to delay the audio frames to ensure audio-video synchronization.
-  /// To disable the delay, set this parameter to 0.
+  /// 发送音频帧的延时（毫秒）。你可以通过该参数来设置需要发送的音频帧的延时，以确保音画同步。
+  /// 如果要关闭延时，将此参数值设置为 0。
   @JsonKey(name: 'audioDelayMs')
   final int? audioDelayMs;
 
@@ -1538,9 +1537,9 @@ class ChannelMediaOptions implements AgoraSerializable {
   @JsonKey(name: 'mediaPlayerAudioDelayMs')
   final int? mediaPlayerAudioDelayMs;
 
-  /// (Optional) A dynamic key generated on the server for authentication. See [Token Authentication](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication).
-  ///  This parameter only takes effect when calling updateChannelMediaOptions or updateChannelMediaOptionsEx.
-  ///  Make sure the App ID, channel name, and user name used to generate the token are consistent with those used in the initialize method and the joinChannel or joinChannelEx methods.
+  /// （可选）在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  ///  该参数仅在调用 updateChannelMediaOptions 或 updateChannelMediaOptionsEx 时生效。
+  ///  请确保用于生成 token 的 App ID、频道名和用户名和 initialize 方法初始化引擎时用的 App ID，以及 joinChannel 或 joinChannelEx 方法加入频道时设置的频道名和用户名是一致的。
   @JsonKey(name: 'token')
   final String? token;
 
@@ -1548,20 +1547,20 @@ class ChannelMediaOptions implements AgoraSerializable {
   @JsonKey(name: 'enableBuiltInMediaEncryption')
   final bool? enableBuiltInMediaEncryption;
 
-  /// Sets whether to publish the virtual metronome sound to remote users: true : Publish. Both local and remote users can hear the metronome. false : Do not publish. Only the local user can hear the metronome.
+  /// 设置是否发布虚拟节拍器声音至远端： true ：发布。本地用户和远端用户都能听到节拍器。 false ：不发布。只有本地用户能听到节拍器。
   @JsonKey(name: 'publishRhythmPlayerTrack')
   final bool? publishRhythmPlayerTrack;
 
-  /// This parameter is used for cross-room co-hosting scenarios. The co-host needs to call joinChannelEx to join the other host's channel as an audience member and set isInteractiveAudience to true.
-  ///  This parameter only takes effect when the user role is clientRoleAudience. Whether to enable interactive audience mode: true : Enable interactive audience mode. Once enabled, the local user, as an interactive audience member, receives low-latency and smooth remote video. false : Do not enable interactive audience mode. The local user receives remote video with default settings as a regular audience member.
+  /// 该参数用于实现跨直播间连麦场景。连麦主播需要调用 joinChannelEx 方法，以观众身份加入对方的直播间，并将 isInteractiveAudience 设置为 true 。
+  ///  仅当用户角色为 clientRoleAudience 时，该参数生效。 是否开启互动观众模式： true ：开启互动观众模式。成功开启后，本地用户作为互动观众，收到低延时和流畅的远端用户视频。 false ：不开启互动观众模式。本地用户作为普通观众，收到默认设置的远端用户视频。
   @JsonKey(name: 'isInteractiveAudience')
   final bool? isInteractiveAudience;
 
-  /// Video track ID returned by the createCustomVideoTrack method. Default is 0.
+  /// 调用 createCustomVideoTrack 方法返回的视频轨道 ID。默认值为 0。
   @JsonKey(name: 'customVideoTrackId')
   final int? customVideoTrackId;
 
-  /// To enable this feature, please [contact sales](https://www.shengwang.cn/contact-sales/). Sets whether the current audio stream participates in stream selection based on audio volume algorithm. true : Participate in audio volume-based stream selection. If the feature is not enabled, this parameter has no effect. false : Do not participate in audio volume-based stream selection.
+  /// 如需启用该功能，请[联系销售](https://www.shengwang.cn/contact-sales/)。 设置是否让当前音频流根据音强算法参与选流。 true ：参与音强选流。如未开启音强选流功能，该参数不会生效。 false ：不参与音强选流。
   @JsonKey(name: 'isAudioFilterable')
   final bool? isAudioFilterable;
 
@@ -1569,23 +1568,23 @@ class ChannelMediaOptions implements AgoraSerializable {
   @JsonKey(name: 'parameters')
   final String? parameters;
 
-  /// Permissions and system requirements:
-  ///  Android: Android 7.0 or higher (API level 24+), requires ACCESS_NETWORK_STATE and CHANGE_NETWORK_STATE permissions.
-  ///  iOS: iOS 12.0 or higher.
-  ///  macOS: 10.14 or higher.
-  ///  Windows: Windows Vista or higher. Whether to enable multipath transmission: true : Enable multipath transmission. false : Disable multipath transmission.
+  /// 权限和系统要求：
+  ///  Android：Android 7.0 或更高版本（API 级别 24 或更高），需要 ACCESS_NETWORK_STATE 和 CHANGE_NETWORK_STATE 权限。
+  ///  iOS：iOS 12.0 或更高版本。
+  ///  macOS：10.14 或更高版本。
+  ///  Windows：Windows Vista 或更高版本。 是否启用多路径传输： true ：启用多路径传输。 false ：禁用多路径传输。
   @JsonKey(name: 'enableMultipath')
   final bool? enableMultipath;
 
-  /// Uplink transmission mode. See MultipathMode. When using this parameter, make sure enableMultipath is set to true.
+  /// @nodoc
   @JsonKey(name: 'uplinkMultipathMode')
   final MultipathMode? uplinkMultipathMode;
 
-  /// Downlink transmission mode. See MultipathMode. When using this parameter, make sure enableMultipath is set to true.
+  /// @nodoc
   @JsonKey(name: 'downlinkMultipathMode')
   final MultipathMode? downlinkMultipathMode;
 
-  /// Preferred transmission path type. See MultipathType. When using this parameter, make sure enableMultipath is set to true.
+  /// 首选的传输路径类型。详见 MultipathType 。 使用该参数时，请确保已将 enableMultipath 设置为 true 。
   @JsonKey(name: 'preferMultipathType')
   final MultipathType? preferMultipathType;
 
@@ -1597,26 +1596,26 @@ class ChannelMediaOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ChannelMediaOptionsToJson(this);
 }
 
-/// Proxy type.
+/// 代理类型。
 @JsonEnum(alwaysCreate: true)
 enum ProxyType {
-  /// 0: Reserved parameter, not supported yet.
+  /// 0: 预留参数，暂不支持。
   @JsonValue(0)
   noneProxyType,
 
-  /// 1: Cloud proxy with UDP protocol, i.e., Force UDP cloud proxy mode. In this mode, the SDK always transmits data via UDP protocol.
+  /// 1: UDP 协议的云代理，即 Force UDP 云代理模式。在该模式下，SDK 始终通过 UDP 协议传输数据。
   @JsonValue(1)
   udpProxyType,
 
-  /// 2: Cloud proxy with TCP (encrypted) protocol, i.e., Force TCP cloud proxy mode. In this mode, the SDK always transmits data via TLS 443.
+  /// 2: TCP（加密）协议的云代理，即 Force TCP 云代理模式。在该模式下，SDK 始终通过 TLS 443 传输数据。
   @JsonValue(2)
   tcpProxyType,
 
-  /// 3: Reserved parameter, not supported yet.
+  /// 3: 预留参数，暂不支持。
   @JsonValue(3)
   localProxyType,
 
-  /// 4: Auto mode. In this mode, the SDK first attempts to connect to SD-RTN™. If the connection fails, it automatically switches to TLS 443.
+  /// 4: 自动模式。在该模式下，SDK 优先连接 SD-RTN™，如果连接失败，自动切换为 TLS 443。
   @JsonValue(4)
   tcpProxyAutoFallbackType,
 
@@ -1642,14 +1641,14 @@ extension ProxyTypeExt on ProxyType {
   }
 }
 
-/// Advanced feature types.
+/// 进阶功能类型。
 @JsonEnum(alwaysCreate: true)
 enum FeatureType {
-  /// 1: Virtual background feature.
+  /// 1: 虚拟背景功能。
   @JsonValue(1)
   videoVirtualBackground,
 
-  /// 2: Beauty effect feature.
+  /// 2: 美颜功能。
   @JsonValue(2)
   videoBeautyEffect,
 }
@@ -1667,22 +1666,22 @@ extension FeatureTypeExt on FeatureType {
   }
 }
 
-/// Options for leaving a channel.
+/// 离开频道的选项。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LeaveChannelOptions implements AgoraSerializable {
   /// @nodoc
   const LeaveChannelOptions(
       {this.stopAudioMixing, this.stopAllEffect, this.stopMicrophoneRecording});
 
-  /// Whether to stop playing music files and audio mixing when leaving the channel: true : (default) Stop playing music files and audio mixing. false : Do not stop playing music files and audio mixing.
+  /// 离开频道时，是否停止播放音乐文件及混音： true ：（默认）停止播放音乐文件及混音。 false ： 不停止播放音乐文件及混音。
   @JsonKey(name: 'stopAudioMixing')
   final bool? stopAudioMixing;
 
-  /// Whether to stop playing sound effects when leaving the channel: true : (default) Stop playing sound effects. false : Do not stop playing sound effects.
+  /// 离开频道时，是否停止播放音效： true ：（默认）停止播放音效。 false ： 不停止播放音效。
   @JsonKey(name: 'stopAllEffect')
   final bool? stopAllEffect;
 
-  /// Whether to stop microphone capture when leaving the channel: true : (default) Stop microphone capture. false : Do not stop microphone capture.
+  /// 离开频道时，是否停止麦克风采集： true ：（默认）停止麦克风采集。 false ： 不停止麦克风采集。
   @JsonKey(name: 'stopMicrophoneRecording')
   final bool? stopMicrophoneRecording;
 
@@ -1694,11 +1693,11 @@ class LeaveChannelOptions implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$LeaveChannelOptionsToJson(this);
 }
 
-/// The RtcEngineEventHandler interface class is used by the SDK to send event notifications to the app. The app receives SDK event notifications by inheriting the methods of this interface class.
+/// 接口类 RtcEngineEventHandler 用于 SDK 向 App 发送事件通知，App 通过继承该接口类的方法获取 SDK 的事件通知。
 ///
-/// All methods of this interface class have default (empty) implementations. The app can choose to inherit only the events of interest.
-///  In callback methods, the app should not perform time-consuming operations or call APIs that may cause blocking (such as sendMessage), otherwise it may affect the operation of the SDK.
-///  The SDK no longer catches exceptions in the custom logic implemented by developers in the RtcEngineEventHandler class callbacks. You need to handle such exceptions yourself, otherwise they may cause the app to crash.
+/// 该接口类的所有方法都有缺省（空）实现， App 可以根据需要只继承关心的事件。
+///  在回调方法中，App 不应该做耗时或者调用可能会引起阻塞的 API（如 sendMessage ），否则可能影响 SDK 的运行。
+///  SDK 不再捕获开发者在 RtcEngineEventHandler 类回调中自行实现的代码逻辑中的异常。你需要自行处理该异常，否则异常出现时可能引起 App 崩溃。
 class RtcEngineEventHandler {
   /// @nodoc
   const RtcEngineEventHandler({
@@ -1802,244 +1801,244 @@ class RtcEngineEventHandler {
     this.onRenewTokenResult,
   });
 
-  /// Callback when successfully joined a channel.
+  /// 成功加入频道回调。
   ///
-  /// This callback indicates that the client has successfully joined the specified channel.
+  /// 该回调方法表示该客户端成功加入了指定的频道。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [elapsed] Time elapsed (ms) from calling joinChannel until this event occurs.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [elapsed] 从本地调用 joinChannel 开始到发生此事件过去的时间（毫秒）。
   final void Function(RtcConnection connection, int elapsed)?
       onJoinChannelSuccess;
 
-  /// Callback when successfully rejoined a channel.
+  /// 成功重新加入频道回调。
   ///
-  /// * [elapsed] Time interval (ms) from calling joinChannel to triggering this callback.
+  /// * [elapsed] 从调用 joinChannel 方法到触发该回调的时间间隔（毫秒）。
   final void Function(RtcConnection connection, int elapsed)?
       onRejoinChannelSuccess;
 
-  /// Callback for proxy connection status.
+  /// 代理连接状态回调。
   ///
-  /// You can use this callback to monitor the SDK's connection status to the proxy. For example, when a user calls setCloudProxy to set the proxy and successfully joins a channel, the SDK triggers this callback to report the user ID, proxy type connected, and the time elapsed from calling joinChannel to triggering this callback.
+  /// 通过该回调你可以监听 SDK 连接代理的状态。例如，当用户调用 setCloudProxy 设置代理并成功加入频道后，SDK 会触发该回调报告用户 ID、连接的代理类型和从调用 joinChannel 到触发该回调经过的时间等。
   ///
-  /// * [channel] Channel name.
-  /// * [uid] User ID
-  /// * [localProxyIp] Reserved parameter, currently not supported.
-  /// * [elapsed] Time elapsed (in milliseconds) from calling joinChannel to the SDK triggering this callback.
+  /// * [channel] 频道名称。
+  /// * [uid] 用户 ID
+  /// * [localProxyIp] 预留参数，暂不支持。
+  /// * [elapsed] 从调用 joinChannel 到 SDK 触发该回调的经过的时间（毫秒）。
   final void Function(String channel, int uid, ProxyType proxyType,
       String localProxyIp, int elapsed)? onProxyConnected;
 
-  /// Callback when an error occurs.
+  /// 发生错误回调。
   ///
-  /// This callback indicates that a network or media-related error occurred during SDK runtime. In most cases, errors reported by the SDK mean it cannot recover automatically and requires app intervention or user notification.
+  /// 该回调方法表示 SDK 运行时出现了网络或媒体相关的错误。通常情况下，SDK 上报的错误意味着 SDK 无法自动恢复，需要 App 干预或提示用户。
   ///
-  /// * [err] Error code. See ErrorCodeType.
-  /// * [msg] Error description.
+  /// * [err] 错误码。详见 ErrorCodeType 。
+  /// * [msg] 错误描述。
   final void Function(ErrorCodeType err, String msg)? onError;
 
-  /// Callback for remote audio quality.
+  /// 远端声音质量回调。
   ///
-  /// Deprecated Deprecated: Use onRemoteAudioStats instead. This callback describes the audio quality of a remote user during a call and is triggered every 2 seconds for each remote user/host. If there are multiple remote users/hosts, the callback is triggered multiple times every 2 seconds.
+  /// 废弃 弃用： 请改用 onRemoteAudioStats 。 该回调描述远端用户在通话中的音频质量，针对每个远端用户/主播每 2 秒触发一次。如果远端同时存在多个用户/主播，该回调每 2 秒会被触发多次。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] User ID of the sender of the audio stream.
-  /// * [quality] Audio quality. See QualityType.
-  /// * [delay] Delay (ms) from the sender to the receiver, including preprocessing, network transmission, and jitter buffer delay.
-  /// * [lost] Packet loss rate (%) from the sender to the receiver.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 用户 ID，指定是谁发的音频流。
+  /// * [quality] 语音质量。详见 QualityType 。
+  /// * [delay] 音频包从发送端到接收端的延迟（毫秒），包括声音采样前处理、网络传输、网络抖动缓冲引起的延迟。
+  /// * [lost] 音频包从发送端到接收端的丢包率 (%)。
   final void Function(RtcConnection connection, int remoteUid,
       QualityType quality, int delay, int lost)? onAudioQuality;
 
-  /// Callback for the last mile uplink and downlink network quality probe report before the call.
+  /// 通话前网络上下行 Last mile 质量探测报告回调。
   ///
-  /// After calling startLastmileProbeTest, the SDK returns this callback within about 30 seconds.
+  /// 在调用 startLastmileProbeTest 之后，SDK 会在约 30 秒内返回该回调。
   ///
-  /// * [result] Uplink and downlink last mile quality probe result. See LastmileProbeResult.
+  /// * [result] 上下行 Last mile 质量探测结果。详见 LastmileProbeResult 。
   final void Function(LastmileProbeResult result)? onLastmileProbeResult;
 
-  /// Callback for user audio volume indication.
+  /// 用户音量提示回调。
   ///
-  /// This callback is disabled by default. You can enable it using enableAudioVolumeIndication. Once enabled, as long as there are users publishing streams in the channel, the SDK triggers the onAudioVolumeIndication callback at the interval set in enableAudioVolumeIndication after joining the channel. Each time, two onAudioVolumeIndication callbacks are triggered: one reports the local user's volume information, and the other reports the volume information of the remote users (up to 3) with the highest instantaneous volume. After enabling this feature, if a user mutes themselves (by calling muteLocalAudioStream), the SDK continues to report the local user's volume indication callback.
-  /// If the remote user with the highest instantaneous volume mutes themselves for 20 seconds, they will no longer be included in the remote volume indication callback. If all remote users mute themselves, the SDK stops reporting remote volume indication callbacks after 20 seconds.
+  /// 该回调默认禁用，你可以通过 enableAudioVolumeIndication 开启。 开启后，只要频道内有发流用户，SDK 会在加入频道后按 enableAudioVolumeIndication 中设置的时间间隔触发 onAudioVolumeIndication 回调。每次会触发两个 onAudioVolumeIndication 回调，一个报告本地发流用户的音量相关信息，另一个报告瞬时音量最高的远端用户（最多 3 位）的音量相关信息。 启用该功能后，如果有用户将自己静音（调用了 muteLocalAudioStream ），SDK 会继续报告本地用户的音量提示回调。
+  /// 瞬时音量最高的远端用户静音后 20 秒，远端的音量提示回调中将不再包含该用户；如果远端所有用户都将自己静音，20 秒后 SDK 停止报告远端用户的音量提示回调。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [speakers] User volume information. See the AudioVolumeInfo array. If speakers is empty, it means no remote users are publishing streams or there are no remote users.
-  /// * [speakerNumber] Number of users.
-  ///  In the local user's callback, as long as the local user is publishing, speakerNumber is always 1.
-  ///  In the remote users' callback, speakerNumber ranges from [0,3]. If there are more than 3 remote users publishing, speakerNumber is 3.
-  /// * [totalVolume] Total mixed volume, range [0,255].
-  ///  In the local user's callback, totalVolume is the local user's volume.
-  ///  In the remote users' callback, totalVolume is the total mixed volume of the top 3 remote users with the highest instantaneous volume.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [speakers] 用户音量信息，详见 AudioVolumeInfo 数组。如果 speakers 为空，则表示远端用户不发流或没有远端用户。
+  /// * [speakerNumber] 用户数量。
+  ///  在本地用户的回调中，只要本地用户在发流， speakerNumber 始终为 1。
+  ///  在远端用户的回调中， speakerNumber 取值范围为 [0,3]。如果远端发流用户数量大于 3，则此回调中 speakerNumber 值为 3。
+  /// * [totalVolume] 混音后的总音量，取值范围为 [0,255]。
+  ///  在本地用户的回调中， totalVolume 为本地发流用户的音量。
+  ///  在远端用户的回调中， totalVolume 为瞬时音量最高的远端用户（最多 3 位）混音后的总音量。
   final void Function(RtcConnection connection, List<AudioVolumeInfo> speakers,
       int speakerNumber, int totalVolume)? onAudioVolumeIndication;
 
-  /// Callback when leaving a channel.
+  /// 离开频道回调。
   ///
-  /// You can use this callback to obtain information such as the total call duration and the amount of data sent and received by the SDK.
+  /// 你可以通过该回调获取此次通话的总通话时长、SDK 收发数据的流量等信息。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [stats] Call statistics. See RtcStats.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [stats] 通话的统计数据，详见 RtcStats 。
   final void Function(RtcConnection connection, RtcStats stats)? onLeaveChannel;
 
-  /// Callback for current call statistics.
+  /// 当前通话相关的统计信息回调。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [stats] RTC engine statistics. See RtcStats.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [stats] RTC 引擎统计数据，详见 RtcStats 。
   final void Function(RtcConnection connection, RtcStats stats)? onRtcStats;
 
-  /// Occurs when the audio device state changes.
+  /// 音频设备变化回调。
   ///
-  /// Indicates that the system audio device state has changed, such as when a headset is unplugged. This method is only applicable to Windows and macOS.
+  /// 提示系统音频设备状态发生改变，比如耳机被拔出。 该方法仅适用于 Windows 和 macOS。
   ///
-  /// * [deviceId] The device ID.
-  /// * [deviceType] The device type definition. See MediaDeviceType.
-  /// * [deviceState] The device state. See MediaDeviceStateType.
+  /// * [deviceId] 设备 ID。
+  /// * [deviceType] 设备类型定义。详见 MediaDeviceType 。
+  /// * [deviceState] 设备状态，详见 MediaDeviceStateType 。
   final void Function(String deviceId, MediaDeviceType deviceType,
       MediaDeviceStateType deviceState)? onAudioDeviceStateChanged;
 
-  /// Reports the playback progress of the music file.
+  /// 音乐文件播放进度回调。
   ///
-  /// After calling startAudioMixing to play a music file, the SDK triggers this callback once every second to report the current playback progress.
+  /// 当你调用 startAudioMixing 方法播放音乐文件后，SDK 会每隔一秒触发一次该回调，报告音乐文件当前的播放进度。
   ///
-  /// * [position] The current playback progress of the music file, in ms.
+  /// * [position] 音乐文件当前的播放进度，单位为 ms。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   final void Function(int position)? onAudioMixingPositionChanged;
 
-  /// Occurs when local music file playback ends.
+  /// 本地音乐文件播放已结束回调。
   ///
-  /// Deprecated Deprecated: Use onAudioMixingStateChanged instead. This callback is triggered when the local music file finishes playing after calling startAudioMixing. If startAudioMixing fails, it returns the error code WARN_AUDIO_MIXING_OPEN_ERROR.
+  /// 废弃 弃用： 请改用 onAudioMixingStateChanged 。 当调用 startAudioMixing 播放本地音乐文件结束后，会触发该回调。如果调用 startAudioMixing 失败，会返回错误码 WARN_AUDIO_MIXING_OPEN_ERROR 。
   final void Function()? onAudioMixingFinished;
 
-  /// Callback when a local audio effect file finishes playing.
+  /// 本地音效文件播放已结束回调。
   ///
-  /// This callback is triggered when the audio effect finishes playing.
+  /// 当播放音效结束后，会触发该回调。
   ///
-  /// * [soundId] The ID of the specified audio effect. Each audio effect has a unique ID.
+  /// * [soundId] 指定音效的 ID。每个音效均有唯一的 ID。
   final void Function(int soundId)? onAudioEffectFinished;
 
-  /// Callback when a video device changes.
+  /// 视频设备变化回调。
   ///
-  /// This callback indicates that the system video device state has changed, such as being unplugged or removed. If you are using an external camera for capture, unplugging it will interrupt the video. This callback is applicable only to Windows and macOS.
+  /// 该回调提示系统视频设备状态发生改变，比如被拔出或移除。如果设备已使用外接摄像头采集，外接摄像头被拔开后，视频会中断。 该回调仅适用于 Windows 和 macOS。
   ///
-  /// * [deviceId] Device ID.
-  /// * [deviceType] Device type. See MediaDeviceType.
-  /// * [deviceState] Device state. See MediaDeviceStateType.
+  /// * [deviceId] 设备 ID。
+  /// * [deviceType] 设备类型。详见 MediaDeviceType 。
+  /// * [deviceState] 设备状态。详见 MediaDeviceStateType 。
   final void Function(String deviceId, MediaDeviceType deviceType,
       MediaDeviceStateType deviceState)? onVideoDeviceStateChanged;
 
-  /// Callback for the last mile uplink and downlink network quality report for each user during the call.
+  /// 通话中每个用户的网络上下行 last mile 质量报告回调。
   ///
-  /// This callback describes the last mile network status of each user during the call. The last mile refers to the network status from the device to the Agora edge server.
-  /// This callback is triggered every 2 seconds. If there are multiple remote users, it is triggered multiple times every 2 seconds.
-  /// This callback reports network quality via broadcast packets within the channel. Excessive broadcast packets may cause a broadcast storm. To avoid excessive data transmission due to broadcast storms, this callback supports reporting the network quality of up to 4 remote hosts simultaneously by default. If the user is not sending streams, txQuality is Unknown; if the user is not receiving streams, rxQuality is Unknown.
+  /// 该回调描述每个用户在通话中的 last mile 网络状态，其中 last mile 是指设备到声网边缘服务器的网络状态。
+  /// 该回调每 2 秒触发一次。如果远端有多个用户，该回调每 2 秒会被触发多次。
+  /// 该回调通过频道内的广播包反馈网络质量。过多的广播包可能引发广播风暴。为防止广播风暴导致频道内大量数据传输，该回调默认支持同时反馈最多 4 个远端主播的网络质量。 用户不发流时， txQuality 为 Unknown ；用户不收流时， rxQuality 为 Unknown 。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] User ID. Indicates the network quality report for the user with this ID. If the uid is 0, it reports the local user's network quality.
-  /// * [txQuality] The user's uplink network quality, calculated based on the sending bitrate, uplink packet loss rate, average round-trip time, and network jitter. This value represents the current uplink network quality and helps determine whether the current video encoding settings are sustainable. For example, if the uplink bitrate is 1000 Kbps, it can support 640 × 480 resolution at 15 fps in a live broadcast scenario, but may struggle to support 1280 × 720 resolution. See QualityType.
-  /// * [rxQuality] The user's downlink network quality, calculated based on the downlink packet loss rate, average round-trip time, and network jitter. See QualityType.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 用户 ID。表示该回调报告的是持有该 ID 的用户的网络质量。如果当 uid 为 0 时，返回的是本地用户的网络质量。
+  /// * [txQuality] 该用户的上行网络质量，基于发送码率、上行丢包率、平均往返时延和网络抖动计算。 该值代表当前的上行网络质量，帮助判断是否可以支持当前设置的视频编码属性。 假设上行码率是 1000 Kbps，那么支持直播场景下 640 × 480 的分辨率、15 fps 的帧率没有问题，但是支持 1280 × 720 的分辨率就会有困难。详见 QualityType 。
+  /// * [rxQuality] 该用户的下行网络质量，基于下行网络的丢包率、平均往返延时和网络抖动计算。详见 QualityType 。
   final void Function(RtcConnection connection, int remoteUid,
       QualityType txQuality, QualityType rxQuality)? onNetworkQuality;
 
   /// @nodoc
   final void Function(RtcConnection connection)? onIntraRequestReceived;
 
-  /// Callback for uplink network information changes.
+  /// 上行网络信息变化回调。
   ///
-  /// The SDK triggers this callback only when the uplink network information changes. This callback is applicable only when pushing externally encoded video data in H.264 format to the SDK.
+  /// 只有当上行网络信息发生变化时，SDK 才会触发该回调。 该回调仅适用于向 SDK 推送 H.264 格式的外部编码视频数据的场景。
   ///
-  /// * [info] Uplink network information. See UplinkNetworkInfo.
+  /// * [info] 上行网络信息，详见 UplinkNetworkInfo 。
   final void Function(UplinkNetworkInfo info)? onUplinkNetworkInfoUpdated;
 
-  /// Callback for the last mile uplink and downlink network quality report.
+  /// 网络上下行 last mile 质量报告回调。
   ///
-  /// This callback describes the result of the last mile network probe for the local user before joining the channel. The last mile refers to the network status from the device to the Agora edge server.
-  /// Before joining the channel, after calling startLastmileProbeTest, the SDK triggers this callback to report the result of the last mile network probe for the local user.
+  /// 该回调描述本地用户在加入频道前的 last mile 网络探测的结果，其中 last mile 是指设备到声网边缘服务器的网络状态。
+  /// 加入频道前，调用 startLastmileProbeTest 之后，SDK 触发该回调报告本地用户在加入频道前的 last mile 网络探测的结果。
   ///
-  /// * [quality] Last mile network quality. See QualityType.
+  /// * [quality] Last mile 网络质量。详见 QualityType 。
   final void Function(QualityType quality)? onLastmileQuality;
 
-  /// Callback when the first local video frame is displayed.
+  /// 已显示本地视频首帧回调。
   ///
-  /// This callback is triggered by the SDK when the first local video frame is displayed in the local view.
+  /// 本地视频首帧显示在本地视图上时，SDK 会触发此回调。
   ///
-  /// * [source] Type of video source. See VideoSourceType.
-  /// * [width] Width (px) of the locally rendered video.
-  /// * [height] Height (px) of the locally rendered video.
-  /// * [elapsed] Time elapsed (ms) from calling joinChannel to the occurrence of this event. If startPreviewWithoutSourceType / startPreview is called before joining the channel, this parameter indicates the time from starting the local video preview to the occurrence of this event.
+  /// * [source] 视频源的类型。详见 VideoSourceType 。
+  /// * [width] 本地渲染视频的宽 (px) 。
+  /// * [height] 本地渲染视频的高 (px)。
+  /// * [elapsed] 从调用 joinChannel 加入频道时到发生此事件过去的时间（毫秒）。如果在加入频道前调用了 startPreviewWithoutSourceType / startPreview ，则该参数表示从调用 startPreviewWithoutSourceType 或 startPreview 开启本地视频预览到发生此事件过去的时间。
   final void Function(
           VideoSourceType source, int width, int height, int elapsed)?
       onFirstLocalVideoFrame;
 
-  /// Callback when the first local video frame is published.
+  /// 已发布本地视频首帧回调。
   ///
-  /// The SDK triggers this callback in the following scenarios:
-  ///  After successfully joining a channel with the local video module enabled.
-  ///  After calling muteLocalVideoStream(true) and then muteLocalVideoStream(false).
-  ///  After calling disableVideo and then enableVideo.
+  /// SDK 会在以下三种时机触发该回调：
+  ///  开启本地视频模块的情况下，调用 joinChannel 成功加入频道后。
+  ///  调用 muteLocalVideoStream (true)，再调用 muteLocalVideoStream (false) 后。
+  ///  调用 disableVideo ，再调用 enableVideo 后。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [elapsed] Time interval (ms) from calling joinChannel to triggering this callback.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [elapsed] 从调用 joinChannel 方法到触发该回调的时间间隔（毫秒）。
   final void Function(RtcConnection connection, int elapsed)?
       onFirstLocalVideoFramePublished;
 
-  /// Callback when the first remote video is received and decoded.
+  /// 已接收到远端视频并完成解码回调。
   ///
-  /// The SDK triggers this callback in the following scenarios:
-  ///  When the remote user sends video after coming online for the first time.
-  ///  When the remote user sends video after going offline and then coming back online. Possible causes of such interruptions include:
-  ///  The remote user leaves the channel.
-  ///  The remote user gets disconnected.
-  ///  The remote user calls the disableVideo method to disable the video module.
+  /// SDK 会在以下时机触发该回调：
+  ///  远端用户首次上线后发送视频。
+  ///  远端用户视频离线再上线后发送视频。出现这种中断的可能原因包括：
+  ///  远端用户离开频道。
+  ///  远端用户掉线。
+  ///  远端用户调用 disableVideo 方法关闭视频模块。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] User ID that specifies whose video stream it is.
-  /// * [width] Width (px) of the video stream.
-  /// * [height] Height (px) of the video stream.
-  /// * [elapsed] Delay (ms) from the local call to joinChannel to the triggering of this callback.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 用户 ID，指定是哪个用户的视频流。
+  /// * [width] 视频流宽（px）。
+  /// * [height] 视频流高（px）。
+  /// * [elapsed] 从本地调用 joinChannel 开始到该回调触发的延迟（毫秒）。
   final void Function(RtcConnection connection, int remoteUid, int width,
       int height, int elapsed)? onFirstRemoteVideoDecoded;
 
-  /// Callback when the size and rotation of local or remote video changes.
+  /// 本地或远端视频大小和旋转信息发生改变回调。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [sourceType] Type of video source. See VideoSourceType.
-  /// * [uid] User ID whose video size or rotation has changed (uid is 0 for local user, indicating local video preview).
-  /// * [width] Width of the video stream (pixels).
-  /// * [height] Height of the video stream (pixels).
-  /// * [rotation] Rotation information, value range [0,360). On iOS, this value is always 0.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [sourceType] 视频源的类型。详见 VideoSourceType 。
+  /// * [uid] 图像尺寸和旋转信息发生变化的用户 ID（本地用户的 uid 为 0。此时视频为本地用户的视频预览）。
+  /// * [width] 视频流的宽度（像素）。
+  /// * [height] 视频流的高度（像素）。
+  /// * [rotation] 旋转信息，取值范围 [0,360)。 在 iOS 平台上，该参数值始终为 0。
   final void Function(RtcConnection connection, VideoSourceType sourceType,
       int uid, int width, int height, int rotation)? onVideoSizeChanged;
 
-  /// Callback triggered when a local video event occurs.
+  /// 本地视频事件发生时触发的回调。
   ///
-  /// Since Available since v4.6.1. You can use this callback to get the reason for the local video event.
+  /// 自从 自 v6.6.2 版本新增。 你可以通过该回调获取本地视频事件的原因。
   ///
-  /// * [source] Type of video source. See VideoSourceType.
-  /// * [event] Type of local video event. See LocalVideoEventType.
+  /// * [source] 视频源类型，详见 VideoSourceType 。
+  /// * [event] 本地视频事件类型，详见 LocalVideoEventType 。
   final void Function(VideoSourceType source, LocalVideoEventType event)?
       onLocalVideoEvent;
 
-  /// Callback when the local video state changes.
+  /// 本地视频状态发生改变回调。
   ///
-  /// The SDK triggers this callback when the local video state changes, reporting the current state and the reason for the change.
-  ///  Frame duplication detection only applies to video frames with resolution greater than 200 × 200, frame rate ≥ 10 fps, and bitrate < 20 Kbps.
-  ///  If an exception occurs during video capture, in most cases you can troubleshoot it using the reason parameter in this callback. However, on some devices, when capture issues occur (e.g., freezing), the Android system does not throw any error callbacks, so the SDK cannot report the reason for the local video state change. In this case, you can determine whether no frames are being captured by checking if this callback reports state as localVideoStreamStateCapturing or localVideoStreamStateEncoding, and the captureFrameRate in the onLocalVideoStats callback is 0.
+  /// 本地视频的状态发生改变时，SDK 会触发该回调，报告当前的本地视频状态以及状态改变的原因。
+  ///  帧重复检测仅针对分辨率大于 200 × 200、帧率大于等于 10 fps、码率小于 20 Kbps 的视频帧。
+  ///  如果视频采集出现异常，正常情况下可以通过该回调的 reason 参数来排查问题。但在部分设备上，采集出现问题时（如卡死） Android 系统不会抛出任何错误回调，因此 SDK 无法报告本地视频状态改变的原因，此时你可以通过下列方式来判断采集是否无帧：该回调报告 state 为 localVideoStreamStateCapturing 或 localVideoStreamStateEncoding ，且 onLocalVideoStats 回调的 captureFrameRate 为 0。
   ///
-  /// * [source] Type of video source. See VideoSourceType.
-  /// * [state] Local video state. See LocalVideoStreamState.
-  /// * [reason] Reason for the local video state change. See LocalVideoStreamReason.
+  /// * [source] 视频源的类型。详见 VideoSourceType 。
+  /// * [state] 本地视频状态，详见 LocalVideoStreamState 。
+  /// * [reason] 本地视频状态改变原因，详见 LocalVideoStreamReason 。
   final void Function(VideoSourceType source, LocalVideoStreamState state,
       LocalVideoStreamReason reason)? onLocalVideoStateChanged;
 
-  /// Callback when the remote video state changes.
+  /// 远端视频状态发生改变回调。
   ///
-  /// This callback may be inaccurate when the number of users (in communication) or hosts (in live broadcast) in the channel exceeds 32.
+  /// 频道内的用户（通信场景）或主播（直播场景）人数超过 32 人时，该回调可能不准确。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] ID of the remote user whose video state changed.
-  /// * [state] Remote video stream state. See RemoteVideoState.
-  /// * [reason] Reason for the change in the remote video stream state. See RemoteVideoStateReason.
-  /// * [elapsed] Time elapsed (ms) from the local user calling joinChannel to the occurrence of this event.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 发生视频状态改变的远端用户 ID。
+  /// * [state] 远端视频流状态，详见 RemoteVideoState 。
+  /// * [reason] 远端视频流状态改变的具体原因，详见 RemoteVideoStateReason 。
+  /// * [elapsed] 从本地用户调用 joinChannel 方法到发生本事件经历的时间，单位为毫秒。
   final void Function(
       RtcConnection connection,
       int remoteUid,
@@ -2047,69 +2046,69 @@ class RtcEngineEventHandler {
       RemoteVideoStateReason reason,
       int elapsed)? onRemoteVideoStateChanged;
 
-  /// Callback when the renderer receives the first remote video frame.
+  /// 渲染器已接收首帧远端视频回调。
   ///
-  /// This callback is only triggered when the SDK is used for rendering. If you use custom video rendering, this callback is not triggered, and you need to implement it using methods outside the SDK.
+  /// 该回调只在 SDK 渲染时才会触发；如果用户采用自定义视频渲染则不会触发，客户需要通过 SDK 以外的方法自行实现。
   ///
-  /// * [uid] User ID that specifies whose video stream it is.
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [width] Width (px) of the video stream.
-  /// * [height] Height (px) of the video stream.
-  /// * [elapsed] Time elapsed (ms) from the local call to joinChannel to the occurrence of this event.
+  /// * [uid] 用户 ID，指定是哪个用户的视频流。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [width] 视频流宽（px）。
+  /// * [height] 视频流高（px）。
+  /// * [elapsed] 从本地调用 joinChannel 到发生此事件过去的时间（毫秒）。
   final void Function(RtcConnection connection, int remoteUid, int width,
       int height, int elapsed)? onFirstRemoteVideoFrame;
 
-  /// Callback when a remote user (in communication) or host (in live streaming) joins the current channel.
+  /// 远端用户（通信场景）/主播（直播场景）加入当前频道回调。
   ///
-  /// In communication scenarios, this callback indicates that a remote user has joined the channel. If other users are already in the channel, the newly joined user also receives callbacks for those existing users.
-  ///  In live streaming scenarios, this callback indicates that a host has joined the channel. If other hosts are already in the channel, the newly joined user also receives callbacks for those existing hosts. It is recommended that the number of co-hosts does not exceed 32 (including no more than 17 video co-hosts).
+  /// 通信场景下，该回调提示有远端用户加入了频道。如果加入之前已经有其他用户在频道中，新加入的用户也会收到这些已有用户加入频道的回调。
+  ///  直播场景下，该回调提示有主播加入了频道。如果加入之前，已经有主播在频道中了，新加入的用户也会收到已有主播加入频道的回调。建议连麦主播不超过 32 人（其中视频连麦主播不超过 17 人）。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] The ID of the remote user/host who joined the channel.
-  /// * [elapsed] The time elapsed (in milliseconds) from the local user calling joinChannel to the triggering of this callback.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 新加入频道的远端用户/主播 ID。
+  /// * [elapsed] 从本地用户调用 joinChannel 到该回调触发的延迟（毫秒）。
   final void Function(RtcConnection connection, int remoteUid, int elapsed)?
       onUserJoined;
 
-  /// Callback when a remote user (in communication) or host (in live streaming) leaves the current channel.
+  /// 远端用户（通信场景）/主播（直播场景）离开当前频道回调。
   ///
-  /// Users leave the channel for the following reasons:
-  ///  Normal departure: The remote user or host sends a 'goodbye' message and leaves the channel voluntarily.
-  ///  Timeout disconnection: No data packets are received from the user within a certain time (20 seconds in communication scenarios, slightly longer in live streaming), and the user is considered offline. In poor network conditions, false positives may occur. It is recommended to use the RTM SDK for reliable offline detection.
+  /// 用户离开频道一般有以下两个原因：
+  ///  正常离开：远端用户或主播会发送类似“再见”的消息然后主动离开频道。
+  ///  超时掉线：在一定时间内（通信场景为 20 秒，直播场景稍有延时），用户没有收到对方的任何数据包，则判定为对方掉线。在网络较差的情况下，有可能会误报。建议使用 RTM SDK 来做可靠的掉线检测。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] The ID of the remote user or host who went offline.
-  /// * [reason] The reason why the remote user (in communication) or host (in live streaming) went offline. See UserOfflineReasonType.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 离线的远端用户或主播的 ID。
+  /// * [reason] 远端用户（通信场景）或主播（直播场景）离线的原因，详见 UserOfflineReasonType 。
   final void Function(RtcConnection connection, int remoteUid,
       UserOfflineReasonType reason)? onUserOffline;
 
-  /// Occurs when a remote user (in communication) or host (in live streaming) stops or resumes sending audio stream.
+  /// 远端用户（通信场景）/主播（直播场景）停止或恢复发送音频流回调。
   ///
-  /// This callback is triggered when a remote user calls the muteLocalAudioStream method to disable or enable audio sending. When the number of users (in communication) or hosts (in live streaming) in the channel exceeds 32, this callback may be inaccurate.
+  /// 该回调是由远端用户调用 muteLocalAudioStream 方法关闭或开启音频发送触发的。 频道内的用户（通信场景）或主播（直播场景）人数超过 32 人时，该回调可能不准确。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] User ID.
-  /// * [muted] Whether the user is muted: true : The user has muted the audio. false : The user has unmuted the audio.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 用户 ID。
+  /// * [muted] 该用户是否静音： true : 该用户已将音频静音。 false : 该用户取消了音频静音。
   final void Function(RtcConnection connection, int remoteUid, bool muted)?
       onUserMuteAudio;
 
-  /// Callback when a remote user stops or resumes publishing the video stream.
+  /// 远端用户取消或恢复发布视频流回调。
   ///
-  /// When a remote user calls muteLocalVideoStream to stop or resume publishing the video stream, the SDK triggers this callback to report the remote user's stream status to the local user. This callback may be inaccurate when the number of users (in communication) or hosts (in live broadcast) in the channel exceeds 32.
+  /// 当远端用户调用 muteLocalVideoStream 取消或恢复发布视频流时，SDK 会触发该回调向本地用户报告远端用户的发流状况。 当频道内的用户（通信场景）或主播（直播场景）的人数超过 32 人时，该回调可能不准确。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] Remote user ID.
-  /// * [muted] Whether the remote user stops publishing the video stream: true : Stops publishing the video stream. false : Publishes the video stream.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 远端用户 ID。
+  /// * [muted] 远端用户是否取消发布视频流： true : 取消发布视频流。 false : 发布视频流。
   final void Function(RtcConnection connection, int remoteUid, bool muted)?
       onUserMuteVideo;
 
-  /// Callback when a remote user enables/disables the video module.
+  /// 远端用户开/关视频模块回调。
   ///
-  /// Disabling the video function means the user can only make voice calls, cannot display or send their own video, and cannot receive or display others' video.
-  /// This callback is triggered when a remote user calls the enableVideo or disableVideo method to enable or disable the video module.
+  /// 关闭视频功能是指该用户只能进行语音通话，不能显示、发送自己的视频，也不能接收、显示别人的视频。
+  /// 该回调是由远端用户调用 enableVideo 或 disableVideo 方法开启或关闭视频模块触发的。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] User ID indicating which user's video stream it is.
-  /// * [enabled] true : The user has enabled the video function. false : The user has disabled the video function.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 用户 ID，提示是哪个用户的视频流。
+  /// * [enabled] true : 该用户已启用视频功能。 false : 该用户已关闭视频功能。
   final void Function(RtcConnection connection, int remoteUid, bool enabled)?
       onUserEnableVideo;
 
@@ -2117,90 +2116,90 @@ class RtcEngineEventHandler {
   final void Function(RtcConnection connection, int remoteUid, int state)?
       onUserStateChanged;
 
-  /// Callback when a remote user enables/disables local video capture.
+  /// 远端用户开/关本地视频采集回调。
   ///
-  /// Deprecated Deprecated: This callback is deprecated. Use the following enums in the onRemoteVideoStateChanged callback instead: remoteVideoStateStopped (0) and remoteVideoStateReasonRemoteMuted (5). remoteVideoStateDecoding (2) and remoteVideoStateReasonRemoteUnmuted (6). This callback is triggered when a remote user calls the enableLocalVideo method to enable or disable video capture.
+  /// 废弃 弃用： 该回调已废弃，请改用 onRemoteVideoStateChanged 回调的如下枚举： remoteVideoStateStopped (0) 和 remoteVideoStateReasonRemoteMuted (5)。 remoteVideoStateDecoding (2) 和 remoteVideoStateReasonRemoteUnmuted (6)。 该回调是由远端用户调用 enableLocalVideo 方法开启或关闭视频采集触发的。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] User ID indicating which user's video stream it is.
-  /// * [enabled] Whether the remote user enables video capture: true : The user has enabled the video function. Other users can receive this user's video stream. false : The user has disabled the video function. This user can still receive other users' video streams, but others cannot receive this user's video stream.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 用户 ID，提示是哪个用户的视频流。
+  /// * [enabled] 远端用户是否启用视频采集： true : 该用户已启用视频功能。启用后，其他用户可以接收到该用户的视频流。 false : 该用户已关闭视频功能。关闭后，该用户仍然可以接收其他用户的视频流，但其他用户接收不到该用户的视频流。
   final void Function(RtcConnection connection, int remoteUid, bool enabled)?
       onUserEnableLocalVideo;
 
-  /// Callback with statistics of the remote audio stream during a call.
+  /// 通话中远端音频流的统计信息回调。
   ///
-  /// This callback is triggered every 2 seconds for each remote user/host who is sending an audio stream. If multiple remote users/hosts are sending audio streams, this callback is triggered multiple times every 2 seconds.
+  /// 该回调针对每个发送音频流的远端用户/主播每 2 秒触发一次。如果远端有多个用户/主播发送音频流，该回调每 2 秒会被触发多次。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [stats] Received remote audio statistics. See RemoteAudioStats.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [stats] 接收到的远端音频统计数据，详见 RemoteAudioStats 。
   final void Function(RtcConnection connection, RemoteAudioStats stats)?
       onRemoteAudioStats;
 
-  /// Callback with statistics of the local audio stream during a call.
+  /// 通话中本地音频流的统计信息回调。
   ///
-  /// The SDK triggers this callback once every 2 seconds.
+  /// SDK 每 2 秒触发该回调一次。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [stats] Local audio statistics. See LocalAudioStats.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [stats] 本地音频统计数据。详见 LocalAudioStats 。
   final void Function(RtcConnection connection, LocalAudioStats stats)?
       onLocalAudioStats;
 
-  /// Callback with local video stream statistics.
+  /// 本地视频流统计信息回调。
   ///
-  /// This callback provides statistics about the local device's video stream every 2 seconds.
+  /// 该回调描述本地设备发送视频流的统计信息，每 2 秒触发一次。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [stats] Local video stream statistics. See LocalVideoStats.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [stats] 本地视频流统计信息。详见 LocalVideoStats 。
   final void Function(RtcConnection connection, VideoSourceType sourceType,
       LocalVideoStats stats)? onLocalVideoStats;
 
-  /// Callback for statistics of the remote video stream during a call.
+  /// 通话中远端视频流的统计信息回调。
   ///
-  /// This callback reports end-to-end statistics of the remote video stream during a call. It is triggered every 2 seconds for each remote user/host. If there are multiple remote users/hosts, this callback is triggered multiple times every 2 seconds.
+  /// 该回调描述远端用户在通话中端到端的视频流统计信息， 针对每个远端用户/主播每 2 秒触发一次。如果远端同时存在多个用户/主播， 该回调每 2 秒会被触发多次。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [stats] Statistics of the remote video. See RemoteVideoStats.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [stats] 远端视频统计数据。详见 RemoteVideoStats 。
   final void Function(RtcConnection connection, RemoteVideoStats stats)?
       onRemoteVideoStats;
 
-  /// Callback when the camera is ready.
+  /// 摄像头就绪回调。
   ///
-  /// Deprecated Deprecated: Use onLocalVideoStateChanged with localVideoStreamStateCapturing(1) instead. This callback indicates that the camera has been successfully opened and video capture can start.
+  /// 废弃 弃用: 请改用 onLocalVideoStateChanged 中的 localVideoStreamStateCapturing(1)。 该回调提示已成功打开摄像头，可以开始捕获视频。
   final void Function()? onCameraReady;
 
-  /// Callback when the camera focus area changes.
+  /// 相机对焦区域已改变回调。
   ///
-  /// This callback is triggered when the local user calls setCameraFocusPositionInPreview to change the focus position. This callback is applicable only to Android and iOS.
+  /// 该回调是由本地用户调用 setCameraFocusPositionInPreview 方法改变对焦位置触发的。 该回调仅适用于 Android 和 iOS。
   ///
-  /// * [x] The x coordinate of the changed focus area.
-  /// * [y] The y coordinate of the changed focus area.
-  /// * [width] The width of the changed focus area.
-  /// * [height] The height of the changed focus area.
+  /// * [x] 发生改变的对焦区域的 x 坐标。
+  /// * [y] 发生改变的对焦区域的 y 坐标。
+  /// * [width] 发生改变的对焦区域的宽度。
+  /// * [height] 发生改变的对焦区域的高度。
   final void Function(int x, int y, int width, int height)?
       onCameraFocusAreaChanged;
 
-  /// Callback when the camera exposure area changes.
+  /// 摄像头曝光区域已改变回调。
   ///
-  /// This callback is triggered when the local user calls setCameraExposurePosition to change the exposure position. This callback is applicable only to Android and iOS.
+  /// 该回调是由本地用户调用 setCameraExposurePosition 方法改变曝光位置触发的。 该回调仅适用于 Android 和 iOS。
   final void Function(int x, int y, int width, int height)?
       onCameraExposureAreaChanged;
 
-  /// Reports local face detection results.
+  /// 报告本地人脸检测结果。
   ///
-  /// After calling enableFaceDetection(true) to enable local face detection, you can use this callback to get the following face detection information in real time:
-  ///  Size of the image captured by the camera
-  ///  Position of the face in the view
-  ///  Distance of the face from the device screen The distance of the face from the screen is estimated by the SDK based on the image size and face position in the view.
-  ///  This callback is only available on Android and iOS platforms.
-  ///  When the face in front of the camera disappears, this callback is triggered immediately. When no face is detected, the callback frequency is reduced to save device power.
-  ///  When the face is too close to the screen, the SDK does not trigger this callback.
-  ///  On Android, the distance value has some error margin. Do not use it for precise calculations.
+  /// 调用 enableFaceDetection(true) 开启本地人脸检测后，你可以通过该回调实时获取以下人脸检测的信息：
+  ///  摄像头采集的画面大小
+  ///  人脸在 view 中的位置
+  ///  人脸距设备屏幕的距离 其中，人脸距设备屏幕的距离由 SDK 通过摄像头采集的画面大小和人脸在 view 中的位置拟合计算得出。
+  ///  该回调仅适用于 Android 和 iOS 平台。
+  ///  当检测到摄像头前的人脸消失时，该回调会立刻触发；在无人脸的状态下，该回调触发频率会降低，以节省设备耗能。
+  ///  当人脸距离设备屏幕过近时，SDK 不会触发该回调。
+  ///  Android 平台上，人脸距设备屏幕的距离（ distance ）值有一定误差，请不要用它进行精确计算。
   ///
-  /// * [imageWidth] Width of the image captured by the camera (px).
-  /// * [imageHeight] Height of the image captured by the camera (px).
-  /// * [vecRectangle] Detected face information. See Rectangle.
-  /// * [vecDistance] Distance between the face and the device screen (cm).
-  /// * [numFaces] Number of faces detected. If 0, no face is detected.
+  /// * [imageWidth] 摄像头采集画面的宽度 (px)。
+  /// * [imageHeight] 摄像头采集画面的高度 (px)。
+  /// * [vecRectangle] 检测到的人脸信息。详见 Rectangle 。
+  /// * [vecDistance] 人脸和设备屏幕之间的距离 (cm)。
+  /// * [numFaces] 检测的人脸数量。如果为 0，则表示没有检测到人脸。
   final void Function(
       int imageWidth,
       int imageHeight,
@@ -2208,73 +2207,73 @@ class RtcEngineEventHandler {
       List<int> vecDistance,
       int numFaces)? onFacePositionChanged;
 
-  /// Callback when video function is stopped.
+  /// 视频功能已停止回调。
   ///
-  /// Deprecated Deprecated: Use localVideoStreamStateStopped (0) in the onLocalVideoStateChanged callback instead. If the app needs to perform other operations on the view after stopping video (such as displaying other content), you can do so in this callback.
+  /// 废弃 弃用： 请改用 onLocalVideoStateChanged 回调中的 localVideoStreamStateStopped (0)。 App 如需在停止视频后对 view 做其他处理（比如显示其他画面），可以在这个回调中进行。
   final void Function()? onVideoStopped;
 
-  /// Occurs when the playback state of the music file changes.
+  /// 音乐文件的播放状态已改变回调。
   ///
-  /// This callback is triggered when the playback state of the music file changes and reports the current playback state and error code.
+  /// 该回调在音乐文件播放状态发生改变时触发，并报告当前的播放状态和错误码。
   ///
-  /// * [state] The playback state of the music file. See AudioMixingStateType.
-  /// * [reason] The error code. See AudioMixingReasonType.
+  /// * [state] 音乐文件播放状态。详见 AudioMixingStateType 。
+  /// * [reason] 错误码。详见 AudioMixingReasonType 。
   final void Function(AudioMixingStateType state, AudioMixingReasonType reason)?
       onAudioMixingStateChanged;
 
-  /// Callback when the state of the virtual metronome changes.
+  /// 虚拟节拍器状态发生改变回调。
   ///
-  /// Deprecated Deprecated since v4.6.2. When the state of the virtual metronome changes, the SDK triggers this callback to report the current state. If a fault occurs with the virtual metronome, this callback helps you understand the current state and the reason for the fault, allowing you to troubleshoot. This callback applies to Android and iOS only.
+  /// 废弃 自 v6.6.2 版本废弃。 虚拟节拍器状态发生改变时，SDK 会触发该回调报告当前的虚拟节拍器状态。在虚拟节拍器出现故障时，该回调可以帮助你了解当前虚拟节拍的状态以及出现故障的原因，方便你排查问题。 该回调仅适用于 Android 和 iOS。
   ///
-  /// * [state] The current state of the virtual metronome. See RhythmPlayerStateType.
-  /// * [reason] The error code and message when the virtual metronome encounters an error. See RhythmPlayerReason.
+  /// * [state] 当前的虚拟节拍器状态，详见 RhythmPlayerStateType 。
+  /// * [reason] 虚拟节拍器发生错误的错误码和错误信息，详见 RhythmPlayerReason 。
   final void Function(RhythmPlayerStateType state, RhythmPlayerReason reason)?
       onRhythmPlayerStateChanged;
 
-  /// Callback when the network connection is lost and the SDK fails to reconnect to the server within 10 seconds.
+  /// 网络连接中断，且 SDK 无法在 10 秒内连接服务器回调。
   ///
-  /// After calling joinChannel, this callback is triggered if the SDK cannot connect to the server within 10 seconds, regardless of whether the user has joined the channel successfully. If the SDK still fails to rejoin the channel within 20 minutes after disconnection, it stops trying to reconnect.
+  /// SDK 在调用 joinChannel 后，无论是否加入成功，只要 10 秒和服务器无法连接就会触发该回调。如果 SDK 在断开连接后，20 分钟内还是没能重新加入频道，SDK 会停止尝试重连。
   ///
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   final void Function(RtcConnection connection)? onConnectionLost;
 
-  /// Callback when the network connection is interrupted.
+  /// 网络连接中断回调。
   ///
-  /// Deprecated Deprecated: Use onConnectionStateChanged callback instead. This callback is triggered when the SDK loses connection to the server for more than 4 seconds after establishing a connection. After this event is triggered, the SDK will try to reconnect to the server. You can use this event to prompt the UI. The difference between this callback and onConnectionLost is: onConnectionInterrupted is triggered only after successfully joining a channel and when the SDK loses connection to the server for more than 4 seconds. onConnectionLost is triggered regardless of whether the user has joined a channel, as long as the SDK cannot connect to the server within 10 seconds. If the SDK still fails to rejoin the channel within 20 minutes after disconnection, it stops trying to reconnect.
+  /// 废弃 弃用: 请改用 onConnectionStateChanged 回调。 SDK 在和服务器建立连接后，失去了网络连接超过 4 秒，会触发该回调。在触发事件后，SDK 会主动重连服务器，所以该事件可以用于 UI 提示。该回调与 onConnectionLost 的区别是： onConnectionInterrupted 回调一定是发生在成功加入频道后，且 SDK 刚失去和服务器连接超过 4 秒时触发。 onConnectionLost 回调是无论是否成功加入频道，只要 10 秒内和服务器无法建立连接都会触发。 如果 SDK 在断开连接后，20 分钟内还是没能重新加入频道，SDK 会停止尝试重连。
   ///
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   final void Function(RtcConnection connection)? onConnectionInterrupted;
 
-  /// Callback when the network connection is banned by the server.
+  /// 网络连接已被服务器禁止回调。
   ///
-  /// Deprecated Deprecated: Use onConnectionStateChanged instead.
+  /// 废弃 弃用: 请改用 onConnectionStateChanged 。
   ///
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   final void Function(RtcConnection connection)? onConnectionBanned;
 
-  /// Occurs when a stream message is received from a remote user.
+  /// 接收到对方数据流消息的回调。
   ///
-  /// This callback indicates that the local user has received a stream message sent by a remote user using the sendStreamMessage method. If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and state synchronization, we recommend using [Real-time Messaging](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page).
+  /// 该回调表示本地用户收到了远端用户调用 sendStreamMessage 方法发送的流消息。 如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] The ID of the user who sent the message.
-  /// * [streamId] The stream ID of the received message.
-  /// * [data] The received data.
-  /// * [length] The length of the data in bytes.
-  /// * [sentTs] The timestamp when the data stream was sent.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 发送消息的用户 ID。
+  /// * [streamId] 接收到的消息的 Stream ID。
+  /// * [data] 接收到的数据。
+  /// * [length] 数据长度，单位为字节。
+  /// * [sentTs] 数据流发出的时间。
   final void Function(RtcConnection connection, int remoteUid, int streamId,
       Uint8List data, int length, int sentTs)? onStreamMessage;
 
-  /// Occurs when an error occurs in receiving a stream message from a remote user.
+  /// 接收对方数据流消息发生错误的回调。
   ///
-  /// This callback indicates that the local user failed to receive a stream message sent by a remote user using the sendStreamMessage method. If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and state synchronization, we recommend using [Real-time Messaging](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page).
+  /// 该回调表示本地用户未收到远端用户调用 sendStreamMessage 方法发送的流消息。 如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] The ID of the user who sent the message.
-  /// * [streamId] The stream ID of the received message.
-  /// * [code] The error code. See ErrorCodeType.
-  /// * [missed] The number of lost messages.
-  /// * [cached] The number of messages cached after the data stream was interrupted.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 发送消息的用户 ID。
+  /// * [streamId] 接收到的消息的 Stream ID。
+  /// * [code] 错误码。详见 ErrorCodeType 。
+  /// * [missed] 丢失的消息数量。
+  /// * [cached] 数据流中断时，后面缓存的消息数量。
   final void Function(RtcConnection connection, int remoteUid, int streamId,
       ErrorCodeType code, int missed, int cached)? onStreamMessageError;
 
@@ -2291,27 +2290,27 @@ class RtcEngineEventHandler {
           RtcConnection connection, int userId, String data, int length)?
       onMediaControlMessage;
 
-  /// Callback when the token has expired.
+  /// Token 已过期回调。
   ///
-  /// During audio and video interaction, if the token becomes invalid, the SDK triggers this callback to report that the token has expired.
-  /// When you receive this callback, you need to generate a new token on your server and update it using one of the following methods:
-  ///  Single-channel scenario:
-  ///  Call renewToken to pass in the new token.
-  ///  Call leaveChannel to leave the current channel, then call joinChannel with the new token to rejoin.
-  ///  Multi-channel scenario: Call updateChannelMediaOptionsEx with the new token.
+  /// 在音视频互动过程中，如果 Token 失效，SDK 会触发该回调报告 Token 已过期。
+  /// 当收到该回调时，你需要重新在服务端生成新的 Token，然后通过下列任意一种方式来更新 Token：
+  ///  单频道场景：
+  ///  调用 renewToken 来传入新的 Token。
+  ///  调用 leaveChannel 离开当前频道，然后在调用 joinChannel 时传入新的 Token 重新加入频道。
+  ///  多频道场景：调用 updateChannelMediaOptionsEx 传入新的 Token。
   ///
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   final void Function(RtcConnection connection)? onRequestToken;
 
-  /// Callback when the token is about to expire in 30 seconds.
+  /// Token 即将在 30s 内过期回调。
   ///
-  /// When you receive this callback, you need to generate a new token on your server and update it using one of the following methods:
-  ///  Single-channel scenario:
-  ///  Call renewToken to pass in the new token.
-  ///  Call leaveChannel to leave the current channel, then pass in the new token when calling joinChannel to rejoin the channel.
-  ///  Multi-channel scenario: Call updateChannelMediaOptionsEx to pass in the new token.
+  /// 当收到该回调时，你需要重新在服务端生成新的 Token，然后通过下列任意一种方式来更新 Token：
+  ///  单频道场景：
+  ///  调用 renewToken 来传入新的 Token。
+  ///  调用 leaveChannel 离开当前频道，然后在调用 joinChannel 时传入新的 Token 重新加入频道。
+  ///  多频道场景：调用 updateChannelMediaOptionsEx 传入新的 Token。
   ///
-  /// * [token] The token that is about to expire.
+  /// * [token] 即将过期的 Token。
   final void Function(RtcConnection connection, String token)?
       onTokenPrivilegeWillExpire;
 
@@ -2319,63 +2318,63 @@ class RtcEngineEventHandler {
   final void Function(RtcConnection connection, LicenseErrorType reason)?
       onLicenseValidationFailure;
 
-  /// Callback when the first local audio frame is published.
+  /// 已发布本地音频首帧回调。
   ///
-  /// The SDK triggers this callback under the following circumstances:
-  ///  After successfully joining a channel by calling joinChannel with local audio enabled.
-  ///  After calling muteLocalAudioStream(true) followed by muteLocalAudioStream(false).
-  ///  After calling disableAudio followed by enableAudio.
+  /// SDK 会在以下时机触发该回调：
+  ///  开启本地音频的情况下，调用 joinChannel 成功加入频道后。
+  ///  调用 muteLocalAudioStream (true) ，再调用 muteLocalAudioStream (false) 后。
+  ///  调用 disableAudio ，再调用 enableAudio 后。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [elapsed] The time elapsed (in milliseconds) from calling the joinChannel method to triggering this callback.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [elapsed] 从调用 joinChannel 方法到触发该回调的时间间隔（毫秒）。
   final void Function(RtcConnection connection, int elapsed)?
       onFirstLocalAudioFramePublished;
 
-  /// Callback when the first remote audio frame is decoded.
+  /// 已解码远端音频首帧的回调。
   ///
-  /// Deprecated Deprecated: Please use onRemoteAudioStateChanged instead. The SDK triggers this callback under the following circumstances:
-  ///  When a remote user sends audio after joining the channel for the first time.
-  ///  When a remote user resumes sending audio after going offline. Offline means no audio packets are received within 15 seconds, which may be caused by:
-  ///  The remote user leaving the channel
-  ///  The remote user going offline
-  ///  The remote user calling muteLocalAudioStream to stop sending audio streams
-  ///  The remote user calling disableAudio to disable audio
+  /// 废弃 弃用： 请改用 onRemoteAudioStateChanged 。 SDK 会在以下时机触发该回调：
+  ///  远端用户首次上线后发送音频。
+  ///  远端用户音频离线再上线发送音频。音频离线指本地在 15 秒内没有收到音频包，可能有如下原因：
+  ///  远端用户离开频道
+  ///  远端用户掉线
+  ///  远端用户调用 muteLocalAudioStream 方法停止发送音频流
+  ///  远端用户调用 disableAudio 方法关闭音频
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [uid] Remote user ID.
-  /// * [elapsed] The delay (in milliseconds) from the local user calling joinChannel to the triggering of this callback.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [uid] 远端用户 ID。
+  /// * [elapsed] 从本地用户调用 joinChannel 直至该回调触发的延迟，单位为毫秒。
   final void Function(RtcConnection connection, int uid, int elapsed)?
       onFirstRemoteAudioDecoded;
 
-  /// Callback when the first remote audio frame is received.
+  /// 已接收远端音频首帧回调。
   ///
-  /// Deprecated Deprecated: Please use onRemoteAudioStateChanged instead.
+  /// 废弃 弃用： 请改用 onRemoteAudioStateChanged 。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [userId] User ID of the remote user sending the audio frame.
-  /// * [elapsed] The delay (in milliseconds) from the local user calling joinChannel to the triggering of this callback.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [userId] 发送音频帧的远端用户的用户 ID。
+  /// * [elapsed] 从本地用户调用 joinChannel 直至该回调触发的延迟，单位为毫秒。
   final void Function(RtcConnection connection, int userId, int elapsed)?
       onFirstRemoteAudioFrame;
 
-  /// Callback when the local audio state changes.
+  /// 本地音频状态发生改变回调。
   ///
-  /// When the local audio state changes (including microphone capture and audio encoding states), the SDK triggers this callback to report the current local audio state. This callback helps you diagnose issues by providing the current state and reason when a local audio failure occurs. When the state is localAudioStreamStateFailed (3), you can check the returned error information in the error parameter.
+  /// 本地音频的状态发生改变时（包括本地麦克风采集状态和音频编码状态），SDK 会触发该回调报告当前的本地音频状态。在本地音频出现故障时，该回调可以帮助你了解当前音频的状态以及出现故障的原因，方便你排查问题。 当状态为 localAudioStreamStateFailed (3) 时， 你可以在 error 参数中查看返回的错误信息。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [state] Current local audio state. See LocalAudioStreamState.
-  /// * [reason] Reason for the local audio state change. See LocalAudioStreamReason.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [state] 当前的本地音频状态。详见 LocalAudioStreamState 。
+  /// * [reason] 本地音频状态改变原因。详见 LocalAudioStreamReason 。
   final void Function(RtcConnection connection, LocalAudioStreamState state,
       LocalAudioStreamReason reason)? onLocalAudioStateChanged;
 
-  /// Callback when the remote audio stream state changes.
+  /// 远端音频流状态发生改变回调。
   ///
-  /// When the audio state of a remote user (in communication) or host (in live streaming) changes, the SDK triggers this callback to report the current remote audio stream state to the local user. When there are more than 32 users (in communication) or hosts (in live streaming) in the channel, this callback may be inaccurate.
+  /// 远端用户（通信场景）或主播（直播场景）的音频状态发生改变时，SDK 会触发该回调向本地用户报告当前的远端音频流状态。 频道内的用户（通信场景）或主播（直播场景）人数超过 32 人时，该回调可能不准确。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] User ID of the remote user whose audio state changed.
-  /// * [state] Remote audio stream state. See RemoteAudioState.
-  /// * [reason] Specific reason for the remote audio stream state change. See RemoteAudioStateReason.
-  /// * [elapsed] Time elapsed (in milliseconds) from the local user calling the joinChannel method to the occurrence of this event.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 发生音频状态改变的远端用户 ID。
+  /// * [state] 远端音频流状态，详见 RemoteAudioState 。
+  /// * [reason] 远端音频流状态改变的具体原因，详见 RemoteAudioStateReason 。
+  /// * [elapsed] 从本地用户调用 joinChannel 方法到发生本事件经历的时间，单位为毫秒。
   final void Function(
       RtcConnection connection,
       int remoteUid,
@@ -2383,205 +2382,205 @@ class RtcEngineEventHandler {
       RemoteAudioStateReason reason,
       int elapsed)? onRemoteAudioStateChanged;
 
-  /// Callback when the most active remote speaker is detected.
+  /// 监测到远端最活跃用户回调。
   ///
-  /// After successfully calling enableAudioVolumeIndication, the SDK continuously monitors the remote user with the highest volume and counts how often the user is detected as having the highest volume. The remote user with the highest count during the current period is considered the most active speaker.
-  /// When there are two or more users in the channel and a remote active speaker exists, the SDK triggers this callback and reports the uid of the most active remote speaker.
-  ///  If the most active speaker remains the same, the SDK does not trigger onActiveSpeaker again.
-  ///  If the most active speaker changes, the SDK triggers the callback again and reports the new uid.
+  /// 成功调用 enableAudioVolumeIndication 后，SDK 会持续监测音量最大的远端用户，并统计该用户被判断为音量最大者的次数。当前时间段内，该次数累积最多的远端用户为最活跃的用户。
+  /// 当频道内用户数量大于或等于 2 且有远端活跃用户时，SDK 会触发该回调并报告远端最活跃用户的 uid 。
+  ///  如果远端最活跃用户一直是同一位用户，则 SDK 不会再次触发 onActiveSpeaker 回调。
+  ///  如果远端最活跃用户有变化，则 SDK 会再次触发该回调并报告新的远端最活跃用户的 uid 。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [uid] ID of the most active remote speaker.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [uid] 远端最活跃用户的 ID。
   final void Function(RtcConnection connection, int uid)? onActiveSpeaker;
 
   /// @nodoc
   final void Function(ContentInspectResult result)? onContentInspectResult;
 
-  /// Callback for video snapshot result.
+  /// 视频截图结果回调。
   ///
-  /// After successfully calling takeSnapshot, the SDK triggers this callback to report whether the snapshot was successful and provide the snapshot details.
+  /// 成功调用 takeSnapshot 后，SDK 触发该回调报告截图是否成功和获取截图的详情。
   ///
-  /// * [uid] User ID. If uid is 0, it indicates the local user.
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [filePath] The local path where the snapshot is saved.
-  /// * [width] Image width (px).
-  /// * [height] Image height (px).
-  /// * [errCode] Indicates whether the snapshot was successful or the reason for failure.
-  ///  0: Snapshot successful.
-  ///  < 0: Snapshot failed.
-  ///  -1: Failed to write file or JPEG encoding failed.
-  ///  -2: No video frame received from the specified user within 1 second after calling takeSnapshot. Possible reasons include local capture stopped, remote user stopped publishing, or video data processing is blocked.
-  ///  -3: takeSnapshot was called too frequently.
+  /// * [uid] 用户 ID。如果 uid 为 0，表示本地用户。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [filePath] 截图的本地保存路径。
+  /// * [width] 图片宽度（px）。
+  /// * [height] 图片高度（px）。
+  /// * [errCode] 截图成功的提示或失败的原因。
+  ///  0：截图成功。
+  ///  < 0: 截图失败。
+  ///  -1：写入文件失败或 JPEG 编码失败。
+  ///  -2： takeSnapshot 方法调用后 1 秒内没有收到指定用户的视频帧。可能的原因有：本地采集停止、远端停止发布或者视频数据处理堵塞。
+  ///  -3： takeSnapshot 方法调用过于频繁。
   final void Function(RtcConnection connection, int uid, String filePath,
       int width, int height, int errCode)? onSnapshotTaken;
 
-  /// Callback when the user role or audience latency level is switched.
+  /// 用户角色、观众端延时级别已切换回调。
   ///
-  /// This callback is not triggered if you call setClientRole before joining a channel and set the role to BROADCASTER.
+  /// 当你在加入频道前调用 setClientRole 并将用户角色设为 BROADCASTER 时，不会触发此回调。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [oldRole] Role before switching: ClientRoleType.
-  /// * [newRole] Role after switching: ClientRoleType.
-  /// * [newRoleOptions] Properties of the new role. See ClientRoleOptions.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [oldRole] 切换前的角色： ClientRoleType 。
+  /// * [newRole] 切换后的角色： ClientRoleType 。
+  /// * [newRoleOptions] 切换后的角色属性。详见 ClientRoleOptions 。
   final void Function(
       RtcConnection connection,
       ClientRoleType oldRole,
       ClientRoleType newRole,
       ClientRoleOptions newRoleOptions)? onClientRoleChanged;
 
-  /// Callback when user role change fails.
+  /// 用户角色切换失败回调。
   ///
-  /// When the user role change fails, you can use this callback to get the reason for the failure and the current user role.
+  /// 当用户角色切换失败时，你可以通过此回调得知切换失败的原因和当前的用户角色。
   ///
-  /// * [reason] The reason for the user role change failure. See ClientRoleChangeFailedReason.
-  /// * [currentRole] The current user role. See ClientRoleType.
-  /// * [connection] Connection information. See RtcConnection.
+  /// * [reason] 切换用户角色失败的原因。详见 ClientRoleChangeFailedReason 。
+  /// * [currentRole] 当前用户角色。详见 ClientRoleType 。
+  /// * [connection] Connection 信息。详见 RtcConnection 。
   final void Function(
       RtcConnection connection,
       ClientRoleChangeFailedReason reason,
       ClientRoleType currentRole)? onClientRoleChangeFailed;
 
-  /// Occurs when the volume of the audio device or app changes.
+  /// 音频设备或 App 的音量发生改变回调。
   ///
-  /// This callback is triggered when the volume of an audio playback or recording device or the app changes. This callback is only applicable to Windows and macOS.
+  /// 当音频播放、采集设备或 App 的音量发生改变时，会触发该回调。 该回调仅适用于 Windows 和 macOS。
   ///
-  /// * [deviceType] The device type definition. See MediaDeviceType.
-  /// * [volume] The volume, ranging from [0,255].
-  /// * [muted] Whether the audio device is muted: true : The audio device is muted. false : The audio device is not muted.
+  /// * [deviceType] 设备类型定义。详见 MediaDeviceType 。
+  /// * [volume] 音量。范围为 [0,255]。
+  /// * [muted] 音频设备是否为静音状态： true : 音频设备已静音。 false : 音频设备未被静音。
   final void Function(MediaDeviceType deviceType, int volume, bool muted)?
       onAudioDeviceVolumeChanged;
 
-  /// Callback when the RTMP streaming state changes.
+  /// 旁路推流状态发生改变回调。
   ///
-  /// When the RTMP streaming state changes, the SDK triggers this callback and reports the URL and current streaming state. This callback helps streaming users understand the current streaming state. If an error occurs, you can use the returned error code to identify the cause and troubleshoot the issue.
+  /// 旁路推流状态发生改变时，SDK会触发该回调，并在回调中明确状态发生改变的 URL 地址及当前推流状态。该回调方便推流用户了解当前的推流状态；推流出错时，你可以通过返回的错误码了解出错的原因，方便排查问题。
   ///
-  /// * [url] The URL of the stream whose state has changed.
-  /// * [state] The current streaming state. See RtmpStreamPublishState.
-  /// * [reason] The reason for the streaming state change. See RtmpStreamPublishReason.
+  /// * [url] 推流状态发生改变的 URL 地址。
+  /// * [state] 当前的推流状态，详见 RtmpStreamPublishState 。
+  /// * [reason] 推流状态改变的原因，详见 RtmpStreamPublishReason 。
   final void Function(String url, RtmpStreamPublishState state,
       RtmpStreamPublishReason reason)? onRtmpStreamingStateChanged;
 
-  /// Callback for RTMP streaming events.
+  /// 旁路推流事件回调。
   ///
-  /// * [url] The RTMP streaming URL.
-  /// * [eventCode] The RTMP streaming event code. See RtmpStreamingEvent.
+  /// * [url] 旁路推流 URL。
+  /// * [eventCode] 旁路推流事件码。详见 RtmpStreamingEvent 。
   final void Function(String url, RtmpStreamingEvent eventCode)?
       onRtmpStreamingEvent;
 
-  /// Callback when the RTMP transcoding settings are updated.
+  /// 旁路推流转码设置已被更新回调。
   ///
-  /// When the LiveTranscoding parameters in the startRtmpStreamWithTranscoding method are updated, the onTranscodingUpdated callback is triggered to notify the host. This callback is not triggered the first time you call startRtmpStreamWithTranscoding to set the LiveTranscoding parameters.
+  /// startRtmpStreamWithTranscoding 方法中的直播参数 LiveTranscoding 更新时， onTranscodingUpdated 回调会被触发并向主播报告更新信息。 首次调用 startRtmpStreamWithTranscoding 方法设置转码参数 LiveTranscoding 时，不会触发此回调。
   final void Function()? onTranscodingUpdated;
 
-  /// Callback when the audio routing changes.
+  /// 音频路由已发生变化回调。
   ///
-  /// This callback is applicable only on Android, iOS, and macOS platforms.
+  /// 该回调仅适用于 Android、iOS 和 macOS 平台。
   ///
-  /// * [routing] The current audio route. See AudioRoute.
+  /// * [routing] 当前的音频路由。详见 AudioRoute 。
   final void Function(int routing)? onAudioRoutingChanged;
 
-  /// Callback when the state of the channel media relay changes.
+  /// 跨频道媒体流转发状态发生改变回调。
   ///
-  /// This callback is triggered by the SDK when the state of the channel media relay changes, reporting the current relay state and related error information.
+  /// 当跨频道媒体流转发状态发生改变时，SDK 会触发该回调，并报告当前的转发状态以及相关的错误信息。
   ///
-  /// * [state] The channel media relay state. See ChannelMediaRelayState.
-  /// * [code] The error code of the channel media relay. See ChannelMediaRelayError.
+  /// * [state] 跨频道媒体流转发状态。详见 ChannelMediaRelayState 。
+  /// * [code] 跨频道媒体流转发出错的错误码。详见 ChannelMediaRelayError 。
   final void Function(
           ChannelMediaRelayState state, ChannelMediaRelayError code)?
       onChannelMediaRelayStateChanged;
 
-  /// Callback when the subscribed stream falls back to audio-only or recovers to audio and video.
+  /// 订阅流已回退为音频流或恢复为音视频流回调。
   ///
-  /// After you call setRemoteSubscribeFallbackOption and set option to streamFallbackOptionAudioOnly, this callback is triggered in the following situations:
-  ///  When the downlink network condition is poor, the subscribed audio and video stream falls back to audio-only
-  ///  When the downlink network condition improves, the subscribed audio-only stream recovers to audio and video When the subscribed stream falls back to a low-quality video stream due to poor network conditions, you can monitor the switching of remote video stream quality through the onRemoteVideoStats callback.
+  /// 当你调用了 setRemoteSubscribeFallbackOption 并将 option 设置为 streamFallbackOptionAudioOnly 后，该回调会在下列情况时被触发：
+  ///  下行网络环境较差，订阅的音视频流回退为音频流
+  ///  下行网络环境改善，订阅音频流恢复为音视频流 订阅流因弱网环境而回退为视频小流时，你可以通过 onRemoteVideoStats 回调来监控远端视频大小流的切换。
   ///
-  /// * [uid] User ID of the remote user.
-  /// * [isFallbackOrRecover] true : Due to poor network conditions, the subscribed stream has fallen back to audio-only. false : Due to improved network conditions, the subscribed stream has recovered to audio and video.
+  /// * [uid] 远端用户的用户 ID。
+  /// * [isFallbackOrRecover] true : 由于网络环境不理想，订阅流已回退为音频流。 false : 由于网络环境改善，订阅流已恢复为音视频流。
   final void Function(int uid, bool isFallbackOrRecover)?
       onRemoteSubscribeFallbackToAudioOnly;
 
-  /// Reports the statistics of the remote audio stream transmission during a call.
+  /// 通话中远端音频流传输的统计信息回调。
   ///
-  /// Deprecated:
-  /// Use onRemoteAudioStats instead.
-  /// This callback reports end-to-end network statistics of the remote user during a call. It calculates metrics based on audio packets and objectively reflects the current network status using data such as packet loss and network delay. During a call, when a user receives audio packets sent by a remote user/host, this callback is triggered every 2 seconds.
+  /// 弃用：
+  /// 请改用 onRemoteAudioStats 。
+  /// 该回调描述远端用户通话中端到端的网络统计信息，通过音频包计算，用客观的数据，如丢包、 网络延迟等，展示当前网络状态。通话中，当用户收到远端用户/主播发送的音频数据包后 ，会每 2 秒触发一次该回调。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] The user ID specifying which user/host the audio packet belongs to.
-  /// * [delay] The delay (ms) from the sender to the receiver for the audio packet.
-  /// * [lost] The packet loss rate (%) from the sender to the receiver for the audio packet.
-  /// * [rxKBitrate] The received bitrate (Kbps) of the remote audio packet.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 用户 ID，指定是哪个用户/主播的音频包。
+  /// * [delay] 音频包从发送端到接收端的延时（毫秒）。
+  /// * [lost] 音频包从发送端到接收端的丢包率 (%)。
+  /// * [rxKBitrate] 远端音频包的接收码率（Kbps）。
   final void Function(RtcConnection connection, int remoteUid, int delay,
       int lost, int rxKBitRate)? onRemoteAudioTransportStats;
 
-  /// Callback for transport statistics of the remote video stream during a call.
+  /// 通话中远端视频流传输的统计信息回调。
   ///
-  /// Deprecated Deprecated: This callback is deprecated. Use onRemoteVideoStats instead. This callback reports end-to-end network statistics of the remote user during a call, calculated based on video packets. It objectively shows the current network status through data such as packet loss and network delay.
-  /// During a call, this callback is triggered every 2 seconds after the user receives video packets sent by the remote user/host.
+  /// 废弃 弃用： 该回调已被废弃，请改用 onRemoteVideoStats 。 该回调描述远端用户通话中端到端的网络统计信息，通过视频包计算，用客观的数据，如丢包、 网络延迟等，展示当前网络状态。
+  /// 通话中，当用户收到远端用户/主播发送的视频数据包后，会每 2 秒触发一次该回调。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [remoteUid] User ID specifying which user/host the video packet belongs to.
-  /// * [delay] Delay (ms) from the sender to the receiver for the video packet.
-  /// * [lost] Packet loss rate (%) from the sender to the receiver for the video packet.
-  /// * [rxKBitRate] Received bitrate (Kbps) of the remote video packet.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [remoteUid] 用户 ID，指定是哪个用户/主播的视频包。
+  /// * [delay] 视频包从发送端到接收端的延时（毫秒）。
+  /// * [lost] 视频包从发送端到接收端的丢包率 (%)。
+  /// * [rxKBitRate] 远端视频包的接收码率（Kbps）。
   final void Function(RtcConnection connection, int remoteUid, int delay,
       int lost, int rxKBitRate)? onRemoteVideoTransportStats;
 
-  /// Callback when the network connection state changes.
+  /// 网络连接状态已改变回调。
   ///
-  /// This callback is triggered when the network connection state changes and informs the user of the current connection state and the reason for the change.
+  /// 该回调在网络连接状态发生改变的时候触发，并告知用户当前的网络连接状态和引起网络状态改变的原因。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [state] Current network connection state. See ConnectionStateType.
-  /// * [reason] Reason for the change in network connection state. See ConnectionChangedReasonType.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [state] 当前网络连接状态。详见 ConnectionStateType 。
+  /// * [reason] 引起当前网络连接状态改变的原因。详见 ConnectionChangedReasonType 。
   final void Function(RtcConnection connection, ConnectionStateType state,
       ConnectionChangedReasonType reason)? onConnectionStateChanged;
 
-  /// Callback when the local network type changes.
+  /// 本地网络类型发生改变回调。
   ///
-  /// When the local network connection type changes, the SDK triggers this callback and specifies the current network connection type in the callback. You can use this callback to obtain the network type in use; when the connection is interrupted, this callback helps determine whether the cause is a network switch or poor network conditions.
+  /// 本地网络连接类型发生改变时，SDK 会触发该回调，并在回调中明确当前的网络连接类型。你可以通过该回调获取正在使用的网络类型；当连接中断时，该回调能辨别引起中断的原因是网络切换还是网络条件不好。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [type] Local network connection type. See NetworkType.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [type] 本地网络连接类型。详见 NetworkType 。
   final void Function(RtcConnection connection, NetworkType type)?
       onNetworkTypeChanged;
 
-  /// Callback when an error occurs with built-in encryption.
+  /// 内置加密出错回调。
   ///
-  /// After calling enableEncryption to enable encryption, if an encryption or decryption error occurs on the sender or receiver side, the SDK triggers this callback.
+  /// 调用 enableEncryption 开启加密后， 如果发流端、收流端出现加解密出错，SDK 会触发该回调。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [errorType] Error type. See EncryptionErrorType.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [errorType] 错误类型，详见 EncryptionErrorType 。
   final void Function(RtcConnection connection, EncryptionErrorType errorType)?
       onEncryptionError;
 
-  /// Callback when failing to obtain device permission.
+  /// 获取设备权限出错回调。
   ///
-  /// When the SDK fails to obtain device permission, it triggers this callback to report which device permission could not be obtained.
+  /// 无法获取设备权限时，SDK 会触发该回调，报告哪个设备的权限无法获取。
   ///
-  /// * [permissionType] Device permission type. See PermissionType.
+  /// * [permissionType] 设备权限类型。详见 PermissionType 。
   final void Function(PermissionType permissionType)? onPermissionError;
 
-  /// Callback triggered when a permission is granted.
+  /// 权限被授予时的回调。
   ///
-  /// * [permissionType] Type of permission. See PermissionType.
+  /// * [permissionType] 权限类型，详见 PermissionType 。
   final void Function(PermissionType permissionType)? onPermissionGranted;
 
-  /// Callback when the local user successfully registers a User Account.
+  /// 本地用户成功注册 User Account 回调。
   ///
-  /// When the local user successfully registers a User Account by calling registerLocalUserAccount, or joins a channel using joinChannelWithUserAccount, the SDK triggers this callback and reports the local user's UID and User Account.
+  /// 本地用户成功调用 registerLocalUserAccount 方法注册用户 User Account，或调用 joinChannelWithUserAccount 加入频道后，SDK 会触发该回调，并告知本地用户的 UID 和 User Account。
   ///
-  /// * [uid] The local user's ID.
-  /// * [userAccount] The local user's User Account.
+  /// * [uid] 本地用户的 ID。
+  /// * [userAccount] 本地用户的 User Account。
   final void Function(int uid, String userAccount)? onLocalUserRegistered;
 
-  /// Callback when remote user information is updated.
+  /// 远端用户信息已更新回调。
   ///
-  /// After a remote user joins the channel, the SDK obtains the user's UID and User Account, then caches a mapping table that includes the remote user's UID and User Account, and triggers this callback locally.
+  /// 远端用户加入频道后，SDK 会获取到该远端用户的 UID 和 User Account，然后缓存一个包含了远端用户 UID 和 User Account 的 Mapping 表，并在本地触发该回调。
   ///
-  /// * [uid] The ID of the remote user.
-  /// * [info] The UserInfo object that identifies the user information, including the user's UID and User Account. See UserInfo class.
+  /// * [uid] 远端用户 ID。
+  /// * [info] 标识用户信息的 UserInfo 对象，包含用户 UID 和 User Account。详见 UserInfo 类。
   final void Function(int uid, UserInfo info)? onUserInfoUpdated;
 
   /// @nodoc
@@ -2589,26 +2588,26 @@ class RtcEngineEventHandler {
           RtcConnection connection, int remoteUid, String remoteUserAccount)?
       onUserAccountUpdated;
 
-  /// Callback for video frame rendering events.
+  /// 视频帧渲染事件回调。
   ///
-  /// After calling the startMediaRenderingTracing method or joining a channel, the SDK triggers this callback to report video frame rendering events and metrics during the rendering process. Developers can optimize based on these metrics to improve rendering efficiency.
+  /// 调用 startMediaRenderingTracing 方法或加入频道后，SDK 会触发该回调，报告视频帧渲染的事件和渲染过程中的指标。开发者可以针对指标进行专项优化，以提高出图效率。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [uid] User ID.
-  /// * [currentEvent] Current video frame rendering event. See MediaTraceEvent.
-  /// * [tracingInfo] Metrics during video frame rendering. Developers should minimize the metric values to improve rendering efficiency. See VideoRenderingTracingInfo.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [uid] 用户 ID。
+  /// * [currentEvent] 当前视频帧渲染事件。详见 MediaTraceEvent 。
+  /// * [tracingInfo] 视频帧渲染过程中的指标。开发者需要尽可能降低指标值，以提高出图效率。详见 VideoRenderingTracingInfo 。
   final void Function(
       RtcConnection connection,
       int uid,
       MediaTraceEvent currentEvent,
       VideoRenderingTracingInfo tracingInfo)? onVideoRenderingTracingResult;
 
-  /// Callback for local video mixing error.
+  /// 本地合图发生错误回调。
   ///
-  /// When calling startLocalVideoTranscoder or updateLocalTranscoderConfiguration fails, the SDK triggers this callback to report the reason for the mixing failure.
+  /// 当你调用 startLocalVideoTranscoder 或 updateLocalTranscoderConfiguration 失败时，SDK 会触发该回调，报告合图失败的原因。
   ///
-  /// * [stream] The video stream that failed to mix. See TranscodingVideoStream.
-  /// * [error] The reason for the local video mixing error. See VideoTranscoderError.
+  /// * [stream] 合图失败的视频流。详见 TranscodingVideoStream 。
+  /// * [error] 本地合图出错原因。详见 VideoTranscoderError 。
   final void Function(
           TranscodingVideoStream stream, VideoTranscoderError error)?
       onLocalVideoTranscoderError;
@@ -2617,13 +2616,13 @@ class RtcEngineEventHandler {
   final void Function(RtcConnection connection, String requestId, bool success,
       UploadErrorReason reason)? onUploadLogResult;
 
-  /// Callback for audio subscription state changes.
+  /// 音频订阅状态发生改变回调。
   ///
-  /// * [channel] Channel name.
-  /// * [uid] Remote user ID.
-  /// * [oldState] Previous subscription state. See StreamSubscribeState.
-  /// * [newState] Current subscription state. See StreamSubscribeState.
-  /// * [elapseSinceLastState] Time elapsed between state changes (ms).
+  /// * [channel] 频道名。
+  /// * [uid] 远端用户的 ID。
+  /// * [oldState] 之前的订阅状态，详见 StreamSubscribeState 。
+  /// * [newState] 当前的订阅状态，详见 StreamSubscribeState 。
+  /// * [elapseSinceLastState] 两次状态变化时间间隔（毫秒）。
   final void Function(
       String channel,
       int uid,
@@ -2631,13 +2630,13 @@ class RtcEngineEventHandler {
       StreamSubscribeState newState,
       int elapseSinceLastState)? onAudioSubscribeStateChanged;
 
-  /// Callback for video subscription state changes.
+  /// 视频订阅状态发生改变回调。
   ///
-  /// * [channel] Channel name.
-  /// * [uid] Remote user ID.
-  /// * [oldState] Previous subscription state. See StreamSubscribeState.
-  /// * [newState] Current subscription state. See StreamSubscribeState.
-  /// * [elapseSinceLastState] Time elapsed between state changes (ms).
+  /// * [channel] 频道名。
+  /// * [uid] 远端用户的 ID。
+  /// * [oldState] 之前的订阅状态，详见 StreamSubscribeState 。
+  /// * [newState] 当前的订阅状态，详见 StreamSubscribeState 。
+  /// * [elapseSinceLastState] 两次状态变化时间间隔（毫秒）。
   final void Function(
       String channel,
       int uid,
@@ -2645,25 +2644,25 @@ class RtcEngineEventHandler {
       StreamSubscribeState newState,
       int elapseSinceLastState)? onVideoSubscribeStateChanged;
 
-  /// Callback for audio publish state changes.
+  /// 音频发布状态改变回调。
   ///
-  /// * [channel] Channel name.
-  /// * [oldState] Previous publish state. See StreamPublishState.
-  /// * [newState] Current publish state. See StreamPublishState.
-  /// * [elapseSinceLastState] Time elapsed between state changes (ms).
+  /// * [channel] 频道名。
+  /// * [oldState] 之前的发布状态，详见 StreamPublishState 。
+  /// * [newState] 当前的发布状态，详见 StreamPublishState 。
+  /// * [elapseSinceLastState] 两次状态变化时间间隔（毫秒）。
   final void Function(
       String channel,
       StreamPublishState oldState,
       StreamPublishState newState,
       int elapseSinceLastState)? onAudioPublishStateChanged;
 
-  /// Callback for video publishing state change.
+  /// 视频发布状态改变回调。
   ///
-  /// * [channel] Channel name.
-  /// * [source] Type of video source. See VideoSourceType.
-  /// * [oldState] Previous publishing state. See StreamPublishState.
-  /// * [newState] Current publishing state. See StreamPublishState.
-  /// * [elapseSinceLastState] Interval between the two state changes (ms).
+  /// * [channel] 频道名。
+  /// * [source] 视频源的类型。详见 VideoSourceType 。
+  /// * [oldState] 之前的发布状态，详见 StreamPublishState 。
+  /// * [newState] 当前的发布状态，详见 StreamPublishState 。
+  /// * [elapseSinceLastState] 两次状态变化时间间隔（毫秒）。
   final void Function(
       VideoSourceType source,
       String channel,
@@ -2671,16 +2670,16 @@ class RtcEngineEventHandler {
       StreamPublishState newState,
       int elapseSinceLastState)? onVideoPublishStateChanged;
 
-  /// Callback for received mixed stream with layout information.
+  /// 已接收携带布局信息的合图视频流回调。
   ///
-  /// When the local client first receives a mixed video stream from the mixing server, or when the layout information of the mixed stream changes, the SDK triggers this callback to report the layout information of each sub-video stream in the mixed stream. This callback is applicable only to Android and iOS.
+  /// 当本地第一次接收到合图服务器发送的合图视频流，或者合图流的布局信息有变化时，SDK 会触发该回调，报告合图视频流中每一路子视频流的布局信息。 该回调仅适用于 Android 和 iOS。
   ///
-  /// * [connection] Connection information. See RtcConnection.
-  /// * [uid] User ID of the mixed video stream publisher.
-  /// * [width] Width (px) of the mixed video stream.
-  /// * [height] Height (px) of the mixed video stream.
-  /// * [layoutCount] Number of layout information entries in the mixed video stream.
-  /// * [layoutlist] Detailed layout information of a mixed video stream. See VideoLayout.
+  /// * [connection] Connection 信息。详见 RtcConnection 。
+  /// * [uid] 发布合图视频流的用户 ID。
+  /// * [width] 合图视频流的宽度 (px)。
+  /// * [height] 合图视频流的高度 (px)。
+  /// * [layoutCount] 合图视频流中布局信息的数量。
+  /// * [layoutlist] 某一路合图视频流的详细布局信息。详见 VideoLayout 。
   final void Function(
       RtcConnection connection,
       int uid,
@@ -2694,114 +2693,114 @@ class RtcEngineEventHandler {
           RtcConnection connection, int uid, Uint8List metadata, int length)?
       onAudioMetadataReceived;
 
-  /// Plugin event callback.
+  /// 插件事件回调。
   ///
-  /// To listen for plugin events, you need to register this callback.
+  /// 为监听插件事件，你需要注册该回调。
   ///
-  /// * [context] Plugin context information. See ExtensionContext.
-  /// * [key] Key of the plugin property.
-  /// * [value] Value corresponding to the plugin property key.
+  /// * [context] 插件上下文信息，详见 ExtensionContext 。
+  /// * [key] 插件属性的 Key。
+  /// * [value] 插件属性 Key 对应的值。
   final void Function(ExtensionContext context, String key, String value)?
       onExtensionEventWithContext;
 
-  /// Callback when the plugin is successfully enabled.
+  /// 插件已启用成功回调。
   ///
-  /// This callback is triggered after the plugin is successfully enabled.
+  /// 成功启用插件后会触发该回调。
   ///
-  /// * [context] Plugin context information. See ExtensionContext.
+  /// * [context] 插件上下文信息，详见 ExtensionContext 。
   final void Function(ExtensionContext context)? onExtensionStartedWithContext;
 
-  /// Callback when the plugin is disabled.
+  /// 插件已禁用回调。
   ///
-  /// This callback is triggered after the plugin is successfully disabled.
+  /// 成功禁用插件后会触发该回调。
   ///
-  /// * [context] Plugin context information. See ExtensionContext.
+  /// * [context] 插件上下文信息，详见 ExtensionContext 。
   final void Function(ExtensionContext context)? onExtensionStoppedWithContext;
 
-  /// Callback for extension errors.
+  /// 插件出错回调。
   ///
-  /// If enabling the extension fails or the extension encounters a runtime error, it triggers this callback to report the error code and reason.
+  /// 启用插件失败或者插件运行出错时，插件会触发该回调并报告错误码和错误原因。
   ///
-  /// * [context] Extension context information. See ExtensionContext.
-  /// * [error] Error code. See the documentation provided by the extension provider.
-  /// * [message] Error reason. See the documentation provided by the extension provider.
+  /// * [context] 插件上下文信息，详见 ExtensionContext 。
+  /// * [error] 错误码。详见插件服务商提供的插件文档。
+  /// * [message] 错误原因。详见插件服务商提供的插件文档。
   final void Function(ExtensionContext context, int error, String message)?
       onExtensionErrorWithContext;
 
   /// @nodoc
   final void Function(RtcConnection connection, int code)? onSetRtmFlagResult;
 
-  /// Callback for multipath transmission statistics.
+  /// 多路径传输统计信息的回调。
   ///
-  /// Since Added since v4.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
-  /// * [stats] Multipath transmission statistics. See MultipathStats.
+  /// * [stats] 多路径传输统计信息。详见 MultipathStats 。
   final void Function(RtcConnection connection, MultipathStats stats)?
       onMultipathStats;
 
-  /// Callback for the result of the renewToken method call.
+  /// renewToken 方法调用结果回调。
   ///
-  /// Since Available since v4.6.2. This callback is triggered after you call the renewToken method to update the token, and is used to notify the result of the update.
+  /// 自从 自 v6.6.2 版本新增。 当你调用 renewToken 方法更新 Token 后，该回调会被触发，用于通知更新结果。
   ///
-  /// * [token] The updated token.
-  /// * [code] Error code. See RenewTokenErrorCode.
+  /// * [token] 更新的 Token。
+  /// * [code] 错误码，详见 RenewTokenErrorCode 。
   final void Function(
           RtcConnection connection, String token, RenewTokenErrorCode code)?
       onRenewTokenResult;
 }
 
-/// Methods for managing video devices.
+/// 视频设备管理方法。
 abstract class VideoDeviceManager {
-  /// Gets a list of all video devices on the system.
+  /// 获取系统中所有的视频设备列表。
   ///
-  /// This method is only applicable to Windows and macOS.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
   /// Returns
-  /// On success: Returns an array of VideoDeviceInfo containing all video devices on the system.
-  ///  On failure: Returns an empty list.
+  /// 方法调用成功：返回一个 VideoDeviceInfo 数组，其中包含系统中所有视频设备。
+  ///  方法调用失败: 返回空列表。
   Future<List<VideoDeviceInfo>> enumerateVideoDevices();
 
-  /// Specifies the video capture device by device ID.
+  /// 通过设备 ID 指定视频采集设备。
   ///
-  /// Plugging or unplugging a device does not change the device ID.
-  ///  This method is applicable only to Windows and macOS.
+  /// 插拔设备不会改变设备 ID。
+  ///  该方法仅适用于 Windows 和 macOS。
   ///
-  /// * [deviceIdUTF8] Device ID. You can get it by calling enumerateVideoDevices.
-  /// The maximum length is MaxDeviceIdLengthType.
+  /// * [deviceIdUTF8] 设备 ID。可通过调用 enumerateVideoDevices 方法获取。
+  /// 最大长度为 MaxDeviceIdLengthType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setDevice(String deviceIdUTF8);
 
-  /// Gets the currently used video capture device.
+  /// 获取当前使用的视频采集设备。
   ///
-  /// This method is only applicable to Windows and macOS.
+  /// 该方法仅适用于 Windows 和 macOS。
   ///
   /// Returns
-  /// The video capture device.
+  /// 视频采集设备。
   Future<String> getDevice();
 
-  /// Gets the number of video formats supported by the specified video capturing device.
+  /// 获取指定视频采集设备支持的视频格式数量。
   ///
-  /// A video capturing device may support multiple video formats, each with different combinations of frame width, frame height, and frame rate.
-  /// You can call this method to get how many video formats the specified video capturing device supports, and then call getCapability to get detailed frame information for a specific video format. This method is only applicable to Windows and macOS.
+  /// 视频采集设备可能支持多种视频格式，每一种格式都支持不同的视频帧宽度、视频帧高度、帧率组合。
+  /// 你可以通过调用该方法，获取指定的视频采集设备可支持多少种视频格式，然后调用 getCapability 获取指定视频格式下的具体视频帧信息。 该方法仅适用于 Windows 和 macOS。
   ///
-  /// * [deviceIdUTF8] The ID of the video capturing device.
+  /// * [deviceIdUTF8] 视频采集设备的 ID。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  ≤ 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  ≤ 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> numberOfCapabilities(String deviceIdUTF8);
 
-  /// Gets detailed video frame information for a video capture device under a specified video format.
+  /// 获取视频采集设备在指定的视频格式下的详细视频帧信息。
   ///
-  /// After calling numberOfCapabilities to get the number of supported video formats for a video capture device, you can call this method to get detailed video frame information for the specified index. This method is only applicable to Windows and macOS.
+  /// 在调用 numberOfCapabilities 获取视频采集设备支持的视频格式数量后，你可以调用该方法获取指定索引号支持的具体视频帧信息。 该方法仅适用于 Windows 和 macOS。
   ///
-  /// * [deviceIdUTF8] The ID of the video capture device.
-  /// * [deviceCapabilityNumber] The index of the video format. If the return value of numberOfCapabilities is i, then the valid range for this parameter is [0, i).
+  /// * [deviceIdUTF8] 视频采集设备的 ID。
+  /// * [deviceCapabilityNumber] 视频格式的索引号。如果 numberOfCapabilities 的返回值为 i，则该参数取值范围为[0,i)。
   ///
   /// Returns
-  /// Detailed information of the specified video format, including width (px), height (px), and frame rate (fps). See VideoFormat.
+  /// 指定视频格式的具体信息，包括宽度（px），高度（px）和帧率（fps）。详见 VideoFormat 。
   Future<VideoFormat> getCapability(
       {required String deviceIdUTF8, required int deviceCapabilityNumber});
 
@@ -2811,150 +2810,150 @@ abstract class VideoDeviceManager {
   /// @nodoc
   Future<void> stopDeviceTest();
 
-  /// Releases all resources occupied by the VideoDeviceManager object.
+  /// 释放 VideoDeviceManager 对象占用的所有资源。
   ///
-  /// This method is only applicable to Windows and macOS.
+  /// 该方法仅适用于 Windows 和 macOS。
   Future<void> release();
 }
 
-/// Used to manage and configure video effects, such as beauty, makeup styles, and filters.
+/// 用于管理和配置视频特效，例如美颜、风格妆容和滤镜。
 ///
-/// Since Available since v4.6.2.
+/// 自从 自 v6.6.2 版本新增。
 abstract class VideoEffectObject {
-  /// Adds or updates the effect for the specified video effect node and template.
+  /// 添加或更新指定视频特效节点和模板的特效。
   ///
-  /// Since Available since v4.6.2. Priority rules:
-  ///  Style makeup nodes take precedence over filter effect nodes.
-  ///  To apply filter effects, you must first remove the style makeup effect node.
+  /// 自从 自 v6.6.2 版本新增。 优先级规则：
+  ///  风格妆节点优先于滤镜特效节点。
+  ///  若要应用滤镜特效，必须先移除风格妆特效节点。
   ///
-  /// * [nodeId] The unique identifier or combination of identifiers for the video effect node. See VideoEffectNodeId.
-  /// * [templateName] Name of the effect template. If set to NULL or an empty string, the SDK loads the default configuration from the resource package.
+  /// * [nodeId] 视频特效节点的唯一标识符或标识符组合。详见 VideoEffectNodeId 。
+  /// * [templateName] 特效模板名称。如果设置为 NULL 或空字符串，SDK 会从资源包中加载默认配置。
   ///
   /// Returns
-  /// 0: Method call succeeds.
-  ///  < 0: Method call fails.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> addOrUpdateVideoEffect(
       {required int nodeId, required String templateName});
 
-  /// Removes the video effect for the specified node ID.
+  /// 移除指定节点 ID 的视频特效。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
-  /// * [nodeId] The unique identifier of the video effect node to be removed. See VideoEffectNodeId.
+  /// * [nodeId] 要移除的视频特效节点的唯一标识符，详见 VideoEffectNodeId 。
   ///
   /// Returns
-  /// 0: Method call succeeds.
-  ///  < 0: Method call fails.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> removeVideoEffect(int nodeId);
 
-  /// Performs an action on the specified video effect node.
+  /// 对指定的视频特效节点执行操作。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
-  /// * [nodeId] The unique identifier of the video effect node.
-  /// * [actionId] The action to perform. See VideoEffectAction.
+  /// * [nodeId] 视频特效节点的唯一标识符。
+  /// * [actionId] 要执行的操作，详见 VideoEffectAction 。
   ///
   /// Returns
-  /// 0: Method call succeeds.
-  ///  < 0: Method call fails.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> performVideoEffectAction(
       {required int nodeId, required VideoEffectAction actionId});
 
-  /// Sets a float parameter for a video effect.
+  /// 设置视频特效的浮点参数。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
-  /// * [option] The category of the parameter option.
-  /// * [key] The key name of the parameter.
-  /// * [param] The float value to set.
+  /// * [option] 参数选项的类别。
+  /// * [key] 参数的键名。
+  /// * [param] 要设置的浮点值。
   ///
   /// Returns
-  /// 0: Method call succeeds.
-  ///  < 0: Method call fails.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setVideoEffectFloatParam(
       {required String option, required String key, required double param});
 
-  /// setVideoEffectIntParam : Sets an integer parameter for a video effect.
+  /// setVideoEffectIntParam ：设置视频特效的整数参数。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
-  /// * [option] The category of the option to which the parameter belongs.
-  /// * [key] The key name of the parameter.
-  /// * [param] The integer parameter value to set.
+  /// * [option] 参数所属选项的类别。
+  /// * [key] 参数的键名。
+  /// * [param] 要设置的整数参数值。
   ///
   /// Returns
-  /// 0: Method call succeeds.
-  ///  < 0: Method call fails.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setVideoEffectIntParam(
       {required String option, required String key, required int param});
 
-  /// Sets a boolean parameter for a video effect.
+  /// 设置视频特效的布尔参数。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
-  /// * [option] The category of the parameter option.
-  /// * [key] The key name of the parameter.
-  /// * [param] The boolean value to set: true : Enables the option. false : Disables the option.
+  /// * [option] 参数选项的类别。
+  /// * [key] 参数的键名。
+  /// * [param] 要设置的布尔值： true ：启用该选项。 false ：禁用该选项。
   ///
   /// Returns
-  /// 0: Method call succeeds.
-  ///  < 0: Method call fails.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setVideoEffectBoolParam(
       {required String option, required String key, required bool param});
 
-  /// Gets the value of the specified float type parameter in a video effect.
+  /// 获取视频特效中指定 float 类型参数的值。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
-  /// * [option] The category of the option to which the parameter belongs.
-  /// * [key] The key name of the parameter.
+  /// * [option] 参数所属选项的类别。
+  /// * [key] 参数的键名。
   ///
   /// Returns
-  /// If the parameter exists, returns the corresponding float value.
-  ///  If the parameter does not exist or an error occurs, returns 0.0f.
+  /// 如果参数存在，返回对应的 float 值。
+  ///  如果参数不存在或发生错误，返回 0.0f。
   Future<double> getVideoEffectFloatParam(
       {required String option, required String key});
 
-  /// Gets the integer parameter from the video effect.
+  /// 获取视频特效中的整数类型参数。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
-  /// * [option] Category of the parameter option.
-  /// * [key] Key name of the parameter.
+  /// * [option] 参数选项的类别。
+  /// * [key] 参数的键名。
   ///
   /// Returns
-  /// If the parameter exists, returns the corresponding integer value.
-  ///  If the parameter does not exist or an error occurs, returns 0.
+  /// 如果参数存在，返回对应的整数值。
+  ///  如果参数不存在或发生错误，返回 0。
   Future<int> getVideoEffectIntParam(
       {required String option, required String key});
 
-  /// Gets the boolean parameter from the video effect.
+  /// 获取视频特效中的布尔参数。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
-  /// * [option] Category of the parameter option.
-  /// * [key] Key name of the parameter.
+  /// * [option] 参数所属的选项类别。
+  /// * [key] 参数的键名。
   ///
   /// Returns
-  /// true : The parameter is enabled. false : The parameter is not enabled or does not exist.
+  /// true ：参数已启用。 false ：参数未启用或不存在。
   Future<bool> getVideoEffectBoolParam(
       {required String option, required String key});
 }
 
-/// Video effect node types.
+/// 视频特效节点类型。
 ///
-/// Since Available since v4.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum VideoEffectNodeId {
-  /// (1): Beauty effect node.
+  /// （1）：美颜特效节点。
   @JsonValue(1 << 0)
   beauty,
 
-  /// (2): Style makeup effect node.
+  /// （2）：风格妆特效节点。
   @JsonValue(1 << 1)
   styleMakeup,
 
-  /// (4): Filter effect node.
+  /// （4）：滤镜特效节点。
   @JsonValue(1 << 2)
   filter,
 }
@@ -2972,16 +2971,16 @@ extension VideoEffectNodeIdExt on VideoEffectNodeId {
   }
 }
 
-/// Operation types for video effect nodes.
+/// 对视频特效节点执行的操作类型。
 ///
-/// Since Available since v4.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum VideoEffectAction {
-  /// (1): Save the current parameters of the video effect.
+  /// （1）：保存当前视频特效的参数。
   @JsonValue(1)
   save,
 
-  /// (2): Reset the video effect to default parameters.
+  /// （2）：将视频特效重置为默认参数。
   @JsonValue(2)
   reset,
 }
@@ -2999,7 +2998,7 @@ extension VideoEffectActionExt on VideoEffectAction {
   }
 }
 
-/// Definition of RtcEngineContext.
+/// RtcEngineContext 定义。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class RtcEngineContext implements AgoraSerializable {
   /// @nodoc
@@ -3015,11 +3014,11 @@ class RtcEngineContext implements AgoraSerializable {
       this.domainLimit,
       this.autoRegisterAgoraExtensions});
 
-  /// The App ID issued by Agora to the app developer. Only apps using the same App ID can join the same channel for communication or live streaming. One App ID can only be used to create one RtcEngine. To change the App ID, you must first call release to destroy the current RtcEngine and then create a new one.
+  /// 声网为 App 开发者签发的 App ID。 使用同一个 App ID 的 App 才能进入同一个频道进行通话或直播。一个 App ID 只能用于创建一个 RtcEngine 。如需更换 App ID，必须先调用 release 销毁当前 RtcEngine 再重新创建。
   @JsonKey(name: 'appId')
   final String? appId;
 
-  /// Channel usage scenario. See ChannelProfileType.
+  /// 频道使用场景。详见 ChannelProfileType 。
   @JsonKey(name: 'channelProfile')
   final ChannelProfileType? channelProfile;
 
@@ -3027,17 +3026,17 @@ class RtcEngineContext implements AgoraSerializable {
   @JsonKey(name: 'license')
   final String? license;
 
-  /// Audio scenario. Different audio scenarios correspond to different volume types on the device.
-  /// See AudioScenarioType.
+  /// 音频场景。不同的音频场景下，设备的音量类型是不同的。
+  /// 详见 AudioScenarioType 。
   @JsonKey(name: 'audioScenario')
   final AudioScenarioType? audioScenario;
 
-  /// The region for accessing the server. This is an advanced setting suitable for scenarios with access security restrictions. Supported regions are listed in AreaCode. The region code supports bitwise operations.
+  /// 服务器的访问区域。该功能为高级设置，适用于有访问安全限制的场景。支持的区域详见 AreaCode 。区域码支持位操作。
   @JsonKey(name: 'areaCode')
   final int? areaCode;
 
-  /// Sets the log files output by the SDK. See LogConfig.
-  /// By default, the SDK generates 5 SDK log files and 5 API call log files, following these rules:
+  /// 设置 SDK 输出的日志文件。详见 LogConfig 。
+  /// 默认情况下，SDK 会生成 5 个 SDK 日志文件和 5 个 API 调用日志文件，规则如下：
   @JsonKey(name: 'logConfig')
   final LogConfig? logConfig;
 
@@ -3049,11 +3048,11 @@ class RtcEngineContext implements AgoraSerializable {
   @JsonKey(name: 'useExternalEglContext')
   final bool? useExternalEglContext;
 
-  /// Whether to enable domain name restriction: true : Enable domain name restriction. This setting is suitable for IoT devices accessing the network using IoT SIM cards. The SDK will only connect to servers whose domain names or IPs are whitelisted and reported to the carrier. false : (default) Disable domain name restriction. This setting is suitable for most general scenarios.
+  /// 是否开启域名限制： true ：开启域名限制。该设置适用于 IoT 设备使用物联网卡进行网络访问的场景。SDK 会仅连接到已向运营商报备的域名或 IP 白名单中的服务器。 false ：（默认）关闭域名限制。该设置适用于大部分普通场景。
   @JsonKey(name: 'domainLimit')
   final bool? domainLimit;
 
-  /// Whether to automatically register Agora extensions when initializing RtcEngine : true : (default) Automatically register Agora extensions when initializing RtcEngine. false : Do not register Agora extensions when initializing RtcEngine. You need to call enableExtension to register the Agora extensions.
+  /// 是否在初始化 RtcEngine 时自动注册声网插件： true ：（默认）初始化 RtcEngine 时自动注册声网插件。 false ：初始化 RtcEngine 时不注册声网插件。你需要调用 enableExtension 来注册声网插件。
   @JsonKey(name: 'autoRegisterAgoraExtensions')
   final bool? autoRegisterAgoraExtensions;
 
@@ -3065,27 +3064,27 @@ class RtcEngineContext implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$RtcEngineContextToJson(this);
 }
 
-/// Metadata observer.
+/// Metadata 观测器。
 class MetadataObserver {
   /// @nodoc
   const MetadataObserver({
     this.onMetadataReceived,
   });
 
-  /// Triggered when the receiver receives metadata.
+  /// 接收端已收到 metadata。
   ///
-  /// * [metadata] The received metadata. See Metadata.
+  /// * [metadata] 接收到的 metadata，详见 Metadata 。
   final void Function(Metadata metadata)? onMetadataReceived;
 }
 
-/// The type of Metadata for the observer. Currently, only video-type Metadata is supported.
+/// 观测器的 Metadata 类型。当前仅支持视频类型的 Metadata 。
 @JsonEnum(alwaysCreate: true)
 enum MetadataType {
-  /// -1: Metadata type is unknown.
+  /// -1: Metadata 类型未知。
   @JsonValue(-1)
   unknownMetadata,
 
-  /// 0: Metadata type is video.
+  /// 0: Metadata 类型为视频。
   @JsonValue(0)
   videoMetadata,
 }
@@ -3132,32 +3131,32 @@ extension MaxMetadataSizeTypeExt on MaxMetadataSizeType {
   }
 }
 
-/// Media metadata.
+/// 媒体附属信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class Metadata implements AgoraSerializable {
   /// @nodoc
   const Metadata(
       {this.channelId, this.uid, this.size, this.buffer, this.timeStampMs});
 
-  /// Channel name.
+  /// 频道名称。
   @JsonKey(name: 'channelId')
   final String? channelId;
 
-  /// User ID.
-  ///  For receivers: the ID of the remote user who sent this Metadata.
-  ///  For senders: ignore this field.
+  /// 用户 ID。
+  ///  对于接收者：发送该 Metadata 的远端用户的 ID。
+  ///  对于发送者：请忽略。
   @JsonKey(name: 'uid')
   final int? uid;
 
-  /// The buffer size of the received or sent Metadata.
+  /// 接收到的或发送的 Metadata 的缓存大小。
   @JsonKey(name: 'size')
   final int? size;
 
-  /// The buffer address of the received Metadata.
+  /// 接收到的 Metadata 的缓存地址。
   @JsonKey(name: 'buffer', ignore: true)
   final Uint8List? buffer;
 
-  /// The timestamp when the Metadata is sent, in milliseconds.
+  /// 发送 Metadata 的时间戳，单位为毫秒。
   @JsonKey(name: 'timeStampMs')
   final int? timeStampMs;
 
@@ -3169,32 +3168,30 @@ class Metadata implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$MetadataToJson(this);
 }
 
-/// Reason for CDN streaming state changes.
-///
-/// Deprecated Deprecated since v4.6.2.
+/// @nodoc
 @JsonEnum(alwaysCreate: true)
 enum DirectCdnStreamingReason {
-  /// 0: Streaming status is normal.
+  /// @nodoc
   @JsonValue(0)
   directCdnStreamingReasonOk,
 
-  /// 1: General error with no specific reason. You can try streaming again.
+  /// @nodoc
   @JsonValue(1)
   directCdnStreamingReasonFailed,
 
-  /// 2: Audio streaming error. For example, the local audio capture device is not working properly, occupied by another process, or lacks permission.
+  /// @nodoc
   @JsonValue(2)
   directCdnStreamingReasonAudioPublication,
 
-  /// 3: Video streaming error. For example, the local video capture device is not working properly, occupied by another process, or lacks permission.
+  /// @nodoc
   @JsonValue(3)
   directCdnStreamingReasonVideoPublication,
 
-  /// 4: Failed to connect to CDN.
+  /// @nodoc
   @JsonValue(4)
   directCdnStreamingReasonNetConnect,
 
-  /// 5: The URL has already been used for streaming. Please use a new URL.
+  /// @nodoc
   @JsonValue(5)
   directCdnStreamingReasonBadName,
 }
@@ -3212,28 +3209,26 @@ extension DirectCdnStreamingReasonExt on DirectCdnStreamingReason {
   }
 }
 
-/// Current CDN streaming state.
-///
-/// Deprecated Deprecated since v4.6.2.
+/// @nodoc
 @JsonEnum(alwaysCreate: true)
 enum DirectCdnStreamingState {
-  /// 0: Initial state, streaming has not started yet.
+  /// @nodoc
   @JsonValue(0)
   directCdnStreamingStateIdle,
 
-  /// 1: Streaming is in progress. When you call startDirectCdnStreaming and streaming starts successfully, the SDK returns this value.
+  /// @nodoc
   @JsonValue(1)
   directCdnStreamingStateRunning,
 
-  /// 2: Streaming has ended normally. When you call stopDirectCdnStreaming to stop streaming proactively, the SDK returns this value.
+  /// @nodoc
   @JsonValue(2)
   directCdnStreamingStateStopped,
 
-  /// 3: Streaming failed. You can troubleshoot the issue using the information reported in the onDirectCdnStreamingStateChanged callback, and then restart streaming.
+  /// @nodoc
   @JsonValue(3)
   directCdnStreamingStateFailed,
 
-  /// 4: Attempting to reconnect to the Agora server and CDN. Will retry up to 10 times. If reconnection still fails, the streaming state changes to directCdnStreamingStateFailed.
+  /// @nodoc
   @JsonValue(4)
   directCdnStreamingStateRecovering,
 }
@@ -3251,9 +3246,7 @@ extension DirectCdnStreamingStateExt on DirectCdnStreamingState {
   }
 }
 
-/// Statistics of the current CDN streaming.
-///
-/// Deprecated Deprecated since v4.6.2.
+/// @nodoc
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class DirectCdnStreamingStats implements AgoraSerializable {
   /// @nodoc
@@ -3264,23 +3257,23 @@ class DirectCdnStreamingStats implements AgoraSerializable {
       this.videoBitrate,
       this.audioBitrate});
 
-  /// Width of the video (px).
+  /// @nodoc
   @JsonKey(name: 'videoWidth')
   final int? videoWidth;
 
-  /// Height of the video (px).
+  /// @nodoc
   @JsonKey(name: 'videoHeight')
   final int? videoHeight;
 
-  /// Current video frame rate (fps).
+  /// @nodoc
   @JsonKey(name: 'fps')
   final int? fps;
 
-  /// Current video bitrate (bps).
+  /// @nodoc
   @JsonKey(name: 'videoBitrate')
   final int? videoBitrate;
 
-  /// Current audio bitrate (bps).
+  /// @nodoc
   @JsonKey(name: 'audioBitrate')
   final int? audioBitrate;
 
@@ -3292,7 +3285,7 @@ class DirectCdnStreamingStats implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$DirectCdnStreamingStatsToJson(this);
 }
 
-/// DirectCdnStreamingEventHandler interface class is used by the SDK to send CDN streaming event notifications to the app. The app receives SDK event notifications by inheriting methods of this interface.
+/// @nodoc
 class DirectCdnStreamingEventHandler {
   /// @nodoc
   const DirectCdnStreamingEventHandler({
@@ -3300,29 +3293,17 @@ class DirectCdnStreamingEventHandler {
     this.onDirectCdnStreamingStats,
   });
 
-  /// Callback for changes in CDN streaming state.
-  ///
-  /// After the host starts pushing streams directly to the CDN, when the streaming state changes, the SDK triggers this callback to report the new state, error code, and message. You can use this information for troubleshooting.
-  ///
-  /// * [state] Current streaming state. See DirectCdnStreamingState.
-  /// * [reason] Reason for the change in streaming state. See DirectCdnStreamingReason.
-  /// * [message] Message corresponding to the state change.
+  /// @nodoc
   final void Function(
       DirectCdnStreamingState state,
       DirectCdnStreamingReason reason,
       String message)? onDirectCdnStreamingStateChanged;
 
-  /// Callback for CDN streaming statistics.
-  ///
-  /// During the process of pushing streams directly from the host to the CDN, the SDK triggers this callback once every second.
-  ///
-  /// * [stats] Current streaming statistics. See DirectCdnStreamingStats.
+  /// @nodoc
   final void Function(DirectCdnStreamingStats stats)? onDirectCdnStreamingStats;
 }
 
-/// Media options for the host.
-///
-/// Deprecated Deprecated since v4.6.2.
+/// @nodoc
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class DirectCdnStreamingMediaOptions implements AgoraSerializable {
   /// @nodoc
@@ -3335,19 +3316,19 @@ class DirectCdnStreamingMediaOptions implements AgoraSerializable {
       this.publishMediaPlayerId,
       this.customVideoTrackId});
 
-  /// Sets whether to publish video captured by the camera. true : Publish video captured by the camera. false : (Default) Do not publish video captured by the camera.
+  /// @nodoc
   @JsonKey(name: 'publishCameraTrack')
   final bool? publishCameraTrack;
 
-  /// Sets whether to publish audio captured by the microphone. true : Publish audio captured by the microphone. false : (Default) Do not publish audio captured by the microphone.
+  /// @nodoc
   @JsonKey(name: 'publishMicrophoneTrack')
   final bool? publishMicrophoneTrack;
 
-  /// Sets whether to publish custom captured audio. true : Publish custom captured audio. false : (Default) Do not publish custom captured audio.
+  /// @nodoc
   @JsonKey(name: 'publishCustomAudioTrack')
   final bool? publishCustomAudioTrack;
 
-  /// Sets whether to publish custom captured video. true : Publish custom captured video. false : (Default) Do not publish custom captured video.
+  /// @nodoc
   @JsonKey(name: 'publishCustomVideoTrack')
   final bool? publishCustomVideoTrack;
 
@@ -3359,7 +3340,7 @@ class DirectCdnStreamingMediaOptions implements AgoraSerializable {
   @JsonKey(name: 'publishMediaPlayerId')
   final int? publishMediaPlayerId;
 
-  /// The video track ID returned by the createCustomVideoTrack method. Default value is 0.
+  /// @nodoc
   @JsonKey(name: 'customVideoTrackId')
   final int? customVideoTrackId;
 
@@ -3402,1163 +3383,1191 @@ class ExtensionInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$ExtensionInfoToJson(this);
 }
 
-/// The base interface class of the RTC SDK that implements core real-time audio and video features.
+/// RTC SDK 的基础接口类，实现实时音视频的主要功能。
 ///
-/// RtcEngine provides the main methods for app calls.
-/// You must call createAgoraRtcEngine to create a RtcEngine object before calling other APIs.
+/// RtcEngine 提供了 App 调用的主要方法。
+/// 在调用其他 API 之前，必须先调用 createAgoraRtcEngine 创建 RtcEngine 对象。
 abstract class RtcEngine {
-  /// Initializes the RtcEngine.
+  /// 初始化 RtcEngine 。
   ///
-  /// All interface functions of the RtcEngine class are asynchronous unless otherwise specified. It is recommended to call the interfaces in the same thread.
-  /// The SDK only supports creating one RtcEngine instance per App.
+  /// RtcEngine 类的所有接口函数，如无特殊说明，都是异步调用，对接口的调用建议在同一个线程进行。
+  /// SDK 只支持每个 App 创建一个 RtcEngine 实例。
   ///
-  /// * [context] Configuration for the RtcEngine instance. See RtcEngineContext.
+  /// * [context] RtcEngine 实例的配置。详见 RtcEngineContext 。
   ///
   /// Returns
-  /// No return value if the method call succeeds; if the method call fails, an AgoraRtcException is thrown, which you need to catch and handle. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and troubleshooting suggestions.
-  ///  < 0: Failure.
-  ///  -1: General error (not specifically categorized).
-  ///  -2: Invalid parameter.
-  ///  -7: SDK initialization failed.
-  ///  -22: Resource allocation failed. This occurs when the App uses too many resources or system resources are exhausted.
-  ///  -101: Invalid App ID.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。
+  ///  -1: 一般性的错误（未明确归类）。
+  ///  -2: 设置了无效的参数。
+  ///  -7: SDK 初始化失败。
+  ///  -22: 资源申请失败。当 App 占用资源过多，或系统资源耗尽时，SDK 分配资源失败，会返回该错误。
+  ///  -101: App ID 无效。
   Future<void> initialize(RtcEngineContext context);
 
-  /// Gets the SDK version.
+  /// 获取 SDK 版本。
   ///
   /// Returns
-  /// SDKBuildInfo object.
+  /// SDKBuildInfo 对象。
   Future<SDKBuildInfo> getVersion();
 
-  /// Gets the warning or error description.
+  /// 获取警告或错误描述。
   ///
-  /// * [code] Error code reported by the SDK.
+  /// * [code] SDK 报告的错误码。
   ///
   /// Returns
-  /// Specific error description.
+  /// 具体的错误描述。
   Future<String> getErrorDescription(int code);
 
-  /// Queries the video codec capabilities supported by the SDK.
+  /// 查询 SDK 支持的视频编解码能力。
   ///
-  /// * [size] The size of CodecCapInfo.
+  /// * [size] CodecCapInfo 的大小。
   ///
   /// Returns
-  /// If the call succeeds, returns an array of CodecCapInfo, indicating the SDK's video encoding capabilities.
-  ///  If the call times out, modify your call logic and avoid calling this method on the main thread.
+  /// 如果调用成功，则返回 CodecCapInfo 数组，表示 SDK 的视频编码能力。
+  ///  如果调用超时，请修改调用逻辑，不要在主线程中调用该方法。
   Future<List<CodecCapInfo>> queryCodecCapability(int size);
 
-  /// Queries the device score level.
+  /// 查询设备评分等级。
   ///
   /// Returns
-  /// When the method call succeeds, it returns a value in the range [0,100], indicating the score level of the current device. A higher value indicates better device capability. Most devices score between 60 and 100. When the method call fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly.
-  ///  < 0: The method call fails.
+  /// 方法调用成功时，返回一个取值范围为 [0,100] 的值，表示当前设备的评分等级，数值越大表示设备能力越强，大部分设备的评分在 60 到 100 之间；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。
+  ///  < 0: 方法调用失败。
   Future<int> queryDeviceScore();
 
-  /// Preloads a channel using token, channelId, and uid.
+  /// 使用 token 、 channelId 、 uid 预加载频道。
   ///
-  /// Calling this method reduces the time it takes for an audience member to join a channel when switching channels frequently, thereby shortening the time to hear the first audio frame and see the first video frame from the host, and improving the audience's video experience.
-  /// If the current channel has already been successfully preloaded, and the audience leaves and rejoins the channel, as long as the Token passed during preloading is still valid, re-preloading is not required. Preloading failure does not affect normal channel joining later, nor does it increase the time to join the channel.
-  ///  When calling this method, ensure the user role is set to audience and the audio scenario is not chorus (audioScenarioChorus), otherwise preloading will not take effect.
-  ///  Ensure the channel name, user ID, and Token passed during preloading are the same as those used when joining the channel later; otherwise, preloading will not take effect.
-  ///  Currently, a single RtcEngine instance supports preloading up to 20 channels. If this limit is exceeded, only the latest 20 preloaded channels take effect.
+  /// 调用该方法可以减少观众频繁切换频道时加入频道的时间，从而缩短观众听到主播首帧音频以及看到首帧画面的耗时，提升观众端的视频体验。
+  /// 如果当前频道已经成功预加载，观众加入、离开频道后如需再次加入该频道，只要预加载时传入的 Token 仍在有效期内，则无需重新预加载。 预加载不生效不会影响后续正常加入频道，也不会增加加入频道的耗时。
+  ///  调用该方法时，请确保用户角色设为观众、音频应用场景设为非合唱场景（ audioScenarioChorus ），否则预加载不生效。
+  ///  请确保预加载频道时传入的频道名、用户 ID、Token 和后续加入频道时传入的值相同，否则预加载不生效。
+  ///  目前一个 RtcEngine 实例最多支持预加载 20 个频道，如超出限制，仅最新预加载的 20 个频道生效。
   ///
-  /// * [token] A dynamic key generated on your server for authentication. See [Token Authentication](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication).
-  /// When the Token expires, depending on the number of preloaded channels, you can pass in a new Token for preloading in different ways:
-  ///  For a single channel: call this method again with the new Token.
-  ///  For multiple channels:
-  ///  If you use a wildcard Token, call updatePreloadChannelToken to update the Token for all preloaded channels. When generating a wildcard Token, the user ID must not be set to 0. See [Wildcard Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token).
-  ///  If you use different Tokens: call this method and pass in your user ID, corresponding channel name, and the updated Token.
-  /// * [channelId] The name of the channel to preload. This parameter identifies the channel for real-time audio and video communication. Under the same App ID, users who enter the same channel name will join the same channel for audio and video interaction.
-  /// This parameter must be a string no longer than 64 bytes. Supported character set (89 characters total):
-  ///  26 lowercase letters a~z
-  ///  26 uppercase letters A~Z
-  ///  10 digits 0~9
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
-  /// * [uid] User ID. This parameter identifies the user in the real-time audio and video channel. You need to set and manage the user ID yourself and ensure it is unique within the same channel. This parameter is a 32-bit unsigned integer. Recommended range: 1 to 2^32-1. If not specified (i.e., set to 0), the SDK automatically assigns one and returns it in the onJoinChannelSuccess callback. The application must store and manage this return value, as the SDK does not maintain it.
+  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  /// Token 过期后，根据预加载频道的数量，你可以通过不同方式来传入用于预加载频道的新 Token：
+  ///  预加载一个频道时：调用此方法来传入新的 Token。
+  ///  预加载多个频道时：
+  ///  如果你使用了通配的 Token，调用 updatePreloadChannelToken 来更新所有预加载频道的 Token。生成通配 Token 时，用户 ID 不得设为 0。详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
+  ///  如果你使用了不同的 Token：调用此方法并传入你的用户 ID、对应的频道名和更新后的 Token。
+  /// * [channelId] 待预加载的频道名。该参数标识用户进行实时音视频互动的频道。App ID 一致的前提下，填入相同频道名的用户会进入同一个频道进行音视频互动。
+  /// 该参数为长度在 64 字节以内的字符串。以下为支持的字符集范围（共 89 个字符）:
+  ///  26 个小写英文字母 a~z
+  ///  26 个大写英文字母 A~Z
+  ///  10 个数字 0~9
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
+  /// * [uid] 用户 ID。该参数用于标识在实时音视频互动频道中的用户。你需要自行设置和管理用户 ID，并确保同一频道内的每个用户 ID 是唯一的。该参数为 32 位无符号整数。建议设置范围：1 到 232-1。如果不指定（即设为 0），SDK 会自动分配一个，并在 onJoinChannelSuccess 回调中返回， 应用层必须记住该返回值并维护，SDK 不对该返回值进行维护。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -7: The RtcEngine object is not initialized. You need to initialize the RtcEngine object before calling this method.
-  ///  -102: Invalid channel name. You need to enter a valid channel name and rejoin the channel.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -7： RtcEngine 对象尚未初始化。你需要在调用该方法前成功初始化 RtcEngine 对象。
+  ///  -102：频道名无效。你需要填入有效的频道名，重新加入频道。
   Future<void> preloadChannel(
       {required String token, required String channelId, required int uid});
 
-  /// Preloads a channel using token, channelId, and userAccount.
+  /// 使用 token 、 channelId 、 userAccount 预加载频道。
   ///
-  /// Calling this method reduces the time it takes for an audience member to join a channel when switching channels frequently, thereby shortening the time to hear the first audio frame and see the first video frame from the host, and improving the audience's video experience.
-  /// If the current channel has already been successfully preloaded, and the audience leaves and rejoins the channel, as long as the Token passed during preloading is still valid, re-preloading is not required. Preloading failure does not affect normal channel joining later, nor does it increase the time to join the channel.
-  ///  When calling this method, ensure the user role is set to audience and the audio scenario is not chorus (audioScenarioChorus), otherwise preloading will not take effect.
-  ///  Ensure the channel name, user account, and Token passed during preloading are the same as those used when joining the channel later; otherwise, preloading will not take effect.
-  ///  Currently, a single RtcEngine instance supports preloading up to 20 channels. If this limit is exceeded, only the latest 20 preloaded channels take effect.
+  /// 调用该方法可以减少观众频繁切换频道时加入频道的时间，从而缩短观众听到主播首帧音频以及看到首帧画面的耗时，提升观众端的视频体验。
+  /// 如果当前频道已经成功预加载，观众加入、离开频道后如需再次加入该频道，只要预加载时传入的 Token 仍在有效期内，则无需重新预加载。 预加载不生效不会影响后续正常加入频道，也不会增加加入频道的耗时。
+  ///  调用该方法时，请确保用户角色设为观众、音频应用场景设为非合唱场景（ audioScenarioChorus ），否则预加载不生效。
+  ///  请确保预加载频道时传入的频道名、用户 User Account、Token 和后续加入频道时传入的值相同，否则预加载不生效。
+  ///  目前一个 RtcEngine 实例最多支持预加载 20 个频道，如超出限制，仅最新预加载的 20 个频道生效。
   ///
-  /// * [token] A dynamic key generated on your server for authentication. See [Token Authentication](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication).
-  /// When the Token expires, depending on the number of preloaded channels, you can pass in a new Token for preloading in different ways:
-  ///  For a single channel: call this method again with the new Token.
-  ///  For multiple channels:
-  ///  If you use a wildcard Token, call updatePreloadChannelToken to update the Token for all preloaded channels. When generating a wildcard Token, the user ID must not be set to 0. See [Wildcard Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token).
-  ///  If you use different Tokens: call this method and pass in your user ID, corresponding channel name, and the updated Token.
-  /// * [channelId] The name of the channel to preload. This parameter identifies the channel for real-time audio and video communication. Under the same App ID, users who enter the same channel name will join the same channel for audio and video interaction.
-  /// This parameter must be a string no longer than 64 bytes. Supported character set (89 characters total):
-  ///  26 lowercase letters a~z
-  ///  26 uppercase letters A~Z
-  ///  10 digits 0~9
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
-  /// * [userAccount] User account. This parameter identifies the user in the real-time audio and video channel. You need to set and manage the user account yourself and ensure it is unique within the same channel. This parameter is required, must not exceed 255 bytes, and cannot be null. Supported character set (89 characters total):
-  ///  26 lowercase letters a-z
-  ///  26 uppercase letters A-Z
-  ///  10 digits 0-9
-  ///  Space
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
+  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  /// Token 过期后，根据预加载频道的数量，你可以通过不同方式来传入用于预加载频道的新 Token：
+  ///  预加载一个频道时：调用此方法来传入新的 Token。
+  ///  预加载多个频道时：
+  ///  如果你使用了通配的 Token，调用 updatePreloadChannelToken 来更新所有预加载频道的 Token。生成通配 Token 时，用户 ID 不得设为 0。详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
+  ///  如果你使用了不同的 Token：调用此方法并传入你的用户 ID、对应的频道名和更新后的 Token。
+  /// * [channelId] 待预加载的频道名。该参数标识用户进行实时音视频互动的频道。App ID 一致的前提下，填入相同频道名的用户会进入同一个频道进行音视频互动。
+  /// 该参数为长度在 64 字节以内的字符串。以下为支持的字符集范围（共 89 个字符）:
+  ///  26 个小写英文字母 a~z
+  ///  26 个大写英文字母 A~Z
+  ///  10 个数字 0~9
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
+  /// * [userAccount] 用户 User Account。该参数用于标识实时音视频互动频道中的用户。你需要自行设置和管理用户的 User Account，并确保同一频道中每个用户的 User Account 是唯一的。 该参数为必填，最大不超过 255 字节，不可填 null 。以下为支持的字符集范围（共 89 个字符）：
+  ///  26 个小写英文字母 a-z
+  ///  26 个大写英文字母 A-Z
+  ///  10 个数字 0-9
+  ///  空格
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -2: Invalid parameter. For example, the user account is empty. You need to enter a valid parameter and rejoin the channel.
-  ///  -7: The RtcEngine object is not initialized. You need to initialize the RtcEngine object before calling this method.
-  ///  -102: Invalid channel name. You need to enter a valid channel name and rejoin the channel.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -2：传入的参数无效。例如，User Account 为空。你需要填入有效的参数，重新加入频道。
+  ///  -7： RtcEngine 对象尚未初始化。你需要在调用该方法前成功初始化 RtcEngine 对象。
+  ///  -102：频道名无效。你需要填入有效的频道名，重新加入频道。
   Future<void> preloadChannelWithUserAccount(
       {required String token,
       required String channelId,
       required String userAccount});
 
-  /// Updates the wildcard token for the preloaded channel.
+  /// 更新预加载频道的通配 Token。
   ///
-  /// You need to manage the lifecycle of the wildcard token yourself. When the wildcard token expires, you need to generate a new one on your server and pass it in using this method.
+  /// 你需要自行维护通配 Token 的生命周期。当通配 Token 过期后，你需要在你的服务端生成新的通配 Token，然后通过此方法来传入新的 Token。
   ///
-  /// * [token] The new token.
+  /// * [token] 新的 Token。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> updatePreloadChannelToken(String token);
 
-  /// Sets media options and joins a channel.
+  /// 设置媒体选项并加入频道。
   ///
-  /// This method allows you to set media options when joining a channel, such as whether to publish audio and video streams in the channel. By default, users subscribe to all remote audio and video streams in the channel, which may incur usage and affect billing. If you want to unsubscribe, you can do so by setting the options parameter or using the corresponding mute methods.
-  ///  This method only supports joining one channel at a time.
-  ///  Apps with different App IDs cannot communicate with each other.
-  ///  Before joining a channel, ensure that the App ID used to generate the Token is the same as the one used in the initialize method to initialize the engine. Otherwise, joining the channel using the Token will fail.
+  /// 该方法可以在加入频道时设置媒体选项，如是否在频道内发布音视频流等。用户加入频道时是否自动订阅频道内所有远端音视频流。默认情况下，用户订阅频道内所有其他用户的音频流和视频流，因此会产生用量并影响计费。如果想取消订阅，可以通过设置 options 参数或相应的 mute 方法实现。
+  ///  该方法仅支持用户一次加入一个频道。
+  ///  使用不同 App ID 的 App 不能互通。
+  ///  加入频道前，请确保用于生成 Token 的 App ID 和调用 initialize 方法初始化引擎时使用的是同一个 App ID，否则使用 Token 加入频道会失败。
   ///
-  /// * [token] The dynamic key generated on your server for authentication. See [Token Authentication](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication).
-  ///  (Recommended) If your project enables security mode (i.e., uses APP ID + Token for authentication), this parameter is required.
-  ///  If your project only enables debug mode (i.e., uses APP ID for authentication), you can join a channel without providing a Token. You will automatically leave the channel after 24 hours.
-  ///  If you need to join multiple channels at once or frequently switch between channels, Agora recommends using a wildcard Token to avoid requesting a new Token from your server for each new channel. See [Wildcard Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token).
-  /// * [channelId] The channel name. This parameter identifies the channel for real-time audio and video interaction. Users with the same App ID and channel name will join the same channel. This parameter must be a string of up to 64 bytes. Supported character set (89 characters):
-  ///  26 lowercase letters a~z
-  ///  26 uppercase letters A~Z
-  ///  10 digits 0~9
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
-  /// * [uid] User ID. This parameter identifies the user in the real-time audio and video interaction channel. You must set and manage the user ID yourself and ensure that each user ID is unique within the same channel. This parameter is a 32-bit unsigned integer. Recommended range: 1 to 2^32-1. If not specified (i.e., set to 0), the SDK automatically assigns one and returns it in the onJoinChannelSuccess callback. The application must remember and maintain this return value; the SDK does not maintain it.
-  /// * [options] Channel media options. See ChannelMediaOptions.
+  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  ///  （推荐）如果你的项目开启了安全模式，即选择 APP ID + Token 为鉴权机制，则该参数为必填。
+  ///  如果你的项目仅开启调试模式，即选择 APP ID 为鉴权机制，则无需填入 Token 即可加入频道。成功加入频道 24 小时后会自动退出该频道。
+  ///  如果你需要同时加入多个频道或在频道间频繁切换，声网推荐你使用通配 Token 以避免每加入一个新的频道都需向服务端申请一个新的 Token，详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
+  /// * [channelId] 频道名。该参数标识用户进行实时音视频互动的频道。App ID 一致的前提下，填入相同频道名的用户会进入同一个频道进行音视频互动。该参数为长度在 64 字节以内的字符串。以下为支持的字符集范围（共 89 个字符）:
+  ///  26 个小写英文字母 a~z
+  ///  26 个大写英文字母 A~Z
+  ///  10 个数字 0~9
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
+  /// * [uid] 用户 ID。该参数用于标识在实时音视频互动频道中的用户。你需要自行设置和管理用户 ID，并确保同一频道内的每个用户 ID 是唯一的。该参数为 32 位无符号整数。建议设置范围：1 到 232-1。如果不指定（即设为 0），SDK 会自动分配一个，并在 onJoinChannelSuccess 回调中返回， 应用层必须记住该返回值并维护，SDK 不对该返回值进行维护。
+  /// * [options] 频道媒体设置选项。详见 ChannelMediaOptions 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -2: Invalid parameters. For example, an invalid Token, uid is not an integer, or ChannelMediaOptions contains invalid values. Provide valid parameters and rejoin the channel.
-  ///  -3: RtcEngine initialization failed. Reinitialize the RtcEngine object.
-  ///  -7: RtcEngine not initialized. Initialize the RtcEngine object before calling this method.
-  ///  -8: Internal state error in RtcEngine. Possible cause: startEchoTest was called but stopEchoTest was not called before joining the channel. Call stopEchoTest before this method.
-  ///  -17: Join channel rejected. Possible cause: user is already in the channel. Use onConnectionStateChanged to check if the user is in the channel. Do not call this method again unless you receive connectionStateDisconnected (1).
-  ///  -102: Invalid channel name. Provide a valid channelId and rejoin the channel.
-  ///  -121: Invalid user ID. Provide a valid uid and rejoin the channel.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -2：传入的参数无效。例如，使用了不合法的 Token， uid 参数未设置为整型，或 ChannelMediaOptions 成员值不合法。你需要填入有效的参数，重新加入频道。
+  ///  -3： RtcEngine 对象初始化失败。你需要重新初始化 RtcEngine 对象。
+  ///  -7： RtcEngine 对象尚未初始化。你需要在调用该方法前成功初始化 RtcEngine 对象。
+  ///  -8： RtcEngine 对象内部状态错误。可能的原因是：调用 startEchoTest 开始通话回路测试后，未调用 stopEchoTest 停止测试就调用该方法加入频道。你需要在该方法前调用 stopEchoTest 。
+  ///  -17：加入频道被拒绝。可能的原因是用户已经在频道中。建议通过 onConnectionStateChanged 回调判断用户是否在频道中。除收到 connectionStateDisconnected (1) 状态外，不要再次调用该方法加入频道。
+  ///  -102：频道名无效。你需要在 channelId 中填入有效的频道名，重新加入频道。
+  ///  -121：用户 ID 无效。你需要在 uid 中填入有效的用户 ID，重新加入频道。
   Future<void> joinChannel(
       {required String token,
       required String channelId,
       required int uid,
       required ChannelMediaOptions options});
 
-  /// Updates channel media options after joining the channel.
+  /// 加入频道后更新频道媒体选项。
   ///
-  /// * [options] Channel media options. See ChannelMediaOptions.
+  /// * [options] 频道媒体选项，详见 ChannelMediaOptions 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> updateChannelMediaOptions(ChannelMediaOptions options);
 
-  /// Sets channel options and leaves the channel.
+  /// 设置频道选项并离开频道。
   ///
-  /// After calling this method, the SDK stops audio and video interaction, leaves the current channel, and releases all session-related resources.
-  /// After successfully joining a channel, you must call this method to end the call; otherwise, you cannot start a new call. If you have joined multiple channels using joinChannelEx, calling this method will leave all joined channels. This method is asynchronous. When the method returns, the user has not actually left the channel yet.
-  /// If you call the release method immediately after this method, the SDK will not trigger the onLeaveChannel callback.
+  /// 调用该方法后，SDK 会终止音视频互动、离开当前频道，并会释放会话相关的所有资源。
+  /// 成功加入频道后，必须调用本方法结束通话，否则无法开始下一次通话。如果你已调用 joinChannelEx 加入多个频道，调用本方法后会同时离开所有已加入的频道。 该方法是异步操作，调用返回时并没有真正退出频道。
+  /// 如果你调用了该方法后立即调用 release 方法，SDK 将不会触发 onLeaveChannel 回调。
   ///
-  /// * [options] Options for leaving the channel. See LeaveChannelOptions.
+  /// * [options] 离开频道的选项，详见 LeaveChannelOptions 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> leaveChannel({LeaveChannelOptions? options});
 
-  /// Updates the token.
+  /// 更新 Token。
   ///
-  /// This method is used to update the token. The token expires after a certain period, at which point the SDK cannot establish a connection with the server.
+  /// 该方法用于更新 Token。Token 会在一定时间后失效，此时 SDK 将无法和服务器建立连接。
   ///
-  /// * [token] The newly generated token.
+  /// * [token] 新生成的 Token。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> renewToken(String token);
 
-  /// Sets the channel profile.
+  /// 设置频道场景。
   ///
-  /// You can call this method to set the channel profile. The SDK adopts different optimization strategies for different use cases, such as prioritizing video quality in live streaming scenarios. The default channel profile after SDK initialization is live streaming. To ensure real-time audio and video quality, all users in the same channel must use the same channel profile.
+  /// 你可以调用该方法设置频道的使用场景。SDK 会针对不同的使用场景采用不同的优化策略，如直播场景优先保证画质。SDK 初始化后默认的频道场景为直播场景。 为保证实时音视频质量，相同频道内的用户必须使用同一种频道场景。
   ///
-  /// * [profile] Channel profile. See ChannelProfileType.
+  /// * [profile] 频道使用场景。详见 ChannelProfileType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -2: Invalid parameter.
-  ///  -7: SDK not initialized.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -2: 参数无效。
+  ///  -7: SDK 尚未初始化。
   Future<void> setChannelProfile(ChannelProfileType profile);
 
-  /// Sets the user role and audience latency level in live streaming.
+  /// 设置直播场景下的用户角色和观众端延时级别。
   ///
-  /// By default, the SDK sets the user role to audience. You can call this method to set the user role to broadcaster. The user role (role) determines the user's privileges at the SDK level, such as whether they can publish streams. When the user role is set to broadcaster, the audience latency level only supports audienceLatencyLevelUltraLowLatency (ultra-low latency).
-  /// If you call this method before joining a channel and set role to BROADCASTER, the local user will not receive the onClientRoleChanged callback.
+  /// SDK 默认设置用户角色为观众，你可以调用该方法设置用户角色为主播。用户角色（ role ）确定用户在 SDK 层的权限，包含是否有发流权限等。 当用户角色设为主播时，观众端延时级别仅支持设置为 audienceLatencyLevelUltraLowLatency（超低延时）。
+  /// 在加入频道前调用该方法并将 role 设为 BROADCASTER （主播）时，本地不会触发 onClientRoleChanged 回调。
   ///
-  /// * [role] User role. See ClientRoleType. Users with the audience role cannot publish audio or video streams in the channel. When publishing in live streaming, make sure the user role is switched to broadcaster.
-  /// * [options] User-specific settings, including user level. See ClientRoleOptions.
+  /// * [role] 用户角色。详见 ClientRoleType 。 角色为观众的用户无法在频道内发布音视频流。在直播场景下发流时，请确保你的用户角色已切换为主播。
+  /// * [options] 用户具体设置，包含用户级别。详见 ClientRoleOptions 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setClientRole(
       {required ClientRoleType role, ClientRoleOptions? options});
 
-  /// Starts an audio and video call loop test.
+  /// 开始音视频通话回路测试。
   ///
-  /// To test whether the user's local stream sending and receiving works properly, you can call this method to perform an audio and video call loop test, which checks whether the system's audio and video devices and the user's uplink and downlink networks are functioning correctly.
-  /// After the test starts, the user needs to speak or face the camera. The audio or video will play back after about 2 seconds. If audio plays back correctly, it indicates that the system audio devices and the user's uplink and downlink networks are working properly; if video plays back correctly, it indicates that the system video devices and the user's uplink and downlink networks are working properly.
-  ///  When calling this method in a channel, ensure that no audio or video stream is being published.
-  ///  After calling this method, you must call stopEchoTest to end the test. Otherwise, the user cannot perform another loop test or join a channel.
-  ///  In a live broadcast scenario, only hosts can call this method.
+  /// 为测试用户本地发流、收流是否正常，你可以调用该方法进行音视频通话回路测试，即测试系统的音视频设备和用户的上下行网络是否正常。
+  /// 开始测试后，用户需发出声音或面对摄像头，音频或视频会在约 2 秒后播放出来。如果音频播放正常，则表示系统音频设备和用户上下行网络均正常； 如果视频播放正常，则表示系统视频设备和用户上下行网络均正常。
+  ///  在频道内调用该方法时，需确保当前没有发布音视频流。
+  ///  调用该方法后，必须调用 stopEchoTest 结束测试，否则该用户无法进行下一次音视频通话回路测试，也无法加入频道。
+  ///  直播场景下，该方法仅能由主播调用。
   ///
-  /// * [config] Configuration for the audio and video call loop test. See EchoTestConfiguration.
+  /// * [config] 音视频通话回路测试的配置。详见 EchoTestConfiguration 。
   ///
   /// Returns
-  /// 0: Success.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 0: 方法调用成功。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startEchoTest(EchoTestConfiguration config);
 
-  /// Stops the audio call loopback test.
+  /// 停止语音通话回路测试。
   ///
-  /// After calling startEchoTest, you must call this method to end the test. Otherwise, the user cannot perform another audio/video loopback test or join a channel.
+  /// 调用 startEchoTest 后，必须调用该方法结束测试，否则该用户无法进行下一次音视频通话回路测试，也无法加入频道。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopEchoTest();
 
-  /// Enables or disables multi-camera capture.
+  /// 开启或关闭多路摄像头采集。
   ///
-  /// In scenarios where a video is already being captured using a camera, Agora recommends the following steps to achieve multi-camera capture and publish video:
-  ///  Call this method to enable multi-camera capture.
-  ///  Call startPreview to start local video preview.
-  ///  Call startCameraCapture and set sourceType to specify the second camera for capture.
-  ///  Call joinChannelEx and set publishSecondaryCameraTrack to true to publish the second camera's video stream in the channel. To disable multi-camera capture, refer to the following steps:
-  ///  Call stopCameraCapture.
-  ///  Call this method and set enabled to false. This method is only applicable to iOS. When using multi-camera capture, ensure the system version is 13.0 or above. The minimum supported iOS device models for multi-camera capture are as follows:
+  /// 在已有摄像头采集视频的场景下，声网推荐你采用以下步骤实现多路摄像头采集、发布视频：
+  ///  调用该方法开启多路摄像头采集。
+  ///  调用 startPreview 开启本地视频预览。
+  ///  调用 startCameraCapture 并设置 sourceType 指定第二个摄像头开始采集。
+  ///  调用 joinChannelEx 并设置 publishSecondaryCameraTrack 为 true ，在频道内发布第二路摄像头采集的视频流。 如果要关闭多路摄像头采集，可参考以下步骤：
+  ///  调用 stopCameraCapture 。
+  ///  调用该方法并将 enabled 设置为 false 。 该方法仅适用于 iOS。 使用多路摄像头采集视频时，请确保系统版本为 13.0 及以上。 支持多路摄像头采集的最低 iOS 设备类型如下所示：
   ///  iPhone XR
   ///  iPhone XS
   ///  iPhone XS Max
-  ///  iPad Pro (3rd generation and later) You can call this method to enable multi-camera capture either before or after startPreview :
-  ///  If called before startPreview, the local video preview will display feeds from both cameras simultaneously.
-  ///  If called after startPreview, the SDK will stop the current camera capture first, then start both the original and the second camera. The local video preview may briefly go black before automatically recovering.
+  ///  iPad Pro (第三代及以上) 你可以在 startPreview 前后调用该方法开启多摄像头采集：
+  ///  如果在 startPreview 之前开启，则本地视频预览会同时出现两个摄像头采集的画面。
+  ///  如果在 startPreview 之后开启，SDK 会先停止当前的摄像头采集，然后再开启原摄像头和第二个摄像头，本地视频预览会出现短暂黑屏、然后自动恢复正常。
   ///
-  /// * [enabled] Whether to enable multi-camera video capture mode: true : Enables multi-camera capture mode. The SDK uses multiple cameras to capture video. false : Disables multi-camera capture mode. The SDK uses only a single camera to capture video.
-  /// * [config] Configuration for the second camera. See CameraCapturerConfiguration.
+  /// * [enabled] 是否开启多摄像头视频采集模式： true ：开启多摄像头采集模式，SDK 使用多路摄像头采集视频。 false ：关闭多摄像头采集模式，SDK 仅使用单路摄像头采集视频。
+  /// * [config] 第二个摄像头的采集配置。详见 CameraCapturerConfiguration 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableMultiCamera(
       {required bool enabled, required CameraCapturerConfiguration config});
 
-  /// Enables the video module.
+  /// 启用视频模块。
   ///
-  /// The video module is disabled by default. You need to call this method to enable it. To disable the video module later, call the disableVideo method.
-  ///  This method sets the internal engine to an enabled state and remains effective after leaving the channel.
-  ///  Calling this method resets the entire engine and may take longer to respond. You can use the following methods to control specific video functions as needed: enableLocalVideo : Whether to enable camera capture and create the local video stream. muteLocalVideoStream : Whether to publish the local video stream. muteRemoteVideoStream : Whether to receive and play the remote video stream. muteAllRemoteVideoStreams : Whether to receive and play all remote video streams.
-  ///  When called in a channel, this method resets the settings of enableLocalVideo, muteRemoteVideoStream, and muteAllRemoteVideoStreams. Use with caution.
+  /// 视频模块默认为关闭状态，需要调用该方法启用。如果后续需要关闭视频模块，需调用 disableVideo 方法。
+  ///  该方法设置的是内部引擎为启用状态，在离开频道后仍然有效。
+  ///  调用该方法会重置整个引擎，响应时间较慢。你可以根据实际需求用以下方法来独立控制视频模块的某一项功能： enableLocalVideo : 是否启动摄像头采集并创建本地视频流。 muteLocalVideoStream : 是否发布本地视频流。 muteRemoteVideoStream : 是否接收并播放远端视频流。 muteAllRemoteVideoStreams : 是否接收并播放所有远端视频流。
+  ///  在频道内调用该方法时，会重置 enableLocalVideo 、 muteRemoteVideoStream 和 muteAllRemoteVideoStreams 的设置，需谨慎使用。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableVideo();
 
-  /// Disables the video module.
+  /// 关闭视频模块。
   ///
-  /// This method disables the video module.
-  ///  This method sets the internal engine to a disabled state and remains effective after leaving the channel.
-  ///  Calling this method resets the entire engine and may take longer to respond. You can use the following methods to control specific video functions as needed: enableLocalVideo : Whether to enable camera capture and create the local video stream. muteLocalVideoStream : Whether to publish the local video stream. muteRemoteVideoStream : Whether to receive and play the remote video stream. muteAllRemoteVideoStreams : Whether to receive and play all remote video streams.
+  /// 该方法用于关闭视频模块。
+  ///  该方法设置的是内部引擎为禁用状态，在离开频道后仍然有效。
+  ///  调用该方法会重置整个引擎，响应时间较慢。你可以根据实际需求用以下方法来独立控制视频模块的某一项功能： enableLocalVideo : 是否启动摄像头采集并创建本地视频流。 muteLocalVideoStream : 是否发布本地视频流。 muteRemoteVideoStream : 是否接收并播放远端视频流。 muteAllRemoteVideoStreams : 是否接收并播放所有远端视频流。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> disableVideo();
 
-  /// Starts video preview and specifies the video source.
+  /// 开启视频预览并指定预览的视频源。
   ///
-  /// This method starts the local video preview and specifies the video source to appear in the preview.
-  ///  Local preview enables mirror mode by default.
-  ///  After leaving the channel, local preview remains active. You need to call stopPreview to stop the local preview.
+  /// 该方法用于启动本地视频预览，并指定出现在预览画面中的视频源。
+  ///  本地预览默认开启镜像功能。
+  ///  在离开频道后，本地预览依然处于开启状态。你需要调用 stopPreview 关闭本地预览。
   ///
-  /// * [sourceType] Type of the video source. See VideoSourceType.
+  /// * [sourceType] 视频源的类型，详见 VideoSourceType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startPreview(
       {VideoSourceType sourceType = VideoSourceType.videoSourceCameraPrimary});
 
-  /// Stops video preview.
+  /// 停止视频预览。
   ///
-  /// * [sourceType] Type of the video source. See VideoSourceType.
+  /// * [sourceType] 视频源的类型，详见 VideoSourceType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopPreview(
       {VideoSourceType sourceType = VideoSourceType.videoSourceCameraPrimary});
 
-  /// Starts the last-mile network probe test before a call.
+  /// 开始通话前网络质量探测。
   ///
-  /// Starts the last-mile network probe test to report the uplink and downlink bandwidth, packet loss, jitter, and round-trip time to the user.
+  /// 开始通话前网络质量探测，向用户反馈上下行网络的带宽、丢包、网络抖动和往返时延数据。
   ///
-  /// * [config] Configuration for the last-mile network probe. See LastmileProbeConfig.
+  /// * [config] Last mile 网络探测配置，详见 LastmileProbeConfig 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startLastmileProbeTest(LastmileProbeConfig config);
 
-  /// Stops the last-mile network probe test before a call.
+  /// 停止通话前网络质量探测。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopLastmileProbeTest();
 
-  /// Sets the video encoding attributes.
+  /// 设置视频编码属性。
   ///
-  /// Sets the encoding attributes for the local video. Each video encoding profile corresponds to a set of video parameters, including resolution, frame rate, and bitrate.
-  ///  The config parameter of this method defines the maximum values achievable under ideal network conditions. If the network condition is poor, the video engine will not use this config to render the local video and will automatically downgrade to a more appropriate video configuration.
+  /// 设置本地视频的编码属性。每一种视频编码属性对应一系列视频相关参数设置，包含分辨率、帧率和码率。
+  ///  该方法的 config 参数设置是在理想网络状态下能达到的最大值。如果网络状态不好，视频引擎便不能使用该 config 渲染本地视频，它会自动降低到一个合适的视频参数设置。
   ///
-  /// * [config] Video encoding configuration. See VideoEncoderConfiguration.
+  /// * [config] 视频编码参数配置。详见 VideoEncoderConfiguration 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setVideoEncoderConfiguration(VideoEncoderConfiguration config);
 
-  /// Sets beauty effect options.
+  /// 设置美颜效果选项。
   ///
-  /// Enables local beauty effects and sets the beauty effect options.
-  ///  This method depends on the video enhancement dynamic library libagora_clear_vision_extension.dll. Deleting this library will cause the feature to fail to start.
-  ///  This feature requires high device performance. When calling this method, the SDK automatically checks the current device capabilities.
+  /// 开启本地美颜功能，并设置美颜效果选项。
+  ///  该方法依赖于视频增强动态库 libagora_clear_vision_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
+  ///  该功能对设备性能要求较高，调用该方法时 SDK 会自动对当前设备能力进行检查。
   ///
-  /// * [enabled] Whether to enable the beauty effect: true : Enable the beauty effect. false : (Default) Disable the beauty effect.
-  /// * [options] Beauty options. See BeautyOptions for details.
-  /// * [type] The media source type to which the effect is applied. See MediaSourceType. In this method, this parameter only supports the following two settings:
-  ///  When capturing local video using the camera, keep the default value primaryCameraSource.
-  ///  To use custom captured video, set this parameter to customVideoSource.
+  /// * [enabled] 是否开启美颜功能： true : 开启美颜功能。 false :（默认）关闭美颜功能。
+  /// * [options] 美颜选项，详细定义见 BeautyOptions 。
+  /// * [type] 效果应用的媒体源类型。详见 MediaSourceType 。 在该方法中，该参数仅支持以下两种设置：
+  ///  使用摄像头采集本地视频时，请保持默认值 primaryCameraSource 。
+  ///  如果要使用自定义采集的视频，将该参数设置为 customVideoSource 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setBeautyEffectOptions(
       {required bool enabled,
       required BeautyOptions options,
       MediaSourceType type = MediaSourceType.primaryCameraSource});
 
-  /// Sets face shaping effect options and specifies the media source.
+  /// 设置美型效果选项并指定媒体源。
   ///
-  /// Call this method to enhance facial features such as slimming the face, enlarging eyes, slimming the nose, etc., using preset parameters in one go. You can also adjust the overall intensity of the effect. Face shaping is a value-added service. See [Billing Strategy](https://doc.shengwang.cn/doc/rtc/android/billing/billing-strategy) for pricing details.
-  ///  On Android, this method is only supported on Android 4.4 and above.
-  ///  This method depends on the video enhancement dynamic library libagora_clear_vision_extension.dll. Deleting this library will cause the feature to fail to start.
-  ///  This feature requires high device performance. When calling this method, the SDK automatically checks the current device capabilities.
+  /// 调用该方法可对人脸各部位进行修饰，使用预设的参数一次性实现瘦脸、大眼、瘦鼻等微整形效果，支持微调整体的修饰力度。 美型属于增值服务，计费方式详见[计费策略](https://doc.shengwang.cn/doc/rtc/android/billing/billing-strategy)。
+  ///  在 Android 平台上，该方法仅适用于 Android 4.4 及以上版本。
+  ///  该方法依赖于视频增强动态库 libagora_clear_vision_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
+  ///  该功能对设备性能要求较高，调用该方法时 SDK 会自动对当前设备能力进行检查。
   ///
-  /// * [enabled] Whether to enable the face shaping effect: true : Enable face shaping. false : (Default) Disable face shaping.
-  /// * [options] Face shaping style options. See FaceShapeBeautyOptions.
-  /// * [type] The media source type to which the effect is applied. See MediaSourceType. In this method, this parameter only supports the following two settings:
-  ///  When capturing local video using the camera, keep the default value primaryCameraSource.
-  ///  To use custom captured video, set this parameter to customVideoSource.
+  /// * [enabled] 是否开启美型效果： true : 开启美型功能。 false :（默认）关闭美型功能。
+  /// * [options] 美型风格选项，详见 FaceShapeBeautyOptions 。
+  /// * [type] 效果应用的媒体源类型。详见 MediaSourceType 。 在该方法中，该参数仅支持以下两种设置：
+  ///  使用摄像头采集本地视频时，请保持默认值 primaryCameraSource 。
+  ///  如果要使用自定义采集的视频，将该参数设置为 customVideoSource 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setFaceShapeBeautyOptions(
       {required bool enabled,
       required FaceShapeBeautyOptions options,
       MediaSourceType type = MediaSourceType.primaryCameraSource});
 
-  /// Sets face shaping area options and specifies the media source.
+  /// 设置美型部位选项并指定媒体源。
   ///
-  /// If the preset face shaping effects set with setFaceShapeBeautyOptions do not meet expectations, you can use this method to configure face shaping area options and fine-tune individual facial areas for more refined results. Face shaping is a value-added service. See [Billing Strategy](https://doc.shengwang.cn/doc/rtc/android/billing/billing-strategy) for pricing details.
-  ///  On Android, this method is only supported on Android 4.4 and above.
-  ///  This method depends on the video enhancement dynamic library libagora_clear_vision_extension.dll. Deleting this library will cause the feature to fail to start.
-  ///  This feature requires high device performance. When calling this method, the SDK automatically checks the current device capabilities.
+  /// 如果在 setFaceShapeBeautyOptions 方法中实现的预设美型效果达不到预期，你可以通过该方法设置美型部位选项，对人脸的各个部位单独微调，实现更加精细的美型效果。 美型属于增值服务，计费方式详见[计费策略](https://doc.shengwang.cn/doc/rtc/android/billing/billing-strategy)。
+  ///  在 Android 平台上，该方法仅适用于 Android 4.4 及以上版本。
+  ///  该方法依赖于视频增强动态库 libagora_clear_vision_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
+  ///  该功能对设备性能要求较高，调用该方法时 SDK 会自动对当前设备能力进行检查。
   ///
-  /// * [options] Face shaping area options. See FaceShapeAreaOptions.
-  /// * [type] The media source type to which the effect is applied. See MediaSourceType. In this method, this parameter only supports the following two settings:
-  ///  When capturing local video using the camera, keep the default value primaryCameraSource.
-  ///  To use custom captured video, set this parameter to customVideoSource.
+  /// * [options] 美型部位选项，详见 FaceShapeAreaOptions 。
+  /// * [type] 效果应用的媒体源类型。详见 MediaSourceType 。 在该方法中，该参数仅支持以下两种设置：
+  ///  使用摄像头采集本地视频时，请保持默认值 primaryCameraSource 。
+  ///  如果要使用自定义采集的视频，将该参数设置为 customVideoSource 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setFaceShapeAreaOptions(
       {required FaceShapeAreaOptions options,
       MediaSourceType type = MediaSourceType.primaryCameraSource});
 
-  /// Gets face shaping effect options.
+  /// 获取美型效果选项。
   ///
-  /// Call this method to get the current parameter settings of the face shaping effect.
+  /// 调用该方法可以获取美型效果当前设置的参数信息。
   ///
-  /// * [type] The media source type to which the effect is applied. See MediaSourceType. In this method, this parameter only supports the following two settings:
-  ///  When capturing local video using the camera, keep the default value primaryCameraSource.
-  ///  To use custom captured video, set this parameter to customVideoSource.
+  /// * [type] 效果应用的媒体源类型。详见 MediaSourceType 。 在该方法中，该参数仅支持以下两种设置：
+  ///  使用摄像头采集本地视频时，请保持默认值 primaryCameraSource 。
+  ///  如果要使用自定义采集的视频，将该参数设置为 customVideoSource 。
   ///
   /// Returns
-  /// Returns a FaceShapeBeautyOptions object if the method call succeeds; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，返回 FaceShapeBeautyOptions 对象；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<FaceShapeBeautyOptions> getFaceShapeBeautyOptions(
       {MediaSourceType type = MediaSourceType.primaryCameraSource});
 
-  /// Gets face shaping area options.
+  /// 获取美型部位选项。
   ///
-  /// Call this method to get the current parameter settings of the face shaping area.
+  /// 调用该方法可以获取美型部位当前设置的参数信息。
   ///
-  /// * [shapeArea] The face shaping area. See FaceShapeArea.
-  /// * [type] The media source type to which the effect is applied. See MediaSourceType. In this method, this parameter only supports the following two settings:
-  ///  When using the camera to capture local video, keep the default value primaryCameraSource.
-  ///  To use custom captured video, set this parameter to customVideoSource.
+  /// * [shapeArea] 美型部位。详见 FaceShapeArea 。
+  /// * [type] 效果应用的媒体源类型。详见 MediaSourceType 。 在该方法中，该参数仅支持以下两种设置：
+  ///  使用摄像头采集本地视频时，请保持默认值 primaryCameraSource 。
+  ///  如果要使用自定义采集的视频，将该参数设置为 customVideoSource 。
   ///
   /// Returns
-  /// If the method call succeeds, returns a FaceShapeAreaOptions object; if it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，返回 FaceShapeAreaOptions 对象；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<FaceShapeAreaOptions> getFaceShapeAreaOptions(
       {required FaceShapeArea shapeArea,
       MediaSourceType type = MediaSourceType.primaryCameraSource});
 
-  /// Sets filter effect options and specifies the media source.
+  /// 设置滤镜效果选项并指定媒体源。
   ///
-  /// This method depends on the video enhancement dynamic library libagora_clear_vision_extension.dll. If this library is removed, the feature cannot be enabled properly.
-  ///  This feature has high performance requirements. When this method is called, the SDK automatically checks the current device capabilities.
+  /// 该方法依赖于视频增强动态库 libagora_clear_vision_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
+  ///  该功能对设备性能要求较高，调用该方法时 SDK 会自动对当前设备能力进行检查。
   ///
-  /// * [enabled] Whether to enable the filter effect: true : Enables the filter feature. false : (Default) Disables the filter feature.
-  /// * [options] Filter options. See FilterEffectOptions.
-  /// * [type] The type of media source to which the effect is applied. See MediaSourceType. In this method, this parameter only supports the following two settings:
-  ///  When using the camera to capture local video, keep the default value primaryCameraSource.
-  ///  If you want to use custom captured video, set this parameter to customVideoSource.
+  /// * [enabled] 是否开启滤镜效果： true : 开启滤镜功能。 false :（默认）关闭滤镜功能。
+  /// * [options] 滤镜选项，详见 FilterEffectOptions 。
+  /// * [type] 效果应用的媒体源类型。详见 MediaSourceType 。 在该方法中，该参数仅支持以下两种设置：
+  ///  使用摄像头采集本地视频时，请保持默认值 primaryCameraSource 。
+  ///  如果要使用自定义采集的视频，将该参数设置为 customVideoSource 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setFilterEffectOptions(
       {required bool enabled,
       required FilterEffectOptions options,
       MediaSourceType type = MediaSourceType.primaryCameraSource});
 
-  /// Creates an IVideoEffectObject video effect object.
+  /// 创建一个 IVideoEffectObject 视频特效对象。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
-  /// * [bundlePath] Path to the video effect resource package.
-  /// * [type] Media source type. See MediaSourceType.
+  /// * [bundlePath] 视频特效资源包的路径。
+  /// * [type] 媒体源类型，详见 MediaSourceType 。
   ///
   /// Returns
-  /// If the method call succeeds, returns a pointer to the IVideoEffectObject object. See IVideoEffectObject.
-  ///  If the method call fails, returns NULL.
+  /// 方法调用成功，返回 IVideoEffectObject 对象指针，详见 IVideoEffectObject 。
+  ///  方法调用失败，返回 NULL 。
   Future<VideoEffectObject?> createVideoEffectObject(
       {required String bundlePath,
       MediaSourceType type = MediaSourceType.primaryCameraSource});
 
-  /// Destroys the video effect object.
+  /// 销毁视频特效对象。
   ///
-  /// Since Available since v4.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
-  /// * [videoEffectObject] The video effect object to destroy. See VideoEffectObject.
+  /// * [videoEffectObject] 要销毁的视频特效对象。详见 VideoEffectObject 。
   ///
   /// Returns
-  /// 0: The method call succeeds.
-  ///  < 0: The method call fails.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> destroyVideoEffectObject(VideoEffectObject videoEffectObject);
 
-  /// Sets the low-light enhancement feature.
+  /// 设置暗光增强功能。
   ///
-  /// You can call this method to enable the low-light enhancement feature and configure its effects.
-  ///  This method depends on the video enhancement dynamic library libagora_clear_vision_extension.dll. If this library is removed, the feature cannot be enabled properly.
-  ///  Low-light enhancement has certain performance requirements. After enabling it, if the device experiences severe overheating, it is recommended to lower the enhancement level to a less performance-intensive one or disable the feature.
-  ///  To achieve high-quality low-light enhancement (lowLightEnhanceLevelHighQuality), you must first call setVideoDenoiserOptions to enable video denoising. The corresponding settings are:
-  ///  For automatic mode (LowLightEnhanceAuto), video denoising must be set to high quality (videoDenoiserLevelHighQuality) and automatic mode (videoDenoiserAuto).
-  ///  For manual mode (LowLightEnhanceManual), video denoising must be set to high quality (videoDenoiserLevelHighQuality) and manual mode (videoDenoiserManual).
+  /// 你可以调用该方法开启暗光增强功能并设置暗光增强的效果。
+  ///  该方法依赖于视频增强动态库 libagora_clear_vision_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
+  ///  暗光增强对设备性能有一定要求。开启暗光增强后，如果设备出现严重发烫等问题，建议你将暗光增强等级修改为消耗性能较少的等级或关闭暗光增强功能。
+  ///  如果要实现优先画质 (lowLightEnhanceLevelHighQuality) 的暗光增强，需要先调用 setVideoDenoiserOptions 实现视频降噪，具体对应关系如下：
+  ///  暗光增强为自动模式 (LowLightEnhanceAuto) 时，视频降噪需设置为优先画质 (videoDenoiserLevelHighQuality)、自动模式 (videoDenoiserAuto)。
+  ///  暗光增强为手动模式 (LowLightEnhanceManual) 时，视频降噪需设置为优先画质 (videoDenoiserLevelHighQuality)、手动模式 (videoDenoiserManual)。
   ///
-  /// * [enabled] Whether to enable the low-light enhancement feature: true : Enables low-light enhancement. false : (Default) Disables low-light enhancement.
-  /// * [options] Low-light enhancement options for configuring the effect. See LowlightEnhanceOptions.
-  /// * [type] The type of media source to which the effect is applied. See MediaSourceType. In this method, this parameter only supports the following two settings:
-  ///  When using the camera to capture local video, keep the default value primaryCameraSource.
-  ///  If you want to use custom captured video, set this parameter to customVideoSource.
+  /// * [enabled] 是否开启暗光增强功能： true : 开启暗光增强功能。 false :（默认）关闭暗光增强功能。
+  /// * [options] 暗光增强选项，用于设置暗光增强的效果。详见 LowlightEnhanceOptions 。
+  /// * [type] 效果应用的媒体源类型。详见 MediaSourceType 。 在该方法中，该参数仅支持以下两种设置：
+  ///  使用摄像头采集本地视频时，请保持默认值 primaryCameraSource 。
+  ///  如果要使用自定义采集的视频，将该参数设置为 customVideoSource 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLowlightEnhanceOptions(
       {required bool enabled,
       required LowlightEnhanceOptions options,
       MediaSourceType type = MediaSourceType.primaryCameraSource});
 
-  /// Sets the video denoising feature.
+  /// 设置视频降噪功能。
   ///
-  /// You can call this method to enable the video denoising feature and configure its effects. If the denoising strength provided by this method does not meet your needs, Agora recommends calling the setBeautyEffectOptions method to enable the skin smoothing feature for better video denoising. Recommended BeautyOptions settings for strong denoising: lighteningContrastLevel : lighteningContrastNormal lighteningLevel : 0.0 smoothnessLevel : 0.5 rednessLevel : 0.0 sharpnessLevel : 0.1
-  ///  This method depends on the video enhancement dynamic library libagora_clear_vision_extension.dll. If this library is removed, the feature cannot be enabled properly.
-  ///  Video denoising has certain performance requirements. After enabling it, if the device experiences severe overheating, it is recommended to lower the denoising level to a less performance-intensive one or disable the feature.
+  /// 你可以调用该方法开启视频降噪功能并设置视频降噪的效果。 如果该方法实现的降噪强度无法满足你的需求，声网推荐你调用 setBeautyEffectOptions 方法启用美颜磨皮功能，以获得更好的视频降噪效果。强效降噪效果的 BeautyOptions 推荐设置如下： lighteningContrastLevel ：lighteningContrastNormal lighteningLevel ：0.0 smoothnessLevel ：0.5 rednessLevel ：0.0 sharpnessLevel ：0.1
+  ///  该方法依赖于视频增强动态库 libagora_clear_vision_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
+  ///  视频降噪对设备性能有一定要求。开启视频降噪后，如果设备出现严重发烫等问题，建议你将视频降噪等级修改为消耗性能较少的等级或关闭视频降噪功能。
   ///
-  /// * [enabled] Whether to enable the video denoising feature: true : Enables video denoising. false : (Default) Disables video denoising.
-  /// * [options] Video denoising options for configuring the effect. See VideoDenoiserOptions.
-  /// * [type] The type of media source to which the effect is applied. See MediaSourceType. In this method, this parameter only supports the following two settings:
-  ///  When using the camera to capture local video, keep the default value primaryCameraSource.
-  ///  If you want to use custom captured video, set this parameter to customVideoSource.
+  /// * [enabled] 是否开启视频降噪功能： true : 开启视频降噪功能。 false :（默认）关闭视频降噪功能。
+  /// * [options] 视频降噪选项，用于设置视频降噪的效果。详见 VideoDenoiserOptions 。
+  /// * [type] 效果应用的媒体源类型。详见 MediaSourceType 。 在该方法中，该参数仅支持以下两种设置：
+  ///  使用摄像头采集本地视频时，请保持默认值 primaryCameraSource 。
+  ///  如果要使用自定义采集的视频，将该参数设置为 customVideoSource 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setVideoDenoiserOptions(
       {required bool enabled,
       required VideoDenoiserOptions options,
       MediaSourceType type = MediaSourceType.primaryCameraSource});
 
-  /// Sets the color enhancement feature.
+  /// 设置色彩增强功能。
   ///
-  /// The video captured by the camera may suffer from color distortion. The color enhancement feature can intelligently adjust video characteristics such as saturation and contrast to improve color richness and accuracy, making the video more vivid.
-  /// You can call this method to enable color enhancement and set the enhancement effect.
-  ///  Call this method after enableVideo.
-  ///  Color enhancement requires a certain level of device performance. After enabling it, if the device overheats or encounters other issues, it is recommended to lower the enhancement level or disable the feature.
-  ///  This method depends on the video enhancement dynamic library libagora_clear_vision_extension.dll. Deleting this library will cause the feature to fail to start.
+  /// 摄像头采集到的视频画面可能存在色彩失真的现象。色彩增强功能可以通过智能调节饱和度和对比度等视频特性，提升视频色彩丰富度和色彩还原度，最终使视频画面更生动。
+  /// 你可以调用该方法开启色彩增强功能并设置色彩增强的效果。
+  ///  请在 enableVideo 后调用该方法。
+  ///  色彩增强对设备性能有一定要求。开启色彩增强后，如果设备出现严重发烫等问题，建议你将色彩增强等级修改为消耗性能较少的等级或关闭色彩增强功能。
+  ///  该方法依赖于视频增强动态库 libagora_clear_vision_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
   ///
-  /// * [enabled] Whether to enable the color enhancement feature: true : Enable color enhancement. false : (Default) Disable color enhancement.
-  /// * [options] Color enhancement options used to configure the enhancement effect. See ColorEnhanceOptions.
-  /// * [type] The media source type to which the effect is applied. See MediaSourceType. In this method, this parameter only supports the following two settings:
-  ///  When capturing local video using the camera, keep the default value primaryCameraSource.
-  ///  To use custom captured video, set this parameter to customVideoSource.
+  /// * [enabled] 是否开启色彩增强功能： true ：开启色彩增强功能。 false ：（默认）关闭色彩增强功能。
+  /// * [options] 色彩增强选项，用于设置色彩增强的效果。详见 ColorEnhanceOptions 。
+  /// * [type] 效果应用的媒体源类型。详见 MediaSourceType 。 在该方法中，该参数仅支持以下两种设置：
+  ///  使用摄像头采集本地视频时，请保持默认值 primaryCameraSource 。
+  ///  如果要使用自定义采集的视频，将该参数设置为 customVideoSource 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setColorEnhanceOptions(
       {required bool enabled,
       required ColorEnhanceOptions options,
       MediaSourceType type = MediaSourceType.primaryCameraSource});
 
-  /// Enables/disables virtual background.
+  /// 开启/关闭虚拟背景。
   ///
-  /// The virtual background feature allows replacing the original background of the local user with a static image, dynamic video, blurring the background, or segmenting the portrait from the background to achieve picture-in-picture effects. After successfully enabling the virtual background feature, all users in the channel can see the customized background.
-  /// Call this method after enableVideo or startPreview.
-  ///  Using video as a virtual background may cause continuous memory usage growth, which can lead to app crashes. Therefore, try to reduce the resolution and frame rate of the video when using it.
-  ///  This feature has high performance requirements. The SDK automatically checks the current device capability when calling this method. It is recommended to use it on devices with the following chipsets:
-  ///  Snapdragon 700 series 750G and above
-  ///  Snapdragon 800 series 835 and above
-  ///  Dimensity 700 series 720 and above
-  ///  Kirin 800 series 810 and above
-  ///  Kirin 900 series 980 and above
-  ///  Devices with A9 and above chips:
-  ///  iPhone 6S and above
-  ///  iPad Air 3rd generation and above
-  ///  iPad 5th generation and above
-  ///  iPad Pro 1st generation and above
-  ///  iPad mini 5th generation and above
-  ///  It is recommended to use this feature under the following conditions:
-  ///  Using a high-definition camera and evenly lit environment.
-  ///  The scene contains few objects, the user's portrait is half-body and mostly unobstructed, and the background color is relatively uniform and different from the user's clothing color.
-  ///  This method depends on the virtual background dynamic library libagora_segmentation_extension.dll. Deleting this library will cause the feature to fail to start properly.
+  /// 虚拟背景功能支持将本地用户原来的背景替换为静态图片、动态视频、将背景虚化，或者将人像与背景分割以实现人像画中画。成功开启虚拟背景功能后，频道内所有用户都能看到自定义的背景。
+  /// 请在 enableVideo 或 startPreview 之后调用该方法。
+  ///  使用视频作为虚拟背景会导致内存占用持续增加，可能会导致 App 出现闪退等问题，因此在使用时请尽量降低视频的分辨率和帧率。
+  ///  该功能对设备性能要求较高，调用该方法时 SDK 会自动对当前设备能力进行检查。建议你在搭载如下芯片的设备上使用：
+  ///  骁龙 700 系列 750G 及以上
+  ///  骁龙 800 系列 835 及以上
+  ///  天玑 700 系列 720 及以上
+  ///  麒麟 800 系列 810 及以上
+  ///  麒麟 900 系列 980 及以上
+  ///  搭载 A9 及以上芯片的如下设备：
+  ///  iPhone 6S 及以上
+  ///  iPad Air 第三代及以上
+  ///  iPad 第五代及以上
+  ///  iPad Pro 第一代及以上
+  ///  iPad mini 第五代及以上
+  ///  建议你在满足如下条件的场景中使用该功能：
+  ///  使用高清摄像设备、摄像环境光照均匀。
+  ///  摄像画面中，物件较少，用户的人像为半身人像且基本无遮挡，背景色较单一且与用户着装颜色不同。
+  ///  该方法依赖于虚拟背景动态库 libagora_segmentation_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
   ///
-  /// * [enabled] Whether to enable virtual background: true : Enable virtual background. false : Disable virtual background.
-  /// * [backgroundSource] The custom background. See VirtualBackgroundSource. To adapt the resolution of the custom background image to the SDK's video capture resolution, the SDK scales and crops the custom background image while preserving its aspect ratio.
-  /// * [segproperty] Processing properties of the background image. See SegmentationProperty.
-  /// * [type] The media source type to which the effect is applied. See MediaSourceType. In this method, this parameter only supports the following two settings:
-  ///  When using the camera to capture local video, keep the default value primaryCameraSource.
-  ///  To use custom captured video, set this parameter to customVideoSource.
+  /// * [enabled] 是否开启虚拟背景： true : 开启虚拟背景。 false : 关闭虚拟背景。
+  /// * [backgroundSource] 自定义的背景。详见 VirtualBackgroundSource 。为将自定义背景图的分辨率与 SDK 的视频采集分辨率适配，SDK 会在保证自定义背景图不变形的前提下，对自定义背景图进行缩放和裁剪。
+  /// * [segproperty] 背景图像的处理属性。详见 SegmentationProperty 。
+  /// * [type] 效果应用的媒体源类型。详见 MediaSourceType 。 在该方法中，该参数仅支持以下两种设置：
+  ///  使用摄像头采集本地视频时，请保持默认值 primaryCameraSource 。
+  ///  如果要使用自定义采集的视频，将该参数设置为 customVideoSource 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableVirtualBackground(
       {required bool enabled,
       required VirtualBackgroundSource backgroundSource,
       required SegmentationProperty segproperty,
       MediaSourceType type = MediaSourceType.primaryCameraSource});
 
-  /// Initializes the remote user view.
+  /// 初始化远端用户视图。
   ///
-  /// This method binds a remote user to a display view and sets the rendering and mirror mode of the remote user view displayed locally. It only affects the video seen by the local user.
-  /// You need to specify the remote user's ID when calling this method. Typically, you can set this before joining the channel. If the remote user ID is not available before joining, call this method upon receiving the onUserJoined callback.
-  /// To unbind a view from a remote user, call this method and set view to null.
-  /// After leaving the channel, the SDK clears the binding of the remote user view.
-  /// In mobile custom composite layout scenarios, you can call this method to set a separate view for each sub-video stream of the composite video stream for rendering.
-  ///  In Flutter, you do not need to call this method manually. Use AgoraVideoView to render local and remote views.
-  ///  If you want to update the rendering or mirror mode of the remote user view during a call, use the setRemoteRenderMode method.
-  ///  When using the recording service, since it does not send video streams, the app does not need to bind a view for it. If the app cannot identify the recording service, bind the remote user view upon receiving the onFirstRemoteVideoDecoded callback.
+  /// 该方法绑定远端用户和显示视图，并设置远端用户视图在本地显示时的渲染模式和镜像模式，只影响本地用户看到的视频画面。
+  /// 调用该方法时需要指定远端视频的用户 ID，一般可以在进频道前提前设置好。如果无法在加入频道前得到远端用户的 ID，可以在收到 onUserJoined 回调时调用该方法。
+  /// 如需解除某个远端用户的绑定视图，可以调用该方法并将 view 设置为空。
+  /// 离开频道后，SDK 会清除远端用户视图的绑定关系。
+  /// 在移动端自定义合图布局场景下，你可以调用该方法并针对合图视频流的每一路子视频流设置一个单独的 view 进行渲染。
+  ///  在 Flutter 中你不需要主动调用该方法，请使用 AgoraVideoView 渲染本地和远端视图。
+  ///  如果你希望在通话中更新远端用户视图的渲染或镜像模式，请使用 setRemoteRenderMode 方法。
+  ///  当使用录制服务时，由于它不会发送视频流，App 无需为它绑定视图。如果 App 无法识别录制服务，可以在收到 onFirstRemoteVideoDecoded 回调时再绑定远端用户视图。
   ///
-  /// * [canvas] Display properties of the remote video. See VideoCanvas.
+  /// * [canvas] 远端视频显示属性。详见 VideoCanvas 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setupRemoteVideo(VideoCanvas canvas);
 
-  /// Initializes the local view.
+  /// 初始化本地视图。
   ///
-  /// This method initializes the local view and sets the display properties of the local user's video. It only affects the video seen by the local user and does not affect the publishing of the local video. Call this method to bind the display window (view) of the local video stream and set the rendering and mirror mode of the local user view.
-  /// The binding remains effective after leaving the channel. To stop rendering or unbind, you can call this method and set the view parameter to NULL to stop rendering and clear the rendering cache.
-  ///  In Flutter, you do not need to call this method manually. Use AgoraVideoView to render local and remote views.
-  ///  If you only want to update the rendering or mirror mode of the local user view during a call, use the setLocalRenderMode method.
+  /// 该方法初始化本地视图并设置本地用户视频显示属性，只影响本地用户看到的视频画面，不影响本地视频的发布。调用该方法绑定本地视频流的显示视窗 (view)，并设置本地用户视图的渲染模式和镜像模式。
+  /// 退出频道后绑定仍然有效。如果需要停止渲染或解除绑定，可以调用该方法将参数 view 设为 NULL，以停止渲染并清理渲染缓存。
+  ///  在 Flutter 中你不需要主动调用该方法，请使用 AgoraVideoView 渲染本地和远端视图。
+  ///  如果你希望在通话中仅更新本地用户视图的渲染或镜像模式，请使用 setLocalRenderMode 方法。
   ///
-  /// * [canvas] Display properties of the local video. See VideoCanvas.
+  /// * [canvas] 本地视频显示属性。详见 VideoCanvas 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setupLocalVideo(VideoCanvas canvas);
 
-  /// Sets the video application scenario.
+  /// 设置视频业务场景。
   ///
-  /// After successfully calling this method to set the video application scenario, the SDK enables best practice strategies based on the specified scenario, automatically adjusting key performance indicators to optimize video experience quality. This method must be called before joining a channel.
+  /// 成功调用该方法设置视频业务场景后，SDK 会基于指定场景启用最佳实践策略，自动调整关键性能指标，进而优化视频体验质量。 该方法需要在加入频道前调用。
   ///
-  /// * [scenarioType] Video application scenario. See VideoApplicationScenarioType. applicationScenarioMeeting (1) is for meeting scenarios. If you have called setDualStreamMode to set the low stream to always off (disableSimulcastStream), the dynamic switching of the low stream does not take effect in meeting scenarios.
-  /// This enum value applies only to broadcaster vs. broadcaster scenarios. The SDK enables the following strategies for this scenario:
-  ///  For meeting scenarios that require higher bitrate for the low stream, multiple anti-weak network technologies are automatically enabled to enhance the low stream's resistance to poor networks and ensure smoothness when multiple streams are subscribed.
-  ///  Real-time monitoring of the number of subscribers to the high stream on the receiving end, and dynamically adjusting the high stream configuration accordingly:
-  ///  When no one subscribes to the high stream, the bitrate and frame rate of the high stream are automatically reduced to save uplink bandwidth and consumption.
-  ///  When someone subscribes to the high stream, the high stream is reset to the VideoEncoderConfiguration set in the most recent call to setVideoEncoderConfiguration. If no configuration was previously set, the following values are used:
-  ///  Video resolution: 1280 × 720 for desktop; 960 × 540 for mobile
-  ///  Frame rate: 15 fps
-  ///  Bitrate: 1600 Kbps for desktop; 1000 Kbps for mobile
-  ///  Real-time monitoring of the number of subscribers to the low stream on the receiving end, and dynamically enabling or disabling the low stream:
-  ///  When no one subscribes to the low stream, the low stream is automatically disabled to save uplink bandwidth and consumption.
-  ///  When someone subscribes to the low stream, it is enabled and reset to the SimulcastStreamConfig set in the most recent call to setDualStreamMode. If no configuration was previously set, the following values are used:
-  ///  Video resolution: 480 × 272
-  ///  Frame rate: 15 fps
-  ///  Bitrate: 500 Kbps applicationScenario1v1 (2) is for [1v1 video call](https://doc.shengwang.cn/doc/one-to-one-live/android/rtm/overview/product-overview) scenarios. The SDK optimizes strategies for low latency and high-quality experience in this scenario, improving performance such as image quality, first frame rendering time, latency on mid- to low-end devices, and smoothness under poor network conditions. applicationScenarioLiveshow (3) is for [showroom live streaming](https://doc.shengwang.cn/doc/showroom/android/overview/product-overview) scenarios. The SDK optimizes strategies for fast first frame rendering and high image clarity, such as enabling audio/video frame accelerated rendering by default to improve first frame experience (no need to call enableInstantMediaRendering separately), and enabling B-frames by default to ensure high image quality and transmission efficiency. It also enhances image quality and smoothness under poor network and low-end device conditions.
+  /// * [scenarioType] 视频业务场景。详见 VideoApplicationScenarioType 。 applicationScenarioMeeting (1) 适用于会议场景。如果用户已调用 setDualStreamMode 将小流设置为始终不发送 (disableSimulcastStream)，会议场景对小流的动态开关不生效。
+  /// 该枚举值仅适用于主播 vs 主播场景。SDK 会针对该场景启用以下策略：
+  ///  针对会议场景对小流码率要求较高的情况，自动启用多项抗弱网技术，提升小流的抗弱网能力，确保多路流订阅时接收端的流畅性。
+  ///  实时监测接收端大流的订阅人数，根据订阅人数动态调节大流配置：
+  ///  无人订阅大流时，会自动降低大流的码率和帧率，节省上行带宽和消耗。
+  ///  有人订阅大流时，大流会重置为用户最近一次调用 setVideoEncoderConfiguration 时的 VideoEncoderConfiguration 配置。如果用户此前没有进行设置，则使用如下值：
+  ///  视频分辨率：桌面端为 1280 × 720；移动端为 960 × 540
+  ///  视频帧率：15 fps
+  ///  码率：桌面端为 1600 Kbps；移动端为 1000 Kbps
+  ///  实时监测接收端小流的订阅人数，根据订阅人数动态开启和关闭小流：
+  ///  无人订阅小流时，自动关闭小流，节省上行带宽和消耗。
+  ///  有人订阅小流时，开启小流并重置为用户最近一次调用 setDualStreamMode 时的 SimulcastStreamConfig 配置。如果用户此前没有进行设置，则使用如下值：
+  ///  视频分辨率：480 × 272
+  ///  视频帧率：15 fps
+  ///  码率：500 Kbps applicationScenario1v1 (2) 适用于[视频 1v1 通话](https://doc.shengwang.cn/doc/one-to-one-live/android/rtm/overview/product-overview)场景。针对该场景低延迟、高画质的体验要求，SDK 进行了策略调优，提升了画质、首帧出图、中低端机延迟及弱网流畅度等性能表现。 applicationScenarioLiveshow (3) 适用于[秀场直播](https://doc.shengwang.cn/doc/showroom/android/overview/product-overview)场景。针对该场景对首帧出图时间和画质清晰度的高要求，SDK 进行了策略调优，例如，默认开启音视频帧加速渲染来提升首帧出图体验，无需再额外调用 enableInstantMediaRendering ，同时会默认开启 B 帧来确保较高的图像质量、提高传输效率。此外，也增强了在弱网环境和低端设备上的画质和流畅度表现。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setVideoScenario(VideoApplicationScenarioType scenarioType);
 
   /// @nodoc
   Future<void> setVideoQoEPreference(VideoQoePreferenceType qoePreference);
 
-  /// Enables the audio module.
+  /// 启用音频模块。
   ///
-  /// The audio module is enabled by default. If you have called disableAudio to disable the audio module, you can call this method to re-enable it.
-  ///  Calling this method resets the entire engine and has a relatively slow response time. You can use the following methods to control specific audio module features based on your needs: enableLocalAudio : Whether to enable microphone capture and create a local audio stream. muteLocalAudioStream : Whether to publish the local audio stream. muteRemoteAudioStream : Whether to receive and play the remote audio stream. muteAllRemoteAudioStreams : Whether to receive and play all remote audio streams.
-  ///  When calling this method in a channel, it resets the settings of enableLocalAudio, muteRemoteAudioStream, and muteAllRemoteAudioStreams. Use with caution.
+  /// 音频模块默认开启。如果你调用 disableAudio 关闭了音频模块，可调用该方法重新开启。
+  ///  调用该方法会重置整个引擎，响应时间较慢。你可以根据实际需求用以下方法来独立控制音频模块的某一项功能： enableLocalAudio : 是否启动麦克风采集并创建本地音频流。 muteLocalAudioStream : 是否发布本地音频流。 muteRemoteAudioStream : 是否接收并播放远端音频流。 muteAllRemoteAudioStreams : 是否接收并播放所有远端音频流。
+  ///  在频道内调用该方法时，会重置 enableLocalAudio 、 muteRemoteAudioStream 和 muteAllRemoteAudioStreams 的设置，需谨慎使用。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableAudio();
 
-  /// Disables the audio module.
+  /// 关闭音频模块。
   ///
-  /// The audio module is enabled by default. You can call this method to disable the audio module. This method resets the entire engine and has a relatively slow response time. Therefore, Agora recommends using the following methods to control the audio module: enableLocalAudio : Whether to enable microphone capture and create a local audio stream. enableLoopbackRecording : Whether to enable sound card capture. muteLocalAudioStream : Whether to publish the local audio stream. muteRemoteAudioStream : Whether to receive and play the remote audio stream. muteAllRemoteAudioStreams : Whether to receive and play all remote audio streams.
+  /// 音频模块默认开启，你可以调用该方法关闭音频模块。 该方法重置整个引擎，响应时间较慢，因此声网建议使用如下方法来控制音频模块： enableLocalAudio ：是否启动麦克风采集并创建本地音频流。 enableLoopbackRecording ：是否开启声卡采集。 muteLocalAudioStream ：是否发布本地音频流。 muteRemoteAudioStream ：是否接收并播放远端音频流。 muteAllRemoteAudioStreams ：是否接收并播放所有远端音频流。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> disableAudio();
 
-  /// Sets the audio encoding profile and audio scenario.
+  /// 设置音频编码属性和音频场景。
   ///
-  /// Due to iOS system limitations, some audio routes cannot be recognized in communication volume mode. Therefore, if you need to use an external sound card, it is recommended to set the audio scenario to the high-quality scenario audioScenarioGameStreaming (3). In this scenario, the SDK switches to media volume to avoid the issue.
+  /// 由于 iOS 系统限制，部分音频路由在通话音量模式下无法识别。因此，如需使用外接声卡，建议将音频应用场景设置为高音质场景 audioScenarioGameStreaming (3)。在这种场景下，SDK 会切换到媒体音量规避该问题。
   ///
-  /// * [profile] Audio encoding profile, including sample rate, bitrate, encoding mode, and number of channels. See AudioProfileType.
-  /// * [scenario] Audio scenario. The device volume type varies under different audio scenarios.
-  /// See AudioScenarioType.
+  /// * [profile] 音频编码属性，包含采样率、码率、编码模式和声道数。详见 AudioProfileType 。
+  /// * [scenario] 音频场景。不同的音频场景下，设备的音量类型是不同的。
+  /// 详见 AudioScenarioType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAudioProfile(
       {required AudioProfileType profile,
       AudioScenarioType scenario = AudioScenarioType.audioScenarioDefault});
 
-  /// Sets the audio scenario.
+  /// 设置音频场景。
   ///
-  /// Due to iOS system limitations, some audio routes cannot be recognized in communication volume mode. Therefore, if you need to use an external sound card, it is recommended to set the audio scenario to the high-quality scenario audioScenarioGameStreaming (3). In this scenario, the SDK switches to media volume to avoid the issue.
+  /// 由于 iOS 系统限制，部分音频路由在通话音量模式下无法识别。因此，如需使用外接声卡，建议将音频应用场景设置为高音质场景 audioScenarioGameStreaming (3)。在这种场景下，SDK 会切换到媒体音量规避该问题。
   ///
-  /// * [scenario] Audio scenario. The device volume type varies under different audio scenarios.
-  /// See AudioScenarioType.
+  /// * [scenario] 音频场景。不同的音频场景下，设备的音量类型是不同的。
+  /// 详见 AudioScenarioType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAudioScenario(AudioScenarioType scenario);
 
-  /// Enables or disables local audio capture.
+  /// 开启或关闭本地音频采集。
   ///
-  /// When a user joins a channel, the audio function is enabled by default. This method can disable or re-enable the local audio function, that is, stop or restart local audio capture.
-  /// The difference between this method and muteLocalAudioStream is: enableLocalAudio : Enables or disables local audio capture and processing. Using enableLocalAudio to disable or enable local capture will cause a brief interruption in hearing remote playback locally. muteLocalAudioStream : Stops or resumes sending the local audio stream without affecting the capture status.
+  /// 当用户加入频道时，音频功能默认是开启的。该方法可以关闭或重新开启本地音频功能，即停止或重新开始本地音频采集。
+  /// 该方法与 muteLocalAudioStream 的区别在于： enableLocalAudio : 开启或关闭本地音频采集及处理。使用 enableLocalAudio 关闭或开启本地采集后，本地听远端播放会有短暂中断。 muteLocalAudioStream : 停止或继续发送本地音频流，不影响音频的采集状态。
   ///
-  /// * [enabled] true : Re-enables the local audio function, i.e., enables local audio capture (default); false : Disables the local audio function, i.e., stops local audio capture.
+  /// * [enabled] true : 重新开启本地音频功能，即开启本地音频采集（默认）； false : 关闭本地音频功能，即停止本地音频采集。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableLocalAudio(bool enabled);
 
-  /// Stops or resumes publishing the local audio stream.
+  /// 取消或恢复发布本地音频流。
   ///
-  /// This method controls whether to publish the locally captured audio stream. Not publishing the local audio stream does not disable the audio capture device, so it does not affect the audio capture status.
+  /// 该方法用于控制是否发布本地采集的音频流。如果不发布本地采集的音频流，也不会禁用音频采集设备，所以不影响音频的采集状态。
   ///
-  /// * [mute] Whether to stop publishing the local audio stream. true : Stop publishing. false : (Default) Publish.
+  /// * [mute] 是否取消发布本地音频流。 true : 取消发布。 false :（默认）发布。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteLocalAudioStream(bool mute);
 
-  /// Stops or resumes subscribing to all remote users' audio streams.
+  /// 取消或恢复订阅所有远端用户的音频流。
   ///
-  /// After this method is called successfully, the local user stops or resumes subscribing to all remote users' audio streams, including streams from users who join the channel after this method is called. By default, the SDK subscribes to all remote users' audio streams when joining a channel. To change this behavior, you can set autoSubscribeAudio to false when calling joinChannel, so that no audio streams are subscribed to upon joining.
-  /// If you call enableAudio or disableAudio after this method, the later call takes effect.
+  /// 成功调用该方法后，本地用户会取消或恢复订阅所有远端用户的音频流，包括在调用该方法后加入频道的用户的音频流。 SDK 默认在加入频道时订阅所有远端用户的音频流，如果要修改此行为，可以在调用 joinChannel 加入频道时设置 autoSubscribeAudio 为 false ，即可在加入频道时取消订阅所有用户的音频流。
+  /// 如果在调用该方法之后又调用了 enableAudio 或 disableAudio ，则后调用的方法会生效。
   ///
-  /// * [mute] Whether to stop subscribing to all remote users' audio streams: true : Stop subscribing to all remote users' audio streams. false : (Default) Subscribe to all remote users' audio streams.
+  /// * [mute] 是否取消订阅所有远端用户的音频流： true : 取消订阅所有远端用户的音频流。 false :（默认）订阅所有远端用户的音频流。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteAllRemoteAudioStreams(bool mute);
 
-  /// Stops or resumes subscribing to the audio stream of a specified remote user.
+  /// 取消或恢复订阅指定远端用户的音频流。
   ///
-  /// * [uid] The user ID of the specified user.
-  /// * [mute] Whether to stop subscribing to the audio stream of the specified remote user. true : Stop subscribing to the audio stream of the specified user. false : (Default) Subscribe to the audio stream of the specified user.
+  /// * [uid] 指定用户的用户 ID。
+  /// * [mute] 是否取消订阅指定远端用户的音频流。 true : 取消订阅指定用户的音频流。 false :（默认）订阅指定用户的音频流。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteRemoteAudioStream({required int uid, required bool mute});
 
-  /// Stops or resumes publishing the local video stream.
+  /// 取消或恢复发布本地视频流。
   ///
-  /// This method controls whether to publish the locally captured video stream. Not publishing the local video stream does not disable the video capture device, so it does not affect the video capture status.
-  /// Compared to calling enableLocalVideo(false) to stop video capture and thus stop publishing, this method responds faster.
+  /// 该方法用于控制是否发布本地采集的视频流。如果不发布本地采集的视频流，也不会禁用视频采集设备，所以不影响视频的采集状态。
+  /// 相比于调用 enableLocalVideo (false) 关闭本地视频流采集、从而取消发布本地视频流的方法，该方法响应速度更快。
   ///
-  /// * [mute] Whether to stop sending the local video stream. true : Stop sending the local video stream. false : (Default) Send the local video stream.
+  /// * [mute] 是否取消发送本地视频流。 true : 取消发送本地视频流。 false : （默认）发送本地视频流。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteLocalVideoStream(bool mute);
 
-  /// Enables or disables local video capture.
+  /// 开关本地视频采集。
   ///
-  /// This method disables or re-enables local video capture and does not affect receiving remote video.
-  /// After calling enableVideo, local video capture is enabled by default.
-  /// If you call enableLocalVideo(false) in a channel to disable local video capture, it also stops publishing the video stream in the channel. To re-enable, call enableLocalVideo(true), then call updateChannelMediaOptions and set the options parameter to publish the captured video stream to the channel.
-  /// After successfully enabling or disabling local video capture, the remote side receives the onRemoteVideoStateChanged callback.
-  ///  This method can be called before or after joining a channel. However, settings made before joining only take effect after joining.
-  ///  This method sets the internal engine to an enabled state and remains effective after leaving the channel.
+  /// 该方法禁用或重新启用本地视频采集，不影响接收远端视频。
+  /// 调用 enableVideo 后，本地视频采集即默认开启。
+  /// 如果你在频道内调用 enableLocalVideo (false) 关闭本地视频采集，也会同时停止在频道内发布视频流。如果想要重新开启，则可调用 enableLocalVideo (true)，然后调用 updateChannelMediaOptions 并设置 options 参数，将本地采集的视频流发布到频道中。
+  /// 成功禁用或启用本地视频采集后，远端会触发 onRemoteVideoStateChanged 回调。
+  ///  该方法在加入频道前后均可调用，但加入频道前调用的设置，在加入频道后才会生效。
+  ///  该方法设置内部引擎为启用状态，在离开频道后仍然有效。
   ///
-  /// * [enabled] Whether to enable local video capture. true : (Default) Enable local video capture. false : Disable local video capture. After disabling, the remote user cannot receive the local video stream, but the local user can still receive the remote video stream. When set to false, this method does not require a local camera.
+  /// * [enabled] 是否开启本地视频采集。 true :（默认）开启本地视频采集。 false : 关闭本地视频采集。关闭后，远端用户会接收不到本地用户的视频流；但本地用户依然可以接收远端用户的视频流。设置为 false 时，该方法不需要本地有摄像头。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableLocalVideo(bool enabled);
 
-  /// Stops or resumes subscribing to all remote users' video streams.
+  /// 取消或恢复订阅所有远端用户的视频流。
   ///
-  /// After this method is called successfully, the local user stops or resumes subscribing to all remote users' video streams, including streams from users who join the channel after this method is called. By default, the SDK subscribes to all remote users' video streams when joining a channel. To change this behavior, you can set autoSubscribeVideo to false when calling joinChannel, so that no video streams are subscribed to upon joining.
-  /// If you call enableVideo or disableVideo after this method, the later call takes effect.
+  /// 成功调用该方法后，本地用户会取消或恢复订阅所有远端用户的视频流，包括在调用该方法后加入频道的用户的视频流。 SDK 默认在加入频道时订阅所有远端用户的视频流，如果要修改此行为，可以在调用 joinChannel 加入频道时设置 autoSubscribeVideo 为 false ，即可在加入频道时取消订阅所有用户的视频流。
+  /// 如果在调用该方法之后又调用了 enableVideo 或 disableVideo ，则后调用的方法会生效。
   ///
-  /// * [mute] Whether to stop subscribing to all remote users' video streams. true : Stop subscribing to all users' video streams. false : (Default) Subscribe to all users' video streams.
+  /// * [mute] 是否取消订阅所有远端用户的视频流。 true : 取消订阅所有用户的视频流。 false :（默认）订阅所有用户的视频流。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteAllRemoteVideoStreams(bool mute);
 
-  /// Sets the default video stream type to subscribe to.
+  /// 设置默认订阅的视频流类型。
   ///
-  /// Depending on the sender's default behavior and the specific settings of setDualStreamMode, the receiver's call to this method falls into the following cases:
-  ///  By default, the SDK enables the small stream adaptive mode (autoSimulcastStream) on the sender side, meaning the sender only sends the high-quality stream. Only receivers with host role can call this method to request the low-quality stream. Once the sender receives the request, it starts sending the low-quality stream. All users in the channel can then call this method to switch to low-quality stream subscription mode.
-  ///  If the sender calls setDualStreamMode and sets mode to disableSimulcastStream (never send low-quality stream), this method has no effect.
-  ///  If the sender calls setDualStreamMode and sets mode to enableSimulcastStream (always send low-quality stream), both hosts and audience can call this method to switch to low-quality stream subscription mode. When receiving the low-quality stream, the SDK dynamically adjusts the video stream size according to the video window size to save bandwidth and computing resources. The default aspect ratio of the low-quality stream is consistent with the high-quality stream. Based on the current high-quality stream's aspect ratio, the system automatically assigns resolution, frame rate, and bitrate to the low-quality stream. If you call both this method and setRemoteVideoStreamType, the SDK uses the settings in setRemoteVideoStreamType.
+  /// 取决于发送端的默认行为和调用 setDualStreamMode 的具体设置，接收端调用该方法分为以下几种情况：
+  ///  SDK 默认在发送端开启小流自适应模式 (autoSimulcastStream)，即：发送端仅发送大流，仅主播身份的接收端可以调用该方法发起小流申请，发送端收到申请后开始自动发送小流，此时频道内所有用户均可调用该方法切换到小流订阅模式。
+  ///  当发送端调用 setDualStreamMode 并将 mode 设置为 disableSimulcastStream （始终不发送小流），则调用该方法不生效。
+  ///  当发送端调用 setDualStreamMode 并将 mode 设置为 enableSimulcastStream （始终发送小流），则主播或观众身份的接收端均可调用该方法切换到小流订阅模式。 在接收视频小流时，SDK 会根据视频窗口的大小动态调整对应视频流的大小，以节约带宽和计算资源。视频小流默认的宽高比和视频大流的宽高比一致。根据当前大流的宽高比，系统会自动分配小流的分辨率、帧率及码率。 如果你既调用了该方法，也调用了 setRemoteVideoStreamType ，则 SDK 以 setRemoteVideoStreamType 中的设置为准。
   ///
-  /// * [streamType] The default video stream type to subscribe to: VideoStreamType.
+  /// * [streamType] 默认订阅的视频流类型: VideoStreamType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteDefaultVideoStreamType(VideoStreamType streamType);
 
-  /// Stops or resumes subscribing to the video stream of a specified remote user.
+  /// 取消或恢复订阅指定远端用户的视频流。
   ///
-  /// * [uid] The user ID of the specified user.
-  /// * [mute] Whether to stop subscribing to the video stream of the specified remote user. true : Stop subscribing to the video stream of the specified user. false : (Default) Subscribe to the video stream of the specified user.
+  /// * [uid] 指定用户的用户 ID。
+  /// * [mute] 是否取消订阅指定远端用户的视频流。 true : 取消订阅指定用户的视频流。 false : （默认）订阅指定用户的视频流。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteRemoteVideoStream({required int uid, required bool mute});
 
-  /// Sets the video stream type to subscribe to.
+  /// 设置订阅的视频流类型。
   ///
-  /// Depending on the sender's default behavior and the specific settings of setDualStreamMode, the receiver's call to this method falls into the following cases:
-  ///  By default, the SDK enables the small stream adaptive mode (autoSimulcastStream) on the sender side, meaning the sender only sends the high-quality stream. Only receivers with host role can call this method to request the low-quality stream. Once the sender receives the request, it starts sending the low-quality stream. All users in the channel can then call this method to switch to low-quality stream subscription mode.
-  ///  If the sender calls setDualStreamMode and sets mode to disableSimulcastStream (never send low-quality stream), this method has no effect.
-  ///  If the sender calls setDualStreamMode and sets mode to enableSimulcastStream (always send low-quality stream), both hosts and audience can call this method to switch to low-quality stream subscription mode. When receiving the low-quality stream, the SDK dynamically adjusts the video stream size according to the video window size to save bandwidth and computing resources. The default aspect ratio of the low-quality stream is consistent with the high-quality stream. Based on the current high-quality stream's aspect ratio, the system automatically assigns resolution, frame rate, and bitrate to the low-quality stream.
-  ///  This method can be called before or after joining a channel.
-  ///  If you call both this method and setRemoteDefaultVideoStreamType, the SDK uses the settings in this method.
+  /// 取决于发送端的默认行为和调用 setDualStreamMode 的具体设置，接收端调用该方法分为以下几种情况：
+  ///  SDK 默认在发送端开启小流自适应模式 (autoSimulcastStream)，即：发送端仅发送大流，仅主播身份的接收端可以调用该方法发起小流申请，发送端收到申请后开始自动发送小流，此时频道内所有用户均可调用该方法切换到小流订阅模式。
+  ///  当发送端调用 setDualStreamMode 并将 mode 设置为 disableSimulcastStream （始终不发送小流），则调用该方法不生效。
+  ///  当发送端调用 setDualStreamMode 并将 mode 设置为 enableSimulcastStream （始终发送小流），则主播或观众身份的接收端均可调用该方法切换到小流订阅模式。 在接收视频小流时，SDK 会根据视频窗口的大小动态调整对应视频流的大小，以节约带宽和计算资源。视频小流默认的宽高比和视频大流的宽高比一致。根据当前大流的宽高比，系统会自动分配小流的分辨率、帧率及码率。
+  ///  该方法在加入频道前后都能调用。
+  ///  如果既调用了该方法，也调用了 setRemoteDefaultVideoStreamType ，则 SDK 以该方法中的设置为准。
   ///
-  /// * [uid] User ID.
-  /// * [streamType] Video stream type: VideoStreamType.
+  /// * [uid] 用户 ID。
+  /// * [streamType] 视频流类型: VideoStreamType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteVideoStreamType(
       {required int uid, required VideoStreamType streamType});
 
-  /// Sets the subscription options for the remote video stream.
+  /// 设置远端视频流的订阅选项。
   ///
-  /// When the remote side sends dual streams, you can call this method to set the subscription options for the remote video stream. The SDK's default subscription behavior for remote video streams depends on the type of registered video observer:
-  ///  If VideoFrameObserver is registered, the SDK subscribes to both raw and encoded data by default.
-  ///  If VideoEncodedFrameObserver is registered, the SDK subscribes to encoded data only by default.
-  ///  If both observers are registered, the SDK follows the most recently registered one. For example, if VideoFrameObserver is registered later, the SDK subscribes to both raw and encoded data by default. If you want to change the above default behavior or set different subscription options for different uid s, you can call this method.
+  /// 当远端发送双流时，可调用此方法来设置远端视频流的订阅选项。SDK 对远端视频流的默认订阅行为取决于注册的视频观测器类型：
+  ///  如果注册的是 VideoFrameObserver 观测器，则默认订阅原始数据和编码后的数据。
+  ///  如果注册的是 VideoEncodedFrameObserver 观测器，则默认仅订阅编码后的数据。
+  ///  如果注册了两种观测器，则默认跟随后注册的视频观测器。举例来说，如果后注册的是 VideoFrameObserver 观测器，则默认订阅原始数据和编码后的数据。 如果你想修改以上默认行为，或者想针对不同 uid 设置不同的订阅选项，可调用该方法设置。
   ///
-  /// * [uid] Remote user ID.
-  /// * [options] Video stream subscription settings. See VideoSubscriptionOptions.
+  /// * [uid] 远端用户 ID。
+  /// * [options] 视频流的订阅设置，详见 VideoSubscriptionOptions 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteVideoSubscriptionOptions(
       {required int uid, required VideoSubscriptionOptions options});
 
-  /// Sets the audio subscription blocklist.
+  /// 设置音频订阅黑名单。
   ///
-  /// You can call this method to specify the audio streams you do not want to subscribe to.
-  ///  This method can be called before or after joining a channel.
-  ///  The audio subscription blocklist is not affected by muteRemoteAudioStream, muteAllRemoteAudioStreams, or autoSubscribeAudio in ChannelMediaOptions.
-  ///  After setting the blocklist, if you leave and rejoin the channel, the blocklist remains effective.
-  ///  If a user appears in both the audio subscription allowlist and blocklist, only the blocklist takes effect.
+  /// 你可以调用该方法指定不订阅的音频流。
+  ///  该方法在加入频道前后均可调用。
+  ///  音频订阅黑名单不受 muteRemoteAudioStream 、 muteAllRemoteAudioStreams 以及 ChannelMediaOptions 中的 autoSubscribeAudio 影响。
+  ///  设置订阅黑名单后，如果离开当前频道后再重新加入频道，黑名单依然生效。
+  ///  如果某个用户同时在音频订阅黑名单和白名单中，仅订阅黑名单生效。
   ///
-  /// * [uidList] The list of user IDs in the audio subscription blocklist.
-  /// If you want to exclude a specific user's audio stream from being subscribed to, add that user's ID to this list. If you want to remove a user from the blocklist, call the setSubscribeAudioBlocklist method again and update the list of user IDs so that it no longer contains the uid of the user you want to remove.
-  /// * [uidNumber] The number of users in the blocklist.
+  /// * [uidList] 订阅黑名单的用户 ID 列表。
+  /// 如果你想指定不订阅某一发流用户的音频流，将该用户的 ID 加入此列表中。如果你想要将某一用户从订阅黑名单中移除，需要重新调用 setSubscribeAudioBlocklist 方法更新订阅黑名单的用户 ID 列表，使其不包含你想移除的用户的 uid 。
+  /// * [uidNumber] 黑名单用户 ID 列表中的用户数量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setSubscribeAudioBlocklist(
       {required List<int> uidList, required int uidNumber});
 
-  /// Sets the audio subscription allowlist.
+  /// 设置音频订阅白名单。
   ///
-  /// You can call this method to specify the audio streams you want to subscribe to.
-  ///  This method can be called before or after joining a channel.
-  ///  The audio subscription allowlist is not affected by muteRemoteAudioStream, muteAllRemoteAudioStreams, or autoSubscribeAudio in ChannelMediaOptions.
-  ///  After setting the allowlist, if you leave and rejoin the channel, the allowlist remains effective.
-  ///  If a user appears in both the audio subscription allowlist and blocklist, only the blocklist takes effect.
+  /// 你可以调用该方法指定想要订阅的音频流。
+  ///  该方法在加入频道前后均可调用。
+  ///  音频订阅白名单不受 muteRemoteAudioStream 、 muteAllRemoteAudioStreams 以及 ChannelMediaOptions 中的 autoSubscribeAudio 的影响。
+  ///  设置订阅白名单后，如果离开当前频道后再重新加入频道，白名单依然生效。
+  ///  如果某个用户同时在音频订阅黑名单和白名单中，仅订阅黑名单生效。
   ///
-  /// * [uidList] The list of user IDs in the audio subscription allowlist.
-  /// If you want to subscribe to a specific user's audio stream, add that user's ID to this list. If you want to remove a user from the allowlist, call the setSubscribeAudioAllowlist method again and update the list of user IDs so that it no longer contains the uid of the user you want to remove.
-  /// * [uidNumber] The number of users in the allowlist.
+  /// * [uidList] 音频订阅白名单的用户 ID 列表。
+  /// 如果你想指定订阅某一发流用户的音频流，将该用户的 ID 加入此列表中。如果你想要将某一用户从订阅白名单中移除，需要重新调用 setSubscribeAudioAllowlist 方法更新音频订阅白名单的用户 ID 列表，使其不包含你想移除的用户的 uid 。
+  /// * [uidNumber] 白名单用户 ID 列表中的用户数量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setSubscribeAudioAllowlist(
       {required List<int> uidList, required int uidNumber});
 
-  /// Sets the video subscription blocklist.
+  /// 设置视频订阅黑名单。
   ///
-  /// You can call this method to specify the video streams you do not want to subscribe to.
-  ///  You can call this method either before or after joining a channel.
-  ///  The video subscription blocklist is not affected by muteRemoteVideoStream, muteAllRemoteVideoStreams, or the autoSubscribeVideo setting in ChannelMediaOptions.
-  ///  After setting the blocklist, it remains effective even if you leave and rejoin the channel.
-  ///  If a user is in both the audio subscription blocklist and allowlist, only the blocklist takes effect.
+  /// 你可以调用该方法指定不订阅的视频流。
+  ///  该方法在加入频道前后均可调用。
+  ///  视频订阅黑名单不受 muteRemoteVideoStream 、 muteAllRemoteVideoStreams 以及 ChannelMediaOptions 中的 autoSubscribeVideo 的影响。
+  ///  设置订阅黑名单后，如果离开当前频道后再重新加入频道，黑名单依然生效。
+  ///  如果某个用户同时在音频订阅黑名单和白名单中，仅订阅黑名单生效。
   ///
-  /// * [uidList] The user ID list of the video subscription blocklist.
-  /// If you want to unsubscribe from the video stream of a specific publishing user, add that user's ID to this list. If you want to remove a user from the blocklist, you need to call the setSubscribeVideoBlocklist method again to update the user ID list of the subscription blocklist so that it no longer contains the uid of the user you want to remove.
-  /// * [uidNumber] The number of users in the blocklist.
+  /// * [uidList] 视频订阅黑名单的用户 ID 列表。
+  /// 如果你想指定不订阅某一发流用户的视频流，将该用户的 ID 加入此列表中。如果你想要将某一用户从订阅黑名单中移除，需要重新调用 setSubscribeVideoBlocklist 方法更新订阅黑名单的用户 ID 列表，使其不包含你想移除的用户的 uid 。
+  /// * [uidNumber] 黑名单用户 ID 列表中的用户数量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setSubscribeVideoBlocklist(
       {required List<int> uidList, required int uidNumber});
 
-  /// Sets the video subscription allowlist.
+  /// 设置视频订阅白名单。
   ///
-  /// You can call this method to specify the video streams you want to subscribe to.
-  ///  This method can be called before or after joining a channel.
-  ///  The video subscription allowlist is not affected by muteRemoteVideoStream, muteAllRemoteVideoStreams, or autoSubscribeVideo in ChannelMediaOptions.
-  ///  After setting the allowlist, if you leave and rejoin the channel, the allowlist remains effective.
-  ///  If a user appears in both the audio subscription allowlist and blocklist, only the blocklist takes effect.
+  /// 你可以调用该方法指定想要订阅的视频流。
+  ///  该方法在加入频道前后均可调用。
+  ///  视频订阅白名单不受 muteRemoteVideoStream 、 muteAllRemoteVideoStreams 以及 ChannelMediaOptions 中的 autoSubscribeVideo 的影响。
+  ///  设置订阅白名单后，如果离开当前频道后再重新加入频道，白名单依然生效。
+  ///  如果某个用户同时在音频订阅黑名单和白名单中，仅订阅黑名单生效。
   ///
-  /// * [uidList] The list of user IDs in the video subscription allowlist.
-  /// If you want to subscribe only to a specific user's video stream, add that user's ID to this list. If you want to remove a user from the allowlist, call the setSubscribeVideoAllowlist method again and update the list of user IDs so that it no longer contains the uid of the user you want to remove.
-  /// * [uidNumber] The number of users in the allowlist.
+  /// * [uidList] 视频订阅白名单的用户 ID 列表。
+  /// 如果你想指定仅订阅某一发流用户的视频流，将该用户的 ID 加入此列表中。如果你想要将某一用户从订阅白名单中移除，需要重新调用 setSubscribeVideoAllowlist 方法更新音频订阅白名单的用户 ID 列表，使其不包含你想移除的用户的 uid 。
+  /// * [uidNumber] 白名单用户 ID 列表中的用户数量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setSubscribeVideoAllowlist(
       {required List<int> uidList, required int uidNumber});
 
-  /// Enables audio volume indication.
+  /// 启用用户音量提示。
   ///
-  /// This method allows the SDK to periodically report volume information of the local user who is sending a stream and up to 3 remote users with the highest instantaneous volume to the app.
+  /// 该方法允许 SDK 定期向 App 报告本地发流用户和瞬时音量最高的远端用户（最多 3 位）的音量相关信息。
   ///
-  /// * [interval] The time interval for volume indication:
-  ///  ≤ 0: Disables the volume indication.
-  ///  > 0: The interval in milliseconds for volume indication. It is recommended to set it greater than 100 ms. Must not be less than 10 ms, otherwise the onAudioVolumeIndication callback will not be received.
-  /// * [smooth] The smoothing factor that specifies the sensitivity of the volume indication. The range is [0,10], and the recommended value is 3. The larger the value, the more sensitive the fluctuation; the smaller the value, the smoother the fluctuation.
-  /// * [reportVad] true : Enables local voice activity detection. When enabled, the vad parameter in the onAudioVolumeIndication callback reports whether voice is detected locally. false : (Default) Disables local voice activity detection. Unless the engine automatically detects local voice, the vad parameter in the onAudioVolumeIndication callback does not report local voice detection.
+  /// * [interval] 指定音量提示的时间间隔：
+  ///  ≤ 0: 禁用音量提示功能。
+  ///  > 0: 返回音量提示的间隔，单位为毫秒。建议设置到大于 100 毫秒，不得小于 10 毫秒，否则会收不到 onAudioVolumeIndication 回调。
+  /// * [smooth] 平滑系数，指定音量提示的灵敏度。取值范围为 [0,10]，建议值为 3。数字越大，波动越灵敏；数字越小，波动越平滑。
+  /// * [reportVad] true ：开启本地人声检测功能。开启后， onAudioVolumeIndication 回调的 vad 参数会报告是否在本地检测到人声。 false ：（默认）关闭本地人声检测功能。除引擎自动进行本地人声检测的场景外， onAudioVolumeIndication 回调的 vad 参数不会报告是否在本地检测到人声。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableAudioVolumeIndication(
       {required int interval, required int smooth, required bool reportVad});
 
-  /// @nodoc
-  Future<void> startAudioRecording(AudioRecordingConfiguration config);
-
-  /// Registers the audio encoded frame observer.
+  /// 开始客户端录音并进行录音配置。
   ///
-  /// Call this method after joining a channel.
-  ///  Since this method and startAudioRecording both configure audio content and quality, it is not recommended to use them together. Otherwise, only the one called later takes effect.
+  /// SDK 支持通话过程中在客户端进行录音。调用该方法后，你可以录制频道内用户的音频，并得到一个录音文件。录音文件仅支持下列格式：
+  ///  WAV: 音质保真度较高，文件较大。例如，采样率为 32000 Hz，录音时长为 10 分钟的文件大小约为 73 M。
+  ///  AAC: 音质保真度较低，文件较小。例如，采样率为 32000 Hz，录音音质为 audioRecordingQualityMedium，录音时长为 10 分钟的文件大小约为 2 M。 用户离开频道后，录音会自动停止。
   ///
-  /// * [config] Configuration for the encoded audio observer. See AudioEncodedFrameObserverConfig.
-  /// * [observer] Observer for encoded audio. See AudioEncodedFrameObserver.
+  /// * [config] 录音配置。详见 AudioRecordingConfiguration 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  Future<void> startAudioRecording(AudioRecordingConfiguration config);
+
+  /// 注册音频编码数据观测器。
+  ///
+  /// 请在加入频道后调用该方法。
+  ///  由于该方法和 startAudioRecording 都会设置音频内容和音质，不建议该方法和 startAudioRecording 一起使用。否则，只有后调用的方法会生效。
+  ///
+  /// * [config] 编码后音频的观测器设置。详见 AudioEncodedFrameObserverConfig 。
+  /// * [observer] 编码后音频的观测器。详见 AudioEncodedFrameObserver 。
+  ///
+  /// Returns
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void registerAudioEncodedFrameObserver(
       {required AudioEncodedFrameObserverConfig config,
       required AudioEncodedFrameObserver observer});
 
-  /// @nodoc
+  /// 停止客户端录音。
+  ///
+  /// Returns
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopAudioRecording();
 
   /// @nodoc
   Future<MediaPlayer?> createMediaPlayer();
 
-  /// Destroys the media player.
+  /// 销毁媒体播放器。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> destroyMediaPlayer(MediaPlayer mediaPlayer);
 
-  /// @nodoc
-  Future<MediaRecorder?> createMediaRecorder(RecorderStreamInfo info);
-
-  /// @nodoc
-  Future<void> destroyMediaRecorder(MediaRecorder mediaRecorder);
-
-  /// Starts playing a music file.
+  /// 创建音视频录制对象。
   ///
-  /// See [Supported audio file formats](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format) for the audio formats supported by this method. If the local music file does not exist, the file format is not supported, or the online music file URL cannot be accessed, the SDK reports audioMixingReasonCanNotOpen.
-  ///  Using this method to play short sound effects may cause playback failure. To play sound effects, use playEffect instead.
-  ///  If you need to call this method multiple times, make sure the interval between calls is more than 500 ms.
-  ///  When calling this method on Android, note the following:
-  ///  Make sure to use a device with Android 4.2 or above and API level no lower than 16.
-  ///  If playing online music files, avoid using redirect URLs. Redirect URLs may not work on some devices.
-  ///  If calling this method on an emulator, make sure the music file is under the /sdcard/ directory and in MP3 format.
+  /// 在开始音视频流录制前，你需要调用该方法创建一个音视频录制对象。SDK 支持录制本地或远端用户的多个音视频流，你可以多次调用该方法创建录制对象，并通过 info 参数指定需要录制的频道名称和发流的用户 ID。
+  /// 成功创建后，你需要调用 setMediaRecorderObserver 注册录制对象的观测器来监听录制的相关回调，然后再调用 startRecording 开始录制。
   ///
-  /// * [filePath] File path:
-  ///  Android: File path, must include the file name and extension. Supports URL of online files, URI of local files, absolute paths, or paths starting with /assets/. Accessing local files via absolute path may cause permission issues. It is recommended to use URI. For example: content://com.android.providers.media.documents/document/audio%3A14441.
-  ///  Windows: Absolute path or URL to the audio file, must include the file name and extension. For example: C:\music\audio.mp4.
-  ///  iOS or macOS: Absolute path or URL to the audio file, must include the file name and extension. For example: /var/mobile/Containers/Data/audio.mp4.
-  /// * [loopback] Whether to play the music file locally only: true : Play the music file locally only. Only the local user can hear the music. false : Publish the locally played music file to remote users. Both local and remote users can hear the music.
-  /// * [cycle] Number of times to play the music file.
-  ///  > 0: Number of times to play. For example, 1 means play once.
-  ///  -1: Play in an infinite loop.
-  /// * [startPos] The playback position of the music file, in milliseconds.
+  /// * [info] 需要录制的音视频流相关信息，详见 RecorderStreamInfo 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法调用成功：返回一个 MediaRecorder 对象。
+  ///  方法调用失败：返回空指针。
+  Future<MediaRecorder?> createMediaRecorder(RecorderStreamInfo info);
+
+  /// 销毁音视频录制对象。
+  ///
+  /// 当你不需要再录制音视频流时，可以调用该方法销毁对应的音视频录制对象。如果你正在录制，请先调用 stopRecording 停止录制，再调用该方法来销毁音视频录制对象。
+  ///
+  /// * [mediaRecorder] 待销毁的 MediaRecorder 对象。
+  ///
+  /// Returns
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  Future<void> destroyMediaRecorder(MediaRecorder mediaRecorder);
+
+  /// 开始播放音乐文件。
+  ///
+  /// 该方法支持播放的音频文件格式见 [RTC SDK 支持播放哪些格式的音频文件](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format)。如果本地音乐文件不存在、文件格式不支持或无法访问在线音乐文件 URL，则 SDK 会报告 audioMixingReasonCanNotOpen。
+  ///  使用该方法播放时长较短的音效文件可能会导致播放失败。如需播放音效文件，建议使用 playEffect 。
+  ///  如需多次调用该方法，请确保调用间隔大于 500 ms。
+  ///  在 Android 平台上调用该方法时，请注意如下事项：
+  ///  请确保使用 Android 4.2 或以上设备，且 API Level 不低于 16。
+  ///  如果播放的是在线音乐文件，建议不要使用重定向地址。重定向地址在某些机型上可能无法打开。
+  ///  如果在模拟器上调用该方法，则请确保音乐文件在 /sdcard/ 目录下，且格式为 MP3。
+  ///
+  /// * [filePath] 文件路径：
+  ///  Android: 文件路径，需精确到文件名及后缀。支持在线文件的 URL 地址，本地文件的 URI 地址、绝对路径或以 /assets/ 开头的路径。通过绝对路径访问本地文件可能会遇到权限问题，建议使用 URI 地址访问本地文件。例如 content://com.android.providers.media.documents/document/audio%3A14441 。
+  ///  Windows: 音频文件的绝对路径或 URL 地址，需精确到文件名及后缀。例如 C:\music\audio.mp4 。
+  ///  iOS 或 macOS: 音频文件的绝对路径或 URL 地址，需精确到文件名及后缀。例如 /var/mobile/Containers/Data/audio.mp4 。
+  /// * [loopback] 是否只在本地播放音乐文件： true ：只在本地播放音乐文件，只有本地用户能听到音乐。 false ：将本地播放的音乐文件发布至远端，本地用户和远端用户都能听到音乐。
+  /// * [cycle] 音乐文件的播放次数。
+  ///  > 0: 播放次数。例如，1 表示播放 1 次。
+  ///  -1: 无限循环播放。
+  /// * [startPos] 音乐文件的播放位置，单位为毫秒。
+  ///
+  /// Returns
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startAudioMixing(
       {required String filePath,
       required bool loopback,
       required int cycle,
       int startPos = 0});
 
-  /// Stops playing the music file.
+  /// 停止播放音乐文件。
   ///
-  /// After calling startAudioMixing to play a music file, you can call this method to stop playback. If you only want to pause playback, call pauseAudioMixing instead.
+  /// 当你调用 startAudioMixing 方法播放音乐文件后，如需停止播放，可调用该方法。如果仅需暂停播放，请调用 pauseAudioMixing 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopAudioMixing();
 
-  /// Pauses the playback of the music file.
+  /// 暂停播放音乐文件。
   ///
-  /// After you call the startAudioMixing method to play a music file, call this method to pause the playback. To stop the playback, call stopAudioMixing.
+  /// 当你调用 startAudioMixing 方法播放音乐文件后，如需暂停播放，请调用该方法。如果你需要停止播放，请调用 stopAudioMixing 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> pauseAudioMixing();
 
-  /// Resumes the playback of the music file.
+  /// 恢复播放音乐文件。
   ///
-  /// After you call pauseAudioMixing to pause the music file, call this method to resume playback.
+  /// 当你调用 pauseAudioMixing 暂停播放音乐文件后，如需恢复播放，请调用该方法。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> resumeAudioMixing();
 
-  /// Specifies the playback audio track of the current music file.
+  /// 指定当前音乐文件的播放音轨。
   ///
-  /// After obtaining the number of audio tracks in the music file, you can call this method to specify any track for playback. For example, if a multi-track file contains songs in different languages on different tracks, you can use this method to set the playback language of the music file.
-  ///  For supported audio file formats, see [What audio formats does the RTC SDK support?](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format).
-  ///  You must call this method after calling startAudioMixing and receiving the onAudioMixingStateChanged(audioMixingStatePlaying) callback.
+  /// 获取音乐文件的音轨数量后，你可以调用该方法指定任一音轨进行播放。例如，如果一个多音轨文件的不同音轨存放了不同语言的歌曲，则你可以调用该方法设置音乐文件的播放语言。
+  ///  该方法支持的音频文件格式见 [RTC SDK 支持播放哪些格式的音频文件？](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format)。
+  ///  你需要在调用 startAudioMixing 并收到 onAudioMixingStateChanged(audioMixingStatePlaying) 回调后调用该方法。
   ///
-  /// * [index] The specified playback audio track. The value must be greater than or equal to 0 and less than the return value of getAudioTrackCount.
+  /// * [index] 指定的播放音轨。取值范围应大于等于 0 且小于 getAudioTrackCount 的返回值。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> selectAudioTrack(int index);
 
-  /// Gets the audio track index of the current music file.
+  /// 获取当前音乐文件的音轨索引。
   ///
-  /// You need to call this method after calling startAudioMixing and receiving the onAudioMixingStateChanged(audioMixingStatePlaying) callback.
+  /// 你需要在调用 startAudioMixing 并收到 onAudioMixingStateChanged(audioMixingStatePlaying) 回调后调用该方法。
   ///
   /// Returns
-  /// When the method call succeeds, returns the audio track index of the current music file.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法调用成功时，返回当前音乐文件的音轨索引。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> getAudioTrackCount();
 
-  /// Adjusts the playback volume of the music file.
+  /// 调节音乐文件的播放音量。
   ///
-  /// This method adjusts the playback volume of the mixed music file for both local and remote playback. Calling this method does not affect the playback volume of sound effects set via the playEffect method.
+  /// 该方法调节混音音乐文件在本端和远端的播放音量大小。 调用该方法不会影响 playEffect 方法中设置的音效文件播放音量。
   ///
-  /// * [volume] Volume range of the music file is 0~100. 100 (default) is the original file volume.
+  /// * [volume] 音乐文件音量范围为 0~100。100 （默认值）为原始文件音量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustAudioMixingVolume(int volume);
 
-  /// Adjusts the remote playback volume of the music file.
+  /// 调节音乐文件远端播放音量。
   ///
-  /// This method adjusts the remote playback volume of the mixed music file.
+  /// 该方法调节混音音乐文件在远端的播放音量大小。
   ///
-  /// * [volume] Volume of the music file. The range is [0,100], where 100 (default) is the original volume.
+  /// * [volume] 音乐文件音量。取值范围为 [0,100]，100 （默认值）为原始音量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustAudioMixingPublishVolume(int volume);
 
-  /// Gets the remote playback volume of the music file.
+  /// 获取音乐文件的远端播放音量。
   ///
-  /// This interface helps developers troubleshoot volume-related issues. You need to call this method after calling startAudioMixing and receiving the onAudioMixingStateChanged(audioMixingStatePlaying) callback.
+  /// 该接口可以方便开发者排查音量相关问题。 你需要在调用 startAudioMixing 并收到 onAudioMixingStateChanged(audioMixingStatePlaying) 回调后调用该方法。
   ///
   /// Returns
-  /// ≥ 0: The method call succeeds and returns the volume value, range is [0,100].
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// ≥ 0: 方法调用成功则返回音量值，范围为 [0,100]。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> getAudioMixingPublishVolume();
 
-  /// Adjusts the local playback volume of the music file.
+  /// 调节音乐文件在本地播放的音量。
   ///
-  /// * [volume] Volume of the music file. The range is [0,100], where 100 (default) is the original volume.
+  /// * [volume] 音乐文件音量。取值范围为 [0,100]，100 （默认值）为原始音量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustAudioMixingPlayoutVolume(int volume);
 
-  /// Gets the local playback volume of the music file.
+  /// 获取音乐文件的本地播放音量。
   ///
-  /// You can call this method to get the local playback volume of the mixed music file, which helps troubleshoot volume-related issues.
+  /// 你可以调用该方法获取混音的音乐文件的本地播放音量，方便排查音量相关问题。
   ///
   /// Returns
-  /// ≥ 0: The method call succeeds and returns the volume value, range is [0,100].
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// ≥ 0: 方法调用成功则返回音量值，范围为 [0,100]。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> getAudioMixingPlayoutVolume();
 
-  /// Gets the total duration of the music file.
+  /// 获取音乐文件总时长。
   ///
-  /// This method gets the total duration of the music file, in milliseconds.
+  /// 该方法获取音乐文件总时长，单位为毫秒。
   ///
   /// Returns
-  /// ≥ 0: The method call succeeds and returns the duration of the music file.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// ≥ 0: 方法调用成功则返回音乐文件时长。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> getAudioMixingDuration();
 
-  /// Gets the playback progress of the music file.
+  /// 获取音乐文件的播放进度。
   ///
-  /// This method gets the current playback progress of the music file, in milliseconds.
-  ///  You need to call this method after calling startAudioMixing and receiving the onAudioMixingStateChanged(audioMixingStatePlaying) callback.
-  ///  If you need to call getAudioMixingCurrentPosition multiple times, ensure the interval between calls is greater than 500 ms.
+  /// 该方法获取当前音乐文件播放进度，单位为毫秒。
+  ///  你需要在调用 startAudioMixing 并收到 onAudioMixingStateChanged(audioMixingStatePlaying) 回调后调用该方法。
+  ///  如需多次调用 getAudioMixingCurrentPosition ，请确保调用间隔大于 500 ms。
   ///
   /// Returns
-  /// ≥ 0: The method call succeeds and returns the current playback progress of the music file (ms). 0 indicates the music file has not started playing.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// ≥ 0: 方法调用成功，返回当前音乐文件播放进度（ms）。0 表示当前音乐文件未开始播放。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> getAudioMixingCurrentPosition();
 
-  /// Sets the playback position of the music file.
+  /// 设置音乐文件的播放位置。
   ///
-  /// This method sets the playback position of the audio file, allowing you to play the file based on actual needs instead of playing it from start to finish.
+  /// 该方法可以设置音频文件的播放位置，这样你可以根据实际情况播放文件，而非从头到尾播放整个文件。
   ///
-  /// * [pos] Integer. The position on the progress bar, in milliseconds.
+  /// * [pos] 整数。进度条位置，单位为毫秒。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAudioMixingPosition(int pos);
 
-  /// Sets the channel mode of the current audio file.
+  /// 设置当前音频文件的声道模式。
   ///
-  /// In stereo audio files, the left and right channels can store different audio data. Depending on your needs, you can set the channel mode to original, left channel, right channel, or mixed mode. This method applies to stereo audio files only.
+  /// 在双声道音频文件中，左声道和右声道可以存储不同的音频数据。根据实际需要，你可以设置声道模式为原始模式、左声道模式、右声道模式或混合模式。 该方法仅适用于双声道的音频文件。
   ///
-  /// * [mode] The channel mode. See AudioMixingDualMonoMode.
+  /// * [mode] 声道模式。详见 AudioMixingDualMonoMode 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAudioMixingDualMonoMode(AudioMixingDualMonoMode mode);
 
-  /// Adjusts the pitch of the locally played music file.
+  /// 调整本地播放的音乐文件的音调。
   ///
-  /// When mixing local voice with a music file, call this method to adjust only the pitch of the music file.
+  /// 本地人声和播放的音乐文件混音时，调用该方法可以仅调节音乐文件的音调。
   ///
-  /// * [pitch] Adjusts the pitch of the locally played music file in semitone steps. The default value is 0, which means no pitch adjustment. The valid range is [-12, 12]. Each step represents a semitone difference. The greater the absolute value, the more the pitch is raised or lowered.
+  /// * [pitch] 按半音音阶调整本地播放的音乐文件的音调，默认值为 0，即不调整音调。取值范围为 [-12,12]，每相邻两个值的音高距离相差半音。取值的绝对值越大，音调升高或降低得越多。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAudioMixingPitch(int pitch);
 
-  /// Sets the playback speed of the current music file.
+  /// 设置当前音乐文件的播放速度。
   ///
-  /// You must call this method after startAudioMixing and after receiving the onAudioMixingStateChanged callback reporting the playback state as audioMixingStatePlaying.
+  /// 你需要在调用 startAudioMixing 并收到 onAudioMixingStateChanged 回调报告播放状态为 audioMixingStatePlaying 后再调用该方法。
   ///
-  /// * [speed] The playback speed of the music file. The recommended range is [50, 400], where:
-  ///  50: 0.5x speed.
-  ///  100: Original speed.
-  ///  400: 4x speed.
+  /// * [speed] 音乐文件的播放速度。推荐取值范围为 [50,400]，其中：
+  ///  50: 0.5 倍速。
+  ///  100: 原始速度。
+  ///  400: 4 倍速。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。
   Future<void> setAudioMixingPlaybackSpeed(int speed);
 
-  /// Gets the playback volume of audio effect files.
+  /// 获取音效文件的播放音量。
   ///
-  /// The volume range is [0,100]. 100 (default) is the original file volume. You need to call this method after playEffect.
+  /// 音量范围为 0~100。100 （默认值）为原始文件音量。 该方法需要在 playEffect 后调用。
   ///
   /// Returns
-  /// The volume of the audio effect file.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 音效文件的音量。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> getEffectsVolume();
 
-  /// Sets the playback volume of audio effect files.
+  /// 设置音效文件的播放音量。
   ///
-  /// * [volume] Playback volume. The range is [0,100]. The default value is 100, representing the original volume.
+  /// * [volume] 播放音量。取值范围为 [0,100]。默认值为 100，表示原始音量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setEffectsVolume(int volume);
 
-  /// Loads the audio effect file into memory.
+  /// 将音效文件加载至内存。
   ///
-  /// To ensure smooth communication, pay attention to the size of the preloaded audio effect file.
-  /// Supported formats for preloading audio files are listed in [What audio formats are supported by the RTC SDK](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format).
+  /// 为保证通信畅通，请注意控制预加载音效文件的大小。
+  /// 该方法支持的预加载音频文件的格式见 [RTC SDK 支持播放哪些格式的音频文件](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format)。
   ///
-  /// * [soundId] The ID of the audio effect. Each audio effect has a unique ID.
-  /// * [filePath] File path:
-  ///  Android: File path including file name and extension. Supports URL of online files, URI of local files, absolute paths, or paths starting with /assets/. Accessing local files via absolute path may cause permission issues. It is recommended to use URI to access local files. For example, content://com.android.providers.media.documents/document/audio%3A14441.
-  ///  Windows: Absolute path or URL of the audio file, including file name and extension. For example, C:\music\audio.mp4.
-  ///  iOS or macOS: Absolute path or URL of the audio file, including file name and extension. For example, /var/mobile/Containers/Data/audio.mp4.
-  /// * [startPos] The start position for loading the audio effect file, in milliseconds.
+  /// * [soundId] 音效的 ID。每个音效的 ID 具有唯一性。
+  /// * [filePath] 文件路径：
+  ///  Android: 文件路径，需精确到文件名及后缀。支持在线文件的 URL 地址，本地文件的 URI 地址、绝对路径或以 /assets/ 开头的路径。通过绝对路径访问本地文件可能会遇到权限问题，建议使用 URI 地址访问本地文件。例如 content://com.android.providers.media.documents/document/audio%3A14441 。
+  ///  Windows: 音频文件的绝对路径或 URL 地址，需精确到文件名及后缀。例如 C:\music\audio.mp4 。
+  ///  iOS 或 macOS: 音频文件的绝对路径或 URL 地址，需精确到文件名及后缀。例如 /var/mobile/Containers/Data/audio.mp4 。
+  /// * [startPos] 音效文件加载的起始位置，单位为毫秒。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> preloadEffect(
       {required int soundId, required String filePath, int startPos = 0});
 
-  /// Plays the specified local or online audio effect file.
+  /// 播放指定的本地或在线音效文件。
   ///
-  /// You can call this method multiple times with different soundID and filePath to play multiple audio effect files simultaneously. For optimal user experience, it is recommended to play no more than 3 audio effect files at the same time. If you need to play an online audio effect file, Agora recommends caching the file to the local device first, then calling preloadEffect to preload the cached file into memory, and finally calling this method to play the effect. Otherwise, playback failure or no sound may occur due to timeout or failure in loading the online file.
+  /// 你可以多次调用该方法，传入不同的 soundID 和 filePath ，同时播放多个音效文件。为获得最佳用户体验，建议同时播放的音效文件不超过 3 个。 如果你需要播放在线音效文件，声网建议先将在线音效文件缓存到本地设备，调用 preloadEffect 将缓存的音效文件预加载到内存中，然后再调用此方法播放音效。否则，可能出现因在线音效文件加载超时、加载失败而导致的播放失败和无声的问题。
   ///
-  /// * [soundId] ID of the audio effect. Each audio effect has a unique ID. If you have loaded the audio effect into memory using preloadEffect, make sure this parameter matches the soundId set in preloadEffect.
-  /// * [filePath] Path of the file to be played. Supports URL of online files or absolute path of local files. Must include file name and extension. Supported formats include MP3, AAC, M4A, MP4, WAV, 3GP, etc. If you have loaded the audio effect into memory using preloadEffect, make sure this parameter matches the filePath set in preloadEffect.
-  /// * [loopCount] Number of times the audio effect is looped.
-  ///  ≥ 0: Number of loops. For example, 1 means loop once, i.e., played twice in total.
-  ///  -1: Loops indefinitely.
-  /// * [pitch] Pitch of the audio effect. Value range is [0.5,2.0]. Default is 1.0, which represents the original pitch. The smaller the value, the lower the pitch.
-  /// * [pan] Spatial position of the audio effect. Value range is [-1.0,1.0], for example:
-  ///  -1.0: Audio effect appears on the left
-  ///  0.0: Audio effect appears in the center
-  ///  1.0: Audio effect appears on the right
-  /// * [gain] Volume of the audio effect. Value range is [0.0,100.0]. Default is 100.0, which represents the original volume. The smaller the value, the lower the volume.
-  /// * [publish] Whether to publish the audio effect to remote users: true : Publishes the audio effect to remote users. Both local and remote users can hear it. false : Does not publish the audio effect to remote users. Only local users can hear it.
-  /// * [startPos] Playback position of the audio effect file in milliseconds.
+  /// * [soundId] 音效的 ID。每个音效的 ID 具有唯一性。 如果你已通过 preloadEffect 将音效加载至内存，请确保该参数与 preloadEffect 中设置的 soundId 相同。
+  /// * [filePath] 播放文件的地址，支持在线文件的 URL 地址、播放文件的绝对路径，需精确到文件名及后缀。支持的音频格式包括 MP3、AAC、M4A、MP4、WAV、3GP 等。 如果你已通过 preloadEffect 将音效加载至内存，请确保该参数与 preloadEffect 中设置的 filePath 相同。
+  /// * [loopCount] 音效循环播放的次数。
+  ///  ≥ 0: 循环播放次数。例如，1 表示循环播放 1 次，即总计播放 2 次。
+  ///  -1: 无限循环播放。
+  /// * [pitch] 音效的音调，取值范围为 [0.5,2.0]。默认值为 1.0，表示原始音调。取值越小，则音调越低。
+  /// * [pan] 音效的空间位置。取值范围为 [-1.0,1.0]，例如：
+  ///  -1.0：音效出现在左边
+  ///  0.0：音效出现在正前方
+  ///  1.0：音效出现在右边
+  /// * [gain] 音效的音量。取值范围为 [0.0,100.0]。默认值为 100.0，表示原始音量。取值越小，则音量越低。
+  /// * [publish] 是否将音效发布至远端： true : 将音效发布至远端。本地用户和远端用户都能听到音效。 false : 不将音效发布至远端。只有本地用户能听到音效。
+  /// * [startPos] 音效文件的播放位置，单位为毫秒。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> playEffect(
       {required int soundId,
       required String filePath,
@@ -4569,24 +4578,24 @@ abstract class RtcEngine {
       bool publish = false,
       int startPos = 0});
 
-  /// Plays all audio effect files.
+  /// 播放所有音效文件。
   ///
-  /// After calling preloadEffect multiple times to preload multiple audio effect files, you can call this method to play all preloaded audio effect files.
+  /// 多次调用 preloadEffect 预加载多个音效文件后，你可以调用本方法播放所有预加载的音效文件。
   ///
-  /// * [loopCount] Number of times the audio effect file is looped:
-  ///  -1: Loops indefinitely until stopEffect or stopAllEffects is called.
-  ///  0: Plays once.
-  ///  1: Plays twice.
-  /// * [pitch] Pitch of the audio effect. Value range is [0.5,2.0]. Default is 1.0, which represents the original pitch. The smaller the value, the lower the pitch.
-  /// * [pan] Spatial position of the audio effect. Value range is [-1.0,1.0]:
-  ///  -1.0: Audio effect appears on the left.
-  ///  0: Audio effect appears in the center.
-  ///  1.0: Audio effect appears on the right.
-  /// * [gain] Volume of the audio effect. Value range is [0,100]. 100 is the default and represents the original volume. The smaller the value, the lower the volume.
-  /// * [publish] Whether to publish the audio effect to remote users: true : Publishes the audio effect to remote users. Both local and remote users can hear it. false : (Default) Does not publish the audio effect to remote users. Only local users can hear it.
+  /// * [loopCount] 音效文件循环播放的次数：
+  ///  -1: 无限循环播放音效文件，直至调用 stopEffect 或 stopAllEffects 后停止。
+  ///  0: 播放音效文件一次。
+  ///  1: 播放音效文件两次。
+  /// * [pitch] 音效的音调。取值范围为 [0.5,2.0]。默认值为 1.0，代表原始音调。取值越小，则音调越低。
+  /// * [pan] 音效的空间位置。取值范围为 [-1.0,1.0]:
+  ///  -1.0: 音效出现在左边。
+  ///  0: 音效出现在正前边。
+  ///  1.0: 音效出现在右边。
+  /// * [gain] 音效的音量。取值范围为 [0,100]。100 为默认值，代表原始音量。取值越小，则音量越低。
+  /// * [publish] 是否将音效发布到远端： true : 将音效发布到远端。本地和远端用户都能听到该音效。 false : （默认）不将音效发布到远端。只能本地用户能听到该音效。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> playAllEffects(
       {required int loopCount,
       required double pitch,
@@ -4594,267 +4603,267 @@ abstract class RtcEngine {
       required int gain,
       bool publish = false});
 
-  /// Gets the playback volume of the specified audio effect file.
+  /// 获取指定音效文件的播放音量。
   ///
-  /// * [soundId] ID of the audio effect file.
+  /// * [soundId] 音效文件的 ID。
   ///
   /// Returns
-  /// ≥ 0: The method call succeeds and returns the playback volume. The volume range is [0,100]. 100 is the original volume.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// ≥ 0: 方法调用成功，返回播放音量。音量范围为 [0,100]。100 为原始音量。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> getVolumeOfEffect(int soundId);
 
-  /// Sets the playback volume of the specified audio effect file.
+  /// 设置指定音效文件的播放音量。
   ///
-  /// * [soundId] The ID of the specified audio effect. Each audio effect has a unique ID.
-  /// * [volume] Playback volume. The range is [0,100]. The default value is 100, representing the original volume.
+  /// * [soundId] 指定音效的 ID。每个音效均有唯一的 ID。
+  /// * [volume] 播放音量。取值范围为 [0,100]。默认值为 100，表示原始音量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setVolumeOfEffect({required int soundId, required int volume});
 
-  /// Pauses playback of the audio effect file.
+  /// 暂停音效文件播放。
   ///
-  /// * [soundId] ID of the audio effect. Each audio effect has a unique ID.
+  /// * [soundId] 音效的 ID。每个音效的 ID 具有唯一性。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> pauseEffect(int soundId);
 
-  /// Pauses playback of all audio effect files.
+  /// 暂停所有音效文件播放。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> pauseAllEffects();
 
-  /// Resumes playback of the specified audio effect file.
+  /// 恢复播放指定音效文件。
   ///
-  /// * [soundId] The ID of the audio effect. Each audio effect has a unique ID.
+  /// * [soundId] 音效的 ID。每个音效的 ID 具有唯一性。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> resumeEffect(int soundId);
 
-  /// Resumes playback of all audio effect files.
+  /// 恢复播放所有音效文件。
   ///
-  /// After you call pauseAllEffects to pause all audio effects, you can call this method to resume playback.
+  /// 当你调用 pauseAllEffects 暂停播放所有音效文件后，如需恢复播放，可以调用该方法。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> resumeAllEffects();
 
-  /// Stops playback of the specified audio effect file.
+  /// 停止播放指定音效文件。
   ///
-  /// If you no longer need to play a specific audio effect file, you can call this method to stop playback. If you only need to pause playback, call pauseEffect.
+  /// 当你不需要再播放某一音效文件时，可以调用该方法停止播放。如果你仅需暂停播放，请调用 pauseEffect 。
   ///
-  /// * [soundId] The ID of the specified audio effect file. Each audio effect file has a unique ID.
+  /// * [soundId] 指定音效文件的 ID。每个音效文件均有唯一的 ID。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopEffect(int soundId);
 
-  /// Stops playback of all audio effect files.
+  /// 停止播放所有音效文件。
   ///
-  /// If you no longer need to play audio effect files, you can call this method to stop playback. If you only need to pause playback, call pauseAllEffects.
+  /// 当你不需要再播放音效文件时，可以调用该方法停止播放。如果你仅需暂停播放，请调用 pauseAllEffects 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopAllEffects();
 
-  /// Releases a specific preloaded audio effect file from memory.
+  /// 从内存释放某个预加载的音效文件。
   ///
-  /// After loading the audio effect file into memory using preloadEffect, call this method to release the audio effect file.
+  /// 调用 preloadEffect 将音效文件加载至内存后，如需释放该音效文件，请调用该方法。
   ///
-  /// * [soundId] The ID of the specified audio effect file. Each audio effect file has a unique ID.
+  /// * [soundId] 指定音效文件的 ID。每个音效文件均有唯一的 ID。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> unloadEffect(int soundId);
 
-  /// Releases all preloaded audio effect files from memory.
+  /// 从内存释放所有预加载音效文件。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> unloadAllEffects();
 
-  /// Gets the total duration of the specified sound effect file.
+  /// 获取指定音效文件总时长。
   ///
-  /// This method must be called after joining a channel.
+  /// 该方法需要在加入频道后调用。
   ///
-  /// * [filePath] File path:
-  ///  Android: File path, must include the file name and extension. Supports URL of online files, URI of local files, absolute paths, or paths starting with /assets/. Accessing local files via absolute path may cause permission issues. It is recommended to use URI. For example: content://com.android.providers.media.documents/document/audio%3A14441.
-  ///  Windows: Absolute path or URL to the audio file, must include the file name and extension. For example: C:\music\audio.mp4.
-  ///  iOS or macOS: Absolute path or URL to the audio file, must include the file name and extension. For example: /var/mobile/Containers/Data/audio.mp4.
+  /// * [filePath] 文件路径：
+  ///  Android: 文件路径，需精确到文件名及后缀。支持在线文件的 URL 地址，本地文件的 URI 地址、绝对路径或以 /assets/ 开头的路径。通过绝对路径访问本地文件可能会遇到权限问题，建议使用 URI 地址访问本地文件。例如 content://com.android.providers.media.documents/document/audio%3A14441 。
+  ///  Windows: 音频文件的绝对路径或 URL 地址，需精确到文件名及后缀。例如 C:\music\audio.mp4 。
+  ///  iOS 或 macOS: 音频文件的绝对路径或 URL 地址，需精确到文件名及后缀。例如 /var/mobile/Containers/Data/audio.mp4 。
   ///
   /// Returns
-  /// If the method call succeeds, returns the duration of the specified sound effect file (milliseconds).
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法调用成功，返回指定音效文件时长（毫秒）。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> getEffectDuration(String filePath);
 
-  /// Sets the playback position of the specified audio effect file.
+  /// 设置指定音效文件的播放位置。
   ///
-  /// After successful setting, the local audio effect file will start playing from the specified position. This method must be called after playEffect.
+  /// 成功设置后，本地音效文件会在指定位置开始播放。 该方法需要在 playEffect 后调用。
   ///
-  /// * [soundId] The ID of the audio effect. Each audio effect has a unique ID.
-  /// * [pos] The playback position of the audio effect file, in milliseconds.
+  /// * [soundId] 音效的 ID。每个音效的 ID 具有唯一性。
+  /// * [pos] 音效文件的播放位置，单位为毫秒。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setEffectPosition({required int soundId, required int pos});
 
-  /// Gets the playback progress of the specified sound effect file.
+  /// 获取指定音效文件的播放进度。
   ///
-  /// This method must be called after playEffect.
+  /// 该方法需要在 playEffect 后调用。
   ///
-  /// * [soundId] The ID of the sound effect. Each sound effect has a unique ID.
+  /// * [soundId] 音效的 ID。每个音效的 ID 具有唯一性。
   ///
   /// Returns
-  /// If the method call succeeds, returns the playback progress of the specified sound effect file (milliseconds).
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法调用成功，返回指定音效文件的播放进度（毫秒）。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> getEffectCurrentPosition(int soundId);
 
-  /// Enables/disables stereo sound for remote users.
+  /// 开启/关闭远端用户的语音立体声。
   ///
-  /// To enable spatial audio positioning using setRemoteVoicePosition, make sure to call this method before joining the channel to enable stereo sound for remote users.
+  /// 如果想调用 setRemoteVoicePosition 实现听声辨位的功能，请确保在加入频道前调用该方法开启远端用户的语音立体声。
   ///
-  /// * [enabled] Whether to enable stereo sound for remote users: true : Enable stereo sound. false : Disable stereo sound.
+  /// * [enabled] 是否开启远端用户语音立体声： true : 开启语音立体声。 false : 关闭语音立体声。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableSoundPositionIndication(bool enabled);
 
-  /// Sets the 2D position of a remote user's voice on the horizontal plane.
+  /// 设置远端用户声音的 2D 位置，即水平面位置。
   ///
-  /// Sets the 2D position and volume of a remote user's voice to help the local user determine the direction of the sound.
-  /// By calling this API to set the position of the remote user's voice, the difference between the left and right audio channels creates a sense of direction, allowing you to determine the real-time position of the remote user. In multiplayer online games, such as battle royale games, this method can effectively enhance the spatial awareness of game characters and simulate real-world scenarios.
-  ///  You must call enableSoundPositionIndication to enable remote voice stereo before joining the channel.
-  ///  For the best audio experience, it is recommended to use wired headphones when using this method.
-  ///  This method must be called after joining the channel.
+  /// 设置远端用户声音的 2D 位置和音量，方便本地用户听声辨位。
+  /// 通过调用该接口设置远端用户声音出现的位置，左右声道的声音差异会产生声音的方位感，从而判断出远端用户的实时位置。在多人在线游戏场景，如吃鸡游戏中，该方法能有效增加游戏角色的方位感，模拟真实场景。
+  ///  使用该方法需要在加入频道前调用 enableSoundPositionIndication 开启远端用户的语音立体声。
+  ///  为获得最佳听觉体验，建议使用该方法时使用有线耳机。
+  ///  该方法需要在加入频道后调用。
   ///
-  /// * [uid] The ID of the remote user.
-  /// * [pan] Sets the 2D position of the remote user's voice. The range is [-1.0, 1.0]:
-  ///  (Default) 0.0: Voice appears in front.
-  ///  -1.0: Voice appears on the left.
-  ///  1.0: Voice appears on the right.
-  /// * [gain] Sets the volume of the remote user's voice. The range is [0.0, 100.0], with a default value of 100.0, representing the original volume of the user. The smaller the value, the lower the volume.
+  /// * [uid] 远端用户的 ID
+  /// * [pan] 设置远端用户声音的 2D 位置，取值范围为 [-1.0,1.0]:
+  ///  （默认）0.0: 声音出现在正前方。
+  ///  -1.0: 声音出现在左边。
+  ///  1.0: 声音出现在右边。
+  /// * [gain] 设置远端用户声音的音量，取值范围为 [0.0,100.0]，默认值为 100.0，表示该用户的原始音量。取值越小，则音量越低。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteVoicePosition(
       {required int uid, required double pan, required double gain});
 
-  /// Enables or disables spatial audio.
+  /// 开启或关闭空间音频。
   ///
-  /// After enabling spatial audio, you can call setRemoteUserSpatialAudioParams to set the spatial audio parameters for remote users.
-  ///  This method can be called before or after joining a channel.
-  ///  This method depends on the spatial audio dynamic library libagora_spatial_audio_extension.dll. Deleting this library will cause the feature to fail to enable properly.
+  /// 开启空间音频后，你可以调用 setRemoteUserSpatialAudioParams 设置远端用户的空间音频参数。
+  ///  该方法在加入频道前后均可调用。
+  ///  该方法依赖于空间音频动态库 libagora_spatial_audio_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
   ///
-  /// * [enabled] Whether to enable spatial audio: true : Enable spatial audio. false : Disable spatial audio.
+  /// * [enabled] 是否开启空间音频： true : 开启空间音频。 false : 关闭空间音频。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableSpatialAudio(bool enabled);
 
-  /// Sets the spatial audio parameters for a remote user.
+  /// 设置远端用户的空间音频参数。
   ///
-  /// This method must be called after enableSpatialAudio. After successfully setting the spatial audio parameters for the remote user, the local user will perceive spatial sound from the remote user.
+  /// 该方法需要在 enableSpatialAudio 后调用。成功设置远端用户的空间音频参数后，本地用户听远端用户会有空间感。
   ///
-  /// * [uid] User ID. Must match the user ID used when joining the channel.
-  /// * [params] Spatial audio parameters. See SpatialAudioParams.
+  /// * [uid] 用户 ID。需与用户加入频道时填写的用户 ID 一致。
+  /// * [params] 空间音频参数。详见 SpatialAudioParams 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteUserSpatialAudioParams(
       {required int uid, required SpatialAudioParams params});
 
-  /// Sets the preset voice beautifier effect.
+  /// 设置预设的美声效果。
   ///
-  /// Call this method to set a preset voice beautifier effect for the local user who is sending the stream. After setting the beautifier effect, all users in the channel can hear it. You can set different beautifier effects for users depending on the scenario.
-  ///  Do not set the profile parameter of setAudioProfile to audioProfileSpeechStandard (1) or audioProfileIot (6), otherwise this method will not take effect.
-  ///  This method provides optimal processing for vocals and is not recommended for audio data containing music.
-  ///  After calling setVoiceBeautifierPreset, do not call the following methods, or the effect set by setVoiceBeautifierPreset will be overridden: setAudioEffectPreset setAudioEffectParameters setLocalVoicePitch setLocalVoiceEqualization setLocalVoiceReverb setVoiceBeautifierParameters setVoiceConversionPreset
-  ///  This method depends on the voice beautifier dynamic library libagora_audio_beauty_extension.dll. If this library is deleted, the feature will not work properly.
+  /// 调用该方法可以为本地发流用户设置预设的人声美化效果。设置美声效果后，频道内所有用户都能听到该效果。根据不同的场景，你可以为用户设置不同的美声效果。
+  ///  请勿将 setAudioProfile 的 profile 参数设置为 audioProfileSpeechStandard (1) 或 audioProfileIot (6)，否则该方法不生效。
+  ///  该方法对人声的处理效果最佳，不建议调用该方法处理含音乐的音频数据。
+  ///  调用 setVoiceBeautifierPreset ，不建议调用以下方法，否则 setVoiceBeautifierPreset 设置的效果会被覆盖： setAudioEffectPreset setAudioEffectParameters setLocalVoicePitch setLocalVoiceEqualization setLocalVoiceReverb setVoiceBeautifierParameters setVoiceConversionPreset
+  ///  该方法依赖于美声动态库 libagora_audio_beauty_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
   ///
-  /// * [preset] The preset voice beautifier option. See VoiceBeautifierPreset.
+  /// * [preset] 预设的美声效果选项，详见 VoiceBeautifierPreset 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setVoiceBeautifierPreset(VoiceBeautifierPreset preset);
 
-  /// Sets the SDK preset voice effect.
+  /// 设置 SDK 预设的人声音效。
   ///
-  /// You can call this method to set the SDK preset voice effect for the local user who is sending the stream, without changing the gender characteristics of the original voice. After setting the effect, all users in the channel can hear it.
-  ///  Do not set the profile parameter of setAudioProfile to audioProfileSpeechStandard (1) or audioProfileIot (6), otherwise this method will not take effect.
-  ///  If you call setAudioEffectPreset and set an enum other than roomAcoustics3dVoice or pitchCorrection, do not call setAudioEffectParameters, otherwise the effect set by setAudioEffectPreset will be overridden.
-  ///  After calling setAudioEffectPreset, it is not recommended to call the following methods, otherwise the effect set by setAudioEffectPreset will be overridden: setVoiceBeautifierPreset setLocalVoicePitch setLocalVoiceEqualization setLocalVoiceReverb setVoiceBeautifierParameters setVoiceConversionPreset
-  ///  This method depends on the voice beautifier dynamic library libagora_audio_beauty_extension.dll. Deleting this library will cause the feature to not function properly.
+  /// 调用该方法可以为本地发流用户设置 SDK 预设的人声音效，且不会改变原声的性别特征。设置音效后，频道内所有用户都能听到该效果。
+  ///  请勿将 setAudioProfile 的 profile 参数设置为 audioProfileSpeechStandard (1) 或 audioProfileIot (6)，否则该方法不生效。
+  ///  如果调用 setAudioEffectPreset 并设置除 roomAcoustics3dVoice 或 pitchCorrection 外的枚举，请勿再调用 setAudioEffectParameters ，否则 setAudioEffectPreset 设置的效果会被覆盖。
+  ///  调用 setAudioEffectPreset 后，不建议调用以下方法，否则 setAudioEffectPreset 设置的效果会被覆盖： setVoiceBeautifierPreset setLocalVoicePitch setLocalVoiceEqualization setLocalVoiceReverb setVoiceBeautifierParameters setVoiceConversionPreset
+  ///  该方法依赖于美声动态库 libagora_audio_beauty_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
   ///
-  /// * [preset] Preset effect options. See AudioEffectPreset.
+  /// * [preset] 预设的音效选项，详见 AudioEffectPreset 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAudioEffectPreset(AudioEffectPreset preset);
 
-  /// Sets the preset voice conversion effect.
+  /// 设置预设的变声效果。
   ///
-  /// Call this method to set a preset voice conversion effect provided by the SDK for the local user who is sending the stream. After setting the effect, all users in the channel can hear it. You can set different voice conversion effects for users depending on the scenario.
-  ///  Do not set the profile parameter of setAudioProfile to audioProfileSpeechStandard (1) or audioProfileIot (6), otherwise this method will not take effect.
-  ///  This method provides optimal processing for vocals and is not recommended for audio data containing music.
-  ///  After calling setVoiceConversionPreset, do not call the following methods, or the effect set by setVoiceConversionPreset will be overridden: setAudioEffectPreset setAudioEffectParameters setVoiceBeautifierPreset setVoiceBeautifierParameters setLocalVoicePitch setLocalVoiceFormant setLocalVoiceEqualization setLocalVoiceReverb
-  ///  This method depends on the voice beautifier dynamic library libagora_audio_beauty_extension.dll. If this library is deleted, the feature will not work properly.
+  /// 调用该方法可以为本地发流用户设置 SDK 预设的变声效果。设置变声效果后，频道内所有用户都能听到该效果。根据不同的场景，你可以为用户设置不同的变声效果。
+  ///  请勿将 setAudioProfile 的 profile 参数设置为 audioProfileSpeechStandard (1) 或 audioProfileIot (6)，否则该方法不生效。
+  ///  该方法对人声的处理效果最佳，不建议调用该方法处理含音乐的音频数据。
+  ///  调用 setVoiceConversionPreset 后，不建议调用以下方法，否则 setVoiceConversionPreset 设置的效果会被覆盖： setAudioEffectPreset setAudioEffectParameters setVoiceBeautifierPreset setVoiceBeautifierParameters setLocalVoicePitch setLocalVoiceFormant setLocalVoiceEqualization setLocalVoiceReverb
+  ///  该方法依赖于美声动态库 libagora_audio_beauty_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
   ///
-  /// * [preset] The preset voice conversion option: VoiceConversionPreset.
+  /// * [preset] 预设的变声效果选项: VoiceConversionPreset 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setVoiceConversionPreset(VoiceConversionPreset preset);
 
-  /// Sets the parameters for SDK preset voice effects.
+  /// 设置 SDK 预设人声音效的参数。
   ///
-  /// You can call this method to configure the following settings for the local user who is sending the stream:
-  ///  3D voice effect: Set the surround cycle of the 3D voice effect.
-  ///  Pitch correction effect: Set the base scale and main pitch of the pitch correction effect. To allow users to adjust the pitch correction effect themselves, it is recommended to bind the base scale and main pitch configuration options to the UI elements of your app. After setting, all users in the channel can hear the effect. To achieve better voice effects, it is recommended that you perform the following operations before calling this method:
-  ///  Call setAudioScenario to set the audio scenario to high-quality, i.e., audioScenarioGameStreaming (3).
-  ///  Call setAudioProfile to set the profile to audioProfileMusicHighQuality (4) or audioProfileMusicHighQualityStereo (5).
-  ///  This method can be called before and after joining a channel.
-  ///  Do not set the profile parameter of setAudioProfile to audioProfileSpeechStandard (1) or audioProfileIot (6), otherwise this method will not take effect.
-  ///  This method provides the best processing effect for voice. It is not recommended to use this method to process audio data that contains music.
-  ///  After calling setAudioEffectParameters, it is not recommended to call the following methods, otherwise the effect set by setAudioEffectParameters will be overridden: setAudioEffectPreset setVoiceBeautifierPreset setLocalVoicePitch setLocalVoiceEqualization setLocalVoiceReverb setVoiceBeautifierParameters setVoiceConversionPreset
-  ///  This method depends on the voice beautifier dynamic library libagora_audio_beauty_extension.dll. Deleting this library will cause the feature to not function properly.
+  /// 调用该方法可以对本地发流用户进行如下设置：
+  ///  3D 人声音效：设置 3D 人声音效的环绕周期。
+  ///  电音音效：设置电音音效的基础调式和主音音高。为方便用户自行调节电音音效，建议你将基础调式和主音音高配置选项与应用的 UI 元素绑定。 设置后，频道内所有用户都能听到该效果。 为获取更好的人声效果，建议你在调用该方法前进行以下操作：
+  ///  调用 setAudioScenario 将音频场景设为高音质场景，即 audioScenarioGameStreaming (3)。
+  ///  调用 setAudioProfile 将 profile 设为 audioProfileMusicHighQuality (4) 或 audioProfileMusicHighQualityStereo (5)。
+  ///  该方法在加入频道前后都能调用。
+  ///  请勿将 setAudioProfile 的 profile 参数设置为 audioProfileSpeechStandard (1) 或 audioProfileIot (6)，否则该方法不生效。
+  ///  该方法对人声的处理效果最佳，不建议调用该方法处理含音乐的音频数据。
+  ///  调用 setAudioEffectParameters 后，不建议调用以下方法，否则 setAudioEffectParameters 设置的效果会被覆盖： setAudioEffectPreset setVoiceBeautifierPreset setLocalVoicePitch setLocalVoiceEqualization setLocalVoiceReverb setVoiceBeautifierParameters setVoiceConversionPreset
+  ///  该方法依赖于美声动态库 libagora_audio_beauty_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
   ///
-  /// * [preset] SDK preset effects. The following settings are supported: roomAcoustics3dVoice, 3D voice effect.
-  ///  Before using this enum, you need to set the profile parameter of setAudioProfile to audioProfileMusicStandardStereo (3) or audioProfileMusicHighQualityStereo (5), otherwise this enum setting is invalid.
-  ///  After enabling 3D voice, users need to use audio playback devices that support stereo to hear the expected effect. pitchCorrection, pitch correction effect.
-  /// * [param1] If preset is set to roomAcoustics3dVoice, then param1 indicates the surround cycle of the 3D voice effect. The range is [1,60] in seconds. The default value is 10, meaning the voice surrounds 360 degrees in 10 seconds.
-  ///  If preset is set to pitchCorrection, then param1 indicates the base scale of the pitch correction effect: 1 : (Default) Natural major. 2 : Natural minor. 3 : Japanese scale.
-  /// * [param2] If preset is set to roomAcoustics3dVoice, you need to set param2 to 0.
-  ///  If preset is set to pitchCorrection, then param2 indicates the main pitch of the pitch correction effect: 1 : A 2 : A# 3 : B 4 : (Default) C 5 : C# 6 : D 7 : D# 8 : E 9 : F 10 : F# 11 : G 12 : G#
+  /// * [preset] SDK 预设的音效，支持以下设置： roomAcoustics3dVoice ，3D 人声音效。
+  ///  你需要在使用该枚举前将 setAudioProfile 的 profile 参数设置 为 audioProfileMusicStandardStereo (3) 或 audioProfileMusicHighQualityStereo (5)，否则该枚举设置无效。
+  ///  启用 3D 人声后，用户需要使用支持双声道的音频播放设备才能听到预期效果。 pitchCorrection ，电音音效。
+  /// * [param1] 如果 preset 设为 roomAcoustics3dVoice ，则 param1 表示 3D 人声音效的环绕周期。取值范围为 [1,60]，单位为秒。默认值为 10，表示人声会 10 秒环绕 360 度。
+  ///  如果 preset 设为 pitchCorrection ，则 param1 表示电音音效的基础调式： 1 : （默认）自然大调。 2 : 自然小调。 3 : 和风小调。
+  /// * [param2] 如果 preset 设为 roomAcoustics3dVoice ，你需要将 param2 设置为 0 。
+  ///  如果 preset 设为 pitchCorrection ，则 param2 表示电音音效的主音音高： 1 : A 2 : A# 3 : B 4 : (Default) C 5 : C# 6 : D 7 : D# 8 : E 9 : F 10 : F# 11 : G 12 : G#
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAudioEffectParameters(
       {required AudioEffectPreset preset,
       required int param1,
       required int param2});
 
-  /// Sets the parameters for the preset voice beautifier effect.
+  /// 设置预设美声效果的参数。
   ///
-  /// Call this method to set the gender characteristics and reverb effect for the singing beautifier. This method applies to the local user who is sending the stream. After setting, all users in the channel can hear the effect.
-  /// To achieve better vocal quality, it is recommended to do the following before calling this method:
-  ///  Call setAudioScenario to set the audio scenario to high-quality, i.e., audioScenarioGameStreaming (3).
-  ///  Call setAudioProfile to set the profile to audioProfileMusicHighQuality (4) or audioProfileMusicHighQualityStereo (5).
-  ///  This method can be called before or after joining a channel.
-  ///  Do not set the profile parameter of setAudioProfile to audioProfileSpeechStandard (1) or audioProfileIot (6), otherwise this method will not take effect.
-  ///  This method provides optimal processing for vocals and is not recommended for audio data containing music.
-  ///  After calling setVoiceBeautifierParameters, do not call the following methods, or the effect set by setVoiceBeautifierParameters will be overridden: setAudioEffectPreset setAudioEffectParameters setVoiceBeautifierPreset setLocalVoicePitch setLocalVoiceEqualization setLocalVoiceReverb setVoiceConversionPreset
-  ///  This method depends on the voice beautifier dynamic library libagora_audio_beauty_extension.dll. If this library is deleted, the feature will not work properly.
+  /// 调用该方法可以设置歌唱美声效果的性别特征和混响效果。该方法对本地发流用户进行设置。设置后，频道内所有用户都能听到该效果。
+  /// 为获取更好的人声效果，建议你在调用该方法前进行以下操作：
+  ///  调用 setAudioScenario 将音频场景设为高音质场景，即 audioScenarioGameStreaming (3)。
+  ///  调用 setAudioProfile 将 profile 设为 audioProfileMusicHighQuality (4) 或 audioProfileMusicHighQualityStereo (5)。
+  ///  该方法在加入频道前后都能调用。
+  ///  请勿将 setAudioProfile 的 profile 参数设置为 audioProfileSpeechStandard (1) 或 audioProfileIot (6)，否则该方法不生效。
+  ///  该方法对人声的处理效果最佳，不建议调用该方法处理含音乐的音频数据。
+  ///  调用 setVoiceBeautifierParameters ，不建议调用以下方法，否则 setVoiceBeautifierParameters 设置的效果会被覆盖： setAudioEffectPreset setAudioEffectParameters setVoiceBeautifierPreset setLocalVoicePitch setLocalVoiceEqualization setLocalVoiceReverb setVoiceConversionPreset
+  ///  该方法依赖于美声动态库 libagora_audio_beauty_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
   ///
-  /// * [preset] The preset audio effect: SINGING_BEAUTIFIER : Singing beautifier.
-  /// * [param1] Gender characteristics of the singing voice: 1 : Male voice. 2 : Female voice.
-  /// * [param2] Reverb effect of the singing voice: 1 : Reverb effect in a small room. 2 : Reverb effect in a large room. 3 : Reverb effect in a hall.
+  /// * [preset] 预设的音效： SINGING_BEAUTIFIER : 歌唱美声。
+  /// * [param1] 歌声的性别特征： 1 : 男声。 2 : 女声。
+  /// * [param2] 歌声的混响效果： 1 : 歌声在小房间的混响效果。 2 : 歌声在大房间的混响效果。 3 : 歌声在大厅的混响效果。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setVoiceBeautifierParameters(
       {required VoiceBeautifierPreset preset,
       required int param1,
@@ -4866,132 +4875,131 @@ abstract class RtcEngine {
       required int param1,
       required int param2});
 
-  /// Sets the local voice pitch.
+  /// 设置本地语音音调。
   ///
-  /// * [pitch] Voice frequency. Can be set in the range [0.5, 2.0]. The smaller the value, the lower the pitch. The default value is 1.0, meaning no pitch change.
+  /// * [pitch] 语音频率。可以 [0.5,2.0] 范围内设置。取值越小，则音调越低。默认值为 1.0，表示不需要修改音调。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLocalVoicePitch(double pitch);
 
-  /// Sets the formant ratio to change the voice timbre.
+  /// 设置共振峰比率以改变语音的音色。
   ///
-  /// Formant ratio is a parameter that affects the timbre of the voice. The smaller the formant ratio, the deeper the voice; the larger the value, the sharper the voice. After setting the formant ratio, all users in the channel can hear the effect. If you want to change both timbre and pitch, Agora recommends using it together with setLocalVoicePitch.
+  /// 共振峰比率是影响声音音色的一个参数，共振峰比率取值越小声音会更低沉，取值越大声音会更尖锐。设置共振峰比率后，频道内所有用户都能听到该效果。如果你想要在调整音色的同时改变音调，声网推荐你搭配 setLocalVoicePitch 一起使用。
   ///
-  /// * [formantRatio] Formant ratio. The range is [-1.0, 1.0]. The default value is 0.0, meaning the original timbre is not changed. Agora recommends using values in the range [-0.4, 0.6]. Effects outside this range may not sound ideal.
+  /// * [formantRatio] 共振峰比率，取值范围为 [-1.0，1.0]。默认值为 0.0，即不改变原声的音色。 声网推荐的取值范围为 [-0.4，0.6] ，超出此范围外音效听感可能不佳。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLocalVoiceFormant(double formantRatio);
 
-  /// Sets the local voice equalization.
+  /// 设置本地语音音效均衡。
   ///
-  /// * [bandFrequency] Index of the frequency band. The range is [0,9], representing 10 frequency bands. The corresponding center frequencies are [31, 62, 125, 250, 500, 1k, 2k, 4k, 8k, 16k] Hz. See AudioEqualizationBandFrequency.
-  /// * [bandGain] Gain of each band in dB. The range for each value is [-15,15], with a default value of 0.
+  /// * [bandFrequency] 频谱子带索引。取值范围是 [0,9]，分别代表音效的 10 个频带。对应的中心频率为 [31，62，125，250，500，1k，2k，4k，8k，16k] Hz。详见 AudioEqualizationBandFrequency 。
+  /// * [bandGain] 每个 band 的增益，单位是 dB，每一个值的范围是 [-15,15]，默认值为 0。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLocalVoiceEqualization(
       {required AudioEqualizationBandFrequency bandFrequency,
       required int bandGain});
 
-  /// Sets the local voice reverb effect.
+  /// 设置本地音效混响。
   ///
-  /// The SDK provides an easier method setAudioEffectPreset to directly apply preset reverb effects such as pop, R&B, KTV, etc. This method can be called before and after joining a channel.
+  /// SDK 提供一个使用更为简便的方法 setAudioEffectPreset ，直接实现流行、R&B、KTV 等预置的混响效果。 该方法在加入频道前后都能调用。
   ///
-  /// * [reverbKey] Reverb effect key. This method supports 5 reverb effect keys. See AudioReverbType.
-  /// * [value] The value corresponding to each reverb effect key.
+  /// * [reverbKey] 混响音效 Key。该方法共有 5 个混响音效 Key，详见 AudioReverbType 。
+  /// * [value] 各混响音效 Key 所对应的值。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLocalVoiceReverb(
       {required AudioReverbType reverbKey, required int value});
 
-  /// Sets the preset headphone equalizer effect.
+  /// 设置预设的耳机均衡效果。
   ///
-  /// This method is mainly used in spatial audio scenarios. You can select a preset headphone equalizer to listen to audio and achieve the desired audio experience. If your headphones already provide a good equalizing effect, calling this method may not significantly improve the experience and may even degrade it.
+  /// 该方法主要应用于空间音频场景下，你可以选择预设的耳机均衡器收听音频，以达到预期的音频体验。 如果你使用的耳机已经具备良好的均衡效果，调用该方法时可能不会获得明显的体验提升效果，甚至可能导致体验下降。
   ///
-  /// * [preset] Preset headphone equalizer effect. See HeadphoneEqualizerPreset.
+  /// * [preset] 预设的耳机均衡效果。详见 HeadphoneEqualizerPreset 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setHeadphoneEQPreset(HeadphoneEqualizerPreset preset);
 
-  /// Sets the low-frequency and high-frequency parameters of the headphone equalizer.
+  /// 设置耳机均衡器的低频和高频参数。
   ///
-  /// In spatial audio scenarios, if the preset headphone equalizer effect set by calling setHeadphoneEQPreset does not meet expectations, you can call this method to further adjust the headphone equalizer effect.
+  /// 在空间音频场景下，如果在调用 setHeadphoneEQPreset 方法使用预设的耳机均衡效果后仍未达到预期，你可以通过调用该方法进一步调节耳机均衡效果。
   ///
-  /// * [lowGain] Low-frequency parameter of the headphone equalizer. Value range is [-10,10]. The higher the value, the deeper the sound.
-  /// * [highGain] High-frequency parameter of the headphone equalizer. Value range is [-10,10]. The higher the value, the sharper the sound.
+  /// * [lowGain] 耳机均衡器的低频参数。取值范围为 [-10,10]，取值越大，声音越低沉。
+  /// * [highGain] 耳机均衡器的高频参数。取值范围为 [-10,10]，取值越大，声音越尖锐。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setHeadphoneEQParameters(
       {required int lowGain, required int highGain});
 
-  /// Enables or disables the AI tuner feature.
+  /// 开启或关闭 AI 调音器功能。
   ///
-  /// The AI tuner feature enhances audio quality and adjusts voice tone style.
+  /// AI 调音器功能支持美化音质，调整音色风格。
   ///
-  /// * [enabled] Whether to enable the AI tuner feature: true : Enable the AI tuner feature. false : (default) Disable the AI tuner feature.
-  /// * [type] AI tuner effect type. See VoiceAiTunerType.
+  /// * [enabled] 是否开启 AI 调音器功能： true ：开启 AI 调音器功能。 false ：（默认）关闭 AI 调音器功能。
+  /// * [type] AI 调音器音效类型，详见 VoiceAiTunerType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableVoiceAITuner(
       {required bool enabled, required VoiceAiTunerType type});
 
-  /// Sets the log file.
+  /// 设置日志文件
   ///
-  /// Deprecated Deprecated: This method is deprecated. Set the log file path via the context parameter when calling initialize. Sets the output log file of the SDK. All logs generated during SDK runtime will be written to this file. The app must ensure that the specified directory exists and is writable.
+  /// 废弃 弃用： 该方法已废弃，请在调用 initialize 时通过 context 参数设置日志文件路径。 设置 SDK 的输出 log 文件。SDK 运行时产生的所有 log 将写入该文件。 App 必须保证指定的目录存在而且可写。
   ///
-  /// * [filePath] The full path of the log file. The log file is encoded in UTF-8.
+  /// * [filePath] 日志文件的完整路径。该日志文件为 UTF-8 编码。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLogFile(String filePath);
 
-  /// Sets the log output level.
+  /// 设置日志输出等级。
   ///
-  /// Deprecated Deprecated: Use logConfig in initialize instead. This method sets the log output level of the SDK. Different output levels can be used individually or in combination. The log levels in order are logFilterOff, logFilterCritical, logFilterError, logFilterWarn, logFilterInfo, and logFilterDebug.
-  /// By selecting a level, you can see all logs at that level and above.
-  /// For example, if you choose logFilterWarn, you will see logs at logFilterCritical, logFilterError, and logFilterWarn levels.
+  /// 废弃 弃用： 请改用 initialize 中的 logConfig 。 该方法设置 SDK 的输出日志输出等级。不同的输出等级可以单独或组合使用。日志级别顺序依次为 logFilterOff 、 logFilterCritical 、 logFilterError 、 logFilterWarn 、 logFilterInfo 和 logFilterDebug 。
+  /// 选择一个级别，你就可以看到在该级别之前所有级别的日志信息。
+  /// 例如，你选择 logFilterWarn 级别，就可以看到在 logFilterCritical 、 logFilterError 和 logFilterWarn 级别的日志信息。
   ///
-  /// * [filter] Log filter level. See LogFilterType.
+  /// * [filter] 日志过滤等级。详见 LogFilterType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLogFilter(LogFilterType filter);
 
-  /// Sets the SDK log output level.
+  /// 设置 SDK 的日志输出级别。
   ///
-  /// Deprecated Deprecated: This method is deprecated. Set the log output level via the context parameter when calling initialize. By selecting a level, you can see the logs at that level.
+  /// 废弃 弃用： 该方法已废弃，请在调用 initialize 时通过 context 参数设置日志输出级别。 选择一个级别，你就可以看到该级别的日志信息。
   ///
-  /// * [level] Log level. See LogLevel.
+  /// * [level] 日志级别。详见 LogLevel 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLogLevel(LogLevel level);
 
-  /// Sets the size of the SDK log file output.
+  /// 设置 SDK 输出的日志文件的大小。
   ///
-  /// Deprecated Deprecated: This method is deprecated. Use the logConfig parameter in initialize instead to set the log file size. By default, the SDK generates 5 SDK log files and 5 API call log files with the following rules:
-  ///  SDK log file names: agorasdk.log, agorasdk.1.log, agorasdk.2.log, agorasdk.3.log, agorasdk.4.log.
-  ///  API call log file names: agoraapi.log, agoraapi.1.log, agoraapi.2.log, agoraapi.3.log, agoraapi.4.log.
-  ///  Each SDK log file has a default size of 2,048 KB; API call log files also have a default size of 2,048 KB. All log files are UTF-8 encoded.
-  ///  The latest logs are always written to agorasdk.log and agoraapi.log.
-  ///  When agorasdk.log is full, the SDK performs the following operations:
-  ///  Deletes agorasdk.4.log (if exists).
-  ///  Renames agorasdk.3.log to agorasdk.4.log.
-  ///  Renames agorasdk.2.log to agorasdk.3.log.
-  ///  Renames agorasdk.1.log to agorasdk.2.log.
-  ///  Creates a new agorasdk.log file.
-  ///  The overwrite rule for agoraapi.log is the same as that of agorasdk.log. This method only sets the size of the agorasdk.log file and does not affect agoraapi.log.
+  /// 废弃 弃用： 该方法已废弃，请改用 initialize 中的 logConfig 参数设置日志文件大小。 默认情况下，SDK 会生成 5 个 SDK 日志文件和 5 个 API 调用日志文件，规则如下：
+  ///  SDK 日志文件的名称分别为： agorasdk.log 、 agorasdk.1.log 、 agorasdk.2.log 、 agorasdk.3.log 、 agorasdk.4.log 。
+  ///  API 调用日志文件的名称分别为： agoraapi.log 、 agoraapi.1.log 、 agoraapi.2.log 、 agoraapi.3.log 、 agoraapi.4.log 。
+  ///  每个 SDK 日志文件的默认大小为 2,048 KB；API 调用日志文件的默认大小为 2,048 KB。日志文件均为 UTF-8 编码。
+  ///  最新的日志永远写在 agorasdk.log 和 agoraapi.log 中。
+  ///  当 agorasdk.log 写满后，SDK 会按照以下顺序对日志文件进行操作：
+  ///  删除 agorasdk.4.log 文件（如有）。
+  ///  将 agorasdk.3.log 重命名为 agorasdk.4.log 。
+  ///  将 agorasdk.2.log 重命名为 agorasdk.3.log 。
+  ///  将 agorasdk.1.log 重命名为 agorasdk.2.log 。
+  ///  新建 agorasdk.log 文件。 agoraapi.log 文件的覆盖规则与 agorasdk.log 相同。 该方法仅用于设置 agorasdk.log 文件的大小，对 agoraapi.log 不生效。
   ///
-  /// * [fileSizeInKBytes] The size of a single agorasdk.log file in KB. The valid range is [128, 20480], and the default value is 2,048 KB. If you set fileSizeInKByte to less than 128 KB, the SDK automatically adjusts it to 128 KB; if you set it to more than 20,480 KB, the SDK automatically adjusts it to 20,480 KB.
+  /// * [fileSizeInKBytes] 单个 agorasdk.log 日志文件的大小，单位为 KB，取值范围为 [128,20480]，默认值为 2,048 KB。如果你将 fileSizeInKByte 设为小于 128 KB，SDK 会自动调整到 128 KB；如果你将 fileSizeInKByte 设为大于 20,480 KB，SDK 会自动调整到 20,480 KB。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLogFileSize(int fileSizeInKBytes);
 
   /// @nodoc
@@ -5000,310 +5008,310 @@ abstract class RtcEngine {
   /// @nodoc
   Future<void> writeLog({required LogLevel level, required String fmt});
 
-  /// Updates the local view display mode.
+  /// 更新本地视图显示模式。
   ///
-  /// After initializing the local user view, you can call this method to update the rendering and mirror mode of the local user view. This method only affects the video seen by the local user and does not affect the published video. This method only takes effect for the first camera (primaryCameraSource). In scenarios with custom video capture or other types of video sources, you need to use the setupLocalVideo method instead.
+  /// 初始化本地用户视图后，你可以调用该方法更新本地用户视图的渲染和镜像模式。该方法只影响本地用户看到的视频画面，不影响本地视频的发布。 该方法仅对第一个摄像头 (primaryCameraSource) 生效。在自定义视频采集或使用其他类型视频源的场景下，你需要使用 setupLocalVideo 方法替代该方法。
   ///
-  /// * [renderMode] Local view display mode. See RenderModeType.
-  /// * [mirrorMode] Mirror mode for the local view. See VideoMirrorModeType. If you use the front camera, the local user view mirror mode is enabled by default; if you use the rear camera, the mirror mode is disabled by default.
+  /// * [renderMode] 本地视图显示模式。详见 RenderModeType 。
+  /// * [mirrorMode] 本地视图的镜像模式，详见 VideoMirrorModeType 。 如果你使用前置摄像头，默认启动本地用户视图镜像模式；如果你使用后置摄像头，默认关闭本地视图镜像模式。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLocalRenderMode(
       {required RenderModeType renderMode,
       VideoMirrorModeType mirrorMode =
           VideoMirrorModeType.videoMirrorModeAuto});
 
-  /// Updates the display mode of the remote view.
+  /// 更新远端视图显示模式。
   ///
-  /// After initializing the remote user view, you can call this method to update the rendering and mirror mode of the remote user view displayed locally. This method only affects the video seen by the local user.
-  ///  Call this method after initializing the remote view using the setupRemoteVideo method.
-  ///  You can call this method multiple times during a call to update the display mode of the remote user view.
+  /// 初始化远端用户视图后，你可以调用该方法更新远端用户视图在本地显示时的渲染和镜像模式。该方法只影响本地用户看到的视频画面。
+  ///  请在调用 setupRemoteVideo 方法初始化远端视图后，调用该方法。
+  ///  你可以在通话中多次调用该方法，多次更新远端用户视图的显示模式。
   ///
-  /// * [uid] Remote user ID.
-  /// * [renderMode] Rendering mode of the remote user view. See RenderModeType.
-  /// * [mirrorMode] Mirror mode of the remote user view. See VideoMirrorModeType.
+  /// * [uid] 远端用户 ID。
+  /// * [renderMode] 远端用户视图的渲染模式，详见 RenderModeType 。
+  /// * [mirrorMode] 远端用户视图的镜像模式，详见 VideoMirrorModeType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteRenderMode(
       {required int uid,
       required RenderModeType renderMode,
       required VideoMirrorModeType mirrorMode});
 
-  /// Sets the maximum frame rate for local video rendering.
+  /// 设置本地视频渲染的最大帧率。
   ///
-  /// * [sourceType] Type of video source. See VideoSourceType.
-  /// * [targetFps] Maximum rendering frame rate (fps). Supported values: 1, 7, 10, 15, 24, 30, 60. You should set this parameter to a rendering frame rate lower than the actual video frame rate; otherwise, the setting will not take effect.
+  /// * [sourceType] 视频源的类型，详见 VideoSourceType 。
+  /// * [targetFps] 最大渲染帧率 (fps)。支持的参数值为：1、7、10、15、24、30、60。 请将此参数设置为低于视频实际帧率的渲染帧率，否则设置将不会生效。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLocalRenderTargetFps(
       {required VideoSourceType sourceType, required int targetFps});
 
-  /// Sets the maximum frame rate for remote video rendering.
+  /// 设置视频在远端渲染的最大帧率。
   ///
-  /// * [targetFps] Maximum rendering frame rate (fps). Supported values: 1, 7, 10, 15, 24, 30, 60. You should set this parameter to a rendering frame rate lower than the actual video frame rate; otherwise, the setting will not take effect.
+  /// * [targetFps] 最大渲染帧率 (fps)。支持的参数值为：1、7、10、15、24、30、60。 请将此参数设置为低于视频实际帧率的渲染帧率，否则设置将不会生效。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteRenderTargetFps(int targetFps);
 
-  /// Sets the local video mirror mode.
+  /// 设置本地视频镜像。
   ///
-  /// Deprecated Deprecated: This method is deprecated.
+  /// 废弃 弃用: 该方法已废弃。
   ///
-  /// * [mirrorMode] Local video mirror mode. See VideoMirrorModeType.
+  /// * [mirrorMode] 本地视频镜像模式。详见 VideoMirrorModeType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLocalVideoMirrorMode(VideoMirrorModeType mirrorMode);
 
-  /// Enables or disables dual-stream mode on the sending end and configures the low-quality stream.
+  /// 在发送端开启或关闭双流模式并设置视频小流。
   ///
-  /// Deprecated Deprecated: Deprecated since v4.2.0. Use setDualStreamMode instead. You can call this method on the sending end to enable or disable dual-stream mode. Dual-stream refers to high-quality and low-quality video streams:
-  ///  High-quality stream: High resolution and high frame rate video stream.
-  ///  Low-quality stream: Low resolution and low frame rate video stream. After enabling dual-stream mode, you can call setRemoteVideoStreamType on the receiving end to choose whether to receive the high-quality or low-quality stream.
-  ///  This method applies to all types of streams sent by the sender, including but not limited to camera-captured video, screen sharing, and custom-captured video.
-  ///  To enable dual-stream mode in multi-channel scenarios, call enableDualStreamModeEx.
-  ///  This method can be called before or after joining a channel.
+  /// 废弃 弃用： 从 v4.2.0 起废弃，请改用 setDualStreamMode 。 你可以在发流端调用该方法开启或关闭双流模式。双流指视频大流和视频小流：
+  ///  视频大流：高分辨率、高帧率的视频流。
+  ///  视频小流：低分辨率、低帧率的视频流。 开启双流模式后，你可以在收流端调用 setRemoteVideoStreamType 选择接收视频大流或视频小流。
+  ///  该方法适用于发送端发送的所有类型的流，包括且不限于来自摄像头采集的视频流、屏幕共享流、自定义采集的视频流。
+  ///  如果需要在多频道场景下开启视频双流，可以调用 enableDualStreamModeEx 方法。
+  ///  该方法可以在加入频道前后调用。
   ///
-  /// * [enabled] Whether to enable dual-stream mode: true : Enable dual-stream mode. false : (Default) Disable dual-stream mode.
-  /// * [streamConfig] Configuration for the low-quality stream. See SimulcastStreamConfig. When mode is set to disableSimulcastStream, setting streamConfig has no effect.
+  /// * [enabled] 是否开启双流模式： true : 开启双流模式。 false : (默认) 关闭双流模式。
+  /// * [streamConfig] 视频小流的配置。详见 SimulcastStreamConfig 。 当设置 mode 为 disableSimulcastStream 时，再设置 streamConfig 不会生效。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableDualStreamMode(
       {required bool enabled, SimulcastStreamConfig? streamConfig});
 
-  /// Sets the dual-stream mode on the sender and configures the low-quality video stream.
+  /// 在发送端设置双流模式并设置视频小流。
   ///
-  /// The SDK enables the adaptive low-quality stream mode (autoSimulcastStream) by default on the sender, meaning the sender does not actively send low-quality streams. Receivers with host roles can call setRemoteVideoStreamType to request low-quality streams. After receiving the request, the sender automatically starts sending low-quality streams.
-  ///  If you want to change this behavior, you can call this method and set mode to disableSimulcastStream (never send low-quality streams) or enableSimulcastStream (always send low-quality streams).
-  ///  If you want to revert to the default behavior after modification, call this method again and set mode to autoSimulcastStream. The differences and relationships between this method and enableDualStreamMode are as follows:
-  ///  Calling this method and setting mode to disableSimulcastStream has the same effect as calling enableDualStreamMode with enabled set to false.
-  ///  Calling this method and setting mode to enableSimulcastStream has the same effect as calling enableDualStreamMode with enabled set to true.
-  ///  Both methods can be called before or after joining a channel. If both are used, the settings in the later call take effect.
+  /// SDK 默认在发送端开启小流自适应模式 (autoSimulcastStream)，即发送端不主动发送小流，主播身份的接收端可以调用 setRemoteVideoStreamType 发起小流申请，发送端收到申请后开始自动发送小流。
+  ///  如果你想修改此行为，可以调用该方法并修改 mode 为 disableSimulcastStream （始终不发送小流）或 enableSimulcastStream （始终发送小流）。
+  ///  如果你在进行修改后又想恢复该默认行为，可重新调用该方法，并将 mode 设置为 autoSimulcastStream 。 该方法和 enableDualStreamMode 的区别与联系如下：
+  ///  调用该方法并设置 mode 为 disableSimulcastStream 时，跟调用 enableDualStreamMode 并设置 enabled 为 false 的效果相同。
+  ///  调用该方法并设置 mode 为 enableSimulcastStream 时，跟调用 enableDualStreamMode 并设置 enabled 为 true 的效果相同。
+  ///  两种方法均可在加入频道前后调用，若同时使用，则以后调用的方法中的设置为准。
   ///
-  /// * [mode] The mode for sending video streams. See SimulcastStreamMode.
-  /// * [streamConfig] The configuration of the low-quality video stream. See SimulcastStreamConfig. When mode is set to disableSimulcastStream, setting streamConfig has no effect.
+  /// * [mode] 发送视频流的模式。详见 SimulcastStreamMode 。
+  /// * [streamConfig] 视频小流的配置。详见 SimulcastStreamConfig 。 当设置 mode 为 disableSimulcastStream 时，再设置 streamConfig 不会生效。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setDualStreamMode(
       {required SimulcastStreamMode mode, SimulcastStreamConfig? streamConfig});
 
   /// @nodoc
   Future<void> setSimulcastConfig(SimulcastConfig simulcastConfig);
 
-  /// Sets whether to play the external audio source locally.
+  /// 设置是否在本地播放外部音频源。
   ///
-  /// After calling this method to enable local playback of the externally captured audio source, to stop local playback, you can call this method again and set enabled to false.
-  /// You can call adjustCustomAudioPlayoutVolume to adjust the local playback volume of the custom audio track. Before calling this method, make sure you have already called createCustomAudioTrack to create a custom audio track.
+  /// 调用该方法设置在本地播放外部采集的音频源后，如需停止本地播放，可以再次调用该方法并设置 enabled 为 false 。
+  /// 你可以调用 adjustCustomAudioPlayoutVolume 调节自定义音频采集轨道在本地播放的音量。 在调用该方法前，请确保你已经调用 createCustomAudioTrack 方法创建自定义音频采集轨道。
   ///
-  /// * [trackId] Audio track ID. Set this parameter to the custom audio track ID returned by the createCustomAudioTrack method.
-  /// * [enabled] Whether to play the external audio source locally: true : Play locally. false : (Default) Do not play locally.
+  /// * [trackId] 音频轨道 ID。将该参数设置为调用 createCustomAudioTrack 方法返回的自定义音频轨道 ID。
+  /// * [enabled] 是否在本地播放外部音频源： true ：在本地播放。 false ：（默认）不在本地播放。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableCustomAudioLocalPlayback(
       {required int trackId, required bool enabled});
 
-  /// Sets the format of the raw audio data for capture.
+  /// 设置采集的原始音频数据格式。
   ///
-  /// The SDK calculates the sampling interval using the samplesPerCall, sampleRate, and channel parameters in this method. The formula is: sampling interval = samplesPerCall / (sampleRate × channel). Ensure the sampling interval is no less than 0.01 seconds. The SDK triggers the onRecordAudioFrame callback based on this interval.
+  /// SDK 会通过该方法中的 samplesPerCall 、 sampleRate 和 channel 参数计算出采样间隔，计算公式为采样间隔 = samplesPerCall /(sampleRate × channel)。请确保采样间隔不小于 0.01 秒。SDK 会根据该采样间隔触发 onRecordAudioFrame 回调。
   ///
-  /// * [sampleRate] The sample rate (Hz) of the audio data. You can set it to 8000, 16000, 32000, 44100, or 48000.
-  /// * [channel] The number of audio channels. You can set it to 1 or 2:
-  ///  1: Mono.
-  ///  2: Stereo.
-  /// * [mode] The usage mode of the audio frame. See RawAudioFrameOpModeType.
-  /// * [samplesPerCall] The number of audio samples per call. Typically 1024 in scenarios like RTMP streaming.
+  /// * [sampleRate] 音频数据的采样率 (Hz)，可设置为 8000、 16000、 32000、44100 或 48000。
+  /// * [channel] 音频数据的声道数，可设置为 1 或 2:
+  ///  1: 单声道。
+  ///  2: 双声道。
+  /// * [mode] 音频帧的使用模式，详见 RawAudioFrameOpModeType 。
+  /// * [samplesPerCall] 音频数据的采样点数，如旁路推流应用中通常为 1024。
   ///
   /// Returns
-  /// This method returns no value if the call succeeds. If the method call fails, it throws an AgoraRtcException, which you need to catch and handle. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and troubleshooting suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and troubleshooting suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRecordingAudioFrameParameters(
       {required int sampleRate,
       required int channel,
       required RawAudioFrameOpModeType mode,
       required int samplesPerCall});
 
-  /// Sets the format of the raw audio data for playback.
+  /// 设置播放的原始音频数据格式。
   ///
-  /// The SDK calculates the sampling interval using the samplesPerCall, sampleRate, and channel parameters in this method. The formula is: sampling interval = samplesPerCall / (sampleRate × channel). Ensure the sampling interval is no less than 0.01 seconds. The SDK triggers the onPlaybackAudioFrame callback based on this interval.
+  /// SDK 会通过该方法中的 samplesPerCall 、 sampleRate 和 channel 参数计算出采样间隔，计算公式为采样间隔 = samplesPerCall /(sampleRate × channel)。请确保采样间隔不小于 0.01 秒。SDK 会根据该采样间隔触发 onPlaybackAudioFrame 回调。
   ///
-  /// * [sampleRate] The sample rate (Hz) of the audio data. You can set it to 8000, 16000, 24000, 32000, 44100, or 48000.
-  /// * [channel] The number of audio channels. You can set it to 1 or 2:
-  ///  1: Mono.
-  ///  2: Stereo.
-  /// * [mode] The usage mode of the audio frame. See RawAudioFrameOpModeType.
-  /// * [samplesPerCall] The number of audio samples per call. Typically 1024 in scenarios like RTMP streaming.
+  /// * [sampleRate] 音频数据的采样率 (Hz)，可设置为 8000、 16000、 24000、 32000、44100 或 48000。
+  /// * [channel] 音频数据的声道数，可设置为 1 或 2:
+  ///  1: 单声道。
+  ///  2: 双声道。
+  /// * [mode] 音频帧的使用模式，详见 RawAudioFrameOpModeType 。
+  /// * [samplesPerCall] 音频数据的采样点数，如旁路推流应用中通常为 1024。
   ///
   /// Returns
-  /// This method returns no value if the call succeeds. If the method call fails, it throws an AgoraRtcException, which you need to catch and handle. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and troubleshooting suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and troubleshooting suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setPlaybackAudioFrameParameters(
       {required int sampleRate,
       required int channel,
       required RawAudioFrameOpModeType mode,
       required int samplesPerCall});
 
-  /// Sets the format of the raw audio data after audio mixing for capture and playback.
+  /// 设置采集和播放音频混音后的原始音频数据格式。
   ///
-  /// The SDK calculates the sampling interval using the samplesPerCall, sampleRate, and channel parameters in this method. The formula is: sampling interval = samplesPerCall / (sampleRate × channel). Ensure the sampling interval is no less than 0.01 seconds. The SDK triggers the onMixedAudioFrame callback based on this interval.
+  /// SDK 会通过该方法中的 samplesPerCall 、 sampleRate 和 channel 参数计算出采样间隔，计算公式为采样间隔 = samplesPerCall /(sampleRate × channel)。请确保采样间隔不小于 0.01 秒。SDK 会根据该采样间隔触发 onMixedAudioFrame 回调。
   ///
-  /// * [sampleRate] The sample rate (Hz) of the audio data. You can set it to 8000, 16000, 32000, 44100, or 48000.
-  /// * [channel] The number of audio channels. You can set it to 1 or 2:
-  ///  1: Mono.
-  ///  2: Stereo.
-  /// * [samplesPerCall] The number of audio samples per call. Typically 1024 in scenarios like RTMP streaming.
+  /// * [sampleRate] 音频数据的采样率 (Hz)，可设置为 8000、 16000、 32000、44100 或 48000。
+  /// * [channel] 音频数据的声道数，可设置为 1 或 2:
+  ///  1: 单声道。
+  ///  2: 双声道。
+  /// * [samplesPerCall] 音频数据的采样点数，如旁路推流应用中通常为 1024。
   ///
   /// Returns
-  /// This method returns no value if the call succeeds. If the method call fails, it throws an AgoraRtcException, which you need to catch and handle. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and troubleshooting suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setMixedAudioFrameParameters(
       {required int sampleRate,
       required int channel,
       required int samplesPerCall});
 
-  /// Sets the data format for the onEarMonitoringAudioFrame callback.
+  /// 设置耳返的音频数据格式。
   ///
-  /// This method sets the data format for the onEarMonitoringAudioFrame callback.
-  ///  Before calling this method, you need to call enableInEarMonitoring and set includeAudioFilters to earMonitoringFilterBuiltInAudioFilters or earMonitoringFilterNoiseSuppression.
-  ///  The SDK calculates the sampling interval using the samplesPerCall, sampleRate, and channel parameters in this method. The formula is: sampling interval = samplesPerCall / (sampleRate × channel). Ensure the sampling interval is no less than 0.01 seconds. The SDK triggers the onEarMonitoringAudioFrame callback based on this interval.
+  /// 该方法用于设置 onEarMonitoringAudioFrame 回调的耳返音频数据格式。
+  ///  调用该方法前，你需要先调用 enableInEarMonitoring ，将 includeAudioFilters 设置为 earMonitoringFilterBuiltInAudioFilters 或 earMonitoringFilterNoiseSuppression 。
+  ///  SDK 会通过该方法中的 samplesPerCall 、 sampleRate 和 channel 参数计算出采样间隔，计算公式为采样间隔 = samplesPerCall /(sampleRate × channel)。请确保采样间隔不小于 0.01 秒。SDK 会根据该采样间隔触发 onEarMonitoringAudioFrame 回调。
   ///
-  /// * [sampleRate] Sampling rate (Hz) of the audio reported in onEarMonitoringAudioFrame, can be set to 8000, 16000, 32000, 44100, or 48000.
-  /// * [channel] Number of audio channels reported in onEarMonitoringAudioFrame, can be set to 1 or 2:
-  ///  1: Mono.
-  ///  2: Stereo.
-  /// * [mode] Usage mode of the audio frame. See RawAudioFrameOpModeType.
-  /// * [samplesPerCall] Number of audio samples reported in onEarMonitoringAudioFrame, typically 1024 in applications like push streaming.
+  /// * [sampleRate] onEarMonitoringAudioFrame 中报告音频的采样率 (Hz)，可设置为 8000、 16000、 32000、44100 或 48000。
+  /// * [channel] onEarMonitoringAudioFrame 中报告音频的声道数，可设置为 1 或 2:
+  ///  1: 单声道。
+  ///  2: 双声道。
+  /// * [mode] 音频帧的使用模式，详见 RawAudioFrameOpModeType 。
+  /// * [samplesPerCall] onEarMonitoringAudioFrame 中报告的音频的采样点数，如旁路推流应用中通常为 1024。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setEarMonitoringAudioFrameParameters(
       {required int sampleRate,
       required int channel,
       required RawAudioFrameOpModeType mode,
       required int samplesPerCall});
 
-  /// Sets the format of the raw audio playback data before mixing.
+  /// 设置混音前的原始音频播放数据格式。
   ///
-  /// The SDK triggers the onPlaybackAudioFrameBeforeMixing callback based on the sampling interval.
+  /// SDK 会根据该采样间隔触发 onPlaybackAudioFrameBeforeMixing 回调。
   ///
-  /// * [sampleRate] The sample rate (Hz) of the audio data. You can set it to 8000, 16000, 32000, 44100, or 48000.
-  /// * [channel] The number of audio channels. You can set it to 1 or 2:
-  ///  1: Mono.
-  ///  2: Stereo.
-  /// * [samplesPerCall] Sets the number of audio samples returned in the onPlaybackAudioFrameBeforeMixing callback. In RTMP streaming scenarios, it is recommended to set this to 1024.
+  /// * [sampleRate] 音频数据的采样率 (Hz)，可设置为 8000、 16000、 32000、44100 或 48000。
+  /// * [channel] 音频数据的声道数，可设置为 1 或 2:
+  ///  1: 单声道。
+  ///  2: 双声道。
+  /// * [samplesPerCall] 设置 onPlaybackAudioFrameBeforeMixing 回调中返回音频数据的采样点数。在 RTMP 推流场景中，建议设置为 1024。
   ///
   /// Returns
-  /// This method returns no value if the call succeeds. If the method call fails, it throws an AgoraRtcException, which you need to catch and handle. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and troubleshooting suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setPlaybackAudioFrameBeforeMixingParameters(
       {required int sampleRate,
       required int channel,
       required int samplesPerCall});
 
-  /// Enables audio spectrum monitoring.
+  /// 开启音频频谱监测。
   ///
-  /// If you want to obtain audio spectrum data of local or remote users, register an audio spectrum observer and enable audio spectrum monitoring. You can call this method either before or after joining a channel.
+  /// 如果你想获取本地或远端用户的音频频谱数据，请注册音频频谱观测器并开启音频频谱监测。 该方法在加入频道前后均可调用。
   ///
-  /// * [intervalInMS] The time interval (in milliseconds) at which the SDK triggers the onLocalAudioSpectrum and onRemoteAudioSpectrum callbacks. The default value is 100 ms. The value must not be less than 10 ms, otherwise the method call fails.
+  /// * [intervalInMS] SDK 触发 onLocalAudioSpectrum 和 onRemoteAudioSpectrum 回调的时间间隔（毫秒）。 默认值为 100 毫秒。取值不得少于 10 毫秒，否则该方法会调用失败。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableAudioSpectrumMonitor({int intervalInMS = 100});
 
-  /// Disables audio spectrum monitoring.
+  /// 关闭音频频谱监测。
   ///
-  /// After calling enableAudioSpectrumMonitor, if you want to disable audio spectrum monitoring, call this method. This method can be called before or after joining a channel.
+  /// 调用 enableAudioSpectrumMonitor 后，如果你想关闭音频频谱监测，请调用该方法。 该方法在加入频道前后均可调用。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> disableAudioSpectrumMonitor();
 
-  /// Registers an audio spectrum observer.
+  /// 注册音频频谱观测器。
   ///
-  /// After successfully registering an audio spectrum observer and calling enableAudioSpectrumMonitor to enable audio spectrum monitoring, the SDK reports the callbacks implemented in the AudioSpectrumObserver class at the interval you set. This method can be called before or after joining a channel.
+  /// 成功注册音频频谱观测器并调用 enableAudioSpectrumMonitor 开启音频频谱监测后，SDK 会按照你设置的时间间隔报告你在 AudioSpectrumObserver 类中实现的回调。 该方法在加入频道前后均可调用。
   ///
-  /// * [observer] Audio spectrum observer. See AudioSpectrumObserver.
+  /// * [observer] 音频频谱观测器。详见 AudioSpectrumObserver 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void registerAudioSpectrumObserver(AudioSpectrumObserver observer);
 
-  /// Unregisters the audio spectrum observer.
+  /// 取消注册音频频谱观测器。
   ///
-  /// After calling registerAudioSpectrumObserver, if you want to unregister the audio spectrum observer, call this method. This method can be called before or after joining a channel.
+  /// 调用 registerAudioSpectrumObserver 后，如果你想取消注册音频频谱观测器，请调用该方法。 该方法在加入频道前后均可调用。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void unregisterAudioSpectrumObserver(AudioSpectrumObserver observer);
 
-  /// Adjusts the volume of the audio recording signal.
+  /// 调节音频采集信号音量。
   ///
-  /// If you only need to mute the audio signal, it is recommended to use muteRecordingSignal.
+  /// 如果你只需将音频信号静音，建议你使用 muteRecordingSignal 。
   ///
-  /// * [volume] Volume. The range is [0,400].
-  ///  0: Mute.
-  ///  100: (Default) Original volume.
-  ///  400: 4 times the original volume, with built-in overflow protection.
+  /// * [volume] 音量，取值范围为 [0,400]。
+  ///  0: 静音。
+  ///  100: （默认）原始音量。
+  ///  400: 原始音量的 4 倍，自带溢出保护。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustRecordingSignalVolume(int volume);
 
-  /// Mutes the recording signal.
+  /// 是否将录音信号静音。
   ///
-  /// If you have already called adjustRecordingSignalVolume to adjust the volume of the recorded audio signal, calling this method and setting it to true will cause the SDK to:
-  ///  Record the adjusted volume.
-  ///  Mute the recording signal. When you call this method again with false, the recording signal will be restored to the volume recorded by the SDK before muting.
+  /// 如果你已经调用 adjustRecordingSignalVolume 调节了音频采集信号音量，则调用该方法并设置为 true 时，SDK 的行为如下：
+  ///  记录调节后的音量。
+  ///  将音频采集信号静音。 当你再次调用该方法并设置为 false 时，录音信号会恢复为静音前 SDK 记录的音量。
   ///
-  /// * [mute] true : Mute. false : (default) Original volume.
+  /// * [mute] true : 静音。 false :（默认）原始音量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> muteRecordingSignal(bool mute);
 
-  /// Adjusts the signal volume of all remote users for local playback.
+  /// 调节本地播放的所有远端用户信号音量。
   ///
-  /// This method adjusts the signal volume of all remote users after mixing for local playback. If you need to adjust the signal volume of a specific remote user for local playback, it is recommended to call adjustUserPlaybackSignalVolume.
+  /// 该方法用于调节所有远端用户混音后在本地播放的信号音量，如果你需要调节指定远端用户在本地播放的信号音量，建议你调用 adjustUserPlaybackSignalVolume 。
   ///
-  /// * [volume] Volume, range is [0,400].
-  ///  0: Mute.
-  ///  100: (Default) Original volume.
-  ///  400: 4 times the original volume, with built-in overflow protection.
+  /// * [volume] 音量，取值范围为 [0,400]。
+  ///  0: 静音。
+  ///  100: （默认）原始音量。
+  ///  400: 原始音量的 4 倍，自带溢出保护。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustPlaybackSignalVolume(int volume);
 
-  /// Adjusts the playback volume of a specified remote user locally.
+  /// 调节本地播放的指定远端用户信号音量。
   ///
-  /// You can call this method during a call to adjust the playback volume of a specified remote user locally. To adjust the playback volume of multiple users, call this method multiple times.
+  /// 你可以在通话中调用该方法调节指定远端用户在本地播放的音量。如需调节多个用户在本地播放的音量，则需多次调用该方法。
   ///
-  /// * [uid] The ID of the remote user.
-  /// * [volume] The volume, with a range of [0,400].
-  ///  0: Mute.
-  ///  100: (Default) Original volume.
-  ///  400: Four times the original volume, with built-in overflow protection.
+  /// * [uid] 远端用户 ID。
+  /// * [volume] 音量，取值范围为 [0,400]。
+  ///  0: 静音。
+  ///  100: （默认）原始音量。
+  ///  400: 原始音量的 4 倍，自带溢出保护。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustUserPlaybackSignalVolume(
       {required int uid, required int volume});
 
-  /// Sets the fallback option for subscribed audio and video streams under poor network conditions.
+  /// 设置弱网环境下订阅的音视频流回退选项。
   ///
-  /// In poor network conditions, the quality of real-time audio and video communication may degrade. You can call this method and set option to streamFallbackOptionVideoStreamLow or streamFallbackOptionAudioOnly. The SDK will switch the video stream to a lower stream or disable the video stream when the downlink network is poor and audio/video quality is severely affected, to ensure audio quality. The SDK continuously monitors network quality and resumes the audio and video stream subscription when the network improves.
-  /// When the subscription falls back to audio only or recovers to audio and video, the SDK triggers the onRemoteSubscribeFallbackToAudioOnly callback.
+  /// 网络不理想的环境下，实时通信音视频的质量会下降。你可以调用该方法并将 option 设置为 streamFallbackOptionVideoStreamLow 或 streamFallbackOptionAudioOnly ，SDK 会在下行弱网且音视频质量严重受影响时，将视频流切换为小流或关闭视频流，从而保证音频质量。同时，SDK 会持续监控网络质量，并在网络质量改善时恢复订阅音视频流。
+  /// 当订阅流回退为音频流或由音频流恢复为音视频流时，SDK 会触发 onRemoteSubscribeFallbackToAudioOnly 回调。
   ///
-  /// * [option] Fallback option for the subscribed stream. See StreamFallbackOptions.
+  /// * [option] 订阅流的回退选项。详见 StreamFallbackOptions 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteSubscribeFallbackOption(StreamFallbackOptions option);
 
   /// @nodoc
@@ -5312,36 +5320,36 @@ abstract class RtcEngine {
       required int uidNum,
       required StreamFallbackOptions option});
 
-  /// Enables or disables an extension.
+  /// 启用/禁用插件。
   ///
-  /// To enable multiple extensions, you need to call this method multiple times.
-  ///  After this method is called successfully, no other extensions can be loaded.
+  /// 如果要开启多个插件，需要多次调用该方法。
+  ///  该方法调用成功后，无法再加载其他插件。
   ///
-  /// * [provider] The name of the extension provider.
-  /// * [extension] The name of the extension.
-  /// * [enable] Whether to enable the extension: true : Enable the extension. false : Disable the extension.
-  /// * [type] The media source type of the extension. See MediaSourceType.
+  /// * [provider] 提供插件的服务商名称。
+  /// * [extension] 插件的名称。
+  /// * [enable] 是否启用插件： true : 启用插件。 false : 禁用插件。
+  /// * [type] 插件的媒体源类型。详见 MediaSourceType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableExtension(
       {required String provider,
       required String extension,
       bool enable = true,
       MediaSourceType type = MediaSourceType.unknownMediaSource});
 
-  /// Sets an extension property.
+  /// 设置插件的属性。
   ///
-  /// After enabling the extension, you can call this method to set its properties. To set properties for multiple extensions, call this method multiple times.
+  /// 开启插件后，你可以调用该方法设置插件的属性。 如果要设置多个插件的属性，需要多次调用该方法。
   ///
-  /// * [provider] The name of the extension provider.
-  /// * [extension] The name of the extension.
-  /// * [key] The key of the extension property.
-  /// * [value] The value corresponding to the extension property key.
-  /// * [type] The media source type of the extension. See MediaSourceType.
+  /// * [provider] 提供插件的服务商名称。
+  /// * [extension] 插件的名称。
+  /// * [key] 插件属性的 Key。
+  /// * [value] 插件属性 Key 对应的值。
+  /// * [type] 插件的媒体源类型。详见 MediaSourceType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setExtensionProperty(
       {required String provider,
       required String extension,
@@ -5349,17 +5357,17 @@ abstract class RtcEngine {
       required String value,
       MediaSourceType type = MediaSourceType.unknownMediaSource});
 
-  /// Retrieves detailed information about the extension.
+  /// 获取插件的详细信息。
   ///
-  /// * [provider] The name of the extension provider.
-  /// * [extension] The name of the extension.
-  /// * [key] The key of the extension property.
-  /// * [bufLen] The maximum length of the extension property JSON string. The maximum value is 512 bytes.
-  /// * [type] The media source type of the extension. See MediaSourceType.
+  /// * [provider] 提供插件的服务商名称。
+  /// * [extension] 插件的名称。
+  /// * [key] 插件属性的 Key。
+  /// * [bufLen] 插件属性 JSON 字符串的最大长度。最大值为 512 字节。
+  /// * [type] 插件的媒体源类型。详见 MediaSourceType 。
   ///
   /// Returns
-  /// If the method call succeeds, returns the extension information.
-  ///  If the method call fails, returns an empty string.
+  /// 方法调用成功，则返回插件信息。
+  ///  方法调用失败，则返回空字符串。
   Future<String> getExtensionProperty(
       {required String provider,
       required String extension,
@@ -5367,817 +5375,817 @@ abstract class RtcEngine {
       required int bufLen,
       MediaSourceType type = MediaSourceType.unknownMediaSource});
 
-  /// Enables sound card capture.
+  /// 开启声卡采集。
   ///
-  /// After enabling the sound card capture function, the sound played by the sound card is mixed into the local audio stream and can be sent to the remote side.
-  ///  This method is only applicable to macOS and Windows platforms.
-  ///  This method can be called before or after joining a channel.
-  ///  If you call disableAudio to disable the audio module, the sound card capture function will also be disabled. To re-enable it, you must call enableAudio to enable the audio module, and then call enableLoopbackRecording again.
+  /// 启用声卡采集功能后，声卡播放的声音会被合到本地音频流中，从而可以发送到远端。
+  ///  该方法仅适用于 macOS 和 Windows 平台。
+  ///  该方法在加入频道前后都能调用。
+  ///  如果你调用了 disableAudio 关闭音频模块，声卡采集功能也会被关闭。如果你需要再次启用声卡采集功能，需要调用 enableAudio 启用音频模块后再次调用 enableLoopbackRecording 。
   ///
-  /// * [enabled] Whether to enable sound card capture: true : Enable sound card capture; the virtual sound card name is displayed in System Sound > Output. false : (Default) Disable sound card capture; the virtual sound card name is not displayed in System Sound > Output.
-  /// * [deviceName] macOS: Device name of the virtual sound card. Default is empty, which means using the AgoraALD virtual sound card for capture.
-  ///  Windows: Device name of the sound card. Default is empty, which means using the built-in sound card of the device for capture.
+  /// * [enabled] 是否开启声卡采集: true : 开启声卡采集；系统声音 > 输出界面显示虚拟声卡名称。 false :（默认）关闭声卡采集；系统声音 > 输出界面不显示虚拟声卡名称。
+  /// * [deviceName] macOS: 虚拟声卡的设备名。默认为空，代表使用 AgoraALD 虚拟声卡进行采集。
+  ///  Windows: 声卡的设备名。默认为空，代表使用设备自带的声卡进行采集。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableLoopbackRecording(
       {required bool enabled, String? deviceName});
 
-  /// Adjusts the volume of the signal captured by the sound card.
+  /// 调节声卡采集信号音量。
   ///
-  /// After calling enableLoopbackRecording to enable sound card capture, you can call this method to adjust the volume of the signal captured by the sound card.
+  /// 调用 enableLoopbackRecording 开启声卡采集后，你可以调用该方法调节声卡采集的信号音量。
   ///
-  /// * [volume] The volume of the music file. The range is 0~100. 100 (default) represents the original volume of the file.
+  /// * [volume] 音乐文件音量范围为 0~100。100 （默认值）为原始文件音量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustLoopbackSignalVolume(int volume);
 
   /// @nodoc
   Future<int> getLoopbackRecordingVolume();
 
-  /// Enables in-ear monitoring.
+  /// 开启耳返功能。
   ///
-  /// This method enables or disables in-ear monitoring. The user must use headphones (wired or Bluetooth) to hear the in-ear monitoring effect.
+  /// 该方法用于打开或关闭耳返功能。 用户必须使用耳机（有线和蓝牙均可）才能听到耳返效果。
   ///
-  /// * [enabled] Enable/disable in-ear monitoring: true : Enable in-ear monitoring. false : (Default) Disable in-ear monitoring.
-  /// * [includeAudioFilters] The audio filter type for in-ear monitoring. See EarMonitoringFilterType.
+  /// * [enabled] 开启/关闭耳返功能: true : 开启耳返功能。 false : （默认）关闭耳返功能。
+  /// * [includeAudioFilters] 耳返 Audio filter 类型。详见 EarMonitoringFilterType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableInEarMonitoring(
       {required bool enabled,
       required EarMonitoringFilterType includeAudioFilters});
 
-  /// Sets the in-ear monitoring volume.
+  /// 设置耳返音量。
   ///
-  /// * [volume] Volume, range is [0,400].
-  ///  0: Mute.
-  ///  100: (default) Original volume.
-  ///  400: 4 times the original volume, with overflow protection.
+  /// * [volume] 音量，取值范围为 [0,400]。
+  ///  0: 静音。
+  ///  100: （默认）原始音量。
+  ///  400: 原始音量的 4 倍，自带溢出保护。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setInEarMonitoringVolume(int volume);
 
-  /// Loads an extension.
+  /// 加载插件。
   ///
-  /// This method adds external SDK extensions (such as marketplace or SDK extension plugins) into the SDK. To load multiple extensions, call this method multiple times.
-  /// This method is available only on Windows and Android.
+  /// 该方法用于将 SDK 外部插件（例如云市场插件和 SDK 拓展插件）添加到 SDK 中。 如果要加载多个插件，需要多次调用该方法。
+  /// 该方法仅适用于 Windows 和 Android。
   ///
-  /// * [path] The path and name of the extension dynamic library. For example: /library/libagora_segmentation_extension.dll.
-  /// * [unloadAfterUse] Whether to automatically unload the extension after use: true : Automatically unloads the extension when RtcEngine is destroyed. false : Does not automatically unload the extension until the process exits (recommended).
+  /// * [path] 插件的动态库路径和名称。例如： /library/libagora_segmentation_extension.dll 。
+  /// * [unloadAfterUse] 是否在插件使用完毕后自动卸载： true : 当 RtcEngine 销毁时自动卸载插件。 false : 不自动卸载插件，直到进程退出（推荐）。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> loadExtensionProvider(
       {required String path, bool unloadAfterUse = false});
 
-  /// Sets a property for the extension provider.
+  /// 设置插件服务商的属性。
   ///
-  /// You can call this method to set the properties of the extension provider and initialize related parameters based on the provider type. To set properties for multiple extension providers, call this method multiple times.
+  /// 你可以调用该方法设置插件服务商的属性，并根据服务商的类型初始化相关参数。 如果要设置多个插件服务商的属性，需要多次调用该方法。
   ///
-  /// * [provider] The name of the extension provider.
-  /// * [key] The key of the extension property.
-  /// * [value] The value corresponding to the extension property key.
+  /// * [provider] 提供插件的服务商名称。
+  /// * [key] 插件属性的 Key。
+  /// * [value] 插件属性 Key 对应的值。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setExtensionProviderProperty(
       {required String provider, required String key, required String value});
 
-  /// Registers an extension.
+  /// 注册插件。
   ///
-  /// For external SDK extensions (such as marketplace or SDK extension plugins), after loading the extension, you need to call this method to register it. Internal SDK extensions (those included in the SDK package) are automatically loaded and registered after initializing RtcEngine, so you do not need to call this method.
-  ///  To register multiple extensions, call this method multiple times.
-  ///  The order in which different extensions process data in the SDK is determined by the registration order. That is, extensions registered earlier process data first.
+  /// 对于 SDK 外部的插件（例如云市场插件和 SDK 拓展插件），加载插件后，你需要调用该方法注册插件。SDK 内部插件（包含在 SDK 包中的插件）在初始化 RtcEngine 后会自动加载并注册，无需调用该方法。
+  ///  如果要注册多个插件，需要多次调用该方法。
+  ///  不同插件在 SDK 中处理数据的顺序由插件的注册顺序决定。即先注册的插件会先处理数据。
   ///
-  /// * [provider] The name of the extension provider.
-  /// * [extension] The name of the extension.
-  /// * [type] The media source type of the extension. See MediaSourceType.
+  /// * [provider] 提供插件的服务商名称。
+  /// * [extension] 插件的名称。
+  /// * [type] 插件的媒体源类型。详见 MediaSourceType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> registerExtension(
       {required String provider,
       required String extension,
       MediaSourceType type = MediaSourceType.unknownMediaSource});
 
-  /// Sets the camera capture configuration.
+  /// 设置摄像头采集配置。
   ///
-  /// Before adjusting the camera focal length configuration, it is recommended to call queryCameraFocalLengthCapability to check the supported focal length capabilities of the device, and then configure accordingly.
-  /// Due to limitations of some Android devices, the configuration may not take effect even if you set the focal length type based on the result of queryCameraFocalLengthCapability.
+  /// 在调整摄像头的焦距配置前，建议先调用 queryCameraFocalLengthCapability 查询设备支持的焦距能力，再根据查询结果进行配置。
+  /// 由于部分 Android 设备的限制，即使根据 queryCameraFocalLengthCapability 的查询结果设置焦距类型，设置结果也可能不生效。
   ///
-  /// * [config] Camera capture configuration. See CameraCapturerConfiguration. You do not need to set the deviceId parameter in this method.
+  /// * [config] 摄像头采集配置，详见 CameraCapturerConfiguration 。 在该方法中，不需要设置 deviceId 参数。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setCameraCapturerConfiguration(
       CameraCapturerConfiguration config);
 
-  /// Creates a custom video track.
+  /// 创建一个自定义的视频轨道。
   ///
-  /// When you need to publish custom captured video in a channel, follow these steps:
-  ///  Call this method to create a video track and get the video track ID.
-  ///  When calling joinChannel to join a channel, set customVideoTrackId in ChannelMediaOptions to the video track ID you want to publish and set publishCustomVideoTrack to true.
-  ///  Call pushVideoFrame and specify videoTrackId as the video track ID from step 2 to publish the corresponding custom video source in the channel.
+  /// 当你需要在频道中发布自定义采集视频时，可参考以下步骤：
+  ///  调用该方法创建视频轨道并获得视频轨道 ID。
+  ///  调用 joinChannel 加入频道时，将 ChannelMediaOptions 中的 customVideoTrackId 设置为你想要发布的视频轨道 ID，并将 publishCustomVideoTrack 设置为 true 。
+  ///  调用 pushVideoFrame 将 videoTrackId 指定为步骤 2 中指定的视频轨道 ID，即可实现在频道内发布对应的自定义视频源。
   ///
   /// Returns
-  /// If the method call succeeds, returns the video track ID as the unique identifier of the video track.
-  ///  If the method call fails, returns 0xffffffff. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法调用成功，返回视频轨道 ID 作为该视频轨道的唯一标识。
+  ///  方法调用失败，返回 0xffffffff。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> createCustomVideoTrack();
 
   /// @nodoc
   Future<int> createCustomEncodedVideoTrack(SenderOptions senderOption);
 
-  /// Destroys the specified video track.
+  /// 销毁指定的视频轨道。
   ///
-  /// * [videoTrackId] The video track ID returned by the createCustomVideoTrack method.
+  /// * [videoTrackId] 调用 createCustomVideoTrack 方法返回的视频轨道 ID。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> destroyCustomVideoTrack(int videoTrackId);
 
   /// @nodoc
   Future<void> destroyCustomEncodedVideoTrack(int videoTrackId);
 
-  /// Switches between front and rear cameras.
+  /// 切换前置/后置摄像头。
   ///
-  /// You can call this method during app runtime to dynamically switch cameras based on the actual availability of cameras, without restarting the video stream or reconfiguring the video source. This method is applicable only to Android and iOS.
-  /// This method only switches the camera for the first video stream captured by the camera, that is, the video source set to videoSourceCamera (0) when calling startCameraCapture.
+  /// 你可以调用该方法在 App 运行期间基于可用摄像头的实际情况来动态切换摄像头，而无需重启视频流或重新配置视频源。 该方法仅适用于 Android 和 iOS。
+  /// 该方法仅会对第一路摄像头采集的视频流进行摄像头切换操作，即调用 startCameraCapture 时设置为 videoSourceCamera (0) 的视频源。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> switchCamera();
 
-  /// Checks whether the device supports camera zoom.
+  /// 检测设备是否支持摄像头缩放功能。
   ///
-  /// This method is only applicable to Android and iOS.
+  /// 该方法仅适用于 Android 和 iOS。
   ///
   /// Returns
-  /// true : The device supports camera zoom. false : The device does not support camera zoom.
+  /// true : 设备支持相机缩放功能。 false : 设备不支持相机缩放功能。
   Future<bool> isCameraZoomSupported();
 
-  /// Checks whether the device camera supports face detection.
+  /// 检查设备摄像头是否支持人脸检测。
   ///
-  /// This method is only applicable to Android and iOS.
-  ///  You must call this method after the SDK triggers the onLocalVideoStateChanged callback and the local video state returns localVideoStreamStateCapturing (1).
+  /// 该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 SDK 触发 onLocalVideoStateChanged 回调，返回本地视频状态为 localVideoStreamStateCapturing (1) 之后调用。
   ///
   /// Returns
-  /// true : The device camera supports face detection. false : The device camera does not support face detection.
+  /// true : 设备摄像头支持人脸检测。 false : 设备摄像头不支持人脸检测。
   Future<bool> isCameraFaceDetectSupported();
 
-  /// Checks whether the device supports keeping the flashlight on.
+  /// 检测设备是否支持闪光灯常开。
   ///
-  /// This method is only applicable to Android and iOS.
-  ///  You must call this method after the SDK triggers the onLocalVideoStateChanged callback and the local video state returns localVideoStreamStateCapturing (1).
-  ///  Typically, the app enables the front camera by default. If your front camera does not support keeping the flashlight on, this method returns false. If you want to check whether the rear camera supports keeping the flashlight on, you need to call switchCamera to switch the camera before using this method.
-  ///  On iPads with system version 15, even if isCameraTorchSupported returns true, due to system issues, you may still fail to turn on the flashlight using setCameraTorchOn.
+  /// 该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 SDK 触发 onLocalVideoStateChanged 回调，返回本地视频状态为 localVideoStreamStateCapturing (1) 之后调用。
+  ///  一般情况下，App 默认开启前置摄像头，因此如果你的前置摄像头不支持闪光灯常开，直接使用该方法会返回 false 。如果需要检查后置摄像头是否支持闪光灯常开，需要先使用 switchCamera 切换摄像头，再使用该方法。
+  ///  在系统版本 15 的 iPad 上，即使 isCameraTorchSupported 返回 true ，也可能因系统问题导致你无法通过 setCameraTorchOn 成功开启闪光灯。
   ///
   /// Returns
-  /// true : The device supports keeping the flashlight on. false : The device does not support keeping the flashlight on.
+  /// true : 设备支持闪光灯常开。 false : 设备不支持闪光灯常开。
   Future<bool> isCameraTorchSupported();
 
-  /// Checks whether the device supports manual focus.
+  /// 检测设备是否支持手动对焦功能。
   ///
-  /// This method is only applicable to Android and iOS.
-  ///  You must call this method after the SDK triggers the onLocalVideoStateChanged callback and the local video state returns localVideoStreamStateCapturing (1).
+  /// 该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 SDK 触发 onLocalVideoStateChanged 回调，返回本地视频状态为 localVideoStreamStateCapturing (1) 之后调用。
   ///
   /// Returns
-  /// true : The device supports manual focus. false : The device does not support manual focus.
+  /// true : 设备支持手动对焦功能。 false : 设备不支持手动对焦功能。
   Future<bool> isCameraFocusSupported();
 
-  /// Checks whether the device supports face auto-focus.
+  /// 检测设备是否支持人脸对焦功能。
   ///
-  /// This method is only applicable to Android and iOS.
-  ///  Call this method after the SDK triggers the onLocalVideoStateChanged callback and returns the local video state as localVideoStreamStateCapturing (1).
+  /// 该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 SDK 触发 onLocalVideoStateChanged 回调，返回本地视频状态为 localVideoStreamStateCapturing (1) 之后调用。
   ///
   /// Returns
-  /// true : The device supports face auto-focus. false : The device does not support face auto-focus.
+  /// true : 设备支持人脸对焦功能。 false : 设备不支持人脸对焦功能。
   Future<bool> isCameraAutoFocusFaceModeSupported();
 
-  /// Sets the camera zoom factor.
+  /// 设置摄像头放大比例。
   ///
-  /// Some iOS devices use a composite rear camera consisting of multiple lenses, such as dual cameras (wide-angle and ultra-wide-angle) or triple cameras (wide-angle, ultra-wide-angle, and telephoto). For such composite lenses with ultra-wide-angle capability, you can call setCameraCapturerConfiguration to set cameraFocalLengthType to cameraFocalLengthDefault (0) (standard lens), and then call this method to set the camera zoom factor to a value less than 1.0 to achieve an ultra-wide-angle shooting effect.
-  ///  This method is applicable only to Android and iOS.
-  ///  You must call this method after enableVideo. The setting takes effect after the camera is successfully started, that is, when the SDK triggers the onLocalVideoStateChanged callback and returns the local video state as localVideoStreamStateCapturing (1).
+  /// 部分 iOS 设备的后置摄像头为多个摄像头组成的融合镜头，如双摄（广角和超广角）或三摄（广角、超广角和长焦），对于这种具备超广角能力的融合镜头，你可以调用 setCameraCapturerConfiguration 将 cameraFocalLengthType 设置为 cameraFocalLengthDefault (0)（标准镜头），然后调用该方法将摄像头缩放比例设置为小于 1.0 的数值，从而实现超广角的拍摄效果。
+  ///  该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 enableVideo 后调用，设置结果在摄像头成功开启后生效，即 SDK 触发 onLocalVideoStateChanged 回调返回本地视频状态为 localVideoStreamStateCapturing (1) 后。
   ///
-  /// * [factor] Camera zoom factor. For devices that do not support ultra-wide-angle, the value ranges from 1.0 to the maximum zoom factor; for devices that support ultra-wide-angle, the value ranges from 0.5 to the maximum zoom factor. You can call getCameraMaxZoomFactor to get the maximum zoom factor supported by the device.
+  /// * [factor] 摄像头放大比例。对不支持超广角的设备，取值范围从 1.0 到最大放大比例；对支持超广角的设备，取值范围从 0.5 到最大放大比例。你可以通过 getCameraMaxZoomFactor 方法获取设备支持的最大放大比例。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  Failure: return value < 0.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  方法调用失败: 返回值 < 0。
   Future<void> setCameraZoomFactor(double factor);
 
-  /// Enables/disables local face detection.
+  /// 开启/关闭本地人脸检测。
   ///
-  /// * [enabled] Whether to enable face detection: true : Enables face detection. false : (Default) Disables face detection.
+  /// * [enabled] 是否开启人脸检测： true ：开启人脸检测。 false ：（默认）关闭人脸检测。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableFaceDetection(bool enabled);
 
-  /// Gets the maximum zoom factor supported by the camera.
+  /// 获取摄像头支持的最大放大倍率。
   ///
-  /// This method is only applicable to Android and iOS.
-  ///  Call this method after the SDK triggers the onLocalVideoStateChanged callback and returns the local video state as localVideoStreamStateCapturing (1).
+  /// 该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 SDK 触发 onLocalVideoStateChanged 回调，返回本地视频状态为 localVideoStreamStateCapturing (1) 之后调用。
   ///
   /// Returns
-  /// The maximum zoom factor supported by the device camera.
+  /// 设备摄像头支持的最大放大倍率。
   Future<double> getCameraMaxZoomFactor();
 
-  /// Sets the manual focus position and triggers focusing.
+  /// 设置手动对焦位置，并触发对焦。
   ///
-  /// This method is applicable to Android and iOS only.
-  ///  You must call this method after enableVideo. The setting takes effect after the camera is successfully turned on, i.e., after the SDK triggers the onLocalVideoStateChanged callback and the local video state is localVideoStreamStateCapturing (1).
-  ///  After this method is successfully called, the local client triggers the onCameraFocusAreaChanged callback.
+  /// 该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 enableVideo 后调用，设置结果在摄像头成功开启后生效，即 SDK 触发 onLocalVideoStateChanged 回调返回本地视频状态为 localVideoStreamStateCapturing (1) 后。
+  ///  成功调用该方法后，本地会触发 onCameraFocusAreaChanged 回调。
   ///
-  /// * [positionX] The horizontal coordinate of the touch point relative to the view.
-  /// * [positionY] The vertical coordinate of the touch point relative to the view.
+  /// * [positionX] 触摸点相对于视图的横坐标。
+  /// * [positionY] 触摸点相对于视图的纵坐标。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setCameraFocusPositionInPreview(
       {required double positionX, required double positionY});
 
-  /// Sets whether to turn on the flashlight.
+  /// 设置是否打开闪光灯。
   ///
-  /// This method is applicable to Android and iOS only.
-  ///  You must call this method after enableVideo. The setting takes effect after the camera is successfully turned on, i.e., after the SDK triggers the onLocalVideoStateChanged callback and the local video state is localVideoStreamStateCapturing (1).
+  /// 该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 enableVideo 后调用，设置结果在摄像头成功开启后生效，即 SDK 触发 onLocalVideoStateChanged 回调返回本地视频状态为 localVideoStreamStateCapturing (1) 后。
   ///
-  /// * [isOn] Whether to turn on the flashlight: true : Turn on the flashlight. false : (default) Turn off the flashlight.
+  /// * [isOn] 是否打开闪光灯： true : 打开闪光灯。 false :（默认）关闭闪光灯。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setCameraTorchOn(bool isOn);
 
-  /// Sets whether to enable face auto-focus.
+  /// 设置是否开启人脸对焦功能。
   ///
-  /// By default, the SDK disables face auto-focus on Android and enables it on iOS. If you want to manually set face auto-focus, call this method. This method is applicable to Android and iOS only.
+  /// SDK 默认在 Android 平台关闭人脸自动对焦，在 iOS 平台开启人脸自动对焦。如需自行设置人脸自动对焦，请调用该方法。 该方法仅适用于 Android 和 iOS。
   ///
-  /// * [enabled] Whether to enable face auto-focus: true : Enable face auto-focus. false : Disable face auto-focus.
+  /// * [enabled] 是否开启人脸对焦： true : 开启人脸对焦功能。 false : 关闭人脸对焦功能。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setCameraAutoFocusFaceModeEnabled(bool enabled);
 
-  /// Checks whether the device supports manual exposure.
+  /// 检测设备是否支持手动曝光功能。
   ///
-  /// This method is only applicable to Android and iOS.
-  ///  Call this method after the SDK triggers the onLocalVideoStateChanged callback and returns the local video state as localVideoStreamStateCapturing (1).
+  /// 该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 SDK 触发 onLocalVideoStateChanged 回调，返回本地视频状态为 localVideoStreamStateCapturing (1) 之后调用。
   ///
   /// Returns
-  /// true : The device supports manual exposure. false : The device does not support manual exposure.
+  /// true : 设备支持手动曝光功能。 false : 设备不支持手动曝光功能。
   Future<bool> isCameraExposurePositionSupported();
 
-  /// Sets the manual exposure position.
+  /// 设置手动曝光位置。
   ///
-  /// This method is applicable to Android and iOS only.
-  ///  You must call this method after enableVideo. The setting takes effect after the camera is successfully turned on, i.e., after the SDK triggers the onLocalVideoStateChanged callback and the local video state is localVideoStreamStateCapturing (1).
-  ///  After this method is successfully called, the local client triggers the onCameraExposureAreaChanged callback.
+  /// 该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 enableVideo 后调用，设置结果在摄像头成功开启后生效，即 SDK 触发 onLocalVideoStateChanged 回调返回本地视频状态为 localVideoStreamStateCapturing (1) 后。
+  ///  成功调用该方法后，本地会触发 onCameraExposureAreaChanged 回调。
   ///
-  /// * [positionXinView] The horizontal coordinate of the touch point relative to the view.
-  /// * [positionYinView] The vertical coordinate of the touch point relative to the view.
+  /// * [positionXinView] 触摸点相对于视图的横坐标。
+  /// * [positionYinView] 触摸点相对于视图的纵坐标。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setCameraExposurePosition(
       {required double positionXinView, required double positionYinView});
 
-  /// Checks whether the current camera supports exposure adjustment.
+  /// 查询当前摄像头是否支持曝光调节。
   ///
-  /// This method is only applicable to Android and iOS.
-  ///  You must call this method after the SDK triggers the onLocalVideoStateChanged callback and the local video state returns localVideoStreamStateCapturing (1).
-  ///  It is recommended to call this method to check whether the current camera supports exposure adjustment before calling setCameraExposureFactor to adjust the exposure factor.
-  ///  This method checks whether the currently used camera supports exposure adjustment, i.e., the camera specified when calling setCameraCapturerConfiguration.
+  /// 该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 SDK 触发 onLocalVideoStateChanged 回调，返回本地视频状态为 localVideoStreamStateCapturing (1) 之后调用。
+  ///  建议你在调用 setCameraExposureFactor 调节曝光系数前，先调用该方法查询当前摄像头是否支持曝光调节。
+  ///  当你调用该方法时，查询的是当前正在使用的摄像头是否支持曝光调节，即调用 setCameraCapturerConfiguration 时指定的摄像头。
   ///
   /// Returns
-  /// true : The method call succeeds. false : The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// true ：方法调用成功。 false ：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<bool> isCameraExposureSupported();
 
-  /// Sets the exposure factor of the current camera.
+  /// 设置当前摄像头的曝光系数。
   ///
-  /// When the lighting in the shooting environment is insufficient or too bright, it affects the quality of video capture. To achieve better video effects, you can use this method to adjust the camera's exposure factor.
-  ///  This method is applicable to Android and iOS only.
-  ///  You must call this method after enableVideo. The setting takes effect after the camera is successfully turned on, i.e., after the SDK triggers the onLocalVideoStateChanged callback and the local video state is localVideoStreamStateCapturing (1).
-  ///  It is recommended to call isCameraExposureSupported before using this method to check whether the current camera supports adjusting the exposure factor.
-  ///  When you call this method, it sets the exposure factor for the currently used camera, which is the one specified in setCameraCapturerConfiguration.
+  /// 当拍摄环境光线不足或过于明亮时，会影响视频采集的画质。为了获得更好的视频效果，你可以使用该方法调节摄像头的曝光系数。
+  ///  该方法仅适用于 Android 和 iOS。
+  ///  该方法必须在 enableVideo 后调用，设置结果在摄像头成功开启后生效，即 SDK 触发 onLocalVideoStateChanged 回调返回本地视频状态为 localVideoStreamStateCapturing (1) 后。
+  ///  建议你在调用该方法前，先调用 isCameraExposureSupported 查询当前摄像头是否支持调节曝光系数。
+  ///  当你调用该方法时，设置的是当前正在使用的摄像头的曝光系数，即调用 setCameraCapturerConfiguration 时指定的摄像头。
   ///
-  /// * [factor] Exposure factor of the camera. The default value is 0, which means using the camera's default exposure level. The larger the value, the higher the exposure. When the video image is overexposed, you can reduce the exposure factor; when the image is underexposed and dark details are lost, you can increase the exposure factor. If the specified exposure factor exceeds the supported range of the device, the SDK automatically adjusts it to the supported range.
-  /// On Android, the range is [-20.0, 20.0]; on iOS, the range is [-8.0, 8.0].
+  /// * [factor] 摄像头的曝光系数。默认值为 0，表示使用摄像头的默认曝光量。取值越大，曝光量越大。视频图像过曝时，你可以降低曝光系数；视频图像欠曝且暗部细节丢失时，你可以增加曝光系数。如果你指定的曝光系数超出设备支持的范围，SDK 会自动调节为设备实际支持的范围。
+  /// 在 Android 平台上，取值范围为 [-20.0,20.0]；在 iOS 平台上，取值范围为 [-8.0,8.0]。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setCameraExposureFactor(double factor);
 
-  /// Checks whether the device supports auto exposure.
+  /// 检测设备是否支持自动曝光功能。
   ///
   /// Returns
-  /// true : The device supports auto exposure. false : The device does not support auto exposure.
+  /// true : 设备支持自动曝光功能。 false : 设备不支持自动曝光功能。
   Future<bool> isCameraAutoExposureFaceModeSupported();
 
-  /// Enables or disables the auto exposure feature.
+  /// 设置是否开启自动曝光功能。
   ///
-  /// * [enabled] Whether to enable auto exposure: true : Enable auto exposure. false : Disable auto exposure.
+  /// * [enabled] 是否开启自动曝光： true : 开启自动曝光。 false : 关闭自动曝光。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setCameraAutoExposureFaceModeEnabled(bool enabled);
 
-  /// Sets the camera stabilization mode.
+  /// 设置摄像头防抖模式。
   ///
-  /// Camera stabilization mode is disabled by default. You need to call this method to enable it and set the appropriate stabilization mode. This method is for iOS only.
-  ///  Camera stabilization only takes effect when the video resolution is greater than 1280 × 720.
-  ///  The higher the stabilization level, the narrower the camera's field of view and the greater the camera delay. To ensure user experience, it is recommended to set the mode parameter to cameraStabilizationModeLevel1.
+  /// 摄像头防抖模式默认关闭，你需要调用该方法开启并设置合适的防抖模式。 该方法仅适用于 iOS。
+  ///  摄像头防抖只对视频分辨率大于 1280 × 720 以上的场景生效。
+  ///  开启摄像头防抖后，摄像头防抖等级越高，相机的视角就越小、相机时延就越大。为保障用户体验，建议你将 mode 参数设置为 cameraStabilizationModeLevel1 。
   ///
-  /// * [mode] Camera stabilization mode. See CameraStabilizationMode.
+  /// * [mode] 摄像头的防抖模式。详见 CameraStabilizationMode 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。
   Future<void> setCameraStabilizationMode(CameraStabilizationMode mode);
 
-  /// Sets the default audio route.
+  /// 设置默认的音频路由。
   ///
-  /// Mobile devices typically have two audio routes: the earpiece at the top, which has lower volume, and the speaker at the bottom, which has higher volume. Setting the default audio route determines whether the system uses the earpiece or speaker to play audio when no external device is connected.
-  /// The system default audio route varies by scenario:
-  ///  Voice call: Earpiece
-  ///  Voice live broadcast: Speaker
-  ///  Video call: Speaker
-  ///  Video live broadcast: Speaker Calling this API allows you to change the default audio route described above. This method is applicable only on Android and iOS platforms.
-  /// After setting the default audio route using this method, the actual audio route may change depending on the connection of external audio devices (wired or Bluetooth headsets). See [Audio Routing](https://doc.shengwang.cn/doc/rtc/android/advanced-features/audio-route) for details.
+  /// 手机设备一般有两个音频路由，一个是位于顶部的听筒，播放声音偏小；一个是位于底部的扬声器，播放声音偏大。设置默认的音频路由，就是在没有外接设备的前提下，设置系统使用听筒还是扬声器播放音频。
+  /// 不同场景下，系统默认的音频路由也不同。具体如下：
+  ///  语音通话：听筒
+  ///  语音直播：扬声器
+  ///  视频通话：扬声器
+  ///  视频直播：扬声器 调用该 API 可以改变上述默认音频路由。 该方法仅适用于 Android 和 iOS 平台。
+  /// 在调用该方法设置默认音频路由后，系统实际音频路由会随着外接音频设备（有线耳机或蓝牙耳机）的连接发生改变。详见[音频路由](https://doc.shengwang.cn/doc/rtc/android/advanced-features/audio-route)。
   ///
-  /// * [defaultToSpeaker] Whether to use the speaker as the default audio route: true : Set the default audio route to speaker. false : Set the default audio route to earpiece.
+  /// * [defaultToSpeaker] 是否使用扬声器作为默认的音频路由： true : 设置默认音频路由为扬声器。 false : 设置默认音频路由为听筒。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setDefaultAudioRouteToSpeakerphone(bool defaultToSpeaker);
 
-  /// Enables or disables speakerphone playback.
+  /// 开启或关闭扬声器播放。
   ///
-  /// For the SDK's default audio routes in different scenarios, see [Audio Routing](https://doc.shengwang.cn/doc/rtc/android/advanced-features/audio-route). This method is applicable only on Android and iOS platforms.
-  ///  This method only sets the audio route used by the user in the current channel and does not affect the SDK's default audio route. If the user leaves the current channel and joins a new one, the SDK's default audio route will still be used.
-  ///  If the user uses external audio playback devices such as Bluetooth or wired headsets, this method has no effect. Audio will only be played through external devices. If multiple external devices are connected, audio is played through the last connected device.
+  /// 不同场景下 SDK 默认的音频路由见[音频路由](https://doc.shengwang.cn/doc/rtc/android/advanced-features/audio-route)。 该方法仅适用于 Android 和 iOS 平台。
+  ///  该方法只设置用户在当前频道内使用的音频路由，不会影响 SDK 默认的音频路由。如果用户离开当前频道并加入新的频道，则用户还是会使用 SDK 默认的音频路由。
+  ///  如果用户使用了蓝牙耳机、有线耳机等外接音频播放设备，则该方法的设置无效，音频只会通过外接设备播放。当有多个外接设备时，音频会通过最后一个接入的设备播放。
   ///
-  /// * [speakerOn] Whether to enable speakerphone playback: true : Enable. Audio is routed to the speaker. false : Disable. Audio is routed to the earpiece.
+  /// * [speakerOn] 设置是否开启扬声器播放： true : 开启。音频路由为扬声器。 false : 关闭。音频路由为听筒。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setEnableSpeakerphone(bool speakerOn);
 
-  /// Checks whether the speakerphone is enabled.
+  /// 检查扬声器状态启用状态。
   ///
-  /// This method is applicable only on Android and iOS.
+  /// 该方法仅适用于 Android 和 iOS。
   ///
   /// Returns
-  /// true : The speakerphone is enabled, and audio is routed to the speaker. false : The speakerphone is not enabled, and audio is routed to a non-speaker device (earpiece, headset, etc.).
+  /// true : 扬声器已开启，语音会输出到扬声器。 false : 扬声器未开启，语音会输出到非扬声器（听筒，耳机等）。
   Future<bool> isSpeakerphoneEnabled();
 
-  /// Selects the audio route in communication volume mode.
+  /// 选择通话音量模式下的音频路由。
   ///
-  /// This method is used in communication volume mode ([MODE_IN_COMMUNICATION](https://developer.android.google.cn/reference/kotlin/android/media/AudioManager?hl=en#mode_in_communication)) to switch the audio route from a Bluetooth headset to the earpiece, wired headset, or speaker. This method is applicable only on Android.
-  /// Using this method together with setEnableSpeakerphone may cause conflicts. Agora recommends using setRouteInCommunicationMode alone.
+  /// 该方法用于在通话音量模式（[MODE_IN_COMMUNICATION](https://developer.android.google.cn/reference/kotlin/android/media/AudioManager?hl=en#mode_in_communication)）下，将音频路由从蓝牙耳机切换为听筒、有线耳机或扬声器。 该方法仅适用于 Android。
+  /// 该方法与 setEnableSpeakerphone 同时使用时可能引起冲突。声网建议你单独使用 setRouteInCommunicationMode 。
   ///
-  /// * [route] The desired audio route:
-  ///  -1: System default audio route.
-  ///  0: Headset with microphone.
-  ///  1: Earpiece.
-  ///  2: Headset without microphone.
-  ///  3: Built-in speaker.
-  ///  4: (Not supported) External speaker.
-  ///  5: Bluetooth headset.
-  ///  6: USB device.
+  /// * [route] 期望使用的音频路由:
+  ///  -1：系统默认的音频路由。
+  ///  0：带麦克风的耳机。
+  ///  1：听筒。
+  ///  2：不带麦克风的耳机。
+  ///  3：设备自带的扬声器。
+  ///  4：（暂不支持）外接的扬声器。
+  ///  5：蓝牙耳机。
+  ///  6：USB 设备。
   ///
   /// Returns
-  /// No practical meaning.
+  /// 无实际意义。
   Future<void> setRouteInCommunicationMode(int route);
 
-  /// Checks whether the camera supports Center Stage.
+  /// 查询摄像头是否支持人像锁定。
   ///
-  /// Before calling enableCameraCenterStage to enable the Center Stage feature, it is recommended to call this method to check whether the current device supports Center Stage. This method is applicable to iOS and macOS only.
+  /// 在调用 enableCameraCenterStage 开启人像锁定功能前，建议你先调用该方法查询当前设备是否支持人像锁定。 该方法仅适用于 iOS 和 macOS。
   ///
   /// Returns
-  /// true : The current camera supports Center Stage. false : The current camera does not support Center Stage.
+  /// true : 当前摄像头支持人像锁定。 false : 当前摄像头不支持人像锁定。
   Future<bool> isCameraCenterStageSupported();
 
-  /// Enables or disables the Center Stage feature.
+  /// 开启或关闭人像锁定功能。
   ///
-  /// The Center Stage feature is disabled by default. You need to call this method to enable it. To disable the feature, call this method again and set enabled to false. This method is applicable to iOS and macOS only.
-  /// As this feature requires high device performance, you need to use it on the following or higher-end devices:
-  ///  iPad:
-  ///  12.9-inch iPad Pro (5th generation)
-  ///  11-inch iPad Pro (3rd generation)
-  ///  iPad (9th generation)
-  ///  iPad mini (6th generation)
-  ///  iPad Air (5th generation)
-  ///  2020 M1 MacBook Pro 13-inch + iPhone 11 (using iPhone as an external camera for MacBook) Agora recommends that you call isCameraCenterStageSupported to check whether the current device supports Center Stage before enabling this feature.
+  /// 人像锁定功能默认关闭，你需要调用该方法开启。如果需要关闭该功能，则需重新调用该方法并将 enabled 设置为 false 。 该方法仅适用于 iOS 和 macOS。
+  /// 由于该功能对设备性能要求较高，你需要在以下类型或更高性能的设备上使用该功能：
+  ///  iPad：
+  ///  12.9 英寸 iPad Pro（第五代）
+  ///  11 英寸 iPad Pro（第三代）
+  ///  iPad（第九代）
+  ///  iPad mini（第六代）
+  ///  iPad Air（第五代）
+  ///  2020 年 M1 MacBook Pro 13 英寸 + iPhone 11（将 iPhone 作为 MacBook 的外接摄像头使用） 声网建议你在开启该功能前，先调用 isCameraCenterStageSupported 查询当前设备是否支持人像锁定。
   ///
-  /// * [enabled] Whether to enable the Center Stage feature: true : Enable Center Stage. false : Disable Center Stage.
+  /// * [enabled] 是否开启人像锁定功能： true ：开启人像锁定。 false ：关闭人像锁定。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。
   Future<void> enableCameraCenterStage(bool enabled);
 
-  /// Gets the list of shareable screen and window objects.
+  /// 获取可共享的屏幕和窗口对象列表。
   ///
-  /// Before screen or window sharing, you can call this method to get a list of shareable screen and window objects, allowing users to select a screen or window to share via thumbnails in the list. The list contains important information such as window ID and screen ID. After obtaining the ID, you can call startScreenCaptureByWindowId or startScreenCaptureByDisplayId to start sharing. This method is only applicable to macOS and Windows.
+  /// 屏幕共享或窗口共享前，你可以调用该方法获取可共享的屏幕和窗口的对象列表，方便用户通过列表中的缩略图选择共享某个显示器的屏幕或某个窗口。列表中包含窗口 ID 和屏幕 ID 等重要信息，你可以获取到 ID 后再调用 startScreenCaptureByWindowId 或 startScreenCaptureByDisplayId 开启共享。 该方法仅适用于 macOS 和 Windows。
   ///
-  /// * [thumbSize] The target size (in pixels) of the thumbnail for the screen or window. The SDK scales the original image to match the longest side of the target size while maintaining the aspect ratio. For example, if the original size is 400 × 300 and thumbSize is 100 × 100, the actual thumbnail size is 100 × 75. If the target size is larger than the original, the thumbnail is the original image and no scaling is applied.
-  /// * [iconSize] The target size (in pixels) of the icon corresponding to the application. The SDK scales the original image to match the longest side of the target size while maintaining the aspect ratio. For example, if the original size is 400 × 300 and iconSize is 100 × 100, the actual icon size is 100 × 75. If the target size is larger than the original, the icon is the original image and no scaling is applied.
-  /// * [includeScreen] Whether the SDK returns screen information in addition to window information: true : SDK returns both screen and window information. false : SDK returns only window information.
+  /// * [thumbSize] 屏幕或窗口的缩略图的目标尺寸（宽高单位为像素）。SDK 会在保证原图不变形的前提下，缩放原图，使图片最长边和目标尺寸的最长边的长度一致。例如，原图宽高为 400 × 300， thumbSize 为 100 x 100，缩略图实际尺寸为 100 × 75。如果目标尺寸大于原图尺寸，缩略图即为原图，SDK 不进行缩放操作。
+  /// * [iconSize] 程序所对应的图标的目标尺寸（宽高单位为像素）。SDK 会在保证原图不变形的前提下，缩放原图，使图片最长边和目标尺寸的最长边的长度一致。例如，原图宽高为 400 × 300， iconSize 为 100 × 100，图标实际尺寸为 100 × 75。如果目标尺寸大于原图尺寸，图标即为原图，SDK 不进行缩放操作。
+  /// * [includeScreen] 除了窗口信息外，SDK 是否返回屏幕信息： true ：SDK 返回屏幕和窗口信息。 false ：SDK 仅返回窗口信息。
   ///
   /// Returns
-  /// An array of ScreenCaptureSourceInfo.
+  /// ScreenCaptureSourceInfo 数组。
   Future<List<ScreenCaptureSourceInfo>> getScreenCaptureSources(
       {required SIZE thumbSize,
       required SIZE iconSize,
       required bool includeScreen});
 
-  /// Sets the SDK's permission to operate the Audio Session.
+  /// 设置 SDK 对 Audio Session 的操作权限。
   ///
-  /// By default, both the SDK and the App have permission to operate the Audio Session. If you only want the App to operate the Audio Session, you can call this method to restrict the SDK's permission.
-  /// This method can be called before or after joining a channel. Once called, the restriction takes effect when the SDK needs to modify the Audio Session.
-  ///  This method is applicable to iOS only.
-  ///  This method does not restrict the App's permission to operate the Audio Session.
+  /// 默认情况下，SDK 和 App 对 Audio Session 都有操作权限。如果你只需使用 App 对 Audio Session 进行操作，你可以调用该方法限制 SDK 对 Audio Session 的操作权限。
+  /// 该方法在加入频道前后都能调用。一旦调用该方法限制了 SDK 对 Audio Session 的操作权限，该限制会在 SDK 需要更改 Audio Session 时生效。
+  ///  该方法仅适用于 iOS 平台。
+  ///  该方法不会限制 App 对 Audio Session 的操作权限。
   ///
-  /// * [restriction] SDK's permission to operate the Audio Session. See AudioSessionOperationRestriction. This parameter is a bit mask, where each bit corresponds to a permission.
+  /// * [restriction] SDK 对 Audio Session 的操作权限，详见 AudioSessionOperationRestriction 。该参数为 Bit Mask，每个 Bit 对应一个权限。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAudioSessionOperationRestriction(
       AudioSessionOperationRestriction restriction);
 
-  /// Starts capturing the video stream of the specified screen.
+  /// 开始采集指定屏幕的视频流。
   ///
-  /// Captures the video stream of a screen or a specific region of the screen. This method is only applicable to Windows and macOS.
+  /// 采集一个屏幕或该屏幕部分区域的视频流。 该方法仅适用于 Windows 和 macOS。
   ///
-  /// * [displayId] Specifies the ID of the screen to be shared. On Windows, if you want to share two screens (primary + secondary) simultaneously, you can set displayId to -1 when calling this method.
-  /// * [regionRect] (Optional) Specifies the position of the region to be shared relative to the entire screen. To share the entire screen, set to nil.
-  /// See Rectangle.
-  /// * [captureParams] Configuration parameters for screen sharing. The default video encoding resolution is 1920 × 1080, i.e., 2,073,600 pixels. This pixel count is used for billing. See ScreenCaptureParameters. The video properties of the screen sharing stream only need to be configured through this parameter and are unrelated to setVideoEncoderConfiguration.
+  /// * [displayId] 指定待共享的屏幕 ID。 对于 Windows 平台，如果你需要同时共享两个屏幕（主屏 + 副屏），可以在调用该方法时，将 displayId 设置为 -1 。
+  /// * [regionRect] （可选）指定待共享区域相对于整个屏幕的位置。如需共享整个屏幕，则填 nil 。
+  /// 详见 Rectangle 。
+  /// * [captureParams] 屏幕共享的参数配置。默认的视频编码分辨率为 1920 × 1080，即 2073600 像素。该像素值为计费标准。详见 ScreenCaptureParameters 。 屏幕共享流的视频属性只需通过该参数设置，与 setVideoEncoderConfiguration 无关。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startScreenCaptureByDisplayId(
       {required int displayId,
       required Rectangle regionRect,
       required ScreenCaptureParameters captureParams});
 
-  /// Starts capturing the video stream of a specified screen region.
+  /// 开始采集指定屏幕区域的视频流。
   ///
-  /// Deprecated Deprecated: This method is deprecated. Use startScreenCaptureByDisplayId instead. If you need to enable screen sharing with external displays, it is strongly recommended to use startScreenCaptureByDisplayId. Shares a screen or a specific region of the screen. You need to specify the screen region to be shared in this method.
-  /// This method can be called before or after joining a channel, with the following differences:
-  ///  If you call this method before joining a channel, then call joinChannel to join the channel and set publishScreenTrack or publishSecondaryScreenTrack to true, screen sharing will start.
-  ///  If you call this method after joining a channel, then call updateChannelMediaOptions to update the channel media options and set publishScreenTrack or publishSecondaryScreenTrack to true, screen sharing will start. This method is only applicable to Windows.
+  /// 废弃 弃用： 该方法已废弃。请改用 startScreenCaptureByDisplayId 。如果你需要在设备外接其他显示屏的情况下开启屏幕共享，强烈建议你使用 startScreenCaptureByDisplayId 。 共享一个屏幕或该屏幕的部分区域。你需要在该方法中指定想要共享的屏幕区域。
+  /// 该方法在加入频道前后均可调用，区别如下：
+  ///  如果在加入频道前调用该方法，然后调用 joinChannel 加入频道，并设置 publishScreenTrack 或 publishSecondaryScreenTrack 为 true ，即可开始屏幕共享。
+  ///  如果在加入频道后调用该方法，然后调用 updateChannelMediaOptions 更新频道媒体选项，并设置 publishScreenTrack 或 publishSecondaryScreenTrack 为 true ，即可开始屏幕共享。 该方法仅适用于 Windows 平台。
   ///
-  /// * [screenRect] Specifies the position of the screen to be shared relative to the virtual screen.
-  /// * [regionRect] Specifies the position of the region to be shared relative to the entire screen. If not set, the entire screen is shared. See Rectangle. If the specified region exceeds the screen boundary, only the content within the screen is shared. If width or height is set to 0, the entire screen is shared.
-  /// * [captureParams] Configuration parameters for screen sharing encoding. The default resolution is 1920 x 1080, i.e., 2,073,600 pixels. This pixel count is used for billing. See ScreenCaptureParameters.
+  /// * [screenRect] 指定待共享的屏幕相对于虚拟屏的位置。
+  /// * [regionRect] 指定待共享区域相对于整个屏幕的位置。如不填，则表示共享整个屏幕。详见 Rectangle 。如果设置的共享区域超出了屏幕的边界，则只共享屏幕内的内容；如果将 width 或 height 设为 0 ，则共享整个屏幕。
+  /// * [captureParams] 屏幕共享的编码参数配置。默认的分辨率为 1920 x 1080，即 2073600 像素。该像素值为计费标准。详见 ScreenCaptureParameters 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startScreenCaptureByScreenRect(
       {required Rectangle screenRect,
       required Rectangle regionRect,
       required ScreenCaptureParameters captureParams});
 
-  /// Gets audio device information.
+  /// 获取音频设备信息。
   ///
-  /// After calling this method, you can check whether the audio device supports ultra-low latency recording and playback.
-  ///  This method is applicable to Android only.
-  ///  This method can be called before or after joining a channel.
+  /// 调用该方法后，你可以获取音频设备是否支持极低延时采集和播放。
+  ///  该方法仅适用于 Android 平台。
+  ///  该方法在加入频道前后均可调用。
   ///
   /// Returns
-  /// A DeviceInfo object containing audio device information.
-  ///  Non-null: The method call succeeds.
-  ///  Null: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 包含音频设备信息的 DeviceInfo 对象。
+  ///  非空：方法调用成功。
+  ///  空：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<DeviceInfo> getAudioDeviceInfo();
 
-  /// Starts capturing the video stream of a specified window.
+  /// 开始采集指定窗口的视频流。
   ///
-  /// Shares a window or a specific region of the window. You need to specify the window ID to be shared in this method.
-  /// This method supports sharing Universal Windows Platform (UWP) application windows. Agora has tested mainstream UWP applications using the latest SDK, with the following results: OS Version Application Compatible Version Supported Windows 10 Chrome 76.0.3809.100 No Office Word 18.1903.1152.0 Yes Office Excel 18.1903.1152.0 No Office PPT 18.1903.1152.0 Yes WPS Word 11.1.0.9145 Yes WPS Excel 11.1.0.9145 Yes WPS PPT 11.1.0.9145 Yes Built-in Media Player All versions Yes Windows 8 Chrome All versions Yes Office Word All versions Yes Office Excel All versions Yes Office PPT All versions Yes WPS Word 11.1.0.9098 Yes WPS Excel 11.1.0.9098 Yes WPS PPT 11.1.0.9098 Yes Built-in Media Player All versions Yes Windows 7 Chrome 73.0.3683.103 No Office Word All versions Yes Office Excel All versions Yes Office PPT All versions Yes WPS Word 11.1.0.9098 No WPS Excel 11.1.0.9098 No WPS PPT 11.1.0.9098 Yes Built-in Media Player All versions No This method is only applicable to macOS and Windows.
-  /// The SDK's window sharing feature depends on WGC (Windows Graphics Capture) or GDI (Graphics Device Interface). On systems earlier than Windows 10 2004, WGC cannot disable mouse capture. Therefore, when sharing windows on such systems, captureMouseCursor(false) may not work as expected. See ScreenCaptureParameters.
+  /// 共享一个窗口或该窗口的部分区域。用户需要在该方法中指定想要共享的窗口 ID。
+  /// 该方法支持共享通用 Windows 平台（UWP）应用窗口。声网使用最新版 SDK 对主流的 UWP 应用进行了测试，结果如下： 系统版本 软件名称 兼容版本 是否支持 Windows 10 Chrome 76.0.3809.100 否 Office Word 18.1903.1152.0 是 Office Excel 18.1903.1152.0 否 Office PPT 18.1903.1152.0 是 WPS Word 11.1.0.9145 是 WPS Excel 11.1.0.9145 是 WPS PPT 11.1.0.9145 是 系统自带的 Media Player 所有版本 是 Windows 8 Chrome 所有版本 是 Office Word 所有版本 是 Office Excel 所有版本 是 Office PPT 所有版本 是 WPS Word 11.1.0.9098 是 WPS Excel 11.1.0.9098 是 WPS PPT 11.1.0.9098 是 系统自带的 Media Player 所有版本 是 Windows 7 Chrome 73.0.3683.103 否 Office Word 所有版本 是 Office Excel 所有版本 是 Office PPT 所有版本 是 WPS Word 11.1.0.9098 否 WPS Excel 11.1.0.9098 否 WPS PPT 11.1.0.9098 是 系统自带的 Media Player 所有版本 否 该方法仅适用于 macOS 和 Windows 平台。
+  /// SDK 的窗口共享功能依赖于 WGC（Windows Graphics Capture）或 GDI（Graphics Device Interface）采集，WGC 在早于 Windows 10 2004 的系统上无法设置关闭鼠标采集，因此，当你在搭载早于 Windows 10 2004 系统的设备上进行窗口共享时，可能出现 captureMouseCursor(false) 不生效的现象。详见 ScreenCaptureParameters 。
   ///
-  /// * [windowId] Specifies the ID of the window to be shared.
-  /// * [regionRect] (Optional) Specifies the position of the region to be shared relative to the entire screen. If not set, the entire screen is shared. See Rectangle. If the specified region exceeds the window boundary, only the content within the window is shared. If width or height is 0, the entire window is shared.
-  /// * [captureParams] Configuration parameters for screen sharing. The default resolution is 1920 x 1080, i.e., 2,073,600 pixels. This pixel count is used for billing. See ScreenCaptureParameters.
+  /// * [windowId] 指定待共享的窗口 ID。
+  /// * [regionRect] （可选）指定待共享区域相对于整个屏幕的位置。如不填，则表示共享整个屏幕。详见 Rectangle 。如果设置的共享区域超出了窗口的边界，则只共享窗口内的内容；如果宽或高为 0，则共享整个窗口。
+  /// * [captureParams] 屏幕共享的参数配置。默认的分辨率为 1920 x 1080，即 2073600 像素。该像素值为计费标准。详见 ScreenCaptureParameters 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startScreenCaptureByWindowId(
       {required int windowId,
       required Rectangle regionRect,
       required ScreenCaptureParameters captureParams});
 
-  /// Sets the content type for screen sharing.
+  /// 设置屏幕共享内容类型。
   ///
-  /// The SDK uses different algorithms to optimize the sharing effect based on the content type. If you do not call this method, the SDK defaults the screen sharing content type to contentHintNone, meaning no specific content type is set. This method can be called before or after starting screen sharing.
+  /// SDK 会根据不同的内容类型，使用不同的算法对共享效果进行优化。如果不调用该方法，SDK 会将屏幕共享的内容默认为 contentHintNone，即无指定的内容类型。 该方法在开始屏幕共享前后都能调用。
   ///
-  /// * [contentHint] The content type of the screen sharing. See VideoContentHint.
+  /// * [contentHint] 屏幕共享的内容类型。详见 VideoContentHint 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setScreenCaptureContentHint(VideoContentHint contentHint);
 
-  /// Updates the region for screen capture.
+  /// 更新屏幕采集的区域。
   ///
-  /// Call this method after screen or window sharing is enabled.
+  /// 请在开启屏幕共享或窗口共享后调用该方法。
   ///
-  /// * [regionRect] The position of the region to be shared relative to the entire screen or window. If not specified, the entire screen or window is shared. See Rectangle. If the set region exceeds the screen or window boundary, only the content within the screen or window is shared; if width or height is set to 0, the entire screen or window is shared.
+  /// * [regionRect] 待共享区域相对于整个屏幕或窗口的位置，如不填，则表示共享整个屏幕或窗口。详见 Rectangle 。如果设置的共享区域超出了屏幕或窗口的边界，则只共享屏幕或窗口内的内容；如果将 width 或 height 设为 0，则共享整个屏幕或窗口。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> updateScreenCaptureRegion(Rectangle regionRect);
 
-  /// Updates the parameter configuration for screen capture.
+  /// 更新屏幕采集的参数配置。
   ///
-  /// This method is applicable to Windows and macOS only.
-  ///  Call this method after screen or window sharing is enabled.
+  /// 该方法仅适用于 Windows 和 macOS 平台。
+  ///  请在开启屏幕共享或窗口共享后调用该方法。
   ///
-  /// * [captureParams] Encoding parameter configuration for screen sharing. See ScreenCaptureParameters. The video properties of the screen sharing stream should be set only through this parameter and are not related to setVideoEncoderConfiguration.
+  /// * [captureParams] 屏幕共享的编码参数配置。详见 ScreenCaptureParameters 。 屏幕共享流的视频属性只需通过该参数设置，与 setVideoEncoderConfiguration 无关。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> updateScreenCaptureParameters(
       ScreenCaptureParameters captureParams);
 
-  /// Starts screen capture.
+  /// 开始屏幕采集。
   ///
-  /// This method is only applicable to Android and iOS platforms.
-  ///  Screen sharing stream billing is based on the dimensions value in ScreenVideoParameters :
-  ///  If not specified, billing is based on 1280 × 720.
-  ///  If specified, billing is based on the provided value.
-  ///  On iOS, screen sharing is only supported on iOS 12.0 and above.
-  ///  On iOS, if you use external audio capture instead of SDK audio capture, to prevent screen sharing from stopping when the app goes to the background, it is recommended to implement keep-alive logic.
-  ///  On iOS, this feature requires high device performance. It is recommended to use it on iPhone X or later.
-  ///  On iOS, this method depends on the screen sharing dynamic library AgoraReplayKitExtension.xcframework. Removing this library will cause screen sharing to fail.
-  ///  On Android, if the user does not grant screen capture permission to the app, the SDK reports the onPermissionError(2) callback.
-  ///  On Android 9 and above, to prevent the app from being killed when it goes to the background, add the foreground service permission android.permission.FOREGROUND_SERVICE in /app/Manifests/AndroidManifest.xml.
-  ///  Due to Android performance limitations, screen sharing is not supported on Android TV.
-  ///  Due to Android system limitations, avoid changing the screen sharing stream's video encoding resolution during sharing on Huawei devices to prevent crashes.
-  ///  Due to Android system limitations, some Xiaomi devices do not support capturing system audio during screen sharing.
-  ///  To improve the success rate of capturing system audio during screen sharing, it is recommended to call setAudioScenario and set the audio scenario to audioScenarioGameStreaming before joining the channel.
+  /// 该方法仅适用于 Android 和 iOS 平台。
+  ///  屏幕共享流的计费标准以 ScreenVideoParameters 中的 dimensions 值为准：
+  ///  当你未传值时，以 1280 × 720 计费。
+  ///  当你传值时，以你传入的值计费。
+  ///  在 iOS 平台上，屏幕共享仅适用于 iOS 12.0 及以上。
+  ///  在 iOS 平台上，如果你使用音频自采集而非 SDK 采集音频，为避免应用退后台后屏幕共享停止，建议你对应用添加保活处理逻辑。
+  ///  在 iOS 平台上，该功能对设备性能要求较高，建议你在 iPhone X 及之后机型上使用。
+  ///  在 iOS 平台上，该方法依赖于屏幕共享动态库 AgoraReplayKitExtension.xcframework ，如果删除该动态库会导致无法正常开启屏幕共享。
+  ///  在 Android 平台上，如果用户未授予 App 屏幕采集权限，SDK 会上报 onPermissionError(2) 回调。
+  ///  在 Android 9 及之后版本上，为避免应用退后台后被系统杀死，建议你在 /app/Manifests/AndroidManifest.xml 文件中添加前台服务权限： android.permission.FOREGROUND_SERVICE 。
+  ///  因 Android 性能限制，屏幕共享不支持 Android TV。
+  ///  因 Android 系统限制，使用华为手机进行屏幕共享时，为避免崩溃，请不要在共享过程中调节屏幕共享流的视频编码分辨率。
+  ///  因 Android 系统限制，部分小米手机不支持屏幕共享时采集系统音频。
+  ///  为提高屏幕共享时采集系统音频的成功率，建议你在加入频道前通过 setAudioScenario 方法设置音频场景为 audioScenarioGameStreaming 。
   ///
-  /// * [captureParams] Encoding parameter configuration for screen sharing. See ScreenCaptureParameters2.
+  /// * [captureParams] 屏幕共享的编码参数配置。详见 ScreenCaptureParameters2 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startScreenCapture(ScreenCaptureParameters2 captureParams);
 
-  /// Updates the parameter configuration for screen capture.
+  /// 更新屏幕采集的参数配置。
   ///
-  /// If system audio is not captured when screen sharing is enabled and you want to update the configuration and publish system audio, follow these steps:
-  ///  Call this method and set captureAudio to true.
-  ///  Call updateChannelMediaOptions and set publishScreenCaptureAudio to true to publish the screen capture audio.
-  ///  This method is applicable to Android and iOS only.
-  ///  On iOS, screen sharing is supported only on iOS 12.0 and later.
+  /// 如果在开启屏幕共享时未采集系统音频、然后想要更新参数配置、发布系统音频，可参考以下步骤：
+  ///  调用该方法并设置 captureAudio 为 true 。
+  ///  调用 updateChannelMediaOptions 设置 publishScreenCaptureAudio 为 true ，即可发布屏幕采集的音频。
+  ///  该方法仅适用于 Android 和 iOS 平台。
+  ///  在 iOS 平台上，屏幕共享仅适用于 iOS 12.0 及以上。
   ///
-  /// * [captureParams] Encoding parameter configuration for screen sharing. See ScreenCaptureParameters2.
+  /// * [captureParams] 屏幕共享的编码参数配置。详见 ScreenCaptureParameters2 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> updateScreenCapture(ScreenCaptureParameters2 captureParams);
 
-  /// Queries the maximum frame rate supported by the device during screen sharing.
+  /// 查询设备在屏幕共享时支持的最高帧率。
   ///
   /// Returns
-  /// If the method call succeeds, returns the maximum frame rate supported by the device. See ScreenCaptureFramerateCapability.
-  ///  <0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法调用成功时，返回设备支持的最高帧率。详见 ScreenCaptureFramerateCapability 。
+  ///  <0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> queryScreenCaptureCapability();
 
-  /// Queries the focal length capabilities supported by the camera.
+  /// 查询摄像头支持的焦距能力。
   ///
-  /// To enable wide-angle or ultra-wide-angle camera modes, it is recommended to call this method first to check whether the device supports the corresponding focal length capabilities. Then, based on the result, call setCameraCapturerConfiguration to adjust the camera's focal length configuration to achieve the best capturing effect. This method is only applicable to Android and iOS.
+  /// 如需开启摄像头广角、超广角拍摄模式，建议你先调用该方法查询设备是否具备相应的焦距能力，再根据查询结果调用 setCameraCapturerConfiguration 调整摄像头的焦距配置，以达到最佳的摄像头采集效果。 该方法仅适用于 Android 和 iOS。
   ///
   /// Returns
-  /// Returns an array of FocalLengthInfo objects, which contain the camera's orientation and focal length type.
+  /// 返回 FocalLengthInfo 对象数组，其中包含摄像头的方向和焦距类型。
   Future<List<FocalLengthInfo>> queryCameraFocalLengthCapability();
 
-  /// Sets an external MediaProjection to capture screen video stream.
+  /// 设置 SDK 外部的 MediaProjection 采集屏幕视频流。
   ///
-  /// After this method is successfully called, the external MediaProjection you set will replace the one applied by the SDK to capture the screen video stream.
-  /// When screen sharing is stopped or RtcEngine is destroyed, the SDK automatically releases the MediaProjection. This method is applicable to Android only.
-  /// You must obtain MediaProjection permission before calling this method.
+  /// 成功调用该方法后，你设置的外部 MediaProjection 会替换掉 SDK 申请的 MediaProjection 采集屏幕视频流。
+  /// 当停止屏幕共享或销毁 RtcEngine 时，SDK 会自动释放 MediaProjection。 该方法仅适用于 Android。
+  /// 在调用该方法前，必须先申请 MediaProjection 权限。
   ///
-  /// * [mediaProjection] A [MediaProjection](https://developer.android.com/reference/android/media/projection/MediaProjection) object used to capture screen video stream.
+  /// * [mediaProjection] 一个 [MediaProjection](https://developer.android.com/reference/android/media/projection/MediaProjection) 对象，用于采集屏幕视频流。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setExternalMediaProjection(int mediaProjection);
 
-  /// Sets the screen sharing scenario.
+  /// 设置屏幕共享的场景。
   ///
-  /// When starting screen or window sharing, you can call this method to set the screen sharing scenario. The SDK adjusts the quality of the shared screen based on the scenario you set. Agora recommends calling this method before joining a channel.
+  /// 开启屏幕共享或窗口共享时，你可以调用该方法设置屏幕共享的场景，SDK 会根据你设置的场景调整共享画面的画质。 声网建议你在加入频道前调用该方法。
   ///
-  /// * [screenScenario] The screen sharing scenario. See ScreenScenarioType.
+  /// * [screenScenario] 屏幕共享的场景，详见 ScreenScenarioType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setScreenCaptureScenario(ScreenScenarioType screenScenario);
 
-  /// Stops screen capture.
+  /// 停止屏幕采集。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopScreenCapture();
 
-  /// Gets the call ID.
+  /// 获取通话 ID。
   ///
-  /// Each time the client joins a channel, a corresponding callId is generated to identify the current call. You can call this method to get the callId parameter, and then pass it in when calling methods such as rate and complain.
+  /// 客户端在每次加入频道后会生成一个对应的 callId ，标识该客户端的此次通话。你可以调用该方法获取 callId 参数，然后在调用 rate 、 complain 等方法时填入。
   ///
   /// Returns
-  /// Call ID.
+  /// 通话 ID。
   Future<String> getCallId();
 
-  /// Rates a call.
+  /// 给通话评分。
   ///
-  /// This method must be called after the user leaves the channel.
+  /// 该方法需要在用户离开频道后调用。
   ///
-  /// * [callId] The call ID. You can obtain this parameter by calling getCallId.
-  /// * [rating] The rating for the call, from 1 (lowest) to 5 (highest).
-  /// * [description] A description of the call. The length must be less than 800 bytes.
+  /// * [callId] 通话 ID。你可以通过调用 getCallId 获取该参数。
+  /// * [rating] 给通话的评分，最低 1 分，最高 5 分。
+  /// * [description] 给通话的描述。长度应小于 800 字节。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> rate(
       {required String callId,
       required int rating,
       required String description});
 
-  /// Report call quality issues.
+  /// 投诉通话质量。
   ///
-  /// This method allows users to report call quality issues. It must be called after leaving the channel.
+  /// 该方法允许用户就通话质量进行投诉。需要在离开频道后调用。
   ///
-  /// * [callId] Call ID. You can obtain this parameter by calling getCallId.
-  /// * [description] Description of the call. The length should be less than 800 bytes.
+  /// * [callId] 通话 ID。你可以通过调用 getCallId 获取该参数。
+  /// * [description] 通话的描述。长度应小于 800 字节。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> complain({required String callId, required String description});
 
-  /// Starts pushing streams without transcoding.
+  /// 开始非转码推流。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side Streaming](https://doc.shengwang.cn/doc/media-push/restful/landing-page).
-  /// You can call this method to push live audio and video streams to a specified CDN streaming URL. This method can only push to one URL at a time. To push to multiple URLs, you must call this method multiple times.
-  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
-  ///  Call this method after joining a channel.
-  ///  Only hosts in live streaming scenarios can call this method.
-  ///  If the stream fails to start and you want to restart it, you must call stopRtmpStream before calling this method again. Otherwise, the SDK returns the same error code as the previous failure.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 调用该方法，你可以向指定的旁路推流地址推送直播音视频流。该方法每次只能向一个地址推送媒体流，如果你需要向多个地址转码推流，则需多次调用该方法。
+  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
+  ///  请在加入频道后调用该方法。
+  ///  只有直播场景下的主播才能调用该方法。
+  ///  调用该方法推流失败后，如果你想要重新推流，那么请你务必先调用 stopRtmpStream ，再调用该方法重推，否则 SDK 会返回与上次推流失败时一样的错误码。
   ///
-  /// * [url] The CDN streaming URL. The format must be RTMP or RTMPS. The character length must not exceed 1024 bytes. Special characters such as Chinese are not supported.
+  /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startRtmpStreamWithoutTranscoding(String url);
 
-  /// Starts pushing streams with transcoding settings.
+  /// 开始旁路推流并设置转码属性。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side Streaming](https://doc.shengwang.cn/doc/media-push/restful/landing-page).
-  /// You can call this method to push live audio and video streams to a specified CDN streaming URL with transcoding settings. This method can only push to one URL at a time. To push to multiple URLs, you must call this method multiple times.
-  /// Each stream push represents a streaming task. The default maximum number of concurrent tasks is 200, meaning you can run up to 200 streaming tasks simultaneously under one Agora project. For higher quotas, please [contact technical support](https://ticket.shengwang.cn/).
-  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
-  ///  Call this method after joining a channel.
-  ///  Only hosts in live streaming scenarios can call this method.
-  ///  If the stream fails to start and you want to restart it, you must call stopRtmpStream before calling this method again. Otherwise, the SDK returns the same error code as the previous failure.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 调用该方法，你可以向指定的旁路推流地址推送直播音视频流并设置转码属性。该方法每次只能向一个地址推送媒体流，如果你需要向多个地址转码推流，则需多次调用该方法。
+  /// 一次推流代表一个推流任务，最大并发任务数默认为 200，表示你在一个声网项目下最多同时运行 200 个推流任务，如需更高配额，请[联系技术支持](https://ticket.shengwang.cn/)。
+  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
+  ///  请在加入频道后调用该方法。
+  ///  只有直播场景下的主播才能调用该方法。
+  ///  调用该方法推流失败后，如果你想要重新推流，那么请你务必先调用 stopRtmpStream ，再调用该方法重推，否则 SDK 会返回与上次推流失败时一样的错误码。
   ///
-  /// * [url] The CDN streaming URL. The format must be RTMP or RTMPS. The character length must not exceed 1024 bytes. Special characters such as Chinese are not supported.
-  /// * [transcoding] The transcoding settings for the CDN stream. See LiveTranscoding.
+  /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
+  /// * [transcoding] 旁路推流的转码属性，详见 LiveTranscoding 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startRtmpStreamWithTranscoding(
       {required String url, required LiveTranscoding transcoding});
 
-  /// Updates the RTMP transcoding configuration.
+  /// 更新旁路推流转码属性。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side RTMP Streaming](https://doc.shengwang.cn/doc/media-push/restful/landing-page).
-  /// After enabling transcoding streaming, you can dynamically update the transcoding configuration based on your scenario needs. After the transcoding configuration is updated, the SDK triggers the onTranscodingUpdated callback.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 开启转码推流后，你可以根据场景需求，动态更新转码属性。转码属性更新后，SDK 会触发 onTranscodingUpdated 回调。
   ///
-  /// * [transcoding] The transcoding configuration for RTMP streaming. See LiveTranscoding.
+  /// * [transcoding] 旁路推流的转码属性，详见 LiveTranscoding 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> updateRtmpTranscoding(LiveTranscoding transcoding);
 
-  /// Starts local video mixing.
+  /// 开启本地合图。
   ///
-  /// After calling this method, you can merge multiple video streams locally into one stream. For example: merge video streams from camera capture, screen sharing, media player, remote video, video files, images, etc., into one stream, and then publish the mixed video stream to the channel.
-  ///  Local video mixing consumes high CPU resources. Agora recommends enabling this feature on high-performance devices.
-  ///  If you need to mix locally captured video streams, the SDK supports the following combinations:
-  ///  On Windows, up to 4 camera video streams + 4 screen sharing streams can be mixed.
-  ///  On macOS, up to 4 camera video streams + 1 screen sharing stream can be mixed.
-  ///  On Android and iOS, up to 2 camera video streams (requires dual camera support or external camera support) + 1 screen sharing stream can be mixed.
-  ///  When configuring mixing, ensure that the layer index of the camera video stream capturing the portrait is higher than that of the screen sharing stream, otherwise the portrait will be covered and not appear in the final mixed video stream.
+  /// 调用该方法后，你可以在本地将多路视频流合并为一路视频流。例如：将摄像头采集的视频流、屏幕共享流、媒体播放器中的视频流、远端视频流、视频文件、图片等合并为一路视频流，然后将已合图的视频流发布到频道中。
+  ///  本地合图对 CPU 的消耗较高，声网建议你在性能较高的设备上开启该功能。
+  ///  如果你需要对本地采集的视频流进行合图，SDK 支持如下采集组合：
+  ///  在 Windows 平台上，最多支持 4 路摄像头采集的视频流 + 4 路屏幕共享流合图。
+  ///  在 macOS 平台上，最多支持 4 路摄像头采集的视频流 + 1 路屏幕共享流合图。
+  ///  在 Android 和 iOS 平台上，最多支持 2 路摄像头采集的视频流（需要设备本身支持双摄或支持外接摄像头）+ 1 路屏幕共享合图。
+  ///  在进行合图配置时，需确保采集人像的摄像头视频流在合图中的图层编号大于屏幕共享流的图层编号，否则人像会被屏幕共享覆盖、无法显示在最终合图的视频流中。
   ///
-  /// * [config] The configuration for local video mixing. See LocalTranscoderConfiguration.
-  ///  The maximum resolution for each video stream involved in local mixing is 4096 × 2160. Exceeding this limit will cause mixing to fail.
-  ///  The maximum resolution of the mixed video stream is 4096 × 2160.
+  /// * [config] 本地合图的配置，详见 LocalTranscoderConfiguration 。
+  ///  参与本地合图的每一路视频流的分辨率最大为 4096 × 2160，如果超出此限制，会导致合图不生效。
+  ///  合图后的视频流最大分辨率为 4096 × 2160。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startLocalVideoTranscoder(LocalTranscoderConfiguration config);
 
-  /// Updates local video mixing configuration.
+  /// 更新本地合图配置。
   ///
-  /// After calling startLocalVideoTranscoder, call this method if you want to update the local video mixing configuration. If you want to update the type of local video source used in mixing, such as adding a second camera or screen capture video, call this method after startCameraCapture or startScreenCaptureBySourceType.
+  /// 调用 startLocalVideoTranscoder 后，如果你希望更新本地合图配置，请调用该方法。 如果你想要更新用于合图的的本地采集视频源类型，比如：增加第二路摄像头或者屏幕采集的视频，需要在 startCameraCapture 或 startScreenCaptureBySourceType 之后调用该方法。
   ///
-  /// * [config] The configuration for local video mixing. See LocalTranscoderConfiguration.
+  /// * [config] 本地合图的配置，详见 LocalTranscoderConfiguration 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> updateLocalTranscoderConfiguration(
       LocalTranscoderConfiguration config);
 
-  /// Stops the CDN stream.
+  /// 结束旁路推流。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side Streaming](https://doc.shengwang.cn/doc/media-push/restful/landing-page).
-  /// You can call this method to stop live streaming to a specified CDN streaming URL. This method can only stop one stream at a time. To stop multiple streams, you must call this method multiple times.
-  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 调用该方法，你可以结束指定的旁路推流地址上的直播。该方法每次只能结束一个推流地址上的直播，如果你需要结束多个推流地址的直播，则需多次调用该方法。
+  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
   ///
-  /// * [url] The CDN streaming URL. The format must be RTMP or RTMPS. The character length must not exceed 1024 bytes. Special characters such as Chinese are not supported.
+  /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopRtmpStream(String url);
 
-  /// Stops local video mixing.
+  /// 停止本地合图。
   ///
-  /// After calling startLocalVideoTranscoder, call this method if you want to stop local video mixing.
+  /// 调用 startLocalVideoTranscoder 后，如果你希望停止本地合图，请调用该方法。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopLocalVideoTranscoder();
 
-  /// Starts local audio mixing.
+  /// 开启本地音频合流。
   ///
-  /// This method supports merging multiple local audio streams into a single audio stream. For example: merge audio from the local microphone, media player, sound card, remote audio streams, etc., into one stream and publish it to the channel.
-  ///  If you want to mix local captured audio, you can set publishMixedAudioTrack in ChannelMediaOptions to true to publish the mixed audio stream to the channel.
-  ///  If you want to mix remote audio streams, make sure the remote audio streams are published in the channel and subscribed. To ensure audio quality, it is recommended that no more than 10 audio streams participate in local mixing.
+  /// 该方法支持在本地将多路音频流合并为一路音频流。例如：将本地麦克风采集的音频流、媒体播放器中的音频流、声卡采集的音频流、远端音频流等合并为一路音频流，然后将合流后的音频流发布到频道中。
+  ///  如果你要对本地采集的音频流进行合流，可以将 ChannelMediaOptions 中的 publishMixedAudioTrack 设置为 true ，则可将合流后的音频流发布到频道中。
+  ///  如果你要对远端音频流进行合流，需确保远端音频流已在频道内发布并且已被订阅。 为了保证音频质量，建议参与本地合流的音频流数量不超过 10 个。
   ///
-  /// * [config] Configuration for local audio mixing. See LocalAudioMixerConfiguration.
+  /// * [config] 本地音频合流的配置。详见 LocalAudioMixerConfiguration 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startLocalAudioMixer(LocalAudioMixerConfiguration config);
 
-  /// Updates the configuration of local audio mixing.
+  /// 更新本地音频合流的配置。
   ///
-  /// After calling startLocalAudioMixer, if you want to update the configuration of local audio mixing, call this method. To ensure audio quality, it is recommended that no more than 10 audio streams participate in local mixing.
+  /// 调用 startLocalAudioMixer 后，如果你希望更新本地音频合流的配置，请调用该方法。 为了保证音频质量，建议参与本地合流的音频流数量不超过 10 个。
   ///
-  /// * [config] Configuration for local audio mixing. See LocalAudioMixerConfiguration.
+  /// * [config] 本地音频合流的配置。详见 LocalAudioMixerConfiguration 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> updateLocalAudioMixerConfiguration(
       LocalAudioMixerConfiguration config);
 
-  /// Stops local audio mixing.
+  /// 停止本地音频合流。
   ///
-  /// After calling startLocalAudioMixer, if you want to stop local audio mixing, call this method.
+  /// 调用 startLocalAudioMixer 后，如果你希望停止本地音频合流，请调用该方法。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopLocalAudioMixer();
 
-  /// Starts video capture using the camera.
+  /// 开始通过摄像头采集视频。
   ///
-  /// Call this method to start multiple camera captures simultaneously by specifying sourceType. On iOS, to enable multiple camera captures, you must call enableMultiCamera and set enabled to true before calling this method.
+  /// 调用该方法可以通过指定 sourceType 同时开启多路摄像头采集。 在 iOS 平台上调用该方法前，如果要开启多路摄像头采集，需要在调用该方法前，先调用 enableMultiCamera 并设置 enabled 为 true 。
   ///
-  /// * [sourceType] Type of video source. See VideoSourceType.
-  ///  iOS devices support up to 2 video streams from camera capture (requires multi-camera or external camera support).
-  ///  Android devices support up to 4 video streams from camera capture (requires multi-camera or external camera support).
-  ///  Desktop supports up to 4 video streams from camera capture.
-  /// * [config] Video capture configuration. See CameraCapturerConfiguration. On iOS, this parameter has no effect. Use the config parameter in enableMultiCamera to configure video capture settings.
+  /// * [sourceType] 视频源的类型。详见 VideoSourceType 。
+  ///  iOS 设备最多支持 2 路摄像头采集的视频流（要求设备配备多摄像头或支持外接摄像头）。
+  ///  Android 设备最多支持 4 路摄像头采集的视频流（要求设备配备多摄像头或支持外接摄像头）。
+  ///  桌面端最多支持 4 路摄像头采集的视频流。
+  /// * [config] 视频采集配置。详见 CameraCapturerConfiguration 。 在 iOS 平台上，该参数无实际作用。请使用 enableMultiCamera 中的 config 参数设置视频采集配置。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startCameraCapture(
       {required VideoSourceType sourceType,
       required CameraCapturerConfiguration config});
 
-  /// Stops video capture using the camera.
+  /// 停止通过摄像头采集视频。
   ///
-  /// After calling startCameraCapture to start one or more camera capture streams, you can call this method with sourceType to stop one or more camera video captures. On iOS, to disable multiple camera captures, you must call enableMultiCamera and set enabled to false after calling this method.
-  /// If you are using local video mixing, stopping video capture from the first camera using this method will interrupt the local video mixing.
+  /// 调用 startCameraCapture 开启一路或多路摄像头采集的视频流后，你可以调用该方法，通过设置 sourceType 停止一路或多路摄像头的视频采集。 在 iOS 平台上，如果要关闭多路摄像头采集，需要在调用该方法之后调用 enableMultiCamera 并设置 enabled 为 false 。
+  /// 如果你正在使用本地合图功能，调用该方法停止通过第一个摄像头采集视频，会造成本地合图中断。
   ///
-  /// * [sourceType] Type of video source. See VideoSourceType.
+  /// * [sourceType] 视频源的类型，详见 VideoSourceType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopCameraCapture(VideoSourceType sourceType);
 
-  /// Sets the rotation angle of the captured video.
+  /// 设置采集视频的旋转角度。
   ///
-  /// This method is applicable to Windows only.
-  ///  You must call this method after enableVideo. The setting takes effect after the camera is successfully turned on, i.e., after the SDK triggers the onLocalVideoStateChanged callback and the local video state is localVideoStreamStateCapturing (1).
-  ///  When the video capture device does not have a gravity sensor, you can call this method to manually adjust the rotation angle of the captured video frame.
+  /// 该方法仅适用于 Windows。
+  ///  该方法必须在 enableVideo 后调用，设置结果在摄像头成功开启后生效，即 SDK 触发 onLocalVideoStateChanged 回调返回本地视频状态为 localVideoStreamStateCapturing (1) 后。
+  ///  当视频采集设备不带重力感应功能时，你可以调用该方法手动调整采集到的视频画面的旋转角度。
   ///
-  /// * [type] Video source type. See VideoSourceType.
+  /// * [type] 视频源类型，详见 VideoSourceType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setCameraDeviceOrientation(
       {required VideoSourceType type, required VideoOrientation orientation});
 
@@ -6185,79 +6193,79 @@ abstract class RtcEngine {
   Future<void> setScreenCaptureOrientation(
       {required VideoSourceType type, required VideoOrientation orientation});
 
-  /// Gets the current network connection state.
+  /// 获取当前网络连接状态。
   ///
   /// Returns
-  /// Current network connection state. See ConnectionStateType.
+  /// 当前网络连接状态。详见 ConnectionStateType 。
   Future<ConnectionStateType> getConnectionState();
 
-  /// Adds the main callback event.
+  /// 添加主回调事件。
   ///
-  /// The interface class RtcEngineEventHandler is used by the SDK to send callback event notifications to the App. The App receives SDK event notifications by inheriting methods from this interface class.
-  /// All methods in the interface class have default (empty) implementations. The App can choose to inherit only the events it cares about.
-  /// In callback methods, the App should not perform time-consuming tasks or call APIs that may block (e.g., sendStreamMessage), otherwise it may affect the operation of the SDK.
+  /// 接口类 RtcEngineEventHandler 用于 SDK 向 App 发送回调事件通知，App 通过继承该接口类的方法获取 SDK 的事件通知。
+  /// 接口类的所有方法都有缺省（空）实现，App 可以根据需要只继承关心的事件。在回调方法中，App 不应该做耗时或者调用可能会引起阻塞的 API（如 sendStreamMessage ），
+  /// 否则可能影响 SDK 的运行。
   ///
-  /// * [eventHandler] The callback event to be added. See RtcEngineEventHandler.
+  /// * [eventHandler] 待添加的回调事件，详见 RtcEngineEventHandler 。
   ///
   /// Returns
-  /// No return value if the method call succeeds; if the method call fails, an AgoraRtcException is thrown, which you need to catch and handle. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and troubleshooting suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void registerEventHandler(RtcEngineEventHandler eventHandler);
 
-  /// Removes the specified callback event.
+  /// 删除指定的回调事件。
   ///
-  /// This method removes all previously added callback events.
+  /// 该方法用于删除已添加的所有回调事件。
   ///
-  /// * [eventHandler] The callback event to be removed. See RtcEngineEventHandler.
+  /// * [eventHandler] 待删除的回调事件。详见 RtcEngineEventHandler 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void unregisterEventHandler(RtcEngineEventHandler eventHandler);
 
   /// @nodoc
   Future<void> setRemoteUserPriority(
       {required int uid, required PriorityType userPriority});
 
-  /// Enable or disable built-in encryption.
+  /// 开启或关闭内置加密。
   ///
-  /// After the user leaves the channel, the SDK automatically disables encryption. To enable encryption again, you need to call this method before the user rejoins the channel.
-  ///  All users in the same channel must set the same encryption mode and key when calling this method.
-  ///  If built-in encryption is enabled, the CDN live streaming feature cannot be used.
+  /// 用户离开频道后，SDK 会自动关闭加密。如需重新开启加密，你需要在用户再次加入频道前调用该方法。
+  ///  同一频道内的所有用户在调用该方法时，必须设置相同的加密模式和密钥。
+  ///  如果开启了内置加密，则不能使用旁路推流功能。
   ///
-  /// * [enabled] Whether to enable built-in encryption: true : Enable built-in encryption. false : (default) Disable built-in encryption.
-  /// * [config] Configure the built-in encryption mode and key. See EncryptionConfig.
+  /// * [enabled] 是否开启内置加密： true : 开启内置加密。 false :（默认）关闭内置加密。
+  /// * [config] 配置内置加密模式和密钥。详见 EncryptionConfig 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableEncryption(
       {required bool enabled, required EncryptionConfig config});
 
-  /// Creates a data stream.
+  /// 创建数据流。
   ///
-  /// If you need a more comprehensive, low-latency, high-concurrency, and scalable real-time messaging and state synchronization solution, we recommend using [Real-time Messaging](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page).
-  /// During the lifecycle of RtcEngine, each user can create up to 5 data streams. The data streams are destroyed when leaving the channel. If needed again, you must recreate them.
+  /// 如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
+  /// 在 RtcEngine 生命周期内，每个用户最多只能创建 5 个数据流。离开频道时数据流会被销毁，如需使用需要重新创建数据流。
   ///
-  /// * [config] Data stream configuration. See DataStreamConfig.
+  /// * [config] 数据流设置。详见 DataStreamConfig 。
   ///
   /// Returns
-  /// ID of the created data stream: method call succeeded.
-  ///  < 0: method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 创建的数据流的 ID：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> createDataStream(DataStreamConfig config);
 
-  /// Sends a data stream.
+  /// 发送数据流。
   ///
-  /// After calling createDataStream, you can call this method to send data stream messages to all users in the channel.
-  /// The SDK imposes the following restrictions on this method:
-  ///  Each client in the channel can have up to 5 data channels simultaneously, with a total sending bitrate limit of 30 KB/s shared among all channels.
-  ///  Each data channel can send up to 60 packets per second, with each packet limited to 1 KB. After this method is successfully called, the remote side triggers the onStreamMessage callback, through which remote users can receive the stream message. If the call fails, the remote side triggers the onStreamMessageError callback. If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and state synchronization, we recommend using [Real-time Messaging](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page).
-  ///  This method must be called after joining the channel and after calling createDataStream to create the data channel.
-  ///  This method is only applicable to broadcaster users.
+  /// 调用 createDataStream 后，你可以调用该方法向频道内所有用户发送数据流消息。
+  /// SDK 对该方法的实现进行了如下限制：
+  ///  频道内每个客户端最多可以同时拥有 5 个数据通道，所有数据通道共用的总发包码率限制为 30 KB/s。
+  ///  每个数据通道每秒最多能发送 60 个包，每个包最大为 1 KB。 成功调用该方法后，远端会触发 onStreamMessage 回调，远端用户可以在该回调中获取接收到的流消息；若调用失败，远端会触发 onStreamMessageError 回调。 如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
+  ///  该方法需要在加入频道后、且调用 createDataStream 创建数据通道之后调用。
+  ///  该方法仅适用于主播用户。
   ///
-  /// * [streamId] The data stream ID. You can get it through createDataStream.
-  /// * [data] The data to be sent.
-  /// * [length] The length of the data.
+  /// * [streamId] 数据流 ID。可以通过 createDataStream 获取。
+  /// * [data] 待发送的数据。
+  /// * [length] 数据长度。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> sendStreamMessage(
       {required int streamId, required Uint8List data, required int length});
 
@@ -6272,42 +6280,42 @@ abstract class RtcEngine {
   Future<void> sendMediaControlMessage(
       {required int uid, required String data, required int length});
 
-  /// Adds a local video watermark.
+  /// 添加本地视频水印。
   ///
-  /// Deprecated Deprecated: This method is deprecated. Use addVideoWatermarkWithConfig instead. This method adds a PNG image as a watermark to the local published live video stream. Users in the same live channel, audience of the CDN live stream, and capture devices can all see or capture the watermark image. Currently, only one watermark can be added to the live video stream. Adding a new watermark replaces the previous one.
-  /// The watermark coordinates depend on the settings in the setVideoEncoderConfiguration method:
-  ///  If the video orientation (OrientationMode) is fixed to landscape or adaptive landscape mode, landscape coordinates are used.
-  ///  If the video orientation (OrientationMode) is fixed to portrait or adaptive portrait mode, portrait coordinates are used.
-  ///  When setting the watermark coordinates, the image area of the watermark must not exceed the video dimensions set in the setVideoEncoderConfiguration method. Otherwise, the exceeding part will be cropped.
-  ///  You must call this method after calling enableVideo.
-  ///  If you only want to add a watermark during CDN streaming, you can use this method or startRtmpStreamWithTranscoding to set the watermark.
-  ///  The watermark image must be in PNG format. This method supports all pixel formats of PNG images: RGBA, RGB, Palette, Gray, and Alpha_gray.
-  ///  If the size of the PNG image to be added does not match the size set in this method, the SDK scales or crops the PNG image to match the settings.
-  ///  If you have set the local video to mirror mode, the local watermark will also be mirrored. To avoid mirrored watermark when local users view their own video, it is recommended not to use both mirror and watermark features on local video. Implement the local watermark feature at the application layer.
+  /// 废弃 弃用：该方法已废弃，请改用 addVideoWatermarkWithConfig 。 该方法将一张 PNG 图片作为水印添加到本地发布的直播视频流上，同一直播频道中的用户、旁路直播观众和采集设备都能看到或采集到该水印图片。当前只支持在直播视频流中添加一个水印，后添加的水印会替换掉之前添加的水印。
+  /// 水印坐标和 setVideoEncoderConfiguration 方法中的设置有依赖关系：
+  ///  如果视频编码方向（ OrientationMode ）固定为横屏或自适应模式下的横屏，那么水印使用横屏坐标。
+  ///  如果视频编码方向（ OrientationMode ）固定为竖屏或自适应模式下的竖屏，那么水印使用竖屏坐标。
+  ///  设置水印坐标时，水印的图像区域不能超出 setVideoEncoderConfiguration 方法中设置的视频尺寸，否则超出部分将被裁剪。
+  ///  你需要在调用 enableVideo 方法之后再调用该方法。
+  ///  如果你只是在旁路推流时添加水印，你可以使用该方法或 startRtmpStreamWithTranscoding 方法设置水印。
+  ///  待添加水印图片必须是 PNG 格式。该方法支持所有像素格式的 PNG 图片：RGBA、RGB、Palette、Gray 和 Alpha_gray。
+  ///  如果待添加的 PNG 图片的尺寸与你在该方法中设置的尺寸不一致，SDK 会对 PNG 图片进行缩放或裁剪，以与设置相符。
+  ///  如果你已设置本地视频为镜像模式，那么此处的本地水印也为镜像。为避免本地用户看本地视频时的水印也被镜像，建议你不要对本地视频同时使用镜像和水印功能，请在应用层实现本地水印功能。
   ///
-  /// * [watermarkUrl] The local path of the watermark image to be added. This method supports adding watermark images from local absolute/relative paths.
-  /// * [options] Settings for the watermark image to be added. See WatermarkOptions.
+  /// * [watermarkUrl] 待添加的水印图片的本地路径。该方法支持从本地绝对/相对路径添加水印图片。
+  /// * [options] 待添加的水印图片的设置选项，详见 WatermarkOptions 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> addVideoWatermark(
       {required String watermarkUrl, required WatermarkOptions options});
 
-  /// Removes the watermark image from the local video.
+  /// 从本地视频中移除水印图像。
   ///
-  /// Since Available since v4.6.2. This method removes the previously added watermark image from the local video stream based on the specified unique ID.
+  /// 自从 自 v6.6.2 版本新增。 该方法根据指定的唯一 ID，从本地视频流中移除之前添加的水印图像。
   ///
-  /// * [id] ID of the watermark to remove. This value must match the ID used when adding the watermark.
+  /// * [id] 要移除的水印的 ID。该值需与添加水印时使用的 ID 相同。
   ///
   /// Returns
-  /// 0: The method call succeeds.
-  ///  < 0: The method call fails.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> removeVideoWatermark(String id);
 
-  /// Removes added video watermarks.
+  /// 删除已添加的视频水印。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> clearVideoWatermarks();
 
   /// @nodoc
@@ -6316,20 +6324,20 @@ abstract class RtcEngine {
   /// @nodoc
   Future<void> resumeAudio();
 
-  /// Enable interoperability with Web SDK (applicable only in live broadcast scenarios).
+  /// 打开与 Web SDK 的互通（仅在直播场景适用）。
   ///
-  /// Deprecated Deprecated: This method is deprecated. The SDK automatically enables interoperability with the Web SDK, so you do not need to call this method. This method enables or disables interoperability with the Web SDK. If users join the channel via Web SDK, make sure to call this method; otherwise, Web users may see a black screen when viewing the Native side.
-  /// This method is only applicable in live broadcast scenarios. In communication scenarios, interoperability is enabled by default.
+  /// 废弃 弃用: 该方法已废弃，SDK 自动开启与 Web SDK 的互通，无需调用该方法开启。 该方法打开或关闭与 Web SDK 的互通。如果有用户通过 Web SDK 加入频道，请确保调用该方法，否则 Web 端用户看 Native 端的画面会是黑屏。
+  /// 该方法仅在直播场景下适用，通信场景下默认互通是打开的。
   ///
-  /// * [enabled] Whether to enable interoperability with the Web SDK: true : Enable interoperability. false : (default) Disable interoperability.
+  /// * [enabled] 是否打开与 Web SDK 的互通： true : 打开互通。 false : (默认) 关闭互通。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableWebSdkInteroperability(bool enabled);
 
-  /// Sends a custom report message.
+  /// 发送自定义上报消息。
   ///
-  /// Agora provides a custom data reporting and analytics service. This service is currently in a free beta period. During the beta, you can report up to 10 data entries within 6 seconds. Each custom data entry must not exceed 256 bytes, and each string must not exceed 100 bytes. To try this service, please [contact sales](https://www.shengwang.cn/contact-sales/) to enable it and agree on the custom data format.
+  /// 声网提供自定义数据上报和分析服务。该服务当前处于免费内测期。内测期提供的能力为 6 秒内最多上报 10 条数据，每条自定义数据不能超过 256 字节，每个字符串不能超过 100 字节。如需试用该服务，请[联系销售](https://www.shengwang.cn/contact-sales/)开通并商定自定义数据格式。
   Future<void> sendCustomReportMessage(
       {required String id,
       required String category,
@@ -6337,27 +6345,27 @@ abstract class RtcEngine {
       required String label,
       required int value});
 
-  /// Registers a media metadata observer to receive or send metadata.
+  /// 注册媒体 metadata 观测器用于接收或发送 metadata。
   ///
-  /// You need to implement the MetadataObserver class yourself and specify the metadata type in this method. This method allows you to add synchronized metadata to the video stream for interactive live streaming scenarios such as sending shopping links, e-coupons, and online quizzes. Call this method before joinChannel.
+  /// 你需要自行实现 MetadataObserver 类并在本方法中指定 metadata 类型。本方法允许你为视频流添加同步的 metadata，用于多样化的直播互动，如发送购物链接、电子优惠券和在线测试。 请在 joinChannel 前调用该方法。
   ///
-  /// * [observer] The metadata observer. See MetadataObserver.
-  /// * [type] The metadata type. Currently only videoMetadata is supported.
+  /// * [observer] metadata 观测器。详见 MetadataObserver 。
+  /// * [type] metadata 类型。目前仅支持 videoMetadata 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void registerMediaMetadataObserver(
       {required MetadataObserver observer, required MetadataType type});
 
-  /// Unregisters the media metadata observer.
+  /// 取消注册媒体 metadata 观测器。
   ///
-  /// * [observer] The metadata observer. See MetadataObserver.
-  /// * [type] The metadata type. Currently, only videoMetadata is supported.
+  /// * [observer] metadata 观测器，详见 MetadataObserver 。
+  /// * [type] metadata 类型。目前仅支持 videoMetadata 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void unregisterMediaMetadataObserver(
       {required MetadataObserver observer, required MetadataType type});
 
@@ -6375,462 +6383,443 @@ abstract class RtcEngine {
   Future<void> stopAudioFrameDump(
       {required String channelId, required int uid, required String location});
 
-  /// Enables or disables AI noise reduction and sets the noise reduction mode.
+  /// 设置是否开启 AI 降噪功能并设置降噪模式。
   ///
-  /// You can call this method to enable the AI noise reduction feature. This feature intelligently detects and reduces various stationary and non-stationary background noises while maintaining voice quality, making human voices clearer.
-  /// Stationary noise refers to noise with consistent frequency over time, such as:
-  ///  TV noise
-  ///  Air conditioner noise
-  ///  Factory machine noise Non-stationary noise refers to noise that changes rapidly over time, such as:
-  ///  Thunder
-  ///  Explosions
-  ///  Cracking sounds
-  ///  This method depends on the AI noise reduction dynamic library. Deleting this library will prevent the feature from working properly. For the name of the AI noise reduction library, see [Plugin List](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/reduce-app-size#%E6%8F%92%E4%BB%B6%E5%88%97%E8%A1%A8).
-  ///  Currently, it is not recommended to enable this feature on devices running Android 6.0 or lower.
+  /// 你可以调用开方法来开启 AI 降噪功能。该功能可以在保证语音质量的前提下，智能化检测并降低周围环境中多种稳态与非稳态噪声，使人声更加清晰。
+  /// 稳态噪声指在任何时间点上都具有相同频率的噪声，常见的稳态噪声有：
+  ///  电视机噪声
+  ///  空调噪声
+  ///  工厂机器噪声等 非稳态噪声是指随时间而快速变化的噪声，常见的非稳态噪声有：
+  ///  雷声
+  ///  爆炸声
+  ///  破裂声等
+  ///  该方法依赖于 AI 降噪动态库，如果删除该动态库会导致无法正常开启该功能。AI 降噪动态库名称见[插件列表](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/reduce-app-size#%E6%8F%92%E4%BB%B6%E5%88%97%E8%A1%A8)。
+  ///  目前暂不推荐在 Android 6.0 及以下版本的设备上开启该功能。
   ///
-  /// * [enabled] Whether to enable AI noise reduction: true : Enable AI noise reduction. false : (default) Disable AI noise reduction.
-  /// * [mode] Noise reduction mode. See AudioAinsMode.
+  /// * [enabled] 是否开启 AI 降噪功能： true ：开启 AI 降噪功能。 false ：（默认）关闭 AI 降噪功能。
+  /// * [mode] 降噪模式，详见 AudioAinsMode 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAINSMode(
       {required bool enabled, required AudioAinsMode mode});
 
-  /// Registers the local user account.
+  /// 注册本地用户 User Account。
   ///
-  /// This method registers a user account for the local user. After successful registration, the user account can be used to identify the local user, who can then join a channel using it.
-  /// This method is optional. If you want users to join a channel using a user account, you can implement it in either of the following ways:
-  ///  Call registerLocalUserAccount to register the account first, then call joinChannelWithUserAccount to join the channel. This can reduce the time to join the channel.
-  ///  Directly call joinChannelWithUserAccount to join the channel.
-  ///  Ensure the userAccount set in this method is unique within the channel.
-  ///  To ensure communication quality, make sure to use the same type of user identifier within a channel. That is, use either UID or user account consistently within the same channel. If users join the channel via Web SDK, ensure they use the same identifier type.
+  /// 该方法为本地用户注册一个 User Account。注册成功后，该 User Account 即可标识该本地用户的身份，用户可以使用它加入频道。
+  /// 该方法为可选。如果你希望用户使用 User Account 加入频道，可参考下列任意一种方式实现：
+  ///  先调用 registerLocalUserAccount 方法注册 Account，再调用 joinChannelWithUserAccount 方法加入频道，可以缩短进入频道的时间。
+  ///  直接调用 joinChannelWithUserAccount 方法加入频道。
+  ///  请确保在该方法中设置的 userAccount 在频道中的唯一性。
+  ///  为保证通信质量，请确保频道内使用同一类型的数据标识用户身份。即同一频道内需要统一使用 UID 或 User Account。如果有用户通过 Web SDK 加入频道，请确保 Web 加入的用户也是同样类型。
   ///
-  /// * [appId] The App ID of your project registered in the console.
-  /// * [userAccount] User account. This parameter identifies the user in the real-time audio and video channel. You need to set and manage the user account yourself and ensure it is unique within the same channel. This parameter is required, must not exceed 255 bytes, and cannot be null. Supported character set (89 characters total):
-  ///  26 lowercase letters a-z
-  ///  26 uppercase letters A-Z
-  ///  10 digits 0-9
-  ///  Space
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
+  /// * [appId] 你的项目在控制台注册的 App ID。
+  /// * [userAccount] 用户 User Account。该参数用于标识实时音视频互动频道中的用户。你需要自行设置和管理用户的 User Account，并确保同一频道中每个用户的 User Account 是唯一的。该参数为必填，最大不超过 255 字节，不可填 null 。以下为支持的字符集范围（共 89 个字符）：
+  ///  26 个小写英文字母 a-z
+  ///  26 个大写英文字母 A-Z
+  ///  10 个数字 0-9
+  ///  空格
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> registerLocalUserAccount(
       {required String appId, required String userAccount});
 
-  /// Joins a channel using a User Account and token, and sets channel media options.
+  /// 使用 User Account 和 Token 加入频道，并设置频道媒体选项。
   ///
-  /// Before calling this method, if you have not registered a User Account using registerLocalUserAccount, the SDK automatically creates one for you when you join a channel using this method. To reduce the time it takes to join a channel, register the account first using registerLocalUserAccount, then call this method.
+  /// 调用该方法前，如果你未调用 registerLocalUserAccount 注册一个 User Account，调用该方法加入频道时，SDK 会自动为你创建一个 User Account。先调用 registerLocalUserAccount 方法注册 Account，再调用此方法加入频道，可以缩短进入频道的时间。
+  /// 用户成功加入频道后，默认订阅频道内所有其他用户的音频流和视频流，因此产生用量并影响计费。如果想取消订阅，可以通过调用相应的 mute 方法实现。 为保证通信质量，请确保频道内使用同一类型的数据标识用户身份。即同一频道内需要统一使用 UID 或 User Account。如果有用户通过 Web SDK 加入频道，请确保 Web 加入的用户也是同样类型。
+  ///  该方法仅支持用户一次加入一个频道。
+  ///  使用不同 App ID 的 App 不能互通。
+  ///  加入频道前，请确保用于生成 Token 的 App ID 和调用 initialize 方法初始化引擎时使用的是同一个 App ID，否则使用 Token 加入频道会失败。
   ///
-  /// After a user successfully joins a channel, they automatically subscribe to all audio and video streams from other users in the channel, which incurs usage and affects billing. To unsubscribe, call the corresponding mute methods. To ensure communication quality, make sure that all users in the channel use the same type of identifier, either UID or User Account. If users join the channel via the Web SDK, ensure they use the same identifier type.
-  ///  This method only supports joining one channel at a time.
-  ///  Apps with different App IDs cannot communicate with each other.
-  ///  Before joining a channel, make sure the App ID used to generate the token is the same as the one used in the initialize method. Otherwise, joining the channel with the token will fail.
-  ///
-  /// * [token] The dynamic key generated on your server for authentication. See [Use Token Authentication](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication).
-  ///  (Recommended) If your project has enabled secure mode (using APP ID + Token for authentication), this parameter is required.
-  ///  If your project is in debug mode only (using APP ID for authentication), you can join the channel without a token. The user will automatically leave the channel after 24 hours.
-  ///  If you need to join multiple channels or frequently switch between channels, Agora recommends using a wildcard token to avoid requesting a new token from your server every time. See [Use Wildcard Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token).
-  /// * [userAccount] The User Account of the user. This parameter identifies the user in the real-time audio/video interaction channel. You must manage and ensure the uniqueness of each User Account within the same channel. This parameter is required, must not exceed 255 bytes, and cannot be null. Supported character set (89 characters total):
-  ///  26 lowercase letters a–z
-  ///  26 uppercase letters A–Z
-  ///  10 digits 0–9
-  ///  Space
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
-  /// * [options] Channel media configuration options. See ChannelMediaOptions.
+  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  ///  （推荐）如果你的项目开启了安全模式，即选择 APP ID + Token 为鉴权机制，则该参数为必填。
+  ///  如果你的项目仅开启调试模式，即选择 APP ID 为鉴权机制，则无需填入 Token 即可加入频道。成功加入频道 24 小时后会自动退出该频道。
+  ///  如果你需要同时加入多个频道或在频道间频繁切换，声网推荐你使用通配 Token 以避免每加入一个新的频道都需向服务端申请一个新的 Token，详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
+  /// * [userAccount] 用户 User Account。该参数用于标识实时音视频互动频道中的用户。你需要自行设置和管理用户的 User Account，并确保同一频道中每个用户的 User Account 是唯一的。 该参数为必填，最大不超过 255 字节，不可填 null 。以下为支持的字符集范围（共 89 个字符）：
+  ///  26 个小写英文字母 a-z
+  ///  26 个大写英文字母 A-Z
+  ///  10 个数字 0-9
+  ///  空格
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
+  /// * [options] 频道媒体设置选项。详见 ChannelMediaOptions 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -2: Invalid parameter. For example, an illegal token is used, the uid parameter is not an integer, or a member value of ChannelMediaOptions is invalid. Provide valid parameters and rejoin the channel.
-  ///  -3: RtcEngine initialization failed. Reinitialize the RtcEngine object.
-  ///  -7: RtcEngine not initialized. Initialize RtcEngine before calling this method.
-  ///  -8: Internal state error of RtcEngine. This may occur if you call this method after starting an echo test with startEchoTest but before stopping it with stopEchoTest. Call stopEchoTest before this method.
-  ///  -17: Join channel rejected. Possibly because the user is already in the channel. Use the onConnectionStateChanged callback to check if the user is in the channel. Do not call this method again unless the state is connectionStateDisconnected (1).
-  ///  -102: Invalid channel name. Provide a valid channelId and rejoin the channel.
-  ///  -121: Invalid user ID. Provide a valid uid and rejoin the channel.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -2：传入的参数无效。例如，使用了不合法的 Token， uid 参数未设置为整型，或 ChannelMediaOptions 成员值不合法。你需要填入有效的参数，重新加入频道。
+  ///  -3： RtcEngine 对象初始化失败。你需要重新初始化 RtcEngine 对象。
+  ///  -7： RtcEngine 对象尚未初始化。你需要在调用该方法前成功初始化 RtcEngine 对象。
+  ///  -8： RtcEngine 对象内部状态错误。可能的原因是：调用 startEchoTest 开始通话回路测试后，未调用 stopEchoTest 停止测试就调用该方法加入频道。你需要在该方法前调用 stopEchoTest 。
+  ///  -17：加入频道被拒绝。可能的原因是用户已经在频道中。建议通过 onConnectionStateChanged 回调判断用户是否在频道中。除收到 connectionStateDisconnected (1) 状态外，不要再次调用该方法加入频道。
+  ///  -102：频道名无效。你需要在 channelId 中填入有效的频道名，重新加入频道。
+  ///  -121：用户 ID 无效。你需要在 uid 中填入有效的用户 ID，重新加入频道。
   Future<void> joinChannelWithUserAccount(
       {required String token,
       required String channelId,
       required String userAccount,
       ChannelMediaOptions? options});
 
-  /// Joins a channel using a User Account and token, and sets channel media options.
+  /// 使用 User Account 和 Token 加入频道，并设置频道媒体选项。
   ///
-  /// Before calling this method, if you have not registered a User Account using registerLocalUserAccount, the SDK automatically creates one for you when you join a channel using this method. To reduce the time it takes to join a channel, register the account first using registerLocalUserAccount, then call this method.
+  /// 调用该方法前，如果你未调用 registerLocalUserAccount 注册一个 User Account，调用该方法加入频道时，SDK 会自动为你创建一个 User Account。先调用 registerLocalUserAccount 方法注册 Account，再调用此方法加入频道，可以缩短进入频道的时间。
+  /// 用户成功加入频道后，默认订阅频道内所有其他用户的音频流和视频流，因此产生用量并影响计费。如果想取消订阅，可以通过设置 options 参数或调用相应的 mute 方法实现。 为保证通信质量，请确保频道内使用同一类型的数据标识用户身份。即同一频道内需要统一使用 UID 或 User Account。如果有用户通过 Web SDK 加入频道，请确保 Web 加入的用户也是同样类型。
+  ///  该方法仅支持用户一次加入一个频道。
+  ///  使用不同 App ID 的 App 不能互通。
+  ///  加入频道前，请确保用于生成 Token 的 App ID 和调用 initialize 方法初始化引擎时使用的是同一个 App ID，否则使用 Token 加入频道会失败。
   ///
-  /// After a user successfully joins a channel, they automatically subscribe to all audio and video streams from other users in the channel, which incurs usage and affects billing. To unsubscribe, set the options parameter or call the corresponding mute methods. To ensure communication quality, make sure that all users in the channel use the same type of identifier, either UID or User Account. If users join the channel via the Web SDK, ensure they use the same identifier type.
-  ///  This method only supports joining one channel at a time.
-  ///  Apps with different App IDs cannot communicate with each other.
-  ///  Before joining a channel, make sure the App ID used to generate the token is the same as the one used in the initialize method. Otherwise, joining the channel with the token will fail.
-  ///
-  /// * [token] The dynamic key generated on your server for authentication. See [Use Token Authentication](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication).
-  ///  (Recommended) If your project has enabled secure mode (using APP ID + Token for authentication), this parameter is required.
-  ///  If your project is in debug mode only (using APP ID for authentication), you can join the channel without a token. The user will automatically leave the channel after 24 hours.
-  ///  If you need to join multiple channels or frequently switch between channels, Agora recommends using a wildcard token to avoid requesting a new token from your server every time. See [Use Wildcard Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token).
-  /// * [userAccount] The User Account of the user. This parameter identifies the user in the real-time audio/video interaction channel. You must manage and ensure the uniqueness of each User Account within the same channel. This parameter is required, must not exceed 255 bytes, and cannot be null. Supported character set (89 characters total):
-  ///  26 lowercase letters a–z
-  ///  26 uppercase letters A–Z
-  ///  10 digits 0–9
-  ///  Space
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
-  /// * [options] Channel media configuration options. See ChannelMediaOptions.
+  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  ///  （推荐）如果你的项目开启了安全模式，即选择 APP ID + Token 为鉴权机制，则该参数为必填。
+  ///  如果你的项目仅开启调试模式，即选择 APP ID 为鉴权机制，则无需填入 Token 即可加入频道。成功加入频道 24 小时后会自动退出该频道。
+  ///  如果你需要同时加入多个频道或在频道间频繁切换，声网推荐你使用通配 Token 以避免每加入一个新的频道都需向服务端申请一个新的 Token，详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
+  /// * [userAccount] 用户 User Account。该参数用于标识实时音视频互动频道中的用户。你需要自行设置和管理用户的 User Account，并确保同一频道中每个用户的 User Account 是唯一的。 该参数为必填，最大不超过 255 字节，不可填 null 。以下为支持的字符集范围（共 89 个字符）：
+  ///  26 个小写英文字母 a-z
+  ///  26 个大写英文字母 A-Z
+  ///  10 个数字 0-9
+  ///  空格
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
+  /// * [options] 频道媒体设置选项。详见 ChannelMediaOptions 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -2: Invalid parameter. For example, an illegal token is used, the uid parameter is not an integer, or a member value of ChannelMediaOptions is invalid. Provide valid parameters and rejoin the channel.
-  ///  -3: RtcEngine initialization failed. Reinitialize the RtcEngine object.
-  ///  -7: RtcEngine not initialized. Initialize RtcEngine before calling this method.
-  ///  -8: Internal state error of RtcEngine. This may occur if you call this method after starting an echo test with startEchoTest but before stopping it with stopEchoTest. Call stopEchoTest before this method.
-  ///  -17: Join channel rejected. Possibly because the user is already in the channel. Use the onConnectionStateChanged callback to check if the user is in the channel. Do not call this method again unless the state is connectionStateDisconnected (1).
-  ///  -102: Invalid channel name. Provide a valid channelId and rejoin the channel.
-  ///  -121: Invalid user ID. Provide a valid uid and rejoin the channel.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -2：传入的参数无效。例如，使用了不合法的 Token， uid 参数未设置为整型，或 ChannelMediaOptions 成员值不合法。你需要填入有效的参数，重新加入频道。
+  ///  -3： RtcEngine 对象初始化失败。你需要重新初始化 RtcEngine 对象。
+  ///  -7： RtcEngine 对象尚未初始化。你需要在调用该方法前成功初始化 RtcEngine 对象。
+  ///  -8： RtcEngine 对象内部状态错误。可能的原因是：调用 startEchoTest 开始通话回路测试后，未调用 stopEchoTest 停止测试就调用该方法加入频道。你需要在该方法前调用 stopEchoTest 。
+  ///  -17：加入频道被拒绝。可能的原因是用户已经在频道中。建议通过 onConnectionStateChanged 回调判断用户是否在频道中。除收到 connectionStateDisconnected (1) 状态外，不要再次调用该方法加入频道。
+  ///  -102：频道名无效。你需要在 channelId 中填入有效的频道名，重新加入频道。
+  ///  -121：用户 ID 无效。你需要在 uid 中填入有效的用户 ID，重新加入频道。
   Future<void> joinChannelWithUserAccountEx(
       {required String token,
       required String channelId,
       required String userAccount,
       required ChannelMediaOptions options});
 
-  /// Gets user information by User Account.
+  /// 通过 User Account 获取用户信息。
   ///
-  /// After a remote user joins a channel, the SDK retrieves the UID and User Account of the remote user and caches a mapping table of UID and User Account. It then triggers the onUserInfoUpdated callback locally. After receiving this callback, call this method with the User Account to get the UserInfo object that contains the specified user's UID.
+  /// 远端用户加入频道后，SDK 会获取到该远端用户的 UID 和 User Account，然后缓存一个包含了远端用户 UID 和 User Account 的映射表，并在本地触发 onUserInfoUpdated 回调。收到回调后，调用该方法传入 User Account 来获取包含了指定用户 UID 的 UserInfo 对象。
   ///
-  /// * [userAccount] User Account of the user.
+  /// * [userAccount] 用户 User Account。
   ///
   /// Returns
-  /// The UserInfo object, if the method call succeeds. null, if the method call fails.
+  /// 方法调用成功，返回 UserInfo 对象。
+  ///  方法调用失败，则返回 null 。
   Future<UserInfo> getUserInfoByUserAccount(String userAccount);
 
-  /// Gets user information by UID.
+  /// 通过 UID 获取用户信息。
   ///
-  /// After a remote user joins a channel, the SDK retrieves the UID and User Account of the remote user and caches a mapping table of UID and User Account. It then triggers the onUserInfoUpdated callback locally. After receiving this callback, call this method with the UID to get the UserInfo object that contains the specified user's User Account.
+  /// 远端用户加入频道后，SDK 会获取到该远端用户的 UID 和 User Account，然后缓存一个包含了远端用户 UID 和 User Account 的映射表，并在本地触发 onUserInfoUpdated 回调。收到回调后，调用该方法传入 UID 来获取包含了指定用户 User Account 的 UserInfo 对象。
   ///
-  /// * [uid] User ID.
+  /// * [uid] 用户 ID。
   ///
   /// Returns
-  /// The UserInfo object, if the method call succeeds. null, if the method call fails.
+  /// 方法调用成功，返回 UserInfo 对象。
+  ///  方法调用失败，则返回 null 。
   Future<UserInfo> getUserInfoByUid(int uid);
 
-  /// Starts or updates cross-channel media stream relay.
+  /// 开始或更新跨频道媒体流转发。
   ///
-  /// The first successful call to this method starts the cross-channel media stream relay. To relay the stream to multiple destination channels or exit the current relay channels, you can call this method again to add or remove destination channels. This feature supports relaying media streams to up to 6 destination channels.
-  /// After the method is successfully called, the SDK triggers the onChannelMediaRelayStateChanged callback to report the current state of the cross-channel media stream relay. Common states include:
-  ///  If the onChannelMediaRelayStateChanged callback reports relayStateRunning (2) and relayOk (0), it indicates that the SDK has started relaying media streams between the source and destination channels.
-  ///  If the onChannelMediaRelayStateChanged callback reports relayStateFailure (3), it indicates an exception occurred in the cross-channel media stream relay.
-  ///  Call this method after successfully joining a channel.
-  ///  In a live broadcast scenario, only users with the broadcaster role can call this method.
-  ///  The cross-channel media stream relay feature requires [contacting technical support](https://ticket.shengwang.cn/) to enable.
-  ///  This feature does not support String-type UIDs.
+  /// 首次成功调用该方法将开始跨频道转发媒体流。如需将流转发到多个目标频道，或退出当前的转发频道，可以再次调用该方法添加或移除转发的目标频道。该功能最多支持将媒体流转发至 6 个目标频道。
+  /// 成功调用该方法后，SDK 会触发 onChannelMediaRelayStateChanged 回调，报告当前的跨频道媒体流转发状态。常见状态如下：
+  ///  如果 onChannelMediaRelayStateChanged 回调报告 relayStateRunning (2) 和 relayOk (0)， 则表示 SDK 开始在源频道和目标频道之间转发媒体流。
+  ///  如果 onChannelMediaRelayStateChanged 回调报告 relayStateFailure (3)， 则表示跨频道媒体流转发出现异常。
+  ///  请在成功加入频道后调用该方法。
+  ///  在直播场景中，只有角色为主播的用户才能调用该方法。
+  ///  跨频道媒体流转发功能需要[联系技术支持](https://ticket.shengwang.cn/)开通。
+  ///  该功能不支持 String 型 UID。
   ///
-  /// * [configuration] Configuration for cross-channel media stream relay. See ChannelMediaRelayConfiguration.
+  /// * [configuration] 跨频道媒体流转发参数配置。详见 ChannelMediaRelayConfiguration 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -1: General error (not specifically classified).
-  ///  -2: Invalid parameter.
-  ///  -8: Internal state error. Possibly because the user role is not broadcaster.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -1: 一般性的错误（未明确归类）。
+  ///  -2: 参数无效。
+  ///  -8：内部状态错误。可能因为用户角色不是主播。
   Future<void> startOrUpdateChannelMediaRelay(
       ChannelMediaRelayConfiguration configuration);
 
-  /// Stops cross-channel media stream relay. Once stopped, the broadcaster leaves all destination channels.
+  /// 停止跨频道媒体流转发。一旦停止，主播会退出所有目标频道。
   ///
-  /// After the method is successfully called, the SDK triggers the onChannelMediaRelayStateChanged callback. If it reports relayStateIdle (0) and relayOk (0), it indicates that media stream relay has been stopped. If the method call fails, the SDK triggers the onChannelMediaRelayStateChanged callback and reports the status code relayErrorServerNoResponse (2) or relayErrorServerConnectionLost (8). You can call the leaveChannel method to leave the channel, and the cross-channel media stream relay will stop automatically.
+  /// 成功调用该方法后，SDK 会触发 onChannelMediaRelayStateChanged 回调。如果报告 relayStateIdle (0) 和 relayOk (0)，则表示已停止转发媒体流。 如果该方法调用不成功，SDK 会触发 onChannelMediaRelayStateChanged 回调，并报告状态码 relayErrorServerNoResponse (2) 或 relayErrorServerConnectionLost (8)。你可以调用 leaveChannel 方法离开频道，跨频道媒体流转发会自动停止。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -5: This method call was rejected. There is no ongoing cross-channel media stream relay.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -5: 方法调用被拒绝。当前没有正在进行的跨频道媒体流转发。
   Future<void> stopChannelMediaRelay();
 
-  /// Pauses media stream relay to all destination channels.
+  /// 暂停向所有目标频道转发媒体流。
   ///
-  /// After starting media stream relay across channels, if you want to pause relaying to all destination channels, you can call this method. To resume relaying, call resumeAllChannelMediaRelay. You must call this method after calling startOrUpdateChannelMediaRelay to start media stream relay across channels.
+  /// 开始跨频道转发媒体流后，如果你需要暂停向所有频道转发媒体流，可以调用该方法；暂停后，如果要恢复跨频道媒体流转发，可以调用 resumeAllChannelMediaRelay 方法。 该方法需要在调用 startOrUpdateChannelMediaRelay 开始跨频道媒体流转发后调用。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> pauseAllChannelMediaRelay();
 
-  /// Resumes media stream relay to all destination channels.
+  /// 恢复向所有目标频道转发媒体流。
   ///
-  /// After calling the pauseAllChannelMediaRelay method, if you need to resume media stream relay to all destination channels, you can call this method. This method must be called after pauseAllChannelMediaRelay.
+  /// 调用 pauseAllChannelMediaRelay 方法后，如果你需要恢复向所有目标频道转发媒体流，可以调用该方法。 该方法需要在 pauseAllChannelMediaRelay 后调用。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  -5: This method call was rejected. There is no paused cross-channel media stream relay.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  -5: 方法调用被拒绝。当前没有暂停的跨频道媒体流转发。
   Future<void> resumeAllChannelMediaRelay();
 
-  /// Sets the audio encoding configuration when the host pushes the stream directly to the CDN.
-  ///
-  /// Deprecated Deprecated since v4.6.2. This method only takes effect for audio captured by the microphone or custom audio sources, that is, when publishMicrophoneTrack or publishCustomAudioTrack is set to true in DirectCdnStreamingMediaOptions.
-  ///
-  /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// @nodoc
   Future<void> setDirectCdnStreamingAudioConfiguration(
       AudioProfileType profile);
 
-  /// Sets the video encoding properties when the host pushes streams directly to the CDN.
-  ///
-  /// Deprecated Deprecated since v4.6.2. This method only applies to video captured by the camera, screen sharing, or custom video sources. That is, it applies to video captured when publishCameraTrack or publishCustomVideoTrack is set to true in DirectCdnStreamingMediaOptions.
-  /// If the video resolution you set exceeds the range supported by your camera device, the SDK adapts based on your settings and captures, encodes, and streams using the closest resolution with the same aspect ratio as your setting. You can get the actual resolution of the pushed video stream through the onDirectCdnStreamingStats callback.
-  ///
-  /// * [config] Video encoding configuration. See VideoEncoderConfiguration. When pushing streams directly to the CDN, the SDK currently only supports setting OrientationMode to landscape mode (orientationModeFixedLandscape) or portrait mode (orientationModeFixedPortrait).
-  ///
-  /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// @nodoc
   Future<void> setDirectCdnStreamingVideoConfiguration(
       VideoEncoderConfiguration config);
 
-  /// Starts pushing streams directly from the host to the CDN.
-  ///
-  /// Deprecated Deprecated since v4.6.2. The SDK does not support pushing to the same URL multiple times simultaneously.
-  /// Media options:
-  /// The SDK does not support publishCameraTrack and publishCustomVideoTrack being true at the same time, nor does it support publishMicrophoneTrack and publishCustomAudioTrack being true at the same time. You can set the media options (DirectCdnStreamingMediaOptions) based on your scenario. For example:
-  /// If you want to push custom audio and video streams from the host:
-  ///  Set publishCustomAudioTrack to true and call pushAudioFrame
-  ///  Set publishCustomVideoTrack to true and call pushVideoFrame
-  ///  Ensure publishCameraTrack is false (default)
-  ///  Ensure publishMicrophoneTrack is false (default) Since v4.2.0, the SDK supports pushing audio-only streams. You can set publishCustomAudioTrack or publishMicrophoneTrack to true in DirectCdnStreamingMediaOptions, and call pushAudioFrame to push audio-only streams.
-  ///
-  /// * [eventHandler] See onDirectCdnStreamingStateChanged and onDirectCdnStreamingStats.
-  /// * [publishUrl] CDN streaming URL.
-  /// * [options] Media options for the host. See DirectCdnStreamingMediaOptions.
-  ///
-  /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// @nodoc
   Future<void> startDirectCdnStreaming(
       {required DirectCdnStreamingEventHandler eventHandler,
       required String publishUrl,
       required DirectCdnStreamingMediaOptions options});
 
-  /// Stops pushing streams directly from the host to the CDN.
-  ///
-  /// Deprecated Deprecated since v4.6.2.
-  ///
-  /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// @nodoc
   Future<void> stopDirectCdnStreaming();
 
   /// @nodoc
   Future<void> updateDirectCdnStreamingMediaOptions(
       DirectCdnStreamingMediaOptions options);
 
-  /// Starts the virtual metronome.
+  /// 开启虚拟节拍器。
   ///
-  /// Deprecated Deprecated since v4.6.2.
-  ///  After enabling the virtual metronome, the SDK starts playing the specified audio files from the beginning and controls the duration of each file based on the beatsPerMinute you set in AgoraRhythmPlayerConfig. For example, if beatsPerMinute is set to 60, the SDK plays 1 beat per second. If the file duration exceeds the beat duration, the SDK only plays the portion that fits the beat duration.
-  ///  By default, the sound of the virtual metronome is not published to remote users. If you want remote users to hear it, set publishRhythmPlayerTrack in ChannelMediaOptions to true after calling this method.
+  /// 废弃 自 v6.6.2 版本废弃。
+  ///  开启虚拟节拍器后，SDK 会从头开始播放指定的音频文件，并根据你在 AgoraRhythmPlayerConfig 中设置的 beatsPerMinute 控制每个文件的播放时长。例如，将 beatsPerMinute 设为 60 ，则 SDK 会 1 秒播放 1 个节拍。如果文件时长超过了节拍时长，则 SDK 只播放节拍时长部分的音频。
+  ///  虚拟节拍器的声音默认不会发布至远端，如果你希望远端用户听到虚拟节拍器的声音，你可以在调用该方法后，将 ChannelMediaOptions 中的 publishRhythmPlayerTrack 设为 true 。
   ///
-  /// * [sound1] The absolute path or URL of the strong beat file, including the file name and extension. For example, C:\music\audio.mp4. Supported audio formats: see [Supported audio formats for RTC SDK](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format).
-  /// * [sound2] The absolute path or URL of the weak beat file, including the file name and extension. For example, C:\music\audio.mp4. Supported audio formats: see [Supported audio formats for RTC SDK](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format).
-  /// * [config] Metronome configuration. See AgoraRhythmPlayerConfig.
+  /// * [sound1] 强拍文件的绝对路径或 URL 地址，需精确到文件名及后缀。例如 C:\music\audio.mp4 。支持的音频文件格式见 [RTC SDK 支持播放哪些格式的音频文件](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format)。
+  /// * [sound2] 弱拍文件的绝对路径或 URL 地址，需精确到文件名及后缀。例如 C:\music\audio.mp4 。支持的音频文件格式见 [RTC SDK 支持播放哪些格式的音频文件](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format)。
+  /// * [config] 节拍器配置。详见 AgoraRhythmPlayerConfig 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startRhythmPlayer(
       {required String sound1,
       required String sound2,
       required AgoraRhythmPlayerConfig config});
 
-  /// Stops the virtual metronome.
+  /// 关闭虚拟节拍器。
   ///
-  /// After calling startRhythmPlayer, you can call this method to stop the virtual metronome. This method applies to Android and iOS only.
+  /// 调用 startRhythmPlayer 后，你可以调用该方法关闭虚拟节拍器。 该方法仅适用于 Android 和 iOS。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopRhythmPlayer();
 
-  /// Configures the virtual metronome.
+  /// 配置虚拟节拍器。
   ///
-  /// Deprecated Deprecated since v4.6.2.
-  ///  After calling startRhythmPlayer, you can call this method to reconfigure the virtual metronome.
-  ///  After enabling the virtual metronome, the SDK starts playing the specified audio files from the beginning and controls the duration of each file based on the beatsPerMinute you set in AgoraRhythmPlayerConfig. For example, if beatsPerMinute is set to 60, the SDK plays 1 beat per second. If the file duration exceeds the beat duration, the SDK only plays the portion that fits the beat duration.
-  ///  By default, the sound of the virtual metronome is not published to remote users. If you want remote users to hear it, set publishRhythmPlayerTrack in ChannelMediaOptions to true after calling this method.
+  /// 废弃 自 v6.6.2 版本废弃。
+  ///  调用 startRhythmPlayer 后，你可以调用该方法重新配置虚拟节拍器。
+  ///  开启虚拟节拍器后，SDK 会从头开始播放指定的音频文件，并根据你在 AgoraRhythmPlayerConfig 中设置的 beatsPerMinute 控制每个文件的播放时长。例如，将 beatsPerMinute 设为 60 ，则 SDK 会 1 秒播放 1 个节拍。如果文件时长超过了节拍时长，则 SDK 只播放节拍时长部分的音频。
+  ///  虚拟节拍器的声音默认不会发布至远端，如果你希望远端用户听到虚拟节拍器的声音，你可以在调用该方法后，将 ChannelMediaOptions 中的 publishRhythmPlayerTrack 设为 true 。
   ///
-  /// * [config] Metronome configuration. See AgoraRhythmPlayerConfig.
+  /// * [config] 节拍器配置。详见 AgoraRhythmPlayerConfig 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> configRhythmPlayer(AgoraRhythmPlayerConfig config);
 
-  /// Takes a snapshot of the video.
+  /// 对视频截图。
   ///
-  /// This method takes a snapshot of the specified user's video stream, generates a JPG image, and saves it to the specified path.
-  ///  This method is asynchronous. When the call returns, the SDK has not actually captured the snapshot.
-  ///  When used for local video snapshot, it captures the video stream specified in ChannelMediaOptions.
-  ///  If the user's video has undergone preprocessing, such as watermarking or beautification, the snapshot will include these effects.
+  /// 该方法用于对指定用户的视频流进行截图，生成一张 JPG 格式的图片，并保存至指定的路径。
+  ///  该方法是异步操作，调用返回时 SDK 并没有真正获取截图。
+  ///  该方法用于本地视频截图时，是对 ChannelMediaOptions 中指定发布的视频流进行截图。
+  ///  如果用户的视频经过前处理，例如，添加了水印或美颜，生成的截图会包含前处理效果。
   ///
-  /// * [uid] User ID. Set to 0 to capture the local user's video.
-  /// * [filePath] Make sure the directory exists and is writable. The local path to save the snapshot. The path must include the file name and format, for example:
+  /// * [uid] 用户 ID。如果要对本地用户的视频截图，则设为 0。
+  /// * [filePath] 请确保目录存在且可写。 截图的本地保存路径，需精确到文件名及格式，例如：
   ///  Windows: C:\Users\<user_name>\AppData\Local\Agora\<process_name>\example.jpg
   ///  iOS: /App Sandbox/Library/Caches/example.jpg
   ///  macOS: ～/Library/Logs/example.jpg
   ///  Android: /storage/emulated/0/Android/data/<package name>/files/example.jpg
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> takeSnapshot({required int uid, required String filePath});
 
-  /// Enables/disables local snapshot upload.
+  /// 开启/关闭本地截图上传。
   ///
-  /// After enabling local snapshot upload, the SDK takes and uploads snapshots of the video sent by the local user based on the module type and frequency set in ContentInspectConfig. After the snapshot is completed, the Agora server sends a callback notification to your server via HTTPS request and uploads all snapshots to your specified third-party cloud storage.
-  ///  Before calling this method, ensure that the local snapshot upload service has been enabled in the Agora Console.
-  ///  When using the Agora-developed plugin for snapshot upload (contentInspectSupervision) in the video moderation module, you must integrate the local snapshot upload dynamic library libagora_content_inspect_extension.dll. Deleting this library will prevent the local snapshot upload feature from working properly.
+  /// 开启本地截图上传后，SDK 会根据你在 ContentInspectConfig 中设置的模块类型和频率对本地用户发送的视频进行截图和上传。截图完成后，声网服务器会以 HTTPS 请求的形式，向你的服务器发送回调通知，并将所有截图发送至你指定的第三方云存储。
+  ///  调用该方法前，请确保已在声网控制台开通本地截图上传服务。
+  ///  视频审核模块选择声网自研插件截图上传（ contentInspectSupervision ）时需集成本地截图上传动态库 libagora_content_inspect_extension.dll ，如果删除该动态库会导致无法正常开启本地截图上传功能。
   ///
-  /// * [enabled] Sets whether to enable local snapshot upload: true : Enable local snapshot upload. false : Disable local snapshot upload.
-  /// * [config] Local snapshot upload configuration. See ContentInspectConfig.
+  /// * [enabled] 设置是否开启本地截图上传： true ：开启本地截图上传。 false ：关闭本地截图上传。
+  /// * [config] 本地截图上传配置。详见 ContentInspectConfig 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableContentInspect(
       {required bool enabled, required ContentInspectConfig config});
 
-  /// Adjusts the remote playback volume of a custom audio track.
+  /// 调节自定义音频采集轨道在远端播放的音量。
   ///
-  /// After calling this method to set the remote playback volume of the audio, if you want to adjust the volume again, you can call this method again. Before calling this method, make sure you have already called createCustomAudioTrack to create a custom audio track.
+  /// 调用该方法设置音频在远端播放的音量后，如果你想重新调整音量，你可以再次调用该方法。 在调用该方法前，请确保你已经调用 createCustomAudioTrack 方法创建自定义音频采集轨道。
   ///
-  /// * [trackId] Audio track ID. Set this parameter to the custom audio track ID returned by the createCustomAudioTrack method.
-  /// * [volume] Playback volume of the custom audio capture. Range: [0,100]. 0 means mute, 100 means original volume.
+  /// * [trackId] 音频轨道 ID。将该参数设置为调用 createCustomAudioTrack 方法返回的自定义音频轨道 ID。
+  /// * [volume] 自定义采集音频的播放音量，取值范围为 [0,100]。0 表示静音，100 表示原始音量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustCustomAudioPublishVolume(
       {required int trackId, required int volume});
 
-  /// Adjusts the local playback volume of a custom audio track.
+  /// 调节自定义音频采集轨道在本地播放的音量。
   ///
-  /// After calling this method to set the local playback volume of the audio, if you want to adjust the volume again, you can call this method again. Before calling this method, make sure you have already called createCustomAudioTrack to create a custom audio track.
+  /// 调用该方法设置音频在本地播放的音量后，如果你想重新调整音量，你可以再次调用该方法。 在调用该方法前，请确保你已经调用 createCustomAudioTrack 方法创建自定义音频采集轨道。
   ///
-  /// * [trackId] Audio track ID. Set this parameter to the custom audio track ID returned by the createCustomAudioTrack method.
-  /// * [volume] Playback volume of the custom audio capture. Range: [0,100]. 0 means mute, 100 means original volume.
+  /// * [trackId] 音频轨道 ID。将该参数设置为调用 createCustomAudioTrack 方法返回的自定义音频轨道 ID。
+  /// * [volume] 自定义采集音频的播放音量，取值范围为 [0,100]。0 表示静音，100 表示原始音量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Method call failed. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustCustomAudioPlayoutVolume(
       {required int trackId, required int volume});
 
-  /// Sets the cloud proxy service.
+  /// 设置云代理服务。
   ///
-  /// When the user's network is restricted by a firewall, you need to add the IP and port provided by Agora to the firewall whitelist, then call this method to enable the cloud proxy and set the proxy type via the proxyType parameter.
-  /// After successfully connecting to the cloud proxy, the SDK triggers the onConnectionStateChanged (connectionStateConnecting, connectionChangedSettingProxyServer) callback.
-  /// To disable an already set Force UDP or Force TCP cloud proxy, call setCloudProxy(noneProxy).
-  /// To change the cloud proxy type, first call setCloudProxy(noneProxy), then call setCloudProxy with the desired proxyType value.
-  ///  It is recommended to call this method outside the channel.
-  ///  If the user is in an intranet firewall environment, the features of CDN streaming and cross-channel media relay are not available when using Force UDP cloud proxy.
-  ///  When using Force UDP cloud proxy, the startAudioMixing method cannot play online audio files via HTTP. CDN streaming and cross-channel media relay use cloud proxy over TCP.
+  /// 当用户的网络访问受到防火墙限制时，你需要将声网提供的 IP 和端口号添加到防火墙白名单，然后调用该方法开启云代理，并通过 proxyType 参数设置云代理类型。
+  /// 成功连接云代理后，SDK 会触发 onConnectionStateChanged (connectionStateConnecting, connectionChangedSettingProxyServer) 回调。
+  /// 如果你想关闭已设置的 Force UDP 或 Force TCP 云代理，请调用 setCloudProxy(noneProxy) 。
+  /// 如果你想更改已设置的云代理类型，请先调用 setCloudProxy(noneProxy) ，再调用 setCloudProxy 并传入你期望的 proxyType 值。
+  ///  建议你在频道外调用该方法。
+  ///  如果用户处于内网防火墙环境下，使用 Force UDP 云代理时，旁路推流和跨频道媒体流转发功能不可用。
+  ///  使用 Force UDP 云代理时，调用 startAudioMixing 方法时无法播放 HTTP 协议的在线音频文件。旁路推流和跨频道媒体流转发功能会使用 TCP 协议的云代理。
   ///
-  /// * [proxyType] The cloud proxy type. See CloudProxyType.
-  /// This parameter is required. If you do not assign a value, the SDK will report an error.
+  /// * [proxyType] 云代理类型，详见 CloudProxyType 。
+  /// 该参数为必填参数，如果你不赋值，SDK 会报错。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setCloudProxy(CloudProxyType proxyType);
 
-  /// @nodoc
-  Future<void> setLocalAccessPoint(LocalAccessPointConfiguration config);
-
-  /// Sets advanced audio options.
+  /// 配置与声网私有媒体服务器接入模块的连接。
   ///
-  /// If you have advanced audio processing needs, such as collecting and sending stereo audio, you can call this method to set advanced audio options. You need to call this method before joinChannel, enableAudio, and enableLocalAudio.
+  /// 成功部署声网私有媒体服务器并在内网终端集成 4.x RTC SDK 后，你可以调用该方法指定 Local Access Point，给 SDK 分配接入模块。 该方法仅在部署声网混合云方案后生效。你可以[联系销售](https://www.shengwang.cn/contact-sales/)了解和部署声网混合云。
   ///
-  /// * [options] Advanced audio options. See AdvancedAudioOptions.
+  /// * [config] Local Access Point 配置。详见 LocalAccessPointConfiguration 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  Future<void> setLocalAccessPoint(LocalAccessPointConfiguration config);
+
+  /// 设置音频的高级选项。
+  ///
+  /// 如果你对音频处理有进阶需求，例如需要采集和发送立体声，可以调用该方法设置音频的高级选项。 你需要在 joinChannel 、 enableAudio 和 enableLocalAudio 前调用该方法。
+  ///
+  /// * [options] 音频的高级选项。详见 AdvancedAudioOptions 。
+  ///
+  /// Returns
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAdvancedAudioOptions(
       {required AdvancedAudioOptions options, int sourceType = 0});
 
-  /// @nodoc
-  Future<void> setAVSyncSource({required String channelId, required int uid});
-
-  /// Enables or disables the placeholder image streaming feature.
+  /// 设置发流端音画同步。
   ///
-  /// When publishing a video stream, you can call this method to use a custom image to replace the current video stream for streaming.
-  /// After enabling this feature, you can customize the placeholder image using the ImageTrackOptions parameter. After disabling the placeholder feature, remote users will still see the video stream you are currently publishing.
+  /// 同一用户可能使用两个设备分别发送音频流和视频流，为保证接收端听到和看到的音频和视频的时间同步性，你可以在视频发送端调用该方法，并传入音频发送端的频道名、用户 ID。 SDK 会以发送的音频流的时间戳为基准进行自动调节发送的视频流，以保证即使在两个发送端的上行网络情况不一致（如分别使用 Wi-Fi 和 4G 网络）的情况下，也能让接收到的音视频具有时间同步性。 建议你在加入频道前调用该方法。
   ///
-  /// * [enable] Whether to enable placeholder image streaming: true : Enable placeholder image streaming. false : (Default) Disable placeholder image streaming.
-  /// * [options] Placeholder image settings. See ImageTrackOptions.
+  /// * [channelId] 标识音频发送端所在频道的频道名。
+  /// * [uid] 音频发送端的用户 ID。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  Future<void> setAVSyncSource({required String channelId, required int uid});
+
+  /// 设置是否开启垫片推流功能。
+  ///
+  /// 在发布视频流时，你可以调用该方法使用自定义图片来替代当前发布的视频流画面进行推流。
+  /// 开启该功能后，你可以通过 ImageTrackOptions 参数自定义垫片图片；在你关闭垫片功能之后，远端用户看到的依旧是当前你发布的视频流画面。
+  ///
+  /// * [enable] 是否开启垫片推流： true ：开启垫片推流。 false ：（默认）关闭垫片推流。
+  /// * [options] 垫片图片设置，详见 ImageTrackOptions 。
+  ///
+  /// Returns
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableVideoImageSource(
       {required bool enable, required ImageTrackOptions options});
 
-  /// Gets the SDK's current monotonic time.
+  /// 获取 SDK 当前的 Monotonic Time。
   ///
-  /// Monotonic time refers to a monotonically increasing time sequence, whose value increases over time. The unit is milliseconds.
-  /// In custom video capture and custom audio capture scenarios, to ensure audio-video synchronization, Agora recommends that you call this method to get the SDK's current monotonic time and then pass the value into the timestamp parameter of the captured VideoFrame or AudioFrame.
+  /// Monotonic Time 是指一个单调递增的时间序列，它的值会随着时间的推移而增加。单位为毫秒。
+  /// 在自定义视频采集、自定义音频采集场景中，为确保音视频同步，声网建议你调用该方法获取 SDK 当前的 Monotonic Time 后，将该值传入采集的视频帧（ VideoFrame ）、音频帧（ AudioFrame ）的时间戳参数。
   ///
   /// Returns
-  /// ≥ 0: The method call succeeds and returns the SDK's current monotonic time (milliseconds).
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// ≥ 0: 方法调用成功，返回 SDK 当前的 Monotonic Time（毫秒）。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> getCurrentMonotonicTimeInMs();
 
-  /// Gets the local network connection type.
+  /// 获取本地网络连接类型。
   ///
-  /// You can call this method at any time to get the current network type in use. This method can be called before or after joining a channel.
+  /// 你可以在任何阶段通过该方法获取正在使用的网络类型。 该方法在加入频道前后均可调用。
   ///
   /// Returns
-  /// ≥ 0: The method call succeeds and returns the local network connection type.
-  ///  0: Network disconnected.
-  ///  1: Network type is LAN.
-  ///  2: Network type is Wi-Fi (including hotspot).
-  ///  3: Network type is 2G mobile network.
-  ///  4: Network type is 3G mobile network.
-  ///  5: Network type is 4G mobile network.
-  ///  6: Network type is 5G mobile network.
-  ///  < 0: The method call fails and returns an error code.
-  ///  -1: Unknown network connection type.
+  /// ≥ 0: 方法调用成功，返回本地网络连接类型。
+  ///  0：网络连接已断开。
+  ///  1：网络类型为 LAN。
+  ///  2：网络类型为 Wi-Fi（包含热点）。
+  ///  3：网络类型为 2G 移动网络。
+  ///  4：网络类型为 3G 移动网络。
+  ///  5：网络类型为 4G 移动网络。
+  ///  6：网络类型为 5G 移动网络。
+  ///  < 0: 方法调用失败，返回错误码。
+  ///  -1：网络连接类型未知。
   Future<int> getNetworkType();
 
-  /// JSON configuration information for the SDK, used to provide technical preview or customized features.
+  /// SDK 的 JSON 配置信息，用于提供技术预览或特别定制功能。
   ///
-  /// * [parameters] Parameters in JSON string format.
+  /// * [parameters] JSON 字符串形式的参数。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setParameters(String parameters);
 
-  /// Starts video frame rendering tracing.
+  /// 开启视频帧渲染数据打点。
   ///
-  /// After this method is successfully called, the SDK uses the time of the call as the starting point and reports information related to video frame rendering through the onVideoRenderingTracingResult callback.
-  ///  If you do not call this method, the SDK uses the time of calling joinChannel to join the channel as the starting point to begin tracing video rendering events automatically. You can call this method at an appropriate time based on your actual business scenario to customize the tracing.
-  ///  After leaving the current channel, the SDK automatically resets the starting point to the time of the next channel join.
+  /// 成功调用该方法后，SDK 会以调用该方法的时刻作为起点，并通过 onVideoRenderingTracingResult 回调报告视频帧渲染的相关信息。
+  ///  如果你未调用该方法，SDK 默认以调用 joinChannel 加入频道的时刻为起始点开始打点，自动开始跟踪视频的渲染事件。你可以根据实际业务场景，在合适的时机调用该方法，进行自定义打点。
+  ///  离开当前频道后，SDK 会自动重置该时间点为下一次加入频道的时刻。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startMediaRenderingTracing();
 
-  /// Enables accelerated rendering of audio and video frames.
+  /// 开启音视频帧加速渲染。
   ///
-  /// After successfully calling this method, the SDK enables accelerated rendering mode for both video and audio, which speeds up the time to first frame and first sound after joining a channel. Both the host and audience need to call this method to enable accelerated rendering of audio and video frames to experience this feature.
-  /// Once this method is successfully called, you can only disable accelerated rendering by calling the release method to destroy the RtcEngine object.
+  /// 成功调用该方法后，SDK 会开启加速出图和出声模式，可加快用户加入频道后的首帧出图与出声速度。 主播端和观众端都需调用该方法开启音视频帧加速渲染才可体验该功能。
+  /// 一旦成功调用该方法，只能通过调用 release 方法销毁 RtcEngine 对象来取消加速渲染。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> enableInstantMediaRendering();
 
-  /// Gets the current NTP (Network Time Protocol) time.
+  /// 获取当前的 NTP (网络时间协议) 时间。
   ///
-  /// In real-time chorus scenarios, especially when downlink inconsistency occurs across receiving ends due to network issues, you can call this method to get the current NTP time as the reference time to align lyrics and music across multiple receivers and achieve chorus synchronization.
+  /// 在实时合唱的场景中，特别是在各个接收端由于网络原因导致下行链路不一致的情况下，你可以调用该方法来获取当前的 NTP 时间作为基准时间，以对齐多个接收端的歌词和音乐，实现合唱同步。
   ///
   /// Returns
-  /// Unix timestamp (milliseconds) of the current NTP time.
+  /// 当前 NTP 时间的 Unix 时间戳 (毫秒)。
   Future<int> getNtpWallTimeInMs();
 
-  /// Checks whether the device supports the specified advanced feature.
+  /// 查询设备是否支持指定进阶功能。
   ///
-  /// Checks whether the current device meets the requirements for advanced features such as virtual background and beauty effects.
+  /// 查询当前设备能力是否满足虚拟背景、美颜等进阶功能的要求。
   ///
-  /// * [type] The type of advanced feature. See FeatureType.
+  /// * [type] 进阶功能类型，详见 FeatureType 。
   ///
   /// Returns
-  /// true : The device supports the specified advanced feature. false : The device does not support the specified advanced feature.
+  /// true : 设备支持指定进阶功能。 false : 设备不支持指定进阶功能。
   Future<bool> isFeatureAvailableOnDevice(FeatureType type);
 
   /// @nodoc
@@ -6840,148 +6829,151 @@ abstract class RtcEngine {
   /// @nodoc
   Future<HdrCapability> queryHDRCapability(VideoModuleType videoModule);
 
-  /// Adds a watermark image to the local video stream.
+  /// 向本地视频流添加水印图像。
   ///
-  /// Since Available since v4.6.2. You can use this method to overlay a watermark image on the local video stream and configure its position, size, and visibility in the preview using WatermarkConfig.
+  /// 自从 自 v6.6.2 版本新增。 你可以使用该方法在本地视频流中叠加水印图像，并通过 WatermarkConfig 设置水印在预览画面中的位置、大小和可见性。
   ///
-  /// * [configs] Watermark configuration. See WatermarkConfig.
+  /// * [configs] 水印配置。详见 WatermarkConfig 。
   ///
   /// Returns
-  /// 0: The method call succeeds.
-  ///  < 0: The method call fails.
+  /// 0：方法调用成功。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> addVideoWatermarkWithConfig(WatermarkConfig configs);
 
-  /// Starts screen capture and specifies the video source.
+  /// 开始屏幕采集并指定视频源。
   ///
-  /// This method is only applicable to macOS and Windows platforms.
-  ///  If you use this method to start screen capture, you must call stopScreenCaptureBySourceType to stop it.
-  ///  On Windows, up to 4 screen capture video streams are supported.
-  ///  On macOS, only 1 screen capture video stream is supported.
+  /// 该方法仅适用于 macOS 和 Windows 平台。
+  ///  如果调用该方法开始屏幕采集，则停止屏幕采集时需要调用 stopScreenCaptureBySourceType 。
+  ///  在 Windows 平台上，最多支持 4 路屏幕采集的视频流。
+  ///  在 macOS 平台上，最多支持 1 路屏幕采集的视频流。
   ///
-  /// * [sourceType] The type of video source. See VideoSourceType. On macOS, only videoSourceScreen (2) is supported for this parameter.
-  /// * [config] Screen capture configuration. See ScreenCaptureConfiguration.
+  /// * [sourceType] 视频源的类型，详见 VideoSourceType 。 在 macOS 平台上，仅支持将该参数设置为 videoSourceScreen (2)。
+  /// * [config] 屏幕采集配置。详见 ScreenCaptureConfiguration 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startScreenCaptureBySourceType(
       {required VideoSourceType sourceType,
       required ScreenCaptureConfiguration config});
 
-  /// Stops screen capture for the specified video source.
+  /// 停止对指定的视频源进行屏幕采集。
   ///
-  /// This method is only applicable to macOS and Windows.
+  /// 该方法仅适用于 macOS 和 Windows 平台。
   ///
-  /// * [sourceType] The type of video source. See VideoSourceType.
+  /// * [sourceType] 视频源的类型，详见 VideoSourceType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stopScreenCaptureBySourceType(VideoSourceType sourceType);
 
-  /// Destroys the RtcEngine object.
+  /// 销毁 RtcEngine 对象。
   ///
-  /// This method releases all resources used by the SDK. Some Apps only use real-time audio and video communication when needed, and release resources when not needed for other operations. This method is suitable for such cases.
-  /// After calling this method, you can no longer use other SDK methods and callbacks. To use real-time audio and video communication again, you must call createAgoraRtcEngine and initialize again to create a new RtcEngine object.
-  ///  This method is a synchronous call. You must wait for the RtcEngine resources to be released before performing other operations (e.g., creating a new RtcEngine object), so it is recommended to call this method in a sub-thread to avoid blocking the main thread.
-  ///  It is not recommended to call release within SDK callbacks, as the SDK must wait for the callback to return before recycling related object resources, which may cause a deadlock.
+  /// 该方法释放 SDK 使用的所有资源。有些 App 只在用户需要时才进行实时音视频通信，不需要时则将资源释放出来用于其他操作，该方法适用于此类情况。
+  /// 调用该方法后，你将无法再使用 SDK 的其它方法和回调。如需再次使用实时音视频通信功能， 你必须依次重新调用 createAgoraRtcEngine 和 initialize 方法创建一个新的 RtcEngine 对象。
+  ///  该方法为同步调用。需要等待 RtcEngine 资源释放后才能执行其他操作（例如：创建一个新的 RtcEngine 对象），因此建议在子线程中调用该方法，避免主线程阻塞。
+  ///  不建议在 SDK 的回调中调用 release ，否则由于 SDK 要等待回调返回才能回收相关的对象资源，会造成死锁。
   ///
-  /// * [sync] Whether this method is a synchronous call: true : This method is synchronous. false : This method is asynchronous. Currently, only synchronous calls are supported. Do not set this parameter to false.
+  /// * [sync] 该方法是否为同步调用： true :该方法为同步调用。 false :该方法为异步调用。目前该方法仅支持同步调用，请不要将该参数设置为该值。
   Future<void> release({bool sync = false});
 
-  /// Starts video preview.
+  /// 开启视频预览。
   ///
-  /// This method starts the local video preview.
-  ///  Local preview enables mirror mode by default.
-  ///  After leaving the channel, local preview remains active. You need to call stopPreview to stop the local preview.
+  /// 该方法用于启动本地视频预览。
+  ///  本地预览默认开启镜像功能。
+  ///  在离开频道后，本地预览依然处于开启状态。你需要调用 stopPreview 关闭本地预览。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> startPreviewWithoutSourceType();
 
-  /// Gets the AudioDeviceManager object to manage audio devices.
+  /// 获取 AudioDeviceManager 对象，以管理音频设备。
   ///
   /// Returns
-  /// An AudioDeviceManager object.
+  /// 一个 AudioDeviceManager 对象。
   AudioDeviceManager getAudioDeviceManager();
 
-  /// Gets a VideoDeviceManager object to manage video devices.
+  /// 获取 VideoDeviceManager 对象，以管理视频设备。
   ///
   /// Returns
-  /// A VideoDeviceManager object.
+  /// 一个 VideoDeviceManager 对象。
   VideoDeviceManager getVideoDeviceManager();
 
-  /// @nodoc
+  /// 获取 MusicContentCenter 。
+  ///
+  /// Returns
+  /// 一个 MusicContentCenter 对象。
   MusicContentCenter getMusicContentCenter();
 
-  /// Gets the MediaEngine object.
+  /// 获取 MediaEngine 对象。
   ///
-  /// This method must be called after initializing the RtcEngine object.
+  /// 该方法需要在初始化 RtcEngine 对象后调用。
   ///
   /// Returns
-  /// MediaEngine object.
+  /// MediaEngine 对象。
   MediaEngine getMediaEngine();
 
-  /// Gets the LocalSpatialAudioEngine object.
+  /// 获取 LocalSpatialAudioEngine 对象。
   ///
-  /// You must call this method after initializing the RtcEngine object.
+  /// 该方法需要在初始化 RtcEngine 对象后调用。
   ///
   /// Returns
-  /// The LocalSpatialAudioEngine object.
+  /// 一个 LocalSpatialAudioEngine 对象。
   LocalSpatialAudioEngine getLocalSpatialAudioEngine();
 
   /// @nodoc
   H265Transcoder getH265Transcoder();
 
-  /// Sends media metadata.
+  /// 发送媒体附属信息。
   ///
-  /// If the metadata is sent successfully, the receiver receives the onMetadataReceived callback.
+  /// 如果成功发送了媒体附属信息，接收端会收到 onMetadataReceived 回调。
   ///
-  /// * [metadata] The media metadata. See Metadata.
-  /// * [sourceType] The type of video source. See VideoSourceType.
+  /// * [metadata] 媒体附属信息。详见 Metadata 。
+  /// * [sourceType] 视频源的类型，详见 VideoSourceType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> sendMetaData(
       {required Metadata metadata, required VideoSourceType sourceType});
 
-  /// Sets the maximum size of media metadata.
+  /// 设置媒体附属信息的最大大小。
   ///
-  /// After calling registerMediaMetadataObserver, you can call this method to set the maximum size of media metadata.
+  /// 调用 registerMediaMetadataObserver 后，你可以调用本方法来设置媒体附属信息的最大大小。
   ///
-  /// * [size] The maximum size of media metadata.
+  /// * [size] 媒体附属信息的最大大小。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setMaxMetadataSize(int size);
 
-  /// Unregisters the audio encoded frame observer.
+  /// 取消注册音频编码数据观测器。
   ///
-  /// * [observer] Audio encoded frame observer. See AudioEncodedFrameObserver.
+  /// * [observer] 音频编码数据观测器。详见 AudioEncodedFrameObserver 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void unregisterAudioEncodedFrameObserver(AudioEncodedFrameObserver observer);
 
-  /// Gets the C++ handle of the Native SDK.
+  /// 获取 Native SDK 的 C++ 句柄。
   ///
-  /// This method gets the C++ handle of the Native SDK engine, which is used in special scenarios including registering audio and video callbacks.
+  /// 该方法获取 Native SDK 引擎 的 C++ 句柄，用于包括注册音视频回调在内的特殊场景。
   ///
   /// Returns
-  /// Native handle of the SDK engine.
+  /// SDK 引擎的 Native 句柄。
   Future<int> getNativeHandle();
 
-  /// Takes a video snapshot at the specified observation point.
+  /// 在指定观测位置进行视频截图。
   ///
-  /// This method takes a snapshot of the specified user's video stream, generates a JPG image, and saves it to the specified path.
-  ///  This method is asynchronous. When the call returns, the SDK has not actually captured the snapshot.
-  ///  When used for local video snapshot, it captures the video stream specified in ChannelMediaOptions.
+  /// 该方法用于对指定用户的视频流进行截图，生成一张 JPG 格式的图片，并保存至指定的路径。
+  ///  该方法是异步操作，调用返回时 SDK 并没有真正获取截图。
+  ///  该方法用于本地视频截图时，是对 ChannelMediaOptions 中指定发布的视频流进行截图。
   ///
-  /// * [uid] User ID. Set to 0 to capture the local user's video.
-  /// * [config] Snapshot configuration. See SnapshotConfig.
+  /// * [uid] 用户 ID。如果要对本地用户的视频截图，则设为 0。
+  /// * [config] 截图设置，详见 SnapshotConfig 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> takeSnapshotWithConfig(
       {required int uid, required SnapshotConfig config});
 }
@@ -7011,30 +7003,30 @@ extension QualityReportFormatTypeExt on QualityReportFormatType {
   }
 }
 
-/// Device state.
+/// 设备状态。
 @JsonEnum(alwaysCreate: true)
 enum MediaDeviceStateType {
-  /// 0: Device is ready.
+  /// 0: 设备就绪。
   @JsonValue(0)
   mediaDeviceStateIdle,
 
-  /// 1: Device is in use.
+  /// 1: 设备正在使用。
   @JsonValue(1)
   mediaDeviceStateActive,
 
-  /// 2: Device is disabled.
+  /// 2: 设备被禁用。
   @JsonValue(2)
   mediaDeviceStateDisabled,
 
-  /// 3: Device is plugged in.
+  /// 3: 设备已插入。
   @JsonValue(3)
   mediaDeviceStatePluggedIn,
 
-  /// 4: Device is not present.
+  /// 4: 没有此设备。
   @JsonValue(4)
   mediaDeviceStateNotPresent,
 
-  /// 8: Device is unplugged.
+  /// 8: 设备被拔出。
   @JsonValue(8)
   mediaDeviceStateUnplugged,
 }
@@ -7353,17 +7345,17 @@ extension VideoProfileTypeExt on VideoProfileType {
   }
 }
 
-/// SDK version information.
+/// SDK 版本信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class SDKBuildInfo implements AgoraSerializable {
   /// @nodoc
   const SDKBuildInfo({this.build, this.version});
 
-  /// SDK build number.
+  /// SDK 编译号。
   @JsonKey(name: 'build')
   final int? build;
 
-  /// SDK version number. Format is a string, such as 6.0.0.
+  /// SDK 版本号。格式为字符串，如 6.0.0。
   @JsonKey(name: 'version')
   final String? version;
 
@@ -7375,17 +7367,17 @@ class SDKBuildInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$SDKBuildInfoToJson(this);
 }
 
-/// The VideoDeviceInfo class, contains the video device ID and device name.
+/// VideoDeviceInfo 类，包含视频设备的 ID 和设备名称。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class VideoDeviceInfo implements AgoraSerializable {
   /// @nodoc
   const VideoDeviceInfo({this.deviceId, this.deviceName});
 
-  /// Device ID.
+  /// 设备 ID。
   @JsonKey(name: 'deviceId')
   final String? deviceId;
 
-  /// Device name.
+  /// 设备名称。
   @JsonKey(name: 'deviceName')
   final String? deviceName;
 
@@ -7397,21 +7389,21 @@ class VideoDeviceInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$VideoDeviceInfoToJson(this);
 }
 
-/// The AudioDeviceInfo class, containing the audio device ID and device name.
+/// AudioDeviceInfo 类，包含音频设备的 ID 和设备名称。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class AudioDeviceInfo implements AgoraSerializable {
   /// @nodoc
   const AudioDeviceInfo({this.deviceId, this.deviceTypeName, this.deviceName});
 
-  /// Device ID.
+  /// 设备 ID。
   @JsonKey(name: 'deviceId')
   final String? deviceId;
 
-  /// Audio device type, such as: built-in, USB, HDMI, etc.
+  /// 音频设备类型，如：built-in、USB、HDMI 等。
   @JsonKey(name: 'deviceTypeName')
   final String? deviceTypeName;
 
-  /// Device name.
+  /// 设备名称。
   @JsonKey(name: 'deviceName')
   final String? deviceName;
 
