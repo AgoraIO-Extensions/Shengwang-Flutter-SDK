@@ -1391,7 +1391,7 @@ class VideoFrame implements AgoraSerializable {
   @JsonKey(name: 'pixelBuffer', ignore: true)
   final Uint8List? pixelBuffer;
 
-  /// 视频帧中的元信息。该参数需要[联系技术支持](https://ticket.shengwang.cn/)使用。
+  /// Metadata in the video frame. This parameter requires [contacting technical support](https://www.agora.io/cn/contact/) to use.
   @VideoFrameMetaInfoConverter()
   @JsonKey(name: 'metaInfo')
   final VideoFrameMetaInfo? metaInfo;
@@ -1576,7 +1576,7 @@ class ContentInspectConfig implements AgoraSerializable {
   @JsonKey(name: 'extraInfo')
   final String? extraInfo;
 
-  /// （可选）云市场视频审核相关服务端配置，该参数仅在 ContentInspectModule 中的 type 设置为 contentInspectImageModeration 时生效。如需使用，请[联系技术支持](https://ticket.shengwang.cn/)。
+  /// (Optional) Server configuration related to video moderation in the Cloud Marketplace. This parameter takes effect only when the type in ContentInspectModule is set to contentInspectImageModeration. To use this feature, please [contact technical support](https://www.agora.io/cn/contact/).
   @JsonKey(name: 'serverConfig')
   final String? serverConfig;
 

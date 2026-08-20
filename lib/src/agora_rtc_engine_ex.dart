@@ -33,12 +33,12 @@ abstract class RtcEngineEx implements RtcEngine {
   /// 调用该方法，你可以同时加入多个频道。如果你想在不同的设备上加入相同的频道，请确保你在不同设备上使用的用户 ID 都不同。 如果你已经在一个频道内，你不能用相同的用户 ID 再次加入该频道。
   /// 加入频道前，请确保用于生成 Token 的 App ID 和调用 initialize 方法初始化引擎时使用的是同一个 App ID，否则使用 Token 加入频道会失败。
   ///
-  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
-  ///  （推荐）如果你的项目开启了安全模式，即选择 APP ID + Token 为鉴权机制，则该参数为必填。
-  ///  如果你的项目仅开启调试模式，即选择 APP ID 为鉴权机制，则无需填入 Token 即可加入频道。成功加入频道 24 小时后会自动退出该频道。
-  ///  如果你需要同时加入多个频道或在频道间频繁切换，声网推荐你使用通配 Token 以避免每加入一个新的频道都需向服务端申请一个新的 Token，详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
-  /// * [connection] Connection 信息。详见 RtcConnection 。
-  /// * [options] 频道媒体设置选项。详见 ChannelMediaOptions 。
+  /// * [token] The dynamic key generated on your server for authentication. See [Token Authentication](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
+  ///  (Recommended) If your project enables security mode (i.e., uses APP ID + Token for authentication), this parameter is required.
+  ///  If your project only enables debug mode (i.e., uses APP ID for authentication), you can join a channel without providing a Token. You will automatically leave the channel after 24 hours.
+  ///  If you need to join multiple channels at once or frequently switch between channels, Agora recommends using a wildcard Token to avoid requesting a new Token from your server for each new channel. See [Wildcard Token](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
+  /// * [connection] Connection information. See RtcConnection.
+  /// * [options] Channel media options. See ChannelMediaOptions.
   ///
   /// Returns
   /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
@@ -434,8 +434,8 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 创建数据流。
   ///
-  /// 如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
-  /// 在 RtcEngine 生命周期内，每个用户最多只能创建 5 个数据流。离开频道时数据流会被销毁，如需使用需要重新创建数据流。
+  /// If you need a more comprehensive, low-latency, high-concurrency, and scalable real-time messaging and state synchronization solution, we recommend using [Real-time Messaging](https://docs.agora.io/en/signaling/overview/product-overview).
+  /// During the lifecycle of RtcEngine, each user can create up to 5 data streams. The data streams are destroyed when leaving the channel. If needed again, you must recreate them.
   ///
   /// * [config] 数据流设置。详见 DataStreamConfig 。
   /// * [connection] Connection 信息。详见 RtcConnection 。
@@ -448,13 +448,13 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 发送数据流。
   ///
-  /// 调用 createDataStreamEx 后，你可以调用本方法向频道内所有用户发送数据流消息。
-  /// SDK 对该方法的实现进行了如下限制：
-  ///  频道内每个客户端最多可以同时拥有 5 个数据通道，所有数据通道共用的总发包码率限制为 30 KB/s。
-  ///  每个数据通道每秒最多能发送 60 个包，每个包最大为 1 KB。 成功调用该方法后，远端会触发 onStreamMessage 回调，远端用户可以在该回调中获取接收到的流消息；若调用失败，远端会触发 onStreamMessageError 回调。
-  ///  如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
-  ///  该方法需要在 joinChannelEx 后调用。
-  ///  请确保在调用该方法前，已调用 createDataStreamEx 创建了数据通道。
+  /// After calling createDataStreamEx, you can call this method to send data stream messages to all users in the channel.
+  /// The SDK imposes the following restrictions on this method:
+  ///  Each client in the channel can have up to 5 data channels simultaneously, with a total sending bitrate limit of 30 KB/s shared among all channels.
+  ///  Each data channel can send up to 60 packets per second, with each packet limited to 1 KB. After this method is successfully called, the remote side triggers the onStreamMessage callback, through which remote users can receive the stream message. If the call fails, the remote side triggers the onStreamMessageError callback.
+  ///  If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and state synchronization, we recommend using [Real-time Messaging](https://docs.agora.io/en/signaling/overview/product-overview).
+  ///  This method must be called after joinChannelEx.
+  ///  Make sure you have called createDataStreamEx to create the data channel before calling this method.
   ///
   /// * [streamId] 数据流 ID。可以通过 createDataStreamEx 获取。
   /// * [data] 待发送的数据。
@@ -510,7 +510,7 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 从本地或远端视频流中移除指定的水印图像。
   ///
-  /// 自从 自 v6.6.2 版本新增。
+  /// Since Available since v6.6.2.
   ///
   /// * [id] 水印 ID。
   /// * [connection] 连接信息。详见 RtcConnection 。
@@ -531,7 +531,7 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 自定义数据上报和分析服务。
   ///
-  /// 声网提供自定义数据上报和分析服务。该服务当前处于免费内测期。内测期提供的能力为 6 秒内最多上报 10 条数据，每条自定义数据不能超过 256 字节，每个字符串不能超过 100 字节。如需试用该服务，请[联系销售](https://www.shengwang.cn/contact-sales/)开通并商定自定义数据格式。
+  /// Agora provides a custom data reporting and analytics service. This service is currently in a free beta period. During the beta, you can report up to 10 data entries within 6 seconds. Each custom data entry must not exceed 256 bytes, and each string must not exceed 100 bytes. To try this service, please [contact sales](mailto:support@agora.io) to enable it and agree on the custom data format.
   Future<void> sendCustomReportMessageEx(
       {required String id,
       required String category,
@@ -562,12 +562,12 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 开始非转码推流。
   ///
-  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
-  /// 调用该方法，你可以向指定的旁路推流地址推送直播音视频流。该方法每次只能向一个地址推送媒体流，如果你需要向多个地址转码推流，则需多次调用该方法。
-  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
-  ///  请在加入频道后调用该方法。
-  ///  只有直播场景下的主播才能调用该方法。
-  ///  调用该方法推流失败后，如果你想要重新推流，那么请你务必先调用 stopRtmpStream ，再调用该方法重推，否则 SDK 会返回与上次推流失败时一样的错误码。
+  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side Streaming](https://docs.agora.io/en/media-push/get-started/enable-media-push).
+  /// You can call this method to push live audio and video streams to a specified CDN streaming URL. This method can only push to one URL at a time. To push to multiple URLs, you must call this method multiple times.
+  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
+  ///  Call this method after joining a channel.
+  ///  Only hosts in live streaming scenarios can call this method.
+  ///  If the stream fails to start and you want to restart it, you must call stopRtmpStream before calling this method again. Otherwise, the SDK returns the same error code as the previous failure.
   ///
   /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
   /// * [connection] Connection 信息。详见 RtcConnection 。
@@ -579,13 +579,13 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 开始旁路推流并设置转码属性。
   ///
-  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
-  /// 调用该方法，你可以向指定的旁路推流地址推送直播音视频流并设置转码属性。该方法每次只能向一个地址推送媒体流，如果你需要向多个地址转码推流，则需多次调用该方法。
-  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
-  ///  请确保已开通旁路推流服务。
-  ///  请在加入频道后调用该方法。
-  ///  只有直播场景下的主播才能调用该方法。
-  ///  调用该方法推流失败后，如果你想要重新推流，那么请你务必先调用 stopRtmpStreamEx ，再调用该方法重推，否则 SDK 会返回与上次推流失败时一样的错误码。
+  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side Streaming](https://docs.agora.io/en/media-push/get-started/enable-media-push).
+  /// You can call this method to push live audio and video streams to a specified CDN streaming URL with transcoding settings. This method can only push to one URL at a time. To push to multiple URLs, you must call this method multiple times.
+  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
+  ///  Make sure the CDN streaming service is enabled.
+  ///  Call this method after joining a channel.
+  ///  Only hosts in live streaming scenarios can call this method.
+  ///  If the stream fails to start and you want to restart it, you must call stopRtmpStreamEx before calling this method again. Otherwise, the SDK returns the same error code as the previous failure.
   ///
   /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
   /// * [transcoding] 旁路推流的转码属性，详见 LiveTranscoding 。
@@ -600,8 +600,8 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 更新旁路推流转码属性。
   ///
-  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
-  /// 开启转码推流后，你可以根据场景需求，动态更新转码属性。转码属性更新后，SDK 会触发 onTranscodingUpdated 回调。
+  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side RTMP Streaming](https://docs.agora.io/en/media-push/get-started/enable-media-push).
+  /// After enabling transcoding streaming, you can dynamically update the transcoding configuration based on your scenario needs. After the transcoding configuration is updated, the SDK triggers the onTranscodingUpdated callback.
   ///
   /// * [transcoding] 旁路推流的转码属性，详见 LiveTranscoding 。
   /// * [connection] Connection 信息。详见 RtcConnection 。
@@ -614,9 +614,9 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 结束旁路推流。
   ///
-  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
-  /// 调用该方法，你可以结束指定的旁路推流地址上的直播。该方法每次只能结束一个推流地址上的直播，如果你需要结束多个推流地址的直播，则需多次调用该方法。
-  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
+  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side RTMP Streaming](https://docs.agora.io/en/media-push/get-started/enable-media-push).
+  /// Call this method to stop the live stream on the specified RTMP streaming URL. This method can only stop one streaming URL at a time. If you need to stop multiple streaming URLs, call this method multiple times.
+  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
   ///
   /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
   /// * [connection] Connection 信息。详见 RtcConnection 。
@@ -628,14 +628,14 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 开始或更新跨频道媒体流转发。
   ///
-  /// 首次成功调用该方法将开始跨频道转发媒体流。如需将流转发到多个目标频道，或退出当前的转发频道，可以再次调用该方法添加或移除转发的目标频道。该功能最多支持将媒体流转发至 6 个目标频道。
-  /// 成功调用该方法后，SDK 会触发 onChannelMediaRelayStateChanged 回调，报告当前的跨频道媒体流转发状态。常见状态如下：
-  ///  如果 onChannelMediaRelayStateChanged 回调报告 relayStateRunning (2) 和 relayOk (0)， 则表示 SDK 开始在源频道和目标频道之间转发媒体流。
-  ///  如果 onChannelMediaRelayStateChanged 回调报告 relayStateFailure (3)， 则表示跨频道媒体流转发出现异常。
-  ///  请在成功加入频道后调用该方法。
-  ///  在直播场景中，只有角色为主播的用户才能调用该方法。
-  ///  跨频道媒体流转发功能需要[联系技术支持](https://ticket.shengwang.cn/)开通。
-  ///  该功能不支持 String 型 UID。
+  /// The first successful call to this method starts the cross-channel media stream relay. To relay the stream to multiple destination channels or exit the current relay channels, you can call this method again to add or remove destination channels. This feature supports relaying media streams to up to 6 destination channels.
+  /// After the method is successfully called, the SDK triggers the onChannelMediaRelayStateChanged callback to report the current state of the cross-channel media stream relay. Common states include:
+  ///  If the onChannelMediaRelayStateChanged callback reports relayStateRunning (2) and relayOk (0), it indicates that the SDK has started relaying media streams between the source and destination channels.
+  ///  If the onChannelMediaRelayStateChanged callback reports relayStateFailure (3), it indicates an exception occurred in the cross-channel media stream relay.
+  ///  Call this method after successfully joining a channel.
+  ///  In a live broadcast scenario, only users with the broadcaster role can call this method.
+  ///  The cross-channel media stream relay feature requires [contacting technical support](https://www.agora.io/cn/contact/) to enable.
+  ///  This feature does not support String-type UIDs.
   ///
   /// * [configuration] 跨频道媒体流转发参数配置。详见 ChannelMediaRelayConfiguration 。
   /// * [connection] Connection 信息。详见 RtcConnection 。
@@ -765,7 +765,7 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 开启/关闭本地截图上传。
   ///
-  /// 该方法可以对多条视频流截图并上传。开启本地截图上传后，SDK 会根据你在 ContentInspectConfig 中设置的模块类型和频率对本地用户发送的视频进行截图和上传。截图完成后，声网服务器会以 HTTPS 请求的形式，向你的服务器发送回调通知，并将所有截图发送至你指定的第三方云存储。 调用该方法前，请确保已[联系技术支持](https://ticket.shengwang.cn/)开通本地截图上传服务。
+  /// This method can take and upload snapshots for multiple video streams. After enabling local snapshot upload, the SDK takes and uploads snapshots of the video sent by the local user based on the module type and frequency set in ContentInspectConfig. After the snapshot is completed, the Agora server sends a callback notification to your server via HTTPS request and uploads all snapshots to your specified third-party cloud storage. Before calling this method, please [contact technical support](https://www.agora.io/cn/contact/) to enable the local snapshot upload service.
   ///
   /// * [enabled] 设置是否开启本地截图上传： true ：开启本地截图上传。 false ：关闭本地截图上传。
   /// * [config] 本地截图上传配置。详见 ContentInspectConfig 。
@@ -809,11 +809,11 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 将指定音效预加载到频道中。
   ///
-  /// 自从 自 v6.6.2 版本新增。 每次调用该方法时，只能将一个音效文件预加载到内存中。如果需要预加载多个音效文件，请多次调用该方法。预加载完成后，可以调用 playEffect 播放预加载的音效，或调用 playAllEffects 播放所有预加载的音效。
-  ///  为确保使用体验流畅，音效文件的大小不应超过限制。
-  ///  声网建议在加入频道前调用该方法。
-  ///  如果在调用 playEffectEx 前已调用 preloadEffectEx ，则 playEffectEx 执行后不会关闭文件资源。下次调用 playEffectEx 时会直接从头开始播放。
-  ///  如果在调用 playEffectEx 前未调用 preloadEffectEx ，则 playEffectEx 执行后会销毁资源。下次调用 playEffectEx 时会尝试重新打开文件并从头开始播放。
+  /// Since Available since v6.6.2. Each time you call this method, only one audio effect file can be preloaded into memory. To preload multiple audio effect files, call this method multiple times. After preloading, you can call playEffect to play the preloaded audio effect, or call playAllEffects to play all preloaded audio effects.
+  ///  To ensure smooth usage, the size of the audio effect file should not exceed the limit.
+  ///  Agora recommends calling this method before joining the channel.
+  ///  If you call preloadEffectEx before playEffectEx, the file resource is not released after playEffectEx is executed. The next time you call playEffectEx, it will start playing from the beginning.
+  ///  If you do not call preloadEffectEx before playEffectEx, the resource is destroyed after playEffectEx is executed. The next time you call playEffectEx, it will attempt to reopen the file and play from the beginning.
   ///
   /// * [connection] 连接信息。详见 RtcConnection 。
   /// * [soundId] 音效 ID。
@@ -831,11 +831,11 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 在频道中播放指定音效。
   ///
-  /// 自从 自 v6.6.2 版本新增。 你可以调用该方法在频道内向所有用户播放指定音效。每次调用该方法只能播放一个音效。若需同时播放多个音效，请使用不同的 soundId 和 filePath 多次调用该方法。你还可以设置是否在频道中发布该音效。
-  ///  声网建议不要同时播放超过三个音效。
-  ///  该方法中的音效 ID 和文件路径必须与 preloadEffectEx 方法中的保持一致。
-  ///  如果在调用 playEffectEx 之前调用了 preloadEffectEx ， playEffectEx 执行后不会关闭文件资源。下次调用 playEffectEx 时会直接从头开始播放。
-  ///  如果在调用 playEffectEx 之前未调用 preloadEffectEx ， playEffectEx 执行后会销毁资源。下次调用 playEffectEx 时会尝试重新打开文件并从头播放。
+  /// Since Available since v6.6.2. You can call this method to play a specified audio effect to all users in the channel. Each call plays only one audio effect. To play multiple audio effects simultaneously, call this method multiple times with different soundId and filePath. You can also set whether to publish the audio effect in the channel.
+  ///  Agora recommends not playing more than three audio effects simultaneously.
+  ///  The audio effect ID and file path in this method must match those in the preloadEffectEx method.
+  ///  If preloadEffectEx is called before playEffectEx, the file resource is not released after playEffectEx is executed. The next time you call playEffectEx, it will start playing from the beginning.
+  ///  If preloadEffectEx is not called before playEffectEx, the resource is destroyed after playEffectEx is executed. The next time you call playEffectEx, it will attempt to reopen the file and play from the beginning.
   ///
   /// * [connection] RtcConnection 对象，详见 RtcConnection 。
   /// * [soundId] 音效 ID。
@@ -881,7 +881,7 @@ abstract class RtcEngineEx implements RtcEngine {
 
   /// 向本地视频添加水印图像。
   ///
-  /// 自从 自 v6.6.2 版本新增。
+  /// Since Available since v6.6.2.
   ///
   /// * [config] 水印配置，详见 WatermarkConfig 。
   /// * [connection] RtcConnection 对象，详见 RtcConnection 。

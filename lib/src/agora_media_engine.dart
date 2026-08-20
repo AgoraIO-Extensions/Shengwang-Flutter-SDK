@@ -110,10 +110,10 @@ abstract class MediaEngine {
   ///
   /// 调用该方法启用外部视频源后，你可以调用 pushVideoFrame 向 SDK 推送外部视频数据。 不支持在频道内动态切换视频源。如果已调用该方法启用外部视频源并加入频道，若想切换为内部视频源，必须先退出频道，然后调用该方法关闭外部视频源，再重新加入频道。
   ///
-  /// * [enabled] 是否启用外部视频源： true : 启用外部视频源。SDK 准备接收外部视频帧。 false :（默认）不启用外部视频源。
-  /// * [useTexture] 是否使用 Texture 格式的外部视频帧： true : 使用 Texture 格式的外部视频帧。 false : 不使用 Texture 格式的外部视频帧。
-  /// * [sourceType] 外部视频帧是否编码，详见 ExternalVideoSourceType 。
-  /// * [encodedVideoOption] 视频编码选项。如果 sourceType 为 encodedVideoFrame ，则需要设置该参数。你可以[联系技术支持](https://ticket.shengwang.cn/)了解如何设置该参数。
+  /// * [enabled] Whether to enable the external video source: true : Enable the external video source. The SDK is ready to receive external video frames. false : (Default) Do not enable the external video source.
+  /// * [useTexture] Whether to use external video frames in Texture format: true : Use Texture format for external video frames. false : Do not use Texture format for external video frames.
+  /// * [sourceType] Whether the external video frame is encoded. See ExternalVideoSourceType.
+  /// * [encodedVideoOption] Video encoding options. If sourceType is encodedVideoFrame, this parameter must be set. You can [contact technical support](https://www.agora.io/cn/contact/) to learn how to configure this parameter.
   ///
   /// Returns
   /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
