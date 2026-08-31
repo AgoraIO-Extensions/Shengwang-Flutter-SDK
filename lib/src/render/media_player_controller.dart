@@ -5,7 +5,7 @@ import '/src/agora_rtc_engine_ex.dart';
 import '/src/impl/media_player_controller_impl.dart';
 import '/src/render/video_view_controller.dart';
 
-/// Controller for AgoraVideoView, used to render media player video.
+/// AgoraVideoView 的控制器，用于渲染媒体播放器的视频。
 abstract class MediaPlayerController
     implements MediaPlayer, VideoViewControllerBase {
   /// @nodoc
@@ -23,6 +23,6 @@ abstract class MediaPlayerController
         useAndroidSurfaceView,
       );
 
-  /// Creates a MediaPlayerController.
+  /// 创建一个 MediaPlayerController 。
   Future<void> initialize();
 }

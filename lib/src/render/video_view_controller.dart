@@ -5,26 +5,26 @@ import '/src/agora_rtc_engine_ex.dart';
 import '/src/impl/video_view_controller_impl.dart';
 import 'package:meta/meta.dart';
 
-/// The controller for AgoraVideoView, used to render local and remote video.
+/// AgoraVideoView 的控制器，用于渲染本地和远端视频。
 ///
-/// On different platforms, the default view corresponding to this class varies:
-///  Android: https://developer.android.com/reference/android/view/TextureView. If you want to use [SurfaceView](https://developer.android.com/reference/android/view/SurfaceView), set the useAndroidSurfaceView property to true.
-///  iOS: [UIView](https://developer.apple.com/documentation/uikit/uiview). If you want to use [FlutterTexture](https://api.flutter.dev/macos-embedder/protocol_flutter_texture-p.html), set the useFlutterTexture property to true.
-///  macOS and Windows: [FlutterTexture](https://api.flutter.dev/macos-embedder/protocol_flutter_texture-p.html).
+/// 在不同平台上，该类对应的默认视图不同：
+///  Android: https://developer.android.com/reference/android/view/TextureView 。如果你想要使用 [SurfaceView](https://developer.android.com/reference/android/view/SurfaceView) ，则设置 useAndroidSurfaceView 的属性为 true 。
+///  iOS: [UIView](https://developer.apple.com/documentation/uikit/uiview) 。 如果你想要使用 [FlutterTexture](https://api.flutter.dev/macos-embedder/protocol_flutter_texture-p.html) ，则设置 useFlutterTexture 的属性为 true 。
+///  macOS 和 Windows：[FlutterTexture](https://api.flutter.dev/macos-embedder/protocol_flutter_texture-p.html) 。
 abstract class VideoViewControllerBase {
-  /// RtcEngine.
+  /// RtcEngine 。
   RtcEngine get rtcEngine;
 
-  /// Local video display properties. See VideoCanvas.
+  /// 本地视频显示属性。详见 VideoCanvas 。
   VideoCanvas get canvas;
 
-  /// Connection information. See RtcConnection.
+  /// Connection 信息。详见 RtcConnection 。
   RtcConnection? get connection;
 
-  /// FlutterTexture is only available on iOS, macOS, and Windows platforms. Whether to use FlutterTexture to render video: true : Use FlutterTexture to render video. false : Do not use FlutterTexture to render video.
+  /// FlutterTexture 仅适用于 iOS、macOS 和 Windows 平台。 是否使用 FlutterTexture 渲染视频： true : 使用 FlutterTexture 渲染视频。 false : 不使用 FlutterTexture 渲染视频。
   bool get useFlutterTexture;
 
-  /// Android SurfaceView is only available on Android platform. Whether to use Android SurfaceView to render video: true : Use Android SurfaceView to render video. false : Do not use Android SurfaceView to render video.
+  /// Android SurfaceView 仅适用于 Android 平台。 是否使用 Android SurfaceView 渲染视频： true : 使用 Android SurfaceView 渲染视频。 false : 不使用 Android SurfaceView 渲染视频。
   bool get useAndroidSurfaceView;
 
   @internal
@@ -60,12 +60,12 @@ abstract class VideoViewControllerBase {
   Future<void> dispose();
 }
 
-/// The controller for AgoraVideoView, used to render local and remote video.
+/// AgoraVideoView 的控制器，用于渲染本地和远端视频。
 ///
-/// On different platforms, the default view corresponding to this class varies:
-///  Android: https://developer.android.com/reference/android/view/TextureView. If you want to use [SurfaceView](https://developer.android.com/reference/android/view/SurfaceView), set the useAndroidSurfaceView property to true.
-///  iOS: [UIView](https://developer.apple.com/documentation/uikit/uiview). If you want to use [FlutterTexture](https://api.flutter.dev/macos-embedder/protocol_flutter_texture-p.html), set the useFlutterTexture property to true.
-///  macOS and Windows: [FlutterTexture](https://api.flutter.dev/macos-embedder/protocol_flutter_texture-p.html).
+/// 在不同平台上，该类对应的默认视图不同：
+///  Android: https://developer.android.com/reference/android/view/TextureView 。如果你想要使用 [SurfaceView](https://developer.android.com/reference/android/view/SurfaceView) ，则设置 useAndroidSurfaceView 的属性为 true 。
+///  iOS: [UIView](https://developer.apple.com/documentation/uikit/uiview) 。如果你想要使用 [FlutterTexture](https://api.flutter.dev/macos-embedder/protocol_flutter_texture-p.html) ，则设置 useFlutterTexture 的属性为 true 。
+///  macOS 和 Windows：[FlutterTexture](https://api.flutter.dev/macos-embedder/protocol_flutter_texture-p.html) 。
 class VideoViewController
     with VideoViewControllerBaseMixin
     implements VideoViewControllerBase {

@@ -3,7 +3,7 @@ import '/src/impl/agora_video_view_impl.dart';
 
 import 'package:flutter/material.dart';
 
-/// The AgoraVideoView class, used to render local and remote video.
+/// AgoraVideoView 类，用于渲染本地和远端视频。
 class AgoraVideoView extends StatefulWidget {
   /// @nodoc
   const AgoraVideoView({
@@ -12,9 +12,9 @@ class AgoraVideoView extends StatefulWidget {
     this.onAgoraVideoViewCreated,
   }) : super(key: key);
 
-  /// Controls the type of video to render:
-  ///  To render video from RtcEngine, see VideoViewController.
-  ///  To render video from the media player, see MediaPlayerController.
+  /// 控制待渲染的视频类型：
+  ///  如果渲染 RtcEngine 的视频，详见 VideoViewController 。
+  ///  如果渲染媒体播放器中的视频，详见 MediaPlayerController 。
   final VideoViewControllerBase controller;
 
   /// @nodoc
