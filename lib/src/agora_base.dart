@@ -3536,6 +3536,14 @@ enum LocalVideoEventType {
   /// （4）：屏幕采集过程中发生系统内部错误，仅适用于 Android 平台。
   @JsonValue(4)
   localVideoEventTypeScreenCaptureSystemInternalError,
+
+  /// @nodoc
+  @JsonValue(5)
+  localVideoEventTypeCameraFocalLengthApplied,
+
+  /// @nodoc
+  @JsonValue(6)
+  localVideoEventTypeCameraFocalLengthFallbackToDefault,
 }
 
 /// @nodoc
