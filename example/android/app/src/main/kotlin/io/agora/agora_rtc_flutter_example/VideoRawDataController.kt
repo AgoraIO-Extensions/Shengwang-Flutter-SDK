@@ -1,4 +1,4 @@
-package io.agora.agora_rtc_flutter_example
+package io.agora.shengwang_rtc_flutter_example
 
 import android.content.Context
 import android.util.Log
