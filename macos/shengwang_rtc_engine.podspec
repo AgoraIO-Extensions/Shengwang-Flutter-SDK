@@ -3,7 +3,7 @@
 # Run `pod lib lint agora_rtc_ng.podspec` to validate before publishing.
 #
 Pod::Spec.new do |s|
-  s.name             = 'agora_rtc_engine'
+  s.name             = 'shengwang_rtc_engine'
   s.version          = '0.0.1'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC

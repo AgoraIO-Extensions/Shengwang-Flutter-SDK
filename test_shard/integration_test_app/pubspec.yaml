@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  agora_rtc_engine:
+  shengwang_rtc_engine:
     path: ../../
 
 

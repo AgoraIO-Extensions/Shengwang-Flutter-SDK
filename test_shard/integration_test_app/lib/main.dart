@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 
 void main() {
   runApp(const MyApp());
