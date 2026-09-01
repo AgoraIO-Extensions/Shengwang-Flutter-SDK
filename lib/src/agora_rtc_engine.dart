@@ -1537,9 +1537,9 @@ class ChannelMediaOptions implements AgoraSerializable {
   @JsonKey(name: 'mediaPlayerAudioDelayMs')
   final int? mediaPlayerAudioDelayMs;
 
-  /// (Optional) A dynamic key generated on the server for authentication. See [Token Authentication](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
-  ///  This parameter only takes effect when calling updateChannelMediaOptions or updateChannelMediaOptionsEx.
-  ///  Make sure the App ID, channel name, and user name used to generate the token are consistent with those used in the initialize method and the joinChannel or joinChannelEx methods.
+  /// （可选）在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  ///  该参数仅在调用 updateChannelMediaOptions 或 updateChannelMediaOptionsEx 时生效。
+  ///  请确保用于生成 token 的 App ID、频道名和用户名和 initialize 方法初始化引擎时用的 App ID，以及 joinChannel 或 joinChannelEx 方法加入频道时设置的频道名和用户名是一致的。
   @JsonKey(name: 'token')
   final String? token;
 
@@ -1560,7 +1560,7 @@ class ChannelMediaOptions implements AgoraSerializable {
   @JsonKey(name: 'customVideoTrackId')
   final int? customVideoTrackId;
 
-  /// To enable this feature, please [contact sales](mailto:support@agora.io). Sets whether the current audio stream participates in stream selection based on audio volume algorithm. true : Participate in audio volume-based stream selection. If the feature is not enabled, this parameter has no effect. false : Do not participate in audio volume-based stream selection.
+  /// 如需启用该功能，请[联系销售](https://www.shengwang.cn/contact-sales/)。 设置是否让当前音频流根据音强算法参与选流。 true ：参与音强选流。如未开启音强选流功能，该参数不会生效。 false ：不参与音强选流。
   @JsonKey(name: 'isAudioFilterable')
   final bool? isAudioFilterable;
 
@@ -2011,7 +2011,7 @@ class RtcEngineEventHandler {
 
   /// 本地视频事件发生时触发的回调。
   ///
-  /// Since Available since v6.6.2. You can use this callback to get the reason for the local video event.
+  /// 自从 自 v6.6.2 版本新增。 你可以通过该回调获取本地视频事件的原因。
   ///
   /// * [source] 视频源类型，详见 VideoSourceType 。
   /// * [event] 本地视频事件类型，详见 LocalVideoEventType 。
@@ -2223,7 +2223,7 @@ class RtcEngineEventHandler {
 
   /// 虚拟节拍器状态发生改变回调。
   ///
-  /// Deprecated Deprecated since v6.6.2. When the state of the virtual metronome changes, the SDK triggers this callback to report the current state. If a fault occurs with the virtual metronome, this callback helps you understand the current state and the reason for the fault, allowing you to troubleshoot. This callback applies to Android and iOS only.
+  /// 废弃 自 v6.6.2 版本废弃。 虚拟节拍器状态发生改变时，SDK 会触发该回调报告当前的虚拟节拍器状态。在虚拟节拍器出现故障时，该回调可以帮助你了解当前虚拟节拍的状态以及出现故障的原因，方便你排查问题。 该回调仅适用于 Android 和 iOS。
   ///
   /// * [state] 当前的虚拟节拍器状态，详见 RhythmPlayerStateType 。
   /// * [reason] 虚拟节拍器发生错误的错误码和错误信息，详见 RhythmPlayerReason 。
@@ -2253,7 +2253,7 @@ class RtcEngineEventHandler {
 
   /// 接收到对方数据流消息的回调。
   ///
-  /// This callback indicates that the local user has received a stream message sent by a remote user using the sendStreamMessage method. If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and state synchronization, we recommend using [Real-time Messaging](https://docs.agora.io/en/signaling/overview/product-overview).
+  /// 该回调表示本地用户收到了远端用户调用 sendStreamMessage 方法发送的流消息。 如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
   ///
   /// * [connection] Connection 信息。详见 RtcConnection 。
   /// * [remoteUid] 发送消息的用户 ID。
@@ -2266,7 +2266,7 @@ class RtcEngineEventHandler {
 
   /// 接收对方数据流消息发生错误的回调。
   ///
-  /// This callback indicates that the local user failed to receive a stream message sent by a remote user using the sendStreamMessage method. If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and state synchronization, we recommend using [Real-time Messaging](https://docs.agora.io/en/signaling/overview/product-overview).
+  /// 该回调表示本地用户未收到远端用户调用 sendStreamMessage 方法发送的流消息。 如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
   ///
   /// * [connection] Connection 信息。详见 RtcConnection 。
   /// * [remoteUid] 发送消息的用户 ID。
@@ -2293,10 +2293,10 @@ class RtcEngineEventHandler {
   /// Token 已过期回调。
   ///
   /// 在音视频互动过程中，如果 Token 失效，SDK 会触发该回调报告 Token 已过期。
-  /// 当收到该回调时，你需要重新在服务端生成新的 Token，然后通过下列任意一种方式来更新 Token：
+  /// 收到该回调时，你需要在 Token 服务器上生成新的 Token，并根据场景更新 Token：
   ///  单频道场景：
-  ///  调用 renewToken 来传入新的 Token。
-  ///  调用 leaveChannel 离开当前频道，然后在调用 joinChannel 时传入新的 Token 重新加入频道。
+  ///  调用 renewToken 传入新的 Token，无需先离开频道。SDK 会通过 onRenewTokenResult 回调报告更新结果。
+  ///  如果你的 App 需要离开并重新加入频道，也可以调用 leaveChannel 离开频道，然后在调用 joinChannel 时传入新的 Token。
   ///  多频道场景：调用 updateChannelMediaOptionsEx 传入新的 Token。
   ///
   /// * [connection] Connection 信息。详见 RtcConnection 。
@@ -2304,10 +2304,10 @@ class RtcEngineEventHandler {
 
   /// Token 即将在 30s 内过期回调。
   ///
-  /// 当收到该回调时，你需要重新在服务端生成新的 Token，然后通过下列任意一种方式来更新 Token：
+  /// 收到该回调时，你需要在 Token 服务器上生成新的 Token，并根据场景更新 Token：
   ///  单频道场景：
-  ///  调用 renewToken 来传入新的 Token。
-  ///  调用 leaveChannel 离开当前频道，然后在调用 joinChannel 时传入新的 Token 重新加入频道。
+  ///  调用 renewToken 传入新的 Token，无需先离开频道。SDK 会通过 onRenewTokenResult 回调报告更新结果。
+  ///  如果你的 App 需要离开并重新加入频道，也可以调用 leaveChannel 离开频道，然后在调用 joinChannel 时传入新的 Token。
   ///  多频道场景：调用 updateChannelMediaOptionsEx 传入新的 Token。
   ///
   /// * [token] 即将过期的 Token。
@@ -2732,7 +2732,7 @@ class RtcEngineEventHandler {
 
   /// 多路径传输统计信息的回调。
   ///
-  /// Since Added since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [stats] 多路径传输统计信息。详见 MultipathStats 。
   final void Function(RtcConnection connection, MultipathStats stats)?
@@ -2740,7 +2740,7 @@ class RtcEngineEventHandler {
 
   /// renewToken 方法调用结果回调。
   ///
-  /// Since Available since v6.6.2. This callback is triggered after you call the renewToken method to update the token, and is used to notify the result of the update.
+  /// 自从 自 v6.6.2 版本新增。 当你调用 renewToken 方法更新 Token 后，该回调会被触发，用于通知更新结果。
   ///
   /// * [token] 更新的 Token。
   /// * [code] 错误码，详见 RenewTokenErrorCode 。
@@ -2818,13 +2818,13 @@ abstract class VideoDeviceManager {
 
 /// 用于管理和配置视频特效，例如美颜、风格妆容和滤镜。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 abstract class VideoEffectObject {
   /// 添加或更新指定视频特效节点和模板的特效。
   ///
-  /// Since Available since v6.6.2. Priority rules:
-  ///  Style makeup nodes take precedence over filter effect nodes.
-  ///  To apply filter effects, you must first remove the style makeup effect node.
+  /// 自从 自 v6.6.2 版本新增。 优先级规则：
+  ///  风格妆节点优先于滤镜特效节点。
+  ///  若要应用滤镜特效，必须先移除风格妆特效节点。
   ///
   /// * [nodeId] 视频特效节点的唯一标识符或标识符组合。详见 VideoEffectNodeId 。
   /// * [templateName] 特效模板名称。如果设置为 NULL 或空字符串，SDK 会从资源包中加载默认配置。
@@ -2837,7 +2837,7 @@ abstract class VideoEffectObject {
 
   /// 移除指定节点 ID 的视频特效。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [nodeId] 要移除的视频特效节点的唯一标识符，详见 VideoEffectNodeId 。
   ///
@@ -2848,7 +2848,7 @@ abstract class VideoEffectObject {
 
   /// 对指定的视频特效节点执行操作。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [nodeId] 视频特效节点的唯一标识符。
   /// * [actionId] 要执行的操作，详见 VideoEffectAction 。
@@ -2861,7 +2861,7 @@ abstract class VideoEffectObject {
 
   /// 设置视频特效的浮点参数。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [option] 参数选项的类别。
   /// * [key] 参数的键名。
@@ -2875,7 +2875,7 @@ abstract class VideoEffectObject {
 
   /// setVideoEffectIntParam ：设置视频特效的整数参数。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [option] 参数所属选项的类别。
   /// * [key] 参数的键名。
@@ -2889,7 +2889,7 @@ abstract class VideoEffectObject {
 
   /// 设置视频特效的布尔参数。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [option] 参数选项的类别。
   /// * [key] 参数的键名。
@@ -2903,7 +2903,7 @@ abstract class VideoEffectObject {
 
   /// 获取视频特效中指定 float 类型参数的值。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [option] 参数所属选项的类别。
   /// * [key] 参数的键名。
@@ -2916,7 +2916,7 @@ abstract class VideoEffectObject {
 
   /// 获取视频特效中的整数类型参数。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [option] 参数选项的类别。
   /// * [key] 参数的键名。
@@ -2929,7 +2929,7 @@ abstract class VideoEffectObject {
 
   /// 获取视频特效中的布尔参数。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [option] 参数所属的选项类别。
   /// * [key] 参数的键名。
@@ -2942,7 +2942,7 @@ abstract class VideoEffectObject {
 
 /// 视频特效节点类型。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum VideoEffectNodeId {
   /// （1）：美颜特效节点。
@@ -2973,7 +2973,7 @@ extension VideoEffectNodeIdExt on VideoEffectNodeId {
 
 /// 对视频特效节点执行的操作类型。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum VideoEffectAction {
   /// （1）：保存当前视频特效的参数。
@@ -3443,19 +3443,19 @@ abstract class RtcEngine {
   ///  请确保预加载频道时传入的频道名、用户 ID、Token 和后续加入频道时传入的值相同，否则预加载不生效。
   ///  目前一个 RtcEngine 实例最多支持预加载 20 个频道，如超出限制，仅最新预加载的 20 个频道生效。
   ///
-  /// * [token] A dynamic key generated on your server for authentication. See [Token Authentication](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
-  /// When the Token expires, depending on the number of preloaded channels, you can pass in a new Token for preloading in different ways:
-  ///  For a single channel: call this method again with the new Token.
-  ///  For multiple channels:
-  ///  If you use a wildcard Token, call updatePreloadChannelToken to update the Token for all preloaded channels. When generating a wildcard Token, the user ID must not be set to 0. See [Wildcard Token](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
-  ///  If you use different Tokens: call this method and pass in your user ID, corresponding channel name, and the updated Token.
-  /// * [channelId] The name of the channel to preload. This parameter identifies the channel for real-time audio and video communication. Under the same App ID, users who enter the same channel name will join the same channel for audio and video interaction.
-  /// This parameter must be a string no longer than 64 bytes. Supported character set (89 characters total):
-  ///  26 lowercase letters a~z
-  ///  26 uppercase letters A~Z
-  ///  10 digits 0~9
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
-  /// * [uid] User ID. This parameter identifies the user in the real-time audio and video channel. You need to set and manage the user ID yourself and ensure it is unique within the same channel. This parameter is a 32-bit unsigned integer. Recommended range: 1 to 2^32-1. If not specified (i.e., set to 0), the SDK automatically assigns one and returns it in the onJoinChannelSuccess callback. The application must store and manage this return value, as the SDK does not maintain it.
+  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  /// Token 过期后，根据预加载频道的数量，你可以通过不同方式来传入用于预加载频道的新 Token：
+  ///  预加载一个频道时：调用此方法来传入新的 Token。
+  ///  预加载多个频道时：
+  ///  如果你使用了通配的 Token，调用 updatePreloadChannelToken 来更新所有预加载频道的 Token。生成通配 Token 时，用户 ID 不得设为 0。详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
+  ///  如果你使用了不同的 Token：调用此方法并传入你的用户 ID、对应的频道名和更新后的 Token。
+  /// * [channelId] 待预加载的频道名。该参数标识用户进行实时音视频互动的频道。App ID 一致的前提下，填入相同频道名的用户会进入同一个频道进行音视频互动。
+  /// 该参数为长度在 64 字节以内的字符串。以下为支持的字符集范围（共 89 个字符）:
+  ///  26 个小写英文字母 a~z
+  ///  26 个大写英文字母 A~Z
+  ///  10 个数字 0~9
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
+  /// * [uid] 用户 ID。该参数用于标识在实时音视频互动频道中的用户。你需要自行设置和管理用户 ID，并确保同一频道内的每个用户 ID 是唯一的。该参数为 32 位无符号整数。建议设置范围：1 到 232-1。如果不指定（即设为 0），SDK 会自动分配一个，并在 onJoinChannelSuccess 回调中返回， 应用层必须记住该返回值并维护，SDK 不对该返回值进行维护。
   ///
   /// Returns
   /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
@@ -3473,24 +3473,24 @@ abstract class RtcEngine {
   ///  请确保预加载频道时传入的频道名、用户 User Account、Token 和后续加入频道时传入的值相同，否则预加载不生效。
   ///  目前一个 RtcEngine 实例最多支持预加载 20 个频道，如超出限制，仅最新预加载的 20 个频道生效。
   ///
-  /// * [token] A dynamic key generated on your server for authentication. See [Token Authentication](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
-  /// When the Token expires, depending on the number of preloaded channels, you can pass in a new Token for preloading in different ways:
-  ///  For a single channel: call this method again with the new Token.
-  ///  For multiple channels:
-  ///  If you use a wildcard Token, call updatePreloadChannelToken to update the Token for all preloaded channels. When generating a wildcard Token, the user ID must not be set to 0. See [Wildcard Token](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
-  ///  If you use different Tokens: call this method and pass in your user ID, corresponding channel name, and the updated Token.
-  /// * [channelId] The name of the channel to preload. This parameter identifies the channel for real-time audio and video communication. Under the same App ID, users who enter the same channel name will join the same channel for audio and video interaction.
-  /// This parameter must be a string no longer than 64 bytes. Supported character set (89 characters total):
-  ///  26 lowercase letters a~z
-  ///  26 uppercase letters A~Z
-  ///  10 digits 0~9
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
-  /// * [userAccount] User account. This parameter identifies the user in the real-time audio and video channel. You need to set and manage the user account yourself and ensure it is unique within the same channel. This parameter is required, must not exceed 255 bytes, and cannot be null. Supported character set (89 characters total):
-  ///  26 lowercase letters a-z
-  ///  26 uppercase letters A-Z
-  ///  10 digits 0-9
-  ///  Space
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
+  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  /// Token 过期后，根据预加载频道的数量，你可以通过不同方式来传入用于预加载频道的新 Token：
+  ///  预加载一个频道时：调用此方法来传入新的 Token。
+  ///  预加载多个频道时：
+  ///  如果你使用了通配的 Token，调用 updatePreloadChannelToken 来更新所有预加载频道的 Token。生成通配 Token 时，用户 ID 不得设为 0。详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
+  ///  如果你使用了不同的 Token：调用此方法并传入你的用户 ID、对应的频道名和更新后的 Token。
+  /// * [channelId] 待预加载的频道名。该参数标识用户进行实时音视频互动的频道。App ID 一致的前提下，填入相同频道名的用户会进入同一个频道进行音视频互动。
+  /// 该参数为长度在 64 字节以内的字符串。以下为支持的字符集范围（共 89 个字符）:
+  ///  26 个小写英文字母 a~z
+  ///  26 个大写英文字母 A~Z
+  ///  10 个数字 0~9
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
+  /// * [userAccount] 用户 User Account。该参数用于标识实时音视频互动频道中的用户。你需要自行设置和管理用户的 User Account，并确保同一频道中每个用户的 User Account 是唯一的。 该参数为必填，最大不超过 255 字节，不可填 null 。以下为支持的字符集范围（共 89 个字符）：
+  ///  26 个小写英文字母 a-z
+  ///  26 个大写英文字母 A-Z
+  ///  10 个数字 0-9
+  ///  空格
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
   ///
   /// Returns
   /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
@@ -3520,17 +3520,17 @@ abstract class RtcEngine {
   ///  使用不同 App ID 的 App 不能互通。
   ///  加入频道前，请确保用于生成 Token 的 App ID 和调用 initialize 方法初始化引擎时使用的是同一个 App ID，否则使用 Token 加入频道会失败。
   ///
-  /// * [token] The dynamic key generated on your server for authentication. See [Token Authentication](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
-  ///  (Recommended) If your project enables security mode (i.e., uses APP ID + Token for authentication), this parameter is required.
-  ///  If your project only enables debug mode (i.e., uses APP ID for authentication), you can join a channel without providing a Token. You will automatically leave the channel after 24 hours.
-  ///  If you need to join multiple channels at once or frequently switch between channels, Agora recommends using a wildcard Token to avoid requesting a new Token from your server for each new channel. See [Wildcard Token](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
-  /// * [channelId] The channel name. This parameter identifies the channel for real-time audio and video interaction. Users with the same App ID and channel name will join the same channel. This parameter must be a string of up to 64 bytes. Supported character set (89 characters):
-  ///  26 lowercase letters a~z
-  ///  26 uppercase letters A~Z
-  ///  10 digits 0~9
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
-  /// * [uid] User ID. This parameter identifies the user in the real-time audio and video interaction channel. You must set and manage the user ID yourself and ensure that each user ID is unique within the same channel. This parameter is a 32-bit unsigned integer. Recommended range: 1 to 2^32-1. If not specified (i.e., set to 0), the SDK automatically assigns one and returns it in the onJoinChannelSuccess callback. The application must remember and maintain this return value; the SDK does not maintain it.
-  /// * [options] Channel media options. See ChannelMediaOptions.
+  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  ///  （推荐）如果你的项目开启了安全模式，即选择 APP ID + Token 为鉴权机制，则该参数为必填。
+  ///  如果你的项目仅开启调试模式，即选择 APP ID 为鉴权机制，则无需填入 Token 即可加入频道。成功加入频道 24 小时后会自动退出该频道。
+  ///  如果你需要同时加入多个频道或在频道间频繁切换，声网推荐你使用通配 Token 以避免每加入一个新的频道都需向服务端申请一个新的 Token，详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
+  /// * [channelId] 频道名。该参数标识用户进行实时音视频互动的频道。App ID 一致的前提下，填入相同频道名的用户会进入同一个频道进行音视频互动。该参数为长度在 64 字节以内的字符串。以下为支持的字符集范围（共 89 个字符）:
+  ///  26 个小写英文字母 a~z
+  ///  26 个大写英文字母 A~Z
+  ///  10 个数字 0~9
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
+  /// * [uid] 用户 ID。该参数用于标识在实时音视频互动频道中的用户。你需要自行设置和管理用户 ID，并确保同一频道内的每个用户 ID 是唯一的。该参数为 32 位无符号整数。建议设置范围：1 到 232-1。如果不指定（即设为 0），SDK 会自动分配一个，并在 onJoinChannelSuccess 回调中返回， 应用层必须记住该返回值并维护，SDK 不对该返回值进行维护。
+  /// * [options] 频道媒体设置选项。详见 ChannelMediaOptions 。
   ///
   /// Returns
   /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
@@ -3743,10 +3743,10 @@ abstract class RtcEngine {
 
   /// 设置美型效果选项并指定媒体源。
   ///
-  /// Call this method to enhance facial features such as slimming the face, enlarging eyes, slimming the nose, etc., using preset parameters in one go. You can also adjust the overall intensity of the effect. Face shaping is a value-added service. See [Billing Strategy](https://docs.agora.io/en/video-calling/overview/pricing) for pricing details.
-  ///  On Android, this method is only supported on Android 4.4 and above.
-  ///  This method depends on the video enhancement dynamic library libagora_clear_vision_extension.dll. Deleting this library will cause the feature to fail to start.
-  ///  This feature requires high device performance. When calling this method, the SDK automatically checks the current device capabilities.
+  /// 调用该方法可对人脸各部位进行修饰，使用预设的参数一次性实现瘦脸、大眼、瘦鼻等微整形效果，支持微调整体的修饰力度。 美型属于增值服务，计费方式详见[计费策略](https://doc.shengwang.cn/doc/rtc/android/billing/billing-strategy)。
+  ///  在 Android 平台上，该方法仅适用于 Android 4.4 及以上版本。
+  ///  该方法依赖于视频增强动态库 libagora_clear_vision_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
+  ///  该功能对设备性能要求较高，调用该方法时 SDK 会自动对当前设备能力进行检查。
   ///
   /// * [enabled] 是否开启美型效果： true : 开启美型功能。 false :（默认）关闭美型功能。
   /// * [options] 美型风格选项，详见 FaceShapeBeautyOptions 。
@@ -3763,10 +3763,10 @@ abstract class RtcEngine {
 
   /// 设置美型部位选项并指定媒体源。
   ///
-  /// If the preset face shaping effects set with setFaceShapeBeautyOptions do not meet expectations, you can use this method to configure face shaping area options and fine-tune individual facial areas for more refined results. Face shaping is a value-added service. See [Billing Strategy](https://docs.agora.io/en/video-calling/overview/pricing) for pricing details.
-  ///  On Android, this method is only supported on Android 4.4 and above.
-  ///  This method depends on the video enhancement dynamic library libagora_clear_vision_extension.dll. Deleting this library will cause the feature to fail to start.
-  ///  This feature requires high device performance. When calling this method, the SDK automatically checks the current device capabilities.
+  /// 如果在 setFaceShapeBeautyOptions 方法中实现的预设美型效果达不到预期，你可以通过该方法设置美型部位选项，对人脸的各个部位单独微调，实现更加精细的美型效果。 美型属于增值服务，计费方式详见[计费策略](https://doc.shengwang.cn/doc/rtc/android/billing/billing-strategy)。
+  ///  在 Android 平台上，该方法仅适用于 Android 4.4 及以上版本。
+  ///  该方法依赖于视频增强动态库 libagora_clear_vision_extension.dll ，如果删除该动态库会导致无法正常开启该功能。
+  ///  该功能对设备性能要求较高，调用该方法时 SDK 会自动对当前设备能力进行检查。
   ///
   /// * [options] 美型部位选项，详见 FaceShapeAreaOptions 。
   /// * [type] 效果应用的媒体源类型。详见 MediaSourceType 。 在该方法中，该参数仅支持以下两种设置：
@@ -3827,7 +3827,7 @@ abstract class RtcEngine {
 
   /// 创建一个 IVideoEffectObject 视频特效对象。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [bundlePath] 视频特效资源包的路径。
   /// * [type] 媒体源类型，详见 MediaSourceType 。
@@ -3841,7 +3841,7 @@ abstract class RtcEngine {
 
   /// 销毁视频特效对象。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [videoEffectObject] 要销毁的视频特效对象。详见 VideoEffectObject 。
   ///
@@ -3985,21 +3985,21 @@ abstract class RtcEngine {
   ///
   /// 成功调用该方法设置视频业务场景后，SDK 会基于指定场景启用最佳实践策略，自动调整关键性能指标，进而优化视频体验质量。 该方法需要在加入频道前调用。
   ///
-  /// * [scenarioType] Video application scenario. See VideoApplicationScenarioType. applicationScenarioMeeting (1) is for meeting scenarios. If you have called setDualStreamMode to set the low stream to always off (disableSimulcastStream), the dynamic switching of the low stream does not take effect in meeting scenarios.
-  /// This enum value applies only to broadcaster vs. broadcaster scenarios. The SDK enables the following strategies for this scenario:
-  ///  For meeting scenarios that require higher bitrate for the low stream, multiple anti-weak network technologies are automatically enabled to enhance the low stream's resistance to poor networks and ensure smoothness when multiple streams are subscribed.
-  ///  Real-time monitoring of the number of subscribers to the high stream on the receiving end, and dynamically adjusting the high stream configuration accordingly:
-  ///  When no one subscribes to the high stream, the bitrate and frame rate of the high stream are automatically reduced to save uplink bandwidth and consumption.
-  ///  When someone subscribes to the high stream, the high stream is reset to the VideoEncoderConfiguration set in the most recent call to setVideoEncoderConfiguration. If no configuration was previously set, the following values are used:
-  ///  Video resolution: 1280 × 720 for desktop; 960 × 540 for mobile
-  ///  Frame rate: 15 fps
-  ///  Bitrate: 1600 Kbps for desktop; 1000 Kbps for mobile
-  ///  Real-time monitoring of the number of subscribers to the low stream on the receiving end, and dynamically enabling or disabling the low stream:
-  ///  When no one subscribes to the low stream, the low stream is automatically disabled to save uplink bandwidth and consumption.
-  ///  When someone subscribes to the low stream, it is enabled and reset to the SimulcastStreamConfig set in the most recent call to setDualStreamMode. If no configuration was previously set, the following values are used:
-  ///  Video resolution: 480 × 272
-  ///  Frame rate: 15 fps
-  ///  Bitrate: 500 Kbps applicationScenario1v1 (2) is for 1v1 video call scenarios. The SDK optimizes strategies for low latency and high-quality experience in this scenario, improving performance such as image quality, first frame rendering time, latency on mid- to low-end devices, and smoothness under poor network conditions. applicationScenarioLiveshow (3) is for showroom live streaming scenarios. The SDK optimizes strategies for fast first frame rendering and high image clarity, such as enabling audio/video frame accelerated rendering by default to improve first frame experience (no need to call enableInstantMediaRendering separately), and enabling B-frames by default to ensure high image quality and transmission efficiency. It also enhances image quality and smoothness under poor network and low-end device conditions.
+  /// * [scenarioType] 视频业务场景。详见 VideoApplicationScenarioType 。 applicationScenarioMeeting (1) 适用于会议场景。如果用户已调用 setDualStreamMode 将小流设置为始终不发送 (disableSimulcastStream)，会议场景对小流的动态开关不生效。
+  /// 该枚举值仅适用于主播 vs 主播场景。SDK 会针对该场景启用以下策略：
+  ///  针对会议场景对小流码率要求较高的情况，自动启用多项抗弱网技术，提升小流的抗弱网能力，确保多路流订阅时接收端的流畅性。
+  ///  实时监测接收端大流的订阅人数，根据订阅人数动态调节大流配置：
+  ///  无人订阅大流时，会自动降低大流的码率和帧率，节省上行带宽和消耗。
+  ///  有人订阅大流时，大流会重置为用户最近一次调用 setVideoEncoderConfiguration 时的 VideoEncoderConfiguration 配置。如果用户此前没有进行设置，则使用如下值：
+  ///  视频分辨率：桌面端为 1280 × 720；移动端为 960 × 540
+  ///  视频帧率：15 fps
+  ///  码率：桌面端为 1600 Kbps；移动端为 1000 Kbps
+  ///  实时监测接收端小流的订阅人数，根据订阅人数动态开启和关闭小流：
+  ///  无人订阅小流时，自动关闭小流，节省上行带宽和消耗。
+  ///  有人订阅小流时，开启小流并重置为用户最近一次调用 setDualStreamMode 时的 SimulcastStreamConfig 配置。如果用户此前没有进行设置，则使用如下值：
+  ///  视频分辨率：480 × 272
+  ///  视频帧率：15 fps
+  ///  码率：500 Kbps applicationScenario1v1 (2) 适用于[视频 1v1 通话](https://doc.shengwang.cn/doc/one-to-one-live/android/rtm/overview/product-overview)场景。针对该场景低延迟、高画质的体验要求，SDK 进行了策略调优，提升了画质、首帧出图、中低端机延迟及弱网流畅度等性能表现。 applicationScenarioLiveshow (3) 适用于[秀场直播](https://doc.shengwang.cn/doc/showroom/android/overview/product-overview)场景。针对该场景对首帧出图时间和画质清晰度的高要求，SDK 进行了策略调优，例如，默认开启音视频帧加速渲染来提升首帧出图体验，无需再额外调用 enableInstantMediaRendering ，同时会默认开启 B 帧来确保较高的图像质量、提高传输效率。此外，也增强了在弱网环境和低端设备上的画质和流畅度表现。
   ///
   /// Returns
   /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
@@ -4311,13 +4311,8 @@ abstract class RtcEngine {
 
   /// 创建音视频录制对象。
   ///
-  /// See [Supported audio file formats](https://docs.agora.io/en/help/general-product-inquiry/audio_format#extended-audio-file-formats) for the audio formats supported by this method. If the local music file does not exist, the file format is not supported, or the online music file URL cannot be accessed, the SDK reports audioMixingReasonCanNotOpen.
-  ///  Using this method to play short sound effects may cause playback failure. To play sound effects, use playEffect instead.
-  ///  If you need to call this method multiple times, make sure the interval between calls is more than 500 ms.
-  ///  When calling this method on Android, note the following:
-  ///  Make sure to use a device with Android 4.2 or above and API level no lower than 16.
-  ///  If playing online music files, avoid using redirect URLs. Redirect URLs may not work on some devices.
-  ///  If calling this method on an emulator, make sure the music file is under the /sdcard/ directory and in MP3 format.
+  /// 在开始音视频流录制前，你需要调用该方法创建一个音视频录制对象。SDK 支持录制本地或远端用户的多个音视频流，你可以多次调用该方法创建录制对象，并通过 info 参数指定需要录制的频道名称和发流的用户 ID。
+  /// 成功创建后，你需要调用 setMediaRecorderObserver 注册录制对象的观测器来监听录制的相关回调，然后再调用 startRecording 开始录制。
   ///
   /// * [info] 需要录制的音视频流相关信息，详见 RecorderStreamInfo 。
   ///
@@ -4390,9 +4385,9 @@ abstract class RtcEngine {
 
   /// 指定当前音乐文件的播放音轨。
   ///
-  /// After obtaining the number of audio tracks in the music file, you can call this method to specify any track for playback. For example, if a multi-track file contains songs in different languages on different tracks, you can use this method to set the playback language of the music file.
-  ///  For supported audio file formats, see [What audio formats does the RTC SDK support?](https://docs.agora.io/en/help/general-product-inquiry/audio_format#extended-audio-file-formats).
-  ///  You must call this method after calling startAudioMixing and receiving the onAudioMixingStateChanged(audioMixingStatePlaying) callback.
+  /// 获取音乐文件的音轨数量后，你可以调用该方法指定任一音轨进行播放。例如，如果一个多音轨文件的不同音轨存放了不同语言的歌曲，则你可以调用该方法设置音乐文件的播放语言。
+  ///  该方法支持的音频文件格式见 [RTC SDK 支持播放哪些格式的音频文件？](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format)。
+  ///  你需要在调用 startAudioMixing 并收到 onAudioMixingStateChanged(audioMixingStatePlaying) 回调后调用该方法。
   ///
   /// * [index] 指定的播放音轨。取值范围应大于等于 0 且小于 getAudioTrackCount 的返回值。
   ///
@@ -4537,8 +4532,8 @@ abstract class RtcEngine {
 
   /// 将音效文件加载至内存。
   ///
-  /// To ensure smooth communication, pay attention to the size of the preloaded audio effect file.
-  /// Supported formats for preloading audio files are listed in [What audio formats are supported by the RTC SDK](https://docs.agora.io/en/help/general-product-inquiry/audio_format#extended-audio-file-formats).
+  /// 为保证通信畅通，请注意控制预加载音效文件的大小。
+  /// 该方法支持的预加载音频文件的格式见 [RTC SDK 支持播放哪些格式的音频文件](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format)。
   ///
   /// * [soundId] 音效的 ID。每个音效的 ID 具有唯一性。
   /// * [filePath] 文件路径：
@@ -5713,13 +5708,13 @@ abstract class RtcEngine {
 
   /// 设置默认的音频路由。
   ///
-  /// Mobile devices typically have two audio routes: the earpiece at the top, which has lower volume, and the speaker at the bottom, which has higher volume. Setting the default audio route determines whether the system uses the earpiece or speaker to play audio when no external device is connected.
-  /// The system default audio route varies by scenario:
-  ///  Voice call: Earpiece
-  ///  Voice live broadcast: Speaker
-  ///  Video call: Speaker
-  ///  Video live broadcast: Speaker Calling this API allows you to change the default audio route described above. This method is applicable only on Android and iOS platforms.
-  /// After setting the default audio route using this method, the actual audio route may change depending on the connection of external audio devices (wired or Bluetooth headsets).
+  /// 手机设备一般有两个音频路由，一个是位于顶部的听筒，播放声音偏小；一个是位于底部的扬声器，播放声音偏大。设置默认的音频路由，就是在没有外接设备的前提下，设置系统使用听筒还是扬声器播放音频。
+  /// 不同场景下，系统默认的音频路由也不同。具体如下：
+  ///  语音通话：听筒
+  ///  语音直播：扬声器
+  ///  视频通话：扬声器
+  ///  视频直播：扬声器 调用该 API 可以改变上述默认音频路由。 该方法仅适用于 Android 和 iOS 平台。
+  /// 在调用该方法设置默认音频路由后，系统实际音频路由会随着外接音频设备（有线耳机或蓝牙耳机）的连接发生改变。详见[音频路由](https://doc.shengwang.cn/doc/rtc/android/advanced-features/audio-route)。
   ///
   /// * [defaultToSpeaker] 是否使用扬声器作为默认的音频路由： true : 设置默认音频路由为扬声器。 false : 设置默认音频路由为听筒。
   ///
@@ -5729,9 +5724,9 @@ abstract class RtcEngine {
 
   /// 开启或关闭扬声器播放。
   ///
-  /// For the SDK's default audio routes in different scenarios. This method is applicable only on Android and iOS platforms.
-  ///  This method only sets the audio route used by the user in the current channel and does not affect the SDK's default audio route. If the user leaves the current channel and joins a new one, the SDK's default audio route will still be used.
-  ///  If the user uses external audio playback devices such as Bluetooth or wired headsets, this method has no effect. Audio will only be played through external devices. If multiple external devices are connected, audio is played through the last connected device.
+  /// 不同场景下 SDK 默认的音频路由见[音频路由](https://doc.shengwang.cn/doc/rtc/android/advanced-features/audio-route)。 该方法仅适用于 Android 和 iOS 平台。
+  ///  该方法只设置用户在当前频道内使用的音频路由，不会影响 SDK 默认的音频路由。如果用户离开当前频道并加入新的频道，则用户还是会使用 SDK 默认的音频路由。
+  ///  如果用户使用了蓝牙耳机、有线耳机等外接音频播放设备，则该方法的设置无效，音频只会通过外接设备播放。当有多个外接设备时，音频会通过最后一个接入的设备播放。
   ///
   /// * [speakerOn] 设置是否开启扬声器播放： true : 开启。音频路由为扬声器。 false : 关闭。音频路由为听筒。
   ///
@@ -6032,12 +6027,12 @@ abstract class RtcEngine {
 
   /// 开始非转码推流。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side Streaming](https://docs.agora.io/en/media-push/get-started/enable-media-push).
-  /// You can call this method to push live audio and video streams to a specified CDN streaming URL. This method can only push to one URL at a time. To push to multiple URLs, you must call this method multiple times.
-  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
-  ///  Call this method after joining a channel.
-  ///  Only hosts in live streaming scenarios can call this method.
-  ///  If the stream fails to start and you want to restart it, you must call stopRtmpStream before calling this method again. Otherwise, the SDK returns the same error code as the previous failure.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 调用该方法，你可以向指定的旁路推流地址推送直播音视频流。该方法每次只能向一个地址推送媒体流，如果你需要向多个地址转码推流，则需多次调用该方法。
+  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
+  ///  请在加入频道后调用该方法。
+  ///  只有直播场景下的主播才能调用该方法。
+  ///  调用该方法推流失败后，如果你想要重新推流，那么请你务必先调用 stopRtmpStream ，再调用该方法重推，否则 SDK 会返回与上次推流失败时一样的错误码。
   ///
   /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
   ///
@@ -6047,13 +6042,13 @@ abstract class RtcEngine {
 
   /// 开始旁路推流并设置转码属性。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side Streaming](https://docs.agora.io/en/media-push/get-started/enable-media-push).
-  /// You can call this method to push live audio and video streams to a specified CDN streaming URL with transcoding settings. This method can only push to one URL at a time. To push to multiple URLs, you must call this method multiple times.
-  /// Each stream push represents a streaming task. The default maximum number of concurrent tasks is 200, meaning you can run up to 200 streaming tasks simultaneously under one Agora project. For higher quotas, please [contact technical support](https://www.agora.io/cn/contact/).
-  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
-  ///  Call this method after joining a channel.
-  ///  Only hosts in live streaming scenarios can call this method.
-  ///  If the stream fails to start and you want to restart it, you must call stopRtmpStream before calling this method again. Otherwise, the SDK returns the same error code as the previous failure.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 调用该方法，你可以向指定的旁路推流地址推送直播音视频流并设置转码属性。该方法每次只能向一个地址推送媒体流，如果你需要向多个地址转码推流，则需多次调用该方法。
+  /// 一次推流代表一个推流任务，最大并发任务数默认为 200，表示你在一个声网项目下最多同时运行 200 个推流任务，如需更高配额，请[联系技术支持](https://ticket.shengwang.cn/)。
+  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
+  ///  请在加入频道后调用该方法。
+  ///  只有直播场景下的主播才能调用该方法。
+  ///  调用该方法推流失败后，如果你想要重新推流，那么请你务必先调用 stopRtmpStream ，再调用该方法重推，否则 SDK 会返回与上次推流失败时一样的错误码。
   ///
   /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
   /// * [transcoding] 旁路推流的转码属性，详见 LiveTranscoding 。
@@ -6065,8 +6060,8 @@ abstract class RtcEngine {
 
   /// 更新旁路推流转码属性。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side RTMP Streaming](https://docs.agora.io/en/media-push/get-started/enable-media-push).
-  /// After enabling transcoding streaming, you can dynamically update the transcoding configuration based on your scenario needs. After the transcoding configuration is updated, the SDK triggers the onTranscodingUpdated callback.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 开启转码推流后，你可以根据场景需求，动态更新转码属性。转码属性更新后，SDK 会触发 onTranscodingUpdated 回调。
   ///
   /// * [transcoding] 旁路推流的转码属性，详见 LiveTranscoding 。
   ///
@@ -6105,9 +6100,9 @@ abstract class RtcEngine {
 
   /// 结束旁路推流。
   ///
-  /// Agora recommends using the more comprehensive server-side streaming feature. See [Implement Server-Side Streaming](https://docs.agora.io/en/media-push/get-started/enable-media-push).
-  /// You can call this method to stop live streaming to a specified CDN streaming URL. This method can only stop one stream at a time. To stop multiple streams, you must call this method multiple times.
-  /// After calling this method, the SDK triggers the onRtmpStreamingStateChanged callback locally to report the streaming status.
+  /// 声网推荐你使用更加完善的服务端推流功能，详见[实现服务端旁路推流](https://doc.shengwang.cn/doc/media-push/restful/landing-page)。
+  /// 调用该方法，你可以结束指定的旁路推流地址上的直播。该方法每次只能结束一个推流地址上的直播，如果你需要结束多个推流地址的直播，则需多次调用该方法。
+  /// 调用该方法后，SDK 会在本地触发 onRtmpStreamingStateChanged 回调，报告推流的状态。
   ///
   /// * [url] 旁路推流地址。格式为 RTMP 或 RTMPS。字符长度不能超过 1024 字节。不支持中文字符等特殊字符。
   ///
@@ -6246,8 +6241,8 @@ abstract class RtcEngine {
 
   /// 创建数据流。
   ///
-  /// If you need a more comprehensive, low-latency, high-concurrency, and scalable real-time messaging and state synchronization solution, we recommend using [Real-time Messaging](https://docs.agora.io/en/signaling/overview/product-overview).
-  /// During the lifecycle of RtcEngine, each user can create up to 5 data streams. The data streams are destroyed when leaving the channel. If needed again, you must recreate them.
+  /// 如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
+  /// 在 RtcEngine 生命周期内，每个用户最多只能创建 5 个数据流。离开频道时数据流会被销毁，如需使用需要重新创建数据流。
   ///
   /// * [config] 数据流设置。详见 DataStreamConfig 。
   ///
@@ -6258,12 +6253,12 @@ abstract class RtcEngine {
 
   /// 发送数据流。
   ///
-  /// After calling createDataStream, you can call this method to send data stream messages to all users in the channel.
-  /// The SDK imposes the following restrictions on this method:
-  ///  Each client in the channel can have up to 5 data channels simultaneously, with a total sending bitrate limit of 30 KB/s shared among all channels.
-  ///  Each data channel can send up to 60 packets per second, with each packet limited to 1 KB. After this method is successfully called, the remote side triggers the onStreamMessage callback, through which remote users can receive the stream message. If the call fails, the remote side triggers the onStreamMessageError callback. If you need a more comprehensive solution for low-latency, high-concurrency, and scalable real-time messaging and state synchronization, we recommend using [Real-time Messaging](https://docs.agora.io/en/signaling/overview/product-overview).
-  ///  This method must be called after joining the channel and after calling createDataStream to create the data channel.
-  ///  This method is only applicable to broadcaster users.
+  /// 调用 createDataStream 后，你可以调用该方法向频道内所有用户发送数据流消息。
+  /// SDK 对该方法的实现进行了如下限制：
+  ///  频道内每个客户端最多可以同时拥有 5 个数据通道，所有数据通道共用的总发包码率限制为 30 KB/s。
+  ///  每个数据通道每秒最多能发送 60 个包，每个包最大为 1 KB。 成功调用该方法后，远端会触发 onStreamMessage 回调，远端用户可以在该回调中获取接收到的流消息；若调用失败，远端会触发 onStreamMessageError 回调。 如你需要更加全面的低延时、高并发、可扩展的实时消息及状态同步解决方案，推荐使用[实时消息](https://doc.shengwang.cn/doc/rtm2/flutter/landing-page)。
+  ///  该方法需要在加入频道后、且调用 createDataStream 创建数据通道之后调用。
+  ///  该方法仅适用于主播用户。
   ///
   /// * [streamId] 数据流 ID。可以通过 createDataStream 获取。
   /// * [data] 待发送的数据。
@@ -6308,7 +6303,7 @@ abstract class RtcEngine {
 
   /// 从本地视频中移除水印图像。
   ///
-  /// Since Available since v6.6.2. This method removes the previously added watermark image from the local video stream based on the specified unique ID.
+  /// 自从 自 v6.6.2 版本新增。 该方法根据指定的唯一 ID，从本地视频流中移除之前添加的水印图像。
   ///
   /// * [id] 要移除的水印的 ID。该值需与添加水印时使用的 ID 相同。
   ///
@@ -6342,7 +6337,7 @@ abstract class RtcEngine {
 
   /// 发送自定义上报消息。
   ///
-  /// Agora provides a custom data reporting and analytics service. This service is currently in a free beta period. During the beta, you can report up to 10 data entries within 6 seconds. Each custom data entry must not exceed 256 bytes, and each string must not exceed 100 bytes. To try this service, please [contact sales](mailto:support@agora.io) to enable it and agree on the custom data format.
+  /// 声网提供自定义数据上报和分析服务。该服务当前处于免费内测期。内测期提供的能力为 6 秒内最多上报 10 条数据，每条自定义数据不能超过 256 字节，每个字符串不能超过 100 字节。如需试用该服务，请[联系销售](https://www.shengwang.cn/contact-sales/)开通并商定自定义数据格式。
   Future<void> sendCustomReportMessage(
       {required String id,
       required String category,
@@ -6390,16 +6385,16 @@ abstract class RtcEngine {
 
   /// 设置是否开启 AI 降噪功能并设置降噪模式。
   ///
-  /// You can call this method to enable the AI noise reduction feature. This feature intelligently detects and reduces various stationary and non-stationary background noises while maintaining voice quality, making human voices clearer.
-  /// Stationary noise refers to noise with consistent frequency over time, such as:
-  ///  TV noise
-  ///  Air conditioner noise
-  ///  Factory machine noise Non-stationary noise refers to noise that changes rapidly over time, such as:
-  ///  Thunder
-  ///  Explosions
-  ///  Cracking sounds
-  ///  This method depends on the AI noise reduction dynamic library. Deleting this library will prevent the feature from working properly. For the name of the AI noise reduction library, see [Plugin List](https://docs.agora.io/en/video-calling/best-practices/app-size-optimization?platform=android#extension-list).
-  ///  Currently, it is not recommended to enable this feature on devices running Android 6.0 or lower.
+  /// 你可以调用开方法来开启 AI 降噪功能。该功能可以在保证语音质量的前提下，智能化检测并降低周围环境中多种稳态与非稳态噪声，使人声更加清晰。
+  /// 稳态噪声指在任何时间点上都具有相同频率的噪声，常见的稳态噪声有：
+  ///  电视机噪声
+  ///  空调噪声
+  ///  工厂机器噪声等 非稳态噪声是指随时间而快速变化的噪声，常见的非稳态噪声有：
+  ///  雷声
+  ///  爆炸声
+  ///  破裂声等
+  ///  该方法依赖于 AI 降噪动态库，如果删除该动态库会导致无法正常开启该功能。AI 降噪动态库名称见[插件列表](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/reduce-app-size#%E6%8F%92%E4%BB%B6%E5%88%97%E8%A1%A8)。
+  ///  目前暂不推荐在 Android 6.0 及以下版本的设备上开启该功能。
   ///
   /// * [enabled] 是否开启 AI 降噪功能： true ：开启 AI 降噪功能。 false ：（默认）关闭 AI 降噪功能。
   /// * [mode] 降噪模式，详见 AudioAinsMode 。
@@ -6439,22 +6434,17 @@ abstract class RtcEngine {
   ///  使用不同 App ID 的 App 不能互通。
   ///  加入频道前，请确保用于生成 Token 的 App ID 和调用 initialize 方法初始化引擎时使用的是同一个 App ID，否则使用 Token 加入频道会失败。
   ///
-  /// After a user successfully joins a channel, they automatically subscribe to all audio and video streams from other users in the channel, which incurs usage and affects billing. To unsubscribe, call the corresponding mute methods. To ensure communication quality, make sure that all users in the channel use the same type of identifier, either UID or User Account. If users join the channel via the Web SDK, ensure they use the same identifier type.
-  ///  This method only supports joining one channel at a time.
-  ///  Apps with different App IDs cannot communicate with each other.
-  ///  Before joining a channel, make sure the App ID used to generate the token is the same as the one used in the initialize method. Otherwise, joining the channel with the token will fail.
-  ///
-  /// * [token] The dynamic key generated on your server for authentication. See [Use Token Authentication](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
-  ///  (Recommended) If your project has enabled secure mode (using APP ID + Token for authentication), this parameter is required.
-  ///  If your project is in debug mode only (using APP ID for authentication), you can join the channel without a token. The user will automatically leave the channel after 24 hours.
-  ///  If you need to join multiple channels or frequently switch between channels, Agora recommends using a wildcard token to avoid requesting a new token from your server every time. See [Use Wildcard Token](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
-  /// * [userAccount] The User Account of the user. This parameter identifies the user in the real-time audio/video interaction channel. You must manage and ensure the uniqueness of each User Account within the same channel. This parameter is required, must not exceed 255 bytes, and cannot be null. Supported character set (89 characters total):
-  ///  26 lowercase letters a–z
-  ///  26 uppercase letters A–Z
-  ///  10 digits 0–9
-  ///  Space
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
-  /// * [options] Channel media configuration options. See ChannelMediaOptions.
+  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  ///  （推荐）如果你的项目开启了安全模式，即选择 APP ID + Token 为鉴权机制，则该参数为必填。
+  ///  如果你的项目仅开启调试模式，即选择 APP ID 为鉴权机制，则无需填入 Token 即可加入频道。成功加入频道 24 小时后会自动退出该频道。
+  ///  如果你需要同时加入多个频道或在频道间频繁切换，声网推荐你使用通配 Token 以避免每加入一个新的频道都需向服务端申请一个新的 Token，详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
+  /// * [userAccount] 用户 User Account。该参数用于标识实时音视频互动频道中的用户。你需要自行设置和管理用户的 User Account，并确保同一频道中每个用户的 User Account 是唯一的。 该参数为必填，最大不超过 255 字节，不可填 null 。以下为支持的字符集范围（共 89 个字符）：
+  ///  26 个小写英文字母 a-z
+  ///  26 个大写英文字母 A-Z
+  ///  10 个数字 0-9
+  ///  空格
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
+  /// * [options] 频道媒体设置选项。详见 ChannelMediaOptions 。
   ///
   /// Returns
   /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
@@ -6480,22 +6470,17 @@ abstract class RtcEngine {
   ///  使用不同 App ID 的 App 不能互通。
   ///  加入频道前，请确保用于生成 Token 的 App ID 和调用 initialize 方法初始化引擎时使用的是同一个 App ID，否则使用 Token 加入频道会失败。
   ///
-  /// After a user successfully joins a channel, they automatically subscribe to all audio and video streams from other users in the channel, which incurs usage and affects billing. To unsubscribe, set the options parameter or call the corresponding mute methods. To ensure communication quality, make sure that all users in the channel use the same type of identifier, either UID or User Account. If users join the channel via the Web SDK, ensure they use the same identifier type.
-  ///  This method only supports joining one channel at a time.
-  ///  Apps with different App IDs cannot communicate with each other.
-  ///  Before joining a channel, make sure the App ID used to generate the token is the same as the one used in the initialize method. Otherwise, joining the channel with the token will fail.
-  ///
-  /// * [token] The dynamic key generated on your server for authentication. See [Use Token Authentication](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
-  ///  (Recommended) If your project has enabled secure mode (using APP ID + Token for authentication), this parameter is required.
-  ///  If your project is in debug mode only (using APP ID for authentication), you can join the channel without a token. The user will automatically leave the channel after 24 hours.
-  ///  If you need to join multiple channels or frequently switch between channels, Agora recommends using a wildcard token to avoid requesting a new token from your server every time. See [Use Wildcard Token](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
-  /// * [userAccount] The User Account of the user. This parameter identifies the user in the real-time audio/video interaction channel. You must manage and ensure the uniqueness of each User Account within the same channel. This parameter is required, must not exceed 255 bytes, and cannot be null. Supported character set (89 characters total):
-  ///  26 lowercase letters a–z
-  ///  26 uppercase letters A–Z
-  ///  10 digits 0–9
-  ///  Space
-  ///  "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", "{", "}", "|", "~", ","
-  /// * [options] Channel media configuration options. See ChannelMediaOptions.
+  /// * [token] 在服务端生成的用于鉴权的动态密钥。详见[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
+  ///  （推荐）如果你的项目开启了安全模式，即选择 APP ID + Token 为鉴权机制，则该参数为必填。
+  ///  如果你的项目仅开启调试模式，即选择 APP ID 为鉴权机制，则无需填入 Token 即可加入频道。成功加入频道 24 小时后会自动退出该频道。
+  ///  如果你需要同时加入多个频道或在频道间频繁切换，声网推荐你使用通配 Token 以避免每加入一个新的频道都需向服务端申请一个新的 Token，详见 [使用通配 Token](https://doc.shengwang.cn/doc/rtc/flutter/best-practice/wildcard-token)。
+  /// * [userAccount] 用户 User Account。该参数用于标识实时音视频互动频道中的用户。你需要自行设置和管理用户的 User Account，并确保同一频道中每个用户的 User Account 是唯一的。 该参数为必填，最大不超过 255 字节，不可填 null 。以下为支持的字符集范围（共 89 个字符）：
+  ///  26 个小写英文字母 a-z
+  ///  26 个大写英文字母 A-Z
+  ///  10 个数字 0-9
+  ///  空格
+  ///  "!"、"#"、"$"、"%"、"&"、"("、")"、"+"、"-"、":"、";"、"<"、"="、"."、">"、"?"、"@"、"["、"]"、"^"、"_"、"{"、"}"、"|"、"~"、","
+  /// * [options] 频道媒体设置选项。详见 ChannelMediaOptions 。
   ///
   /// Returns
   /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
@@ -6537,14 +6522,14 @@ abstract class RtcEngine {
 
   /// 开始或更新跨频道媒体流转发。
   ///
-  /// The first successful call to this method starts the cross-channel media stream relay. To relay the stream to multiple destination channels or exit the current relay channels, you can call this method again to add or remove destination channels. This feature supports relaying media streams to up to 6 destination channels.
-  /// After the method is successfully called, the SDK triggers the onChannelMediaRelayStateChanged callback to report the current state of the cross-channel media stream relay. Common states include:
-  ///  If the onChannelMediaRelayStateChanged callback reports relayStateRunning (2) and relayOk (0), it indicates that the SDK has started relaying media streams between the source and destination channels.
-  ///  If the onChannelMediaRelayStateChanged callback reports relayStateFailure (3), it indicates an exception occurred in the cross-channel media stream relay.
-  ///  Call this method after successfully joining a channel.
-  ///  In a live broadcast scenario, only users with the broadcaster role can call this method.
-  ///  The cross-channel media stream relay feature requires [contacting technical support](https://www.agora.io/cn/contact/) to enable.
-  ///  This feature does not support String-type UIDs.
+  /// 首次成功调用该方法将开始跨频道转发媒体流。如需将流转发到多个目标频道，或退出当前的转发频道，可以再次调用该方法添加或移除转发的目标频道。该功能最多支持将媒体流转发至 6 个目标频道。
+  /// 成功调用该方法后，SDK 会触发 onChannelMediaRelayStateChanged 回调，报告当前的跨频道媒体流转发状态。常见状态如下：
+  ///  如果 onChannelMediaRelayStateChanged 回调报告 relayStateRunning (2) 和 relayOk (0)， 则表示 SDK 开始在源频道和目标频道之间转发媒体流。
+  ///  如果 onChannelMediaRelayStateChanged 回调报告 relayStateFailure (3)， 则表示跨频道媒体流转发出现异常。
+  ///  请在成功加入频道后调用该方法。
+  ///  在直播场景中，只有角色为主播的用户才能调用该方法。
+  ///  跨频道媒体流转发功能需要[联系技术支持](https://ticket.shengwang.cn/)开通。
+  ///  该功能不支持 String 型 UID。
   ///
   /// * [configuration] 跨频道媒体流转发参数配置。详见 ChannelMediaRelayConfiguration 。
   ///
@@ -6608,13 +6593,13 @@ abstract class RtcEngine {
 
   /// 开启虚拟节拍器。
   ///
-  /// Deprecated Deprecated since v6.6.2.
-  ///  After enabling the virtual metronome, the SDK starts playing the specified audio files from the beginning and controls the duration of each file based on the beatsPerMinute you set in AgoraRhythmPlayerConfig. For example, if beatsPerMinute is set to 60, the SDK plays 1 beat per second. If the file duration exceeds the beat duration, the SDK only plays the portion that fits the beat duration.
-  ///  By default, the sound of the virtual metronome is not published to remote users. If you want remote users to hear it, set publishRhythmPlayerTrack in ChannelMediaOptions to true after calling this method.
+  /// 废弃 自 v6.6.2 版本废弃。
+  ///  开启虚拟节拍器后，SDK 会从头开始播放指定的音频文件，并根据你在 AgoraRhythmPlayerConfig 中设置的 beatsPerMinute 控制每个文件的播放时长。例如，将 beatsPerMinute 设为 60 ，则 SDK 会 1 秒播放 1 个节拍。如果文件时长超过了节拍时长，则 SDK 只播放节拍时长部分的音频。
+  ///  虚拟节拍器的声音默认不会发布至远端，如果你希望远端用户听到虚拟节拍器的声音，你可以在调用该方法后，将 ChannelMediaOptions 中的 publishRhythmPlayerTrack 设为 true 。
   ///
-  /// * [sound1] The absolute path or URL of the strong beat file, including the file name and extension. For example, C:\music\audio.mp4. Supported audio formats: see [Supported audio formats for RTC SDK](https://docs.agora.io/en/help/general-product-inquiry/audio_format#extended-audio-file-formats).
-  /// * [sound2] The absolute path or URL of the weak beat file, including the file name and extension. For example, C:\music\audio.mp4. Supported audio formats: see [Supported audio formats for RTC SDK](https://docs.agora.io/en/help/general-product-inquiry/audio_format#extended-audio-file-formats).
-  /// * [config] Metronome configuration. See AgoraRhythmPlayerConfig.
+  /// * [sound1] 强拍文件的绝对路径或 URL 地址，需精确到文件名及后缀。例如 C:\music\audio.mp4 。支持的音频文件格式见 [RTC SDK 支持播放哪些格式的音频文件](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format)。
+  /// * [sound2] 弱拍文件的绝对路径或 URL 地址，需精确到文件名及后缀。例如 C:\music\audio.mp4 。支持的音频文件格式见 [RTC SDK 支持播放哪些格式的音频文件](https://doc.shengwang.cn/faq/general-product-inquiry/audio-format)。
+  /// * [config] 节拍器配置。详见 AgoraRhythmPlayerConfig 。
   ///
   /// Returns
   /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
@@ -6625,7 +6610,7 @@ abstract class RtcEngine {
 
   /// 关闭虚拟节拍器。
   ///
-  /// 调用 startRhythmPlayer 后，你可以调用该方法关闭虚拟节拍器。 该方法仅适用于 Android 和 iOS。
+  /// 废弃 自 v6.6.2 版本废弃。 调用 startRhythmPlayer 后，你可以调用该方法关闭虚拟节拍器。 该方法仅适用于 Android 和 iOS。
   ///
   /// Returns
   /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
@@ -6633,10 +6618,10 @@ abstract class RtcEngine {
 
   /// 配置虚拟节拍器。
   ///
-  /// Deprecated Deprecated since v6.6.2.
-  ///  After calling startRhythmPlayer, you can call this method to reconfigure the virtual metronome.
-  ///  After enabling the virtual metronome, the SDK starts playing the specified audio files from the beginning and controls the duration of each file based on the beatsPerMinute you set in AgoraRhythmPlayerConfig. For example, if beatsPerMinute is set to 60, the SDK plays 1 beat per second. If the file duration exceeds the beat duration, the SDK only plays the portion that fits the beat duration.
-  ///  By default, the sound of the virtual metronome is not published to remote users. If you want remote users to hear it, set publishRhythmPlayerTrack in ChannelMediaOptions to true after calling this method.
+  /// 废弃 自 v6.6.2 版本废弃。
+  ///  调用 startRhythmPlayer 后，你可以调用该方法重新配置虚拟节拍器。
+  ///  开启虚拟节拍器后，SDK 会从头开始播放指定的音频文件，并根据你在 AgoraRhythmPlayerConfig 中设置的 beatsPerMinute 控制每个文件的播放时长。例如，将 beatsPerMinute 设为 60 ，则 SDK 会 1 秒播放 1 个节拍。如果文件时长超过了节拍时长，则 SDK 只播放节拍时长部分的音频。
+  ///  虚拟节拍器的声音默认不会发布至远端，如果你希望远端用户听到虚拟节拍器的声音，你可以在调用该方法后，将 ChannelMediaOptions 中的 publishRhythmPlayerTrack 设为 true 。
   ///
   /// * [config] 节拍器配置。详见 AgoraRhythmPlayerConfig 。
   ///
@@ -6846,7 +6831,7 @@ abstract class RtcEngine {
 
   /// 向本地视频流添加水印图像。
   ///
-  /// Since Available since v6.6.2. You can use this method to overlay a watermark image on the local video stream and configure its position, size, and visibility in the preview using WatermarkConfig.
+  /// 自从 自 v6.6.2 版本新增。 你可以使用该方法在本地视频流中叠加水印图像，并通过 WatermarkConfig 设置水印在预览画面中的位置、大小和可见性。
   ///
   /// * [configs] 水印配置。详见 WatermarkConfig 。
   ///

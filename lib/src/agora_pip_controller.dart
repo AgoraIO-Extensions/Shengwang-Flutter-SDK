@@ -5,7 +5,7 @@ import '/src/agora_rtc_engine_ex.dart';
 
 /// 画中画模式的视频流配置。
 ///
-/// Since Available since v6.6.2. This class stores the connection and canvas settings required to display the video stream in the picture-in-picture window.
+/// 自从 自 v6.6.2 版本新增。 该类保存显示画中画窗口内视频流所需的连接和画布设置。
 class AgoraPipVideoStream {
   /// 与此视频流关联的 RTC 连接。
   final RtcConnection connection;
@@ -34,7 +34,7 @@ class AgoraPipVideoStream {
 
 /// 画中画视频流的布局配置。
 ///
-/// Since Available since v6.6.2. This class defines the arrangement of multiple video streams in a flowing layout, where video streams are arranged from left to right and top to bottom.
+/// 自从 自 v6.6.2 版本新增。 该类定义多个视频流在流式布局中的排列方式，视频流从左到右、从上到下依次排列。
 class AgoraPipContentViewLayout {
   /// 整个布局周围的内边距，单位为像素。用于在布局边缘和视频流之间创建空间。如果为 null，则不应用内边距。
   final int? padding;
@@ -76,7 +76,7 @@ class AgoraPipContentViewLayout {
 
 /// 声网画中画模式的配置选项。
 ///
-/// Since Available since v6.6.2. This class provides platform-specific options to configure picture-in-picture behavior on Android and iOS platforms.
+/// 自从 自 v6.6.2 版本新增。 该类提供平台特定的选项来配置 Android 和 iOS 平台的画中画行为。
 class AgoraPipOptions {
   /// @nodoc
   AgoraPipOptions({
@@ -250,7 +250,7 @@ class AgoraPipOptions {
 
 /// 表示画中画模式的当前状态。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 enum AgoraPipState {
   /// 画中画模式已成功启动。
   pipStateStarted,
@@ -264,14 +264,14 @@ enum AgoraPipState {
 
 /// 画中画状态改变的观测器。
 ///
-/// Since Available since v6.6.2. Implement this class to receive notifications about picture-in-picture state transitions and potential errors.
+/// 自从 自 v6.6.2 版本新增。 实现此类以接收画中画状态转换和潜在错误的通知。
 class AgoraPipStateChangedObserver {
   /// @nodoc
   const AgoraPipStateChangedObserver({required this.onPipStateChanged});
 
   /// 画中画状态改变回调。
   ///
-  /// Since Available since v6.6.2. This callback is triggered by the SDK when the picture-in-picture state changes.
+  /// 自从 自 v6.6.2 版本新增。 当画中画状态发生改变时，SDK 会触发此回调。
   ///
   /// * [state] 新的画中画状态，详见 AgoraPipState 。
   /// * [error] 如果状态改变失败，返回错误信息；否则返回 null。
@@ -280,16 +280,16 @@ class AgoraPipStateChangedObserver {
 
 /// 管理画中画功能的控制器接口。
 ///
-/// Since Available since v6.6.2. This abstract class defines the methods required to control picture-in-picture mode, including setup, state management, and lifecycle operations.
+/// 自从 自 v6.6.2 版本新增。 此抽象类定义了控制画中画模式所需的方法，包括设置、状态管理和生命周期操作。
 abstract class AgoraPipController {
   /// 释放画中画相关的资源。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   Future<void> dispose();
 
   /// 注册画中画状态改变观测器。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [observer] 画中画状态改变观测器，详见 AgoraPipStateChangedObserver 。
   Future<void> registerPipStateChangedObserver(
@@ -298,12 +298,12 @@ abstract class AgoraPipController {
 
   /// 取消注册画中画状态改变观测器。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   Future<void> unregisterPipStateChangedObserver();
 
   /// 检查当前设备是否支持画中画模式。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// Returns
   /// true ：当前设备支持画中画模式。 false ：当前设备不支持画中画模式。
@@ -311,7 +311,7 @@ abstract class AgoraPipController {
 
   /// 检查是否支持自动进入画中画模式。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// Returns
   /// true ：支持自动进入画中画模式。 false ：不支持自动进入画中画模式。
@@ -319,7 +319,7 @@ abstract class AgoraPipController {
 
   /// 检查画中画模式是否已激活。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// Returns
   /// true ：画中画模式已激活。 false ：画中画模式未激活。
@@ -327,7 +327,7 @@ abstract class AgoraPipController {
 
   /// 配置画中画模式。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// * [options] 画中画配置选项，详见 AgoraPipOptions 。
   ///
@@ -337,7 +337,7 @@ abstract class AgoraPipController {
 
   /// 启动画中画模式。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   ///
   /// Returns
   /// true ：方法调用成功。 false ：方法调用失败。
@@ -345,11 +345,11 @@ abstract class AgoraPipController {
 
   /// 停止画中画模式。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   Future<void> pipStop();
 
   /// 释放画中画相关的资源。
   ///
-  /// Since Available since v6.6.2.
+  /// 自从 自 v6.6.2 版本新增。
   Future<void> pipDispose();
 }

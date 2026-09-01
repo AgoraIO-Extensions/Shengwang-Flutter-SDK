@@ -2022,9 +2022,9 @@ class VideoEncoderConfiguration implements AgoraSerializable {
   @JsonKey(name: 'frameRate')
   final int? frameRate;
 
-  /// Bitrate for video encoding, in Kbps. You do not need to set this parameter. Keep the default value standardBitrate. The SDK automatically selects the optimal bitrate based on the resolution and frame rate you set. For the relationship between resolution and frame rate, see [Video Profile](https://docs.agora.io/en/video-calling/enhance-call-quality/configure-video-encoding).
-  ///  standardBitrate (0): (Default) Standard bitrate mode.
-  ///  compatibleBitrate (-1): Compatible bitrate mode. In general, Agora recommends not using this value.
+  /// 视频编码码率，单位为 Kbps。该参数无需设置，保留默认值 standardBitrate 即可，SDK 会根据你设定的视频分辨率和帧率自动匹配最合适的码率。有关视频分辨率和帧率的对应关系，详见[视频属性](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/video-profile#%E8%A7%86%E9%A2%91%E5%B1%9E%E6%80%A7%E5%8F%82%E8%80%83)。
+  ///  standardBitrate (0): (默认) 标准码率模式。
+  ///  compatibleBitrate (-1): 适配码率模式。一般情况下，声网建议你不要使用该值。
   @JsonKey(name: 'bitrate')
   final int? bitrate;
 
@@ -2345,7 +2345,7 @@ class WatermarkOptions implements AgoraSerializable {
 
 /// 水印源类型。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum WatermarkSourceType {
   /// （0）：水印源为图像。
@@ -2380,7 +2380,7 @@ extension WatermarkSourceTypeExt on WatermarkSourceType {
 
 /// 用于配置时间戳水印。
 ///
-/// Since Available since v6.6.2. (Linux only)
+/// 自从 自 v6.6.2 版本新增。 仅适用于 Linux 平台。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class WatermarkTimestamp implements AgoraSerializable {
   /// @nodoc
@@ -2413,7 +2413,7 @@ class WatermarkTimestamp implements AgoraSerializable {
 
 /// 用于配置文字水印。
 ///
-/// Since Available since v6.6.2. (Linux only)
+/// 自从 自 v6.6.2 版本新增。 仅适用于 Linux 平台。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class WatermarkLiteral implements AgoraSerializable {
   /// @nodoc
@@ -2446,7 +2446,7 @@ class WatermarkLiteral implements AgoraSerializable {
 
 /// 用于配置水印图像的格式、尺寸和像素缓冲区。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class WatermarkBuffer implements AgoraSerializable {
   /// @nodoc
@@ -2483,7 +2483,7 @@ class WatermarkBuffer implements AgoraSerializable {
 
 /// 用于配置水印信息。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class WatermarkConfig implements AgoraSerializable {
   /// @nodoc
@@ -2534,7 +2534,7 @@ class WatermarkConfig implements AgoraSerializable {
 
 /// 多路径数据传输的模式。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum MultipathMode {
   /// （0）：冗余发送模式，相同的数据会通过所有可用路径进行冗余传输。
@@ -2561,7 +2561,7 @@ extension MultipathModeExt on MultipathMode {
 
 /// 多路径传输使用的网络路径类型。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum MultipathType {
   /// （0）：局域网（LAN）路径。
@@ -2596,7 +2596,7 @@ extension MultipathTypeExt on MultipathType {
 
 /// 用于获取特定网络路径的统计数据。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class PathStats implements AgoraSerializable {
   /// @nodoc
@@ -2624,7 +2624,7 @@ class PathStats implements AgoraSerializable {
 
 /// 用于汇总多路径传输中各网络路径的统计数据。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class MultipathStats implements AgoraSerializable {
   /// @nodoc
@@ -2790,8 +2790,8 @@ class RtcStats implements AgoraSerializable {
 
   /// 客户端到本地路由器的往返时延 (ms)。 该属性默认在 iOS 14 之前的设备上开启，在 iOS 14 及之后的设备上关闭。
   ///
-  ///  To enable this property on iOS 14 and later, please [contact technical support](https://www.agora.io/cn/contact/).
-  /// On Android, to obtain gatewayRtt, make sure you have added the android.permission.ACCESS_WIFI_STATE permission after </application> in your project's AndroidManifest.xml file.
+  ///  如需在 iOS 14 及之后的设备上启用该属性，请[联系技术支持](https://ticket.shengwang.cn/)。
+  /// 在 Android 平台上，如需获取 gatewayRtt ，请确保已在项目 AndroidManifest.xml 文件的 </application> 后面添加 android.permission.ACCESS_WIFI_STATE 权限。
   @JsonKey(name: 'gatewayRtt')
   final int? gatewayRtt;
 
@@ -3137,7 +3137,7 @@ enum AudioScenarioType {
   @JsonValue(9)
   audioScenarioAiServer,
 
-  /// 10: AI conversation scenario, only applicable for interactions with agents created using [Agora Conversational AI Engine](https://docs.agora.io/en/conversational-ai/overview/product-overview).
+  /// 10: AI 对话场景，仅适用于与[声网对话式 AI 引擎](https://doc.shengwang.cn/doc/convoai/restful/landing-page)创建的智能体互动的场景。
   @JsonValue(10)
   audioScenarioAiClient,
 
@@ -3518,7 +3518,7 @@ extension LocalVideoStreamStateExt on LocalVideoStreamState {
 
 /// 本地视频事件类型。
 ///
-/// Since Available since v6.6.2.
+/// 自从 自 v6.6.2 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum LocalVideoEventType {
   /// （1）：屏幕采集窗口被隐藏，仅适用于 Android 平台。
@@ -3606,9 +3606,9 @@ enum LocalVideoStreamReason {
   @JsonValue(10)
   localVideoStreamReasonDeviceInvalidId,
 
-  /// 14: (Android only) Video capture interrupted. Possible reasons:
-  ///  The camera is occupied by another app. Prompt the user to check if the camera is in use.
-  ///  The app has been sent to the background. Use a foreground service notification to ensure video capture continues in the background.
+  /// 14:（仅适用于 Android）视频采集中断。可能的原因是：
+  ///  摄像头被其他 App 占用。请提示用户检查摄像头是否被其他 App 占用。
+  ///  当前 App 已被切换到后台。可以使用前台服务通知操作系统，确保 App 在切换到后台时仍可采集视频。详见[为什么部分 Android 版本应用锁屏或切后台后采集音视频无效？](https://doc.shengwang.cn/faq/quality-issues/android-background)。
   @JsonValue(14)
   localVideoStreamReasonDeviceInterrupt,
 
@@ -4497,7 +4497,7 @@ class RtcImage implements AgoraSerializable {
 
 /// 转码推流的高级功能配置。
 ///
-/// To use advanced transcoding live streaming features, please [contact sales](mailto:support@agora.io).
+/// 如需使用转码推流高级功能，请[联系销售](https://www.shengwang.cn/contact-sales/)。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class LiveStreamAdvancedFeature implements AgoraSerializable {
   /// @nodoc
@@ -4664,7 +4664,7 @@ class LiveTranscoding implements AgoraSerializable {
   @JsonKey(name: 'height')
   final int? height;
 
-  /// Video encoding bitrate in Kbps. You do not need to set this parameter. Keep the default value standardBitrate. The SDK automatically matches the most appropriate bitrate based on the video resolution and frame rate you set. For the mapping between resolution and frame rate, see [Video Profile](https://docs.agora.io/en/video-calling/enhance-call-quality/configure-video-encoding).
+  /// 视频编码码率，单位为 Kbps。该参数无需设置，保留默认值 standardBitrate 即可，SDK 会根据你设定的视频分辨率和帧率自动匹配最合适的码率。有关视频分辨率和帧率的对应关系，详见[视频属性](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/video-profile#%E8%A7%86%E9%A2%91%E5%B1%9E%E6%80%A7%E5%8F%82%E8%80%83)。
   @JsonKey(name: 'videoBitrate')
   final int? videoBitrate;
 
@@ -4700,7 +4700,7 @@ class LiveTranscoding implements AgoraSerializable {
   @JsonKey(name: 'transcodingUsers')
   final List<TranscodingUser>? transcodingUsers;
 
-  /// Reserved parameter: Custom information sent to the CDN streaming client, used to populate SEI frames in H264/H265 video. Length limit: 4096 bytes.
+  /// 预留参数：用户自定义的发送到旁路推流客户端的信息，用于填充 H264/H265 视频中 SEI 帧内容。长度限制：4096 字节。关于 SEI 的详细信息，详见 [SEI 帧相关问题](https://doc.shengwang.cn/faq/quality-issues/sei)。
   @JsonKey(name: 'transcodingExtraInfo')
   final String? transcodingExtraInfo;
 
@@ -5388,8 +5388,8 @@ class VideoCanvas implements AgoraSerializable {
   @JsonKey(name: 'cropArea')
   final Rectangle? cropArea;
 
-  /// The receiver can only render alpha channel information when the sender enables the alpha transmission feature.
-  ///  To enable alpha transmission, please [contact technical support](https://www.agora.io/cn/contact/). (Optional) Whether to enable alpha mask rendering: true : Enable alpha mask rendering. false : (Default) Disable alpha mask rendering. Alpha mask rendering can create images with transparency effects and extract portraits from videos. When used with other methods, it can achieve effects such as portrait picture-in-picture or watermark overlays.
+  /// 仅当发送端开启 Alpha 传输功能时，接收端才能渲染 Alpha 通道的信息。
+  ///  如需开启 Alpha 传输功能，请[联系技术支持](https://ticket.shengwang.cn/)。 （可选）是否开启 Alpha 遮罩渲染： true ：开启 Alpha 遮罩渲染。 false ：（默认）关闭 Alpha 遮罩渲染。 Alpha 遮罩渲染可以创建具有透明效果的图像，还可以提取视频中的人像。与其他方法结合使用时，可以实现人像画中画、添加水印等效果。
   @JsonKey(name: 'enableAlphaMask')
   final bool? enableAlphaMask;
 
@@ -6711,11 +6711,11 @@ class AudioRecordingConfiguration implements AgoraSerializable {
   @JsonKey(name: 'quality')
   final AudioRecordingQualityType? quality;
 
-  /// The actual recorded audio channel depends on the captured audio channel:
-  ///  If the captured audio is mono and recordingChannel is set to 2, the recorded audio will be stereo with duplicated mono data, not true stereo.
-  ///  If the captured audio is stereo and recordingChannel is set to 1, the recorded audio will be mono with mixed stereo data. In addition, the integration scheme may affect the final recorded audio channel. If you want to record true stereo, please [contact technical support](https://www.agora.io/cn/contact/) for assistance. Number of audio channels to record. Supported values:
-  ///  1: (Default) Mono.
-  ///  2: Stereo.
+  /// 实际录制的音频声道与你采集的音频声道有关：
+  ///  如果采集的音频为单声道， recordingChannel 设为 2 ， 则录制的音频为经过单声道数据拷贝后的双声道数据，而不是立体声。
+  ///  如果采集的音频为双声道， recordingChannel 设为 1 ，则录制的音频为经过双声道数据混合后的单声道数据。 此外，集成方案也会影响最终录制的音频声道。因此，如果你希望录制立体声，请[联系技术支持](https://ticket.shengwang.cn/)协助。 录制的音频声道。目前支持如下取值：
+  ///  1:（默认）单声道。
+  ///  2: 双声道。
   @JsonKey(name: 'recordingChannel')
   final int? recordingChannel;
 
@@ -6895,9 +6895,9 @@ enum ChannelMediaRelayError {
   @JsonValue(1)
   relayErrorServerErrorResponse,
 
-  /// 2: No response from the server.
-  /// This error may be caused by poor network conditions. If this error is reported when initiating cross-channel media relay, you can try again later; if reported during the relay process, you can call the leaveChannel method to leave the channel.
-  /// This error may also occur if the current App ID has not enabled cross-channel media relay. You can [contact technical support](https://www.agora.io/cn/contact/) to apply for enabling it.
+  /// 2: 服务器无回应。
+  /// 该错误可能是网络状况不佳导致的。如果在发起跨频道连麦时报告该错误，你可以稍后重试；如果在跨频道连麦过程中报告该错误，你可以调用 leaveChannel 方法离开频道。
+  /// 该错误也可能是由于当前的 App ID 未开启跨频道连麦导致的。你可以[联系技术支持](https://ticket.shengwang.cn/)申请开通跨频道连麦。
   @JsonValue(2)
   relayErrorServerNoResponse,
 
@@ -7289,7 +7289,7 @@ extension UploadErrorReasonExt on UploadErrorReason {
 
 /// 调用 renewToken 后的错误码。
 ///
-/// Since Available since 6.6.0.
+/// 自从 自 v6.6.0 版本新增。
 @JsonEnum(alwaysCreate: true)
 enum RenewTokenErrorCode {
   /// （0）：Token 更新成功。
@@ -7465,7 +7465,7 @@ class EchoTestConfiguration implements AgoraSerializable {
   @JsonKey(name: 'enableVideo')
   final bool? enableVideo;
 
-  /// Token used to ensure the security of the audio and video echo test. If you have not enabled the App Certificate in the console, you do not need to set this parameter. If you have enabled the App Certificate, you must provide a Token, and the uid used to generate the Token must be 0xFFFFFFFF, and the channel name used must uniquely identify each echo test. For how to generate a Token on the server, refer to [Use Token for Authentication](https://docs.agora.io/en/video-calling/token-authentication/deploy-token-server).
+  /// 用于保证音视频通话回路测试安全性的 Token。如果你在控制台未启用 App 证书，则不需要向该参数传值；如果你在控制台已启用 App 证书，则必须向该参数传入 Token，且在你生成 Token 时使用的 uid 必须为 0xFFFFFFFF，使用的频道名必须为标识每个音视频通话回路测试的频道名。服务端生成 Token 的方式请参考[使用 Token 鉴权](https://doc.shengwang.cn/doc/rtc/flutter/basic-features/token-authentication)。
   @JsonKey(name: 'token')
   final String? token;
 
