@@ -2293,10 +2293,10 @@ class RtcEngineEventHandler {
   /// Token 已过期回调。
   ///
   /// 在音视频互动过程中，如果 Token 失效，SDK 会触发该回调报告 Token 已过期。
-  /// 当收到该回调时，你需要重新在服务端生成新的 Token，然后通过下列任意一种方式来更新 Token：
+  /// 收到该回调时，你需要在 Token 服务器上生成新的 Token，并根据场景更新 Token：
   ///  单频道场景：
-  ///  调用 renewToken 来传入新的 Token。
-  ///  调用 leaveChannel 离开当前频道，然后在调用 joinChannel 时传入新的 Token 重新加入频道。
+  ///  调用 renewToken 传入新的 Token，无需先离开频道。SDK 会通过 onRenewTokenResult 回调报告更新结果。
+  ///  如果你的 App 需要离开并重新加入频道，也可以调用 leaveChannel 离开频道，然后在调用 joinChannel 时传入新的 Token。
   ///  多频道场景：调用 updateChannelMediaOptionsEx 传入新的 Token。
   ///
   /// * [connection] Connection 信息。详见 RtcConnection 。
@@ -2304,10 +2304,10 @@ class RtcEngineEventHandler {
 
   /// Token 即将在 30s 内过期回调。
   ///
-  /// 当收到该回调时，你需要重新在服务端生成新的 Token，然后通过下列任意一种方式来更新 Token：
+  /// 收到该回调时，你需要在 Token 服务器上生成新的 Token，并根据场景更新 Token：
   ///  单频道场景：
-  ///  调用 renewToken 来传入新的 Token。
-  ///  调用 leaveChannel 离开当前频道，然后在调用 joinChannel 时传入新的 Token 重新加入频道。
+  ///  调用 renewToken 传入新的 Token，无需先离开频道。SDK 会通过 onRenewTokenResult 回调报告更新结果。
+  ///  如果你的 App 需要离开并重新加入频道，也可以调用 leaveChannel 离开频道，然后在调用 joinChannel 时传入新的 Token。
   ///  多频道场景：调用 updateChannelMediaOptionsEx 传入新的 Token。
   ///
   /// * [token] 即将过期的 Token。
@@ -6610,7 +6610,7 @@ abstract class RtcEngine {
 
   /// 关闭虚拟节拍器。
   ///
-  /// 调用 startRhythmPlayer 后，你可以调用该方法关闭虚拟节拍器。 该方法仅适用于 Android 和 iOS。
+  /// 废弃 自 v6.6.2 版本废弃。 调用 startRhythmPlayer 后，你可以调用该方法关闭虚拟节拍器。 该方法仅适用于 Android 和 iOS。
   ///
   /// Returns
   /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。

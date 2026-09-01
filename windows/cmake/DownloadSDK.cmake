@@ -1,9 +1,9 @@
 # iris dependencies start
-set(IRIS_SDK_DOWNLOAD_URL "https://download.agora.io/sdk/release/iris_4.6.2-build.1_DCG_Windows_Video_Standalone_20260212_0947_31926.zip")
+set(IRIS_SDK_DOWNLOAD_URL "https://download.agora.io/sdk/release/iris_4.6.4-build.4_DCG_Windows_Video_Standalone_20260831_0943_311053.zip")
 # iris dependencies end
 
 # native dependencies start
-set(NATIVE_SDK_DOWNLOAD_URL "https://download.shengwang.cn/sdk/release/Shengwang_Native_SDK_for_Windows_rel.v4.6.2.70_31616_FULL_20260211_1433_1009683.zip")
+set(NATIVE_SDK_DOWNLOAD_URL "https://download.agora.io/sdk/release/AgoraRtcEngine_windows_Preview_4.6.4-build.3_Video_20260829_144642.zip")
 # native dependencies end
 
 function(download_and_extract URL TARGET_DIR EXTRACTED_DIR)
@@ -22,15 +22,26 @@ function(download_and_extract URL TARGET_DIR EXTRACTED_DIR)
 
     # Download the file if it doesn't exist
     if(NOT EXISTS "${TARGET_FILE}")
-        file(DOWNLOAD ${URL_ESCAPED} ${TARGET_FILE} SHOW_PROGRESS STATUS status)
-        list(GET status 0 status_code)
-        list(GET status 1 status_string)
-        if(NOT status_code EQUAL 0)
-          # Remove the file if it exists when the download fails
+        foreach(DOWNLOAD_ATTEMPT RANGE 1 3)
+          file(DOWNLOAD ${URL_ESCAPED} ${TARGET_FILE} SHOW_PROGRESS STATUS status)
+          list(GET status 0 status_code)
+          list(GET status 1 status_string)
+          if(status_code EQUAL 0)
+            break()
+          endif()
+
+          # A failed transfer can leave a partial archive that must not be reused.
           if(EXISTS "${TARGET_FILE}")
             file(REMOVE "${TARGET_FILE}")
           endif()
-          message(FATAL_ERROR "Download failed: ${STATUS_STRING}")
+          if(DOWNLOAD_ATTEMPT LESS 3)
+            message(WARNING "Download attempt ${DOWNLOAD_ATTEMPT} of 3 failed: ${status_string}. Retrying...")
+            execute_process(COMMAND ${CMAKE_COMMAND} -E sleep 5)
+          endif()
+        endforeach()
+
+        if(NOT status_code EQUAL 0)
+          message(FATAL_ERROR "Download failed: ${status_string}")
         endif()
     endif()
 

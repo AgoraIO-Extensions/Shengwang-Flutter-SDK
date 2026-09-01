@@ -107,7 +107,7 @@ class LogConfig implements AgoraSerializable {
   /// @nodoc
   const LogConfig({this.filePath, this.fileSizeInKB, this.level});
 
-  /// 日志文件的完整路径。声网建议你使用默认的日志路径。如果你需要修改默认的日志路径，请确保你指定的路径存在且可写。
+  /// 日志文件的完整路径。声网建议你使用默认的日志路径。如果你需要修改默认的日志路径，请确保你指定的路径存在且可写。自定义路径必须包含日志文件名，例如 /path/to/agorasdk.log ；如果只指定日志目录，请在目录末尾添加路径分隔符，SDK 会在该目录下生成 agorasdk.log 。
   @JsonKey(name: 'filePath')
   final String? filePath;
 
