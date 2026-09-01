@@ -1,7 +1,7 @@
 import '/src/_serializable.dart';
 import '/src/binding_forward_export.dart';
 
-/// Provides callbacks for the media player.
+/// 提供媒体播放器的回调。
 class MediaPlayerSourceObserver {
   /// @nodoc
   const MediaPlayerSourceObserver({
@@ -20,55 +20,55 @@ class MediaPlayerSourceObserver {
     this.onAudioVolumeIndication,
   });
 
-  /// Reports changes in player state.
+  /// 报告播放器状态改变。
   ///
-  /// When the player state changes, the SDK triggers this callback to report the new playback state.
+  /// 当播放器状态改变时，SDK 会触发该回调，报告新的播放状态。
   ///
-  /// * [state] The new playback state. See MediaPlayerState.
-  /// * [reason] The reason for the player state change. See MediaPlayerReason.
+  /// * [state] 新的播放状态，详见 MediaPlayerState 。
+  /// * [reason] 播放器状态改变的原因，详见 MediaPlayerReason 。
   final void Function(MediaPlayerState state, MediaPlayerReason reason)?
       onPlayerSourceStateChanged;
 
-  /// Reports the current playback position of the media resource.
+  /// 报告当前媒体资源的播放进度。
   ///
-  /// While playing media files, the SDK automatically triggers this callback every second to report the current playback position.
+  /// 播放媒体文件时，SDK 每隔 1 秒会自动触发该回调，报告当前播放进度。
   ///
-  /// * [positionMs] Current playback position in milliseconds.
-  /// * [timestampMs] NTP timestamp of the current playback position in milliseconds.
+  /// * [positionMs] 当前播放进度，单位为 ms。
+  /// * [timestampMs] 当前播放进度的 NTP 时间戳，单位为 ms。 该参数仅在频道内生效。
   final void Function(int positionMs, int timestampMs)? onPositionChanged;
 
-  /// Reports player events.
+  /// 报告播放器的事件。
   ///
-  /// After calling seek to locate playback, the SDK triggers this callback to report the result of the seek operation.
+  /// 调用 seek 定位播放后，SDK 会触发该回调，报告定位播放的结果。
   ///
-  /// * [eventCode] Player event. See MediaPlayerEvent.
-  /// * [elapsedTime] The time when the event occurred (in milliseconds).
-  /// * [message] Information about the event.
+  /// * [eventCode] 播放器事件，详见 MediaPlayerEvent 。
+  /// * [elapsedTime] 发生事件的时间 (毫秒)。
+  /// * [message] 事件的信息。
   final void Function(
           MediaPlayerEvent eventCode, int elapsedTime, String message)?
       onPlayerEvent;
 
-  /// Reports retrieved media metadata.
+  /// 报告已获取媒体附属信息。
   ///
-  /// After parsing the media metadata, the SDK triggers this callback to report the type and content of the metadata.
+  /// 解析媒体附属信息后时，SDK 会触发该回调，报告媒体附属信息的数据类型和具体数据。
   ///
-  /// * [data] The actual data in a user-defined format.
-  /// * [length] The length of the data in bytes.
+  /// * [data] 具体数据，用户自定义格式的数据。
+  /// * [length] 数据长度，单位为 byte。
   final void Function(Uint8List data, int length)? onMetaData;
 
-  /// Reports the playable duration of buffered data.
+  /// 报告当前缓冲数据能播放的时间。
   ///
-  /// While playing online media resources, the SDK triggers this callback every second to report the duration that the current buffered data can support.
-  ///  If the buffered duration is less than the threshold (default is 0), playerEventBufferLow (6) is returned.
-  ///  If the buffered duration is greater than the threshold (default is 0), playerEventBufferRecover (7) is returned.
+  /// 播放在线媒体资源的过程中，SDK 会每隔 1 秒触发一次该回调，报告当前缓冲的数据能支持的播放时间。
+  ///  当缓冲数据支持的播放时间小于阈值（默认为 0）时，返回 playerEventBufferLow (6)。
+  ///  当缓冲数据支持的播放时间大于阈值（默认为 0）时，返回 playerEventBufferRecover (7)。
   ///
-  /// * [playCachedBuffer] The duration (in milliseconds) that the current buffered data can support playback.
+  /// * [playCachedBuffer] 当前缓冲的数据能支持的播放时间 (毫秒)。
   final void Function(int playCachedBuffer)? onPlayBufferUpdated;
 
-  /// Reports events during media resource preloading.
+  /// 报告预加载媒体资源的事件。
   ///
-  /// * [src] Path of the media resource.
-  /// * [event] Event that occurred during media resource preloading. See PlayerPreloadEvent.
+  /// * [src] 媒体资源的路径。
+  /// * [event] 预加载媒体资源时发生的事件。详见 PlayerPreloadEvent 。
   final void Function(String src, PlayerPreloadEvent event)? onPreloadEvent;
 
   /// @nodoc
@@ -77,37 +77,37 @@ class MediaPlayerSourceObserver {
   /// @nodoc
   final void Function()? onAgoraCDNTokenWillExpire;
 
-  /// Callback for changes in video bitrate of media resource.
+  /// 媒体资源视频码率变化回调。
   ///
-  /// * [from] Information about the video bitrate before the change during media playback. See SrcInfo.
-  /// * [to] Information about the video bitrate after the change during media playback. See SrcInfo.
+  /// * [from] 变化前，媒体资源播放时的视频码率相关信息。详见 SrcInfo 。
+  /// * [to] 变化后，媒体资源播放时的视频码率相关信息。详见 SrcInfo 。
   final void Function(SrcInfo from, SrcInfo to)? onPlayerSrcInfoChanged;
 
-  /// Callback when media player-related information changes.
+  /// 媒体播放器相关信息发生改变回调。
   ///
-  /// When media player-related information changes, the SDK triggers this callback. You can use it for issue diagnosis and troubleshooting.
+  /// 当媒体播放器相关信息发生改变时，SDK 会触发该回调。你可用其进行问题定位和排查。
   ///
-  /// * [info] Media player-related information. See PlayerUpdatedInfo.
+  /// * [info] 媒体播放器相关信息。详见 PlayerUpdatedInfo 。
   final void Function(PlayerUpdatedInfo info)? onPlayerInfoUpdated;
 
-  /// Reports information about the media resources currently in cache.
+  /// 报告当前缓存中的媒体资源的相关信息。
   ///
-  /// After calling the openWithMediaSource method and setting the enableCache member to true, the SDK triggers this callback once per second after the media file is opened to report statistics of the currently cached media files.
+  /// 调用 openWithMediaSource 方法且设置 enableCache 成员为 true 后，SDK 会在媒体文件打开后每秒触发一次该回调，报告当前缓存的媒体文件的统计数据。
   ///
-  /// * [stats] Information about the media resources in cache. See CacheStatistics.
+  /// * [stats] 缓存中的媒体资源的相关信息，详见 CacheStatistics 。
   final void Function(CacheStatistics stats)? onPlayerCacheStats;
 
-  /// Reports information about the currently playing media resource.
+  /// 报告当前播放的媒体资源的相关信息。
   ///
-  /// After the media resource starts playing, the SDK triggers this callback once per second to report information about the media resource.
+  /// 当媒体资源开始播放后，SDK 会每秒触发一次该回调，报告媒体资源的相关信息。
   ///
-  /// * [stats] Information about the media resource. See PlayerPlaybackStats.
+  /// * [stats] 媒体资源的相关信息，详见 PlayerPlaybackStats 。
   final void Function(PlayerPlaybackStats stats)? onPlayerPlaybackStats;
 
-  /// Callback for media player audio volume indication.
+  /// 媒体播放器音量提示回调。
   ///
-  /// The SDK triggers this callback every 200 milliseconds to report the current volume of the media player.
+  /// SDK 每 200 毫秒触发一次该回调，报告媒体播放器当前的音量。
   ///
-  /// * [volume] Current volume of the media player, ranging from [0,255].
+  /// * [volume] 播放器的当前音量，取值范围为 [0,255]。
   final void Function(int volume)? onAudioVolumeIndication;
 }

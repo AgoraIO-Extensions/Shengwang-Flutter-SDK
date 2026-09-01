@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:shengwang_rtc_engine_example/config/agora.config.dart' as config;
+import 'package:shengwang_rtc_engine_example/config/agora.config.dart'
+    as config;
 
 /// MediaRecorder Example
 class MediaRecorderExample extends StatefulWidget {
