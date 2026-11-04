@@ -3,6 +3,7 @@ import 'package:shengwang_rtc_engine_example/config/agora.config.dart'
     as config;
 import 'package:shengwang_rtc_engine_example/components/example_actions_widget.dart';
 import 'package:shengwang_rtc_engine_example/components/log_sink.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 /// MediaPlayer Example
@@ -36,6 +37,10 @@ class _State extends State<MediaPlayer> {
   int _streamCount = 0;
 
   bool isJoined = false;
+
+  // Android only. HDR video needs both switches on. Toggling recreates the player.
+  bool _useAndroidSurfaceView = false;
+  bool _useAndroidHybridComposition = false;
 
   @override
   void initState() {
@@ -92,8 +97,15 @@ class _State extends State<MediaPlayer> {
       },
     ));
 
+    await _createMediaPlayer();
+  }
+
+  Future<void> _createMediaPlayer() async {
     _mediaPlayerController = MediaPlayerController(
-        rtcEngine: _engine, canvas: const VideoCanvas(uid: 0));
+        rtcEngine: _engine,
+        canvas: const VideoCanvas(uid: 0),
+        useAndroidSurfaceView: _useAndroidSurfaceView,
+        useAndroidHybridComposition: _useAndroidHybridComposition);
     await _mediaPlayerController.initialize();
     _mediaPlayerController.registerPlayerSourceObserver(
       MediaPlayerSourceObserver(
@@ -147,6 +159,23 @@ class _State extends State<MediaPlayer> {
     });
   }
 
+  /// The view options are fixed when the controller is created, so recreate the player.
+  Future<void> _recreateMediaPlayer() async {
+    setState(() {
+      _isReadyPreview = false;
+    });
+    await _mediaPlayerController.dispose();
+    await _createMediaPlayer();
+  }
+
+  Widget _androidViewSwitch(
+      String title, bool value, ValueChanged<bool> onChanged) {
+    return Row(children: [
+      Expanded(child: Text(title, style: const TextStyle(fontSize: 12))),
+      Switch(value: value, onChanged: _isUrlOpened ? null : onChanged),
+    ]);
+  }
+
   void _leaveChannel() async {
     if (_isUrlOpened) {
       await _mediaPlayerController.stop();
@@ -191,6 +220,18 @@ class _State extends State<MediaPlayer> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
+            if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) ...[
+              _androidViewSwitch('Android SurfaceView', _useAndroidSurfaceView,
+                  (changed) {
+                _useAndroidSurfaceView = changed;
+                _recreateMediaPlayer();
+              }),
+              _androidViewSwitch('Android Hybrid Composition (HDR)',
+                  _useAndroidHybridComposition, (changed) {
+                _useAndroidHybridComposition = changed;
+                _recreateMediaPlayer();
+              }),
+            ],
             Row(children: [
               Expanded(
                 child: TextField(
