@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-import 'package:agora_rtc_engine/agora_rtc_engine_debug.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine_debug.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';

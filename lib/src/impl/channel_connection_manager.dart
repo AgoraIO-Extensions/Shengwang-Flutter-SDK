@@ -1,5 +1,5 @@
-import 'package:agora_rtc_engine/src/agora_media_base.dart';
-import 'package:agora_rtc_engine/src/agora_rtc_engine_ex.dart';
+import 'package:shengwang_rtc_engine/src/agora_media_base.dart';
+import 'package:shengwang_rtc_engine/src/agora_rtc_engine_ex.dart';
 
 class ChannelConnectionManager {
   static final ChannelConnectionManager _instance =
