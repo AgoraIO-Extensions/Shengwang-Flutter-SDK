@@ -6,9 +6,9 @@ if(POLICY CMP0091)
 endif()
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
-project(agora_rtc_engine_example LANGUAGES CXX)
+project(shengwang_rtc_engine_example LANGUAGES CXX)
 
-set(BINARY_NAME "agora_rtc_engine_example")
+set(BINARY_NAME "shengwang_rtc_engine_example")
 
 cmake_policy(SET CMP0063 NEW)
 

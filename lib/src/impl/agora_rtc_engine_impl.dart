@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:agora_rtc_engine/src/impl/channel_connection_manager.dart';
+import 'package:shengwang_rtc_engine/src/impl/channel_connection_manager.dart';
 
 import '/src/agora_base.dart';
 import '/src/agora_h265_transcoder.dart';
