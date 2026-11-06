@@ -30,7 +30,12 @@ flutter_ios_podfile_setup
 target 'Runner' do
   use_frameworks!
   use_modular_headers!
-  
+
+  # 4.6.4.2-test.2 Preview pods are not published to CocoaPods trunk; only the CDN zips exist.
+  # Test builds resolve them from local podspecs. Do not ship these lines in a release.
+  pod 'AgoraIrisRTC_iOS', :podspec => 'preview_podspecs/AgoraIrisRTC_iOS.podspec.json'
+  pod 'AgoraRtcEngine_iOS_Preview', :podspec => 'preview_podspecs/AgoraRtcEngine_iOS_Preview.podspec.json'
+
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 
   target 'ScreenSharing' do

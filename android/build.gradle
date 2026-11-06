@@ -17,6 +17,14 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
+        // Iris Auto Preview dependencies are hosted in Agora's Maven repo.
+        maven {
+            url 'https://download.agora.io/maven'
+            content {
+                includeGroup 'io.agora.rtc'
+                includeGroup 'cn.shengwang.rtc'
+            }
+        }
     }
 }
 
