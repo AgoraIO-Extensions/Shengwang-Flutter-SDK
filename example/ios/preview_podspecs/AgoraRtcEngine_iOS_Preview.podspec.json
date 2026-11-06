@@ -1,0 +1,69 @@
+{
+  "name": "AgoraRtcEngine_iOS_Preview",
+  "version": "4.6.4.2-test.2",
+  "summary": "Agora iOS video SDK",
+  "description": "iOS library for agora A/V communication, broadcasting and data channel service.",
+  "homepage": "https://docs.agora.io/en/Agora%20Platform/downloads",
+  "license": {
+    "type": "Copyright",
+    "text": "Copyright 2023 agora.io. All rights reserved."
+  },
+  "authors": {
+    "Agora Lab": "developer@agora.io"
+  },
+  "source": {
+    "http": "https://download.agora.io/sdk/release/AgoraRtcEngine_iOS_Preview_4.6.4.2-test.2_Video_20261105_003848.zip"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "vendored_frameworks": [
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraAiEchoCancellationExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraAiEchoCancellationLLExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraAiNoiseSuppressionExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraAiNoiseSuppressionLLExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraAudioBeautyExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraClearVisionExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraContentInspectExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraFaceCaptureExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraFaceDetectionExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraLipSyncExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraReplayKitExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraRtcKit.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraSoundTouch.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraSpatialAudioExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraVideoAv1EncoderExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraVideoEncoderExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraVideoQualityAnalyzerExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/AgoraVideoSegmentationExtension.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/Agorafdkaac.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/Agoraffmpeg.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/aosl.xcframework",
+    "Shengwang_Native_SDK_for_iOS_FULL/libs/video_dec.xcframework"
+  ],
+  "weak_frameworks": [
+    "AgoraAiEchoCancellationExtension",
+    "AgoraAiEchoCancellationLLExtension",
+    "AgoraAiNoiseSuppressionExtension",
+    "AgoraAiNoiseSuppressionLLExtension",
+    "AgoraAudioBeautyExtension",
+    "AgoraClearVisionExtension",
+    "AgoraContentInspectExtension",
+    "AgoraFaceCaptureExtension",
+    "AgoraFaceDetectionExtension",
+    "AgoraLipSyncExtension",
+    "AgoraReplayKitExtension",
+    "AgoraRtcKit",
+    "AgoraSoundTouch",
+    "AgoraSpatialAudioExtension",
+    "AgoraVideoAv1EncoderExtension",
+    "AgoraVideoEncoderExtension",
+    "AgoraVideoQualityAnalyzerExtension",
+    "AgoraVideoSegmentationExtension",
+    "Agorafdkaac",
+    "Agoraffmpeg",
+    "aosl",
+    "video_dec"
+  ],
+  "requires_arc": true
+}

@@ -3537,11 +3537,11 @@ enum LocalVideoEventType {
   @JsonValue(4)
   localVideoEventTypeScreenCaptureSystemInternalError,
 
-  /// @nodoc
+  /// （5）：请求的广角或超广角摄像头已应用，仅适用于 Android 平台。
   @JsonValue(5)
   localVideoEventTypeCameraFocalLengthApplied,
 
-  /// @nodoc
+  /// （6）：请求的广角或超广角摄像头无法打开，SDK 回退到默认摄像头，仅适用于 Android 平台。
   @JsonValue(6)
   localVideoEventTypeCameraFocalLengthFallbackToDefault,
 }

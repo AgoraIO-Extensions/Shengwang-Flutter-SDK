@@ -21,29 +21,13 @@ abstract class VideoViewControllerBase {
   /// Connection 信息。详见 RtcConnection 。
   RtcConnection? get connection;
 
-  /// FlutterTexture 仅适用于 iOS、macOS 和 Windows 平台。 是否使用 FlutterTexture 渲染视频： true : 使用 FlutterTexture 渲染视频。 false : 不使用 FlutterTexture 渲染视频。
+  /// FlutterTexture 适用于 Android、iOS、macOS 和 Windows 平台。 是否使用 FlutterTexture 渲染视频： true : 使用 FlutterTexture 渲染视频。 false : 不使用 FlutterTexture 渲染视频。
   bool get useFlutterTexture;
 
   /// Android SurfaceView 仅适用于 Android 平台。 是否使用 Android SurfaceView 渲染视频： true : 使用 Android SurfaceView 渲染视频。 false : 不使用 Android SurfaceView 渲染视频。
   bool get useAndroidSurfaceView;
 
-  /// 仅适用于 Android 平台。是否以 Hybrid Composition 方式嵌入 Android 平台视图。
-  ///
-  /// true ：通过 `PlatformViewLink` 和 `PlatformViewsService.initSurfaceAndroidView`
-  /// 创建视图。原生视图包含 SurfaceView 时，Flutter 使用 Hybrid Composition，视频保持为独立的
-  /// SurfaceFlinger 图层。在 Android 上显示 HDR 视频需要同时将 [useAndroidSurfaceView] 和
-  /// [useAndroidHybridComposition] 设为 true 。
-  ///
-  /// 使用默认的 TextureView（[useAndroidSurfaceView] 为 false ）时，Flutter 保持 Texture Layer
-  /// Hybrid Composition，该参数没有可见效果。
-  ///
-  /// false ：（默认）使用 `AndroidView` 创建视图。SurfaceView 会退回 Virtual Display，HDR 视频
-  /// 按 SDR 显示。
-  ///
-  /// Hybrid Composition 在平台线程合成 Flutter 帧，Android 10 以下每帧多一次拷贝，可能降低 Flutter
-  /// 帧率。Flutter 的变换、裁剪和透明度可能对 SurfaceView 不生效。[useFlutterTexture] 为 true
-  /// 或非 Android 平台时忽略该参数。该参数在创建 `AgoraVideoView` 时读取；如需修改，请创建新的
-  /// `AgoraVideoView` 。
+  /// @nodoc
   bool get useAndroidHybridComposition;
 
   @internal
