@@ -2014,7 +2014,7 @@ class RtcEngineEventHandler {
   /// 自从 自 v6.6.2 版本新增。 你可以通过该回调获取本地视频事件的原因。
   ///
   /// * [source] 视频源类型，详见 VideoSourceType 。
-  /// * [event] 本地视频事件类型，详见 LocalVideoEventType 。
+  /// * [event] 本地视频事件类型： localVideoEventTypeScreenCaptureWindowHidden ：屏幕采集窗口被隐藏。 localVideoEventTypeScreenCaptureWindowRecoverFromHidden ：屏幕采集窗口从隐藏状态恢复。 localVideoEventTypeScreenCaptureStoppedByUser ：屏幕采集被用户停止。 localVideoEventTypeScreenCaptureSystemInternalError ：屏幕采集过程中发生系统内部错误。 localVideoEventTypeCameraFocalLengthApplied ：请求的广角或超广角摄像头已应用。 localVideoEventTypeCameraFocalLengthFallbackToDefault ：请求的广角或超广角摄像头无法打开，SDK 回退到默认摄像头。
   final void Function(VideoSourceType source, LocalVideoEventType event)?
       onLocalVideoEvent;
 
@@ -4188,6 +4188,7 @@ abstract class RtcEngine {
   ///
   /// 你可以调用该方法指定不订阅的音频流。
   ///  该方法在加入频道前后均可调用。
+  ///  黑名单设置实时生效。将已订阅用户加入黑名单后，该用户的音频流也会停止订阅。
   ///  音频订阅黑名单不受 muteRemoteAudioStream 、 muteAllRemoteAudioStreams 以及 ChannelMediaOptions 中的 autoSubscribeAudio 影响。
   ///  设置订阅黑名单后，如果离开当前频道后再重新加入频道，黑名单依然生效。
   ///  如果某个用户同时在音频订阅黑名单和白名单中，仅订阅黑名单生效。
@@ -4222,6 +4223,7 @@ abstract class RtcEngine {
   ///
   /// 你可以调用该方法指定不订阅的视频流。
   ///  该方法在加入频道前后均可调用。
+  ///  黑名单设置实时生效。将已订阅用户加入黑名单后，该用户的视频流也会停止订阅。
   ///  视频订阅黑名单不受 muteRemoteVideoStream 、 muteAllRemoteVideoStreams 以及 ChannelMediaOptions 中的 autoSubscribeVideo 的影响。
   ///  设置订阅黑名单后，如果离开当前频道后再重新加入频道，黑名单依然生效。
   ///  如果某个用户同时在音频订阅黑名单和白名单中，仅订阅黑名单生效。
