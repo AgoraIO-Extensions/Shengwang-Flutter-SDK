@@ -5,12 +5,12 @@ body:
     attributes:
       value: |
         Before filling out the form, please consider the following:
-        - Make sure to search the [existing issues](https://github.com/AgoraIO-Extensions/Agora-Flutter-SDK/issues) to see if your bug has already been reported.
+        - Make sure to search the [existing issues](https://github.com/AgoraIO-Extensions/Shengwang-Flutter-SDK/issues) to see if your bug has already been reported.
         - For urgent issues, please submit a ticket to [Agora Support](https://www.agora.io/en/customer-support/) for a prompt response.
   - type: textarea
     attributes:
-      label: Version of the agora_rtc_engine
-      description: The version of the agora_rtc_engine.
+      label: Version of the shengwang_rtc_engine
+      description: The version of the shengwang_rtc_engine.
       placeholder: |
         6.3.0
     validations:
