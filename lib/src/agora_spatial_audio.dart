@@ -2,13 +2,13 @@ import '/src/_serializable.dart';
 import '/src/binding_forward_export.dart';
 part 'agora_spatial_audio.g.dart';
 
-/// Spatial position information of the remote user or media player.
+/// 远端用户或媒体播放器的空间位置信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class RemoteVoicePositionInfo implements AgoraSerializable {
   /// @nodoc
   const RemoteVoicePositionInfo({this.position, this.forward});
 
-  /// Coordinates in the world coordinate system. This parameter is an array of length 3, where the three values represent the coordinates in the front, right, and up directions respectively.
+  /// 在世界坐标系中的坐标。该参数是长度为 3 的数组，三个值依次表示前、右、上的坐标值。
   @JsonKey(name: 'position')
   final List<double>? position;
 
@@ -24,7 +24,7 @@ class RemoteVoicePositionInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$RemoteVoicePositionInfoToJson(this);
 }
 
-/// Sound insulation zone settings.
+/// 隔声区域的设置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class SpatialAudioZone implements AgoraSerializable {
   /// @nodoc
@@ -39,43 +39,43 @@ class SpatialAudioZone implements AgoraSerializable {
       this.upLength,
       this.audioAttenuation});
 
-  /// ID of the sound insulation zone.
+  /// 隔声区域的 ID。
   @JsonKey(name: 'zoneSetId')
   final int? zoneSetId;
 
-  /// The spatial center point of the sound insulation zone. This parameter is an array of length 3, representing the coordinates in the forward, right, and up directions.
+  /// 隔声区域的空间中心点。该参数是长度为 3 的数组，三个值依次表示前、右、上的坐标值。
   @JsonKey(name: 'position')
   final List<double>? position;
 
-  /// Unit vector in the forward direction starting from position. This parameter is an array of length 3, representing the coordinates in the forward, right, and up directions.
+  /// 以 position 为起点，向前的单位向量。该参数是长度为 3 的数组，三个值依次表示前、右、上的坐标值。
   @JsonKey(name: 'forward')
   final List<double>? forward;
 
-  /// Unit vector in the right direction starting from position. This parameter is an array of length 3, representing the coordinates in the forward, right, and up directions.
+  /// 以 position 为起点，向右的单位向量。该参数是长度为 3 的数组，三个值依次表示前、右、上的坐标值。
   @JsonKey(name: 'right')
   final List<double>? right;
 
-  /// Unit vector in the upward direction starting from position. This parameter is an array of length 3, representing the coordinates in the forward, right, and up directions.
+  /// 以 position 为起点，向上的单位向量。该参数是长度为 3 的数组，三个值依次表示前、右、上的坐标值。
   @JsonKey(name: 'up')
   final List<double>? up;
 
-  /// Assuming the sound insulation zone is a cube, this represents the length in the forward direction, in game engine units.
+  /// 将整个隔声区域看做一个立方体，表示向前的边长，单位为游戏引擎的单位长度。
   @JsonKey(name: 'forwardLength')
   final double? forwardLength;
 
-  /// Assuming the sound insulation zone is a cube, this represents the length in the right direction, in game engine units.
+  /// 将整个隔声区域看做一个立方体，表示向右的边长，单位为游戏引擎的单位长度。
   @JsonKey(name: 'rightLength')
   final double? rightLength;
 
-  /// Assuming the sound insulation zone is a cube, this represents the length in the upward direction, in game engine units.
+  /// 将整个隔声区域看做一个立方体，表示向上的边长，单位为游戏引擎的单位长度。
   @JsonKey(name: 'upLength')
   final double? upLength;
 
-  /// Sound attenuation coefficient when users inside and outside the sound insulation zone communicate. Value range: [0,1]:
-  ///  0: Broadcast mode. Volume and timbre do not attenuate with distance.
-  ///  (0,0.5): Weak attenuation. Slight attenuation of volume and timbre during transmission. Sound travels farther than in real environments.
-  ///  0.5: Simulates real-world volume attenuation. Equivalent to not setting the audioAttenuation parameter.
-  ///  (0.5,1]: Strong attenuation (default is 1). Rapid attenuation of volume and timbre during transmission.
+  /// 隔声区域以内的用户和外部用户互通时的声音衰减系数，取值范围为 [0,1]。其中：
+  ///  0：广播模式，即音量和音色均不随距离衰减，无论距离远近，本地用户听到的音量和音色都无变化。
+  ///  (0,0.5)：弱衰减模式，即音量和音色在传播过程中仅发生微弱衰减，跟真实环境相比，声音可以传播得更远。
+  ///  0.5：模拟音量在真实环境下的衰减，效果等同于不设置 audioAttenuation 参数。
+  ///  (0.5,1]：强衰减模式 (默认值为 1) ，即音量和音色在传播过程中发生迅速衰减。
   @JsonKey(name: 'audioAttenuation')
   final double? audioAttenuation;
 
@@ -87,31 +87,31 @@ class SpatialAudioZone implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$SpatialAudioZoneToJson(this);
 }
 
-/// This class calculates user coordinates through the SDK to implement spatial audio.
+/// 该类通过 SDK 计算用户坐标，实现空间音频。
 ///
-/// This class inherits from BaseSpatialAudioEngine. Before calling other APIs under this class, you need to call the initialize method to initialize it.
+/// 该类继承自 BaseSpatialAudioEngine 。调用该类下其他 API 前，你需要调用 initialize 方法初始化该类。
 abstract class LocalSpatialAudioEngine {
   /// @nodoc
   Future<void> release();
 
-  /// Initializes the LocalSpatialAudioEngine.
+  /// 初始化 LocalSpatialAudioEngine 。
   ///
-  /// You must call this method to initialize the LocalSpatialAudioEngine before calling other methods of the LocalSpatialAudioEngine class.
-  ///  The SDK supports only one LocalSpatialAudioEngine instance per app.
+  /// 在调用 LocalSpatialAudioEngine 类的其他方法前，你需要先调用该方法初始化 LocalSpatialAudioEngine 。
+  ///  SDK 只支持每个 App 创建一个 LocalSpatialAudioEngine 实例。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> initialize();
 
-  /// Updates the spatial position information of a remote user.
+  /// 更新远端用户的空间位置信息。
   ///
-  /// After successfully calling this method, the SDK calculates spatial audio parameters based on the relative position of the local and remote users. You must call this method after joinChannel.
+  /// 成功调用该方法后，SDK 会根据本地和远端用户的相对位置计算空间音频参数。 该方法需要在 joinChannel 后调用。
   ///
-  /// * [uid] The user ID. It must be the same as the user ID used when the user joins the channel.
-  /// * [posInfo] The spatial position information of the remote user. See RemoteVoicePositionInfo.
+  /// * [uid] 用户 ID。需与用户加入频道时填写的用户 ID 一致。
+  /// * [posInfo] 远端用户的空间位置信息。详见 RemoteVoicePositionInfo 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> updateRemotePosition(
       {required int uid, required RemoteVoicePositionInfo posInfo});
 
@@ -121,15 +121,15 @@ abstract class LocalSpatialAudioEngine {
       required RemoteVoicePositionInfo posInfo,
       required RtcConnection connection});
 
-  /// Deletes the spatial position information of the specified remote user.
+  /// 删除指定远端用户的空间位置信息。
   ///
-  /// After this method is successfully called, the local user will no longer hear the specified remote user.
-  /// After leaving the channel, to avoid wasting computing resources, you need to call this method to delete the spatial position information of the specified remote user. Otherwise, the user's spatial position information will continue to be stored. When the number of remote users exceeds the number of audio streams set in setMaxAudioRecvCount, the SDK will automatically unsubscribe from the audio streams of the farthest users based on relative distance.
+  /// 成功调用该方法后，本地用户将听不到指定的远端用户。
+  /// 离开频道后，为避免计算资源的浪费，你需要调用该方法删除指定远端用户的空间位置信息。否则，该用户的空间位置信息会一直被保存。当远端用户人数大于 setMaxAudioRecvCount 中设定的可接收音频流数时，会按照相对距离依次自动取消订阅距离最远的用户的音频流。
   ///
-  /// * [uid] User ID. Must match the user ID used when joining the channel.
+  /// * [uid] 用户 ID。需与用户加入频道时填写的用户 ID 一致。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> removeRemotePosition(int uid);
 
   /// @nodoc
@@ -179,16 +179,16 @@ abstract class LocalSpatialAudioEngine {
   /// @nodoc
   Future<void> muteRemoteAudioStream({required int uid, required bool mute});
 
-  /// Sets the sound attenuation effect for a specified user.
+  /// 设置指定用户的声音衰减效果。
   ///
-  /// * [uid] User ID. Must match the user ID used when joining the channel.
-  /// * [attenuation] The sound attenuation coefficient for the specified user, ranging from [0,1].
-  /// * [forceSet] Whether to forcibly apply the sound attenuation effect for the user: true : Forces the use of attenuation to set the user's sound attenuation effect. In this case, the audioAttenuation value set in SpatialAudioZone has no effect on this user. false : Does not forcibly apply attenuation to the user. Behavior depends on the following:
-  ///  If the audio source and listener are in and out of the sound insulation zone respectively, the attenuation effect is determined by audioAttenuation in SpatialAudioZone.
-  ///  If the audio source and listener are both inside or both outside the same sound insulation zone, the attenuation effect is determined by the attenuation parameter in this method.
+  /// * [uid] 用户 ID。需与用户加入频道时填写的用户 ID 一致。
+  /// * [attenuation] 针对该用户的声音衰减系数，取值范围为[0,1]。其中：
+  /// * [forceSet] 是否强制设定该用户的声音衰减效果： true ：强制使用 attenuation 设置该用户的声音衰减效果，此时 SpatialAudioZone 中的 audioAttenuation 中设置的隔声区域衰减系数对该用户不生效。 false ：不强制使用 attenuation 设置用户的声音衰减效果，分为以下两种情况。
+  ///  如果音源和听声者分属于隔声区域内部和外部，则声音衰减效果由 SpatialAudioZone 中的 audioAttenuation 决定。
+  ///  如果音源和听声者在同一个隔声区域内或同在隔声区域外，则声音衰减效果由该方法中的 attenuation 决定。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRemoteAudioAttenuation(
       {required int uid, required double attenuation, required bool forceSet});
 
@@ -202,12 +202,12 @@ abstract class LocalSpatialAudioEngine {
       required double attenuation,
       required bool forceSet});
 
-  /// Deletes the spatial position information of all remote users.
+  /// 删除所有远端用户的空间位置信息。
   ///
-  /// After this method is successfully called, the local user will no longer hear any remote users.
-  /// After leaving the channel, you can also call this method to delete all remote users' spatial position information to avoid wasting computing resources.
+  /// 成功调用该方法后，本地用户将听不到所有远端用户。
+  /// 离开频道后，为避免计算资源的浪费，你也可以调用该方法删除所有远端用户的空间位置信息。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> clearRemotePositions();
 }
