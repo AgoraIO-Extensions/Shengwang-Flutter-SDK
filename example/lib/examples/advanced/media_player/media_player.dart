@@ -38,8 +38,6 @@ class _State extends State<MediaPlayer> {
 
   bool isJoined = false;
 
-  // Android only. HDR video needs `useAndroidSurfaceViewHdr`, which also counts as
-  // `useAndroidSurfaceView`. Toggling recreates the player.
   bool _useAndroidSurfaceView = false;
   bool _useAndroidSurfaceViewHdr = false;
 
@@ -160,7 +158,6 @@ class _State extends State<MediaPlayer> {
     });
   }
 
-  /// The view options are fixed when the controller is created, so recreate the player.
   Future<void> _recreateMediaPlayer() async {
     setState(() {
       _isReadyPreview = false;
@@ -173,7 +170,9 @@ class _State extends State<MediaPlayer> {
       String title, bool value, ValueChanged<bool>? onChanged) {
     return Row(children: [
       Expanded(child: Text(title, style: const TextStyle(fontSize: 12))),
-      Switch(value: value, onChanged: _isUrlOpened ? null : onChanged),
+      Switch(
+          value: value,
+          onChanged: _isUrlOpened || !_isReadyPreview ? null : onChanged),
     ]);
   }
 
@@ -222,7 +221,6 @@ class _State extends State<MediaPlayer> {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) ...[
-              // HDR takes priority and implies a SurfaceView, so this switch is locked on.
               _androidViewSwitch(
                   'Android SurfaceView',
                   _useAndroidSurfaceView || _useAndroidSurfaceViewHdr,

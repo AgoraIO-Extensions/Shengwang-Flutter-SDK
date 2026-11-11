@@ -27,20 +27,7 @@ abstract class VideoViewControllerBase {
   /// Android SurfaceView 仅适用于 Android 平台。 是否使用 Android SurfaceView 渲染视频： true : 使用 Android SurfaceView 渲染视频。 false : 不使用 Android SurfaceView 渲染视频。
   bool get useAndroidSurfaceView;
 
-  /// 仅适用于 Android 平台。是否使用 Android SurfaceView 以 Hybrid Composition 方式渲染 HDR（PQ / HLG）视频。
-  ///
-  /// true ：优先级高于 [useAndroidSurfaceView]，等同于把 [useAndroidSurfaceView] 设为 true ，视频用 Android SurfaceView 渲染。
-  /// 平台视图通过 `PlatformViewLink` 和 `PlatformViewsService.initSurfaceAndroidView` 创建，Flutter 使用 Hybrid Composition，
-  /// SurfaceView 保持为独立的 SurfaceFlinger 图层。在 Android 上显示 HDR 视频需要设为 true 。
-  ///
-  /// false ：（默认）与之前一样使用 `AndroidView`（`initAndroidView`）创建视图。此时 Android SurfaceView 会退回 Virtual Display，
-  /// HDR 视频按 SDR 显示。
-  ///
-  /// Hybrid Composition 在平台线程合成 Flutter 帧，Android 10 以下每帧多一次拷贝，可能降低 Flutter 帧率。Flutter 的变换、
-  /// 裁剪和透明度可能对 SurfaceView 不生效，所以只对需要 HDR 的视图打开。
-  ///
-  /// 不影响 [useFlutterTexture]： [useFlutterTexture] 为 true 时用 Flutter Texture 渲染，忽略该参数。非 Android 平台也忽略该参数。
-  /// 该参数在创建 `AgoraVideoView` 时读取；如需修改，请创建新的 `AgoraVideoView` 。
+  /// Android SurfaceView HDR 仅适用于 Android 平台。 是否以 Hybrid Composition 方式用 Android SurfaceView 渲染 HDR（PQ / HLG）视频： true : 以 Hybrid Composition 方式用 Android SurfaceView 渲染视频。优先级高于 useAndroidSurfaceView ，并将其视为 true 。Flutter 界面性能可能降低。 false : （默认）不改变视频的渲染方式。 useFlutterTexture 为 true 时忽略该参数。该参数在创建 AgoraVideoView 时读取；如需修改，请创建新的 AgoraVideoView 。
   bool get useAndroidSurfaceViewHdr;
 
   @internal
