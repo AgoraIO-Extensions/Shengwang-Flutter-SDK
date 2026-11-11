@@ -1,162 +1,162 @@
 import '/src/_serializable.dart';
 import '/src/binding_forward_export.dart';
 
-/// Class that provides media player functionality and supports multiple instances.
+/// 提供媒体播放器功能的类，支持多实例。
 abstract class MediaPlayer {
-  /// Gets the player ID.
+  /// 获取播放器 ID。
   ///
   /// Returns
-  /// If the method call succeeds, returns the player ID.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法调用成功，返回播放器 ID。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   int getMediaPlayerId();
 
-  /// Opens a media resource.
+  /// 打开媒体资源。
   ///
-  /// This method is asynchronous.
+  /// 该方法为异步调用。
   ///
-  /// * [url] Sets the path of the media file. Supports both local and online files.
-  /// * [startPos] Sets the start playback position in milliseconds. Default is 0.
+  /// * [url] 设置媒体文件的路径，支持本地和在线文件。
+  /// * [startPos] 设置起始播放位置（毫秒），默认值为 0。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> open({required String url, required int startPos});
 
-  /// Opens a media resource and sets playback options.
+  /// 打开媒体资源并进行播放设置。
   ///
-  /// This method allows you to open different types of media resources, including custom media files, and configure playback settings. This method is asynchronous. To play the media file, call the play method after receiving the onPlayerSourceStateChanged callback reporting the state playerStateOpenCompleted.
+  /// 该方法支持你打开不同类型的媒体资源，包括自定义的媒体资源文件，并可进行播放设置。 该方法为异步调用。如需播放媒体文件，需要在收到 onPlayerSourceStateChanged 回调报告状态为 playerStateOpenCompleted 后再调用 play 方法播放媒体文件。
   ///
-  /// * [source] Media resource. See MediaSource.
+  /// * [source] 媒体资源，详见 MediaSource 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> openWithMediaSource(MediaSource source);
 
-  /// Plays the media file.
+  /// 播放媒体文件。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> play();
 
-  /// Pauses playback.
+  /// 暂停播放。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> pause();
 
-  /// Stops playback.
+  /// 停止播放。
   ///
-  /// After calling this method to stop playback, you need to call open or openWithMediaSource to open the media resource again if you want to replay.
+  /// 调用该方法停止播放后，如需重新播放，需要调用 open 或 openWithMediaSource 再次打开媒体资源。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> stop();
 
-  /// Resumes playback after pausing.
+  /// 暂停后恢复播放。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> resume();
 
-  /// Seeks to the specified playback position in the media file.
+  /// 定位到媒体文件的指定播放位置。
   ///
-  /// If you call seek after playback has completed (i.e., you received the onPlayerSourceStateChanged callback reporting the playback state as playerStatePlaybackCompleted or playerStatePlaybackAllLoopsCompleted), the SDK will automatically start playback from the specified position upon success. You will receive the onPlayerSourceStateChanged callback reporting the state as playerStatePlaying.
-  ///  If you call seek while playback is paused, the SDK will seek to the specified position upon success. To start playback, call resume or play.
+  /// 如果你在播放已经完成后（收到 onPlayerSourceStateChanged 回调报告播放状态为 playerStatePlaybackCompleted 或 playerStatePlaybackAllLoopsCompleted）再调用 seek ，方法调用成功后，SDK 会从你指定的位置开始自动播放，此时你会收到 onPlayerSourceStateChanged 回调报告播放状态为 playerStatePlaying。
+  ///  如果你在播放暂停的情况下调用 seek ，调用成功后 SDK 会定位到你指定位置，如需播放，请调用 resume 或 play 。
   ///
-  /// * [newPos] The specified position (in milliseconds).
+  /// * [newPos] 指定的位置（毫秒）。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> seek(int newPos);
 
-  /// Adjusts the pitch of the currently playing media resource.
+  /// 调整当前播放的媒体资源的音调。
   ///
-  /// You need to call this method after calling open.
+  /// 你需要在调用 open 后调用该方法。
   ///
-  /// * [pitch] Adjusts the pitch of the locally played music file in semitone steps. The default value is 0, meaning no pitch adjustment. The valid range is [-12, 12], where each adjacent value differs by a semitone. The greater the absolute value, the more the pitch is increased or decreased.
+  /// * [pitch] 按半音音阶调整本地播放的音乐文件的音调，默认值为 0，即不调整音调。取值范围为 [-12,12]，每相邻两个值的音高距离相差半音。取值的绝对值越大，音调升高或降低得越多。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAudioPitch(int pitch);
 
-  /// Gets the total duration of the media file.
+  /// 获取媒体文件总时长。
   ///
   /// Returns
-  /// Total duration of the media file (in milliseconds).
+  /// 媒体文件总时长（毫秒）。
   Future<int> getDuration();
 
-  /// Gets the current playback position.
+  /// 获取当前播放进度。
   ///
   /// Returns
-  /// If the method call succeeds, returns the current playback position (milliseconds).
-  ///  < 0: The method call fails. See MediaPlayerReason.
+  /// 方法调用成功，返回当前播放进度（毫秒）。
+  ///  < 0: 方法调用失败，详见 MediaPlayerReason 。
   Future<int> getPlayPosition();
 
-  /// Gets the number of media streams in the current media file.
+  /// 获取当前媒体文件中媒体流的数量。
   ///
-  /// Call this method after open and after receiving the onPlayerSourceStateChanged callback reporting the playback state as playerStateOpenCompleted.
+  /// 请在 open 后并收到 onPlayerSourceStateChanged 回调报告播放状态为 playerStateOpenCompleted 后再调用该方法。
   ///
   /// Returns
-  /// If the method call succeeds, returns the number of media streams in the media file.
-  ///  < 0: The method call fails. See MediaPlayerReason.
+  /// 方法调用成功，返回该媒体文件中媒体流的数量。
+  ///  < 0: 方法调用失败，详见 MediaPlayerReason 。
   Future<int> getStreamCount();
 
-  /// Gets media stream information by stream index.
+  /// 通过媒体流的索引值获取媒体流信息。
   ///
-  /// * [index] Media stream index. The value must be less than the return value of getStreamCount.
+  /// * [index] 媒体流索引值。该参数的值需小于 getStreamCount 的返回值。
   ///
   /// Returns
-  /// If the method call succeeds, returns the media stream information. See PlayerStreamInfo.
-  ///  If the method call fails, returns NULL.
+  /// 方法调用成功，返回媒体流信息，详见 PlayerStreamInfo 。
+  ///  方法调用失败，返回 NULL 。
   Future<PlayerStreamInfo> getStreamInfo(int index);
 
-  /// Sets loop playback.
+  /// 设置循环播放。
   ///
-  /// If you want to enable loop playback, call this method and set the number of loops.
-  /// When loop playback ends, the SDK triggers the onPlayerSourceStateChanged callback to report the playback state as playerStatePlaybackAllLoopsCompleted.
+  /// 如果你希望循环播放，请调用该方法并设置循环播放次数。
+  /// 循环播放结束时，SDK 会触发 onPlayerSourceStateChanged 回调，向你报告播放状态为 playerStatePlaybackAllLoopsCompleted。
   ///
-  /// * [loopCount] Number of playback loops.
-  ///  ≥0: Number of loops. For example, 0 means no loop, play once in total; 1 means loop once, play twice in total.
-  ///  -1: Infinite loop.
+  /// * [loopCount] 循环播放的次数。
+  ///  ≥0：循环次数。例如，设为 0 表示不循环播放，一共播放一次；设为 1 表示循环播放一次，一共播放 2 次。
+  ///  -1：无限循环播放。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setLoopCount(int loopCount);
 
-  /// Sets the playback speed of the current audio file.
+  /// 设置当前音频文件的播放速度。
   ///
-  /// You need to call this method after open.
+  /// 你需要在 open 后调用该方法。
   ///
-  /// * [speed] Playback speed. Recommended range is [30, 400], where:
-  ///  30: 0.3x speed.
-  ///  100: original speed.
-  ///  400: 4x speed.
+  /// * [speed] 播放速度。推荐取值范围为 [30,400]，其中：
+  ///  30: 0.3 倍速。
+  ///  100: 原始速度。
+  ///  400: 4 倍速。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setPlaybackSpeed(int speed);
 
-  /// Specifies the audio track for the current audio file.
+  /// 指定当前音频文件的播放音轨。
   ///
-  /// After obtaining the audio track index of the audio file, you can call this method to select any track for playback. If different tracks in a multi-track file contain songs in different languages, you can call this method to set the playback language. You need to call this method after calling getStreamInfo to get the audio stream index.
+  /// 获取音频文件的音轨索引后，你可以调用该方法指定任一音轨进行播放。如果一个多音轨文件的不同音轨存放了不同语言的歌曲，你可以调用该方法设置播放语言。 你需要在调用 getStreamInfo 获取音频流索引值后调用该方法。
   ///
-  /// * [index] Index of the audio track.
+  /// * [index] 音轨的索引值。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> selectAudioTrack(int index);
 
-  /// Selects the audio tracks for local playback and remote publishing.
+  /// 选择本地播放和发送至远端的音轨。
   ///
-  /// You can call this method to separately set the audio tracks for local playback and for publishing to the remote end.
-  /// Before calling this method, you must open the media file using openWithMediaSource and set enableMultiAudioTrack to true via MediaSource.
+  /// 你可以调用该方法分别设置本地播放和发送到远端的音轨。
+  /// 在调用该方法前，你需要通过 openWithMediaSource 来打开媒体文件，并通过 MediaSource 将 enableMultiAudioTrack 设为 true 。
   ///
-  /// * [playoutTrackIndex] The index of the audio track used for local playback. You can get the index via getStreamInfo.
-  /// * [publishTrackIndex] The index of the audio track used for publishing to the remote end. You can get the index via getStreamInfo.
+  /// * [playoutTrackIndex] 用于本地播放的音轨索引。你可以通过 getStreamInfo 来获取索引值。
+  /// * [publishTrackIndex] 用于发送至远端的音轨索引。你可以通过 getStreamInfo 来获取索引值。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly.
-  ///  < 0: Failure.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。
+  ///  < 0: 方法调用失败。
   Future<void> selectMultiAudioTrack(
       {required int playoutTrackIndex, required int publishTrackIndex});
 
@@ -169,134 +169,134 @@ abstract class MediaPlayer {
   /// @nodoc
   Future<void> setExternalSubtitle(String url);
 
-  /// Gets the current state of the player.
+  /// 获取播放器当前状态。
   ///
   /// Returns
-  /// The current state of the player. See MediaPlayerState.
+  /// 播放器当前状态，详见 MediaPlayerState 。
   Future<MediaPlayerState> getState();
 
-  /// Sets whether to mute.
+  /// 设置是否静音。
   ///
-  /// * [muted] Mute option. true : Mute. false : (Default) Do not mute.
+  /// * [muted] 静音选项。 true ：静音。 false ：（默认）不静音。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> mute(bool muted);
 
-  /// Gets whether the currently playing media file is muted.
+  /// 获取当前播放的媒体文件是否静音。
   ///
   /// Returns
-  /// true : The currently playing media file is muted. false : The currently playing media file is not muted.
+  /// true ：当前播放的媒体文件为静音。 false ：当前播放的媒体文件没有静音。
   Future<bool> getMute();
 
-  /// Adjusts the local playback volume.
+  /// 调节本地播放音量。
   ///
-  /// * [volume] Local playback volume, ranging from 0 to 100:
-  ///  0: Mute.
-  ///  100: (Default) Original playback volume of the media file.
+  /// * [volume] 本地播放音量，取值范围从 0 到 100：
+  ///  0: 无声。
+  ///  100: （默认）媒体文件的原始播放音量。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustPlayoutVolume(int volume);
 
-  /// Gets the current local playback volume.
+  /// 获取当前本地播放音量。
   ///
   /// Returns
-  /// Returns the current local playback volume, ranging from 0 to 100:
-  ///  0: Silent.
-  ///  100: (Default) Original playback volume of the media file.
+  /// 返回当前本地播放音量，取值范围从 0 到 100：
+  ///  0: 无声。
+  ///  100: （默认）媒体文件的原始播放音量。
   Future<int> getPlayoutVolume();
 
-  /// Adjusts the volume heard by remote users.
+  /// 调节远端用户听到的音量。
   ///
-  /// After connecting to the Agora server, you can call this method to adjust the volume of the media file heard by remote users.
+  /// 连接到声网服务器后，你可以调用该方法，调节远端用户听到的媒体文件的音量。
   ///
-  /// * [volume] Signal volume, ranging from 0 to 400:
-  ///  0: Mute.
-  ///  100: (Default) Original volume of the media file.
-  ///  400: Four times the original volume (with built-in overflow protection).
+  /// * [volume] 信号音量，取值范围从 0 到 400：
+  ///  0: 无声。
+  ///  100: （默认）媒体文件的原始音量。
+  ///  400: 原始音量的四倍（自带溢出保护）。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> adjustPublishSignalVolume(int volume);
 
-  /// Gets the volume heard by remote users.
+  /// 获取远端用户听到的音量。
   ///
   /// Returns
-  /// ≥ 0: Remote playback volume of the media file.
-  ///  < 0: The method call fails. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// ≥ 0: 播放文件的远端播放音量。
+  ///  < 0: 方法调用失败。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<int> getPublishSignalVolume();
 
-  /// Sets the player rendering view.
+  /// 设置播放器渲染视图。
   ///
-  /// In Flutter, you do not need to call this method manually. Use AgoraVideoView to render local and remote views.
+  /// 在 Flutter 中你不需要主动调用该方法，请使用 AgoraVideoView 渲染本地和远端视图。
   ///
-  /// * [view] Rendering view. On Windows, this is a window handle (HWND).
+  /// * [view] 渲染视图。Windows 平台为窗口句柄（HWND）。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setView(int view);
 
-  /// Sets the rendering mode of the player view.
+  /// 设置播放器视图的渲染模式。
   ///
-  /// * [renderMode] Rendering mode of the player view. See RenderModeType.
+  /// * [renderMode] 播放器视图的渲染模式。详见 RenderModeType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setRenderMode(RenderModeType renderMode);
 
-  /// Registers a playback observer.
+  /// 注册一个播放观测器。
   ///
-  /// * [observer] Playback observer that reports events during playback. See MediaPlayerSourceObserver.
+  /// * [observer] 播放观测器，报告播放中的事件，详见 MediaPlayerSourceObserver 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void registerPlayerSourceObserver(MediaPlayerSourceObserver observer);
 
-  /// Unregisters the playback observer.
+  /// 取消注册播放观测器。
   ///
-  /// * [observer] Playback observer that reports events during playback. See MediaPlayerSourceObserver.
+  /// * [observer] 播放观测器，报告播放中的事件，详见 MediaPlayerSourceObserver 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void unregisterPlayerSourceObserver(MediaPlayerSourceObserver observer);
 
-  /// Registers an audio frame observer.
+  /// 注册音频帧观测器。
   ///
-  /// * [observer] Audio frame observer that monitors the reception of each audio frame. See AudioPcmFrameSink.
-  /// * [mode] Usage mode of the audio frame. See RawAudioFrameOpModeType.
+  /// * [observer] 音频帧观测器，观测每帧音频的接收，详见 AudioPcmFrameSink 。
+  /// * [mode] 音频帧的使用模式，详见 RawAudioFrameOpModeType 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void registerAudioFrameObserver(
       {required AudioPcmFrameSink observer,
       RawAudioFrameOpModeType mode =
           RawAudioFrameOpModeType.rawAudioFrameOpModeReadOnly});
 
-  /// Unregisters the audio frame observer.
+  /// 取消注册音频帧观测器。
   ///
-  /// * [observer] Audio frame observer. See AudioPcmFrameSink.
+  /// * [observer] 音频帧观测器，详见 AudioPcmFrameSink 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void unregisterAudioFrameObserver(AudioPcmFrameSink observer);
 
-  /// Registers a video frame observer.
+  /// 注册视频帧观测器。
   ///
-  /// You need to implement a MediaPlayerVideoFrameObserver class in this method and register its callbacks as needed based on your scenario. Once the video frame observer is successfully registered, the SDK triggers the registered callbacks upon capturing each video frame.
+  /// 你需要在该方法中实现一个 MediaPlayerVideoFrameObserver 类，并根据场景需要，注册该类的回调。成功注册视频帧观测器后，SDK 会在捕捉到每个视频帧时，触发你所注册的回调。
   ///
-  /// * [observer] Video frame observer that monitors the reception of each video frame. See MediaPlayerVideoFrameObserver.
+  /// * [observer] 视频帧观测器，观测每帧视频的接收。详见 MediaPlayerVideoFrameObserver 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void registerVideoFrameObserver(MediaPlayerVideoFrameObserver observer);
 
-  /// Unregisters the video frame observer.
+  /// 取消注册视频帧观测器。
   ///
-  /// * [observer] Video frame observer that monitors the reception of each video frame. See MediaPlayerVideoFrameObserver.
+  /// * [observer] 视频帧观测器，观测每帧视频的接收，详见 MediaPlayerVideoFrameObserver 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   void unregisterVideoFrameObserver(MediaPlayerVideoFrameObserver observer);
 
   /// @nodoc
@@ -307,25 +307,25 @@ abstract class MediaPlayer {
   void unregisterMediaPlayerAudioSpectrumObserver(
       AudioSpectrumObserver observer);
 
-  /// Sets the channel mode of the current audio file.
+  /// 设置当前音频文件的声道模式。
   ///
-  /// In stereo audio files, the left and right channels can store different audio data. Depending on your needs, you can set the channel mode to original, left channel, right channel, or mixed mode. For example, in a KTV scenario, the left channel of an audio file stores the accompaniment, and the right channel stores the original vocal. If you only want to hear the accompaniment, call this method to set the channel mode to left channel; if you want to hear both the accompaniment and the original vocal, set the channel mode to mixed mode.
-  ///  You need to call this method after calling open.
-  ///  This method applies to stereo audio files only.
+  /// 在双声道音频文件中，左声道和右声道可以存储不同的音频数据。根据实际需要，你可以设置声道模式为原始模式、左声道模式、右声道模式或混合模式。例如，在 KTV 场景中，音频文件的左声道存储了伴奏，右声道存储了原唱的歌声。如果你只需听伴奏，调用该方法设置音频文件的声道模式为左声道模式；如果你需要同时听伴奏和原唱，调用该方法设置声道模式为混合模式。
+  ///  你需要在调用 open 后调用该方法。
+  ///  该方法仅适用于双声道的音频文件。
   ///
-  /// * [mode] Channel mode. See AudioDualMonoMode.
+  /// * [mode] 声道模式。详见 AudioDualMonoMode 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setAudioDualMonoMode(AudioDualMonoMode mode);
 
   /// @nodoc
   Future<String> getPlayerSdkVersion();
 
-  /// Gets the path of the media resource being played.
+  /// 获取播放的媒体资源的路径。
   ///
   /// Returns
-  /// The path of the media resource being played.
+  /// 播放的媒体资源的路径。
   Future<String> getPlaySrc();
 
   /// @nodoc
@@ -350,66 +350,66 @@ abstract class MediaPlayer {
   /// @nodoc
   Future<void> switchAgoraCDNSrc({required String src, bool syncPts = false});
 
-  /// Switches the media resource.
+  /// 切换媒体资源。
   ///
-  /// You can call this method to switch the bitrate of the media resource being played based on the current network conditions. For example:
-  ///  When the network is poor, switch to a lower bitrate media resource.
-  ///  When the network is good, switch to a higher bitrate media resource. After calling this method, if you receive the onPlayerEvent callback reporting the playerEventSwitchComplete event, the media resource has been switched successfully. If the switch fails, the SDK retries 3 times. If it still fails, you receive the onPlayerEvent callback reporting the playerEventSwitchError event, indicating an error occurred during the switch.
-  ///  Make sure to call this method after open.
-  ///  To ensure normal playback, note the following when calling this method:
-  ///  Do not call this method while playback is paused.
-  ///  Do not call seek during bitrate switching.
-  ///  Ensure the playback position before switching does not exceed the total duration of the media resource to be switched.
+  /// 你可以根据当前网络状态调用该方法切换播放的媒体资源的码率。例如：
+  ///  在网络较差时，将播放的媒体资源切换为较低码率的媒体资源地址。
+  ///  在网络较好时，将播放的媒体资源切换为较高码率的媒体资源地址。 调用该方法后，如果你收到 onPlayerEvent 回调报告事件 playerEventSwitchComplete ，则媒体资源切换成功。如果资源切换失败，SDK 会自动重试 3 次。如果仍然失败，你会收到 onPlayerEvent 回调，报告 playerEventSwitchError 事件，表示媒体资源切换时发生错误。
+  ///  请确保在 open 之后调用该方法。
+  ///  为保证播放正常，请在调用该方法时注意如下：
+  ///  不要在播放暂停时调用该方法。
+  ///  不要在切换码率过程中调用 seek 。
+  ///  确保切换码率前的播放位置不大于待切换的媒体资源总时长。
   ///
-  /// * [src] Network path of the media resource.
-  /// * [syncPts] Whether to synchronize the start playback position before and after switching: true : Synchronize. false : (Default) Do not synchronize.
+  /// * [src] 媒体资源的网络路径。
+  /// * [syncPts] 是否同步切换前后的起始播放位置: true ：同步。 false ：(默认) 不同步。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> switchSrc({required String src, bool syncPts = true});
 
-  /// Preloads a media resource.
+  /// 预加载媒体资源。
   ///
-  /// You can call this method to preload a media resource into the playlist. To preload multiple media resources, call this method multiple times.
-  /// After preloading succeeds, call playPreloadedSrc to play the media resource, or call stop to clear the playlist.
-  ///  Before calling this method, make sure you have successfully called open or openWithMediaSource to open the media resource.
-  ///  The SDK does not support preloading duplicate media resources into the playlist, but supports preloading the currently playing media resource again into the playlist.
+  /// 你可以调用该方法将一个媒体资源预加载到播放列表中。如果需要预加载多个媒体资源，你可以多次调用该方法。
+  /// 预加载成功后，如果你想播放媒体资源，请调用 playPreloadedSrc ；如果你想清空播放列表，请调用 stop 。
+  ///  调用该方法前，请确保你已经调用 open 或 openWithMediaSource 成功打开媒体资源。
+  ///  SDK 不支持你预加载重复的媒体资源到播放列表，但支持你将正在播放的媒体资源再次预加载到播放列表。
   ///
-  /// * [src] Network path of the media resource.
-  /// * [startPos] Start position (in milliseconds) when playback begins after preloading into the playlist. Set to 0 when preloading a live stream.
+  /// * [src] 媒体资源的网络路径。
+  /// * [startPos] 预加载到播放列表后，开始播放时的起始位置（毫秒）。预加载直播流时，将该参数设置为 0。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> preloadSrc({required String src, required int startPos});
 
-  /// Plays a preloaded media resource.
+  /// 播放预加载的媒体资源。
   ///
-  /// After calling the preloadSrc method to preload a media resource into the playlist, you can call this method to play the preloaded media resource. After calling this method, if you receive the onPlayerSourceStateChanged callback reporting the state as playerStatePlaying, the playback is successful.
-  /// If you want to change the preloaded media resource being played, you can call this method again and specify a new media resource path. If you want to replay the media resource, you need to call preloadSrc again to preload the media resource into the playlist before playing. To clear the playlist, call stop. If you call this method while playback is paused, it will take effect only after playback resumes.
+  /// 调用 preloadSrc 方法将媒体资源预加载到播放列表后，可以调用该方法播放已预加载的媒体资源。调用该方法后，如果你收到 onPlayerSourceStateChanged 回调报告状态 playerStatePlaying ，则表示播放成功。
+  /// 如果你想更换播放的预加载媒体资源，你可以再次调用该方法并指定新的媒体资源路径。如果你想重新播放媒体资源，你需要在播放前调用 preloadSrc 重新将该媒体资源预加载到播放列表。如果你想清空播放列表，请调用 stop 。 如果你在播放暂停时调用该方法，该方法会在恢复播放后才生效。
   ///
-  /// * [src] The URL of the media resource in the playlist. It must match the src set in the preloadSrc method; otherwise, playback will fail.
+  /// * [src] 播放列表中的媒体资源 URL 地址，必须与 preloadSrc 方法设置的 src 一致，否则无法播放。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> playPreloadedSrc(String src);
 
-  /// Releases the preloaded media resource.
+  /// 释放预加载的媒体资源。
   ///
-  /// * [src] Network path of the media resource.
+  /// * [src] 媒体资源的网络路径。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> unloadSrc(String src);
 
-  /// Enables or disables spatial audio for the media player.
+  /// 开启或关闭媒体播放器的空间音频。
   ///
-  /// After successfully setting the spatial audio parameters of the media player, the SDK enables spatial audio for the media player, allowing the local user to perceive spatial sound from media resources.
-  /// To disable spatial audio for the media player, you need to set the params parameter to null.
+  /// 成功设置媒体播放器的空间音频参数后，SDK 会开启媒体播放器的空间音频，即本地用户听媒体资源会有空间感。
+  /// 如果需关闭媒体播放器的空间音频，你需要将 params 参数设为空。
   ///
-  /// * [params] Spatial audio parameters for the media player. See SpatialAudioParams.
+  /// * [params] 媒体播放器的空间音频参数。详见 SpatialAudioParams 。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when it fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setSpatialAudioParams(SpatialAudioParams params);
 
   /// @nodoc
@@ -419,153 +419,153 @@ abstract class MediaPlayer {
   /// @nodoc
   Future<int> getAudioBufferDelay();
 
-  /// Sets media player options.
+  /// 设置媒体播放器选项。
   ///
-  /// The media player supports setting options using key and value.
-  /// The difference between this method and setPlayerOptionInString is that this method uses an Int type for value, while setPlayerOptionInString uses a String type. The two cannot be mixed.
+  /// 媒体播放器支持通过 key 和 value 来设置选项。
+  /// 该方法和 setPlayerOptionInString 的区别在于，该方法的 value 是 Int 型， setPlayerOptionInString 的 value 是 String 型。二者不可混用。
   ///
-  /// * [key] Key value.
-  /// * [value] Value.
+  /// * [key] key 值。
+  /// * [value] value 值。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setPlayerOptionInInt({required String key, required int value});
 
-  /// Sets media player options.
+  /// 设置媒体播放器选项。
   ///
-  /// The media player supports setting options using key and value.
-  /// The difference between this method and setPlayerOptionInInt is that this method uses a String type for value, while setPlayerOptionInInt uses an Int type. The two cannot be mixed.
+  /// 媒体播放器支持通过 key 和 value 来设置选项。
+  /// 该方法和 setPlayerOptionInInt 的区别在于，该方法的 value 是 String 型， setPlayerOptionInInt 的 value 是 Int 型。二者不可混用。
   ///
-  /// * [key] Key value.
-  /// * [value] Value.
+  /// * [key] key 值。
+  /// * [value] value 值。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
   Future<void> setPlayerOptionInString(
       {required String key, required String value});
 }
 
-/// This class provides methods for managing cached media files in the media player.
+/// 该类提供管理媒体播放器中缓存媒体文件的方法。
 abstract class MediaPlayerCacheManager {
-  /// Deletes all cached media files in the media player.
+  /// 删除媒体播放器中所有已缓存的媒体文件。
   ///
-  /// This method does not delete cached media files that are currently playing.
+  /// 该方法不会删除正在播放中的已缓存媒体文件。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See MediaPlayerReason.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败，详见 MediaPlayerReason 。
   Future<void> removeAllCaches();
 
-  /// Deletes the least recently used cached media file in the media player.
+  /// 删除媒体播放器中近期最少使用的一个缓存媒体文件。
   ///
-  /// When cached media files occupy too much space, you can call this method to clean up cache files. After calling this method, the SDK deletes the least recently used cached media file. When you call this method to delete cached media files, the currently playing cached media file will not be deleted.
+  /// 缓存媒体文件占用过多空间时，你可以调用该方法清理缓存文件。调用该方法后，SDK 会删除最少使用的一个缓存媒体文件。 当你调用此方法删除缓存媒体文件时，当前正在播放的已缓存媒体文件不会被删除。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See MediaPlayerReason.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败，详见 MediaPlayerReason 。
   Future<void> removeOldCache();
 
-  /// Deletes a specified cached media file.
+  /// 删除指定的已缓存媒体文件。
   ///
-  /// This method does not delete cached media files that are currently playing.
+  /// 该方法不会删除正在播放中的已缓存媒体文件。
   ///
-  /// * [uri] The URI (Uniform Resource Identifier) of the cache file to be deleted, which can be used to identify the media file.
+  /// * [uri] 待删除的缓存文件的 URI（Uniform Resource Identifier），可用于标识媒体文件。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See MediaPlayerReason.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败，详见 MediaPlayerReason 。
   Future<void> removeCacheByUri(String uri);
 
-  /// Sets the storage path for media files to be cached.
+  /// 设置待缓存的媒体文件的储存路径。
   ///
-  /// This method must be called after initializing RtcEngine.
+  /// 该方法需在初始化 RtcEngine 之后调用。
   ///
-  /// * [path] The absolute path for storing cached files. Make sure the specified directory exists and is writable.
+  /// * [path] 缓存文件储存的绝对路径。请确保指定的目录存在且可写。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See MediaPlayerReason.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败，详见 MediaPlayerReason 。
   Future<void> setCacheDir(String path);
 
-  /// Sets the maximum number of cached media files.
+  /// 设置缓存媒体文件数量的上限。
   ///
-  /// * [count] The maximum number of media files that can be cached. The default value is 1000.
+  /// * [count] 可缓存的媒体文件数量的上限，默认值为 1000。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See MediaPlayerReason.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败，详见 MediaPlayerReason 。
   Future<void> setMaxCacheFileCount(int count);
 
-  /// Sets the upper limit of the total cache size for media files.
+  /// 设置缓存媒体文件的总缓存大小的上限。
   ///
-  /// * [cacheSize] The total cache size limit for media files, in bytes. The default is 1 GB.
+  /// * [cacheSize] 缓存媒体文件的总缓存上限，单位为字节。默认为 1 GB。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See MediaPlayerReason.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败，详见 MediaPlayerReason 。
   Future<void> setMaxCacheFileSize(int cacheSize);
 
-  /// Enables or disables the automatic cache file removal feature.
+  /// 设置是否开启自动清除缓存文件功能。
   ///
-  /// When automatic cache file removal is enabled, if the number or total size of cached media files in the player exceeds the set limit, the SDK automatically removes the least recently used cache file.
+  /// 开启自动清除缓存文件后，当播放器中缓存的媒体文件超过你设置的文件数量或总缓存大小的上限时，SDK 会自动清除近期最少使用的一个缓存文件。
   ///
-  /// * [enable] Whether to enable automatic cache file removal: true : Enables automatic cache file removal. false : (Default) Disables automatic cache file removal.
+  /// * [enable] 是否自动清除缓存文件： true ：开启自动清除缓存文件功能。 false ：（默认）关闭自动清除缓存文件功能。
   ///
   /// Returns
-  /// When the method call succeeds, there is no return value; when fails, the AgoraRtcException exception is thrown. You need to catch the exception and handle it accordingly. See [Error Codes](https://docs.agora.io/en/video-calling/troubleshooting/error-codes) for details and resolution suggestions.
-  ///  < 0: Failure. See MediaPlayerReason.
+  /// 方法成功调用时，无返回值；方法调用失败时，会抛出 AgoraRtcException 异常，你需要捕获异常并进行处理。详见[错误码](https://doc.shengwang.cn/api-ref/rtc/flutter/error-code)了解详情和解决建议。
+  ///  < 0：方法调用失败，详见 MediaPlayerReason 。
   Future<void> enableAutoRemoveCache(bool enable);
 
-  /// Gets the storage path of the cached files.
+  /// 获取缓存文件的储存路径。
   ///
-  /// If you have not called the setCacheDir method to customize the cache file storage path before calling this method, the method returns the SDK's default cache file storage path.
+  /// 如果你在调用该方法前未曾调用 setCacheDir 方法自定义缓存文件的储存路径，该方法返回的为 SDK 默认的缓存文件储存路径。
   ///
-  /// * [length] Input parameter. The maximum length of the cache file storage path string.
+  /// * [length] 输入参数，缓存文件储存路径字符串的最大长度。
   ///
   /// Returns
-  /// On success, returns the storage path of the cached files.
-  ///  < 0: Failure. See MediaPlayerReason.
+  /// 方法调用成功时，返回缓存文件的储存路径。
+  ///  < 0：方法调用失败，详见 MediaPlayerReason 。
   Future<String> getCacheDir(int length);
 
-  /// Gets the maximum number of cache files set.
+  /// 获取所设置的缓存文件数量上限。
   ///
-  /// The default maximum number of cache files in the SDK is 1000.
+  /// SDK 默认的缓存文件数量上限为 1000。
   ///
   /// Returns
-  /// > 0: Success. Returns the maximum number of cache files.
-  ///  < 0: Failure. See MediaPlayerReason.
+  /// > 0：方法调用成功，返回缓存文件数量的上限。
+  ///  < 0：方法调用失败，详见 MediaPlayerReason 。
   Future<int> getMaxCacheFileCount();
 
-  /// Gets the maximum total cache size of cache files set.
+  /// 获取所设置的缓存文件总缓存的上限。
   ///
-  /// The default maximum total cache size of cache files in the SDK is 1GB. You can call the setMaxCacheFileSize method to customize the limit.
+  /// SDK 默认的缓存文件总缓存上限为 1GB。你可以调用 setMaxCacheFileSize 方法自定义总缓存大小的上限。
   ///
   /// Returns
-  /// > 0: Success. Returns the maximum total cache size in bytes.
-  ///  < 0: Failure. See MediaPlayerReason.
+  /// > 0：方法调用成功，返回缓存文件的总缓存上限，单位为字节。
+  ///  < 0：方法调用失败，详见 MediaPlayerReason 。
   Future<int> getMaxCacheFileSize();
 
-  /// Gets the total number of currently cached media files.
+  /// 获取当前已缓存的媒体文件的总数量。
   ///
   /// Returns
-  /// ≥ 0: Success. Returns the total number of currently cached media files.
-  ///  < 0: Failure. See MediaPlayerReason.
+  /// ≥ 0：方法调用成功，返回当前已缓存的媒体文件的总数量。
+  ///  < 0：方法调用失败，详见 MediaPlayerReason 。
   Future<int> getCacheFileCount();
 }
 
-/// Video data observer for the media player.
+/// 媒体播放器的视频数据观测器。
 ///
-/// You can call registerVideoFrameObserver to register or unregister the MediaPlayerVideoFrameObserver.
+/// 你可以调用 registerVideoFrameObserver 注册或取消注册 MediaPlayerVideoFrameObserver 观测器。
 class MediaPlayerVideoFrameObserver {
   /// @nodoc
   const MediaPlayerVideoFrameObserver({
     this.onFrame,
   });
 
-  /// Callback when a video frame is received.
+  /// 已获取视频帧回调。
   ///
-  /// After registering the video observer, this callback is triggered every time a video frame is received, reporting video frame information.
+  /// 注册视频观测器后，每次接收到一帧视频时，都会触发该回调，报告视频帧信息。
   ///
-  /// * [frame] Video frame information. See VideoFrame.
+  /// * [frame] 视频帧信息，详见 VideoFrame 。
   final void Function(VideoFrame frame)? onFrame;
 }
