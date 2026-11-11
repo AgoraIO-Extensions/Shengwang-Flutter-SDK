@@ -123,8 +123,8 @@ jobs:
             app="build/ios/iphoneos/Runner.app"
             archive_app="build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app"
           else
-            app="build/macos/Build/Products/Release/agora_rtc_engine_example.app"
-            archive_app="build/macos/archive/Runner.xcarchive/Products/Applications/agora_rtc_engine_example.app"
+            app="build/macos/Build/Products/Release/shengwang_rtc_engine_example.app"
+            archive_app="build/macos/archive/Runner.xcarchive/Products/Applications/shengwang_rtc_engine_example.app"
           fi
 
           symbols=(

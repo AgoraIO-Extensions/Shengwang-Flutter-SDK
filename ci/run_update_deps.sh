@@ -5,8 +5,8 @@ current_dir=$(pwd)
 echo "current_dir=${current_dir}"
 
 # const variables
-dep_file_ios=ios/agora_rtc_engine.podspec
-dep_file_macos=macos/agora_rtc_engine.podspec
+dep_file_ios=ios/shengwang_rtc_engine.podspec
+dep_file_macos=macos/shengwang_rtc_engine.podspec
 dep_file_android=android/build.gradle
 dep_file_windows=windows/cmake/DownloadSDK.cmake
 
