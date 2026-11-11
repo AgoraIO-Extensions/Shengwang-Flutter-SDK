@@ -12,12 +12,12 @@ import '/src/impl/agora_pip_controller_impl.dart';
 
 /// @nodoc
 extension RtcEngineExt on RtcEngine {
-  /// Get the actual absolute path of an asset from its relative asset path.
+  /// 通过 Asset 的相对规路径获取该 Asset 的实际绝对路径。
   ///
-  /// * [assetPath] The flutter -> assets field configured in the pubspec.yaml file.
+  /// * [assetPath] pubspec.yaml 文件中配置的 flutter -> assets 字段。
   ///
   /// Returns
-  /// The actual path of the asset.
+  /// Asset 的实际路径。
   Future<String?> getAssetAbsolutePath(String assetPath) async {
     final impl = this as RtcEngineImpl;
     return impl.getAssetAbsolutePath(assetPath);
@@ -67,15 +67,15 @@ extension RtcEngineExt on RtcEngine {
   }
 }
 
-/// Error code and description.
+/// 错误码及错误描述。
 class AgoraRtcException implements Exception {
   /// @nodoc
   AgoraRtcException({required this.code, this.message});
 
-  /// Error code. See ErrorCodeType.
+  /// 错误码，详见 ErrorCodeType 。
   final int code;
 
-  /// Error description.
+  /// 错误描述。
   final String? message;
 
   @override

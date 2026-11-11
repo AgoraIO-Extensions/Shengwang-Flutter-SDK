@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
-import 'package:shengwang_rtc_engine_example/config/agora.config.dart' as config;
+import 'package:shengwang_rtc_engine_example/config/agora.config.dart'
+    as config;
 import 'package:shengwang_rtc_engine_example/components/log_sink.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

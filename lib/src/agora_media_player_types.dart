@@ -5,38 +5,38 @@ part 'agora_media_player_types.g.dart';
 /// @nodoc
 const kMaxCharBufferLength = 50;
 
-/// Player states.
+/// 播放器的状态。
 @JsonEnum(alwaysCreate: true)
 enum MediaPlayerState {
-  /// 0: Default state. Returned before opening a media file and after playback ends.
+  /// 0: 默认状态。播放器会在你打开媒体文件之前和结束播放之后返回该状态码。
   @JsonValue(0)
   playerStateIdle,
 
-  /// 1: Opening media file.
+  /// 1: 正在打开媒体文件。
   @JsonValue(1)
   playerStateOpening,
 
-  /// 2: Media file opened successfully.
+  /// 2: 成功打开媒体文件。
   @JsonValue(2)
   playerStateOpenCompleted,
 
-  /// 3: Playing.
+  /// 3: 正在播放。
   @JsonValue(3)
   playerStatePlaying,
 
-  /// 4: Playback paused.
+  /// 4: 暂停播放。
   @JsonValue(4)
   playerStatePaused,
 
-  /// 5: Playback completed.
+  /// 5: 播放完毕。
   @JsonValue(5)
   playerStatePlaybackCompleted,
 
-  /// 6: Loop playback ended.
+  /// 6: 循环播放已结束。
   @JsonValue(6)
   playerStatePlaybackAllLoopsCompleted,
 
-  /// 7: Playback stopped.
+  /// 7: 播放已停止。
   @JsonValue(7)
   playerStateStopped,
 
@@ -68,7 +68,7 @@ enum MediaPlayerState {
   @JsonValue(56)
   playerStateSetTrackInternal,
 
-  /// 100: Playback failed.
+  /// 100: 播放失败。
   @JsonValue(100)
   playerStateFailed,
 }
@@ -86,70 +86,70 @@ extension MediaPlayerStateExt on MediaPlayerState {
   }
 }
 
-/// Reason for media player state change.
+/// 播放器状态改变的原因。
 @JsonEnum(alwaysCreate: true)
 enum MediaPlayerReason {
-  /// 0: No error.
+  /// 0: 没有错误。
   @JsonValue(0)
   playerReasonNone,
 
-  /// -1: Invalid arguments.
+  /// -1: 不正确的参数。
   @JsonValue(-1)
   playerReasonInvalidArguments,
 
-  /// -2: Internal error.
+  /// -2: 内部错误。
   @JsonValue(-2)
   playerReasonInternal,
 
-  /// -3: No resource.
+  /// -3: 没有 resource。
   @JsonValue(-3)
   playerReasonNoResource,
 
-  /// -4: Invalid resource.
+  /// -4: 无效的 resource。
   @JsonValue(-4)
   playerReasonInvalidMediaSource,
 
-  /// -5: Unknown media stream type.
+  /// -5: 未知的媒体流类型。
   @JsonValue(-5)
   playerReasonUnknownStreamType,
 
-  /// -6: Object not initialized.
+  /// -6: 对象没有初始化。
   @JsonValue(-6)
   playerReasonObjNotInitialized,
 
-  /// -7: Codec not supported.
+  /// -7: 解码器不支持该 codec。
   @JsonValue(-7)
   playerReasonCodecNotSupported,
 
-  /// -8: Invalid renderer.
+  /// -8: 无效的 renderer。
   @JsonValue(-8)
   playerReasonVideoRenderFailed,
 
-  /// -9: Invalid internal player state.
+  /// -9: 播放器内部状态错误。
   @JsonValue(-9)
   playerReasonInvalidState,
 
-  /// -10: URL not found.
+  /// -10: 未找到该 URL。
   @JsonValue(-10)
   playerReasonUrlNotFound,
 
-  /// -11: Invalid connection between player and Agora server.
+  /// -11: 播放器与声网服务器的连接无效。
   @JsonValue(-11)
   playerReasonInvalidConnectionState,
 
-  /// -12: Insufficient playback buffer data.
+  /// -12: 播放缓冲区数据不足。
   @JsonValue(-12)
   playerReasonSrcBufferUnderflow,
 
-  /// -13: Playback was interrupted abnormally and ended.
+  /// -13: 播放被异常打断而结束。
   @JsonValue(-13)
   playerReasonInterrupted,
 
-  /// -14: SDK does not support this API call.
+  /// -14: SDK 不支持的接口调用。
   @JsonValue(-14)
   playerReasonNotSupported,
 
-  /// -15: Authentication information for the media resource network path has expired.
+  /// -15: 媒体资源网络路径的鉴权信息已过期。
   @JsonValue(-15)
   playerReasonTokenExpired,
 
@@ -157,7 +157,7 @@ enum MediaPlayerReason {
   @JsonValue(-16)
   playerReasonIpExpired,
 
-  /// -17: Unknown error.
+  /// -17：未知错误。
   @JsonValue(-17)
   playerReasonUnknown,
 }
@@ -175,22 +175,22 @@ extension MediaPlayerReasonExt on MediaPlayerReason {
   }
 }
 
-/// Media stream types.
+/// 媒体流的类型。
 @JsonEnum(alwaysCreate: true)
 enum MediaStreamType {
-  /// 0: Unknown type.
+  /// 0: 未知类型。
   @JsonValue(0)
   streamTypeUnknown,
 
-  /// 1: Video stream.
+  /// 1: 视频流。
   @JsonValue(1)
   streamTypeVideo,
 
-  /// 2: Audio stream.
+  /// 2: 音频流。
   @JsonValue(2)
   streamTypeAudio,
 
-  /// 3: Subtitle stream.
+  /// 3: 字幕流。
   @JsonValue(3)
   streamTypeSubtitle,
 }
@@ -208,62 +208,62 @@ extension MediaStreamTypeExt on MediaStreamType {
   }
 }
 
-/// Player events.
+/// 播放器事件。
 @JsonEnum(alwaysCreate: true)
 enum MediaPlayerEvent {
-  /// 0: Start seeking.
+  /// 0: 开始定位。
   @JsonValue(0)
   playerEventSeekBegin,
 
-  /// 1: Seek completed.
+  /// 1: 完成定位。
   @JsonValue(1)
   playerEventSeekComplete,
 
-  /// 2: Seek error.
+  /// 2: 定位出错。
   @JsonValue(2)
   playerEventSeekError,
 
-  /// 5: Current audio track changed.
+  /// 5: 当前音轨发生改变。
   @JsonValue(5)
   playerEventAudioTrackChanged,
 
-  /// 6: The current buffer is insufficient for playback.
+  /// 6: 当前缓冲的数据不足以支持播放。
   @JsonValue(6)
   playerEventBufferLow,
 
-  /// 7: The current buffer is just enough for playback.
+  /// 7: 当前缓冲的数据刚好能支持播放。
   @JsonValue(7)
   playerEventBufferRecover,
 
-  /// 8: Audio or video stuttering occurred.
+  /// 8: 音频或视频出现卡顿。
   @JsonValue(8)
   playerEventFreezeStart,
 
-  /// 9: Audio and video stuttering stopped.
+  /// 9: 音频和视频均停止卡顿。
   @JsonValue(9)
   playerEventFreezeStop,
 
-  /// 10: Start switching media source.
+  /// 10: 开始切换媒体资源。
   @JsonValue(10)
   playerEventSwitchBegin,
 
-  /// 11: Media source switch completed.
+  /// 11: 媒体资源切换完成。
   @JsonValue(11)
   playerEventSwitchComplete,
 
-  /// 12: Media source switch error.
+  /// 12: 媒体资源切换出错。
   @JsonValue(12)
   playerEventSwitchError,
 
-  /// 13: First video frame displayed.
+  /// 13: 视频首帧出图。
   @JsonValue(13)
   playerEventFirstDisplayed,
 
-  /// 14: Reached the maximum number of cacheable files.
+  /// 14：达到可缓存文件的数量上限。
   @JsonValue(14)
   playerEventReachCacheFileMaxCount,
 
-  /// 15: Reached the maximum size of cacheable files.
+  /// 15：达到可缓存文件的大小上限。
   @JsonValue(15)
   playerEventReachCacheFileMaxSize,
 
@@ -297,18 +297,18 @@ extension MediaPlayerEventExt on MediaPlayerEvent {
   }
 }
 
-/// Events that occur during media resource preloading.
+/// 预加载媒体资源时发生的事件。
 @JsonEnum(alwaysCreate: true)
 enum PlayerPreloadEvent {
-  /// 0: Start preloading media resource.
+  /// 0: 开始预加载媒体资源。
   @JsonValue(0)
   playerPreloadEventBegin,
 
-  /// 1: Media resource preloading completed.
+  /// 1: 预加载媒体资源完成。
   @JsonValue(1)
   playerPreloadEventComplete,
 
-  /// 2: Error occurred during media resource preloading.
+  /// 2: 预加载媒体资源出错。
   @JsonValue(2)
   playerPreloadEventError,
 }
@@ -326,7 +326,7 @@ extension PlayerPreloadEventExt on PlayerPreloadEvent {
   }
 }
 
-/// All information of the player media stream.
+/// 播放器媒体流的所有信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class PlayerStreamInfo implements AgoraSerializable {
   /// @nodoc
@@ -345,55 +345,55 @@ class PlayerStreamInfo implements AgoraSerializable {
       this.audioBitsPerSample,
       this.duration});
 
-  /// The index of the media stream.
+  /// 媒体流的索引值。
   @JsonKey(name: 'streamIndex')
   final int? streamIndex;
 
-  /// The type of this media stream. See MediaStreamType.
+  /// 此条媒体流的类型。详见 MediaStreamType 。
   @JsonKey(name: 'streamType')
   final MediaStreamType? streamType;
 
-  /// The codec specification of this media stream.
+  /// 此条媒体流的编码规格。
   @JsonKey(name: 'codecName')
   final String? codecName;
 
-  /// The language of this media stream.
+  /// 此条媒体流的语言。
   @JsonKey(name: 'language')
   final String? language;
 
-  /// Applies to video streams only. Indicates the video frame rate (fps).
+  /// 该参数仅对视频流生效，表示视频帧率 (fps)。
   @JsonKey(name: 'videoFrameRate')
   final int? videoFrameRate;
 
-  /// Applies to video streams only. Indicates the video bitrate (bps).
+  /// 该参数仅对视频流生效，表示视频码率 (bps)。
   @JsonKey(name: 'videoBitRate')
   final int? videoBitRate;
 
-  /// Applies to video streams only. Indicates the video width (px).
+  /// 该参数仅对视频流生效，表示视频宽度 (px)。
   @JsonKey(name: 'videoWidth')
   final int? videoWidth;
 
-  /// Applies to video streams only. Indicates the video height (px).
+  /// 该参数仅对视频流生效，表示视频高度 (px)。
   @JsonKey(name: 'videoHeight')
   final int? videoHeight;
 
-  /// Applies to video streams only. Indicates the rotation angle.
+  /// 该参数仅对视频流生效，表示旋转角度。
   @JsonKey(name: 'videoRotation')
   final int? videoRotation;
 
-  /// Applies to audio streams only. Indicates the audio sample rate (Hz).
+  /// 该参数仅对音频流生效，表示音频采样率 (Hz)。
   @JsonKey(name: 'audioSampleRate')
   final int? audioSampleRate;
 
-  /// Applies to audio streams only. Indicates the number of audio channels.
+  /// 该参数仅对音频流生效，表示声道数。
   @JsonKey(name: 'audioChannels')
   final int? audioChannels;
 
-  /// Applies to audio streams only. Indicates the number of bits per audio sample (bit).
+  /// 该参数仅对音频流生效，表示每个音频采样点的位数 (bit)。
   @JsonKey(name: 'audioBitsPerSample')
   final int? audioBitsPerSample;
 
-  /// The duration of the media stream (milliseconds).
+  /// 媒体流的时长（毫秒）。
   @JsonKey(name: 'duration')
   final int? duration;
 
@@ -405,17 +405,17 @@ class PlayerStreamInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$PlayerStreamInfoToJson(this);
 }
 
-/// Video bitrate information during media playback.
+/// 媒体资源播放时的视频码率相关信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class SrcInfo implements AgoraSerializable {
   /// @nodoc
   const SrcInfo({this.bitrateInKbps, this.name});
 
-  /// Video bitrate during media playback (Kbps).
+  /// 媒体资源播放时的视频码率（Kbps）。
   @JsonKey(name: 'bitrateInKbps')
   final int? bitrateInKbps;
 
-  /// Name of the media resource.
+  /// 媒体资源的名字。
   @JsonKey(name: 'name')
   final String? name;
 
@@ -427,14 +427,14 @@ class SrcInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$SrcInfoToJson(this);
 }
 
-/// Media metadata types.
+/// 媒体附属信息数据类型。
 @JsonEnum(alwaysCreate: true)
 enum MediaPlayerMetadataType {
-  /// 0: Unknown type.
+  /// 0: 未知类型。
   @JsonValue(0)
   playerMetadataTypeUnknown,
 
-  /// 1: SEI (Supplemental Enhancement Information) type.
+  /// 1: SEI （补充增强信息）类型。
   @JsonValue(1)
   playerMetadataTypeSei,
 }
@@ -452,21 +452,21 @@ extension MediaPlayerMetadataTypeExt on MediaPlayerMetadataType {
   }
 }
 
-/// Statistics of cached files.
+/// 缓存文件的统计数据。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class CacheStatistics implements AgoraSerializable {
   /// @nodoc
   const CacheStatistics({this.fileSize, this.cacheSize, this.downloadSize});
 
-  /// Size of the media file for this playback, in bytes.
+  /// 本次播放的媒体文件的大小，单位为字节。
   @JsonKey(name: 'fileSize')
   final int? fileSize;
 
-  /// Size of the cached data of the media file for this playback, in bytes.
+  /// 本次播放的媒体文件已缓存的数据大小，单位为字节。
   @JsonKey(name: 'cacheSize')
   final int? cacheSize;
 
-  /// Size of the downloaded media file for this playback, in bytes.
+  /// 本次播放已下载的媒体文件大小，单位为字节。
   @JsonKey(name: 'downloadSize')
   final int? downloadSize;
 
@@ -478,7 +478,7 @@ class CacheStatistics implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$CacheStatisticsToJson(this);
 }
 
-/// Information related to the currently playing media resource.
+/// 当前播放的媒体资源的相关信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class PlayerPlaybackStats implements AgoraSerializable {
   /// @nodoc
@@ -488,19 +488,19 @@ class PlayerPlaybackStats implements AgoraSerializable {
       this.audioBitrateInKbps,
       this.totalBitrateInKbps});
 
-  /// Video frame rate, in fps.
+  /// 视频帧率，单位为 fps。
   @JsonKey(name: 'videoFps')
   final int? videoFps;
 
-  /// Video bitrate, in kbps.
+  /// 视频码率，单位为 kbps。
   @JsonKey(name: 'videoBitrateInKbps')
   final int? videoBitrateInKbps;
 
-  /// Audio bitrate, in kbps.
+  /// 音频码率，单位为 kbps。
   @JsonKey(name: 'audioBitrateInKbps')
   final int? audioBitrateInKbps;
 
-  /// Total bitrate of the media stream, in kbps.
+  /// 媒体流的总码率，单位为 kbps。
   @JsonKey(name: 'totalBitrateInKbps')
   final int? totalBitrateInKbps;
 
@@ -512,7 +512,7 @@ class PlayerPlaybackStats implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$PlayerPlaybackStatsToJson(this);
 }
 
-/// Information related to the media player.
+/// 媒体播放器相关信息。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class PlayerUpdatedInfo implements AgoraSerializable {
   /// @nodoc
@@ -529,27 +529,27 @@ class PlayerUpdatedInfo implements AgoraSerializable {
   @JsonKey(name: 'internalPlayerUuid')
   final String? internalPlayerUuid;
 
-  /// Device ID, identifies a device.
+  /// 设备 ID，标识一个设备。
   @JsonKey(name: 'deviceId')
   final String? deviceId;
 
-  /// Video height (pixel).
+  /// 视频高度 (pixel)。
   @JsonKey(name: 'videoHeight')
   final int? videoHeight;
 
-  /// Video width (pixel).
+  /// 视频宽度 (pixel)。
   @JsonKey(name: 'videoWidth')
   final int? videoWidth;
 
-  /// Audio sample rate (Hz).
+  /// 音频采样率 (Hz)。
   @JsonKey(name: 'audioSampleRate')
   final int? audioSampleRate;
 
-  /// Number of audio channels.
+  /// 声道数。
   @JsonKey(name: 'audioChannels')
   final int? audioChannels;
 
-  /// Number of bits per audio sample (bit).
+  /// 每个音频采样点的位数 (bit)。
   @JsonKey(name: 'audioBitsPerSample')
   final int? audioBitsPerSample;
 
@@ -561,7 +561,7 @@ class PlayerUpdatedInfo implements AgoraSerializable {
   Map<String, dynamic> toJson() => _$PlayerUpdatedInfoToJson(this);
 }
 
-/// Information and playback settings for the media file to be played.
+/// 需播放的媒体文件的相关信息及播放设置。
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class MediaSource implements AgoraSerializable {
   /// @nodoc
@@ -575,37 +575,37 @@ class MediaSource implements AgoraSerializable {
       this.isAgoraSource,
       this.isLiveSource});
 
-  /// URL of the media resource to be played.
+  /// 需要播放的媒体资源的 URL。
   @JsonKey(name: 'url')
   final String? url;
 
-  /// URI (Uniform Resource Identifier) of the media file, used to identify the media file.
+  /// 媒体文件的 URI（Uniform Resource Identifier），可用于标识媒体文件。
   @JsonKey(name: 'uri')
   final String? uri;
 
-  /// Start playback position in milliseconds. Default is 0.
+  /// 设置起始播放位置 (毫秒)，默认值为 0。
   @JsonKey(name: 'startPos')
   final int? startPos;
 
-  /// If you disable autoplay, call the play method to play the media file after opening it. Whether to enable autoplay after opening the media file: true : (default) Enable autoplay. false : Disable autoplay.
+  /// 如果你设置关闭自动播放，打开媒体文件后，请调用 play 方法来播放媒体文件。 打开媒体文件后，是否开启自动播放： true ：（默认）开启自动播放。 false ：关闭自动播放。
   @JsonKey(name: 'autoPlay')
   final bool? autoPlay;
 
-  /// The SDK currently only supports caching for on-demand streams, not for on-demand streams transmitted via HLS protocol.
-  ///  Before caching, assign a value to uri, otherwise the player uses the media file's url as the cache index.
-  ///  After enabling real-time caching, the player pre-caches part of the currently playing media file locally. When you play the file again, the player loads data from the cache, saving network traffic. The statistics of the currently cached media file are updated every second after playback starts. See CacheStatistics. Whether to enable real-time caching for this playback: true : Enable real-time caching. false : (default) Disable real-time caching.
+  /// SDK 目前仅支持缓存点播流，但不支持缓存通过 HLS 协议传输的点播流。
+  ///  缓存前，请向 uri 传值，否则播放器会以媒体文件的 url 作为缓存索引。
+  ///  开启实时缓存后，播放器会预先缓存当前正在播放的媒体文件的部分数据到本地，当你下次播放该文件时播放器会直接从缓存中加载数据，可节省网络流量。当前缓存的媒体文件的相关统计数据会在媒体文件开始播放后每秒更新一次，详见 CacheStatistics 。 此次播放是否开启实时缓存功能： true ：开启实时缓存。 false ：（默认）关闭实时缓存。
   @JsonKey(name: 'enableCache')
   final bool? enableCache;
 
-  /// Whether to allow selecting different audio tracks for this playback: true : Allow selecting different audio tracks. false : (default) Do not allow selecting different audio tracks. If you need to set different audio tracks for local playback and publishing to remote, set this parameter to true and then call the selectMultiAudioTrack method to set the audio track.
+  /// 此次播放是否允许选择不同音轨： true ：允许选择不同音轨。 false ：（默认）不允许选择不同音轨。 如果你在本地播放和发布音频至远端时，需要设置不同的音轨，你需要将该参数设为 true ，然后再调用 selectMultiAudioTrack 方法来设置音轨。
   @JsonKey(name: 'enableMultiAudioTrack')
   final bool? enableMultiAudioTrack;
 
-  /// If the media resource to be opened is a live or on-demand stream distributed via Agora Fusion CDN, pass the stream URL to url and set isAgoraSource to true. Otherwise, you do not need to set isAgoraSource. Whether the opened media resource is a live or on-demand stream distributed via Agora Fusion CDN: true : The media resource is a live or on-demand stream distributed via Agora Fusion CDN. false : (default) The media resource is not distributed via Agora Fusion CDN.
+  /// 如果你需要打开的媒体资源为声网融合 CDN 分发的直播流或点播流，请向 url 传入直播或点播流的 URL 并将 isAgoraSource 设置为 true ，否则无需设置 isAgoraSource 。 打开的媒体资源是否为通过声网融合 CDN 分发的直播或点播流： true ：打开的媒体资源是声网融合 CDN 分发的直播或点播流。 false ：（默认）打开的媒体资源不是声网融合 CDN 分发的直播或点播流。
   @JsonKey(name: 'isAgoraSource')
   final bool? isAgoraSource;
 
-  /// Only when the media resource is a live stream, setting isLiveSource to true can speed up opening the media resource. Whether the opened media resource is a live stream: true : Live stream. false : (default) Not a live stream. If the media resource is a live stream, it is recommended to set this parameter to true to speed up the opening of the live stream.
+  /// 仅当打开的媒体资源为直播流时，将 isLiveSource 设置为 true 后才可加快媒体资源的打开速度。 打开的媒体资源是否为直播流： true ：直播流。 false ：（默认）非直播流。 如果你打开的媒体资源为直播流，建议你将该参数设置为 true ，可加快打开直播流的速度。
   @JsonKey(name: 'isLiveSource')
   final bool? isLiveSource;
 
