@@ -2,6 +2,8 @@
 # Validate default CI, conditional packaging, and the preserved full matrix.
 require 'json'
 require 'yaml'
+require 'open3'
+require 'tempfile'
 
 root = File.expand_path('..', __dir__)
 read = lambda { |name| YAML.load_file(File.join(root, '.github/workflows', name)) }
@@ -10,6 +12,20 @@ packages = read.call('run_apple_dependency_matrix.yml')
 ios_workflow = read.call('run_ios_integration_test.yml')
 weekly = read.call('run_test_weekly_latest_stable.yml')
 jobs = workflow.fetch('jobs')
+entry = read.call('on_pr_internal.yml').fetch('jobs')
+gate = entry.fetch('check_permission').fetch('steps').find { |step| step['id'] == 'check_permission_by_secret' }.fetch('run')
+raise 'Runtime tests must use their own credential gate' unless entry.fetch('run_test').fetch('if').include?('outputs.has_test_permission == 1')
+raise 'Example builds must retain their existing credential gate' unless entry.fetch('build_example').fetch('if').include?('outputs.has_permission == 1')
+[false, true].product([false, true]).each do |app_id, my_app_id|
+  Tempfile.create('ci-secret-gate') do |output|
+    env = { 'APP_ID' => app_id ? 'fixture' : '', 'MY_APP_ID' => my_app_id ? 'fixture' : '', 'GITHUB_OUTPUT' => output.path }
+    _, error, status = Open3.capture3(env, 'bash', '-c', gate)
+    raise error unless status.success?
+    results = File.readlines(output.path).map { |line| line.strip.split('=', 2) }.to_h
+    raise 'Runtime tests must require APP_ID only' unless results['has_test_permission'] == (app_id ? '1' : '-1')
+    raise 'Example builds must require both credentials' unless results['has_permission'] == (app_id && my_app_id ? '1' : '-1')
+  end
+end
 triggers = lambda { |value| value['on'] || value[true] }
 
 def values(job, field, full)

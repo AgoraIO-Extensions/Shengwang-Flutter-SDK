@@ -15,21 +15,27 @@ jobs:
     timeout-minutes: 60
     outputs:
         has_permission: ${{ steps.check_permission_by_secret.outputs.has_permission }}
+        has_test_permission: ${{ steps.check_permission_by_secret.outputs.has_test_permission }}
     steps:
       - name: Check for Secret availability
         id: check_permission_by_secret
-        # perform secret check & put boolean result as an output
+        # Runtime tests need APP_ID; optional example builds also use MY_APP_ID.
         shell: bash
         env:
           APP_ID: ${{ secrets.APP_ID }}
           MY_APP_ID: ${{ secrets.MY_APP_ID }}
         run: |
+          if [ -n "$APP_ID" ]; then
+            echo "has_test_permission=1" >> $GITHUB_OUTPUT;
+          else
+            echo "has_test_permission=-1" >> $GITHUB_OUTPUT;
+          fi
           if [ -n "$APP_ID" ] && [ -n "$MY_APP_ID" ]; then
             echo "has_permission=1" >> $GITHUB_OUTPUT;
-            echo "App ID secrets are available, PR opened by the internal contributors"
+            echo "Example build credentials are available"
           else
             echo "has_permission=-1" >> $GITHUB_OUTPUT;
-            echo "App ID secrets are unavailable, PR opened by the external contributors"
+            echo "Example build credentials are unavailable"
           fi
 
   build_example:
@@ -57,7 +63,7 @@ jobs:
     name: Run test
     needs: check_permission
     # If the PR requested by a external contributor, the secrets.APP_ID should be empty, and skip this workflow
-    if: ${{ needs.check_permission.outputs.has_permission == 1 && !contains(github.event.pull_request.labels.*.name, 'ci:skip') }}
+    if: ${{ needs.check_permission.outputs.has_test_permission == 1 && !contains(github.event.pull_request.labels.*.name, 'ci:skip') }}
     uses: ./.github/workflows/run_test.yml
     secrets:
       APP_ID: ${{ secrets.APP_ID }}
