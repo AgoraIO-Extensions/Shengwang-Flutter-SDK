@@ -13,6 +13,10 @@ A normal PR allocates nine runners including the permission check, with two macO
 workers. Apple packaging changes add two macOS workers: eleven runners total,
 four on macOS. GitHub also displays skipped deep-regression jobs; they allocate
 no runners. Fast native workers have a 20-minute ceiling, not a latency promise.
+When packaging is selected, the combined macOS worker has a 60-minute ceiling
+for startup plus its three builds; each package-consumer/example build is capped
+at 20 minutes. Cold dependency downloads therefore do not consume a shared
+20-minute budget for all four checks.
 
 The fast gate deliberately does not run the full API and screenshot suites.
 This reduces per-PR regression depth: rendering and less common API regressions

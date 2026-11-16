@@ -127,7 +127,7 @@ jobs:
       matrix:
         include: ${{ fromJSON(inputs.full_compatibility && '[{"version":"3.16","renderer_version":"3.24.5"},{"version":"3.38.5","renderer_version":"3.38.5"}]' || '[{"version":"3.38.5","renderer_version":"3.38.5"}]') }}
     runs-on: macos-26
-    timeout-minutes: ${{ (inputs.full_regression || inputs.full_compatibility) && 120 || 20 }}
+    timeout-minutes: ${{ (inputs.full_regression || inputs.full_compatibility) && 120 || (needs.check_changes.outputs.apple_packages != 'false' && 60 || 20) }}
     env:
       FULL_REGRESSION: ${{ (inputs.full_regression || inputs.full_compatibility) }}
       TEST_APP_ID: ${{ secrets.APP_ID }}
@@ -159,10 +159,12 @@ jobs:
         name: Run macOS startup smoke or full API suite
         if: ${{ !cancelled() && steps.runtime_flutter.outcome == 'success' }}
       - name: Run macOS published package smoke test
+        timeout-minutes: 20
         run: bash ci/run_flutter_macos_published_package_smoke_test.sh
         id: published_macos
         if: ${{ !cancelled() && steps.runtime_flutter.outcome == 'success' && matrix.version == '3.38.5' && (inputs.full_compatibility || needs.check_changes.outputs.apple_packages != 'false') }}
       - name: Run iOS published package smoke test
+        timeout-minutes: 20
         run: bash ci/run_flutter_ios_published_package_smoke_test.sh
         id: published_ios
         if: ${{ !cancelled() && steps.runtime_flutter.outcome == 'success' && matrix.version == '3.38.5' && (inputs.full_compatibility || needs.check_changes.outputs.apple_packages != 'false') }}
@@ -171,6 +173,7 @@ jobs:
         if: ${{ !cancelled() && steps.runtime_flutter.outcome == 'success' && (inputs.full_compatibility || needs.check_changes.outputs.apple_packages != 'false') }}
         run: flutter pub get
       - name: Build iOS example
+        timeout-minutes: 20
         id: ios_example
         if: ${{ !cancelled() && steps.runtime_flutter.outcome == 'success' && steps.example_dependencies.outcome == 'success' }}
         run: flutter build ios --no-codesign --simulator
