@@ -38,10 +38,8 @@ class _State extends State<MediaPlayer> {
 
   bool isJoined = false;
 
-  // Android only. With Hybrid Composition++ enabled in AndroidManifest.xml
-  // (Flutter 3.44+, Android 14+, Impeller Vulkan) a SurfaceView shows HDR
-  // video; the default TextureView is always SDR.
   bool _useAndroidSurfaceView = false;
+  bool _useAndroidSurfaceViewHdr = false;
 
   @override
   void initState() {
@@ -105,7 +103,8 @@ class _State extends State<MediaPlayer> {
     _mediaPlayerController = MediaPlayerController(
         rtcEngine: _engine,
         canvas: const VideoCanvas(uid: 0),
-        useAndroidSurfaceView: _useAndroidSurfaceView);
+        useAndroidSurfaceView: _useAndroidSurfaceView,
+        useAndroidSurfaceViewHdr: _useAndroidSurfaceViewHdr);
     await _mediaPlayerController.initialize();
     _mediaPlayerController.registerPlayerSourceObserver(
       MediaPlayerSourceObserver(
@@ -167,6 +166,16 @@ class _State extends State<MediaPlayer> {
     await _createMediaPlayer();
   }
 
+  Widget _androidViewSwitch(
+      String title, bool value, ValueChanged<bool>? onChanged) {
+    return Row(children: [
+      Expanded(child: Text(title, style: const TextStyle(fontSize: 12))),
+      Switch(
+          value: value,
+          onChanged: _isUrlOpened || !_isReadyPreview ? null : onChanged),
+    ]);
+  }
+
   void _leaveChannel() async {
     if (_isUrlOpened) {
       await _mediaPlayerController.stop();
@@ -211,21 +220,22 @@ class _State extends State<MediaPlayer> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android)
-              Row(children: [
-                const Expanded(
-                    child: Text('Android SurfaceView',
-                        style: TextStyle(fontSize: 12))),
-                Switch(
-                  value: _useAndroidSurfaceView,
-                  onChanged: _isUrlOpened || !_isReadyPreview
+            if (!kIsWeb && defaultTargetPlatform == TargetPlatform.android) ...[
+              _androidViewSwitch(
+                  'Android SurfaceView',
+                  _useAndroidSurfaceView || _useAndroidSurfaceViewHdr,
+                  _useAndroidSurfaceViewHdr
                       ? null
                       : (changed) {
                           _useAndroidSurfaceView = changed;
                           _recreateMediaPlayer();
-                        },
-                ),
-              ]),
+                        }),
+              _androidViewSwitch('Android SurfaceView HDR (Hybrid Composition)',
+                  _useAndroidSurfaceViewHdr, (changed) {
+                _useAndroidSurfaceViewHdr = changed;
+                _recreateMediaPlayer();
+              }),
+            ],
             Row(children: [
               Expanded(
                 child: TextField(

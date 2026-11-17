@@ -27,6 +27,9 @@ abstract class VideoViewControllerBase {
   /// Android SurfaceView 仅适用于 Android 平台。 是否使用 Android SurfaceView 渲染视频： true : 使用 Android SurfaceView 渲染视频。 false : 不使用 Android SurfaceView 渲染视频。
   bool get useAndroidSurfaceView;
 
+  /// Android SurfaceView HDR 仅适用于 Android 平台。 是否以 Hybrid Composition 方式用 Android SurfaceView 渲染 HDR（PQ / HLG）视频： true : 以 Hybrid Composition 方式用 Android SurfaceView 渲染视频。优先级高于 useAndroidSurfaceView ，并将其视为 true 。Flutter 界面性能可能降低。 false : （默认）不改变视频的渲染方式。 useFlutterTexture 为 true 时忽略该参数。该参数在创建 AgoraVideoView 时读取；如需修改，请创建新的 AgoraVideoView 。HDR 场景建议使用 Flutter 3.47.9（仍支持 Android Gradle Plugin 8 的最新版本），并在 App 的 AndroidManifest.xml 中添加 `io.flutter.embedding.android.EnableHcpp` meta-data 开启 Hybrid Composition++（HCPP）。Flutter 会在 Android 14 及以上、使用 Impeller Vulkan 的设备上使用 HCPP，首帧前视频区域不会显示之前的 Flutter 界面；其他设备回退到 Hybrid Composition。该 meta-data 对 App 内所有 platform view 生效。
+  bool get useAndroidSurfaceViewHdr;
+
   @internal
   int getTextureId();
 
@@ -74,7 +77,8 @@ class VideoViewController
       {required this.rtcEngine,
       required this.canvas,
       this.useFlutterTexture = false,
-      this.useAndroidSurfaceView = false})
+      this.useAndroidSurfaceView = false,
+      this.useAndroidSurfaceViewHdr = false})
       : connection = const RtcConnection();
 
   /// @nodoc
@@ -83,7 +87,8 @@ class VideoViewController
       required this.canvas,
       required this.connection,
       this.useFlutterTexture = false,
-      this.useAndroidSurfaceView = false})
+      this.useAndroidSurfaceView = false,
+      this.useAndroidSurfaceViewHdr = false})
       : assert(canvas.uid != null && canvas.uid != 0,
             'Remote uid can not be null or 0'),
         assert(connection.channelId != null);
@@ -102,6 +107,9 @@ class VideoViewController
 
   @override
   final bool useAndroidSurfaceView;
+
+  @override
+  final bool useAndroidSurfaceViewHdr;
 
   @protected
   @override
