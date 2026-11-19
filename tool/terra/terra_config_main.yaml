@@ -78,4 +78,4 @@ renderers:
       language: dart
       fmtConfig: fmt_dart.yaml
       exportFilePath: ../../lib/agora_rtc_engine.dart
-      templateUrl: https://github.com/AgoraIO/agora_doc_source/releases/download/master-build/flutter_ng_json_template_en.json
+      templateUrl: https://github.com/AgoraIO/agora_doc_source/releases/download/master-build/flutter_ng_json_template_cn.json

@@ -5,12 +5,12 @@
 cmake_minimum_required(VERSION 3.14)
 
 # Project-level configuration.
-set(PROJECT_NAME "agora_rtc_engine")
+set(PROJECT_NAME "shengwang_rtc_engine")
 project(${PROJECT_NAME} LANGUAGES CXX)
 
 # This value is used when generating builds using this plugin, so it must
 # not be changed
-set(PLUGIN_NAME "agora_rtc_engine_plugin")
+set(PLUGIN_NAME "shengwang_rtc_engine_plugin")
 
 include(cmake/DownloadSDK.cmake)
 
@@ -75,7 +75,7 @@ endforeach (NATIVE_DLL ${NATIVE_DLLS})
 # List of absolute paths to libraries that should be bundled with the plugin.
 # This list could contain prebuilt libraries, or libraries created by an
 # external build triggered from this build file.
-set(agora_rtc_engine_bundled_libraries
+set(shengwang_rtc_engine_bundled_libraries
   ${BUNDLED_LIBRARIES}
   PARENT_SCOPE
 )
