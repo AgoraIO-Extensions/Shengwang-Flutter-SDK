@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import '../generated/rtcengine_fake_test.generated.dart' as generated;

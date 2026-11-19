@@ -1,10 +1,10 @@
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
-import 'package:agora_rtc_engine_example/config/agora.config.dart' as config;
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine_example/config/agora.config.dart' as config;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import 'package:agora_rtc_engine_example/components/log_sink.dart';
+import 'package:shengwang_rtc_engine_example/components/log_sink.dart';
 
 /// JoinChannelAudio Example
 class JoinChannelAudio extends StatefulWidget {

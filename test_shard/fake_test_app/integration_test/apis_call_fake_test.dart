@@ -18,7 +18,7 @@ import 'generated/videodevicemanager_fake_test.generated.dart'
     as videodevicemanager;
 
 import 'package:iris_tester/iris_tester.dart';
-import 'package:agora_rtc_engine/src/impl/agora_rtc_engine_impl.dart';
+import 'package:shengwang_rtc_engine/src/impl/agora_rtc_engine_impl.dart';
 import 'package:iris_method_channel/iris_method_channel.dart';
 
 class TestInitilizationArgProvider implements InitilizationArgProvider {

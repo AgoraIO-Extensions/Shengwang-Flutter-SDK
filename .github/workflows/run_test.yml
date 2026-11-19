@@ -65,12 +65,12 @@ jobs:
           # Generate DartDoc
           dart doc
           # Create a zip file of the DartDoc output
-          zip -r agora_rtc_engine_docs.zip doc
+          zip -r shengwang_rtc_engine_docs.zip doc
       - name: Upload DartDoc Artifact ⬆️
         uses: actions/upload-artifact@v4
         with:
-          name: agora_rtc_engine_docs.zip
-          path: agora_rtc_engine_docs.zip
+          name: shengwang_rtc_engine_docs.zip
+          path: shengwang_rtc_engine_docs.zip
   pub_publish_check:
     name: pub publish check
     if: ${{ !contains(github.event.pull_request.labels.*.name, 'ci:skip') }}

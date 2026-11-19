@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:agora_rtc_engine/agora_rtc_engine.dart';
+import 'package:shengwang_rtc_engine/agora_rtc_engine.dart';
 
 class FakeRemoteUser {
   FakeRemoteUser(this._rtcEngineEx);
