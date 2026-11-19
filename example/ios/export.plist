@@ -8,9 +8,9 @@
 	<true/>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>io.agora.agoraRtcEngineExample</key>
+		<key>io.agora.shengwangRtcEngineExample</key>
 		<string>DEFAULT_BUILD_PROVISION_PROFILE_NAME</string>
-		<key>io.agora.agoraRtcEngineExample.ScreenSharing</key>
+		<key>io.agora.shengwangRtcEngineExample.ScreenSharing</key>
 		<string>DEFAULT_BUILD_PROVISION_PROFILE_NAME</string>
 	</dict>
 </dict>
