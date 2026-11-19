@@ -78,17 +78,17 @@ jobs:
           # Generate DartDoc
           dart doc
           # Create a zip file of the DartDoc output
-          zip -r agora_rtc_engine_docs.zip doc
+          zip -r shengwang_rtc_engine_docs.zip doc
       - name: Upload DartDoc Artifact ⬆️
         uses: actions/upload-artifact@v4
         with:
-          name: agora_rtc_engine_docs.zip
-          path: agora_rtc_engine_docs.zip
+          name: shengwang_rtc_engine_docs.zip
+          path: shengwang_rtc_engine_docs.zip
       - name: Upload DartDoc Archive to GitHub release ⬆️
         uses: svenstaro/upload-release-action@2.6.0
         with:
-          file: agora_rtc_engine_docs.zip
-          asset_name: agora_rtc_engine_docs.zip
+          file: shengwang_rtc_engine_docs.zip
+          asset_name: shengwang_rtc_engine_docs.zip
           tag: ${{ needs.release_if_merged.outputs.release_version }}
 
 
