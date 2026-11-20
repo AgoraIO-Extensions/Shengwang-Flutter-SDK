@@ -47,7 +47,7 @@ on:
         description: 'App ID secret(s) used for builds'
         type: choice
         required: false
-        default: 'MY_APP_ID'
+        default: 'APP_ID'
         options:
           - 'MY_APP_ID'
           - 'APP_ID'
@@ -97,12 +97,12 @@ on:
         description: 'App ID secret(s) used for builds, separated by comma'
         type: string
         required: false
-        default: 'MY_APP_ID'
+        default: 'APP_ID'
     secrets:
       APP_ID:
-        required: false
-      MY_APP_ID:
         required: true
+      MY_APP_ID:
+        required: false
       BUILD_PROVISION_PROFILE_UUID:
         required: true
       BUILD_PROVISION_PROFILE_NAME:
