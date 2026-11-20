@@ -28,7 +28,7 @@ on:
 
 jobs:
   build:
-    name: ${{ matrix.platform }} dependency linkage - agora_rtc_engine-${{ matrix.dependency_manager }}-iris_method_channel-${{ matrix.dependency_manager }}
+    name: ${{ matrix.platform }} dependency linkage - shengwang_rtc_engine-${{ matrix.dependency_manager }}-iris_method_channel-${{ matrix.dependency_manager }}
     strategy:
       fail-fast: false
       matrix:
@@ -44,11 +44,11 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 120
     steps:
-      - name: Checkout as agora_rtc_engine
+      - name: Checkout as shengwang_rtc_engine
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.target_branch || github.sha }}
-          path: agora_rtc_engine
+          path: shengwang_rtc_engine
           fetch-depth: '1'
           lfs: 'true'
           submodules: 'true'
@@ -69,10 +69,10 @@ jobs:
 
       - name: Resolve dependencies
         run: flutter pub get
-        working-directory: agora_rtc_engine/example
+        working-directory: shengwang_rtc_engine/example
 
       - name: Build ${{ matrix.platform }} app
-        working-directory: agora_rtc_engine/example
+        working-directory: shengwang_rtc_engine/example
         run: |
           if [ "${{ matrix.platform }}" = "ios" ]; then
             flutter build ios --release --no-codesign
@@ -82,7 +82,7 @@ jobs:
           fi
 
       - name: Archive ${{ matrix.platform }} app without signing
-        working-directory: agora_rtc_engine/example
+        working-directory: shengwang_rtc_engine/example
         run: |
           if [ "${{ matrix.platform }}" = "ios" ]; then
             xcodebuild \
@@ -109,7 +109,7 @@ jobs:
           fi
 
       - name: Verify ${{ matrix.platform }} ${{ matrix.dependency_manager }} linkage
-        working-directory: agora_rtc_engine/example
+        working-directory: shengwang_rtc_engine/example
         run: |
           set -euo pipefail
 
@@ -172,8 +172,8 @@ jobs:
               echo "::error::Missing generated Swift package: $package_swift"
               exit 1
             }
-            grep -Fq '.package(name: "agora_rtc_engine",' "$package_swift" || {
-              echo "::error::agora_rtc_engine is not integrated through SwiftPM"
+            grep -Fq '.package(name: "shengwang_rtc_engine",' "$package_swift" || {
+              echo "::error::shengwang_rtc_engine is not integrated through SwiftPM"
               exit 1
             }
             grep -Fq '.package(name: "iris_method_channel",' "$package_swift" || {
@@ -187,8 +187,8 @@ jobs:
               echo "::error::Missing CocoaPods lockfile: $podfile_lock"
               exit 1
             }
-            grep -Fq 'agora_rtc_engine' "$podfile_lock" || {
-              echo "::error::agora_rtc_engine is not integrated through CocoaPods"
+            grep -Fq 'shengwang_rtc_engine' "$podfile_lock" || {
+              echo "::error::shengwang_rtc_engine is not integrated through CocoaPods"
               exit 1
             }
             grep -Fq 'iris_method_channel' "$podfile_lock" || {

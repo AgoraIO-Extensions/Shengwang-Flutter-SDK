@@ -10,7 +10,7 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 WORK_DIR=$(mktemp -d)
-PACKAGE_DIR="${WORK_DIR}/agora_rtc_engine_published"
+PACKAGE_DIR="${WORK_DIR}/shengwang_rtc_engine_published"
 APP_DIR="${WORK_DIR}/agora_pub_consumer_ios_smoke"
 
 cleanup() {
@@ -31,7 +31,7 @@ ruby -e '
   path = ARGV[0]
   plugin_path = ARGV[1]
   marker = "cupertino_icons: ^1.0.8"
-  replacement = "#{marker}\n  agora_rtc_engine:\n    path: #{plugin_path}"
+  replacement = "#{marker}\n  shengwang_rtc_engine:\n    path: #{plugin_path}"
   content = File.read(path)
   abort("failed to patch pubspec.yaml") unless content.include?(marker)
   File.write(path, content.sub(marker, replacement))
