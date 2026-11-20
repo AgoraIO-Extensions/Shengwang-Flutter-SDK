@@ -41,8 +41,8 @@ const artifactTimeoutMs = readPositiveIntegerEnv(
 function parseArgs(argv) {
   const args = {
     dependenciesContent: '',
-    iosManifest: path.join(repoRoot, 'ios/agora_rtc_engine/Package.swift'),
-    macosManifest: path.join(repoRoot, 'macos/agora_rtc_engine/Package.swift'),
+    iosManifest: path.join(repoRoot, 'ios/shengwang_rtc_engine/Package.swift'),
+    macosManifest: path.join(repoRoot, 'macos/shengwang_rtc_engine/Package.swift'),
     printLegacyContent: false,
   };
 

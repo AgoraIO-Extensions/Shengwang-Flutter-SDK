@@ -4,19 +4,19 @@
 import PackageDescription
 
 let package = Package(
-    name: "agora_rtc_engine",
+    name: "shengwang_rtc_engine",
     platforms: [
         .macOS("10.14")
     ],
     products: [
-        .library(name: "agora-rtc-engine", targets: ["agora_rtc_engine"])
+        .library(name: "shengwang-rtc-engine", targets: ["shengwang_rtc_engine"])
     ],
     dependencies: [
         .package(url: "https://github.com/AgoraIO/AgoraRtcEngine_macOS.git", exact: "4.6.2"),
     ],
     targets: [
         .target(
-            name: "agora_rtc_engine",
+            name: "shengwang_rtc_engine",
             dependencies: [
                 .product(name: "RtcBasic", package: "AgoraRtcEngine_macOS"),
                 .product(name: "AINS", package: "AgoraRtcEngine_macOS"),
@@ -38,7 +38,7 @@ let package = Package(
                 "AgoraRtcWrapper"
             ],
             cSettings: [
-                .headerSearchPath("include/agora_rtc_engine")
+                .headerSearchPath("include/shengwang_rtc_engine")
             ],
             cxxSettings: [
                 .unsafeFlags(["-std=c++14"])

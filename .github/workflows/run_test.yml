@@ -278,16 +278,16 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 120
     steps:
-      - name: Checkout as agora_rtc_engine
+      - name: Checkout as shengwang_rtc_engine
         uses: actions/checkout@v4
         with:
-          path: agora_rtc_engine
+          path: shengwang_rtc_engine
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
           cache: true
       - name: Run flutter integration test swiftpm for ${{ matrix.os }}
-        working-directory: agora_rtc_engine/test_shard/integration_test_swiftpm
+        working-directory: shengwang_rtc_engine/test_shard/integration_test_swiftpm
         run: |
           flutter config --enable-swift-package-manager
           flutter pub get
