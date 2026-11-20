@@ -168,8 +168,8 @@ jobs:
             echo "SPM manifest validation skipped for target ref without updater rules"
             exit 0
           fi
-          swift package dump-package --package-path ios/agora_rtc_engine > /dev/null
-          swift package dump-package --package-path macos/agora_rtc_engine > /dev/null
+          swift package dump-package --package-path ios/shengwang_rtc_engine > /dev/null
+          swift package dump-package --package-path macos/shengwang_rtc_engine > /dev/null
 
       - name: Update pub version into pubspec.yaml
         if: ${{ inputs.pub_version != '' }}

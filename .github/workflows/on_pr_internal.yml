@@ -25,7 +25,7 @@ jobs:
           APP_ID: ${{ secrets.APP_ID }}
           MY_APP_ID: ${{ secrets.MY_APP_ID }}
         run: |
-          if [ -n "$APP_ID" ] && [ -n "$MY_APP_ID" ]; then
+          if [ -n "$APP_ID" ]; then
             echo "has_permission=1" >> $GITHUB_OUTPUT;
             echo "App ID secrets are available, PR opened by the internal contributors"
           else

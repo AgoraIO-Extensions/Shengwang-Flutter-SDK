@@ -11,14 +11,14 @@ from ci.check_apple_changes import needs_apple_packages
 class AppleChangesTest(unittest.TestCase):
     def test_dart_docs_and_other_native_platforms_do_not_need_apple_archives(self):
         self.assertFalse(needs_apple_packages([
-            "lib/src/agora_rtc_engine_impl.dart", "README.md", "docs/ios/guide.md",
+            "lib/src/shengwang_rtc_engine_impl.dart", "README.md", "docs/ios/guide.md",
             "test/unit_test.dart", "android/build.gradle", "windows/CMakeLists.txt",
         ]))
 
     def test_packaging_dependencies_layout_and_ci_changes_select_archives(self):
         for path in ("pubspec.yaml", ".pubignore", ".gitmodules", ".gitattributes",
-                     "ios/native.mm", "macos/agora_rtc_engine.podspec",
-                     "ios/agora_rtc_engine/Package.swift", "src/binding.cc",
+                     "ios/native.mm", "macos/shengwang_rtc_engine.podspec",
+                     "ios/shengwang_rtc_engine/Package.swift", "src/binding.cc",
                      "example/lib/main.dart", "test_shard/integration_test_swiftpm/lib/main.dart",
                      "ci/check_apple_changes.py", ".github/workflows/run_test.yml",
                      ".github/actions/gen_code/action.yml",

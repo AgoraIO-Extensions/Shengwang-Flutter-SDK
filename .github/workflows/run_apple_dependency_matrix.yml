@@ -51,11 +51,11 @@ jobs:
           path: ci-tools
           sparse-checkout: ci/run_apple_dependency_linkage.sh
           sparse-checkout-cone-mode: false
-      - name: Checkout as agora_rtc_engine
+      - name: Checkout as shengwang_rtc_engine
         uses: actions/checkout@v4
         with:
           ref: ${{ inputs.target_branch || github.sha }}
-          path: agora_rtc_engine
+          path: shengwang_rtc_engine
           fetch-depth: '1'
           lfs: 'true'
           submodules: 'true'
@@ -70,7 +70,7 @@ jobs:
         timeout-minutes: 20
         if: ${{ !cancelled() && inputs.include_swiftpm_integration && steps.swiftpm_flutter.outcome == 'success' }}
         id: swiftpm_integration
-        working-directory: agora_rtc_engine/test_shard/integration_test_swiftpm
+        working-directory: shengwang_rtc_engine/test_shard/integration_test_swiftpm
         env:
           IOS_SIMULATOR_SDK_VERSION: 18.0
         run: |
@@ -84,7 +84,7 @@ jobs:
           fi
       - name: Remove temporary SwiftPM consumer build outputs
         if: ${{ !cancelled() && inputs.include_swiftpm_integration && steps.swiftpm_flutter.outcome == 'success' }}
-        working-directory: agora_rtc_engine/test_shard/integration_test_swiftpm
+        working-directory: shengwang_rtc_engine/test_shard/integration_test_swiftpm
         run: rm -rf build
       - name: Set up dependency-check Flutter
         if: ${{ !cancelled() && !(steps.swiftpm_flutter.outcome == 'success' && steps.swiftpm_flutter.outputs.VERSION == inputs.flutter_version) }}
@@ -97,9 +97,9 @@ jobs:
         timeout-minutes: 20
         if: ${{ !cancelled() && (steps.dependency_flutter.outcome == 'success' || (steps.swiftpm_flutter.outcome == 'success' && steps.swiftpm_flutter.outputs.VERSION == inputs.flutter_version)) }}
         id: cocoapods_linkage
-        run: bash ci-tools/ci/run_apple_dependency_linkage.sh "$GITHUB_WORKSPACE/agora_rtc_engine" '${{ matrix.platform }}' cocoapods
+        run: bash ci-tools/ci/run_apple_dependency_linkage.sh "$GITHUB_WORKSPACE/shengwang_rtc_engine" '${{ matrix.platform }}' cocoapods
       - name: Verify SwiftPM build and archive linkage
         timeout-minutes: 20
         if: ${{ !cancelled() && (steps.dependency_flutter.outcome == 'success' || (steps.swiftpm_flutter.outcome == 'success' && steps.swiftpm_flutter.outputs.VERSION == inputs.flutter_version)) }}
         id: swiftpm_linkage
-        run: bash ci-tools/ci/run_apple_dependency_linkage.sh "$GITHUB_WORKSPACE/agora_rtc_engine" '${{ matrix.platform }}' swiftpm
+        run: bash ci-tools/ci/run_apple_dependency_linkage.sh "$GITHUB_WORKSPACE/shengwang_rtc_engine" '${{ matrix.platform }}' swiftpm
