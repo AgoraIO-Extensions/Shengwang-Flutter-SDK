@@ -11,7 +11,7 @@ project = OpenStruct.new YAML.load_file("../pubspec.yaml")
 # The iOS integration is CDN based: `prepare_command` downloads the native SDK
 # and the Iris wrapper and vendors their xcframeworks, so the plugin does not
 # depend on the `AgoraRtcEngine_Special_iOS` / `AgoraIrisRTC_iOS` CocoaPods pods.
-# Keep these values in sync with `agora_rtc_engine/Package.swift`.
+# Keep these values in sync with `shengwang_rtc_engine/Package.swift`.
 agora_ios_sdk_version = '4.6.4.2'
 agora_ios_sdk_url = "https://download.agora.io/sdk/release/AgoraRtcEngine_Special_iOS-#{agora_ios_sdk_version}.zip"
 agora_ios_sdk_sha256 = '37bc083fa98d928ed80b395c6e1e3fd8a26f780ddbb451d495a1bc6b728c3b57'
@@ -52,7 +52,7 @@ Pod::Spec.new do |s|
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Agora' => 'developer@agora.io' }
   s.source           = { :path => '.' }
-  s.source_files = 'agora_rtc_engine/Sources/**/*.{h,mm,m,swift}'
+  s.source_files = 'shengwang_rtc_engine/Sources/**/*.{h,mm,m,swift}'
   s.dependency 'Flutter'
 
   plugin_dev_path = File.join(File.dirname(File.realpath(__FILE__)), '.plugin_dev')

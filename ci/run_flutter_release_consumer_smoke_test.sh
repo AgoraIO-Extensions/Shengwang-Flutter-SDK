@@ -7,7 +7,7 @@ set -x
 : "${PACKAGE_SOURCE:?PACKAGE_SOURCE is required}"
 : "${RELEASE_VERSION:?RELEASE_VERSION is required}"
 
-PACKAGE_NAME="${PACKAGE_NAME:-agora_rtc_engine}"
+PACKAGE_NAME="${PACKAGE_NAME:-shengwang_rtc_engine}"
 GIT_URL="${GIT_URL:-}"
 GIT_REF="${GIT_REF:-${RELEASE_VERSION}}"
 FLUTTER_BIN="${FLUTTER_BIN:-flutter}"

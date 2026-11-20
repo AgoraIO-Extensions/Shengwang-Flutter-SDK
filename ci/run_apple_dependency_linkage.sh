@@ -10,7 +10,7 @@ case "$dependency_manager" in cocoapods|swiftpm) ;; *) echo "Unsupported depende
 # Give each package-manager check a fresh consumer while retaining runner caches.
 WORK_DIR=$(mktemp -d)
 trap 'rm -rf "$WORK_DIR"' EXIT
-PACKAGE_DIR="$WORK_DIR/agora_rtc_engine"
+PACKAGE_DIR="$WORK_DIR/shengwang_rtc_engine"
 mkdir -p "$PACKAGE_DIR"
 git -C "$SOURCE_ROOT" ls-files -z |
   rsync -aL --from0 --files-from=- "$SOURCE_ROOT/" "$PACKAGE_DIR/"
@@ -48,8 +48,8 @@ if [ "$platform" = "ios" ]; then
   app="build/ios/iphoneos/Runner.app"
   archive_app="build/ios/archive/Runner.xcarchive/Products/Applications/Runner.app"
 else
-  app="build/macos/Build/Products/Release/agora_rtc_engine_example.app"
-  archive_app="build/macos/archive/Runner.xcarchive/Products/Applications/agora_rtc_engine_example.app"
+  app="build/macos/Build/Products/Release/shengwang_rtc_engine_example.app"
+  archive_app="build/macos/archive/Runner.xcarchive/Products/Applications/shengwang_rtc_engine_example.app"
 fi
 
 symbols=(
@@ -97,8 +97,8 @@ if [ "$dependency_manager" = "swiftpm" ]; then
     echo "::error::Missing generated Swift package: $package_swift"
     exit 1
   }
-  grep -Fq '.package(name: "agora_rtc_engine",' "$package_swift" || {
-    echo "::error::agora_rtc_engine is not integrated through SwiftPM"
+  grep -Fq '.package(name: "shengwang_rtc_engine",' "$package_swift" || {
+    echo "::error::shengwang_rtc_engine is not integrated through SwiftPM"
     exit 1
   }
   grep -Fq '.package(name: "iris_method_channel",' "$package_swift" || {
@@ -112,8 +112,8 @@ else
     echo "::error::Missing CocoaPods lockfile: $podfile_lock"
     exit 1
   }
-  grep -Fq 'agora_rtc_engine' "$podfile_lock" || {
-    echo "::error::agora_rtc_engine is not integrated through CocoaPods"
+  grep -Fq 'shengwang_rtc_engine' "$podfile_lock" || {
+    echo "::error::shengwang_rtc_engine is not integrated through CocoaPods"
     exit 1
   }
   grep -Fq 'iris_method_channel' "$podfile_lock" || {

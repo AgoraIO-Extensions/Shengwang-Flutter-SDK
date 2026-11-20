@@ -25,8 +25,8 @@ const execFileAsync = promisify(execFile);
 const ciDir = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(ciDir, '..');
 const updaterPath = path.join(ciDir, 'update_spm_deps.mjs');
-const sourceIosManifest = path.join(repoRoot, 'ios/agora_rtc_engine/Package.swift');
-const sourceMacosManifest = path.join(repoRoot, 'macos/agora_rtc_engine/Package.swift');
+const sourceIosManifest = path.join(repoRoot, 'ios/shengwang_rtc_engine/Package.swift');
+const sourceMacosManifest = path.join(repoRoot, 'macos/shengwang_rtc_engine/Package.swift');
 const updateDepsWorkflow = path.join(repoRoot, '.github/workflows/run_update_deps.yml');
 
 const iosIrisUrl =
